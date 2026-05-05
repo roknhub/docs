@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo Cáo Phân Tích Toàn Diện — Beauty Business T4/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-deep: #ebe6db;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3a3a;
+    --ink-mute: #6b6b6b;
+    --paper: #fbfaf6;
+    --accent: #c8553d;
+    --accent-deep: #8c2f1f;
+    --gold: #b8860b;
+    --green: #2d5016;
+    --red: #8b1a1a;
+    --line: #1a1a1a;
+    --line-soft: rgba(26, 26, 26, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(26,26,26,0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* === MASTHEAD === */
+  .masthead {
+    border-bottom: 3px double var(--ink);
+    padding: 32px 0 24px;
+    margin-bottom: 0;
+    background: var(--paper);
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 24px;
+  }
+
+  .masthead-top span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .masthead-top .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-deep);
+  }
+
+  .masthead-sub {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    align-items: end;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .deck {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 600px;
+  }
+
+  .meta-block {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    text-align: right;
+  }
+
+  .meta-block strong {
+    display: block;
+    color: var(--ink);
+    font-size: 14px;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* === EXECUTIVE SUMMARY === */
+  .executive {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .executive::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--accent) 0 40px,
+      var(--gold) 40px 80px,
+      var(--paper) 80px 120px
+    );
+  }
+
+  .executive-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .executive-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    max-width: 1000px;
+  }
+
+  .executive-headline em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+    background: linear-gradient(180deg, transparent 60%, rgba(200, 85, 61, 0.2) 60%);
+  }
+
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    border-top: 1px solid rgba(251, 250, 246, 0.15);
+    padding-top: 40px;
+  }
+
+  .verdict {
+    border-left: 2px solid var(--accent);
+    padding-left: 24px;
+  }
+
+  .verdict-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.04em;
+  }
+
+  .verdict-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(251, 250, 246, 0.6);
+    margin-bottom: 12px;
+  }
+
+  .verdict-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--paper);
+  }
+
+  /* === SECTION === */
+  .section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-deep);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-num::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent-deep);
+  }
+
+  .section h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+
+  .section h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-deep);
+  }
+
+  .section-lead {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  /* === KPI HEADER GRID === */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin-bottom: 64px;
+    background: var(--paper);
+  }
+
+  .kpi {
+    padding: 32px 24px;
+    border-right: 1px solid var(--line-soft);
+    position: relative;
+  }
+
+  .kpi:last-child { border-right: none; }
+
+  .kpi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+  }
+
+  .kpi-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .kpi-value.negative { color: var(--red); }
+  .kpi-value.warning { color: var(--accent); }
+
+  .kpi-sub {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+
+  /* === EDITORIAL COLS === */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 64px;
+  }
+
+  .columns p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+  }
+
+  .columns p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 72px;
+    float: left;
+    line-height: 0.85;
+    margin: 4px 8px -4px 0;
+    color: var(--accent-deep);
+  }
+
+  /* === DATA TABLE === */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter Tight', sans-serif;
+    margin: 32px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+  }
+
+  .data-table th {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: left;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  .data-table th.num { text-align: right; }
+
+  .data-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .data-table td.num {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr.total td {
+    background: var(--bg-deep);
+    font-weight: 700;
+    color: var(--ink);
+    border-top: 2px solid var(--ink);
+  }
+
+  .data-table .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pill.bad { background: rgba(139, 26, 26, 0.12); color: var(--red); }
+  .pill.warn { background: rgba(184, 134, 11, 0.15); color: var(--gold); }
+  .pill.good { background: rgba(45, 80, 22, 0.12); color: var(--green); }
+
+  /* === PULL QUOTE === */
+  .pullquote {
+    margin: 80px -24px;
+    padding: 48px;
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    text-align: center;
+    background: var(--bg-deep);
+  }
+
+  .pullquote-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    line-height: 0.5;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .pullquote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .pullquote-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent-deep);
+  }
+
+  /* === CHANNEL CARDS === */
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 48px 0;
+  }
+
+  .channel {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .channel:hover { transform: translateY(-4px); }
+
+  .channel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .channel-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+  }
+
+  .channel-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .channel-tag.bad { background: var(--red); }
+  .channel-tag.good { background: var(--green); }
+  .channel-tag.warn { background: var(--accent); }
+
+  .channel-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+  }
+
+  .channel-row .label { color: var(--ink-mute); }
+  .channel-row .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .channel-roas {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    text-align: center;
+  }
+
+  .channel-roas-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+
+  .channel-roas-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-top: 4px;
+  }
+
+  .channel-roas-value.bad { color: var(--red); }
+  .channel-roas-value.good { color: var(--green); }
+  .channel-roas-value.warn { color: var(--accent); }
+
+  /* === FUNNEL DIAGRAM === */
+  .funnel {
+    margin: 48px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 48px;
+  }
+
+  .funnel-row {
+    display: grid;
+    grid-template-columns: 280px 1fr 200px;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .funnel-row:last-child { border-bottom: none; }
+
+  .funnel-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .funnel-bar {
+    height: 36px;
+    background: var(--ink);
+    position: relative;
+    transition: width 0.6s ease;
+  }
+
+  .funnel-bar.lost {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--red),
+      var(--red) 6px,
+      rgba(139, 26, 26, 0.7) 6px,
+      rgba(139, 26, 26, 0.7) 12px
+    );
+  }
+
+  .funnel-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: right;
+  }
+
+  .funnel-value .pct {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* === CHURN CURVE === */
+  .churn-viz {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 48px;
+    margin: 48px 0;
+    position: relative;
+  }
+
+  .churn-viz h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: var(--paper);
+  }
+
+  .churn-viz-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(251, 250, 246, 0.5);
+    margin-bottom: 40px;
+  }
+
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .scenario {
+    border-top: 2px solid var(--accent);
+    padding-top: 16px;
+  }
+
+  .scenario-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .scenario-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    color: rgba(251, 250, 246, 0.7);
+    border-bottom: 1px solid rgba(251, 250, 246, 0.08);
+  }
+
+  .scenario-row .v {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .scenario-row.critical .v { color: var(--accent); }
+
+  /* === ACTION PLAN === */
+  .actions {
+    margin: 48px 0;
+  }
+
+  .action {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: start;
+  }
+
+  .action-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+
+  .action-content h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .action-content p {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .action-impact {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .action-impact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(251, 250, 246, 0.6);
+    margin-bottom: 8px;
+  }
+
+  .action-impact-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .action-impact-value .unit {
+    display: block;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(251, 250, 246, 0.5);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* === FINAL VERDICT === */
+  .final {
+    background: var(--accent-deep);
+    color: var(--paper);
+    padding: 96px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .final-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: rgba(251, 250, 246, 0.7);
+    margin-bottom: 24px;
+  }
+
+  .final h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final h2 em {
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .final-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: rgba(251, 250, 246, 0.85);
+    max-width: 700px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 0 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(251, 250, 246, 0.15);
+    margin-bottom: 24px;
+  }
+
+  .footer-col strong {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 12px;
+    letter-spacing: 0.2em;
+  }
+
+  .footer-col div {
+    color: rgba(251, 250, 246, 0.7);
+    line-height: 1.8;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    color: rgba(251, 250, 246, 0.4);
+    font-size: 10px;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 32px 40px;
+    margin: 48px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 32px;
+  }
+
+  .toc-title {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    padding: 6px 0;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-right: 12px;
+    min-width: 24px;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--paper);
+    border-left: 4px solid var(--accent);
+    padding: 24px 32px;
+    margin: 32px 0;
+  }
+
+  .highlight-box-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-deep);
+    margin-bottom: 8px;
+  }
+
+  .highlight-box p {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* SOURCE STRUCTURE */
+  .source-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 32px 0;
+  }
+
+  .source-card {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 32px;
+  }
+
+  .source-card h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .source-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 80px;
+    gap: 12px;
+    padding: 10px 0;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 14px;
+    border-bottom: 1px dotted var(--line-soft);
+  }
+
+  .source-row:last-child { border-bottom: none; }
+
+  .source-row .v {
+    font-family: 'JetBrains Mono', monospace;
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .source-row .pct {
+    text-align: right;
+    color: var(--accent-deep);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* TIMELINE - bao lâu hết khách */
+  .timeline {
+    margin: 48px 0;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 48px;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: center;
+  }
+
+  .timeline-row:last-child { border-bottom: none; }
+
+  .timeline-month {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-bar-wrap {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .timeline-bar {
+    height: 32px;
+    background: var(--ink);
+    position: relative;
+  }
+
+  .timeline-bar-fade {
+    background: linear-gradient(90deg, var(--ink) 0%, var(--accent) 70%, var(--red) 100%);
+  }
+
+  .timeline-bar-fill {
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .timeline-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-align: right;
+    font-size: 14px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .columns { grid-template-columns: 1fr; gap: 24px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .channels { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; gap: 24px; }
+    .scenario-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .source-grid { grid-template-columns: 1fr; }
+    .toc { grid-template-columns: 1fr; }
+    .funnel-row { grid-template-columns: 1fr; gap: 8px; }
+    .action { grid-template-columns: 1fr; gap: 12px; }
+    .action-num { font-size: 48px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .masthead-sub { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .meta-block { text-align: left; }
+    .timeline-row { grid-template-columns: 1fr; gap: 8px; }
+    .timeline-bar-wrap { grid-template-columns: 1fr; }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .section, .executive, .final { page-break-inside: avoid; padding: 24px 0; }
+    .pullquote { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead">
+  <div class="container">
+    <div class="masthead-top">
+      <span><span class="dot"></span>BÁO CÁO PHÂN TÍCH NỘI BỘ</span>
+      <span>Volume I · Kỳ T4/2026 · Bản số 01</span>
+      <span>Soạn cho: Roy / Đội Sản Phẩm</span>
+    </div>
+    <h1>Bài toán <em>Sống Còn</em><br>của Beauty Biz.</h1>
+    <div class="masthead-sub">
+      <p class="deck">Một cuộc giải phẫu data về churn, hiệu quả ads, và câu hỏi quan trọng nhất: nếu ngưng đốt tiền vào quảng cáo, business này có còn thở được hay không?</p>
+      <div class="meta-block">
+        Phạm vi phân tích<br>
+        <strong>T1/2024 → T4/2026</strong>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ EXECUTIVE SUMMARY ============ -->
+<section class="executive">
+  <div class="container">
+    <div class="executive-label">◆ Tóm tắt cho Lãnh Đạo</div>
+    <p class="executive-headline">Business hiện đang <em>chạy nhanh để đứng yên</em> — bơm 13.2 tỷ ads/tháng để duy trì doanh thu, trong khi 70% khách rò rỉ trong 12 tháng và pool khách cũ đang một mình gánh toàn bộ lợi nhuận.</p>
+
+    <div class="verdict-grid">
+      <div class="verdict">
+        <div class="verdict-num">70%</div>
+        <div class="verdict-label">Tỷ lệ churn 12 tháng</div>
+        <div class="verdict-text">Trong 61k KH tạo trước T4/2025, chỉ ~18.4k còn check-in — một xô thủng đáy.</div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-num">1.14</div>
+        <div class="verdict-label">ROAS tổng tháng 4</div>
+        <div class="verdict-text">Mỗi đồng ads chỉ tạo 1.14 đồng DT — chưa đủ bù giá vốn dịch vụ, KH mới đang lỗ ròng.</div>
+      </div>
+      <div class="verdict">
+        <div class="verdict-num">43%</div>
+        <div class="verdict-label">DT từ KH &gt;12 tháng</div>
+        <div class="verdict-text">Pool 18.4k khách cũ tạo 27 tỷ — đây là tài sản thực, gần như không phụ thuộc ads.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOC ============ -->
+<div class="container">
+  <nav class="toc">
+    <div class="toc-title">Mục lục báo cáo</div>
+    <a href="#section-1"><span class="toc-num">01</span>Tổng quan kỳ phân tích</a>
+    <a href="#section-2"><span class="toc-num">02</span>Cấu trúc khách hàng</a>
+    <a href="#section-3"><span class="toc-num">03</span>Phân tích Churn</a>
+    <a href="#section-4"><span class="toc-num">04</span>Hiệu quả Ads từng kênh</a>
+    <a href="#section-5"><span class="toc-num">05</span>Kịch bản "Cắt sạch Ads"</a>
+    <a href="#section-6"><span class="toc-num">06</span>Bao lâu hết khách?</a>
+    <a href="#section-7"><span class="toc-num">07</span>Khuyến nghị hành động</a>
+    <a href="#section-8"><span class="toc-num">08</span>Kết luận chiến lược</a>
+  </nav>
+</div>
+
+<!-- ============ SECTION 1 - OVERVIEW ============ -->
+<section class="section" id="section-1">
+  <div class="container">
+    <div class="section-num">01 — Tổng quan kỳ phân tích</div>
+    <h2>Bức tranh <em>34.1k lượt check-in</em> trong tháng 4.</h2>
+    <p class="section-lead">Tháng 04/2026 ghi nhận 34.1k lượt check-in với tổng doanh thu 62.5 tỷ. Bề ngoài là một tháng khoẻ — nhưng dữ liệu phía sau kể một câu chuyện rất khác.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Tổng lượt check-in</div>
+        <div class="kpi-value">34.1k</div>
+        <div class="kpi-sub">Trải dài 5 nhóm tuổi KH</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Tổng doanh thu</div>
+        <div class="kpi-value">62.5<span style="font-size: 24px;"> tỷ</span></div>
+        <div class="kpi-sub">VNĐ trong T4/2026</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Chi phí ads</div>
+        <div class="kpi-value warning">13.2<span style="font-size: 24px;"> tỷ</span></div>
+        <div class="kpi-sub">21% doanh thu — cực cao</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Lợi nhuận ước tính</div>
+        <div class="kpi-value">5.5<span style="font-size: 24px;"> tỷ</span></div>
+        <div class="kpi-sub">Biên lãi mỏng ~9%</div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div>
+        <p>Mỗi tháng, hàng nghìn khách hàng mới được kéo về thông qua quảng cáo trên Meta, Google và TikTok. Báo cáo doanh thu vẫn báo "tăng trưởng". Pool khách cũ trên 12 tháng vẫn dày — 18.4k người vẫn quay lại đều đặn.</p>
+        <p>Nhưng khi xếp các con số cạnh nhau, một bức tranh khác lộ ra: doanh thu từ khách mới chỉ vừa đủ bù chi phí quảng cáo. Lợi nhuận thực sự của business đang được tạo ra hoàn toàn bởi nhóm khách hàng đã gắn bó hơn một năm — họ đang "trợ cấp" cho khoản lỗ của khách mới.</p>
+      </div>
+      <div>
+        <p>Vấn đề không nằm ở việc business đang lỗ — vẫn có 5.5 tỷ lợi nhuận mỗi tháng. Vấn đề nằm ở <strong>cấu trúc</strong>: 67% khách mới đến từ ads, và 70% trong số họ sẽ biến mất trong vòng 12 tháng. Mỗi tháng phải bơm thêm 13.2 tỷ vào ads chỉ để giữ con số doanh thu không tụt.</p>
+        <p>Báo cáo này phân tích từng lớp của bài toán: từ cấu trúc khách hàng, churn rate, hiệu quả từng kênh ads, đến kịch bản giả định "không còn tiền chạy ads". Mục tiêu cuối cùng là trả lời một câu hỏi: <em>business này có thể tự đứng vững mà không cần ads không?</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 - CUSTOMER STRUCTURE ============ -->
+<section class="section" id="section-2">
+  <div class="container">
+    <div class="section-num">02 — Cấu trúc khách hàng theo độ tuổi</div>
+    <h2>Ai đang <em>thực sự nuôi</em> business này?</h2>
+    <p class="section-lead">Phân tích 5 nhóm khách hàng theo thời gian gắn bó — và phát hiện đáng giật mình về nguồn lợi nhuận thực.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nhóm khách hàng</th>
+          <th class="num">Số lượt</th>
+          <th class="num">% Lượt</th>
+          <th class="num">Doanh thu</th>
+          <th class="num">% DT</th>
+          <th class="num">DT/lượt TB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Mới</strong> (tạo T4/2026)</td>
+          <td class="num">5.17k</td>
+          <td class="num">15.17%</td>
+          <td class="num">14.9 tỷ</td>
+          <td class="num">23.77%</td>
+          <td class="num">2.88 tr</td>
+        </tr>
+        <tr>
+          <td><strong>2. 2 tháng</strong> (tạo T2/2026)</td>
+          <td class="num">3.21k</td>
+          <td class="num">9.43%</td>
+          <td class="num">11.2 tỷ</td>
+          <td class="num">17.92%</td>
+          <td class="num"><span class="pill good">3.49 tr</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. 2-6 tháng</strong></td>
+          <td class="num">4.42k</td>
+          <td class="num">12.98%</td>
+          <td class="num">5.8 tỷ</td>
+          <td class="num">9.28%</td>
+          <td class="num"><span class="pill bad">1.31 tr</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. 6-12 tháng</strong></td>
+          <td class="num">2.83k</td>
+          <td class="num">8.31%</td>
+          <td class="num">3.69 tỷ</td>
+          <td class="num">5.89%</td>
+          <td class="num"><span class="pill bad">1.30 tr</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. Trên 12 tháng</strong></td>
+          <td class="num">18.4k</td>
+          <td class="num"><span class="pill warn">54.11%</span></td>
+          <td class="num">27 tỷ</td>
+          <td class="num"><span class="pill warn">43.14%</span></td>
+          <td class="num">1.47 tr</td>
+        </tr>
+        <tr class="total">
+          <td>TỔNG</td>
+          <td class="num">34.1k</td>
+          <td class="num">100%</td>
+          <td class="num">62.5 tỷ</td>
+          <td class="num">100%</td>
+          <td class="num">1.83 tr</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="columns">
+      <div>
+        <p>Pool khách trên 12 tháng — nhóm được tạo ra từ trước tháng 4 năm 2025 — đang chiếm hơn một nửa số lượt check-in và 43% tổng doanh thu. Đây là xương sống của business: 18.4k người đã chứng minh sự gắn bó, không cần ads để giữ chân, và mang lại doanh thu ổn định mỗi tháng.</p>
+        <p>Khách mới có giá trị đơn cao bất thường (~2.88 triệu/lượt) — gấp đôi nhóm khách cũ. Pattern này gợi ý rằng họ đang được upsell mạnh ở lần đầu tiên qua các gói liệu trình lớn, có thể được kích hoạt bởi voucher giảm giá đính kèm trong chiến dịch ads.</p>
+      </div>
+      <div>
+        <p>Vùng nguy hiểm nằm ở nhóm 2-6 tháng và 6-12 tháng. Họ chiếm tới 21% số lượt nhưng chỉ tạo 15% doanh thu, với DT/lượt thấp nhất (~1.3 triệu). Đây là giai đoạn "rò rỉ chính" — khách đã quay lại sau lần đầu (DT/lượt nhóm 2 tháng cao nhất, 3.49 triệu), nhưng từ tháng thứ 3 trở đi thì vừa giảm tần suất, vừa giảm giá trị mỗi lần.</p>
+        <p>Nói cách khác: business đang mất khách <strong>đúng lúc khách vừa bắt đầu tin tưởng</strong>. Đây là lỗ hổng có thể vá được — nhưng nếu không vá, mỗi đồng ads đầu tư đều mất giá trị nhanh chóng theo thời gian.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-box-label">◆ Phát hiện cốt lõi</div>
+      <p>Nhóm khách trên 12 tháng đang gánh khoảng 17.5 tỷ lợi nhuận gộp/tháng. Trong khi đó, KH mới (sau khi trừ ads) đang lỗ ~3.5 tỷ. <strong>Khách cũ đang trợ cấp cho khoản lỗ của ads.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PULL QUOTE ============ -->
+<div class="container">
+  <blockquote class="pullquote">
+    <div class="pullquote-mark">"</div>
+    <p class="pullquote-text">Business KHÔNG chết vì cắt ads — mà chết vì <strong>ngừng tạo khách hàng mới</strong>. Hai điều này khác nhau hoàn toàn.</p>
+  </blockquote>
+</div>
+
+<!-- ============ SECTION 3 - CHURN ============ -->
+<section class="section" id="section-3">
+  <div class="container">
+    <div class="section-num">03 — Phân tích Churn</div>
+    <h2>Một <em>chiếc xô thủng đáy</em>: 70% rò rỉ sau 12 tháng.</h2>
+    <p class="section-lead">Truy ngược từ data hiện tại để đo retention rate thực sự, và đối chiếu với benchmark ngành làm đẹp Việt Nam.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">KH tạo trước T4/2025</div>
+        <div class="kpi-value">~61k</div>
+        <div class="kpi-sub">Cộng dồn từ T1/2024 → T3/2025</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">KH còn active T4/2026</div>
+        <div class="kpi-value">18.4k</div>
+        <div class="kpi-sub">Nhóm trên 12 tháng</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Retention 12 tháng</div>
+        <div class="kpi-value warning">30.2%</div>
+        <div class="kpi-sub">Benchmark ngành: 40-60%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Churn 12 tháng</div>
+        <div class="kpi-value negative">~70%</div>
+        <div class="kpi-sub">Mức đáng báo động</div>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 48px 0 24px;">Đường cong retention ước tính</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Mốc thời gian</th>
+          <th class="num">Retention rate</th>
+          <th class="num">Churn rate</th>
+          <th>Đánh giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Tháng 1 (mới tạo)</td><td class="num">100%</td><td class="num">0%</td><td>Baseline</td></tr>
+        <tr><td>Tháng 2</td><td class="num">~55-60%</td><td class="num">40-45%</td><td><span class="pill bad">Drop lớn nhất</span></td></tr>
+        <tr><td>Tháng 3</td><td class="num">~45%</td><td class="num">55%</td><td>Tiếp tục rò rỉ</td></tr>
+        <tr><td>Tháng 6</td><td class="num">~38%</td><td class="num">62%</td><td>Vùng nguy hiểm</td></tr>
+        <tr><td>Tháng 12</td><td class="num">~30%</td><td class="num">70%</td><td><span class="pill bad">Đo được từ data</span></td></tr>
+        <tr><td>Tháng 18</td><td class="num">~22%</td><td class="num">78%</td><td>Chỉ còn KH "core"</td></tr>
+        <tr><td>Tháng 24</td><td class="num">~16%</td><td class="num">84%</td><td>Rất loyal</td></tr>
+        <tr><td>Tháng 36</td><td class="num">~9%</td><td class="num">91%</td><td>"Tài sản" thật</td></tr>
+      </tbody>
+    </table>
+
+    <div class="columns">
+      <div>
+        <p>Cú drop lớn nhất xảy ra giữa tháng 1 và tháng 2 — gần một nửa khách hàng mới không bao giờ quay lại lần thứ hai. Đây là điểm đứt gãy quan trọng nhất trong hành trình khách hàng, và cũng là chỉ báo rõ ràng cho thấy chất lượng lead từ ads đang có vấn đề: khách bị thu hút bởi ưu đãi lần đầu, đến trải nghiệm một lần, rồi biến mất.</p>
+        <p>Sau tháng thứ 2, đường cong tiếp tục giảm với tốc độ chậm hơn nhưng đều đặn. Đến mốc 12 tháng, chỉ còn 30% khách quay lại — một con số rất thấp so với benchmark ngành làm đẹp/clinic Việt Nam (thường 40-60%).</p>
+      </div>
+      <div>
+        <p>Đây là lý do mỗi tháng phải tạo mới 5,200 khách chỉ để duy trì pool 34k active. Với CPL trung bình 867k và tỷ lệ Lead→Book 23%, chi phí thực để có một khách mới là khoảng 3.78 triệu. Nhân với hàng nghìn khách rò rỉ mỗi tháng, đây là khoản lãng phí ngân sách lớn.</p>
+        <p>Tin tốt: nhóm khách trên 24 tháng có churn rất thấp (chỉ ~3-5%/tháng). Họ là "tài sản thật" của business. Tin xấu: pool này đang teo dần vì không có đủ khách 6-12 tháng "trưởng thành" để bổ sung vào.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 4 - ADS CHANNELS ============ -->
+<section class="section" id="section-4">
+  <div class="container">
+    <div class="section-num">04 — Hiệu quả Ads từng kênh</div>
+    <h2><em>13.2 tỷ</em>, ba kênh, ba câu chuyện rất khác nhau.</h2>
+    <p class="section-lead">Chi tiết hiệu quả Meta, Google, TikTok trong tháng 4/2026 — và phát hiện về kênh "ngôi sao bị bỏ rơi".</p>
+
+    <div class="channels">
+      <div class="channel">
+        <div class="channel-header">
+          <span class="channel-name">META</span>
+          <span class="channel-tag warn">Quá phụ thuộc</span>
+        </div>
+        <div class="channel-row"><span class="label">Chi phí</span><span class="val">9.3 tỷ</span></div>
+        <div class="channel-row"><span class="label">Tỷ trọng ngân sách</span><span class="val">70%</span></div>
+        <div class="channel-row"><span class="label">Doanh thu</span><span class="val">10.9 tỷ</span></div>
+        <div class="channel-row"><span class="label">Lead</span><span class="val">9,618</span></div>
+        <div class="channel-row"><span class="label">Đặt lịch</span><span class="val">2,456</span></div>
+        <div class="channel-row"><span class="label">CPL</span><span class="val">965k</span></div>
+        <div class="channel-row"><span class="label">Cost/Book</span><span class="val">3.78 tr</span></div>
+        <div class="channel-row"><span class="label">Lead→Book</span><span class="val">25.5%</span></div>
+        <div class="channel-roas">
+          <div class="channel-roas-label">ROAS</div>
+          <div class="channel-roas-value warn">1.18</div>
+        </div>
+      </div>
+
+      <div class="channel">
+        <div class="channel-header">
+          <span class="channel-name">GOOGLE</span>
+          <span class="channel-tag good">Chưa được khai thác</span>
+        </div>
+        <div class="channel-row"><span class="label">Chi phí</span><span class="val">1 tỷ</span></div>
+        <div class="channel-row"><span class="label">Tỷ trọng ngân sách</span><span class="val">8%</span></div>
+        <div class="channel-row"><span class="label">Doanh thu</span><span class="val">1.5 tỷ</span></div>
+        <div class="channel-row"><span class="label">Lead</span><span class="val">1,702</span></div>
+        <div class="channel-row"><span class="label">Đặt lịch</span><span class="val">386</span></div>
+        <div class="channel-row"><span class="label">CPL</span><span class="val">597k ✓</span></div>
+        <div class="channel-row"><span class="label">Cost/Book</span><span class="val">2.63 tr ✓</span></div>
+        <div class="channel-row"><span class="label">Lead→Book</span><span class="val">22.7%</span></div>
+        <div class="channel-roas">
+          <div class="channel-roas-label">ROAS</div>
+          <div class="channel-roas-value good">1.46</div>
+        </div>
+      </div>
+
+      <div class="channel">
+        <div class="channel-header">
+          <span class="channel-name">TIKTOK</span>
+          <span class="channel-tag bad">Đang lỗ rõ ràng</span>
+        </div>
+        <div class="channel-row"><span class="label">Chi phí</span><span class="val">2.9 tỷ</span></div>
+        <div class="channel-row"><span class="label">Tỷ trọng ngân sách</span><span class="val">22%</span></div>
+        <div class="channel-row"><span class="label">Doanh thu</span><span class="val">2.6 tỷ</span></div>
+        <div class="channel-row"><span class="label">Lead</span><span class="val">3,871</span></div>
+        <div class="channel-row"><span class="label">Đặt lịch</span><span class="val">639</span></div>
+        <div class="channel-row"><span class="label">CPL</span><span class="val">741k</span></div>
+        <div class="channel-row"><span class="label">Cost/Book</span><span class="val">4.49 tr ✗</span></div>
+        <div class="channel-row"><span class="label">Lead→Book</span><span class="val">16.5% ✗</span></div>
+        <div class="channel-roas">
+          <div class="channel-roas-label">ROAS</div>
+          <div class="channel-roas-value bad">0.90</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 64px 0 24px;">Funnel: 11,710 leads "chết" mỗi tháng</h3>
+
+    <div class="funnel">
+      <div class="funnel-row">
+        <div class="funnel-label">Tổng Lead tạo ra</div>
+        <div class="funnel-bar" style="width: 100%;"></div>
+        <div class="funnel-value">15,191<span class="pct">100%</span></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Lead chuyển thành Booking</div>
+        <div class="funnel-bar" style="width: 23%;"></div>
+        <div class="funnel-value">3,481<span class="pct">22.9%</span></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">LEAD CHẾT (không đặt lịch)</div>
+        <div class="funnel-bar lost" style="width: 77%;"></div>
+        <div class="funnel-value">11,710<span class="pct">77.1%</span></div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-box-label">◆ Đòn bẩy lớn nhất chưa được khai thác</div>
+      <p>11,710 leads chết mỗi tháng tương đương ~10.15 tỷ chi phí ads "bốc hơi". Chỉ cần cải thiện tỷ lệ Lead→Book từ 22.9% lên 30%, sẽ có thêm ~1,076 booking/tháng (tương đương ~4.6 tỷ doanh thu), <strong>không tốn thêm một đồng ads nào.</strong></p>
+    </div>
+
+    <div class="source-grid">
+      <div class="source-card">
+        <h4>Nguồn KH mới T4/2026</h4>
+        <div class="source-row"><span>Tổng KH mới (check-in)</span><span class="v">5,170</span><span class="pct">100%</span></div>
+        <div class="source-row"><span>Từ Ads (đặt lịch ads)</span><span class="v">3,481</span><span class="pct">67%</span></div>
+        <div class="source-row"><span>Organic / Referral / Walk-in</span><span class="v">~1,689</span><span class="pct">33%</span></div>
+      </div>
+      <div class="source-card">
+        <h4>Doanh thu KH mới T4/2026</h4>
+        <div class="source-row"><span>Tổng DT từ KH mới</span><span class="v">14.9 tỷ</span><span class="pct">100%</span></div>
+        <div class="source-row"><span>DT từ Ads</span><span class="v">15 tỷ</span><span class="pct">~100%</span></div>
+        <div class="source-row"><span>DT từ nguồn khác</span><span class="v">~0 tỷ</span><span class="pct">0%</span></div>
+      </div>
+    </div>
+    <p style="font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--ink-mute); font-style: italic; margin-top: -16px;">Lưu ý: 33% KH non-ads đến nhưng gần như không tạo doanh thu trong tháng đầu — có thể là KH dùng voucher/dịch vụ thử miễn phí. Cần phân tích sâu hơn về hành vi nhóm này.</p>
+  </div>
+</section>
+
+<!-- ============ PULL QUOTE 2 ============ -->
+<div class="container">
+  <blockquote class="pullquote">
+    <div class="pullquote-mark">"</div>
+    <p class="pullquote-text">Cắt ads <strong>có thể làm TĂNG lợi nhuận</strong> mặc dù doanh thu giảm 35%. Vì mỗi đồng ads hiện chỉ tạo 0.14 đồng lợi nhuận gộp.</p>
+  </blockquote>
+</div>
+
+<!-- ============ SECTION 5 - SCENARIO ============ -->
+<section class="section" id="section-5">
+  <div class="container">
+    <div class="section-num">05 — Kịch bản "Cắt sạch Ads"</div>
+    <h2>Nếu <em>không còn tiền</em> chạy ads, biz này còn sống không?</h2>
+    <p class="section-lead">Mô phỏng tài chính 4 kịch bản, từ "tận thế" cực đoan đến tối ưu nhất với Beauty Biz.</p>
+
+    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 48px 0 24px;">So sánh P&L: Hiện tại vs. Sau khi cắt ads (T+6 tháng)</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Khoản mục</th>
+          <th class="num">Hiện tại (T4/2026)</th>
+          <th class="num">Sau cắt ads (~T10/2026)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Doanh thu</td><td class="num">62.5 tỷ</td><td class="num">~40 tỷ (-36%)</td></tr>
+        <tr><td>Giá vốn dịch vụ (~35%)</td><td class="num">21.9 tỷ</td><td class="num">14 tỷ</td></tr>
+        <tr><td>Chi phí Ads</td><td class="num">13.2 tỷ</td><td class="num"><span class="pill good">0 tỷ</span></td></tr>
+        <tr><td>Lương nhân viên (~20%)</td><td class="num">12.5 tỷ</td><td class="num">7 tỷ</td></tr>
+        <tr><td>Mặt bằng + vận hành</td><td class="num">9.4 tỷ</td><td class="num">6.5 tỷ</td></tr>
+        <tr class="total"><td>Lợi nhuận trước thuế</td><td class="num">5.5 tỷ (~9% biên)</td><td class="num"><span class="pill good">12.5 tỷ (~31% biên)</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <div class="highlight-box-label">◆ Phát hiện gây sốc</div>
+      <p>Cắt sạch ads sẽ khiến doanh thu giảm 36% trong 6 tháng — nhưng lợi nhuận tuyệt đối có thể <strong>tăng từ 5.5 tỷ lên 12.5 tỷ/tháng</strong>. Lý do: ads đang nuốt 21% doanh thu nhưng chỉ tạo ROAS 1.14, sau khi trừ vận hành thì đang lỗ ròng.</p>
+    </div>
+
+    <div class="churn-viz">
+      <h3>4 Kịch bản chiến lược</h3>
+      <div class="churn-viz-sub">Mô phỏng pool KH active (k người) theo thời gian</div>
+
+      <div class="scenario-grid">
+        <div class="scenario">
+          <div class="scenario-name">A. Tận thế<br>(0 KH mới)</div>
+          <div class="scenario-row"><span>T+12</span><span class="v">12k</span></div>
+          <div class="scenario-row"><span>T+24</span><span class="v">5k</span></div>
+          <div class="scenario-row"><span>T+36</span><span class="v">2.5k</span></div>
+          <div class="scenario-row critical"><span>T+60</span><span class="v">700</span></div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-name">B. Chỉ Organic<br>(1.7k/tháng)</div>
+          <div class="scenario-row"><span>T+12</span><span class="v">23k</span></div>
+          <div class="scenario-row"><span>T+24</span><span class="v">25k</span></div>
+          <div class="scenario-row"><span>T+36</span><span class="v">24k</span></div>
+          <div class="scenario-row"><span>T+60</span><span class="v">24k</span></div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-name">C. + Beauty Biz<br>(3.5k/tháng) ★</div>
+          <div class="scenario-row"><span>T+12</span><span class="v">38k</span></div>
+          <div class="scenario-row"><span>T+24</span><span class="v">48k</span></div>
+          <div class="scenario-row"><span>T+36</span><span class="v">50k</span></div>
+          <div class="scenario-row"><span>T+60</span><span class="v">50k</span></div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-name">D. Giữ Ads<br>như hiện tại</div>
+          <div class="scenario-row"><span>T+12</span><span class="v">35k</span></div>
+          <div class="scenario-row"><span>T+24</span><span class="v">38k</span></div>
+          <div class="scenario-row"><span>T+36</span><span class="v">40k</span></div>
+          <div class="scenario-row"><span>T+60</span><span class="v">45k</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 6 - HOW LONG ============ -->
+<section class="section" id="section-6">
+  <div class="container">
+    <div class="section-num">06 — Bao lâu thì hết khách?</div>
+    <h2>Câu trả lời: <em>không bao giờ</em>, nhưng quy mô có thể co lại đáng kể.</h2>
+    <p class="section-lead">Mô phỏng pool KH theo thời gian trong kịch bản tận thế: cắt ads + không còn KH mới nào.</p>
+
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="timeline-month">T+0 (HIỆN TẠI)</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 100%;"></div></div>
+          <div class="timeline-num">34.1k KH</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+6 THÁNG</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 59%;"></div></div>
+          <div class="timeline-num">~20k (-41%)</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+12 THÁNG</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 35%;"></div></div>
+          <div class="timeline-num">~12k (-65%)</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+24 THÁNG</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 15%;"></div></div>
+          <div class="timeline-num">~5k (-85%)</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+36 THÁNG</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 7%;"></div></div>
+          <div class="timeline-num">~2.5k (-93%)</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+60 THÁNG</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 2%;"></div></div>
+          <div class="timeline-num">~700 (-98%)</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-month">T+120 (10 NĂM)</div>
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar"><div class="timeline-bar-fill" style="width: 0.2%;"></div></div>
+          <div class="timeline-num">~50 KH</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div>
+        <p>Trong kịch bản cực đoan nhất — cắt sạch ads, không có một KH mới nào, không Beauty Biz, không referral — pool active sẽ giảm 65% trong 12 tháng và 93% trong 36 tháng. Sau 5 năm, business chỉ còn ~700 KH.</p>
+        <p>Nhưng kịch bản này phi thực tế. Ngay cả khi không có ads, mỗi tháng vẫn có khoảng 1,700 KH organic/referral đến từ word-of-mouth, social media tự nhiên, và khách quen giới thiệu. Đây là "đáy" tự nhiên của business.</p>
+      </div>
+      <div>
+        <p>Phép tính steady-state: với 1,700 KH mới/tháng và churn trung bình 7%/tháng (toàn pool), pool sẽ ổn định ở khoảng <strong>24,000 KH active</strong> — tức co lại 30% so với hiện tại, nhưng không bao giờ về 0.</p>
+        <p>Nếu Beauty Biz hoạt động hiệu quả và tạo thêm 1,500-2,000 KH referral/tháng, pool có thể đạt 48-50k — <strong>cao hơn cả hiện tại</strong>. Đây là lý do Beauty Biz không phải là "nice to have" mà là chiến lược sống còn của business.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-box-label">◆ KPI quan trọng nhất Beauty Biz cần đạt</div>
+      <p>Để Roy có thể tự tin cắt ads, Beauty Biz cần tạo ra tối thiểu <strong>1,300 KH referral mỗi tháng</strong> — đủ để bù đắp cho lượng KH ads bị cắt. Đây là chỉ số bắc cầu giữa "cắt ads" và "duy trì quy mô business".</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 7 - ACTION PLAN ============ -->
+<section class="section" id="section-7">
+  <div class="container">
+    <div class="section-num">07 — Khuyến nghị hành động</div>
+    <h2>Những đòn bẩy có thể <em>kéo ngay</em> trong 90 ngày tới.</h2>
+    <p class="section-lead">Không phải mọi việc đều cần làm cùng lúc. Đây là thứ tự ưu tiên dựa trên mức độ tác động và độ khó triển khai.</p>
+
+    <div class="actions">
+      <div class="action">
+        <div class="action-num">01</div>
+        <div class="action-content">
+          <h4>Cắt 50% ngân sách TikTok ngay tuần này</h4>
+          <p>ROAS 0.9 nghĩa là đang lỗ rõ ràng. Cost/Book 4.49tr cao nhất trong 3 kênh. Lead→Book chỉ 16.5% — chất lượng lead kém. Dồn ngân sách tiết kiệm sang Google.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Tiết kiệm</div>
+          <div class="action-impact-value">~1.5 tỷ<span class="unit">/tháng</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">02</div>
+        <div class="action-content">
+          <h4>Tăng 2-3 lần ngân sách Google Ads</h4>
+          <p>Google đang có ROAS 1.46, CPL thấp nhất, Cost/Book thấp nhất. Hiện chỉ chiếm 8% ngân sách. Test scale từ 1 tỷ lên 2-3 tỷ trong 1 tháng để đo dư địa.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">DT tăng ước tính</div>
+          <div class="action-impact-value">+2.2 tỷ<span class="unit">/tháng</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">03</div>
+        <div class="action-content">
+          <h4>Audit & vá funnel Lead→Book</h4>
+          <p>11,710 leads chết mỗi tháng. Nghe ngẫu nhiên 100 cuộc gọi/tuần, đo thời gian phản hồi lead (mục tiêu &lt;5 phút), phân tích theo telesale. Cải thiện từ 22.9% → 30%.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">DT tăng (không tốn ads)</div>
+          <div class="action-impact-value">+4.6 tỷ<span class="unit">/tháng</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">04</div>
+        <div class="action-content">
+          <h4>Phân tích retention theo nguồn ads</h4>
+          <p>KH từ Meta, Google, TikTok có retention 12T khác nhau như thế nào? Đây là dữ liệu quyết định chiến lược dài hạn. KH Google (intent-based) có thể có retention cao hơn nhiều.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Tác động</div>
+          <div class="action-impact-value">Định hướng<span class="unit">chiến lược</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">05</div>
+        <div class="action-content">
+          <h4>Vá lỗ hổng nhóm 2-6 tháng &amp; 6-12 tháng</h4>
+          <p>Đây là vùng "rò rỉ" lớn nhất với DT/lượt thấp nhất. Triển khai chương trình loyalty + remarketing có target cho 2 nhóm này. Mỗi 1% cải thiện retention = +500-700k/tháng.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Mục tiêu retention</div>
+          <div class="action-impact-value">30% → 45%<span class="unit">trong 12 tháng</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">06</div>
+        <div class="action-content">
+          <h4>Đẩy nhanh Beauty Biz — KPI 1,300 KH/tháng</h4>
+          <p>Đây là chìa khóa thoát khỏi sự phụ thuộc ads. Đặt KPI rõ ràng: trong 12 tháng, Beauty Biz cần tạo tối thiểu 1,300 KH referral/tháng. Đầu tư 2-3 tỷ tiết kiệm từ ads vào đây.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Mục tiêu 12 tháng</div>
+          <div class="action-impact-value">1,300<span class="unit">KH referral/tháng</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">07</div>
+        <div class="action-content">
+          <h4>Re-engagement campaign cho lead chết</h4>
+          <p>140k+ lead chết mỗi năm là pool khổng lồ. SMS/Zalo/Email với offer mới — chi phí ~50-100k/lead so với 867k CPL mới. Hiệu quả tiềm năng rất lớn.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Pool re-engage</div>
+          <div class="action-impact-value">~140k<span class="unit">leads/năm</span></div>
+        </div>
+      </div>
+
+      <div class="action">
+        <div class="action-num">08</div>
+        <div class="action-content">
+          <h4>Xây dashboard LTV/CAC theo kênh</h4>
+          <p>ROAS tháng đầu không đủ để ra quyết định. Cần tracking LTV 3T/6T/12T cho từng kênh ads. Dashboard này là nền tảng để Roy ra quyết định scale ads bền vững dài hạn.</p>
+        </div>
+        <div class="action-impact">
+          <div class="action-impact-label">Tác động</div>
+          <div class="action-impact-value">Ra quyết định<span class="unit">data-driven</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL VERDICT ============ -->
+<section class="final">
+  <div class="container">
+    <div class="final-label">◆ Kết luận chiến lược</div>
+    <h2 id="section-8">Bài toán không phải <em>"có nên cắt ads không"</em>. Bài toán là làm sao mỗi đồng ads tạo ra <em>LTV &gt;&gt; CAC</em>.</h2>
+    <p class="final-tagline">Hiện tại tỉ lệ này đang quá mỏng. Hoặc fix retention (30% → 45%), hoặc fix ads efficiency (cắt TikTok, scale Google), hoặc tốt nhất là cả hai. Trong 90 ngày, có thể tăng lợi nhuận thêm 30-50% mà không tốn thêm ngân sách. Trong 12 tháng, có thể đạt được mô hình ít phụ thuộc ads (40% thay vì 67%) và bền vững hơn nhiều.</p>
+
+    <div style="display: inline-block; padding: 24px 48px; border: 2px solid var(--paper); font-family: 'Fraunces', serif; font-style: italic; font-size: 22px;">
+      Beauty Biz không phải "nice to have" — đây là <strong style="font-style: normal;">chiến lược sống còn dài hạn</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <strong>Phạm vi data</strong>
+        <div>
+          T1/2024 — T4/2026<br>
+          27 tháng historical<br>
+          ~111k KH mới được tạo<br>
+          5 nhóm cohort phân tích
+        </div>
+      </div>
+      <div class="footer-col">
+        <strong>Phương pháp</strong>
+        <div>
+          Cohort retention analysis<br>
+          Channel-level ROAS audit<br>
+          P&amp;L scenario modeling<br>
+          Steady-state simulation
+        </div>
+      </div>
+      <div class="footer-col">
+        <strong>Bước tiếp theo</strong>
+        <div>
+          Validate metric definitions<br>
+          Cohort retention by source<br>
+          Beauty Biz KPI dashboard<br>
+          90-day execution plan
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Báo cáo nội bộ · Soạn cho Roy &amp; Đội Sản Phẩm · T5/2026 · Bản phân tích sơ bộ
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
