@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Guideline & Keyword Strategy — Quang Minh Corp</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --bg-elevated: #ffffff;
+    --bg-sidebar: #1a1f2e;
+    --bg-sidebar-hover: #252b3d;
+    --bg-accent-soft: #eff6ff;
+    --bg-success-soft: #ecfdf5;
+    --bg-warning-soft: #fffbeb;
+    --bg-danger-soft: #fef2f2;
+    --border: #e7e5e4;
+    --border-light: #f5f5f4;
+    --text-primary: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #a8a29e;
+    --text-inverse: #f5f5f4;
+    --text-inverse-muted: #94a3b8;
+    --accent: #1e40af;
+    --accent-hover: #1e3a8a;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --radius: 8px;
+    --sidebar-w: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* ----- Sidebar ----- */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--bg-sidebar);
+    color: var(--text-inverse);
+    overflow-y: auto;
+    padding: 24px 0;
+    z-index: 100;
+  }
+
+  .sidebar-brand {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-brand .title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-brand .subtitle {
+    font-size: 11px;
+    color: var(--text-inverse-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sidebar-nav { padding: 0 12px; }
+
+  .nav-section {
+    margin-bottom: 20px;
+  }
+
+  .nav-section-title {
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-inverse-muted);
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 7px 12px;
+    color: var(--text-inverse);
+    text-decoration: none;
+    font-size: 13.5px;
+    border-radius: 6px;
+    margin-bottom: 1px;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    background: var(--bg-sidebar-hover);
+  }
+
+  .nav-link.active {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  .nav-link .num {
+    display: inline-block;
+    width: 22px;
+    color: var(--text-inverse-muted);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+  }
+
+  .nav-link.active .num { color: rgba(255,255,255,0.7); }
+
+  .nav-sub {
+    padding-left: 22px;
+    font-size: 12.5px;
+    color: var(--text-inverse-muted);
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  /* ----- Main ----- */
+  .main {
+    margin-left: var(--sidebar-w);
+    padding: 48px 64px 80px;
+    max-width: 1100px;
+  }
+
+  .doc-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+
+  .badge-version {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--bg-accent-soft);
+    color: var(--accent);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1.doc-title {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+  }
+
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+
+  .doc-meta span strong { color: var(--text-primary); }
+
+  .doc-summary {
+    margin-top: 20px;
+    padding: 18px 22px;
+    background: var(--bg-elevated);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  /* ----- Section ----- */
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  h2 .h-num {
+    color: var(--accent);
+    font-weight: 600;
+    margin-right: 10px;
+    font-feature-settings: "tnum";
+  }
+
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--text-primary);
+  }
+
+  h4 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin: 20px 0 10px;
+    color: var(--text-primary);
+  }
+
+  p { margin-bottom: 12px; color: var(--text-primary); }
+
+  ul, ol { margin: 0 0 16px 22px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--text-muted); }
+
+  strong { font-weight: 600; color: var(--text-primary); }
+
+  code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
+    color: #0f172a;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
+  }
+
+  pre code { background: none; padding: 0; color: inherit; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 24px;
+    font-size: 13.5px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  th {
+    background: #f8fafc;
+    text-align: left;
+    padding: 11px 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:hover td { background: #fafafa; }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0 28px;
+  }
+
+  .stat-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+
+  .stat-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .stat-card .value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .stat-card .desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  /* Pillar / box callouts */
+  .callout {
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    margin: 16px 0 22px;
+    font-size: 14px;
+    border-left: 3px solid;
+  }
+
+  .callout.info {
+    background: var(--bg-accent-soft);
+    border-color: var(--accent);
+    color: #1e3a8a;
+  }
+
+  .callout.success {
+    background: var(--bg-success-soft);
+    border-color: var(--success);
+    color: #064e3b;
+  }
+
+  .callout.warning {
+    background: var(--bg-warning-soft);
+    border-color: var(--warning);
+    color: #78350f;
+  }
+
+  .callout.danger {
+    background: var(--bg-danger-soft);
+    border-color: var(--danger);
+    color: #7f1d1d;
+  }
+
+  .callout strong { color: inherit; }
+
+  /* Action items (5 việc cần làm ngay) */
+  .action-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .action-card:hover { box-shadow: var(--shadow-md); }
+
+  .action-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: linear-gradient(to right, #f8fafc, white);
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .action-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .action-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .action-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .action-meta span {
+    padding: 3px 8px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+
+  .action-toggle {
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .action-card.expanded .action-toggle { transform: rotate(180deg); }
+
+  .action-body {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .action-card.expanded .action-body {
+    padding: 18px 20px 20px;
+    max-height: 2000px;
+  }
+
+  .action-rationale {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--bg-warning-soft);
+    border-radius: 4px;
+    font-size: 13.5px;
+    color: #78350f;
+  }
+
+  .action-rationale strong { color: #78350f; }
+
+  /* Tabs (for keyword pillars) */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin: 24px 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 10px 18px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    user-select: none;
+    margin-bottom: -1px;
+  }
+
+  .tab:hover { color: var(--text-primary); }
+
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* Intent badges */
+  .intent {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .intent.tofu { background: #e0f2fe; color: #075985; }
+  .intent.mofu { background: #fef3c7; color: #92400e; }
+  .intent.bofu { background: #dcfce7; color: #166534; }
+
+  /* Print */
+  @media print {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 20px; }
+    .action-card .action-body { max-height: none !important; padding: 18px 20px 20px !important; }
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px 20px; }
+    h1.doc-title { font-size: 26px; }
+    h2 { font-size: 22px; }
+  }
+
+  /* Top toolbar */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .btn {
+    padding: 7px 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+
+  .btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+  /* Roadmap */
+  .roadmap {
+    margin: 16px 0;
+  }
+  .roadmap-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .roadmap-row:last-child { border-bottom: none; }
+  .roadmap-week {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .roadmap-content { color: var(--text-secondary); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="title">Quang Minh Corp</div>
+    <div class="subtitle">SEO Strategy v1.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Tổng quan</div>
+      <a class="nav-link active" data-target="overview"><span class="num">—</span>Tóm tắt</a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Phần 1 — Chiến lược</div>
+      <a class="nav-link" data-target="positioning"><span class="num">1.1</span>Định vị SEO</a>
+      <a class="nav-link" data-target="architecture"><span class="num">1.2</span>Cấu trúc URL</a>
+      <a class="nav-link" data-target="technical"><span class="num">1.3</span>Technical SEO</a>
+      <a class="nav-link" data-target="onpage"><span class="num">1.4</span>On-page Standards</a>
+      <a class="nav-link" data-target="eeat"><span class="num">1.5</span>E-E-A-T</a>
+      <a class="nav-link" data-target="local"><span class="num">1.6</span>Local SEO</a>
+      <a class="nav-link" data-target="content"><span class="num">1.7</span>Content Strategy</a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Phần 2 — Keyword</div>
+      <a class="nav-link" data-target="keywords"><span class="num">2</span>Bộ từ khóa</a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Phần 3 — Đo lường</div>
+      <a class="nav-link" data-target="tracking"><span class="num">3</span>Tracking & KPI</a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Phần 4 — Hành động</div>
+      <a class="nav-link" data-target="actions"><span class="num">4</span>5 việc làm ngay</a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Phụ lục</div>
+      <a class="nav-link" data-target="roadmap"><span class="num">—</span>Roadmap 90 ngày</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+
+  <!-- Header -->
+  <header class="doc-header" id="overview">
+    <span class="badge-version">Phiên bản 1.0 · Tài liệu nội bộ</span>
+    <h1 class="doc-title">SEO Guideline & Keyword Strategy<br>Quang Minh Corp</h1>
+    <div class="doc-meta">
+      <span><strong>Mục đích:</strong> Brief cho rebuild quangminhcorp.com.vn</span>
+      <span><strong>Định hướng:</strong> Cân bằng B2B + SME, phủ toàn quốc</span>
+      <span><strong>Ưu tiên:</strong> Vận tải → Kho lạnh → Tích hợp → Ngành dọc</span>
+    </div>
+    <div class="doc-summary">
+      Tài liệu tổng hợp đánh giá website hiện tại, chiến lược SEO toàn diện, bộ từ khóa ~175 keyword theo 4 pillar, phương án đo lường, và 5 hành động ưu tiên triển khai trong 30 ngày đầu — không phụ thuộc tiến độ rebuild website.
+    </div>
+
+    <div class="toolbar" style="margin-top: 24px;">
+      <button class="btn btn-primary" onclick="window.print()">📄 In / Lưu PDF</button>
+      <button class="btn" onclick="expandAllActions()">⊕ Mở tất cả hành động</button>
+      <button class="btn" onclick="collapseAllActions()">⊖ Thu gọn</button>
+    </div>
+
+    <div class="card-grid" style="margin-top: 28px;">
+      <div class="stat-card">
+        <div class="label">Pillar chính</div>
+        <div class="value">4</div>
+        <div class="desc">Vận tải, kho lạnh, chuỗi cung ứng, ngành dọc</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Keyword target</div>
+        <div class="value">~175</div>
+        <div class="desc">Phân theo intent TOFU/MOFU/BOFU</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Hành động ngay</div>
+        <div class="value">5</div>
+        <div class="desc">Hoàn thành trong 30 ngày đầu</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Roadmap</div>
+        <div class="value">90 ngày</div>
+        <div class="desc">Foundation → Growth → Scale</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PHẦN 1 ============ -->
+  <section id="positioning">
+    <h2><span class="h-num">1.1</span>Định vị SEO</h2>
+    <p>Quang Minh không nên cạnh tranh bằng giá rẻ — Yên Hưng, Hải Như, TOTAHA đang bão hòa keyword "giá rẻ". Lợi thế thực sự cần khai thác qua SEO:</p>
+    <ul>
+      <li><strong>Thâm niên 25+ năm</strong> (1996/2002) — uy tín, không bị các startup logistics 5–10 năm vượt qua được về E-E-A-T.</li>
+      <li><strong>Khách hàng tier-1 thật</strong>: KFC, Lotte, Jollibee, Pizza Hut, Domino's, Vissan, TH True Milk — social proof cực mạnh, đối thủ không có.</li>
+      <li><strong>Tích hợp vận tải + kho lạnh</strong>: hiếm đối thủ làm cả 2 mảng chuẩn chỉnh.</li>
+      <li><strong>3 điểm vận hành Bắc–Trung–Nam</strong>: Bình Dương, Thủ Đức, Hà Nội — phủ địa lý mà SME đối thủ không có.</li>
+    </ul>
+    <div class="callout success">
+      <strong>Định vị SEO chốt:</strong> "Đối tác chuỗi cung ứng lạnh tin cậy cho doanh nghiệp F&B và bán lẻ — 25+ năm, phục vụ các thương hiệu hàng đầu."
+    </div>
+  </section>
+
+  <section id="architecture">
+    <h2><span class="h-num">1.2</span>Cấu trúc URL & Site Architecture</h2>
+    <p>Bỏ hoàn toàn cấu trúc Haravan (<code>/pages/...</code>, <code>/cart</code>, <code>/account/login</code>). Dùng cấu trúc service-business chuẩn:</p>
+    <pre><code>quangminhcorp.com.vn/
+├── /                                    (Trang chủ)
+├── /ve-chung-toi/
+│   ├── /lich-su-hinh-thanh/
+│   ├── /khach-hang-doi-tac/
+│   ├── /chung-nhan-giay-phep/
+│   └── /tuyen-dung/
+├── /dich-vu/
+│   ├── /cho-thue-xe-dong-lanh/          (Pillar 1)
+│   │   ├── /xe-dong-lanh-1-5-tan-2-tan/
+│   │   ├── /xe-dong-lanh-3-5-tan-5-tan/
+│   │   ├── /xe-dong-lanh-8-tan/
+│   │   ├── /xe-dong-lanh-12-14-tan/
+│   │   └── /container-lanh-40-45-feet/
+│   ├── /cho-thue-kho-lanh/              (Pillar 2)
+│   │   ├── /kho-dong-lanh/              (-18 đến -22°C)
+│   │   ├── /kho-mat/                    (0-4°C)
+│   │   └── /kho-trung-chuyen/
+│   ├── /van-chuyen-bac-nam/             (Pillar 3)
+│   └── /chuoi-cung-ung-lanh/            (Pillar 4)
+├── /khu-vuc/                            (Local SEO)
+│   ├── /tphcm/  /binh-duong/  /ha-noi/  /dong-nai/  ...
+├── /nganh-hang/                         (Industry pages)
+│   ├── /thuc-pham-dong-lanh/
+│   ├── /thuy-hai-san/
+│   ├── /sua-cac-san-pham-tu-sua/
+│   ├── /trai-cay-rau-cu/
+│   ├── /duoc-pham-vaccine/
+│   ├── /chuoi-fb-nha-hang/
+│   └── /sieu-thi-ban-le/
+├── /bao-gia/
+├── /blog/
+├── /lien-he/
+├── /tin-tuc/
+└── /case-study/</code></pre>
+
+    <h4>Quy tắc URL</h4>
+    <ul>
+      <li>Tiếng Việt không dấu, gạch ngang giữa từ</li>
+      <li>Không quá 5 cấp deep</li>
+      <li>Không có ID, query string, tham số tracking trong URL chính</li>
+      <li>Lowercase toàn bộ</li>
+      <li>Có trailing slash hoặc không — chọn 1 và 301 redirect cái còn lại</li>
+    </ul>
+  </section>
+
+  <section id="technical">
+    <h2><span class="h-num">1.3</span>Technical SEO Requirements</h2>
+
+    <h3>Hosting & Performance</h3>
+    <ul>
+      <li><strong>Core Web Vitals</strong> đạt "Good" cho cả mobile & desktop:
+        <ul>
+          <li>LCP &lt; 2.5s</li>
+          <li>FID/INP &lt; 200ms</li>
+          <li>CLS &lt; 0.1</li>
+        </ul>
+      </li>
+      <li>Hosting đặt tại VN (hoặc Singapore CDN) để giảm latency cho user VN</li>
+      <li>Bật HTTP/2 hoặc HTTP/3, Brotli compression</li>
+      <li>HTTPS bắt buộc, HSTS preload</li>
+      <li>Image: dùng WebP/AVIF, lazy-load đúng cách, có width/height attribute</li>
+    </ul>
+
+    <h3>Crawlability</h3>
+    <ul>
+      <li><code>robots.txt</code> chuẩn — chỉ block <code>/admin/</code>, <code>/api/</code>, các trang preview</li>
+      <li><code>sitemap.xml</code> tự động generate, submit Google Search Console + Bing Webmaster Tools</li>
+      <li>Canonical URL đúng cho mọi trang</li>
+      <li>Pagination có rel="next"/"prev" hoặc dùng infinite scroll có fallback URL</li>
+      <li>Không có orphan page (page không có internal link trỏ về)</li>
+    </ul>
+
+    <h3>Mobile-first</h3>
+    <ul>
+      <li>Responsive design, không dùng AMP (đã lỗi thời)</li>
+      <li>Tap target ≥ 48px, font size ≥ 16px cho body</li>
+      <li>Không pop-up che màn hình trên mobile (Google penalty)</li>
+    </ul>
+
+    <h3>Schema Markup (BẮT BUỘC)</h3>
+    <ul>
+      <li><code>Organization</code> + <code>LocalBusiness</code> (cho mỗi chi nhánh — 3 schema riêng biệt)</li>
+      <li><code>Service</code> cho mỗi trang dịch vụ</li>
+      <li><code>BreadcrumbList</code> cho mọi trang con</li>
+      <li><code>FAQPage</code> cho các trang có FAQ</li>
+      <li><code>Article</code> / <code>BlogPosting</code> cho blog</li>
+      <li><code>Review</code> / <code>AggregateRating</code> nếu có testimonial thật</li>
+      <li><code>Product</code> cho từng loại xe (vì đây là "rentable asset")</li>
+    </ul>
+  </section>
+
+  <section id="onpage">
+    <h2><span class="h-num">1.4</span>On-page SEO Standards</h2>
+
+    <h3>Title Tag</h3>
+    <ul>
+      <li>Format: <code>[Primary keyword] | [USP/Secondary keyword] - Quang Minh Corp</code></li>
+      <li>Độ dài: 50–60 ký tự, mỗi trang title duy nhất</li>
+      <li>Ví dụ: "Cho thuê xe đông lạnh TPHCM | Giá tốt 24/7 - Quang Minh"</li>
+    </ul>
+
+    <h3>Meta Description</h3>
+    <ul>
+      <li>140–160 ký tự, có CTA (gọi ngay, xem báo giá, liên hệ tư vấn)</li>
+      <li>Có số điện thoại hoặc USP (25+ năm, 24/7, miễn phí khảo sát)</li>
+      <li><strong>KHÔNG</strong> dùng meta description mặc định Haravan ("Trang giới thiệu giúp khách hàng...")</li>
+    </ul>
+
+    <h3>Heading</h3>
+    <ul>
+      <li>Mỗi trang chỉ có <strong>1 H1 duy nhất</strong>, chứa primary keyword</li>
+      <li>H2 chia section, mỗi H2 cover 1 secondary keyword</li>
+      <li>H3 chia subsection</li>
+      <li>Không nhảy cấp (không H1 → H3)</li>
+    </ul>
+
+    <h3>Body Content</h3>
+    <ul>
+      <li>Trang dịch vụ: tối thiểu 800 từ, lý tưởng 1200–2000 từ</li>
+      <li>Trang ngành dọc: 1000–1500 từ</li>
+      <li>Blog post: 1500–2500 từ</li>
+      <li>Keyword density: 1–2% (đừng nhồi)</li>
+      <li>Có LSI keyword (từ đồng nghĩa, từ liên quan)</li>
+      <li>Đoạn văn ngắn (≤ 4 câu), nhiều bullet, có bảng so sánh</li>
+    </ul>
+
+    <h3>Internal Linking</h3>
+    <ul>
+      <li>Mỗi trang dịch vụ link đến: 2–3 trang dịch vụ liên quan + 1–2 case study + 1–2 blog post liên quan</li>
+      <li>Anchor text đa dạng, không lặp keyword chính 100%</li>
+      <li>Footer có link đến tất cả trang dịch vụ chính</li>
+      <li>Breadcrumb visible</li>
+    </ul>
+
+    <h3>Image SEO</h3>
+    <ul>
+      <li>Alt text mô tả thực tế (KHÔNG keyword stuff như site cũ — alt hiện tại toàn lặp tên thương hiệu)</li>
+      <li>Filename có keyword: <code>xe-dong-lanh-8-tan-quang-minh.webp</code></li>
+      <li>Có caption khi cần</li>
+      <li>Compress dưới 200KB cho ảnh thường, 500KB cho hero</li>
+    </ul>
+  </section>
+
+  <section id="eeat">
+    <h2><span class="h-num">1.5</span>E-E-A-T cho ngành vận tải</h2>
+    <p>Google rất khắt khe với ngành vận tải/logistics vì liên quan đến tài sản và an toàn hàng hóa của khách. Cần làm nổi bật:</p>
+
+    <div class="card-grid">
+      <div class="stat-card">
+        <div class="label">Experience</div>
+        <div class="value" style="font-size: 16px;">Năm thành lập, số chuyến, số khách</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Expertise</div>
+        <div class="value" style="font-size: 16px;">Tác giả blog ghi rõ chức vụ — không "Admin"</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Authoritativeness</div>
+        <div class="value" style="font-size: 16px;">Press mention, chứng nhận ngành</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Trustworthiness</div>
+        <div class="value" style="font-size: 16px;">MST, GPKD, SSL, chính sách bồi thường</div>
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <strong>Tín hiệu Trust hiện tại đang yếu:</strong> Logo đối tác broken (icon spinner), 3 hotline khác nhau, meta description placeholder Haravan, lỗi chính tả nhiều — tất cả đều giảm điểm Trust trong mắt Google và khách hàng.
+    </div>
+  </section>
+
+  <section id="local">
+    <h2><span class="h-num">1.6</span>Local SEO</h2>
+
+    <h3>Google Business Profile (GBP)</h3>
+    <p>Tạo + tối ưu <strong>3 GBP riêng biệt</strong>:</p>
+    <ol>
+      <li>Trụ sở Bình Dương (36F/1B Tỉnh lộ 43, Bình Hòa, Thuận An)</li>
+      <li>Chi nhánh HCM (1335/7 Tỉnh Lộ 43, Bình Chiểu, Thủ Đức)</li>
+      <li>Chi nhánh Hà Nội (KCN Duyên Thái, Thường Tín)</li>
+    </ol>
+
+    <h4>Mỗi GBP cần:</h4>
+    <ul>
+      <li>Category chính: "Trucking company" hoặc "Cold storage facility" tùy vai trò chi nhánh</li>
+      <li>Category phụ: "Logistics service", "Refrigerated transport service"</li>
+      <li>Upload tối thiểu 20 ảnh thật (xe, kho, tài xế, văn phòng)</li>
+      <li>Cập nhật giờ làm việc đúng (24/7 nếu có hỗ trợ)</li>
+      <li>Có post hàng tuần</li>
+      <li>Trả lời mọi review (kể cả review âm)</li>
+      <li>Số điện thoại trùng với footer website (NAP consistency)</li>
+    </ul>
+
+    <h3>NAP Consistency</h3>
+    <p>Name + Address + Phone phải giống <strong>NHAU 100%</strong> trên: Website, GBP, Facebook, Zalo OA, Yellowpages, các directory ngành.</p>
+
+    <div class="callout warning">
+      <strong>Vấn đề hiện tại:</strong> Site cũ có 3 hotline khác nhau (0907100137 / 0362381038 / 0982823339) và 3 email khác nhau → cực kỳ hại SEO local. <strong>Phải thống nhất 1 hotline + 1 email kinh doanh chính.</strong>
+    </div>
+
+    <h3>Local Citation</h3>
+    <p>Submit doanh nghiệp lên các directory chất lượng:</p>
+    <ul>
+      <li>yellowpages.vn (đã có — cần update)</li>
+      <li>vinabiz.org, 1mienphi.com, diachiso.vn</li>
+      <li>Diễn đàn ngành: logistics4vn.com, vla.com.vn</li>
+      <li>Hiệp hội DN logistics VN (VLA) — nếu là thành viên</li>
+    </ul>
+  </section>
+
+  <section id="content">
+    <h2><span class="h-num">1.7</span>Content Strategy</h2>
+
+    <h3>Pillar — Cluster Model</h3>
+    <p>Mỗi pillar (trang dịch vụ chính) có 5–10 cluster (blog post hỗ trợ) trỏ về:</p>
+    <pre><code>PILLAR: /dich-vu/cho-thue-xe-dong-lanh/
+├── Cluster: "Chi phí thuê xe đông lạnh năm 2026 - bảng giá tham khảo"
+├── Cluster: "Thuê xe đông lạnh theo chuyến vs theo tháng"
+├── Cluster: "Quy trình bảo quản hàng hóa khi vận chuyển đông lạnh"
+├── Cluster: "Cách chọn tải trọng xe đông lạnh phù hợp"
+├── Cluster: "Tiêu chuẩn nhiệt độ vận chuyển từng loại hàng"
+├── Cluster: "Hợp đồng thuê xe đông lạnh - những điều cần lưu ý"
+└── Cluster: "Kinh nghiệm vận chuyển hàng đông lạnh Bắc Nam"</code></pre>
+
+    <h3>Content Cadence</h3>
+    <ul>
+      <li>4–6 blog post chất lượng/tháng (không chạy số lượng)</li>
+      <li>1 case study/tháng (xin phép khách hàng cũ)</li>
+      <li>2 trang ngành dọc/quý</li>
+      <li>Update lại pillar pages mỗi 6 tháng</li>
+    </ul>
+
+    <h3>Topical Authority</h3>
+    <p>Để Google công nhận là "authority" trong ngành vận tải lạnh, cần cover hết các topic con:</p>
+    <ul>
+      <li><strong>Vận hành</strong>: bảo dưỡng xe lạnh, đào tạo tài xế, GPS tracking</li>
+      <li><strong>Kỹ thuật</strong>: hệ thống lạnh Carrier vs Thermo King, vật liệu cách nhiệt, máy phát dự phòng</li>
+      <li><strong>Pháp lý</strong>: giấy phép vận tải, ATTP, HACCP, GMP</li>
+      <li><strong>Ngành hàng</strong>: từng loại hàng có nhiệt độ riêng</li>
+      <li><strong>Logistics</strong>: kho ngoại quan, xuất nhập khẩu, cross-docking</li>
+      <li><strong>Xu hướng</strong>: cold chain Việt Nam, IoT trong vận tải lạnh, ESG</li>
+    </ul>
+  </section>
+
+  <!-- ============ PHẦN 2 — KEYWORD ============ -->
+  <section id="keywords">
+    <h2><span class="h-num">2</span>Bộ từ khóa Quang Minh Corp</h2>
+    <p>Tổng ~175 keyword phân theo 4 pillar và 5 cụm chức năng. Phân loại theo search intent:</p>
+    <ul>
+      <li><span class="intent tofu">TOFU</span> — Top of funnel, Informational: tìm hiểu, so sánh</li>
+      <li><span class="intent mofu">MOFU</span> — Middle, Commercial Investigation: so sánh nhà cung cấp</li>
+      <li><span class="intent bofu">BOFU</span> — Bottom, Transactional: sẵn sàng thuê</li>
+    </ul>
+
+    <div class="tabs" id="kwTabs">
+      <div class="tab active" data-tab="kw1">Pillar 1 — Vận tải</div>
+      <div class="tab" data-tab="kw2">Pillar 2 — Kho lạnh</div>
+      <div class="tab" data-tab="kw3">Pillar 3 — Chuỗi cung ứng</div>
+      <div class="tab" data-tab="kw4">Pillar 4 — Ngành dọc</div>
+      <div class="tab" data-tab="kw5">Brand</div>
+      <div class="tab" data-tab="kw6">Long-tail Blog</div>
+      <div class="tab" data-tab="kw7">Negative</div>
+      <div class="tab" data-tab="kw8">Priority Matrix</div>
+    </div>
+
+    <!-- TAB 1 -->
+    <div class="tab-pane active" id="kw1">
+      <h3>Pillar 1 — Cho thuê xe đông lạnh <span style="color: var(--success); font-size: 14px;">(ƯU TIÊN #1)</span></h3>
+
+      <h4>Primary keyword (BOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Volume/tháng</th><th>Độ khó</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>cho thuê xe đông lạnh</td><td>1.000–2.000</td><td>Cao</td><td><code>/dich-vu/cho-thue-xe-dong-lanh/</code></td></tr>
+          <tr><td>thuê xe đông lạnh</td><td>800–1.500</td><td>Cao</td><td><code>/dich-vu/cho-thue-xe-dong-lanh/</code></td></tr>
+          <tr><td>thuê xe tải đông lạnh</td><td>500–800</td><td>TB</td><td><code>/dich-vu/cho-thue-xe-dong-lanh/</code></td></tr>
+          <tr><td>dịch vụ vận chuyển hàng đông lạnh</td><td>400–700</td><td>TB</td><td><code>/dich-vu/cho-thue-xe-dong-lanh/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Secondary — theo tải trọng (BOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>thuê xe đông lạnh 1.5 tấn / 2 tấn / 1.4 tấn</td><td><code>/xe-dong-lanh-1-5-tan-2-tan/</code></td></tr>
+          <tr><td>thuê xe đông lạnh 3.5 tấn / 5 tấn</td><td><code>/xe-dong-lanh-3-5-tan-5-tan/</code></td></tr>
+          <tr><td>thuê xe đông lạnh 8 tấn</td><td><code>/xe-dong-lanh-8-tan/</code></td></tr>
+          <tr><td>thuê xe đông lạnh 12 tấn / 14 tấn</td><td><code>/xe-dong-lanh-12-14-tan/</code></td></tr>
+          <tr><td>thuê container lạnh 40 feet / 45 feet / 40 fit</td><td><code>/container-lanh-40-45-feet/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Theo địa lý (BOFU — Local intent)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>thuê xe đông lạnh tphcm / hồ chí minh</td><td><code>/khu-vuc/tphcm/</code></td></tr>
+          <tr><td>thuê xe đông lạnh bình dương</td><td><code>/khu-vuc/binh-duong/</code></td></tr>
+          <tr><td>thuê xe đông lạnh hà nội</td><td><code>/khu-vuc/ha-noi/</code></td></tr>
+          <tr><td>thuê xe đông lạnh thủ đức</td><td><code>/khu-vuc/tphcm/</code></td></tr>
+          <tr><td>thuê xe đông lạnh đồng nai</td><td><code>/khu-vuc/dong-nai/</code></td></tr>
+          <tr><td>thuê xe đông lạnh thuận an / bình chiểu</td><td><code>/khu-vuc/binh-duong/</code> / <code>/khu-vuc/tphcm/</code></td></tr>
+          <tr><td>cho thuê xe đông lạnh miền nam / miền bắc</td><td><code>/khu-vuc/tphcm/</code> / <code>/khu-vuc/ha-noi/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Theo hình thức thuê (MOFU + BOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Intent</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>thuê xe đông lạnh theo chuyến</td><td><span class="intent bofu">BOFU</span></td><td><code>/cho-thue-xe-dong-lanh/#theo-chuyen</code></td></tr>
+          <tr><td>thuê xe đông lạnh theo tháng</td><td><span class="intent bofu">BOFU</span></td><td><code>/cho-thue-xe-dong-lanh/#theo-thang</code></td></tr>
+          <tr><td>thuê xe đông lạnh hợp đồng dài hạn</td><td><span class="intent bofu">BOFU</span></td><td><code>/cho-thue-xe-dong-lanh/#dai-han</code></td></tr>
+          <tr><td>thuê xe đông lạnh ghép hàng</td><td><span class="intent bofu">BOFU</span></td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+          <tr><td>thuê xe đông lạnh nguyên chuyến</td><td><span class="intent bofu">BOFU</span></td><td><code>/dich-vu/cho-thue-xe-dong-lanh/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Long-tail Commercial (MOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>báo giá thuê xe đông lạnh</td><td><code>/bao-gia/</code></td></tr>
+          <tr><td>bảng giá thuê xe đông lạnh 2026</td><td><code>/blog/bang-gia-thue-xe-dong-lanh-2026/</code></td></tr>
+          <tr><td>chi phí thuê xe đông lạnh</td><td><code>/blog/chi-phi-thue-xe-dong-lanh/</code></td></tr>
+          <tr><td>giá thuê xe đông lạnh tphcm hà nội</td><td><code>/blog/gia-thue-xe-dong-lanh-tphcm-ha-noi/</code></td></tr>
+          <tr><td>công ty cho thuê xe đông lạnh uy tín</td><td><code>/ve-chung-toi/</code></td></tr>
+          <tr><td>top công ty vận tải đông lạnh việt nam</td><td><code>/blog/top-cong-ty-van-tai-dong-lanh/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Tuyến đường (BOFU — long-tail nhưng intent rất cao)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Volume</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>vận chuyển hàng đông lạnh bắc nam</td><td>Cao</td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+          <tr><td>vận chuyển hàng lạnh tphcm đi hà nội</td><td>TB</td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+          <tr><td>vận chuyển hàng lạnh hà nội đi tphcm</td><td>TB</td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+          <tr><td>ghép hàng lạnh bắc nam</td><td>TB</td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+          <tr><td>xe đông lạnh chạy bắc nam</td><td>TB</td><td><code>/dich-vu/van-chuyen-bac-nam/</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2 -->
+    <div class="tab-pane" id="kw2">
+      <h3>Pillar 2 — Cho thuê kho lạnh <span style="color: var(--success); font-size: 14px;">(ƯU TIÊN #2)</span></h3>
+
+      <h4>Primary (BOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Volume/tháng</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>cho thuê kho lạnh</td><td>2.000–3.000</td><td><code>/dich-vu/cho-thue-kho-lanh/</code></td></tr>
+          <tr><td>cho thuê kho đông lạnh</td><td>800–1.500</td><td><code>/cho-thue-kho-lanh/kho-dong-lanh/</code></td></tr>
+          <tr><td>cho thuê kho mát</td><td>500–800</td><td><code>/cho-thue-kho-lanh/kho-mat/</code></td></tr>
+          <tr><td>dịch vụ kho lạnh</td><td>600–1.000</td><td><code>/dich-vu/cho-thue-kho-lanh/</code></td></tr>
+          <tr><td>lưu kho đông lạnh</td><td>400–700</td><td><code>/cho-thue-kho-lanh/kho-dong-lanh/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Theo nhiệt độ (Long-tail)</h4>
+      <ul>
+        <li>kho lạnh -18 độ / kho lạnh -22 độ</li>
+        <li>kho mát 0–4 độ / kho mát 2–8 độ (dược phẩm)</li>
+        <li>kho lạnh nhiệt độ phòng / 18–23 độ</li>
+      </ul>
+
+      <h4>Theo địa lý (Local — BOFU)</h4>
+      <table>
+        <thead><tr><th>Keyword</th><th>Map to URL</th></tr></thead>
+        <tbody>
+          <tr><td>cho thuê kho lạnh tphcm</td><td><code>/khu-vuc/tphcm/#kho-lanh</code></td></tr>
+          <tr><td>cho thuê kho lạnh thủ đức / bình chiểu</td><td><code>/khu-vuc/tphcm/#kho-lanh</code></td></tr>
+          <tr><td>cho thuê kho lạnh bình dương / thuận an</td><td><code>/khu-vuc/binh-duong/#kho-lanh</code></td></tr>
+          <tr><td>cho thuê kho lạnh hà nội / thường tín</td><td><code>/khu-vuc/ha-noi/#kho-lanh</code></td></tr>
+          <tr><td>cho thuê kho lạnh long an</td><td><code>/khu-vuc/long-an/</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>MOFU</h4>
+      <ul>
+        <li>bảng giá cho thuê kho lạnh</li>
+        <li>giá thuê kho lạnh 1 pallet / 1 m² / 1 m³</li>
+        <li>công ty cho thuê kho lạnh uy tín</li>
+        <li>so sánh thuê kho lạnh và xây kho riêng</li>
+        <li>tiêu chuẩn HACCP cho kho lạnh</li>
+      </ul>
+    </div>
+
+    <!-- TAB 3 -->
+    <div class="tab-pane" id="kw3">
+      <h3>Pillar 3 — Chuỗi cung ứng lạnh <span style="color: var(--success); font-size: 14px;">(ƯU TIÊN #3)</span></h3>
+      <p>Đây là keyword B2B cao cấp, volume thấp nhưng giá trị từng lead rất lớn:</p>
+      <table>
+        <thead><tr><th>Keyword</th><th>Search Intent</th></tr></thead>
+        <tbody>
+          <tr><td>dịch vụ chuỗi cung ứng lạnh</td><td><span class="intent mofu">MOFU</span></td></tr>
+          <tr><td>cold chain logistics việt nam</td><td><span class="intent mofu">MOFU</span></td></tr>
+          <tr><td>công ty logistics đông lạnh</td><td><span class="intent mofu">MOFU</span></td></tr>
+          <tr><td>giải pháp chuỗi cung ứng lạnh tích hợp</td><td><span class="intent bofu">BOFU</span></td></tr>
+          <tr><td>3PL kho lạnh</td><td><span class="intent mofu">MOFU</span></td></tr>
+          <tr><td>dịch vụ kho lạnh và vận chuyển trọn gói</td><td><span class="intent bofu">BOFU</span></td></tr>
+          <tr><td>cold storage and transportation vietnam (EN)</td><td><span class="intent mofu">MOFU</span> — nhắm khách FDI</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 4 -->
+    <div class="tab-pane" id="kw4">
+      <h3>Pillar 4 — Ngành dọc (Industry pages)</h3>
+      <p>Mỗi trang ngành dọc nhắm 1 nhóm khách hàng cụ thể.</p>
+      <table>
+        <thead><tr><th>Ngành</th><th>Keyword chính</th><th>URL</th></tr></thead>
+        <tbody>
+          <tr><td>Thực phẩm đông lạnh</td><td>vận chuyển thực phẩm đông lạnh, kho lạnh thực phẩm</td><td><code>/nganh-hang/thuc-pham-dong-lanh/</code></td></tr>
+          <tr><td>Thủy hải sản</td><td>vận chuyển thủy hải sản, vận chuyển hải sản đông lạnh, kho lạnh thủy sản</td><td><code>/nganh-hang/thuy-hai-san/</code></td></tr>
+          <tr><td>Sữa & sản phẩm sữa</td><td>vận chuyển sữa, kho mát sữa, vận chuyển sữa chua phô mai</td><td><code>/nganh-hang/sua-cac-san-pham-tu-sua/</code></td></tr>
+          <tr><td>Trái cây & rau củ</td><td>vận chuyển trái cây, vận chuyển rau củ quả tươi, kho mát trái cây</td><td><code>/nganh-hang/trai-cay-rau-cu/</code></td></tr>
+          <tr><td>Dược phẩm & vaccine</td><td>vận chuyển vaccine, kho lạnh GSP, vận chuyển 2-8 độ</td><td><code>/nganh-hang/duoc-pham-vaccine/</code></td></tr>
+          <tr><td>Chuỗi F&B</td><td>vận chuyển hàng cho chuỗi nhà hàng, logistics cho chuỗi cà phê</td><td><code>/nganh-hang/chuoi-fb-nha-hang/</code></td></tr>
+          <tr><td>Siêu thị & bán lẻ</td><td>vận chuyển hàng siêu thị, dịch vụ DC siêu thị</td><td><code>/nganh-hang/sieu-thi-ban-le/</code></td></tr>
+          <tr><td>Thịt & gia cầm</td><td>vận chuyển thịt đông lạnh, vận chuyển thịt heo bò gà</td><td><code>/nganh-hang/thit-gia-cam/</code></td></tr>
+          <tr><td>Kem & đồ tráng miệng</td><td>vận chuyển kem, kho -22 độ kem</td><td><code>/nganh-hang/kem-dong-lanh/</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 5 -->
+    <div class="tab-pane" id="kw5">
+      <h3>Brand & Branded keyword</h3>
+      <table>
+        <thead><tr><th>Keyword</th><th>Hành động</th></tr></thead>
+        <tbody>
+          <tr><td>quang minh corp</td><td>Trang chủ — phải rank #1 (hiện đã rank)</td></tr>
+          <tr><td>quangminhcorp</td><td>Trang chủ — phải rank #1</td></tr>
+          <tr><td>công ty cổ phần quang minh</td><td><code>/ve-chung-toi/</code></td></tr>
+          <tr><td>quang minh vận tải đông lạnh</td><td>Trang chủ</td></tr>
+          <tr><td>quang minh kho lạnh</td><td><code>/dich-vu/cho-thue-kho-lanh/</code></td></tr>
+          <tr><td>quang minh corp bình dương</td><td><code>/khu-vuc/binh-duong/</code></td></tr>
+        </tbody>
+      </table>
+      <div class="callout warning">
+        <strong>Lưu ý:</strong> Có nhiều "Quang Minh" cùng tên trong ngành vận tải (VD: "Vận Tải Và Du Lịch Quang Minh Hà Nội" ở Cầu Giấy). Cần làm SEO branded để Google phân biệt rõ — schema <code>Organization</code> với <code>legalName</code>, <code>taxID</code>, <code>foundingDate</code>, <code>address</code> chuẩn xác giúp việc này.
+      </div>
+    </div>
+
+    <!-- TAB 6 -->
+    <div class="tab-pane" id="kw6">
+      <h3>Long-tail Blog Keywords <span style="color: var(--success); font-size: 14px;">(TOFU — content marketing)</span></h3>
+      <p>Tập keyword "dễ ăn" mà đối thủ chưa làm tốt. Volume mỗi keyword thấp nhưng cộng dồn rất lớn, là phễu hút khách top funnel.</p>
+
+      <h4>Cụm "How-to / Hướng dẫn"</h4>
+      <ul>
+        <li>Cách bảo quản hàng đông lạnh khi vận chuyển đường dài</li>
+        <li>Hướng dẫn đóng gói thực phẩm đông lạnh</li>
+        <li>Quy trình vận chuyển hàng đông lạnh đạt chuẩn</li>
+        <li>Cách kiểm tra nhiệt độ xe đông lạnh</li>
+        <li>Cách chọn tải trọng xe đông lạnh phù hợp với từng loại hàng</li>
+      </ul>
+
+      <h4>Cụm "Nhiệt độ"</h4>
+      <ul>
+        <li>Nhiệt độ bảo quản thực phẩm đông lạnh là bao nhiêu</li>
+        <li>Nhiệt độ vận chuyển vaccine</li>
+        <li>Nhiệt độ bảo quản trái cây tươi</li>
+        <li>Nhiệt độ vận chuyển sữa</li>
+        <li>Nhiệt độ kho lạnh thủy sản</li>
+      </ul>
+
+      <h4>Cụm "So sánh"</h4>
+      <ul>
+        <li>Thuê xe đông lạnh vs mua xe đông lạnh</li>
+        <li>Thuê kho lạnh vs xây kho lạnh riêng</li>
+        <li>Kho đông lạnh vs kho mát khác nhau ra sao</li>
+        <li>Xe đông lạnh Hino vs Isuzu vs Fuso</li>
+      </ul>
+
+      <h4>Cụm "Pháp lý / Tiêu chuẩn"</h4>
+      <ul>
+        <li>Tiêu chuẩn HACCP cho kho lạnh thực phẩm</li>
+        <li>Tiêu chuẩn GSP cho kho lạnh dược phẩm</li>
+        <li>Giấy phép vận tải hàng đông lạnh</li>
+        <li>Quy định ATTP cho xe vận chuyển thực phẩm</li>
+      </ul>
+
+      <h4>Cụm "Kinh nghiệm / Lưu ý"</h4>
+      <ul>
+        <li>Kinh nghiệm thuê xe đông lạnh lần đầu</li>
+        <li>Những lưu ý khi ký hợp đồng thuê xe lạnh</li>
+        <li>Cách kiểm tra chất lượng xe đông lạnh trước khi thuê</li>
+        <li>Dấu hiệu xe đông lạnh kém chất lượng</li>
+      </ul>
+
+      <h4>Cụm "Chi phí / Báo giá"</h4>
+      <ul>
+        <li>Chi phí vận chuyển hàng đông lạnh bắc nam 2026</li>
+        <li>Bảng giá thuê xe đông lạnh theo chuyến</li>
+        <li>Giá thuê kho lạnh 1 pallet / 1 m³ tại tphcm</li>
+        <li>Chi phí vận chuyển hải sản từ phú quốc lên tphcm</li>
+      </ul>
+    </div>
+
+    <!-- TAB 7 -->
+    <div class="tab-pane" id="kw7">
+      <h3>Negative keyword (cần tránh)</h3>
+      <p>Không nên đầu tư SEO vào các keyword sau (sai mục đích kinh doanh hoặc cạnh tranh quá khốc liệt từ portal):</p>
+      <div class="callout danger">
+        <ul style="margin: 0; padding-left: 18px;">
+          <li><strong>"thuê xe đông lạnh giá rẻ"</strong> → cạnh tranh giá, không phù hợp định vị Quang Minh</li>
+          <li><strong>"tuyển tài xế xe đông lạnh"</strong> → trang chủ ghi rõ "không tuyển tài xế"</li>
+          <li><strong>"mua xe đông lạnh cũ" / "bán xe đông lạnh"</strong> → không phải dịch vụ</li>
+          <li><strong>"xe đông lạnh tự lái"</strong> → không phải mô hình kinh doanh</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 8 -->
+    <div class="tab-pane" id="kw8">
+      <h3>Keyword Priority Matrix</h3>
+      <table>
+        <thead><tr><th>Pillar</th><th>Keyword count</th><th>Tháng triển khai</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Vận tải đông lạnh</strong></td><td>~40 KW</td><td>Tháng 1–3 (launch + first content batch)</td></tr>
+          <tr><td><strong>2. Kho lạnh</strong></td><td>~25 KW</td><td>Tháng 2–4</td></tr>
+          <tr><td><strong>3. Chuỗi cung ứng lạnh</strong></td><td>~10 KW</td><td>Tháng 4–6</td></tr>
+          <tr><td><strong>4. Ngành dọc</strong></td><td>~30 KW</td><td>Tháng 5–9</td></tr>
+          <tr><td><strong>5. Long-tail blog</strong></td><td>~50+ KW</td><td>Liên tục từ tháng 1</td></tr>
+          <tr><td><strong>6. Local (3 khu vực chính)</strong></td><td>~20 KW</td><td>Tháng 1–2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ PHẦN 3 ============ -->
+  <section id="tracking">
+    <h2><span class="h-num">3</span>Tracking & Measurement</h2>
+
+    <h3>3.1. Tools setup</h3>
+    <ul>
+      <li>Google Search Console (verify cả 4 properties: http, https, www, non-www)</li>
+      <li>Google Analytics 4</li>
+      <li>Google Tag Manager (đã có <code>GTM-NTMNBNHL</code> — kế thừa)</li>
+      <li>Bing Webmaster Tools</li>
+      <li>Ahrefs / SEMrush / Mangools (rank tracking)</li>
+      <li>Hotjar / Microsoft Clarity (UX behavior)</li>
+    </ul>
+
+    <h3>3.2. KPI theo mốc</h3>
+    <table>
+      <thead><tr><th>Giai đoạn</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tháng 1–3</strong><br><em>Foundation</em></td><td>
+          • 100% trang được index<br>
+          • Core Web Vitals "Good"<br>
+          • 3 GBP setup hoàn chỉnh<br>
+          • 0 lỗi crawl trong Search Console
+        </td></tr>
+        <tr><td><strong>Tháng 4–6</strong><br><em>Growth</em></td><td>
+          • Top 10 cho 5 keyword brand + 10 keyword secondary<br>
+          • Organic traffic tăng 50% so với baseline<br>
+          • 20+ blog post published<br>
+          • 30+ backlink quality
+        </td></tr>
+        <tr><td><strong>Tháng 7–12</strong><br><em>Scale</em></td><td>
+          • Top 3 cho 10+ keyword chính<br>
+          • Organic traffic tăng 200%<br>
+          • 5+ keyword "money" rank top 5<br>
+          • Lead từ organic ≥ 30% tổng lead
+        </td></tr>
+      </tbody>
+    </table>
+
+    <h3>3.3. Conversion Tracking</h3>
+    <p>Setup event tracking cho:</p>
+    <ul>
+      <li>Click hotline (mobile + desktop)</li>
+      <li>Click Zalo / Facebook chat</li>
+      <li>Submit form "Đăng ký tư vấn"</li>
+      <li>Submit form báo giá</li>
+      <li>Time on page &gt; 60s cho trang dịch vụ</li>
+      <li>Scroll depth &gt; 75% cho blog post</li>
+    </ul>
+  </section>
+
+  <!-- ============ PHẦN 4 — ACTIONS ============ -->
+  <section id="actions">
+    <h2><span class="h-num">4</span>5 điểm cần làm ngay</h2>
+    <div class="callout info">
+      Đây là 5 hành động ROI cao nhất, làm trong <strong>30 ngày đầu</strong>, <strong>không phụ thuộc website mới</strong> (có thể thực hiện ngay trên site hiện tại trong khi rebuild). Click vào từng card để xem chi tiết.
+    </div>
+
+    <!-- ACTION 1 -->
+    <div class="action-card expanded" onclick="toggleAction(this, event)">
+      <div class="action-header">
+        <div class="action-num">1</div>
+        <div class="action-title">Thống nhất NAP (Name–Address–Phone) trên mọi kênh</div>
+        <div class="action-meta">
+          <span>1–2 ngày</span>
+          <span>Marketing/PA</span>
+        </div>
+        <div class="action-toggle">▼</div>
+      </div>
+      <div class="action-body">
+        <p>Hiện trạng có 3 hotline khác nhau, 3 email khác nhau, gây confused cho khách hàng và <strong>phá hủy tín hiệu Local SEO</strong>.</p>
+        <h4>Hành động:</h4>
+        <ol>
+          <li>Quyết định <strong>1 hotline kinh doanh chính</strong> (đề xuất số đã in profile lâu nhất: 0907100137)</li>
+          <li>Quyết định <strong>1 email kinh doanh chính</strong> (đề xuất: <code>kinhdoanh@quangminhcorp.com.vn</code>)</li>
+          <li>Cập nhật đồng nhất trên: footer website, header, contact page, GBP cả 3 chi nhánh, Facebook, Zalo OA, Yellowpages, namecard, chữ ký email, popup tư vấn</li>
+          <li>Các số khác chuyển thành "số nội bộ" (kế toán, vận hành) chứ không hiển thị marketing</li>
+        </ol>
+        <div class="action-rationale">
+          <strong>Tại sao quan trọng:</strong> Google dùng NAP consistency làm tín hiệu trust để rank Local. Inconsistency = penalty không thấy được nhưng có thật.
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION 2 -->
+    <div class="action-card" onclick="toggleAction(this, event)">
+      <div class="action-header">
+        <div class="action-num">2</div>
+        <div class="action-title">Tạo & tối ưu 3 Google Business Profile</div>
+        <div class="action-meta">
+          <span>3–5 ngày</span>
+          <span>Marketing</span>
+        </div>
+        <div class="action-toggle">▼</div>
+      </div>
+      <div class="action-body">
+        <p>Hiện tại <strong>chưa thấy GBP nào active</strong> cho Quang Minh trên Google Maps khi search keyword cốt lõi → đang mất hoàn toàn local pack traffic.</p>
+        <h4>Hành động cho mỗi chi nhánh (Bình Dương / Thủ Đức / Hà Nội):</h4>
+        <ol>
+          <li>Verify ownership (Google sẽ gửi postcard, mất 7–14 ngày)</li>
+          <li>Điền đầy đủ: tên, địa chỉ, hotline đã thống nhất ở Việc #1, giờ làm việc, website, mô tả 750 ký tự</li>
+          <li>Chọn category: chính = "Refrigerated transport service" hoặc "Trucking company"; phụ = "Cold storage facility", "Logistics service"</li>
+          <li>Upload 20–30 ảnh thật: xe đông lạnh các loại tải trọng, kho lạnh bên trong, văn phòng, đội ngũ tài xế</li>
+          <li>Tạo 2–3 Post đầu tiên (giới thiệu dịch vụ, khuyến mãi nếu có)</li>
+          <li>Add danh sách services với mô tả + giá tham khảo</li>
+          <li>Setup messaging để khách chat trực tiếp qua GBP</li>
+        </ol>
+        <div class="action-rationale">
+          <strong>Tại sao quan trọng:</strong> Local pack chiếm ~30% click cho mọi keyword có local intent ("thuê xe đông lạnh tphcm", "kho lạnh bình dương"). Đây là kênh organic nhanh nhất.
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION 3 -->
+    <div class="action-card" onclick="toggleAction(this, event)">
+      <div class="action-header">
+        <div class="action-num">3</div>
+        <div class="action-title">Sửa lỗi nghiêm trọng trên site hiện tại</div>
+        <div class="action-meta">
+          <span>2–3 ngày</span>
+          <span>Dev + Marketing</span>
+        </div>
+        <div class="action-toggle">▼</div>
+      </div>
+      <div class="action-body">
+        <p>Một số lỗi đang hủy hoại traffic & UX, không thể chờ rebuild:</p>
+        <h4>Hành động:</h4>
+        <ol>
+          <li><strong>Sửa H1 trùng lặp ở trang chủ</strong> (đang lặp 2 lần "Dịch vụ cho thuê xe đông lạnh - Lưu kho đông lạnh - Quang Minh Corp")</li>
+          <li><strong>Viết lại meta description trang <code>/pages/about-us</code></strong> (đang là text mẫu Haravan: "Trang giới thiệu giúp khách hàng hiểu rõ hơn về cửa hàng của bạn...")</li>
+          <li><strong>Fix logo đối tác bị broken</strong> — hiện hiển thị toàn icon <code>rolling.svg</code> (spinner). Upload logo đúng cho KFC, Lotte, Jollibee, TH True Milk, Vissan, Pizza Hut, Domino's</li>
+          <li><strong>Fix slider 2/3/4 link rỗng</strong> (đang trỏ <code>#</code>) — hoặc set click → trang dịch vụ tương ứng, hoặc tắt clickable</li>
+          <li><strong>Fix lỗi chính tả</strong>: "Tell" → "Tel", "Texxas" → "Texas Chicken", "giầu" → "giàu", thông tin năm thành lập (2001 vs 2002 đang mâu thuẫn giữa 2 trang)</li>
+          <li><strong>Ẩn các element ecommerce không liên quan</strong>: giỏ hàng, đăng ký tài khoản, popup "thêm vào giỏ thành công" — qua CSS <code>display: none</code> nếu Haravan không cho tắt hẳn</li>
+          <li><strong>Cập nhật giờ hỗ trợ</strong>: nếu thực sự 24/7 thì sửa "T2-T7 8h-17h" thành "Hỗ trợ 24/7", nếu không 24/7 thì xóa text "Hỗ trợ 24/7" ở các section khác</li>
+        </ol>
+        <div class="action-rationale">
+          <strong>Tại sao quan trọng:</strong> Đây là "first impression" cho mọi khách click vào — đặc biệt khách B2B lớn. Logo đối tác hỏng = mất hết social proof. Mỗi ngày để vậy là mất lead thật.
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION 4 -->
+    <div class="action-card" onclick="toggleAction(this, event)">
+      <div class="action-header">
+        <div class="action-num">4</div>
+        <div class="action-title">Submit Sitemap + Setup Search Console + Schema cơ bản</div>
+        <div class="action-meta">
+          <span>1 ngày</span>
+          <span>Dev</span>
+        </div>
+        <div class="action-toggle">▼</div>
+      </div>
+      <div class="action-body">
+        <h4>Hành động:</h4>
+        <ol>
+          <li>Verify <code>quangminhcorp.com.vn</code> trên Google Search Console (cả 4 property variants)</li>
+          <li>Submit sitemap.xml hiện tại của Haravan: <code>https://quangminhcorp.com.vn/sitemap.xml</code></li>
+          <li>Check & fix các lỗi crawl đang có</li>
+          <li>Add <strong>schema Organization</strong> vào mọi trang (qua GTM nếu Haravan không cho can thiệp code):</li>
+        </ol>
+        <pre><code>{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Công Ty Cổ Phần Quang Minh",
+  "alternateName": "Quang Minh Corp",
+  "foundingDate": "2002-07-03",
+  "url": "https://quangminhcorp.com.vn",
+  "logo": "https://quangminhcorp.com.vn/logo.png",
+  "telephone": "+84907100137",
+  "address": [...],
+  "sameAs": ["https://facebook.com/...", "https://zalo.me/..."]
+}</code></pre>
+        <ol start="5">
+          <li>Add <strong>schema LocalBusiness</strong> cho mỗi chi nhánh</li>
+          <li>Verify GTM đang track đúng (hiện tại có <code>GTM-NTMNBNHL</code> nhưng cần check kỹ event)</li>
+        </ol>
+        <div class="action-rationale">
+          <strong>Tại sao quan trọng:</strong> Không có Search Console = mù về performance SEO. Không có schema = bỏ rich result, knowledge panel.
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION 5 -->
+    <div class="action-card" onclick="toggleAction(this, event)">
+      <div class="action-header">
+        <div class="action-num">5</div>
+        <div class="action-title">Tạo trang "Báo giá" + 3 Case Study đầu tiên</div>
+        <div class="action-meta">
+          <span>5–7 ngày</span>
+          <span>Marketing + Sales</span>
+        </div>
+        <div class="action-toggle">▼</div>
+      </div>
+      <div class="action-body">
+        <p>Site cũ thiếu 2 trang chuyển đổi quan trọng nhất:</p>
+
+        <h4>A. Trang <code>/bao-gia/</code></h4>
+        <ul>
+          <li>Form chia 3 loại: thuê xe / thuê kho / cả 2</li>
+          <li>Hỏi: tải trọng cần, tuyến đường, loại hàng, tần suất, thời gian thuê</li>
+          <li>CTA: "Nhận báo giá trong 30 phút"</li>
+          <li>Có bảng giá tham khảo dạng "from X đồng/chuyến" (không cần chính xác, chỉ cần khoảng) — đối thủ TOTAHA, Hải Như đều có và rank cao nhờ keyword "bảng giá"</li>
+        </ul>
+
+        <h4>B. 3 Case study đầu tiên</h4>
+        <p>Chọn 3 khách hàng tiêu biểu (đề xuất: 1 khách F&B chuỗi như KFC/Lotte, 1 khách thủy sản, 1 khách siêu thị). Xin phép viết bài dạng:</p>
+        <ul>
+          <li>Bối cảnh khách hàng</li>
+          <li>Bài toán logistics đặt ra</li>
+          <li>Giải pháp Quang Minh đưa ra (loại xe, tuyến, tần suất)</li>
+          <li>Kết quả định lượng (% tiết kiệm chi phí, on-time rate, etc.)</li>
+          <li>Quote ngắn từ phía khách hàng</li>
+        </ul>
+        <p>URL: <code>/case-study/[ten-khach-hang]/</code></p>
+
+        <div class="action-rationale">
+          <strong>Tại sao quan trọng:</strong>
+          <ul style="margin: 6px 0 0 18px;">
+            <li>Trang báo giá hứng được toàn bộ traffic MOFU "bảng giá", "chi phí", "báo giá" — keyword commercial intent cao nhất</li>
+            <li>Case study là nội dung E-E-A-T mạnh nhất ngành B2B, rất ít đối thủ vận tải lạnh VN làm bài bản → cơ hội cách biệt hóa lớn</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section id="roadmap">
+    <h2>Phụ lục — Roadmap 90 ngày</h2>
+    <div class="roadmap">
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 1–2</div>
+        <div class="roadmap-content">5 việc cần làm ngay (NAP, GBP, fix lỗi site cũ, Search Console, trang báo giá + case study)</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 3–4</div>
+        <div class="roadmap-content">Finalize sitemap mới, lock URL structure, brief design + dev rebuild</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 5–8</div>
+        <div class="roadmap-content">Build website mới song song; viết content 6 trang dịch vụ chính + 3 trang khu vực chính</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 9–10</div>
+        <div class="roadmap-content">UAT, schema, performance optimization, 301 redirect map từ URL cũ → mới</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 11</div>
+        <div class="roadmap-content">Soft launch, theo dõi Search Console kỹ</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-week">Tuần 12</div>
+        <div class="roadmap-content">Hard launch + đẩy 5 blog post đầu tiên + outreach backlink</div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top: 32px;">
+      <em>Tài liệu này là "living document" — review và cập nhật mỗi quý dựa trên data thực tế từ Search Console + GA4.</em>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Sidebar nav
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const target = this.dataset.target;
+      const el = document.getElementById(target);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Active state via IntersectionObserver
+  const sections = document.querySelectorAll('section, header.doc-header');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[data-target="${id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Action card toggle
+  function toggleAction(card, event) {
+    if (event.target.closest('.action-body') && event.target.tagName !== 'SUMMARY') return;
+    card.classList.toggle('expanded');
+  }
+
+  function expandAllActions() {
+    document.querySelectorAll('.action-card').forEach(c => c.classList.add('expanded'));
+  }
+  function collapseAllActions() {
+    document.querySelectorAll('.action-card').forEach(c => c.classList.remove('expanded'));
+  }
+
+  // Tabs
+  document.querySelectorAll('#kwTabs .tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      const target = this.dataset.tab;
+      document.querySelectorAll('#kwTabs .tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
