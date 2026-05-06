@@ -3,25 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Báo Cáo Phân Tích Toàn Diện — Beauty Business T4/2026</title>
+<title>Báo Cáo Phân Tích — Beauty Business T4/2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f1ea;
-    --bg-deep: #ebe6db;
-    --ink: #1a1a1a;
-    --ink-soft: #3a3a3a;
-    --ink-mute: #6b6b6b;
-    --paper: #fbfaf6;
-    --accent: #c8553d;
-    --accent-deep: #8c2f1f;
-    --gold: #b8860b;
-    --green: #2d5016;
-    --red: #8b1a1a;
-    --line: #1a1a1a;
-    --line-soft: rgba(26, 26, 26, 0.15);
+    --bg: #ffffff;
+    --paper: #fafafa;
+    --ink: #0a0a0a;
+    --ink-soft: #2a2a2a;
+    --ink-mute: #707070;
+    --line: #0a0a0a;
+    --line-soft: rgba(10, 10, 10, 0.12);
+    --hairline: rgba(10, 10, 10, 0.08);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,27 +26,23 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Newsreader', Georgia, serif;
     font-size: 17px;
-    line-height: 1.6;
-    overflow-x: hidden;
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(26,26,26,0.04) 1px, transparent 0);
-    background-size: 24px 24px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: "opsz" 16;
   }
 
   .container {
-    max-width: 1280px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 48px;
+    padding: 0 40px;
   }
 
   /* === MASTHEAD === */
   .masthead {
-    border-bottom: 3px double var(--ink);
-    padding: 32px 0 24px;
-    margin-bottom: 0;
-    background: var(--paper);
+    border-bottom: 1px solid var(--ink);
+    padding: 48px 0 40px;
   }
 
   .masthead-top {
@@ -59,43 +50,29 @@
     justify-content: space-between;
     align-items: center;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     color: var(--ink-mute);
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line-soft);
-    margin-bottom: 24px;
-  }
-
-  .masthead-top span {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .masthead-top .dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: inline-block;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 40px;
   }
 
   .masthead h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: clamp(48px, 7vw, 96px);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    margin-bottom: 16px;
-    font-variation-settings: "opsz" 144;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 72;
   }
 
   .masthead h1 em {
     font-style: italic;
     font-weight: 400;
-    color: var(--accent-deep);
   }
 
   .masthead-sub {
@@ -104,24 +81,24 @@
     gap: 48px;
     align-items: end;
     padding-top: 24px;
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid var(--hairline);
   }
 
   .deck {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
     font-style: italic;
     font-size: 22px;
-    line-height: 1.4;
+    line-height: 1.45;
     color: var(--ink-soft);
     max-width: 600px;
   }
 
   .meta-block {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--ink-mute);
     text-align: right;
   }
@@ -129,110 +106,94 @@
   .meta-block strong {
     display: block;
     color: var(--ink);
-    font-size: 14px;
-    margin-top: 4px;
+    font-size: 13px;
+    margin-top: 6px;
     letter-spacing: 0.05em;
+    font-weight: 500;
   }
 
   /* === EXECUTIVE SUMMARY === */
   .executive {
     background: var(--ink);
-    color: var(--paper);
+    color: var(--bg);
     padding: 80px 0;
-    position: relative;
-  }
-
-  .executive::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 8px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--accent) 0 40px,
-      var(--gold) 40px 80px,
-      var(--paper) 80px 120px
-    );
   }
 
   .executive-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: var(--accent);
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 24px;
   }
 
   .executive-headline {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-weight: 300;
-    font-size: clamp(32px, 4vw, 52px);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: 48px;
-    max-width: 1000px;
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 56px;
+    max-width: 900px;
   }
 
   .executive-headline em {
     font-style: italic;
-    font-weight: 600;
-    color: var(--accent);
-    background: linear-gradient(180deg, transparent 60%, rgba(200, 85, 61, 0.2) 60%);
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   .verdict-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    border-top: 1px solid rgba(251, 250, 246, 0.15);
-    padding-top: 40px;
-  }
-
-  .verdict {
-    border-left: 2px solid var(--accent);
-    padding-left: 24px;
+    gap: 48px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 48px;
   }
 
   .verdict-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 64px;
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 72px;
     line-height: 1;
-    color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 72;
   }
 
   .verdict-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(251, 250, 246, 0.6);
-    margin-bottom: 12px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .verdict-text {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--paper);
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 300;
   }
 
   /* === SECTION === */
   .section {
     padding: 96px 0;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--hairline);
   }
 
   .section-num {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: var(--accent-deep);
-    margin-bottom: 16px;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -242,35 +203,45 @@
     content: '';
     display: inline-block;
     width: 32px; height: 1px;
-    background: var(--accent-deep);
+    background: var(--ink);
   }
 
   .section h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(34px, 4.5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
     margin-bottom: 24px;
     max-width: 900px;
+    font-variation-settings: "opsz" 48;
   }
 
   .section h2 em {
     font-style: italic;
     font-weight: 400;
-    color: var(--accent-deep);
+  }
+
+  .section h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 26px;
+    margin: 56px 0 24px;
+    letter-spacing: -0.01em;
   }
 
   .section-lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-style: italic;
+    font-weight: 300;
     font-size: 20px;
     line-height: 1.5;
     color: var(--ink-soft);
     max-width: 720px;
     margin-bottom: 64px;
     padding-bottom: 24px;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--hairline);
   }
 
   /* === KPI HEADER GRID === */
@@ -278,18 +249,18 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    border: 1px solid var(--ink);
-    margin-bottom: 64px;
-    background: var(--paper);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 56px;
   }
 
   .kpi {
-    padding: 32px 24px;
-    border-right: 1px solid var(--line-soft);
-    position: relative;
+    padding: 32px 24px 32px 0;
+    border-right: 1px solid var(--hairline);
   }
 
   .kpi:last-child { border-right: none; }
+  .kpi:not(:first-child) { padding-left: 24px; }
 
   .kpi-label {
     font-family: 'JetBrains Mono', monospace;
@@ -301,31 +272,30 @@
   }
 
   .kpi-value {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
     font-size: 44px;
     line-height: 1;
     letter-spacing: -0.03em;
     color: var(--ink);
     margin-bottom: 8px;
+    font-variation-settings: "opsz" 48;
   }
 
-  .kpi-value.negative { color: var(--red); }
-  .kpi-value.warning { color: var(--accent); }
-
   .kpi-sub {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 13px;
+    font-family: 'Newsreader', serif;
+    font-size: 14px;
     color: var(--ink-mute);
     line-height: 1.4;
+    font-style: italic;
   }
 
   /* === EDITORIAL COLS === */
   .columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    margin-bottom: 64px;
+    gap: 56px;
+    margin-bottom: 56px;
   }
 
   .columns p {
@@ -336,97 +306,106 @@
   }
 
   .columns p:first-child::first-letter {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 72px;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 64px;
     float: left;
     line-height: 0.85;
     margin: 4px 8px -4px 0;
-    color: var(--accent-deep);
+    color: var(--ink);
+    font-variation-settings: "opsz" 72;
   }
 
   /* === DATA TABLE === */
   .data-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Inter Tight', sans-serif;
-    margin: 32px 0;
-    background: var(--paper);
-    border: 1px solid var(--ink);
+    font-family: 'Newsreader', serif;
+    margin: 24px 0 32px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
   .data-table th {
-    background: var(--ink);
-    color: var(--paper);
     text-align: left;
-    padding: 16px 20px;
+    padding: 14px 20px 14px 0;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
-  .data-table th.num { text-align: right; }
+  .data-table th.num { text-align: right; padding-right: 0; }
+  .data-table th:not(:first-child) { padding-left: 20px; }
 
   .data-table td {
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line-soft);
-    font-size: 14px;
+    padding: 14px 20px 14px 0;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 15px;
     color: var(--ink-soft);
   }
+
+  .data-table td:not(:first-child) { padding-left: 20px; }
 
   .data-table td.num {
     text-align: right;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 500;
     color: var(--ink);
+    font-size: 13px;
+    padding-right: 0;
   }
 
   .data-table tr:last-child td { border-bottom: none; }
   .data-table tr.total td {
-    background: var(--bg-deep);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--ink);
-    border-top: 2px solid var(--ink);
+    border-top: 1px solid var(--ink);
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
-  .data-table .pill {
+  .pill {
     display: inline-block;
     padding: 2px 8px;
-    border-radius: 2px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     font-family: 'JetBrains Mono', monospace;
+    border: 1px solid var(--ink);
   }
-  .pill.bad { background: rgba(139, 26, 26, 0.12); color: var(--red); }
-  .pill.warn { background: rgba(184, 134, 11, 0.15); color: var(--gold); }
-  .pill.good { background: rgba(45, 80, 22, 0.12); color: var(--green); }
+
+  .pill.bad { background: var(--ink); color: var(--bg); }
+  .pill.warn { background: var(--ink); color: var(--bg); }
+  .pill.good { background: transparent; color: var(--ink); }
 
   /* === PULL QUOTE === */
   .pullquote {
-    margin: 80px -24px;
-    padding: 48px;
-    border-top: 3px solid var(--ink);
-    border-bottom: 3px solid var(--ink);
+    margin: 80px 0;
+    padding: 56px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
     text-align: center;
-    background: var(--bg-deep);
   }
 
   .pullquote-mark {
-    font-family: 'Fraunces', serif;
-    font-size: 96px;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 64px;
     line-height: 0.5;
-    color: var(--accent);
-    margin-bottom: 16px;
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-weight: 300;
   }
 
   .pullquote-text {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-style: italic;
-    font-weight: 400;
-    font-size: clamp(24px, 3vw, 36px);
-    line-height: 1.3;
+    font-weight: 300;
+    font-size: clamp(22px, 2.8vw, 32px);
+    line-height: 1.35;
     letter-spacing: -0.01em;
     color: var(--ink);
     max-width: 800px;
@@ -435,107 +414,107 @@
 
   .pullquote-text strong {
     font-style: normal;
-    font-weight: 700;
-    color: var(--accent-deep);
+    font-weight: 500;
   }
 
   /* === CHANNEL CARDS === */
   .channels {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 48px 0;
+    gap: 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
   .channel {
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    padding: 32px 28px;
-    position: relative;
-    transition: transform 0.3s ease;
+    padding: 32px 24px;
+    border-right: 1px solid var(--hairline);
   }
 
-  .channel:hover { transform: translateY(-4px); }
+  .channel:last-child { border-right: none; }
+  .channel:not(:first-child) { padding-left: 24px; }
+  .channel:first-child { padding-left: 0; }
+  .channel:last-child { padding-right: 0; }
 
   .channel-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--hairline);
     padding-bottom: 16px;
     margin-bottom: 20px;
   }
 
   .channel-name {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 28px;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 26px;
     letter-spacing: -0.02em;
   }
 
   .channel-tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 4px 8px;
-    background: var(--ink);
-    color: var(--paper);
+    letter-spacing: 0.12em;
+    padding: 3px 8px;
+    border: 1px solid var(--ink);
   }
 
-  .channel-tag.bad { background: var(--red); }
-  .channel-tag.good { background: var(--green); }
-  .channel-tag.warn { background: var(--accent); }
+  .channel-tag.bad { background: var(--ink); color: var(--bg); }
+  .channel-tag.warn { background: transparent; color: var(--ink); }
+  .channel-tag.good { background: var(--ink); color: var(--bg); }
 
   .channel-row {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    font-family: 'Inter Tight', sans-serif;
+    padding: 7px 0;
     font-size: 14px;
+    border-bottom: 1px dotted var(--hairline);
   }
+
+  .channel-row:last-of-type { border-bottom: none; }
 
   .channel-row .label { color: var(--ink-mute); }
   .channel-row .val {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 500;
     color: var(--ink);
+    font-size: 12px;
   }
 
   .channel-roas {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid var(--ink);
     text-align: center;
   }
 
   .channel-roas-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     color: var(--ink-mute);
   }
 
   .channel-roas-value {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
     font-size: 56px;
     line-height: 1;
     letter-spacing: -0.04em;
-    margin-top: 4px;
+    margin-top: 8px;
+    font-variation-settings: "opsz" 72;
   }
-
-  .channel-roas-value.bad { color: var(--red); }
-  .channel-roas-value.good { color: var(--green); }
-  .channel-roas-value.warn { color: var(--accent); }
 
   /* === FUNNEL DIAGRAM === */
   .funnel {
-    margin: 48px 0;
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    padding: 48px;
+    margin: 32px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 32px 0;
   }
 
   .funnel-row {
@@ -543,96 +522,95 @@
     grid-template-columns: 280px 1fr 200px;
     align-items: center;
     gap: 24px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
   }
 
   .funnel-row:last-child { border-bottom: none; }
 
   .funnel-label {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 600;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
     font-size: 16px;
+    font-style: italic;
   }
 
   .funnel-bar {
-    height: 36px;
+    height: 28px;
     background: var(--ink);
-    position: relative;
-    transition: width 0.6s ease;
   }
 
   .funnel-bar.lost {
     background: repeating-linear-gradient(
       45deg,
-      var(--red),
-      var(--red) 6px,
-      rgba(139, 26, 26, 0.7) 6px,
-      rgba(139, 26, 26, 0.7) 12px
+      var(--ink),
+      var(--ink) 4px,
+      transparent 4px,
+      transparent 8px
     );
+    border: 1px solid var(--ink);
   }
 
   .funnel-value {
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
     text-align: right;
   }
 
   .funnel-value .pct {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--ink-mute);
     font-weight: 400;
     margin-top: 2px;
   }
 
-  /* === CHURN CURVE === */
+  /* === SCENARIOS === */
   .churn-viz {
     background: var(--ink);
-    color: var(--paper);
-    padding: 64px 48px;
-    margin: 48px 0;
-    position: relative;
+    color: var(--bg);
+    padding: 56px 48px;
+    margin: 32px 0;
   }
 
   .churn-viz h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-style: italic;
-    font-weight: 400;
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: var(--paper);
+    font-weight: 300;
+    font-size: 26px;
+    margin: 0 0 8px;
+    color: var(--bg);
   }
 
   .churn-viz-sub {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(251, 250, 246, 0.5);
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.4);
     margin-bottom: 40px;
   }
 
   .scenario-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
     margin-top: 32px;
   }
 
   .scenario {
-    border-top: 2px solid var(--accent);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
     padding-top: 16px;
   }
 
   .scenario-name {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: 15px;
     margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    line-height: 1.3;
+    font-style: italic;
   }
 
   .scenario-row {
@@ -640,60 +618,58 @@
     justify-content: space-between;
     padding: 6px 0;
     font-size: 13px;
-    color: rgba(251, 250, 246, 0.7);
-    border-bottom: 1px solid rgba(251, 250, 246, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .scenario-row .v {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--paper);
+    color: var(--bg);
     font-weight: 500;
   }
 
-  .scenario-row.critical .v { color: var(--accent); }
-
   /* === ACTION PLAN === */
-  .actions {
-    margin: 48px 0;
-  }
+  .actions { margin: 32px 0; }
 
   .action {
     display: grid;
     grid-template-columns: 80px 1fr 200px;
     gap: 32px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--line-soft);
+    padding: 28px 0;
+    border-bottom: 1px solid var(--hairline);
     align-items: start;
   }
 
+  .action:last-child { border-bottom: none; }
+
   .action-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 64px;
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+    font-size: 56px;
     line-height: 1;
-    color: var(--accent);
+    color: var(--ink);
     letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 72;
   }
 
   .action-content h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.2;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
     margin-bottom: 8px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
 
   .action-content p {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 14px;
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--ink-soft);
   }
 
   .action-impact {
-    background: var(--ink);
-    color: var(--paper);
+    border: 1px solid var(--ink);
     padding: 16px;
     text-align: center;
   }
@@ -702,82 +678,95 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(251, 250, 246, 0.6);
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
     margin-bottom: 8px;
   }
 
   .action-impact-value {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
   }
 
   .action-impact-value .unit {
     display: block;
     font-size: 11px;
     font-family: 'JetBrains Mono', monospace;
-    color: rgba(251, 250, 246, 0.5);
+    color: var(--ink-mute);
     margin-top: 4px;
     font-weight: 400;
   }
 
   /* === FINAL VERDICT === */
   .final {
-    background: var(--accent-deep);
-    color: var(--paper);
+    background: var(--ink);
+    color: var(--bg);
     padding: 96px 0;
     text-align: center;
-    position: relative;
   }
 
   .final-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    color: rgba(251, 250, 246, 0.7);
-    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 32px;
   }
 
   .final h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-weight: 300;
-    font-size: clamp(36px, 5vw, 64px);
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     margin-bottom: 32px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--bg);
+    font-variation-settings: "opsz" 48;
   }
 
-  .final h2 em {
-    font-style: italic;
-    font-weight: 700;
-  }
+  .final h2 em { font-style: italic; font-weight: 400; }
 
   .final-tagline {
-    font-family: 'Fraunces', serif;
+    font-family: 'Newsreader', serif;
     font-style: italic;
-    font-size: 20px;
-    color: rgba(251, 250, 246, 0.85);
-    max-width: 700px;
+    font-weight: 300;
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 720px;
     margin: 0 auto 48px;
-    line-height: 1.5;
+    line-height: 1.55;
   }
+
+  .final-callout {
+    display: inline-block;
+    padding: 20px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    color: var(--bg);
+  }
+
+  .final-callout strong { font-style: normal; font-weight: 500; }
 
   /* === FOOTER === */
   .footer {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 48px 0 32px;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 56px 0 32px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
+    border-top: 1px solid var(--ink);
   }
 
   .footer-grid {
@@ -785,49 +774,51 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 48px;
     padding-bottom: 32px;
-    border-bottom: 1px solid rgba(251, 250, 246, 0.15);
+    border-bottom: 1px solid var(--hairline);
     margin-bottom: 24px;
   }
 
   .footer-col strong {
     display: block;
-    color: var(--accent);
-    margin-bottom: 12px;
-    letter-spacing: 0.2em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
   }
 
   .footer-col div {
-    color: rgba(251, 250, 246, 0.7);
-    line-height: 1.8;
+    color: var(--ink-mute);
+    line-height: 1.9;
+    font-weight: 400;
   }
 
   .footer-bottom {
     text-align: center;
-    color: rgba(251, 250, 246, 0.4);
+    color: var(--ink-mute);
     font-size: 10px;
   }
 
   /* TOC */
   .toc {
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    padding: 32px 40px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 32px 0;
     margin: 48px 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px 32px;
+    gap: 8px 48px;
   }
 
   .toc-title {
     grid-column: 1 / -1;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     color: var(--ink-mute);
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--line-soft);
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--hairline);
   }
 
   .toc a {
@@ -835,27 +826,27 @@
     align-items: baseline;
     color: var(--ink);
     text-decoration: none;
-    font-family: 'Fraunces', serif;
-    font-size: 16px;
-    padding: 6px 0;
-    transition: color 0.2s;
+    font-family: 'Newsreader', serif;
+    font-size: 17px;
+    padding: 8px 0;
+    transition: padding-left 0.2s ease;
   }
 
-  .toc a:hover { color: var(--accent); }
+  .toc a:hover { padding-left: 8px; }
 
   .toc-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--ink-mute);
-    margin-right: 12px;
+    margin-right: 16px;
     min-width: 24px;
   }
 
   /* HIGHLIGHT BOX */
   .highlight-box {
-    background: var(--paper);
-    border-left: 4px solid var(--accent);
-    padding: 24px 32px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 28px 0;
     margin: 32px 0;
   }
 
@@ -864,38 +855,52 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: var(--accent-deep);
-    margin-bottom: 8px;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
   }
 
   .highlight-box p {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    line-height: 1.5;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.45;
     color: var(--ink);
+  }
+
+  .highlight-box p strong {
+    font-style: normal;
+    font-weight: 500;
   }
 
   /* SOURCE STRUCTURE */
   .source-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 0;
     margin: 32px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
   .source-card {
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    padding: 32px;
+    padding: 28px 32px 28px 0;
+    border-right: 1px solid var(--hairline);
+  }
+  .source-card:last-child {
+    border-right: none;
+    padding-left: 32px;
+    padding-right: 0;
   }
 
   .source-card h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 24px;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px;
     margin-bottom: 16px;
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--hairline);
   }
 
   .source-row {
@@ -903,9 +908,8 @@
     grid-template-columns: 1fr 100px 80px;
     gap: 12px;
     padding: 10px 0;
-    font-family: 'Inter Tight', sans-serif;
     font-size: 14px;
-    border-bottom: 1px dotted var(--line-soft);
+    border-bottom: 1px dotted var(--hairline);
   }
 
   .source-row:last-child { border-bottom: none; }
@@ -914,29 +918,31 @@
     font-family: 'JetBrains Mono', monospace;
     text-align: right;
     font-weight: 500;
+    font-size: 13px;
   }
 
   .source-row .pct {
     text-align: right;
-    color: var(--accent-deep);
+    color: var(--ink);
     font-weight: 600;
     font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
   }
 
-  /* TIMELINE - bao lâu hết khách */
+  /* TIMELINE */
   .timeline {
-    margin: 48px 0;
-    background: var(--paper);
-    border: 1px solid var(--ink);
-    padding: 48px;
+    margin: 32px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 32px 0;
   }
 
   .timeline-row {
     display: grid;
-    grid-template-columns: 120px 1fr;
+    grid-template-columns: 140px 1fr;
     gap: 24px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
     align-items: center;
   }
 
@@ -944,39 +950,46 @@
 
   .timeline-month {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--ink-mute);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
   }
 
   .timeline-bar-wrap {
     display: grid;
-    grid-template-columns: 1fr 100px;
+    grid-template-columns: 1fr 120px;
     gap: 16px;
     align-items: center;
   }
 
   .timeline-bar {
-    height: 32px;
-    background: var(--ink);
+    height: 24px;
+    border: 1px solid var(--ink);
     position: relative;
-  }
-
-  .timeline-bar-fade {
-    background: linear-gradient(90deg, var(--ink) 0%, var(--accent) 70%, var(--red) 100%);
   }
 
   .timeline-bar-fill {
     height: 100%;
-    background: var(--accent);
+    background: var(--ink);
   }
 
   .timeline-num {
     font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
+    font-weight: 600;
     text-align: right;
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  /* note style */
+  .note {
+    font-family: 'Newsreader', serif;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-style: italic;
+    margin-top: -16px;
+    margin-bottom: 24px;
+    line-height: 1.5;
   }
 
   /* RESPONSIVE */
@@ -984,26 +997,37 @@
     .container { padding: 0 24px; }
     .columns { grid-template-columns: 1fr; gap: 24px; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi { padding: 24px 16px !important; }
     .channels { grid-template-columns: 1fr; }
-    .verdict-grid { grid-template-columns: 1fr; gap: 24px; }
-    .scenario-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .channel { padding: 24px 0 !important; border-right: none; border-bottom: 1px solid var(--hairline); }
+    .channel:last-child { border-bottom: none; }
+    .verdict-grid { grid-template-columns: 1fr; gap: 32px; }
+    .scenario-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
     .source-grid { grid-template-columns: 1fr; }
+    .source-card { padding: 24px 0 !important; border-right: none; border-bottom: 1px solid var(--hairline); }
+    .source-card:last-child { border-bottom: none; }
     .toc { grid-template-columns: 1fr; }
     .funnel-row { grid-template-columns: 1fr; gap: 8px; }
     .action { grid-template-columns: 1fr; gap: 12px; }
-    .action-num { font-size: 48px; }
+    .action-num { font-size: 40px; }
     .footer-grid { grid-template-columns: 1fr; gap: 24px; }
     .masthead-sub { grid-template-columns: 1fr; gap: 24px; align-items: start; }
     .meta-block { text-align: left; }
     .timeline-row { grid-template-columns: 1fr; gap: 8px; }
     .timeline-bar-wrap { grid-template-columns: 1fr; }
+    .churn-viz { padding: 32px 24px; }
+    .data-table { font-size: 14px; }
+    .data-table td, .data-table th { padding: 10px 12px 10px 0; }
+    .data-table td:not(:first-child), .data-table th:not(:first-child) { padding-left: 12px; }
   }
 
   /* PRINT */
   @media print {
-    body { background: white; font-size: 11pt; }
+    body { font-size: 11pt; }
     .section, .executive, .final { page-break-inside: avoid; padding: 24px 0; }
     .pullquote { page-break-inside: avoid; }
+    .executive, .churn-viz, .final { background: var(--bg); color: var(--ink); }
+    .executive *, .churn-viz *, .final * { color: var(--ink) !important; }
   }
 </style>
 </head>
@@ -1013,11 +1037,11 @@
 <header class="masthead">
   <div class="container">
     <div class="masthead-top">
-      <span><span class="dot"></span>BÁO CÁO PHÂN TÍCH NỘI BỘ</span>
-      <span>Volume I · Kỳ T4/2026 · Bản số 01</span>
-      <span>Soạn cho: Roy / Đội Sản Phẩm</span>
+      <span>Báo cáo phân tích nội bộ</span>
+      <span>Volume I · Kỳ T4/2026</span>
+      <span>Bản phân tích sơ bộ</span>
     </div>
-    <h1>Bài toán <em>Sống Còn</em><br>của Beauty Biz.</h1>
+    <h1>Bài toán <em>sống còn</em><br>của Beauty Biz.</h1>
     <div class="masthead-sub">
       <p class="deck">Một cuộc giải phẫu data về churn, hiệu quả ads, và câu hỏi quan trọng nhất: nếu ngưng đốt tiền vào quảng cáo, business này có còn thở được hay không?</p>
       <div class="meta-block">
@@ -1031,21 +1055,21 @@
 <!-- ============ EXECUTIVE SUMMARY ============ -->
 <section class="executive">
   <div class="container">
-    <div class="executive-label">◆ Tóm tắt cho Lãnh Đạo</div>
+    <div class="executive-label">Tóm tắt cho lãnh đạo</div>
     <p class="executive-headline">Business hiện đang <em>chạy nhanh để đứng yên</em> — bơm 13.2 tỷ ads/tháng để duy trì doanh thu, trong khi 70% khách rò rỉ trong 12 tháng và pool khách cũ đang một mình gánh toàn bộ lợi nhuận.</p>
 
     <div class="verdict-grid">
-      <div class="verdict">
+      <div>
         <div class="verdict-num">70%</div>
         <div class="verdict-label">Tỷ lệ churn 12 tháng</div>
         <div class="verdict-text">Trong 61k KH tạo trước T4/2025, chỉ ~18.4k còn check-in — một xô thủng đáy.</div>
       </div>
-      <div class="verdict">
+      <div>
         <div class="verdict-num">1.14</div>
         <div class="verdict-label">ROAS tổng tháng 4</div>
         <div class="verdict-text">Mỗi đồng ads chỉ tạo 1.14 đồng DT — chưa đủ bù giá vốn dịch vụ, KH mới đang lỗ ròng.</div>
       </div>
-      <div class="verdict">
+      <div>
         <div class="verdict-num">43%</div>
         <div class="verdict-label">DT từ KH &gt;12 tháng</div>
         <div class="verdict-text">Pool 18.4k khách cũ tạo 27 tỷ — đây là tài sản thực, gần như không phụ thuộc ads.</div>
@@ -1080,22 +1104,22 @@
       <div class="kpi">
         <div class="kpi-label">Tổng lượt check-in</div>
         <div class="kpi-value">34.1k</div>
-        <div class="kpi-sub">Trải dài 5 nhóm tuổi KH</div>
+        <div class="kpi-sub">trải dài 5 nhóm tuổi KH</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Tổng doanh thu</div>
-        <div class="kpi-value">62.5<span style="font-size: 24px;"> tỷ</span></div>
+        <div class="kpi-value">62.5<span style="font-size: 22px; font-weight: 300;"> tỷ</span></div>
         <div class="kpi-sub">VNĐ trong T4/2026</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Chi phí ads</div>
-        <div class="kpi-value warning">13.2<span style="font-size: 24px;"> tỷ</span></div>
+        <div class="kpi-value">13.2<span style="font-size: 22px; font-weight: 300;"> tỷ</span></div>
         <div class="kpi-sub">21% doanh thu — cực cao</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Lợi nhuận ước tính</div>
-        <div class="kpi-value">5.5<span style="font-size: 24px;"> tỷ</span></div>
-        <div class="kpi-sub">Biên lãi mỏng ~9%</div>
+        <div class="kpi-value">5.5<span style="font-size: 22px; font-weight: 300;"> tỷ</span></div>
+        <div class="kpi-sub">biên lãi mỏng ~9%</div>
       </div>
     </div>
 
@@ -1132,7 +1156,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong>1. Mới</strong> (tạo T4/2026)</td>
+          <td><em>1. Mới</em> (tạo T4/2026)</td>
           <td class="num">5.17k</td>
           <td class="num">15.17%</td>
           <td class="num">14.9 tỷ</td>
@@ -1140,31 +1164,31 @@
           <td class="num">2.88 tr</td>
         </tr>
         <tr>
-          <td><strong>2. 2 tháng</strong> (tạo T2/2026)</td>
+          <td><em>2. 2 tháng</em> (tạo T2/2026)</td>
           <td class="num">3.21k</td>
           <td class="num">9.43%</td>
           <td class="num">11.2 tỷ</td>
           <td class="num">17.92%</td>
-          <td class="num"><span class="pill good">3.49 tr</span></td>
+          <td class="num"><span class="pill good">3.49 tr ↑</span></td>
         </tr>
         <tr>
-          <td><strong>3. 2-6 tháng</strong></td>
+          <td><em>3. 2-6 tháng</em></td>
           <td class="num">4.42k</td>
           <td class="num">12.98%</td>
           <td class="num">5.8 tỷ</td>
           <td class="num">9.28%</td>
-          <td class="num"><span class="pill bad">1.31 tr</span></td>
+          <td class="num"><span class="pill bad">1.31 tr ↓</span></td>
         </tr>
         <tr>
-          <td><strong>4. 6-12 tháng</strong></td>
+          <td><em>4. 6-12 tháng</em></td>
           <td class="num">2.83k</td>
           <td class="num">8.31%</td>
           <td class="num">3.69 tỷ</td>
           <td class="num">5.89%</td>
-          <td class="num"><span class="pill bad">1.30 tr</span></td>
+          <td class="num"><span class="pill bad">1.30 tr ↓</span></td>
         </tr>
         <tr>
-          <td><strong>5. Trên 12 tháng</strong></td>
+          <td><em>5. Trên 12 tháng</em></td>
           <td class="num">18.4k</td>
           <td class="num"><span class="pill warn">54.11%</span></td>
           <td class="num">27 tỷ</td>
@@ -1172,7 +1196,7 @@
           <td class="num">1.47 tr</td>
         </tr>
         <tr class="total">
-          <td>TỔNG</td>
+          <td>Tổng</td>
           <td class="num">34.1k</td>
           <td class="num">100%</td>
           <td class="num">62.5 tỷ</td>
@@ -1194,7 +1218,7 @@
     </div>
 
     <div class="highlight-box">
-      <div class="highlight-box-label">◆ Phát hiện cốt lõi</div>
+      <div class="highlight-box-label">Phát hiện cốt lõi</div>
       <p>Nhóm khách trên 12 tháng đang gánh khoảng 17.5 tỷ lợi nhuận gộp/tháng. Trong khi đó, KH mới (sau khi trừ ads) đang lỗ ~3.5 tỷ. <strong>Khách cũ đang trợ cấp cho khoản lỗ của ads.</strong></p>
     </div>
   </div>
@@ -1219,26 +1243,26 @@
       <div class="kpi">
         <div class="kpi-label">KH tạo trước T4/2025</div>
         <div class="kpi-value">~61k</div>
-        <div class="kpi-sub">Cộng dồn từ T1/2024 → T3/2025</div>
+        <div class="kpi-sub">cộng dồn từ T1/2024 → T3/2025</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">KH còn active T4/2026</div>
         <div class="kpi-value">18.4k</div>
-        <div class="kpi-sub">Nhóm trên 12 tháng</div>
+        <div class="kpi-sub">nhóm trên 12 tháng</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Retention 12 tháng</div>
-        <div class="kpi-value warning">30.2%</div>
-        <div class="kpi-sub">Benchmark ngành: 40-60%</div>
+        <div class="kpi-value">30.2%</div>
+        <div class="kpi-sub">benchmark ngành: 40-60%</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">Churn 12 tháng</div>
-        <div class="kpi-value negative">~70%</div>
-        <div class="kpi-sub">Mức đáng báo động</div>
+        <div class="kpi-value">~70%</div>
+        <div class="kpi-sub">mức đáng báo động</div>
       </div>
     </div>
 
-    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 48px 0 24px;">Đường cong retention ước tính</h3>
+    <h3>Đường cong retention ước tính</h3>
 
     <table class="data-table">
       <thead>
@@ -1250,14 +1274,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Tháng 1 (mới tạo)</td><td class="num">100%</td><td class="num">0%</td><td>Baseline</td></tr>
+        <tr><td>Tháng 1 (mới tạo)</td><td class="num">100%</td><td class="num">0%</td><td><em>baseline</em></td></tr>
         <tr><td>Tháng 2</td><td class="num">~55-60%</td><td class="num">40-45%</td><td><span class="pill bad">Drop lớn nhất</span></td></tr>
-        <tr><td>Tháng 3</td><td class="num">~45%</td><td class="num">55%</td><td>Tiếp tục rò rỉ</td></tr>
-        <tr><td>Tháng 6</td><td class="num">~38%</td><td class="num">62%</td><td>Vùng nguy hiểm</td></tr>
+        <tr><td>Tháng 3</td><td class="num">~45%</td><td class="num">55%</td><td><em>tiếp tục rò rỉ</em></td></tr>
+        <tr><td>Tháng 6</td><td class="num">~38%</td><td class="num">62%</td><td><em>vùng nguy hiểm</em></td></tr>
         <tr><td>Tháng 12</td><td class="num">~30%</td><td class="num">70%</td><td><span class="pill bad">Đo được từ data</span></td></tr>
-        <tr><td>Tháng 18</td><td class="num">~22%</td><td class="num">78%</td><td>Chỉ còn KH "core"</td></tr>
-        <tr><td>Tháng 24</td><td class="num">~16%</td><td class="num">84%</td><td>Rất loyal</td></tr>
-        <tr><td>Tháng 36</td><td class="num">~9%</td><td class="num">91%</td><td>"Tài sản" thật</td></tr>
+        <tr><td>Tháng 18</td><td class="num">~22%</td><td class="num">78%</td><td><em>chỉ còn KH "core"</em></td></tr>
+        <tr><td>Tháng 24</td><td class="num">~16%</td><td class="num">84%</td><td><em>rất loyal</em></td></tr>
+        <tr><td>Tháng 36</td><td class="num">~9%</td><td class="num">91%</td><td><em>"tài sản" thật</em></td></tr>
       </tbody>
     </table>
 
@@ -1297,14 +1321,14 @@
         <div class="channel-row"><span class="label">Lead→Book</span><span class="val">25.5%</span></div>
         <div class="channel-roas">
           <div class="channel-roas-label">ROAS</div>
-          <div class="channel-roas-value warn">1.18</div>
+          <div class="channel-roas-value">1.18</div>
         </div>
       </div>
 
       <div class="channel">
         <div class="channel-header">
           <span class="channel-name">GOOGLE</span>
-          <span class="channel-tag good">Chưa được khai thác</span>
+          <span class="channel-tag good">Chưa khai thác</span>
         </div>
         <div class="channel-row"><span class="label">Chi phí</span><span class="val">1 tỷ</span></div>
         <div class="channel-row"><span class="label">Tỷ trọng ngân sách</span><span class="val">8%</span></div>
@@ -1316,14 +1340,14 @@
         <div class="channel-row"><span class="label">Lead→Book</span><span class="val">22.7%</span></div>
         <div class="channel-roas">
           <div class="channel-roas-label">ROAS</div>
-          <div class="channel-roas-value good">1.46</div>
+          <div class="channel-roas-value">1.46</div>
         </div>
       </div>
 
       <div class="channel">
         <div class="channel-header">
           <span class="channel-name">TIKTOK</span>
-          <span class="channel-tag bad">Đang lỗ rõ ràng</span>
+          <span class="channel-tag bad">Đang lỗ</span>
         </div>
         <div class="channel-row"><span class="label">Chi phí</span><span class="val">2.9 tỷ</span></div>
         <div class="channel-row"><span class="label">Tỷ trọng ngân sách</span><span class="val">22%</span></div>
@@ -1335,12 +1359,12 @@
         <div class="channel-row"><span class="label">Lead→Book</span><span class="val">16.5% ✗</span></div>
         <div class="channel-roas">
           <div class="channel-roas-label">ROAS</div>
-          <div class="channel-roas-value bad">0.90</div>
+          <div class="channel-roas-value">0.90</div>
         </div>
       </div>
     </div>
 
-    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 64px 0 24px;">Funnel: 11,710 leads "chết" mỗi tháng</h3>
+    <h3>Funnel: 11,710 leads "chết" mỗi tháng</h3>
 
     <div class="funnel">
       <div class="funnel-row">
@@ -1354,14 +1378,14 @@
         <div class="funnel-value">3,481<span class="pct">22.9%</span></div>
       </div>
       <div class="funnel-row">
-        <div class="funnel-label">LEAD CHẾT (không đặt lịch)</div>
+        <div class="funnel-label">Lead chết (không đặt lịch)</div>
         <div class="funnel-bar lost" style="width: 77%;"></div>
         <div class="funnel-value">11,710<span class="pct">77.1%</span></div>
       </div>
     </div>
 
     <div class="highlight-box">
-      <div class="highlight-box-label">◆ Đòn bẩy lớn nhất chưa được khai thác</div>
+      <div class="highlight-box-label">Đòn bẩy lớn nhất chưa được khai thác</div>
       <p>11,710 leads chết mỗi tháng tương đương ~10.15 tỷ chi phí ads "bốc hơi". Chỉ cần cải thiện tỷ lệ Lead→Book từ 22.9% lên 30%, sẽ có thêm ~1,076 booking/tháng (tương đương ~4.6 tỷ doanh thu), <strong>không tốn thêm một đồng ads nào.</strong></p>
     </div>
 
@@ -1379,7 +1403,7 @@
         <div class="source-row"><span>DT từ nguồn khác</span><span class="v">~0 tỷ</span><span class="pct">0%</span></div>
       </div>
     </div>
-    <p style="font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--ink-mute); font-style: italic; margin-top: -16px;">Lưu ý: 33% KH non-ads đến nhưng gần như không tạo doanh thu trong tháng đầu — có thể là KH dùng voucher/dịch vụ thử miễn phí. Cần phân tích sâu hơn về hành vi nhóm này.</p>
+    <p class="note">Lưu ý: 33% KH non-ads đến nhưng gần như không tạo doanh thu trong tháng đầu — có thể là KH dùng voucher/dịch vụ thử miễn phí. Cần phân tích sâu hơn về hành vi nhóm này.</p>
   </div>
 </section>
 
@@ -1398,7 +1422,7 @@
     <h2>Nếu <em>không còn tiền</em> chạy ads, biz này còn sống không?</h2>
     <p class="section-lead">Mô phỏng tài chính 4 kịch bản, từ "tận thế" cực đoan đến tối ưu nhất với Beauty Biz.</p>
 
-    <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-size: 28px; margin: 48px 0 24px;">So sánh P&L: Hiện tại vs. Sau khi cắt ads (T+6 tháng)</h3>
+    <h3>So sánh P&amp;L: Hiện tại vs. Sau khi cắt ads (T+6 tháng)</h3>
 
     <table class="data-table">
       <thead>
@@ -1414,17 +1438,17 @@
         <tr><td>Chi phí Ads</td><td class="num">13.2 tỷ</td><td class="num"><span class="pill good">0 tỷ</span></td></tr>
         <tr><td>Lương nhân viên (~20%)</td><td class="num">12.5 tỷ</td><td class="num">7 tỷ</td></tr>
         <tr><td>Mặt bằng + vận hành</td><td class="num">9.4 tỷ</td><td class="num">6.5 tỷ</td></tr>
-        <tr class="total"><td>Lợi nhuận trước thuế</td><td class="num">5.5 tỷ (~9% biên)</td><td class="num"><span class="pill good">12.5 tỷ (~31% biên)</span></td></tr>
+        <tr class="total"><td>Lợi nhuận trước thuế</td><td class="num">5.5 tỷ (~9% biên)</td><td class="num"><span class="pill warn">12.5 tỷ (~31% biên)</span></td></tr>
       </tbody>
     </table>
 
     <div class="highlight-box">
-      <div class="highlight-box-label">◆ Phát hiện gây sốc</div>
+      <div class="highlight-box-label">Phát hiện gây sốc</div>
       <p>Cắt sạch ads sẽ khiến doanh thu giảm 36% trong 6 tháng — nhưng lợi nhuận tuyệt đối có thể <strong>tăng từ 5.5 tỷ lên 12.5 tỷ/tháng</strong>. Lý do: ads đang nuốt 21% doanh thu nhưng chỉ tạo ROAS 1.14, sau khi trừ vận hành thì đang lỗ ròng.</p>
     </div>
 
     <div class="churn-viz">
-      <h3>4 Kịch bản chiến lược</h3>
+      <h3 style="color: var(--bg); margin: 0;">4 Kịch bản chiến lược</h3>
       <div class="churn-viz-sub">Mô phỏng pool KH active (k người) theo thời gian</div>
 
       <div class="scenario-grid">
@@ -1433,7 +1457,7 @@
           <div class="scenario-row"><span>T+12</span><span class="v">12k</span></div>
           <div class="scenario-row"><span>T+24</span><span class="v">5k</span></div>
           <div class="scenario-row"><span>T+36</span><span class="v">2.5k</span></div>
-          <div class="scenario-row critical"><span>T+60</span><span class="v">700</span></div>
+          <div class="scenario-row"><span>T+60</span><span class="v">700</span></div>
         </div>
         <div class="scenario">
           <div class="scenario-name">B. Chỉ Organic<br>(1.7k/tháng)</div>
@@ -1532,8 +1556,8 @@
     </div>
 
     <div class="highlight-box">
-      <div class="highlight-box-label">◆ KPI quan trọng nhất Beauty Biz cần đạt</div>
-      <p>Để Roy có thể tự tin cắt ads, Beauty Biz cần tạo ra tối thiểu <strong>1,300 KH referral mỗi tháng</strong> — đủ để bù đắp cho lượng KH ads bị cắt. Đây là chỉ số bắc cầu giữa "cắt ads" và "duy trì quy mô business".</p>
+      <div class="highlight-box-label">KPI quan trọng nhất Beauty Biz cần đạt</div>
+      <p>Để bạn có thể tự tin cắt ads, Beauty Biz cần tạo ra tối thiểu <strong>1,300 KH referral mỗi tháng</strong> — đủ để bù đắp cho lượng KH ads bị cắt. Đây là chỉ số bắc cầu giữa "cắt ads" và "duy trì quy mô business".</p>
     </div>
   </div>
 </section>
@@ -1634,7 +1658,7 @@
         <div class="action-num">08</div>
         <div class="action-content">
           <h4>Xây dashboard LTV/CAC theo kênh</h4>
-          <p>ROAS tháng đầu không đủ để ra quyết định. Cần tracking LTV 3T/6T/12T cho từng kênh ads. Dashboard này là nền tảng để Roy ra quyết định scale ads bền vững dài hạn.</p>
+          <p>ROAS tháng đầu không đủ để ra quyết định. Cần tracking LTV 3T/6T/12T cho từng kênh ads. Dashboard này là nền tảng để bạn ra quyết định scale ads bền vững dài hạn.</p>
         </div>
         <div class="action-impact">
           <div class="action-impact-label">Tác động</div>
@@ -1648,12 +1672,12 @@
 <!-- ============ FINAL VERDICT ============ -->
 <section class="final">
   <div class="container">
-    <div class="final-label">◆ Kết luận chiến lược</div>
+    <div class="final-label">Kết luận chiến lược</div>
     <h2 id="section-8">Bài toán không phải <em>"có nên cắt ads không"</em>. Bài toán là làm sao mỗi đồng ads tạo ra <em>LTV &gt;&gt; CAC</em>.</h2>
     <p class="final-tagline">Hiện tại tỉ lệ này đang quá mỏng. Hoặc fix retention (30% → 45%), hoặc fix ads efficiency (cắt TikTok, scale Google), hoặc tốt nhất là cả hai. Trong 90 ngày, có thể tăng lợi nhuận thêm 30-50% mà không tốn thêm ngân sách. Trong 12 tháng, có thể đạt được mô hình ít phụ thuộc ads (40% thay vì 67%) và bền vững hơn nhiều.</p>
 
-    <div style="display: inline-block; padding: 24px 48px; border: 2px solid var(--paper); font-family: 'Fraunces', serif; font-style: italic; font-size: 22px;">
-      Beauty Biz không phải "nice to have" — đây là <strong style="font-style: normal;">chiến lược sống còn dài hạn</strong>.
+    <div class="final-callout">
+      Beauty Biz không phải "nice to have" — đây là <strong>chiến lược sống còn dài hạn</strong>.
     </div>
   </div>
 </section>
@@ -1691,7 +1715,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      Báo cáo nội bộ · Soạn cho Roy &amp; Đội Sản Phẩm · T5/2026 · Bản phân tích sơ bộ
+      Báo cáo nội bộ · Bản phân tích sơ bộ · T5/2026
     </div>
   </div>
 </footer>
