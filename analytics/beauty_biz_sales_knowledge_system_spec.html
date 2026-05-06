@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hệ Thống Hoá Tri Thức Chuyên Gia Sale — Beauty Biz Spec v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --ink-soft: #3a302a;
+  --paper: #faf7f2;
+  --paper-warm: #f4ede1;
+  --paper-deep: #ebe0cb;
+  --rose: #b03a4a;
+  --rose-deep: #7d1f2c;
+  --rose-soft: #f5e0e3;
+  --gold: #b08a3e;
+  --sage: #5a6b4a;
+  --line: #d8cdb8;
+  --line-soft: #e8dfc9;
+  --accent-grad: linear-gradient(135deg, #b03a4a 0%, #7d1f2c 100%);
+
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Geist", -apple-system, sans-serif;
+  --font-mono: "Geist Mono", "SF Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ======= SHARED LAYOUT ======= */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.container-narrow { max-width: 920px; margin: 0 auto; padding: 0 32px; }
+
+/* ======= TOP META BAR ======= */
+.meta-bar {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.meta-bar .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.meta-bar span { opacity: 0.7; }
+.meta-bar strong { color: var(--paper); font-weight: 500; opacity: 1; }
+
+/* ======= HERO ======= */
+.hero {
+  background: var(--paper-warm);
+  padding: 80px 0 100px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--rose-soft) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: end;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  max-width: 200px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 68px);
+  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--rose-deep);
+  font-weight: 500;
+}
+.hero-lead {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 640px;
+  font-weight: 400;
+}
+
+.hero-meta-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 28px;
+  font-size: 13px;
+}
+.hero-meta-card h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.hero-meta-card dl { display: grid; gap: 14px; }
+.hero-meta-card dt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+.hero-meta-card dd {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* ======= TOC ======= */
+.toc-section {
+  background: var(--paper);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.toc-item {
+  padding: 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toc-item:hover { background: var(--paper-warm); }
+.toc-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--rose);
+  font-weight: 500;
+}
+.toc-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.toc-desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* ======= SECTION ======= */
+.section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+.section:nth-child(even) { background: var(--paper-warm); }
+.section-header { margin-bottom: 56px; max-width: 720px; }
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--rose);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.section h2 em { font-style: italic; color: var(--rose-deep); }
+.section-lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 40px 0 16px;
+}
+h4 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  margin: 28px 0 12px;
+  letter-spacing: -0.005em;
+}
+
+p { margin-bottom: 16px; line-height: 1.65; color: var(--ink-soft); }
+p strong { color: var(--ink); font-weight: 600; }
+
+/* ======= CONTEXT BLOCK ======= */
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 40px;
+  border: 1px solid var(--line);
+}
+.context-cell {
+  padding: 32px;
+  background: var(--paper);
+  position: relative;
+}
+.context-cell + .context-cell {
+  border-left: 1px solid var(--line);
+}
+.context-cell.problem {
+  background: linear-gradient(180deg, var(--paper) 0%, #fdf6f7 100%);
+}
+.context-cell.opportunity {
+  background: linear-gradient(180deg, var(--paper) 0%, #f7f9f4 100%);
+}
+.context-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.context-label.red { color: var(--rose); }
+.context-label.green { color: var(--sage); }
+.context-cell h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+.context-cell ul { list-style: none; margin-top: 12px; }
+.context-cell li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 20px;
+}
+.context-cell li:last-child { border-bottom: none; }
+.context-cell li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* ======= INSIGHT CALLOUT ======= */
+.insight-callout {
+  margin: 48px 0;
+  padding: 40px 48px;
+  background: var(--ink);
+  color: var(--paper);
+  position: relative;
+  border-left: 4px solid var(--rose);
+}
+.insight-callout::before {
+  content: 'INSIGHT';
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--rose);
+  opacity: 0.8;
+}
+.insight-callout p {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--paper);
+  margin: 0;
+  font-style: italic;
+}
+.insight-callout p em {
+  font-style: normal;
+  color: var(--rose);
+  font-weight: 500;
+}
+
+/* ======= 5D FRAMEWORK ======= */
+.dimensions {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+.dim-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 28px 20px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+.dim-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26, 20, 16, 0.08);
+}
+.dim-card .num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--rose);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.dim-card .label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.dim-card h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.dim-card .vn {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.dim-card .desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  border-top: 1px solid var(--line-soft);
+  padding-top: 14px;
+}
+.dim-card .weight {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--rose);
+  letter-spacing: 0.05em;
+}
+
+/* ======= 5D DETAIL TABLE ======= */
+.dim-detail-table {
+  width: 100%;
+  margin-top: 32px;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.dim-detail-table th {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 16px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-bottom: 1px solid var(--ink);
+}
+.dim-detail-table th:first-child { width: 14%; }
+.dim-detail-table th:nth-child(2) { width: 22%; }
+.dim-detail-table th:nth-child(3) { width: 32%; }
+.dim-detail-table th:nth-child(4) { width: 32%; }
+.dim-detail-table td {
+  padding: 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line-soft);
+  line-height: 1.5;
+}
+.dim-detail-table tr:last-child td { border-bottom: none; }
+.dim-detail-table tr:hover td { background: var(--paper-warm); }
+.dim-detail-table .dim-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--rose-deep);
+}
+.dim-detail-table .dim-vn {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.dim-detail-table strong { color: var(--ink); }
+.metric-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  margin: 2px 4px 2px 0;
+  border-radius: 2px;
+  color: var(--ink-soft);
+}
+
+/* ======= COMPARISON: TOP vs AVG ======= */
+.versus-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 40px 0;
+  align-items: stretch;
+}
+.versus-side {
+  padding: 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.versus-side.top {
+  background: linear-gradient(180deg, #f7f9f4 0%, var(--paper) 100%);
+  border-color: var(--sage);
+}
+.versus-side.avg {
+  background: linear-gradient(180deg, #fdf6f7 0%, var(--paper) 100%);
+  border-color: var(--line);
+}
+.versus-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--ink-soft);
+}
+.versus-side h4 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.versus-side h4 .badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-style: normal;
+}
+.versus-side.top .badge {
+  background: var(--sage);
+  color: var(--paper);
+}
+.versus-side.avg .badge {
+  background: var(--rose);
+  color: var(--paper);
+}
+.versus-flow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  background: var(--paper);
+  padding: 16px;
+  border: 1px dashed var(--line);
+  margin-top: 12px;
+}
+
+/* ======= PROFILE EXAMPLE CARD ======= */
+.profile-card {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 48px;
+  margin: 48px 0;
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-card::before {
+  content: 'EXPERT PROFILE EXAMPLE';
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--rose);
+  opacity: 0.8;
+}
+.profile-card h3 {
+  font-family: var(--font-display);
+  color: var(--paper);
+  font-size: 32px;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+.profile-card .meta {
+  font-size: 12px;
+  color: var(--paper-deep);
+  margin-bottom: 32px;
+  letter-spacing: 0.05em;
+}
+.profile-card .scores {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--ink-soft);
+}
+.profile-card .score-box {
+  text-align: center;
+  padding: 16px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.profile-card .score-box .name {
+  font-size: 10px;
+  color: var(--paper-deep);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.profile-card .score-box .val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--paper);
+  line-height: 1;
+}
+.profile-card .score-box .status {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+.profile-card .score-box .status.strong { color: #8db380; }
+.profile-card .score-box .status.weak { color: #e08a96; }
+.profile-card .score-box .status.ok { color: var(--paper-deep); }
+.profile-card .insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.profile-card .insight-block h5 {
+  font-size: 11px;
+  color: var(--rose);
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.profile-card .insight-block li {
+  list-style: none;
+  font-size: 12px;
+  color: var(--paper-deep);
+  line-height: 1.7;
+  padding: 4px 0 4px 16px;
+  position: relative;
+}
+.profile-card .insight-block li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--rose);
+  font-weight: 600;
+}
+
+/* ======= JOURNEY ======= */
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  margin: 40px 0;
+  position: relative;
+}
+.journey-grid::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: var(--line);
+}
+.journey-step {
+  text-align: center;
+  position: relative;
+  padding: 0 8px;
+}
+.journey-dot {
+  width: 44px;
+  height: 44px;
+  background: var(--paper);
+  border: 2px solid var(--rose);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--rose);
+  position: relative;
+  z-index: 1;
+}
+.journey-step h5 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: -0.005em;
+}
+.journey-step p {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ======= DATA SOURCES TABLE ======= */
+.sources-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.sources-table th {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: left;
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.sources-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.sources-table tr:last-child td { border-bottom: none; }
+.sources-table .priority {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.priority.p1 { color: var(--rose-deep); }
+.priority.p2 { color: var(--rose); }
+.priority.p3 { color: var(--gold); }
+.priority.p4 { color: var(--sage); }
+.priority.p5 { color: var(--ink-soft); }
+.sources-table .source-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.sources-table .source-name small {
+  display: block;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  font-size: 11px;
+}
+
+/* ======= ARCHITECTURE LAYERS ======= */
+.layers-stack { margin: 48px 0; }
+.layer-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.layer-row:last-child { border-bottom: 1px solid var(--line); }
+.layer-num {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--rose);
+  letter-spacing: -0.04em;
+}
+.layer-content h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+.layer-tagline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 16px;
+}
+.layer-content p { margin-bottom: 14px; }
+.deliverables {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+.deliverable {
+  background: var(--paper);
+  border-left: 3px solid var(--rose);
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.deliverable strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ======= ROADMAP TIMELINE ======= */
+.roadmap {
+  margin: 48px 0;
+  position: relative;
+}
+.phase {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.phase:last-child { border-bottom: 1px solid var(--line); }
+.phase-time {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.phase-time .num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--rose);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.phase-time .duration {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.phase-time .month {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+.phase-content h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+.phase-goal {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 2px solid var(--rose);
+}
+.phase-content ul { list-style: none; padding: 0; }
+.phase-content li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.phase-content li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--sage);
+  font-weight: 600;
+}
+
+/* ======= ROI TABLE ======= */
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin: 40px 0;
+}
+.roi-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+.roi-card.investment { border-color: var(--rose); }
+.roi-card.return { border-color: var(--sage); }
+.roi-card h4 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  font-weight: 500;
+}
+.roi-card.investment h4 { color: var(--rose); }
+.roi-card.return h4 { color: var(--sage); }
+.roi-card .total {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.roi-card .total small {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  margin-left: 6px;
+}
+.roi-card .total-note {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.roi-card ul { list-style: none; }
+.roi-card li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.roi-card li:last-child { border-bottom: none; }
+.roi-card li span:last-child {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+.kpi-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 24px 20px;
+  text-align: left;
+}
+.kpi-card .label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+.kpi-card .value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--rose-deep);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.kpi-card .desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+/* ======= RISKS ======= */
+.risks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.risks-table th {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: left;
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.risks-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.risks-table tr:last-child td { border-bottom: none; }
+.severity {
+  display: inline-block;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.severity.high { background: var(--rose); color: var(--paper); }
+.severity.med { background: var(--gold); color: var(--paper); }
+.severity.low { background: var(--sage); color: var(--paper); }
+
+/* ======= ASK ======= */
+.ask-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 96px 0;
+}
+.ask-section .section-num { color: var(--rose); }
+.ask-section h2 { color: var(--paper); margin-bottom: 24px; }
+.ask-section h2 em { color: var(--rose); }
+.ask-section .section-lead { color: var(--paper-deep); }
+.ask-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+.ask-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px;
+}
+.ask-card .icon {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--rose);
+  margin-bottom: 16px;
+  display: block;
+}
+.ask-card h4 {
+  color: var(--paper);
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.ask-card p {
+  font-size: 13px;
+  color: var(--paper-deep);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--paper-deep);
+  padding: 40px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .toc-grid { grid-template-columns: repeat(2, 1fr); }
+  .dimensions { grid-template-columns: repeat(2, 1fr); }
+  .journey-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 16px; }
+  .journey-grid::before { display: none; }
+  .ask-grid { grid-template-columns: 1fr; }
+  .roi-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .versus-grid { grid-template-columns: 1fr; }
+  .versus-divider { padding: 12px 0; }
+  .profile-card .scores { grid-template-columns: repeat(2, 1fr); }
+  .profile-card .insights-grid { grid-template-columns: 1fr; }
+  .layer-row { grid-template-columns: 1fr; gap: 12px; }
+  .layer-num { font-size: 48px; }
+  .phase { grid-template-columns: 1fr; gap: 12px; }
+  .deliverables { grid-template-columns: 1fr; }
+  .context-grid { grid-template-columns: 1fr; }
+  .context-cell + .context-cell { border-left: none; border-top: 1px solid var(--line); }
+  .dim-detail-table { font-size: 12px; }
+  .dim-detail-table th, .dim-detail-table td { padding: 10px 8px; }
+}
+
+@media (max-width: 640px) {
+  .container, .container-narrow { padding: 0 20px; }
+  .hero { padding: 56px 0 64px; }
+  .section { padding: 64px 0; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .dimensions { grid-template-columns: 1fr; }
+  .journey-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .insight-callout { padding: 28px 24px; }
+  .insight-callout p { font-size: 18px; }
+  .profile-card { padding: 32px 24px; }
+  .profile-card .scores { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .meta-bar, .ask-section { background: white !important; color: black !important; }
+  .insight-callout, .profile-card { background: var(--paper-warm) !important; color: var(--ink) !important; }
+  .insight-callout p, .profile-card h3, .profile-card .score-box .val { color: var(--ink) !important; }
+  .section { padding: 32px 0; page-break-inside: avoid; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============= META BAR ============= -->
+<div class="meta-bar">
+  <div class="container">
+    <span><strong>Beauty Biz</strong> — Internal Strategy Document</span>
+    <span>Spec v1.0 — Confidential</span>
+  </div>
+</div>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Đề xuất chiến lược / Bộ phận Sale</div>
+        <h1>
+          Hệ thống hoá <em>tri thức chuyên gia sale</em> tại chi nhánh
+        </h1>
+        <p class="hero-lead">
+          Biến năng lực bán hàng cá nhân của các chuyên gia top performer thành tài sản tổ chức có thể đo lường, đào tạo và nhân bản — nhằm nâng cấp toàn bộ phận sale lên tầm chuyên gia trong 12 tháng.
+        </p>
+      </div>
+      <aside class="hero-meta-card">
+        <h4>Document Info</h4>
+        <dl>
+          <div>
+            <dt>Đối tượng</dt>
+            <dd>Ban Giám đốc Beauty Biz</dd>
+          </div>
+          <div>
+            <dt>Phạm vi</dt>
+            <dd>Bộ phận sale tại chi nhánh — tư vấn trực tiếp</dd>
+          </div>
+          <div>
+            <dt>Thời gian triển khai</dt>
+            <dd>6 tháng (MVP) → 12 tháng (full rollout)</dd>
+          </div>
+          <div>
+            <dt>Quy mô pilot</dt>
+            <dd>1 chi nhánh, 3-5 chuyên gia top</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============= TOC ============= -->
+<section class="toc-section">
+  <div class="container">
+    <div class="toc-grid">
+      <a class="toc-item" href="#problem">
+        <div class="toc-num">01 / Bối cảnh</div>
+        <div class="toc-title">Vấn đề & Cơ hội</div>
+        <div class="toc-desc">Vì sao chuyện này quan trọng ngay bây giờ</div>
+      </a>
+      <a class="toc-item" href="#solution">
+        <div class="toc-num">02 / Giải pháp</div>
+        <div class="toc-title">Kiến trúc 3 lớp</div>
+        <div class="toc-desc">Khai quật → Chuẩn hoá → Đào tạo</div>
+      </a>
+      <a class="toc-item" href="#framework">
+        <div class="toc-num">03 / Khung phân tích</div>
+        <div class="toc-title">5D Framework</div>
+        <div class="toc-desc">Discovery → Diagnosis → Discussion → Decision → Devotion</div>
+      </a>
+      <a class="toc-item" href="#data">
+        <div class="toc-num">04 / Dữ liệu</div>
+        <div class="toc-title">Nguồn & Phương pháp</div>
+        <div class="toc-desc">Thu thập tri thức ngầm của chuyên gia</div>
+      </a>
+      <a class="toc-item" href="#roadmap">
+        <div class="toc-num">05 / Lộ trình</div>
+        <div class="toc-title">Triển khai 6 tháng</div>
+        <div class="toc-desc">Từ pilot đến scale toàn hệ thống</div>
+      </a>
+      <a class="toc-item" href="#roi">
+        <div class="toc-num">06 / ROI</div>
+        <div class="toc-title">Đầu tư & Lợi ích</div>
+        <div class="toc-desc">Chi phí, KPI, rủi ro, đề xuất</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PROBLEM ============= -->
+<section class="section" id="problem">
+  <div class="container-narrow">
+    <header class="section-header">
+      <div class="section-num">01 / Bối cảnh</div>
+      <h2>Tri thức chuyên gia đang là <em>tài sản vô hình</em> chưa được khai thác</h2>
+      <p class="section-lead">
+        Tại mỗi chi nhánh Beauty Biz, một số chuyên gia sale đạt close rate, AOV và retention cao gấp 2-3 lần đồng nghiệp. Nhưng tri thức làm nên kết quả đó đang nằm trong đầu họ — không có công cụ trích lọc, không có phương pháp đào tạo lại.
+      </p>
+    </header>
+
+    <div class="context-grid">
+      <div class="context-cell problem">
+        <div class="context-label red">Vấn đề hiện tại</div>
+        <h3>Tri thức cá nhân, không scale được</h3>
+        <ul>
+          <li>Chuyên gia top thường <strong>không tự nhận thức</strong> được vì sao mình giỏi — họ làm theo phản xạ, trực giác</li>
+          <li>Sale mới onboard mất 6-12 tháng mới tự lập, một phần lớn dựa vào "shadow" thụ động</li>
+          <li>Không có dữ liệu định lượng về <strong>điểm mạnh/yếu cụ thể</strong> của từng chuyên gia để coaching cá nhân hoá</li>
+          <li>Khi chuyên gia top nghỉ việc, tri thức ra đi cùng họ — rủi ro phụ thuộc nhân sự</li>
+          <li>Training hiện tại dựa trên giáo trình tổng quát, không phản ánh "best practice nội bộ" thật sự</li>
+        </ul>
+      </div>
+      <div class="context-cell opportunity">
+        <div class="context-label green">Cơ hội</div>
+        <h3>AI + dữ liệu mở ra cách tiếp cận mới</h3>
+        <ul>
+          <li>Công nghệ ASR (speech-to-text) tiếng Việt đã đủ trưởng thành để xử lý cuộc tư vấn tại chi nhánh</li>
+          <li>LLM có thể phân tích ngôn ngữ tự nhiên ở mức nuance — đủ để bóc tách kỹ thuật bán hàng tinh tế</li>
+          <li>Dữ liệu CRM, recording, camera đã có sẵn ở phần lớn chi nhánh — chỉ cần kết nối và xử lý</li>
+          <li>Chi phí AI giảm mạnh: phân tích 1 cuộc tư vấn 30 phút ~1.700đ — trong tầm kinh tế</li>
+          <li>Khoản đầu tư hệ thống rẻ hơn nhiều so với thuê thêm 2-3 quality coach full-time</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-callout">
+      <p>
+        Bài toán cốt lõi không phải "tổng hợp" tri thức — mà là <em>"khai quật"</em> những pattern mà ngay cả chuyên gia cũng không có ngôn ngữ để mô tả.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= SOLUTION ============= -->
+<section class="section" id="solution">
+  <div class="container">
+    <header class="section-header">
+      <div class="section-num">02 / Giải pháp</div>
+      <h2>Kiến trúc 3 lớp: <em>Khai quật → Chuẩn hoá → Đào tạo</em></h2>
+      <p class="section-lead">
+        Hệ thống không phải một sản phẩm AI đơn thuần — mà là một quy trình tổ chức kết hợp công nghệ, phương pháp và con người, vận hành như một vòng lặp tự nâng cấp liên tục.
+      </p>
+    </header>
+
+    <div class="layers-stack">
+      <div class="layer-row">
+        <div class="layer-num">01</div>
+        <div class="layer-content">
+          <div class="layer-tagline">Excavation Layer</div>
+          <h3>Khai quật tri thức ngầm</h3>
+          <p>
+            Thu thập đa nguồn dữ liệu từ thực tế tư vấn tại quầy: recording cuộc tư vấn, hành vi tại quầy, dữ liệu giao dịch CRM, follow-up sau buổi. Áp dụng phương pháp <strong>Critical Incident Interview</strong> để bypass "expert blind spot" — khai thác chính xác khoảnh khắc quyết định, không phải lời tự thuật chung chung.
+          </p>
+          <p>
+            So sánh top performer vs. average performer cùng loại khách → trích pattern khác biệt. Phân tích thắng/thua cùng chuyên gia → tìm điểm bứt phá.
+          </p>
+          <div class="deliverables">
+            <div class="deliverable">
+              <strong>Voice & behavior corpus</strong>
+              Recording chuẩn hoá, gắn metadata, mask PII đáp ứng NĐ 13/2023
+            </div>
+            <div class="deliverable">
+              <strong>Top vs. Average dataset</strong>
+              Bộ dữ liệu so sánh có cấu trúc, sẵn sàng phân tích AI
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num">02</div>
+        <div class="layer-content">
+          <div class="layer-tagline">Standardization Layer</div>
+          <h3>Chuẩn hoá thành tri thức tổ chức</h3>
+          <p>
+            Đóng gói pattern thành deliverable cụ thể, có thể tra cứu và đào tạo. Trọng tâm là <strong>chuẩn hoá framework và intent</strong>, không chuẩn hoá từ ngữ chính xác — giữ được cá tính riêng của từng chuyên gia trong khi vẫn có chuẩn chung.
+          </p>
+          <div class="deliverables">
+            <div class="deliverable">
+              <strong>Sales Playbook</strong>
+              Cẩm nang bán hàng chia theo 5-7 archetype khách hàng Beauty Biz
+            </div>
+            <div class="deliverable">
+              <strong>Case Study Library</strong>
+              Kho case study có annotation từng moment quyết định, tra cứu được
+            </div>
+            <div class="deliverable">
+              <strong>Objection Library</strong>
+              20-30 phản đối phổ biến với 3-5 cách xử lý từ chuyên gia top
+            </div>
+            <div class="deliverable">
+              <strong>Decision Trees</strong>
+              Cây quyết định cho up-sale, cross-sale theo từng pain point
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer-row">
+        <div class="layer-num">03</div>
+        <div class="layer-content">
+          <div class="layer-tagline">Training & Scaling Layer</div>
+          <h3>Đào tạo & nâng cấp toàn bộ phận</h3>
+          <p>
+            Đưa tri thức vào thực tế qua 4 vòng lặp song song: onboarding sale mới có cấu trúc, coaching cá nhân hoá cho sale hiện tại, vinh danh chuyên gia top thành Master Trainer, và cập nhật playbook theo quý dựa trên dữ liệu mới.
+          </p>
+          <div class="deliverables">
+            <div class="deliverable">
+              <strong>Onboarding 8-tuần</strong>
+              Lộ trình chuẩn từ kiến thức → roleplay AI → shadow thật → tự tư vấn
+            </div>
+            <div class="deliverable">
+              <strong>Profile cá nhân hoá</strong>
+              Mỗi sale có báo cáo 5D cập nhật hàng tháng + lộ trình phát triển 90 ngày
+            </div>
+            <div class="deliverable">
+              <strong>Master Trainer program</strong>
+              Career path biến chuyên gia top thành mentor có thưởng theo hiệu quả học trò
+            </div>
+            <div class="deliverable">
+              <strong>Playbook living document</strong>
+              Cập nhật quý — pattern mới bổ sung, pattern hết hiệu quả loại bỏ
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= 5D FRAMEWORK ============= -->
+<section class="section" id="framework">
+  <div class="container">
+    <header class="section-header">
+      <div class="section-num">03 / Khung phân tích</div>
+      <h2>5D Framework — <em>5 chiều đo lường</em> kỹ năng chuyên gia</h2>
+      <p class="section-lead">
+        Mỗi cuộc tư vấn được phân tích theo 5 dimension độc lập, mỗi dimension có sub-skill, observable behaviors, và metric định lượng. Đây là khung chuẩn để chấm điểm chuyên gia, so sánh peer, và xác định gap kỹ năng.
+      </p>
+    </header>
+
+    <div class="dimensions">
+      <div class="dim-card">
+        <div class="num">01</div>
+        <div class="label">D1</div>
+        <h4>Discovery</h4>
+        <div class="vn">Khám phá nhu cầu</div>
+        <div class="desc">Đặt câu hỏi mở, lắng nghe chủ động, đào pain point thật, sử dụng dụng cụ chẩn đoán.</div>
+        <div class="weight">Trọng số 25%</div>
+      </div>
+      <div class="dim-card">
+        <div class="num">02</div>
+        <div class="label">D2</div>
+        <h4>Diagnosis</h4>
+        <div class="vn">Chẩn đoán & Đề xuất</div>
+        <div class="desc">Synthesis dữ liệu, education khách, visual proof, đề xuất cá nhân hoá theo lộ trình.</div>
+        <div class="weight">Trọng số 20%</div>
+      </div>
+      <div class="dim-card">
+        <div class="num">03</div>
+        <div class="label">D3</div>
+        <h4>Discussion</h4>
+        <div class="vn">Xử lý phản đối</div>
+        <div class="desc">Đón nhận objection, reframing giá trị, dùng evidence, hạn chế discount để giữ value.</div>
+        <div class="weight">Trọng số 20%</div>
+      </div>
+      <div class="dim-card">
+        <div class="num">04</div>
+        <div class="label">D4</div>
+        <h4>Decision</h4>
+        <div class="vn">Chốt deal & Up/Cross-sale</div>
+        <div class="desc">Đọc buying signal, chọn closing technique, up-sale có rationale, cross-sale tự nhiên.</div>
+        <div class="weight">Trọng số 15%</div>
+      </div>
+      <div class="dim-card">
+        <div class="num">05</div>
+        <div class="label">D5</div>
+        <h4>Devotion</h4>
+        <div class="vn">Giữ chân & LTV</div>
+        <div class="desc">Đặt lịch tại quầy, follow-up cá nhân hoá, build loyalty, kích hoạt referral.</div>
+        <div class="weight">Trọng số 20%</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 56px;">Chi tiết từng dimension</h3>
+    <table class="dim-detail-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Mục tiêu cốt lõi</th>
+          <th>Sub-skill chính</th>
+          <th>Metric đo lường (Top performer benchmark)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="dim-name">Discovery</div>
+            <span class="dim-vn">Khám phá nhu cầu</span>
+          </td>
+          <td>Hiểu khách <strong>trước khi</strong> đề xuất bất cứ giải pháp nào — quyết định 70% kết quả buổi tư vấn</td>
+          <td>
+            Tiếp đón rapport · Câu hỏi mở vs đóng · Active listening · Đào pain point 3-5 layer · Khám đo bằng dụng cụ · Lifestyle context
+          </td>
+          <td>
+            <span class="metric-tag">Talk-listen 30:70</span>
+            <span class="metric-tag">≥6 câu hỏi mở</span>
+            <span class="metric-tag">Pain depth ≥3</span>
+            <span class="metric-tag">8-15 phút/discovery</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="dim-name">Diagnosis</div>
+            <span class="dim-vn">Chẩn đoán đề xuất</span>
+          </td>
+          <td>Chuyển dữ liệu thành <strong>đề xuất cá nhân hoá</strong> — khách cảm thấy "dành riêng cho mình"</td>
+          <td>
+            Synthesis tóm gọn · Education ngắn gọn có analogy · Visual proof case tương tự · Service mapping · Phasing lộ trình · Anchor giá trị trước giá tiền
+          </td>
+          <td>
+            <span class="metric-tag">100% có synthesis</span>
+            <span class="metric-tag">≥3 reference cá nhân</span>
+            <span class="metric-tag">2-3 phương án</span>
+            <span class="metric-tag">100% value-first</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="dim-name">Discussion</div>
+            <span class="dim-vn">Xử lý phản đối</span>
+          </td>
+          <td>Hoan nghênh objection — phân biệt rõ nhất top vs. average</td>
+          <td>
+            Welcoming objection · Clarifying để hiểu thật · Acknowledging cảm xúc · Reframing chi phí → đầu tư · Evidence-based · Trade-off thay vì discount
+          </td>
+          <td>
+            <span class="metric-tag">Conversion ≥60%</span>
+            <span class="metric-tag">Discount ≤15% case</span>
+            <span class="metric-tag">≥2 reframe/objection</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="dim-name">Decision</div>
+            <span class="dim-vn">Chốt deal</span>
+          </td>
+          <td>Tối ưu <strong>AOV</strong> qua up-sale & cross-sale tự nhiên — không ép, không sale-y</td>
+          <td>
+            Reading buying signals · Closing technique phù hợp · Urgency có lý do thật · Up-sale có rationale từ pain point · Cross-sale dịch vụ liên quan · Confirmation ritual
+          </td>
+          <td>
+            <span class="metric-tag">Close rate ≥60%</span>
+            <span class="metric-tag">Up-sale ≥35%</span>
+            <span class="metric-tag">Cross-sale ≥40%</span>
+            <span class="metric-tag">AOV +40-80%</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="dim-name">Devotion</div>
+            <span class="dim-vn">Giữ chân khách</span>
+          </td>
+          <td>Quyết định <strong>LTV</strong> — dimension bị bỏ quên nhất nhưng giá trị dài hạn cao nhất</td>
+          <td>
+            Đặt lịch ngay tại quầy · Post-service ritual · Follow-up cá nhân hoá Zalo · Result tracking · Loyalty building · Referral activation
+          </td>
+          <td>
+            <span class="metric-tag">In-store rebook ≥75%</span>
+            <span class="metric-tag">Retention 90d ≥75%</span>
+            <span class="metric-tag">LTV gấp 2-3x</span>
+            <span class="metric-tag">Referral ≥20%</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 64px;">Khoảng cách Top vs. Average — Ví dụ ở Discovery</h3>
+    <div class="versus-grid">
+      <div class="versus-side top">
+        <h4>Top performer <span class="badge">Pattern</span></h4>
+        <p>Buổi tư vấn của chuyên gia top thường có cấu trúc rõ ràng, dành đủ thời gian để hiểu khách trước khi đề xuất. Khách cảm thấy được lắng nghe, không bị đẩy bán.</p>
+        <div class="versus-flow">
+          Tiếp đón ấm → Hỏi 1 câu mở rộng → Im lặng 3-5s → Khách kể<br>
+          → Đào sâu 3 layer pain point → Soi da/đo + giải thích<br>
+          → Re-confirm hiểu đúng → Mới chuyển sang Diagnosis
+        </div>
+      </div>
+      <div class="versus-divider">vs</div>
+      <div class="versus-side avg">
+        <h4>Average performer <span class="badge">Pattern</span></h4>
+        <p>Sale trung bình thường nhảy thẳng vào pitch dịch vụ trong vài phút đầu, dẫn đến đề xuất chung chung, khách dễ phản đối hơn và chuyển sang chiến tranh giá.</p>
+        <div class="versus-flow">
+          Chào → Hỏi "chị muốn làm gì ạ?"<br>
+          → Khách trả lời ngắn → Pitch luôn dịch vụ tương ứng<br>
+          → Chiến tranh giá khi gặp objection
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-style: italic; color: var(--ink-soft); margin-top: 24px;">
+      Chênh lệch 2 pattern này tạo ra khoảng cách <strong style="color: var(--rose-deep);">close rate ~30-40%</strong> giữa top và average performer.
+    </p>
+
+    <h3 style="margin-top: 64px;">Profile Output mẫu — Báo cáo cá nhân chuyên gia</h3>
+    <p>Mỗi chuyên gia, sau 60-90 ngày phân tích, sẽ có một profile báo cáo như sau. Đây là công cụ chính cho coaching session 1-1, không phải báo cáo dashboard khô khan.</p>
+
+    <div class="profile-card">
+      <h3>Nguyễn Thị A</h3>
+      <div class="meta">CHI NHÁNH Q1 · 87 cuộc tư vấn · giai đoạn 60 ngày · top 25% hệ thống</div>
+      <div class="scores">
+        <div class="score-box">
+          <div class="name">D1 / Discovery</div>
+          <div class="val">8.5</div>
+          <div class="status strong">★ STRENGTH</div>
+        </div>
+        <div class="score-box">
+          <div class="name">D2 / Diagnosis</div>
+          <div class="val">7.8</div>
+          <div class="status ok">Above avg</div>
+        </div>
+        <div class="score-box">
+          <div class="name">D3 / Discussion</div>
+          <div class="val">6.2</div>
+          <div class="status weak">⚠ WEAKNESS</div>
+        </div>
+        <div class="score-box">
+          <div class="name">D4 / Decision</div>
+          <div class="val">8.1</div>
+          <div class="status strong">★ STRENGTH</div>
+        </div>
+        <div class="score-box">
+          <div class="name">D5 / Devotion</div>
+          <div class="val">5.4</div>
+          <div class="status weak">⚠ MAJOR GAP</div>
+        </div>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-block">
+          <h5>★ ĐIỂM MẠNH NỔI BẬT — đáng học từ A</h5>
+          <ul>
+            <li>Talk-listen ratio 32:68 — xuất sắc, top 10% hệ thống</li>
+            <li>Technique "kể chuyện khách cũ tương tự" — đã trích 12 đoạn vào Case Library</li>
+            <li>Up-sale rate 47% — cao nhất chi nhánh</li>
+            <li>Closing technique "summary + choice" rất hiệu quả</li>
+          </ul>
+        </div>
+        <div class="insight-block">
+          <h5>⚠ ĐIỂM YẾU CẦN CẢI THIỆN</h5>
+          <ul>
+            <li>Khi khách phản đối giá, 67% case giảm giá ngay thay vì reframe — học từ chuyên gia B</li>
+            <li>Booking rebook tại quầy chỉ 31% (top performer 78%) — cần roleplay 2 tuần với mentor C</li>
+            <li>Lộ trình 90 ngày: T1 focus reframing, T2 focus rebook ritual, T3 đo lại</li>
+            <li>Đóng góp tổ chức: 12 đoạn Discovery vào Master Playbook v2.1</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= DATA SOURCES ============= -->
+<section class="section" id="data">
+  <div class="container-narrow">
+    <header class="section-header">
+      <div class="section-num">04 / Dữ liệu</div>
+      <h2>Nguồn dữ liệu — <em>thu thập tri thức ngầm</em></h2>
+      <p class="section-lead">
+        Khác sale online có sẵn recording, sale tại chi nhánh thiếu data có cấu trúc. Cần thu thập đa nguồn theo độ ưu tiên rõ ràng, đồng thời tuân thủ pháp lý Việt Nam (Nghị định 13/2023 về Bảo vệ dữ liệu cá nhân).
+      </p>
+    </header>
+
+    <h3>Hành trình khách hàng tại chi nhánh — nơi tri thức bộc lộ</h3>
+    <div class="journey-grid">
+      <div class="journey-step">
+        <div class="journey-dot">1</div>
+        <h5>Tiếp đón</h5>
+        <p>Rapport 60s đầu</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-dot">2</div>
+        <h5>Tư vấn ban đầu</h5>
+        <p>Discovery + đo soi</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-dot">3</div>
+        <h5>Đề xuất & Báo giá</h5>
+        <p>Diagnosis</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-dot">4</div>
+        <h5>Phản đối & Xử lý</h5>
+        <p>Khoảnh khắc vàng</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-dot">5</div>
+        <h5>Chốt + Up/Cross-sale</h5>
+        <p>Decision</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-dot">6</div>
+        <h5>Tiễn & Follow-up</h5>
+        <p>Devotion</p>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-style: italic; color: var(--ink-soft);">
+      Ba khoảnh khắc quyết định cần focus thu thập: <strong style="color: var(--rose-deep);">phản đối giá lần đầu</strong>, <strong style="color: var(--rose-deep);">đề xuất up-sale</strong>, <strong style="color: var(--rose-deep);">chốt lịch lần kế tiếp</strong>.
+    </p>
+
+    <h3 style="margin-top: 56px;">Nguồn dữ liệu xếp theo ưu tiên</h3>
+    <table class="sources-table">
+      <thead>
+        <tr>
+          <th style="width: 12%;">Ưu tiên</th>
+          <th style="width: 28%;">Nguồn</th>
+          <th style="width: 30%;">Giá trị mang lại</th>
+          <th style="width: 30%;">Lưu ý triển khai</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="priority p1">P1 — Cao nhất</span></td>
+          <td>
+            <div class="source-name">Audio recording tại quầy<small>Mic chuyên dụng tại bàn tư vấn</small></div>
+          </td>
+          <td>Capture nguyên văn cách chuyên gia handle objection, dùng từ ngữ, nhịp nói, im lặng — input quan trọng nhất cho phân tích 5D</td>
+          <td>Thông báo công khai bằng biển + lời nói; opt-out cho khách; lưu 30 ngày sau đó delete; mask PII trước khi phân tích</td>
+        </tr>
+        <tr>
+          <td><span class="priority p2">P2 — Cao</span></td>
+          <td>
+            <div class="source-name">Camera quầy tư vấn<small>Tận dụng camera an ninh sẵn có</small></div>
+          </td>
+          <td>Body language chuyên gia và khách — khoanh tay = phản đối, nghiêng đầu = quan tâm; thời điểm chuyên gia chuyển từ nói sang nghe</td>
+          <td>Không cần thêm hardware; AI vision phân tích micro-expression mà người xem trực tiếp không nhận ra</td>
+        </tr>
+        <tr>
+          <td><span class="priority p3">P3 — TB</span></td>
+          <td>
+            <div class="source-name">Dữ liệu CRM & giao dịch<small>Đã có sẵn trong hệ thống</small></div>
+          </td>
+          <td>Mỗi chuyên gia: số khách tư vấn, close rate, AOV, dịch vụ chốt được, retention; phân theo loại khách → cross-reference với recording</td>
+          <td>Chỉ cần API tích hợp với CRM hiện tại; không cần thay đổi hành vi nhân viên</td>
+        </tr>
+        <tr>
+          <td><span class="priority p4">P4 — TB</span></td>
+          <td>
+            <div class="source-name">Đánh giá 360 độ<small>Peer + manager + khách hàng</small></div>
+          </td>
+          <td>Sale khác đánh giá đồng nghiệp, quản lý chi nhánh quan sát, khách rate qua NPS — bổ sung góc nhìn định tính</td>
+          <td>Tạo template đánh giá ngắn, chạy hàng tháng; đảm bảo ẩn danh để có feedback thật</td>
+        </tr>
+        <tr>
+          <td><span class="priority p5">P5 — Bổ sung</span></td>
+          <td>
+            <div class="source-name">Self-reflection journal<small>Ghi chép cuối ca</small></div>
+          </td>
+          <td>5 phút cuối ca chuyên gia ghi: ca khó nhất chốt được, ca mất, nếu làm lại sẽ làm gì khác — capture suy nghĩ "tươi"</td>
+          <td>Tạo form Zalo/app đơn giản; nên có thưởng nhỏ để duy trì thói quen</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="insight-callout" style="margin-top: 56px;">
+      <p>
+        Phương pháp <em>Critical Incident Interview</em> — không hỏi "chị tư vấn thế nào", mà hỏi "kể em nghe ca khó nhất tháng vừa rồi mà chị vẫn close được" — bypass được expert blind spot và là kỹ thuật quan trọng nhất khi phỏng vấn chuyên gia.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ROADMAP ============= -->
+<section class="section" id="roadmap">
+  <div class="container-narrow">
+    <header class="section-header">
+      <div class="section-num">05 / Lộ trình</div>
+      <h2>Triển khai <em>theo phase, không big bang</em></h2>
+      <p class="section-lead">
+        Bắt đầu nhỏ, validate giá trị, scale dần. Mỗi phase có deliverable rõ ràng và success criteria — nếu không đạt, dừng lại đánh giá trước khi đi tiếp.
+      </p>
+    </header>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-time">
+          <div class="num">Phase 1</div>
+          <div class="duration">2 tháng</div>
+          <div class="month">T1 — T2</div>
+        </div>
+        <div class="phase-content">
+          <h3>MVP Pilot — 1 chi nhánh</h3>
+          <div class="phase-goal">Mục tiêu: Chứng minh pipeline end-to-end chạy được với 3-5 chuyên gia top, 50-100 cuộc tư vấn thật</div>
+          <ul>
+            <li>Setup hardware tại 5 quầy của 1 chi nhánh pilot (mic + tablet)</li>
+            <li>Đáp ứng pháp lý: thông báo, consent, retention policy</li>
+            <li>Manual segmentation + analysis cho 50-100 sessions</li>
+            <li>Critical Incident Interview với 3-5 chuyên gia top</li>
+            <li>Đầu ra: Profile cá nhân v1.0 cho chuyên gia pilot, validate với họ</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">
+          <div class="num">Phase 2</div>
+          <div class="duration">1 tháng</div>
+          <div class="month">T3</div>
+        </div>
+        <div class="phase-content">
+          <h3>Tự động hoá phân tích 5D</h3>
+          <div class="phase-goal">Mục tiêu: Pipeline phân tích chạy tự động, chi phí dưới 2.000đ/cuộc tư vấn</div>
+          <ul>
+            <li>Triển khai 5 prompt LLM cho 5 dimension độc lập</li>
+            <li>Schema validation + retry logic + cross-dimension sanity check</li>
+            <li>Cost monitoring dashboard, theo dõi từng cuộc tư vấn</li>
+            <li>So sánh kết quả AI vs. manual analysis Phase 1 → fine-tune</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">
+          <div class="num">Phase 3</div>
+          <div class="duration">1 tháng</div>
+          <div class="month">T4</div>
+        </div>
+        <div class="phase-content">
+          <h3>Profile & Case Library</h3>
+          <div class="phase-goal">Mục tiêu: Quản lý chi nhánh dùng được dashboard cho coaching session 1-1</div>
+          <ul>
+            <li>Aggregation engine: 60-90 ngày sessions → expert profile</li>
+            <li>Dashboard cho quản lý: leaderboard, skill gaps, drill-down</li>
+            <li>Case Study Library v1.0: 50-80 case study đã review bởi master trainer</li>
+            <li>Sales Playbook v1.0: 5 archetype, 20 objection handling, decision tree</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">
+          <div class="num">Phase 4</div>
+          <div class="duration">2 tháng</div>
+          <div class="month">T5 — T6</div>
+        </div>
+        <div class="phase-content">
+          <h3>Mobile + Coaching Workflow</h3>
+          <div class="phase-goal">Mục tiêu: Mỗi sale tự xem profile + tự cải thiện theo lộ trình; mở rộng 3-5 chi nhánh</div>
+          <ul>
+            <li>App Flutter cho chuyên gia: tự xem profile, gợi ý phát triển 90 ngày</li>
+            <li>Roleplay AI bot: đóng vai khách hàng theo từng archetype để luyện tập</li>
+            <li>Master Trainer program kick-off với 5-7 chuyên gia top</li>
+            <li>Onboarding 8-tuần áp dụng cho lứa sale mới đầu tiên</li>
+            <li>Scale ra 3-5 chi nhánh tiếp theo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-time">
+          <div class="num">Phase 5+</div>
+          <div class="duration">Ongoing</div>
+          <div class="month">T7 →</div>
+        </div>
+        <div class="phase-content">
+          <h3>Optimization & Scale toàn hệ thống</h3>
+          <div class="phase-goal">Mục tiêu: Áp dụng toàn bộ chi nhánh; vòng lặp cập nhật playbook hàng quý</div>
+          <ul>
+            <li>Fine-tune prompt theo feedback master trainer</li>
+            <li>Custom Vietnamese ASR model nếu cần độ chính xác cao hơn</li>
+            <li>AI co-pilot real-time cho sale junior (advanced)</li>
+            <li>Multi-branch rollout với playbook đã proven</li>
+            <li>Quarterly review: pattern mới in, pattern cũ out</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ROI ============= -->
+<section class="section" id="roi">
+  <div class="container-narrow">
+    <header class="section-header">
+      <div class="section-num">06 / ROI & Rủi ro</div>
+      <h2>Đầu tư hợp lý, <em>ROI rõ ràng</em></h2>
+      <p class="section-lead">
+        Chi phí vận hành thấp hơn nhiều so với thuê bổ sung 2 quality coach full-time. Lợi ích đo lường được qua KPI cụ thể của bộ phận sale, kèm theo tài sản tri thức tổ chức xây được.
+      </p>
+    </header>
+
+    <div class="roi-grid">
+      <div class="roi-card investment">
+        <h4>Đầu tư hàng tháng (steady state)</h4>
+        <div class="total">~12tr <small>VND/tháng</small></div>
+        <div class="total-note">Ước tính cho 1.000 cuộc tư vấn/tháng — tương đương 5 chi nhánh quy mô vừa</div>
+        <ul>
+          <li><span>Hạ tầng máy chủ + storage</span><span>~1.5tr</span></li>
+          <li><span>GPU on-demand (ML inference)</span><span>~1.2tr</span></li>
+          <li><span>Speech-to-Text (FPT.AI ~500h)</span><span>~5tr</span></li>
+          <li><span>LLM API (Claude — 1.000 sessions)</span><span>~1.7tr</span></li>
+          <li><span>Hardware ban đầu phân bổ</span><span>~2tr</span></li>
+          <li><span>Monitoring + domain</span><span>~0.5tr</span></li>
+        </ul>
+      </div>
+
+      <div class="roi-card return">
+        <h4>Lợi ích định lượng</h4>
+        <div class="total">~50tr+ <small>VND/tháng tiết kiệm</small></div>
+        <div class="total-note">Chỉ riêng so với chi phí thuê 2 quality coach full-time — chưa tính tăng doanh thu</div>
+        <ul>
+          <li><span>Thay thế 2 quality coach</span><span>~45tr</span></li>
+          <li><span>Rút ngắn onboarding sale mới (50%)</span><span>~10tr</span></li>
+          <li><span>Tăng close rate 5-10%</span><span>Theo doanh thu</span></li>
+          <li><span>Tăng AOV 10-20%</span><span>Theo doanh thu</span></li>
+          <li><span>Tăng retention 90 ngày</span><span>Theo LTV</span></li>
+          <li><span>Tài sản tri thức (giảm rủi ro)</span><span>Khó định giá</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 64px;">KPI thành công sau 12 tháng</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="label">Close rate trung bình</div>
+        <div class="value">+15%</div>
+        <div class="desc">Toàn bộ phận sale, so với baseline T0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">AOV trung bình</div>
+        <div class="value">+25%</div>
+        <div class="desc">Up-sale + cross-sale phổ biến hoá</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Retention 90 ngày</div>
+        <div class="value">+30%</div>
+        <div class="desc">D5 Devotion được chuẩn hoá</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Onboarding time</div>
+        <div class="value">−50%</div>
+        <div class="desc">6-12 tháng → 3-6 tháng để sale độc lập</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 64px;">Rủi ro & Cách giảm thiểu</h3>
+    <table class="risks-table">
+      <thead>
+        <tr>
+          <th style="width: 28%;">Rủi ro</th>
+          <th style="width: 12%;">Mức độ</th>
+          <th style="width: 60%;">Giải pháp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Chuyên gia chống đối ghi âm</strong> — sợ bị đánh giá, sợ mất giá trị độc quyền</td>
+          <td><span class="severity high">Cao</span></td>
+          <td>Buy-in từ đầu, share value rõ ràng (AI assess là input cho coaching, không phải auto-rating); biến chuyên gia top thành Master Trainer có thưởng theo hiệu quả học trò → chuyển zero-sum sang positive-sum</td>
+        </tr>
+        <tr>
+          <td><strong>Pháp lý NĐ 13/2023</strong> — vi phạm bảo vệ dữ liệu cá nhân khách hàng</td>
+          <td><span class="severity high">Cao</span></td>
+          <td>Tham vấn pháp lý từ đầu; thông báo công khai có biển + lời nói; consent log đầy đủ; opt-out cho khách; PII masking; retention policy 30 ngày audio gốc; audit trail</td>
+        </tr>
+        <tr>
+          <td><strong>LLM hallucinate</strong> — đánh giá sai chuyên gia → mất uy tín hệ thống</td>
+          <td><span class="severity high">Cao</span></td>
+          <td>Cross-validation 5 dimension; master trainer review weekly 10% kết quả; AI là input cho coaching session, không phải verdict tự động; cơ chế feedback từ chuyên gia để fine-tune</td>
+        </tr>
+        <tr>
+          <td><strong>Khách phản ứng với recording</strong> — cảm thấy không thoải mái khi tư vấn</td>
+          <td><span class="severity med">TB</span></td>
+          <td>Thông báo nhẹ nhàng, có quà ưu đãi nhỏ cho khách opt-in; biển thông báo design tinh tế phù hợp tone Beauty Biz; trải nghiệm khách không thay đổi đáng kể</td>
+        </tr>
+        <tr>
+          <td><strong>Tiếng Việt ASR sai nhiều</strong> — đặc biệt từ chuyên môn beauty, brand name</td>
+          <td><span class="severity med">TB</span></td>
+          <td>Custom vocabulary cho ngành beauty (collagen, peeling, HIFU, mesotherapy...); human review 10% transcript đầu để correction; fallback Whisper large-v3 cho audio chất lượng cao</td>
+        </tr>
+        <tr>
+          <td><strong>Cost LLM vượt budget</strong> — số session tăng nhanh khi scale</td>
+          <td><span class="severity med">TB</span></td>
+          <td>Cache aggressive cho prompt similar; tier model — Sonnet cho D1-D3 (cần nuance), Haiku cho D4-D5 (đơn giản hơn); batch processing thay real-time; cost dashboard alert khi vượt threshold</td>
+        </tr>
+        <tr>
+          <td><strong>Resistance từ quản lý chi nhánh</strong> — quen quản lý theo phương pháp cũ</td>
+          <td><span class="severity low">Thấp</span></td>
+          <td>Workshop training cho quản lý hiểu cách dùng dashboard; bắt đầu với 1 quản lý ủng hộ làm "champion"; tài liệu hướng dẫn coaching session 1-1 cụ thể</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============= ASK ============= -->
+<section class="ask-section" id="ask">
+  <div class="container-narrow">
+    <header class="section-header">
+      <div class="section-num">07 / Đề xuất</div>
+      <h2>Bước tiếp theo — <em>quyết định 3 việc</em></h2>
+      <p class="section-lead">
+        Để khởi động Phase 1 trong tháng tới, đề xuất Ban Giám đốc xem xét và phê duyệt 3 hạng mục:
+      </p>
+    </header>
+
+    <div class="ask-grid">
+      <div class="ask-card">
+        <span class="icon">①</span>
+        <h4>Phê duyệt ngân sách MVP</h4>
+        <p>~80-120tr cho Phase 1-2 (3 tháng đầu): hardware 1 chi nhánh pilot, ngân sách dev + AI cost, ngân sách pháp lý NĐ 13.</p>
+      </div>
+      <div class="ask-card">
+        <span class="icon">②</span>
+        <h4>Chọn chi nhánh pilot</h4>
+        <p>1 chi nhánh có 3-5 chuyên gia top sẵn lòng tham gia, quản lý chi nhánh ủng hộ, doanh thu ổn định để có baseline đo lường.</p>
+      </div>
+      <div class="ask-card">
+        <span class="icon">③</span>
+        <h4>Chỉ định Project Sponsor</h4>
+        <p>1 thành viên Ban Giám đốc làm sponsor, 1 PM dedicated, quyền truy cập CRM + camera + cuộc gọi để đội triển khai có thể bắt đầu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="container">
+    <div>
+      <strong>Beauty Biz</strong> — Sales Knowledge System Spec v1.0
+    </div>
+    <div>
+      Internal Strategy Document — Confidential
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
