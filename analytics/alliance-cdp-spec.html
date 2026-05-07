@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alliance CDP — Business Model Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f4f1ea;
+    --paper-2: #ebe6d9;
+    --rule: #1a1a1a;
+    --accent: #c9302c;
+    --accent-2: #2d4f3e;
+    --accent-3: #d4a04c;
+    --muted: #6b6660;
+    --highlight: #fff5b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+    background-size: 3px 3px;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  /* ===== MASTHEAD ===== */
+  .masthead {
+    border-bottom: 4px double var(--rule);
+    padding: 24px 5vw 16px;
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    background: rgba(244, 241, 234, 0.95);
+  }
+
+  .masthead-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .mast-left, .mast-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .mast-right { text-align: right; }
+
+  .masthead-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 80px 5vw 60px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 9vw, 144px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .italic {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .hero-deck {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 900px;
+    line-height: 1.3;
+    margin-bottom: 48px;
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .meta-item .label {
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .meta-item .value {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== TOC ===== */
+  .toc {
+    padding: 60px 5vw;
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .toc-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .toc-item {
+    padding: 20px 24px 20px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.15);
+    display: flex;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .toc-item:hover {
+    background: var(--ink);
+    color: var(--paper);
+    padding-left: 16px;
+  }
+
+  .toc-item:hover .toc-num { color: var(--accent-3); }
+
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    min-width: 24px;
+    padding-top: 4px;
+  }
+
+  .toc-text {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    padding: 80px 5vw;
+    border-bottom: 1px solid var(--rule);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-title h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .section-title .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .subsection {
+    margin-bottom: 48px;
+  }
+
+  .subsection h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .subsection h3 .num-prefix {
+    color: var(--accent);
+    font-weight: 500;
+    margin-right: 8px;
+    font-style: italic;
+  }
+
+  .subsection h4 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-2);
+    margin: 24px 0 12px;
+  }
+
+  .subsection p {
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+    max-width: 78ch;
+  }
+
+  .subsection ul {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .subsection ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .subsection ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .subsection strong {
+    font-weight: 700;
+    background: linear-gradient(180deg, transparent 60%, var(--highlight) 60%);
+    padding: 0 2px;
+  }
+
+  /* ===== TABLES ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+
+  .data-table thead {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .data-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(26,26,26,0.1);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .data-table tr:nth-child(even) td {
+    background: var(--paper-2);
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table td strong {
+    background: none;
+    padding: 0;
+  }
+
+  .data-table .num-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-align: right;
+    color: var(--accent-2);
+  }
+
+  /* ===== PULL QUOTE ===== */
+  .pull-quote {
+    margin: 48px 0;
+    padding: 40px 0;
+    border-top: 4px double var(--rule);
+    border-bottom: 4px double var(--rule);
+    text-align: center;
+  }
+
+  .pull-quote blockquote {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(24px, 3.5vw, 40px);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.25;
+    max-width: 1000px;
+    margin: 0 auto;
+    letter-spacing: -0.01em;
+  }
+
+  .pull-quote blockquote::before,
+  .pull-quote blockquote::after {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+
+  .pull-quote blockquote::before { content: '“'; }
+  .pull-quote blockquote::after { content: '”'; }
+
+  /* ===== STAT CARDS ===== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  .stat-card {
+    padding: 28px 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .stat-card:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .stat-card.featured { background: var(--ink); color: var(--paper); }
+  .stat-card.featured .stat-label { color: rgba(244,241,234,0.6); }
+  .stat-card.featured .stat-value { color: var(--accent-3); }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 40px;
+    margin: 32px 0;
+    position: relative;
+  }
+
+  .callout::before {
+    content: 'Δ';
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    color: var(--accent-3);
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-3);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .callout-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    max-width: 900px;
+  }
+
+  .callout.warning { background: var(--accent); color: var(--paper); }
+  .callout.warning::before { color: var(--ink); content: '!'; }
+  .callout.warning .callout-label { color: var(--ink); }
+
+  /* ===== CODE BLOCK ===== */
+  pre {
+    background: var(--ink);
+    color: #d4a04c;
+    padding: 24px;
+    margin: 24px 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    border-left: 4px solid var(--accent);
+  }
+
+  code:not(pre code) {
+    background: var(--paper-2);
+    padding: 2px 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92em;
+    border: 1px solid rgba(26,26,26,0.15);
+  }
+
+  /* ===== TIMELINE / PHASES ===== */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0;
+    margin: 32px 0;
+  }
+
+  .phase {
+    padding: 24px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-left: -1px;
+  }
+
+  .phase-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 0.9;
+    margin-bottom: 8px;
+  }
+
+  .phase-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .phase ul li {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  /* ===== AI MODULES ===== */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0;
+    margin: 24px 0;
+    border: 1px solid var(--rule);
+  }
+
+  .ai-module {
+    padding: 28px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    transition: all 0.3s ease;
+  }
+
+  .ai-module:hover {
+    background: var(--paper-2);
+  }
+
+  .ai-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .ai-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .ai-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #2d2a26;
+  }
+
+  .ai-desc strong {
+    background: none;
+    color: var(--accent-2);
+  }
+
+  /* ===== ARCHITECTURE DIAGRAM ===== */
+  .arch-diagram {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px;
+    margin: 32px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .arch-diagram pre {
+    background: none;
+    border: none;
+    color: var(--paper);
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+  }
+
+  /* ===== RISK MATRIX ===== */
+  .risk-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 120px 2fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(26,26,26,0.15);
+    align-items: start;
+  }
+
+  .risk-row:last-child { border-bottom: none; }
+
+  .risk-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .risk-name { font-weight: 600; }
+
+  .risk-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    text-align: center;
+    font-weight: 700;
+    width: fit-content;
+  }
+
+  .risk-level.critical { background: var(--accent); color: var(--paper); }
+  .risk-level.high { background: var(--accent-3); color: var(--ink); }
+  .risk-level.medium { background: var(--paper-2); color: var(--ink); border: 1px solid var(--rule); }
+
+  .risk-mitigation { font-size: 14px; line-height: 1.5; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 5vw;
+    text-align: center;
+  }
+
+  footer .colophon {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-style: italic;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+  }
+
+  footer .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.5);
+    margin-top: 32px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .masthead-grid { grid-template-columns: 1fr; text-align: center; }
+    .mast-left, .mast-right { text-align: center; }
+    .hero { padding: 60px 5vw 40px; }
+    .section { padding: 60px 5vw; }
+    .section-header { grid-template-columns: 60px 1fr; gap: 16px; }
+    .section-num { font-size: 48px; }
+    .stat-card { border-right: none !important; }
+    .ai-module { border-right: none !important; }
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 10px 8px; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeInUp 0.6s ease-out backwards; }
+
+  /* ===== HIGHLIGHTING ===== */
+  .highlight-block {
+    background: var(--highlight);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 4px solid var(--accent-3);
+    font-size: 15px;
+  }
+
+  .number-emphasis {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.15em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== MASTHEAD ===== -->
+<header class="masthead">
+  <div class="masthead-grid">
+    <div class="mast-left">Vol. 1 · Issue 01</div>
+    <div class="masthead-title">Alliance CDP <span style="color:var(--accent);">⚭</span> Spec</div>
+    <div class="mast-right">Tháng 5 / 2026</div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-tag">Business Model Specification · v1.0</div>
+  <h1>Một nền kinh tế<br><span class="italic">dữ liệu</span> ba bên.</h1>
+  <p class="hero-deck">
+    Nền tảng chia sẻ tệp khách hàng giữa các doanh nghiệp dịch vụ không cạnh tranh —
+    nơi data tạo ra giá trị tuần hoàn thay vì bị khoá trong silo, và khách hàng được trả tiền cho chính hành vi của mình.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="label">Stage</span>
+      <span class="value">Pre-launch / Spec</span>
+    </div>
+    <div class="meta-item">
+      <span class="label">Target Market</span>
+      <span class="value">Việt Nam</span>
+    </div>
+    <div class="meta-item">
+      <span class="label">Document Type</span>
+      <span class="value">Business Model Draft</span>
+    </div>
+    <div class="meta-item">
+      <span class="label">Status</span>
+      <span class="value">Ideation Phase</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<section class="toc">
+  <div class="toc-inner">
+    <div class="toc-label">— Mục lục</div>
+    <div class="toc-grid">
+      <a href="#s1" class="toc-item"><span class="toc-num">01</span><span class="toc-text">Executive Summary</span></a>
+      <a href="#s2" class="toc-item"><span class="toc-num">02</span><span class="toc-text">Problem &amp; Market Opportunity</span></a>
+      <a href="#s3" class="toc-item"><span class="toc-num">03</span><span class="toc-text">Business Model</span></a>
+      <a href="#s4" class="toc-item"><span class="toc-num">04</span><span class="toc-text">Cơ chế liên minh giữa các Biz</span></a>
+      <a href="#s5" class="toc-item"><span class="toc-num">05</span><span class="toc-text">Cơ chế lợi ích cho Khách hàng cuối</span></a>
+      <a href="#s6" class="toc-item"><span class="toc-num">06</span><span class="toc-text">Đơn vị Token &amp; Ví thưởng</span></a>
+      <a href="#s7" class="toc-item"><span class="toc-num">07</span><span class="toc-text">Khung pháp lý &amp; Consent</span></a>
+      <a href="#s8" class="toc-item"><span class="toc-num">08</span><span class="toc-text">Kiến trúc dữ liệu</span></a>
+      <a href="#s9" class="toc-item"><span class="toc-num">09</span><span class="toc-text">AI Layer — Intelligence Engine</span></a>
+      <a href="#s10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Use cases tiêu biểu</span></a>
+      <a href="#s11" class="toc-item"><span class="toc-num">11</span><span class="toc-text">Go-to-Market</span></a>
+      <a href="#s12" class="toc-item"><span class="toc-num">12</span><span class="toc-text">Rủi ro &amp; Mitigation</span></a>
+      <a href="#s13" class="toc-item"><span class="toc-num">13</span><span class="toc-text">Roadmap &amp; KPIs</span></a>
+      <a href="#s14" class="toc-item"><span class="toc-num">14</span><span class="toc-text">Open Questions</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 1: EXECUTIVE SUMMARY ===== -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title">
+      <div class="kicker">Chương Một</div>
+      <h2>Executive Summary</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">1.1</span>Tóm tắt</h3>
+    <p><strong>Alliance CDP</strong> là nền tảng Customer Data Platform liên minh, cho phép các doanh nghiệp dịch vụ <strong>không cạnh tranh trực tiếp</strong> (thẩm mỹ, gym, nha khoa, spa, yoga, dinh dưỡng, thời trang, F&amp;B cao cấp...) chia sẻ tệp khách hàng theo cơ chế bảo mật (data clean room), cùng khai thác chéo qua các campaign liên minh, và <strong>chia sẻ doanh thu với chính khách hàng cuối</strong> thông qua referral, cashback và reward.</p>
+    <p>Khác với CDP truyền thống chỉ phục vụ một thương hiệu, Alliance CDP xây dựng một nền kinh tế dữ liệu <strong>ba bên</strong>: doanh nghiệp tiết kiệm CPL và mở rộng thị trường, khách hàng kiếm tiền từ chính hành vi và mạng lưới của mình, nền tảng thu phí từ giao dịch và dịch vụ data.</p>
+  </div>
+
+  <div class="pull-quote">
+    <blockquote>Biến mỗi khách hàng trung thành thành một kênh phân phối, biến mỗi doanh nghiệp dịch vụ thành một mắt xích trong hệ sinh thái khách hàng chung.</blockquote>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">1.3</span>Định hướng phát triển</h3>
+    <p>Spec này ở giai đoạn phác thảo ý tưởng. Các con số mục tiêu cụ thể (số biz, MAU, GMV, doanh thu) sẽ được làm rõ trong các phiên bản tiếp theo sau khi:</p>
+    <ul>
+      <li>Khảo sát anchor partners tiềm năng để có baseline thực tế về CPL, GMV ngành</li>
+      <li>Hoàn thành sensitivity analysis cho mô hình pricing (transaction commission, SaaS tier)</li>
+      <li>Validate giả định về take rate qua pilot 3-5 biz đầu tiên</li>
+    </ul>
+    <p>Định hướng tổng quát: bắt đầu với <strong>3-5 ngành dịch vụ bổ trợ</strong> tại thị trường Việt Nam, ưu tiên <strong>chiều sâu liên minh</strong> trước chiều rộng số lượng biz, lấy <strong>chất lượng data và tỷ lệ chuyển đổi</strong> làm thước đo chính thay vì volume.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: PROBLEM & MARKET ===== -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title">
+      <div class="kicker">Chương Hai</div>
+      <h2>Problem &amp; Market Opportunity</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">2.1</span>Vấn đề cốt lõi</h3>
+
+    <h4>B2B Pain — Doanh nghiệp dịch vụ</h4>
+    <ul>
+      <li>CPL ngành làm đẹp/sức khoẻ tại VN dao động <strong>200K – 1M VNĐ/lead</strong>, chiếm 25–40% chi phí marketing</li>
+      <li>Phụ thuộc nặng vào quảng cáo Meta/Google — chi phí tăng ~20%/năm, hiệu quả giảm sau iOS 14.5</li>
+      <li>Tỷ lệ chuyển đổi telesale chỉ 8–15% vì lead lạnh, thiếu context hành vi</li>
+      <li>Data khách hàng bị khoá trong silo nội bộ, không tận dụng được mạng lưới ngành phụ trợ</li>
+    </ul>
+
+    <h4>B2C Pain — Khách hàng cuối</h4>
+    <ul>
+      <li>Thông tin cá nhân bị thu thập, sử dụng, mua bán mà không nhận được giá trị tương xứng</li>
+      <li>Ngập trong tin nhắn telesale spam, không kiểm soát được ai có data của mình</li>
+      <li>Các chương trình referral hiện có rời rạc — mỗi thương hiệu một app, không tích luỹ</li>
+      <li>Không có công cụ chính thống để biến mạng lưới quan hệ cá nhân thành thu nhập</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">2.2</span>Cơ hội thị trường — Việt Nam</h3>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">TAM</div>
+        <div class="stat-value">~120K tỷ</div>
+        <div class="stat-sub">Tổng chi marketing &amp; loyalty ngành dịch vụ tiêu dùng VN</div>
+      </div>
+      <div class="stat-card featured">
+        <div class="stat-label">SAM</div>
+        <div class="stat-value">~25K tỷ</div>
+        <div class="stat-sub">Ngân sách lead-gen của SMB &amp; mid-market chịu áp lực CPL cao</div>
+      </div>
+    </div>
+    <p style="font-size: 14px; color: var(--muted); font-style: italic; margin-top: 16px;">SOM (thị phần thực tế có thể đạt) sẽ được ước lượng cụ thể trong các phiên bản spec tiếp theo dựa trên kết quả pilot.</p>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">2.3</span>Tại sao thời điểm này?</h3>
+    <ul>
+      <li><strong>Nghị định 13/2023</strong> ép DN tìm giải pháp consent-first thay vì mua bán data lén</li>
+      <li><strong>iOS 14.5+</strong> và sự co lại của signal trên Meta/Google đẩy ngành sang first-party data</li>
+      <li><strong>Gen Z / Millennials VN</strong> đã quen với cashback, referral, super-app — sẵn sàng tiếp nhận</li>
+      <li><strong>Chưa có player nào tại VN</strong> xây CDP liên minh đa ngành chuyên dịch vụ</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: BUSINESS MODEL ===== -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title">
+      <div class="kicker">Chương Ba</div>
+      <h2>Business Model</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">3.1</span>Mô hình tổng quan — HYBRID</h3>
+    <p>Alliance CDP vận hành theo mô hình <strong>hybrid hai lớp</strong>:</p>
+    <ul>
+      <li><strong>Lớp Enterprise SaaS</strong> — phục vụ chuỗi &amp; doanh nghiệp lớn (&gt;10 chi nhánh hoặc &gt;50K KH/tháng). Tích hợp sâu, custom workflow, dedicated support.</li>
+      <li><strong>Lớp Marketplace SMB</strong> — phục vụ SMB và shop nhỏ (&lt;10 chi nhánh). Self-service onboarding, plug-and-play, freemium.</li>
+    </ul>
+    <p>Cả hai lớp dùng chung: data infrastructure, identity graph, end-user mobile app, ví thưởng, campaign engine.</p>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">3.2</span>Ba bên trong hệ sinh thái</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Bên</th><th>Cho gì</th><th>Nhận gì</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Doanh nghiệp</strong><br><em>Member biz</em></td>
+          <td>Tệp khách hàng (đã hash); hành vi giao dịch; ngân sách campaign / commission pool; phí SaaS hoặc % giao dịch</td>
+          <td>Lead chất lượng cao từ ngành bạn; lookalike audience trong pool chung; insight hành vi cross-industry; tăng LTV qua bundle service; giảm CPL 30–65%</td>
+        </tr>
+        <tr>
+          <td><strong>Khách hàng</strong><br><em>End user</em></td>
+          <td>Consent share data (granular); hành vi mua hàng; mạng lưới quan hệ (referral); nội dung review / UGC</td>
+          <td>Cashback 3–10%/giao dịch; referral cash khi mời bạn; reward token khi share data; voucher cross-brand độc quyền; quyền kiểm soát data minh bạch</td>
+        </tr>
+        <tr>
+          <td><strong>Nền tảng</strong><br><em>Alliance CDP</em></td>
+          <td>Hạ tầng data clean room; identity resolution; campaign engine; mobile app KH cuối; tuân thủ pháp lý NĐ 13; vận hành ví, thanh toán</td>
+          <td>Phí SaaS hàng tháng; % commission giao dịch; phí data query / clean room; margin trên float ví; doanh thu insight (anonymized)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">3.3</span>Năm nguồn doanh thu (Multi-stream)</h3>
+
+    <div class="ai-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+      <div class="ai-module">
+        <div class="ai-id">R1 · SaaS</div>
+        <div class="ai-name">Subscription Enterprise</div>
+        <div class="ai-desc">Starter 5tr/tháng → Enterprise 50tr+/tháng. Tier theo số chi nhánh &amp; số KH tích hợp.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">R2 · Commission</div>
+        <div class="ai-name">Transaction 5–15%</div>
+        <div class="ai-desc">Cắt trên mỗi giao dịch từ campaign liên minh hoặc referral. Thấp hơn AccessTrade nhưng cao hơn loyalty.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">R3 · Data Room</div>
+        <div class="ai-name">Clean Room Queries</div>
+        <div class="ai-desc">500K – 5tr/query hoặc gói 20–100tr/tháng. Lookalike, attribution cross-brand, segment building.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">R4 · Float</div>
+        <div class="ai-name">Wallet Margin</div>
+        <div class="ai-desc">Lãi từ float của ví khách (giai đoạn earn → withdraw, trung bình 14-30 ngày).</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">R5 · Insight</div>
+        <div class="ai-name">Trend Reports</div>
+        <div class="ai-desc">Bán report cross-industry cho ngân hàng, BĐS, FMCG. CHỈ aggregated, ẩn danh hoàn toàn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: ALLIANCE MECHANICS ===== -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title">
+      <div class="kicker">Chương Bốn</div>
+      <h2>Cơ chế liên minh giữa các Biz</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">4.1</span>Tier hệ thống thành viên</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Tier</th><th>Điều kiện</th><th>Quyền lợi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Bronze</strong></td><td>Mới gia nhập</td><td>Nhận lead campaign chung; không query clean room; phí transaction <strong>15%</strong></td></tr>
+        <tr><td><strong>Silver</strong></td><td>≥5K khách hợp lệ, share rate ≥1.5× receive rate</td><td>Tham gia campaign liên minh chủ động; query lookalike; phí transaction <strong>10%</strong></td></tr>
+        <tr><td><strong>Gold</strong></td><td>≥30K khách + GMV nhận ≥500tr/quý</td><td>Tạo campaign &amp; mời partner; insight cross-industry deep; phí transaction <strong>7%</strong></td></tr>
+        <tr><td><strong>Platinum</strong></td><td>Anchor partner, ký năm + commit GMV</td><td>Phí transaction <strong>5%</strong>; custom workflow; equity option trong nền tảng</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">4.2</span>Reciprocity Engine — chống free-rider</h3>
+    <p><strong>Vấn đề:</strong> Biz A khai thác data của B nhưng không đổ lại data chất lượng → liên minh sụp đổ.</p>
+
+    <div class="callout">
+      <div class="callout-label">Reciprocity Score</div>
+      <div class="callout-text">RS = (Giá trị data đóng góp) / (Giá trị data nhận về)<br><br>RS ≥ 1.0 → ưu tiên campaign mới · RS &lt; 0.5 trong 2 quý → tự động xuống tier · RS &lt; 0.2 → tạm khoá quyền nhận lead.</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">4.3</span>Campaign Builder liên minh</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Loại</th><th>Mô tả</th><th>Ví dụ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cross-promotion</strong></td><td>Biz A tặng voucher của B cho khách của A</td><td>Gym tặng voucher nha khoa cho hội viên VIP</td></tr>
+        <tr><td><strong>Bundle service</strong></td><td>Combo dịch vụ chéo, chia doanh thu theo công thức</td><td>"Glow up": tẩy trắng răng + facial + PT</td></tr>
+        <tr><td><strong>Lead exchange</strong></td><td>Trao đổi lead theo segment, settle bằng commission</td><td>Thẩm mỹ ↔ nha khoa cùng segment phụ nữ 30+</td></tr>
+        <tr><td><strong>Co-launch event</strong></td><td>3-5 biz đồng tổ chức event/livestream</td><td>Mega Live "Wellness Week" chung</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Cấu hình campaign</h4>
+<pre>campaign:
+  type: cross-promotion | bundle | lead-exchange | co-launch
+  participants: [biz_id_1, biz_id_2, ...]
+  audience_filter:
+    industries: [beauty, fitness]
+    segments: ["high-LTV", "active-90d"]
+    exclude_existing_customers_of: [biz_id_2]
+  reward_split:
+    referrer_biz: 40%
+    receiver_biz:  30%
+    end_user:      20%
+    platform:      10%
+  conversion_funnel: [lead, booking, checkin, purchase]
+  attribution_window: 30d
+  budget_cap: 50,000,000 VND</pre>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: USER BENEFITS ===== -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title">
+      <div class="kicker">Chương Năm</div>
+      <h2>Cơ chế lợi ích cho Khách hàng cuối</h2>
+    </div>
+  </div>
+
+  <p style="font-size: 18px; margin-bottom: 32px;">Khách hàng kiếm tiền qua <strong>4 kênh</strong>:</p>
+
+  <div class="ai-grid">
+    <div class="ai-module">
+      <div class="ai-id">CH-01 · Referral</div>
+      <div class="ai-name">Cash khi giới thiệu KH mới</div>
+      <div class="ai-desc">5–15% giá trị giao dịch khi bạn bè đăng ký + mua lần đầu. <strong>Multi-tier 2 cấp</strong> (F1: 80%, F2: 20%) giới hạn để tránh đa cấp. Trần thu nhập <strong>20 triệu/tháng</strong>.</div>
+    </div>
+    <div class="ai-module">
+      <div class="ai-id">CH-02 · Cashback</div>
+      <div class="ai-name">Khi mua dịch vụ liên minh</div>
+      <div class="ai-desc">3–10% mỗi giao dịch tại biz liên minh. Boost +2-3% nếu dùng campaign cross-promo. Rút về NH (phí 1%) hoặc dùng tại biz khác (miễn phí).</div>
+    </div>
+    <div class="ai-module">
+      <div class="ai-id">CH-03 · Reward</div>
+      <div class="ai-name">Khi chia sẻ data / hành vi</div>
+      <div class="ai-desc">Alliance Token (ALT): hoàn thiện profile (50 ALT), liên kết MXH (100 ALT), survey (20-80 ALT). 1,000 ALT = 10,000 VNĐ. <strong>KHÔNG phải crypto</strong>.</div>
+    </div>
+    <div class="ai-module">
+      <div class="ai-id">CH-04 · Affiliate</div>
+      <div class="ai-name">Content review / livestream</div>
+      <div class="ai-desc">Cho user Silver+ trở thành Micro-KOC. 15–30% commission trên doanh số phát sinh. Top KOC được mời tham gia co-launch của biz Gold/Platinum.</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">5.5</span>Tier khách hàng cuối</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Tier</th><th>Điều kiện</th><th>Cashback</th><th>Referral</th><th>Quyền lợi đặc biệt</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Bronze</strong></td><td>Đăng ký mới</td><td class="num-cell">3%</td><td class="num-cell">5%</td><td>Voucher cơ bản</td></tr>
+        <tr><td><strong>Silver</strong></td><td>3+ giao dịch / 3+ referral</td><td class="num-cell">5%</td><td class="num-cell">8%</td><td>Mở Affiliate Content</td></tr>
+        <tr><td><strong>Gold</strong></td><td>GMV ≥10tr/quý hoặc 10+ referral</td><td class="num-cell">7%</td><td class="num-cell">10%</td><td>Early access dịch vụ mới</td></tr>
+        <tr><td><strong>Platinum</strong></td><td>GMV ≥50tr/năm + Top KOC</td><td class="num-cell">10%</td><td class="num-cell">15%</td><td>Co-marketing, vote feature</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: WALLET ===== -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title">
+      <div class="kicker">Chương Sáu</div>
+      <h2>Đơn vị Token &amp; Ví thưởng</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">6.1</span>Cấu trúc Alliance Wallet — 3 loại số dư</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Loại</th><th>Đặc điểm</th><th>Quy đổi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Cash Balance (VNĐ)</strong></td><td>Từ cashback &amp; referral</td><td>Rút NH (phí 1%) hoặc chi tiêu tại biz liên minh (miễn phí)</td></tr>
+        <tr><td><strong>Alliance Token (ALT)</strong></td><td>Từ reward share data</td><td>Quy đổi VNĐ ở ngưỡng ≥10,000 ALT (= 100K VNĐ); đổi voucher tỷ giá ưu đãi 1.2×</td></tr>
+        <tr><td><strong>Voucher Wallet</strong></td><td>Voucher cụ thể từ biz</td><td>Sử dụng trực tiếp tại biz đó, có hạn dùng</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">6.2</span>Anti-fraud &amp; compliance</h3>
+    <ul>
+      <li>KYC bắt buộc khi rút &gt;2M/tháng (CMND/CCCD + xác minh khuôn mặt)</li>
+      <li>Giới hạn số tài khoản/thiết bị (1 SĐT, 1 CCCD, 1 thiết bị chính)</li>
+      <li>Detect: self-referral, cluster fraud (nhiều account cùng IP/device), pattern bất thường</li>
+    </ul>
+    <p>Cashback &amp; referral được <strong>biz tài trợ</strong> (lấy từ marketing budget) — không phải nền tảng chi. Hợp tác <strong>1 ngân hàng đối tác</strong> để vận hành escrow &amp; payout.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: LEGAL ===== -->
+<section class="section" id="s7">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title">
+      <div class="kicker">Chương Bảy</div>
+      <h2>Khung pháp lý &amp; Consent</h2>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-label">Cảnh báo</div>
+    <div class="callout-text">Nghị định 13/2023/NĐ-CP là rủi ro lớn nhất của mô hình này. Không thể "làm trước rồi tính".</div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">7.1</span>Nguyên tắc thiết kế</h3>
+    <ul>
+      <li><strong>Granular consent</strong> — Khách đồng ý từng mục đích, từng ngành cụ thể, không phải blanket consent</li>
+      <li><strong>Right to revoke</strong> — Rút consent bất cứ lúc nào, hệ thống xoá khỏi pool trong 24h</li>
+      <li><strong>Right to access</strong> — KH xem được toàn bộ data đang được share, biz nào đã truy cập</li>
+      <li><strong>Data minimization</strong> — Biz nhận chỉ thấy data cần cho mục đích cụ thể</li>
+      <li><strong>Audit trail</strong> — Mọi lượt truy cập data đều log và hiển thị cho KH</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">7.3</span>Data Clean Room — Kỹ thuật</h3>
+    <div class="highlight-block">
+      <strong>Raw data không bao giờ rời khỏi tenant của biz chủ sở hữu.</strong> Match qua hash SHA-256 SĐT/email trong môi trường confidential compute. Biz query chỉ nhận aggregate hoặc segment ID list (không phải PII). Implement: Snowflake Data Clean Room / AWS Clean Rooms / hoặc tự build trên TEE.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">7.4</span>Compliance roadmap</h3>
+    <table class="data-table">
+      <thead><tr><th>Giai đoạn</th><th>Hành động</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pre-launch</strong></td><td>Thuê tư vấn pháp lý chuyên data privacy. Soạn DPA, ToS, Privacy Policy.</td></tr>
+        <tr><td><strong>Launch</strong></td><td>Đăng ký xử lý DLCN với Cục An ninh mạng. Thiết lập DPO.</td></tr>
+        <tr><td><strong>Year 1</strong></td><td>Audit độc lập định kỳ 6 tháng. ISO 27001 + ISO 27701.</td></tr>
+        <tr><td><strong>Year 2+</strong></td><td>Audit định kỳ duy trì, cập nhật theo các nghị định/thông tư mới về DLCN.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 8: ARCHITECTURE ===== -->
+<section class="section" id="s8">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title">
+      <div class="kicker">Chương Tám</div>
+      <h2>Kiến trúc dữ liệu</h2>
+    </div>
+  </div>
+
+  <div class="arch-diagram">
+<pre>┌─────────────────────────────────────────────────────────────┐
+│                    ALLIANCE CDP CORE                          │
+│                                                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
+│  │ Identity     │  │ Consent      │  │ Data Clean Room  │    │
+│  │ Resolution   │  │ Management   │  │ (Confidential    │    │
+│  │ (graph DB)   │  │ Service      │  │  Compute / TEE)  │    │
+│  └──────────────┘  └──────────────┘  └──────────────────┘    │
+│                                                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
+│  │ Campaign     │  │ Reciprocity  │  │ Wallet & Payout  │    │
+│  │ Engine       │  │ Engine       │  │ (Cash + ALT)     │    │
+│  └──────────────┘  └──────────────┘  └──────────────────┘    │
+│                                                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
+│  │ Attribution  │  │ Insight &    │  │ Anti-Fraud &     │    │
+│  │ Engine       │  │ Reporting    │  │ KYC              │    │
+│  └──────────────┘  └──────────────┘  └──────────────────┘    │
+└────────────────────────────────────────────────────────────────┘
+         ▲                    ▲                      ▲
+         │                    │                      │
+   ┌─────┴─────┐        ┌────┴─────┐         ┌──────┴──────┐
+   │ Biz API & │        │ End-User │         │ Admin /     │
+   │ SDK       │        │ Mobile   │         │ Operator    │
+   │ (REST/    │        │ App      │         │ Dashboard   │
+   │  webhook) │        │ (Flutter)│         │             │
+   └───────────┘        └──────────┘         └─────────────┘</pre>
+  </div>
+
+  <div class="subsection">
+    <h4>Tech stack gợi ý</h4>
+    <ul>
+      <li><strong>Backend:</strong> Go (gRPC nội bộ, REST cho biz partner) + Node.js (cho dashboard)</li>
+      <li><strong>Database:</strong> PostgreSQL (transactional) · Redis (cache) · Neo4j/Dgraph (identity graph) · ClickHouse (analytics)</li>
+      <li><strong>Mobile:</strong> Flutter</li>
+      <li><strong>Data Clean Room:</strong> Snowflake hoặc tự build trên Intel SGX/AMD SEV</li>
+      <li><strong>Infrastructure:</strong> Nginx + SSH deployment, scale lên K8s khi cần</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION 9: AI LAYER ===== -->
+<section class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div class="section-title">
+      <div class="kicker">Chương Chín · Trọng tâm</div>
+      <h2>AI Layer — Intelligence Engine</h2>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Triết lý</div>
+    <div class="callout-text">AI không phải feature add-on, mà là layer xuyên suốt biến Alliance CDP từ "marketplace data" thành "platform thông minh". Đây là moat chính — càng nhiều biz và user tham gia, AI càng mạnh.</div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">9.1</span>Vì sao Alliance CDP là môi trường lý tưởng cho AI?</h3>
+    <ul>
+      <li><strong>Data đa ngành</strong> — hành vi 1 KH ở 5-10 ngành khác nhau → chân dung 360° thật sự</li>
+      <li><strong>Volume scale lớn</strong> — hàng triệu user × hàng nghìn biz → đủ data cho ML chất lượng</li>
+      <li><strong>Closed-loop feedback</strong> — campaign → conversion → revenue, vòng lặp đầy đủ để self-improve</li>
+      <li><strong>Cross-industry signal</strong> — hành vi gym dự đoán nhu cầu thẩm mỹ — patterns này không tồn tại ở CDP đơn ngành</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">9.2</span>Sáu module AI cốt lõi</h3>
+    <div class="ai-grid">
+      <div class="ai-module">
+        <div class="ai-id">AI-1</div>
+        <div class="ai-name">Intelligent Audience Matching</div>
+        <div class="ai-desc">Embedding 256-512 chiều + two-tower neural network + propensity model per industry. <strong>Conversion gấp 3-5×</strong> so với rule-based filter; CPL giảm 50-70%.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">AI-2</div>
+        <div class="ai-name">Campaign Optimization Engine</div>
+        <div class="ai-desc">Multi-armed bandit + reinforcement learning cho timing & frequency. AI gợi ý mức cashback/voucher tối ưu để <strong>maximize ROI</strong>, không phải max discount.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">AI-3</div>
+        <div class="ai-name">Cross-Industry Insight</div>
+        <div class="ai-desc">Sequence model (Transformer) học chuỗi hành vi. <em>"Khách botox → 60% có nhu cầu nha khoa cosmetic trong 90 ngày"</em>. Life event detection: pre-wedding, mang thai...</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">AI-4</div>
+        <div class="ai-name">Conversational AI for End-User</div>
+        <div class="ai-desc">LLM-based personal assistant trong Mini App, hiểu tiếng Việt tự nhiên. Voice input cho user lớn tuổi. <em>"Tháng này tôi có 500K cashback, gợi ý dịch vụ?"</em></div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">AI-5</div>
+        <div class="ai-name">AI Copilot for Biz</div>
+        <div class="ai-desc">Chat interface trong dashboard. Auto-content generation, anomaly explanation, weekly briefing. <strong>Giúp Marketplace SMB usable</strong> — không cần team marketing chuyên nghiệp.</div>
+      </div>
+      <div class="ai-module">
+        <div class="ai-id">AI-6</div>
+        <div class="ai-name">Trust &amp; Safety AI</div>
+        <div class="ai-desc">Graph neural network phát hiện cluster fraud. Behavior anomaly detection. Review authenticity scoring. Privacy attack detection (membership inference).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">9.4</span>AI thành sản phẩm bán được</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>Feature</th><th>Tier</th><th>Pricing</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Basic audience filter (rule-based)</td><td>Bronze+</td><td class="num-cell">Free</td></tr>
+        <tr><td>AI Lookalike (embedding-based)</td><td>Silver+</td><td class="num-cell">2tr/query · 30tr/tháng</td></tr>
+        <tr><td>Campaign Optimization Engine</td><td>Gold+</td><td class="num-cell">5tr/tháng · % uplift</td></tr>
+        <tr><td>Cross-Industry Insight</td><td>Gold+</td><td class="num-cell">20tr/tháng</td></tr>
+        <tr><td>AI Copilot for Biz</td><td>Tất cả tier</td><td class="num-cell">Free Bronze · Pay per use</td></tr>
+        <tr><td>Custom propensity model</td><td>Platinum</td><td class="num-cell">50-200tr/dự án</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight-block">
+      AI premium features là <strong>nguồn doanh thu cao biên</strong> và là moat dài hạn. Mức đóng góp doanh thu cụ thể sẽ được mô hình hoá khi có dữ liệu pilot từ các biz đầu tiên.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">9.5</span>AI Roadmap</h3>
+    <div class="phase-grid">
+      <div class="phase">
+        <div class="phase-num">Y1</div>
+        <div class="phase-title">Q1-Q2 · MVP</div>
+        <ul>
+          <li>AI-4 Conversational Assistant (Claude API)</li>
+          <li>AI-6 basic fraud detection</li>
+          <li>Rule-based + simple ML</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y1</div>
+        <div class="phase-title">Q3-Q4 · Scale</div>
+        <ul>
+          <li>AI-1 Lookalike v1 (embeddings)</li>
+          <li>AI-2 Campaign Optimization v1</li>
+          <li>Bandit algorithms</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y2</div>
+        <div class="phase-title">Q1-Q2</div>
+        <ul>
+          <li>AI-3 Cross-Industry Insight</li>
+          <li>AI-5 Copilot for Biz</li>
+          <li>Fine-tuned LLM cho VN</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y3</div>
+        <div class="phase-title">Maturation</div>
+        <ul>
+          <li>Federated learning</li>
+          <li>Explainable AI module</li>
+          <li>Propensity-as-a-service</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">9.6</span>AI Risk &amp; Ethics</h3>
+    <table class="data-table">
+      <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Bias — AI ưu tiên user giàu, bỏ qua tier thấp</td><td>Fairness metrics monitoring, đa dạng training data</td></tr>
+        <tr><td>Hallucination từ LLM Copilot khuyên sai biz</td><td>Guardrails + RAG + biz approval cho action quan trọng</td></tr>
+        <tr><td>Privacy leak qua model (membership inference)</td><td>Differential privacy khi train, audit định kỳ</td></tr>
+        <tr><td>Dependency vào LLM provider</td><td>Multi-provider strategy (Claude + GPT + tự host fallback)</td></tr>
+        <tr><td>Quyền giải thích theo NĐ 13</td><td>Mọi automated decision phải có reason code</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 10: USE CASES ===== -->
+<section class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">
+      <div class="kicker">Chương Mười</div>
+      <h2>Use cases tiêu biểu</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">UC-01</span>"Glow Up Combo" cross-industry bundle</h3>
+    <p><strong>Setup:</strong> 3 biz Platinum (thẩm mỹ Ngọc Dung + nha khoa Elite + gym California). Combo "Glow Up 30 ngày": tẩy trắng răng + facial signature + 4 buổi PT. Giá lẻ 12tr → combo 8.5tr (giảm 30%).</p>
+    <ol style="padding-left: 24px; margin: 16px 0;">
+      <li>KH thấy combo trên Mini App, mua qua nền tảng</li>
+      <li>Platform giữ tiền escrow, cấp QR code cho từng dịch vụ</li>
+      <li>KH check-in tại từng biz → biz xác nhận → escrow release</li>
+      <li>Cashback 7% (<span class="number-emphasis">595K</span>) vào ví KH</li>
+      <li>Platform thu 8% commission (<span class="number-emphasis">680K</span>), chia cho 3 biz</li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">UC-02</span>Lead Exchange theo segment</h3>
+    <p><strong>Setup:</strong> Biz Silver "Spa Hà An" cần lead "phụ nữ 28-40, đã chi &gt;5tr cho làm đẹp 90 ngày qua". Pool có 12 biz cùng tier+ trong ngành liên quan.</p>
+    <ol style="padding-left: 24px; margin: 16px 0;">
+      <li>Spa Hà An tạo query trong clean room: filter segment, pay 2tr cho 200 lead match</li>
+      <li>Hệ thống match qua hash, tìm 350 user thoả mãn nhưng đã consent share</li>
+      <li>Trả về 200 lead random trong 350 (anti-cherry-pick)</li>
+      <li>Spa gửi voucher cá nhân hoá qua Mini App. User được tặng 30K cashback nếu book trong 7 ngày</li>
+      <li>Conversion tracking → biz nguồn data nhận 60% phí (1.2tr), platform giữ 40%</li>
+    </ol>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">UC-03</span>Khách hàng KOC tự nhiên</h3>
+    <p><strong>Setup:</strong> Linh, 28 tuổi, khách Gold của thẩm mỹ viện X, có 3,000 follower Instagram. Đăng ký Affiliate Content sau khi đạt Silver tier.</p>
+    <ol style="padding-left: 24px; margin: 16px 0;">
+      <li>Linh nhận template review từ X (ảnh trước/sau, talking points)</li>
+      <li>Linh đăng story + reel, gắn link tracking từ Mini App</li>
+      <li>5 bạn click → 2 booking → 1 mua dịch vụ 8tr</li>
+      <li>Linh nhận 25% × 8tr = <span class="number-emphasis">2tr commission</span></li>
+      <li>Tháng sau, Linh được mời tham gia co-launch event "Wellness Week" với 3 biz Gold</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== SECTION 11: GTM ===== -->
+<section class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">
+      <div class="kicker">Chương Mười Một</div>
+      <h2>Go-to-Market</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">11.1</span>Chiến lược 3 phase</h3>
+
+    <div class="phase-grid">
+      <div class="phase">
+        <div class="phase-num">P1</div>
+        <div class="phase-title">Anchor Partners<br><span style="font-size: 13px; color: var(--muted); font-style: italic;">Giai đoạn đầu</span></div>
+        <ul>
+          <li>Xác định &amp; ký một số ít anchor brand đa ngành ở tier Platinum</li>
+          <li>Pitch top chuỗi mỗi ngành ưu tiên</li>
+          <li>Founding deal: ưu đãi dài hạn + equity option</li>
+          <li><strong>Mục tiêu:</strong> validate giả định liên minh chéo ngành</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">P2</div>
+        <div class="phase-title">Network Effect<br><span style="font-size: 13px; color: var(--muted); font-style: italic;">Giai đoạn trung</span></div>
+        <ul>
+          <li>Self-service SMB onboarding</li>
+          <li>Referral B2B (ưu đãi cho biz giới thiệu biz mới)</li>
+          <li>PR + case study từ anchors</li>
+          <li><strong>Mục tiêu:</strong> đạt critical mass tại các thành phố lớn</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">P3</div>
+        <div class="phase-title">Platform Expansion<br><span style="font-size: 13px; color: var(--muted); font-style: italic;">Giai đoạn sau</span></div>
+        <ul>
+          <li>Mở rộng ngành: F&amp;B, retail, du lịch wellness</li>
+          <li>Mở rộng địa lý trong nước: HN → HCM → tier-2</li>
+          <li>Bán insight reports cho NH/FMCG</li>
+          <li><strong>Mục tiêu:</strong> trở thành standard CDP cho ngành dịch vụ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">11.2</span>Acquisition channels</h3>
+    <table class="data-table">
+      <thead><tr><th>Cho biz</th><th>Cho end user</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Direct sales team (enterprise) · Inbound từ case study · Partner referral (3 tháng free) · Đại lý/agency hợp tác</td>
+          <td>Cross-promo từ base anchor partners · Mini App Zalo (70M user reach) · Referral viral loop · Performance ads target lookalike</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== SECTION 12: RISK ===== -->
+<section class="section" id="s12">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">
+      <div class="kicker">Chương Mười Hai</div>
+      <h2>Rủi ro &amp; Mitigation</h2>
+    </div>
+  </div>
+
+  <div class="risk-row">
+    <div class="risk-id">R1</div>
+    <div class="risk-name">Vi phạm NĐ 13 → phạt 5% doanh thu</div>
+    <div><span class="risk-level critical">Critical</span></div>
+    <div class="risk-mitigation">Granular consent + audit trail + DPO + tư vấn pháp lý từ ngày 1</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R2</div>
+    <div class="risk-name">Anchor partner không cam kết → không có critical mass</div>
+    <div><span class="risk-level critical">Critical</span></div>
+    <div class="risk-mitigation">Founding partner deal hấp dẫn (equity, free tier) + ký exclusive 12-24 tháng</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R3</div>
+    <div class="risk-name">Free-rider biz hút data không đổ lại</div>
+    <div><span class="risk-level high">High</span></div>
+    <div class="risk-mitigation">Reciprocity Score + auto-tier downgrade</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R4</div>
+    <div class="risk-name">KH spam referral / fraud</div>
+    <div><span class="risk-level high">High</span></div>
+    <div class="risk-mitigation">KYC + device fingerprint + rate limit + ML fraud detection</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R5</div>
+    <div class="risk-name">Bị coi như "bán data" → khủng hoảng truyền thông</div>
+    <div><span class="risk-level critical">Critical</span></div>
+    <div class="risk-mitigation">Truyền thông minh bạch: "data ở yên chỗ chủ", focus narrative "khách hàng kiểm soát data + kiếm tiền"</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R6</div>
+    <div class="risk-name">Mô hình referral đa cấp bị quy chụp đa cấp bất chính</div>
+    <div><span class="risk-level high">High</span></div>
+    <div class="risk-mitigation">Giới hạn 2 tier F1/F2 + trần thu nhập + đăng ký bán hàng đa cấp nếu cần</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R7</div>
+    <div class="risk-name">Float ví bị quy là "huy động vốn trái phép"</div>
+    <div><span class="risk-level high">High</span></div>
+    <div class="risk-mitigation">Hợp tác ngân hàng escrow + KYC chuẩn + có thể xin license trung gian thanh toán</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R8</div>
+    <div class="risk-name">Competitor (AccessTrade, Momo) copy mô hình</div>
+    <div><span class="risk-level medium">Medium</span></div>
+    <div class="risk-mitigation">First-mover advantage + lock-in qua identity graph + anchor exclusivity</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R9</div>
+    <div class="risk-name">Biz Platinum churn → mất uy tín</div>
+    <div><span class="risk-level medium">Medium</span></div>
+    <div class="risk-mitigation">Multi-anchor mỗi ngành (không phụ thuộc 1 tên) + customer success team</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-id">R10</div>
+    <div class="risk-name">Data clean room scale chậm</div>
+    <div><span class="risk-level medium">Medium</span></div>
+    <div class="risk-mitigation">Bắt đầu với Snowflake managed service trước, tự build sau khi có volume</div>
+  </div>
+</section>
+
+<!-- ===== SECTION 13: ROADMAP ===== -->
+<section class="section" id="s13">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">
+      <div class="kicker">Chương Mười Ba</div>
+      <h2>Roadmap &amp; KPIs</h2>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3><span class="num-prefix">13.1</span>Phased roadmap</h3>
+    <div class="phase-grid">
+      <div class="phase">
+        <div class="phase-num">Y1</div>
+        <div class="phase-title">Q1-Q2 · Foundation MVP</div>
+        <ul>
+          <li>3-5 anchor partners đa ngành</li>
+          <li>Mobile app KH cuối (Flutter)</li>
+          <li>Biz dashboard + campaign builder</li>
+          <li>Identity resolution v1</li>
+          <li>Wallet + payout integration NH</li>
+          <li>Consent management NĐ 13</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y1</div>
+        <div class="phase-title">Q3-Q4 · Marketplace launch</div>
+        <ul>
+          <li>Self-service SMB onboarding</li>
+          <li>Data clean room v1 (Snowflake)</li>
+          <li>Reciprocity Score live</li>
+          <li>Affiliate Content cho Silver+</li>
+          <li>Anti-fraud engine v1</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y2</div>
+        <div class="phase-title">Scale trong nước</div>
+        <ul>
+          <li>Mở rộng ngành mới (F&amp;B, retail, du lịch wellness)</li>
+          <li>API v2 + webhook + SDK</li>
+          <li>Insight report sản phẩm hoá</li>
+          <li>HN → HCM → tier-2 cities</li>
+          <li>AI recommendation engine</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Y3</div>
+        <div class="phase-title">Maturation</div>
+        <ul>
+          <li>Mở rộng vertical: B2B services, education</li>
+          <li>Federated learning &amp; explainable AI</li>
+          <li>Tự động hoá vận hành liên minh</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">North Star Metric</div>
+    <div class="callout-text">GMV-per-shared-customer/year — đo hiệu quả của liên minh: tổng giao dịch phát sinh trên mỗi khách hàng đã share data cross-industry. Ngưỡng mục tiêu cụ thể sẽ được xác lập sau giai đoạn pilot.</div>
+  </div>
+
+  <div class="highlight-block">
+    <strong>Lưu ý:</strong> Spec này ở giai đoạn phác thảo ý tưởng. Bộ KPI chi tiết (số biz, MAU, DAU/MAU, ARPU, retention, NPS, take rate...) cùng với target cụ thể theo từng giai đoạn sẽ được xây dựng trong các phiên bản spec tiếp theo, sau khi:
+    <ul style="margin-top: 12px;">
+      <li>Có dữ liệu khảo sát thị trường thực tế từ anchor partners tiềm năng</li>
+      <li>Hoàn thành mô hình tài chính chi tiết (financial model)</li>
+      <li>Validate giả định qua pilot với 3-5 biz đầu tiên</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION 14: OPEN QUESTIONS ===== -->
+<section class="section" id="s14">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">
+      <div class="kicker">Chương Mười Bốn</div>
+      <h2>Open Questions</h2>
+    </div>
+  </div>
+
+  <p style="font-size: 18px; margin-bottom: 32px;">Các câu hỏi cần làm rõ trong phase tiếp theo (PO + Tech Lead + Legal):</p>
+
+  <ol style="list-style: none; padding: 0;">
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">01</span>
+      <div><strong>Pháp lý:</strong> Có cần xin giấy phép trung gian thanh toán cho ví Alliance không? Hay chạy qua ngân hàng đối tác là đủ?</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">02</span>
+      <div><strong>Tài chính:</strong> Cashback &amp; referral do biz tài trợ — nhưng nếu biz không nạp đủ thì sao? Cần escrow hay credit line?</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">03</span>
+      <div><strong>Data:</strong> Build clean room in-house (TEE) hay dùng Snowflake từ đầu? Trade-off cost vs control.</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">04</span>
+      <div><strong>Anchor partner:</strong> Equity 0.1-0.5% có hợp lý không? So với revenue share 12-24 tháng?</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">05</span>
+      <div><strong>End-user app:</strong> Standalone app hay Mini App trên Zalo trước? (Mini App reach lớn hơn nhưng kém control)</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">06</span>
+      <div><strong>Pricing:</strong> Phí transaction 5-15% có cạnh tranh được với CPL hiện tại của biz không? Cần sensitivity analysis.</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">07</span>
+      <div><strong>Token ALT:</strong> Có nên đặt tên khác để tránh hiểu lầm crypto? (e.g., "Alliance Points")</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">08</span>
+      <div><strong>Biz đa ngành:</strong> Một biz hoạt động cả thẩm mỹ + gym (như resort wellness) thì xếp ngành nào để tính reciprocity?</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">09</span>
+      <div><strong>Brand:</strong> Tên thương hiệu — "Alliance CDP" là internal name, cần brand name market-friendly cho VN.</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">10</span>
+      <div><strong>AI infra:</strong> Dùng LLM API (Claude/OpenAI) hay tự host model nhỏ (Llama/Qwen) cho Conversational Assistant? Trade-off chi phí vs latency vs privacy.</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(26,26,26,0.15);">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">11</span>
+      <div><strong>AI moat:</strong> Federated learning là long-term play (Y2-Y3) — có nên đầu tư từ Y1 để build moat sớm, hay tập trung vào AI features có ROI ngắn hạn?</div>
+    </li>
+    <li style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 16px 0;">
+      <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 900; font-size: 28px; color: var(--accent); line-height: 1;">12</span>
+      <div><strong>AI ethics:</strong> Cần thiết lập AI Ethics Board ngay từ đầu hay sau khi đạt scale? Theo NĐ 13, automated decision có quy định cụ thể nào về quyền giải thích?</div>
+    </li>
+  </ol>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="colophon">
+    <em>"Data không bị khoá trong silo<br>mà tạo ra giá trị tuần hoàn."</em>
+  </div>
+  <div class="footer-meta">
+    Alliance CDP · Business Model Spec v1.0<br>
+    Tháng 5 / 2026 · Confidential
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for TOC
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Stagger animation on scroll
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = (i * 0.05) + 's';
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.subsection').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
