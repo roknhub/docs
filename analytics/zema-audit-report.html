@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Audit — zema.com.vn | 2026-05-06</title>
+<style>
+  :root {
+    --red: #ef4444; --orange: #f97316; --yellow: #eab308;
+    --blue: #3b82f6; --green: #22c55e; --gray: #6b7280;
+    --bg: #f9fafb; --card: #ffffff; --border: #e5e7eb;
+    --text: #111827; --text-light: #6b7280; --sidebar: #1f2937;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
+
+  /* Sidebar */
+  #sidebar {
+    width: 240px; background: var(--sidebar); color: #d1d5db; position: fixed; top: 0; left: 0; height: 100vh;
+    overflow-y: auto; z-index: 100; display: flex; flex-direction: column;
+  }
+  #sidebar .brand { padding: 20px 16px 16px; border-bottom: 1px solid #374151; }
+  #sidebar .brand h2 { font-size: 13px; color: #9ca3af; font-weight: 500; margin-bottom: 4px; }
+  #sidebar .brand .domain { color: #f9fafb; font-weight: 700; font-size: 15px; }
+  #sidebar .brand .date { color: #6b7280; font-size: 11px; margin-top: 2px; }
+  #sidebar nav { padding: 12px 0; flex: 1; }
+  #sidebar nav a {
+    display: block; padding: 8px 16px; color: #9ca3af; text-decoration: none;
+    font-size: 13px; border-left: 3px solid transparent; transition: all .15s;
+  }
+  #sidebar nav a:hover, #sidebar nav a.active { color: #f9fafb; background: #374151; border-left-color: #3b82f6; }
+  #sidebar nav .section-label { padding: 12px 16px 4px; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #4b5563; }
+  #sidebar .score-badge { margin: 12px 16px; background: #374151; border-radius: 8px; padding: 12px; text-align: center; }
+  #sidebar .score-badge .num { font-size: 28px; font-weight: 800; color: #fbbf24; }
+  #sidebar .score-badge .label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+
+  /* Main */
+  #main { margin-left: 240px; flex: 1; padding: 32px; max-width: calc(100vw - 240px); }
+
+  /* Header */
+  .page-header { margin-bottom: 32px; }
+  .page-header h1 { font-size: 24px; font-weight: 800; color: var(--text); }
+  .page-header .meta { color: var(--text-light); font-size: 13px; margin-top: 6px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .page-header .meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Stat cards */
+  .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
+  .stat-card .axis { font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+  .stat-card .score { font-size: 32px; font-weight: 800; line-height: 1; }
+  .stat-card .out-of { font-size: 12px; color: var(--text-light); }
+  .stat-card .trend { font-size: 12px; margin-top: 6px; }
+  .score-low { color: var(--red); }
+  .score-mid { color: var(--orange); }
+  .score-ok { color: var(--yellow); }
+  .score-good { color: var(--green); }
+
+  /* Radar chart */
+  .chart-section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 32px; }
+  .chart-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+  .chart-wrapper { display: flex; align-items: center; gap: 32px; }
+  .bar-chart { flex: 1; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .bar-label { width: 180px; font-size: 13px; color: var(--text); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--bg); border-radius: 4px; height: 20px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: white; transition: width .5s ease; }
+  .bar-num { width: 40px; font-size: 13px; font-weight: 700; color: var(--text); }
+
+  /* Section headers */
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+  .section-num { width: 32px; height: 32px; background: var(--sidebar); color: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; flex-shrink: 0; }
+  .section-title { font-size: 18px; font-weight: 700; }
+  .section-score { margin-left: auto; font-size: 20px; font-weight: 800; }
+
+  /* Cards */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+  .card p { color: var(--text-light); line-height: 1.6; font-size: 13px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--bg); padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover td { background: #f9fafb; }
+
+  /* Severity badges */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .badge-critical { background: #fee2e2; color: #dc2626; }
+  .badge-high { background: #ffedd5; color: #ea580c; }
+  .badge-medium { background: #fef9c3; color: #a16207; }
+  .badge-low { background: #dbeafe; color: #1d4ed8; }
+  .badge-good { background: #dcfce7; color: #16a34a; }
+
+  /* Issues list */
+  .issue { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .issue-header { padding: 14px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px; user-select: none; }
+  .issue-header:hover { background: var(--bg); }
+  .issue-title { font-weight: 600; font-size: 14px; flex: 1; }
+  .issue-body { padding: 0 20px 20px; display: none; }
+  .issue-body.open { display: block; }
+  .issue-body h4 { font-size: 13px; font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+  .track-card { border-radius: 8px; padding: 14px; margin-top: 8px; }
+  .track-a { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .track-b { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .track-card .track-label { font-weight: 700; font-size: 12px; margin-bottom: 8px; }
+  .track-a .track-label { color: #1d4ed8; }
+  .track-b .track-label { color: #15803d; }
+  .track-card p, .track-card li { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  .track-card ul { padding-left: 16px; }
+  .effort-row { display: flex; gap: 12px; margin-top: 8px; }
+  .effort-tag { font-size: 11px; background: white; border-radius: 4px; padding: 2px 8px; font-weight: 600; color: var(--gray); border: 1px solid var(--border); }
+
+  /* Quick wins */
+  .quick-win { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .quick-win:last-child { border-bottom: none; }
+  .qw-num { width: 24px; height: 24px; background: var(--sidebar); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .qw-content h4 { font-size: 13px; font-weight: 700; }
+  .qw-content p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .qw-meta { margin-top: 4px; display: flex; gap: 6px; }
+
+  /* Decision matrix */
+  .matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .matrix-col { border-radius: 10px; padding: 20px; }
+  .matrix-col.rebuild { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .matrix-col.optimize { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .matrix-col h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+  .matrix-col.rebuild h3 { color: #1e40af; }
+  .matrix-col.optimize h3 { color: #166534; }
+  .matrix-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.06); font-size: 13px; }
+  .matrix-row:last-child { border-bottom: none; }
+  .matrix-row .key { color: var(--text-light); }
+  .matrix-row .val { font-weight: 600; }
+
+  /* Summary boxes */
+  .summary-box { border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .summary-box.strengths { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .summary-box.issues { background: #fef2f2; border: 1px solid #fecaca; }
+  .summary-box h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .summary-box.strengths h3 { color: #166534; }
+  .summary-box.issues h3 { color: #dc2626; }
+  .summary-box li { font-size: 13px; margin-bottom: 6px; padding-left: 4px; line-height: 1.5; }
+  .summary-box ul { padding-left: 16px; }
+
+  /* Print */
+  @media print {
+    #sidebar { display: none; }
+    #main { margin-left: 0; max-width: 100%; }
+    .issue-body { display: block !important; }
+    .bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+  @media (max-width: 900px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; max-width: 100%; padding: 20px; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .matrix { grid-template-columns: 1fr; }
+    .chart-wrapper { flex-direction: column; }
+  }
+
+  /* Print button */
+  .print-btn { position: fixed; bottom: 20px; right: 20px; background: var(--sidebar); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+  .print-btn:hover { background: #374151; }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+  code { background: var(--bg); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: #dc2626; }
+  .highlight { background: #fef3c7; padding: 12px 16px; border-radius: 8px; border-left: 3px solid #f59e0b; font-size: 13px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand h2">Website Audit Report</div>
+    <div class="domain">zema.com.vn</div>
+    <div class="date">2026-05-06 · seo_audit v1.0</div>
+  </div>
+  <div class="score-badge">
+    <div class="num">5.6</div>
+    <div class="label">Overall /10</div>
+  </div>
+  <nav>
+    <div class="section-label">Tổng quan</div>
+    <a href="#summary">Executive Summary</a>
+    <a href="#strengths">Điểm mạnh & yếu</a>
+    <div class="section-label">5 Trục đánh giá</div>
+    <a href="#traffic">1. Traffic & Discoverability</a>
+    <a href="#seo">2. SEO</a>
+    <a href="#ui">3. UI Design</a>
+    <a href="#ux">4. UX</a>
+    <a href="#perf">5. Performance</a>
+    <div class="section-label">Đề xuất</div>
+    <a href="#matrix">Decision Matrix</a>
+    <a href="#issues">Vấn đề & Giải pháp</a>
+    <a href="#quickwins">Quick Wins 30 ngày</a>
+    <a href="#rebuild">Roadmap Rebuild</a>
+    <a href="#optimize">Roadmap Optimize</a>
+    <div class="section-label">Phụ lục</div>
+    <a href="#competitors">Đối thủ benchmark</a>
+    <a href="#methodology">Methodology</a>
+  </nav>
+</nav>
+
+<!-- Main content -->
+<main id="main">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Website Audit Report — zema.com.vn</h1>
+    <div class="meta">
+      <span>📅 2026-05-06</span>
+      <span>🔗 <a href="https://zema.com.vn" target="_blank">https://zema.com.vn</a></span>
+      <span>🏢 Chuỗi Nail–Hair–Spa · 20+ chi nhánh · 500 tỷ VND</span>
+      <span>🤖 Claude · seo_audit v1.0</span>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="axis">Traffic</div>
+      <div class="score score-mid">5</div>
+      <div class="out-of">/10</div>
+      <div class="trend">⚠️ Invisible non-brand</div>
+    </div>
+    <div class="stat-card">
+      <div class="axis">SEO</div>
+      <div class="score score-mid">5</div>
+      <div class="out-of">/10</div>
+      <div class="trend">⚠️ On-page issues</div>
+    </div>
+    <div class="stat-card">
+      <div class="axis">UI Design</div>
+      <div class="score score-ok">6</div>
+      <div class="out-of">/10</div>
+      <div class="trend">🟡 Flatsome generic</div>
+    </div>
+    <div class="stat-card">
+      <div class="axis">UX</div>
+      <div class="score score-ok">7</div>
+      <div class="out-of">/10</div>
+      <div class="trend">✅ App + booking tốt</div>
+    </div>
+    <div class="stat-card">
+      <div class="axis">Performance</div>
+      <div class="score score-mid">5</div>
+      <div class="out-of">/10</div>
+      <div class="trend">⚠️ WP + Flatsome nặng</div>
+    </div>
+  </div>
+
+  <!-- Bar chart -->
+  <div class="chart-section" id="summary">
+    <h2>Tổng quan điểm số 5 trục</h2>
+    <div class="chart-wrapper">
+      <div class="bar-chart" style="flex:1">
+        <div class="bar-row">
+          <div class="bar-label">Traffic & Discoverability</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;background:#f97316">5.0</div></div>
+          <div class="bar-num">5/10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">SEO</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;background:#f97316">5.0</div></div>
+          <div class="bar-num">5/10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">UI Design</div>
+          <div class="bar-track"><div class="bar-fill" style="width:60%;background:#eab308">6.0</div></div>
+          <div class="bar-num">6/10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">UX</div>
+          <div class="bar-track"><div class="bar-fill" style="width:70%;background:#22c55e">7.0</div></div>
+          <div class="bar-num">7/10</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Performance</div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%;background:#f97316">5.0</div></div>
+          <div class="bar-num">5/10</div>
+        </div>
+        <div class="bar-row" style="margin-top:16px;padding-top:16px;border-top:2px solid #e5e7eb;">
+          <div class="bar-label" style="font-weight:700">Overall</div>
+          <div class="bar-track"><div class="bar-fill" style="width:56%;background:#1f2937">5.6</div></div>
+          <div class="bar-num" style="font-weight:800">5.6/10</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strengths & Issues -->
+  <div id="strengths" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px">
+    <div class="summary-box strengths">
+      <h3>✅ Top 3 điểm mạnh</h3>
+      <ul>
+        <li><strong>Hệ sinh thái vận hành ấn tượng</strong>: App riêng, booking subdomain, loyalty program, Google Maps per chi nhánh</li>
+        <li><strong>Content marketing đầu tư</strong>: 235+ bài blog, cập nhật thường xuyên (05/2026), service pages 2,500+ từ</li>
+        <li><strong>Schema markup vững</strong>: HealthAndBeautyBusiness, Organization, Service, Place, GeoCoordinates đầy đủ</li>
+      </ul>
+    </div>
+    <div class="summary-box issues">
+      <h3>🔴 Top 3 vấn đề cần xử lý</h3>
+      <ul>
+        <li><strong>Vô hình với non-branded keywords</strong>: "nail salon hà nội", "cắt tóc hà nội" — top 10 toàn directory sites</li>
+        <li><strong>Brand confusion nguy hiểm</strong>: zemaspa.com.vn ăn trực tiếp branded traffic với claim "#1 Việt Nam"</li>
+        <li><strong>Blog URL /tin-tuc/ bị 404</strong>: Dead-end nghiêm trọng cho cả user lẫn Google crawler</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Recommendation banner -->
+  <div class="highlight" style="margin-bottom:32px">
+    🎯 <strong>Recommendation chính</strong>: <strong>HYBRID</strong> — 60 ngày OPTIMIZE bịt lỗ hổng SEO + brand defense → quyết định REBUILD giai đoạn 2 để scale organic traffic dài hạn. Quy mô 20 chi nhánh, 500 tỷ VND doanh thu xứng đáng đầu tư rebuild trong 6 tháng tới.
+  </div>
+
+  <!-- ===== SECTION 1: TRAFFIC ===== -->
+  <div class="section" id="traffic">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Traffic & Discoverability</div>
+      <div class="section-score score-mid">5/10</div>
+    </div>
+    <div class="card">
+      <h3>Hiện trạng</h3>
+      <p>Zema rank tốt cho branded keyword nhưng <strong>hoàn toàn vô hình với người chưa biết thương hiệu</strong>. Top 10 cho "nail salon hà nội" và "cắt tóc hà nội" bị chiếm bởi toplist.vn, fresha.com, igapilates.vn. Đáng lo ngại hơn, zemaspa.com.vn xuất hiện cạnh Zema Beauty cho các branded search.</p>
+    </div>
+    <table>
+      <tr><th>Tiêu chí</th><th>Hiện trạng</th><th>Đánh giá</th></tr>
+      <tr><td>Rank branded keyword</td><td>Top 1-3 cho "zema beauty hà nội"</td><td><span class="badge badge-good">✅ Tốt</span></td></tr>
+      <tr><td>Rank "nail salon hà nội"</td><td>Không xuất hiện trong top 10</td><td><span class="badge badge-critical">❌ Kém</span></td></tr>
+      <tr><td>Rank "cắt tóc hà nội"</td><td>Không xuất hiện trong top 10</td><td><span class="badge badge-critical">❌ Kém</span></td></tr>
+      <tr><td>Google index volume</td><td>308 pages + 235+ posts (~543 URLs)</td><td><span class="badge badge-good">✅ Đủ lớn</span></td></tr>
+      <tr><td>Sitemap</td><td>sitemap_index.xml + 11 sub-sitemaps</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Google Business Profile</td><td>20 chi nhánh, GBP chưa xác nhận từng chi nhánh</td><td><span class="badge badge-high">⚠️ Cần audit</span></td></tr>
+      <tr><td>Brand confusion</td><td>zemaspa.com.vn claim "#1 VN, 17 chi nhánh"</td><td><span class="badge badge-critical">🔴 Rủi ro cao</span></td></tr>
+      <tr><td>Social presence</td><td>Facebook 15.7K, + IG, TikTok, YouTube, LinkedIn...</td><td><span class="badge badge-good">✅ Đa dạng</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== SECTION 2: SEO ===== -->
+  <div class="section" id="seo">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">SEO</div>
+      <div class="section-score score-mid">5/10</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="card">
+        <h3>Technical SEO</h3>
+        <table>
+          <tr><td>HTTPS</td><td><span class="badge badge-good">✅</span></td></tr>
+          <tr><td>robots.txt</td><td><span class="badge badge-good">✅</span></td></tr>
+          <tr><td>sitemap_index.xml</td><td><span class="badge badge-good">✅</span></td></tr>
+          <tr><td>Schema markup</td><td><span class="badge badge-good">✅ Đầy đủ</span></td></tr>
+          <tr><td>Mobile responsive</td><td><span class="badge badge-good">✅ Flatsome</span></td></tr>
+          <tr><td>URL structure</td><td><span class="badge badge-good">✅ Sạch</span></td></tr>
+          <tr><td>Canonical URL</td><td><span class="badge badge-medium">⚠️ Cần check</span></td></tr>
+          <tr><td>Homepage lastmod</td><td><span class="badge badge-medium">⚠️ 2025-06-05 (stale)</span></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>On-page SEO — Lỗi phát hiện</h3>
+        <table>
+          <tr><td><code>/spa/</code> H1</td><td><span class="badge badge-critical">❌ "spa" (1 từ)</span></td></tr>
+          <tr><td>Meta description homepage</td><td><span class="badge badge-high">⚠️ 76 ký tự, thiếu CTA</span></td></tr>
+          <tr><td>Meta desc category pages</td><td><span class="badge badge-high">⚠️ Dùng lại desc chung</span></td></tr>
+          <tr><td>Image alt text</td><td><span class="badge badge-critical">❌ Hầu hết thiếu</span></td></tr>
+          <tr><td>BreadcrumbList schema</td><td><span class="badge badge-high">⚠️ Thiếu</span></td></tr>
+          <tr><td>AggregateRating schema</td><td><span class="badge badge-high">⚠️ Thiếu (40K KH/tháng!)</span></td></tr>
+          <tr><td>FAQPage schema</td><td><span class="badge badge-medium">⚠️ Có Q&A content, chưa markup</span></td></tr>
+          <tr><td>Blog slug policy</td><td><span class="badge badge-medium">⚠️ Nhiều slug tiếng lóng</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Content — Điểm mạnh</h3>
+      <p>Service pages có <strong>2,500-3,000 từ</strong> với cấu trúc H2/H3 rõ ràng, đủ chiều sâu để rank. Blog có <strong>235+ bài</strong>, cập nhật đến tháng 5/2026. Schema markup rất tốt (HealthAndBeautyBusiness + Service + Place).</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: UI ===== -->
+  <div class="section" id="ui">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">UI — Visual Design</div>
+      <div class="section-score score-ok">6/10</div>
+    </div>
+    <div class="card">
+      <h3>Nhận xét tổng quan</h3>
+      <p>Zema dùng <strong>WordPress + Flatsome theme v3.15.5</strong> — commercial theme phổ biến trong ngành làm đẹp VN. Giao diện <strong>chuyên nghiệp ở mức cơ bản</strong>: hero rõ CTA, visual hierarchy đủ để dùng được, brand nhất quán qua các trang. Điểm yếu: <strong>không unique</strong> cho một chuỗi 20 chi nhánh, 500 tỷ doanh thu.</p>
+    </div>
+    <table>
+      <tr><th>Tiêu chí</th><th>Nhận xét</th><th>Đánh giá</th></tr>
+      <tr><td>Visual hierarchy</td><td>Hero section CTA "Đặt lịch" rõ ràng</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Brand consistency</td><td>Logo, màu sắc nhất quán qua các trang</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Asset quality</td><td>Hình ảnh dịch vụ đủ chất lượng, không placeholder</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Brand uniqueness</td><td>Flatsome dùng bởi hàng nghìn site VN khác</td><td><span class="badge badge-critical">❌ Không unique</span></td></tr>
+      <tr><td>Social icons footer</td><td>8+ icons (IG, TikTok, LinkedIn, Pinterest, 500px, Flickr)</td><td><span class="badge badge-medium">⚠️ Quá nhiều</span></td></tr>
+      <tr><td>Mobile responsive</td><td>Flatsome responsive, cần test thực tế</td><td><span class="badge badge-good">✅ est.</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== SECTION 4: UX ===== -->
+  <div class="section" id="ux">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">UX — User Experience</div>
+      <div class="section-score score-good">7/10</div>
+    </div>
+    <div class="card">
+      <h3>Điểm mạnh — Hệ sinh thái khách hàng tốt</h3>
+      <p>Đây là <strong>trục mạnh nhất</strong> của Zema. Đầu tư nghiêm túc vào trải nghiệm: booking subdomain riêng, app mobile iOS/Android, loyalty program, hotline shortcode dễ nhớ (*8686), Google Maps embed từng chi nhánh, partnership Sacombank/Sunlife/Vascara.</p>
+    </div>
+    <table>
+      <tr><th>Tiêu chí</th><th>Hiện trạng</th><th>Đánh giá</th></tr>
+      <tr><td>Booking system</td><td>datlich.zema.com.vn — subdomain riêng</td><td><span class="badge badge-good">✅ Rất tốt</span></td></tr>
+      <tr><td>Mobile app</td><td>iOS + Android, kèm khuyến mãi</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Loyalty program</td><td>Zema Loyalty page riêng</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Navigation</td><td>7 menu items: Trang chủ, Giới thiệu, Tóc, Nail, Spa, Tin tức, Đặt lịch</td><td><span class="badge badge-good">✅ Rõ ràng</span></td></tr>
+      <tr><td>CTA consistency</td><td>"Đặt lịch" xuất hiện mọi trang</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Branch maps</td><td>Google Maps embed mỗi chi nhánh</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Blog URL /tin-tuc/</td><td><strong>404 Not Found</strong> — dead-end</td><td><span class="badge badge-critical">🔴 Critical</span></td></tr>
+      <tr><td>Hotline format</td><td>Website: *8686 | Facebook: 0899 778 686 — mâu thuẫn</td><td><span class="badge badge-high">⚠️ Gây nhầm lẫn</span></td></tr>
+      <tr><td>Contact form</td><td>Không có form rõ ràng trên trang Liên hệ</td><td><span class="badge badge-medium">⚠️ Thiếu</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== SECTION 5: PERFORMANCE ===== -->
+  <div class="section" id="perf">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Performance</div>
+      <div class="section-score score-mid">5/10</div>
+    </div>
+    <div class="highlight" style="margin-bottom:16px">
+      ⚠️ <strong>Limitation quan trọng</strong>: Không có PageSpeed Insights API access. Score này là <em>estimated</em> dựa trên platform signals. Cần đo thực tế tại <a href="https://pagespeed.web.dev" target="_blank">pagespeed.web.dev</a>.
+    </div>
+    <table>
+      <tr><th>Tín hiệu</th><th>Quan sát</th><th>Đánh giá</th></tr>
+      <tr><td>Platform</td><td>WordPress + Flatsome 3.15.5</td><td><span class="badge badge-medium">⚠️ Thường nặng</span></td></tr>
+      <tr><td>JS bloat risk</td><td>WooCommerce refs + 8+ social scripts + sliders</td><td><span class="badge badge-high">⚠️ Cao</span></td></tr>
+      <tr><td>Image format</td><td>Chưa xác nhận WebP/AVIF (cần check)</td><td><span class="badge badge-medium">⚠️</span></td></tr>
+      <tr><td>CDN</td><td>Chưa xác nhận</td><td><span class="badge badge-medium">⚠️</span></td></tr>
+      <tr><td>HTTPS</td><td>Active</td><td><span class="badge badge-good">✅</span></td></tr>
+      <tr><td>Site size</td><td>543+ URLs, 8 post sitemaps</td><td><span class="badge badge-medium">⚠️ Cần lazy-load nghiêm túc</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== DECISION MATRIX ===== -->
+  <div class="section" id="matrix">
+    <div class="section-header">
+      <div class="section-num" style="background:#7c3aed">⚖</div>
+      <div class="section-title">Decision Matrix — REBUILD vs OPTIMIZE</div>
+    </div>
+    <div class="matrix">
+      <div class="matrix-col rebuild">
+        <h3>🅰️ REBUILD</h3>
+        <div class="matrix-row"><span class="key">Effort</span><span class="val">45-60 ngày-người</span></div>
+        <div class="matrix-row"><span class="key">Chi phí</span><span class="val">150-350 triệu VND</span></div>
+        <div class="matrix-row"><span class="key">Timeline</span><span class="val">4-6 tháng</span></div>
+        <div class="matrix-row"><span class="key">Tác động dài hạn</span><span class="val">Cao — scalable</span></div>
+        <div class="matrix-row"><span class="key">Risk</span><span class="val">Cao (migration, downtime)</span></div>
+        <div class="matrix-row"><span class="key">Phù hợp nếu</span><span class="val">Scale >30 chi nhánh, ngân sách marketing >500tr/năm</span></div>
+        <div class="matrix-row"><span class="key">Tech stack đề xuất</span><span class="val">Next.js + Sanity.io + Vercel + Cloudflare</span></div>
+      </div>
+      <div class="matrix-col optimize">
+        <h3>🅱️ OPTIMIZE</h3>
+        <div class="matrix-row"><span class="key">Effort</span><span class="val">15-25 ngày-người</span></div>
+        <div class="matrix-row"><span class="key">Chi phí</span><span class="val">30-70 triệu VND</span></div>
+        <div class="matrix-row"><span class="key">Timeline</span><span class="val">4-8 tuần</span></div>
+        <div class="matrix-row"><span class="key">Tác động dài hạn</span><span class="val">Trung bình — giới hạn Flatsome</span></div>
+        <div class="matrix-row"><span class="key">Risk</span><span class="val">Thấp</span></div>
+        <div class="matrix-row"><span class="key">Phù hợp nếu</span><span class="val">Cần kết quả trong 2-3 tháng, team nhỏ</span></div>
+        <div class="matrix-row"><span class="key">Giới hạn</span><span class="val">Không thoát khỏi Flatsome look & JS bloat</span></div>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:16px">
+      💡 <strong>Khuyến nghị</strong>: <strong>HYBRID</strong> — 60 ngày OPTIMIZE trước (bịt lỗ hổng critical, brand defense, quick wins) → sau đó quyết định REBUILD nếu muốn scale organic traffic nghiêm túc.
+    </div>
+  </div>
+
+  <!-- ===== ISSUES LIST ===== -->
+  <div class="section" id="issues">
+    <div class="section-header">
+      <div class="section-num" style="background:#dc2626">!</div>
+      <div class="section-title">Danh sách vấn đề & Giải pháp</div>
+    </div>
+
+    <!-- Issue 1 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-critical">🔴 Critical</span>
+        <span class="issue-title">#1 — Blog URL /tin-tuc/ bị 404</span>
+        <span style="color:#6b7280;font-size:12px">UX · SEO</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body open">
+        <p><strong>Hiện trạng</strong>: <code>https://zema.com.vn/tin-tuc/</code> trả về HTTP 404. Menu "Tin tức" nhiều khả năng trỏ về đây → dead-end cho user và Google crawler.</p>
+        <div class="track-card track-a">
+          <div class="track-label">🅰️ REBUILD</div>
+          <p>Thiết kế lại cấu trúc URL blog từ đầu với slug chuẩn SEO (<code>/blog/</code>) trong architecture mới.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 1 ngày</span><span class="effort-tag">Tác động: Cao</span></div>
+        </div>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Xác định URL blog thực tế → 301 redirect <code>/tin-tuc/</code> về URL đúng. Sửa menu item trong WordPress admin.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 2 giờ</span><span class="effort-tag">Tác động: Ngay lập tức</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 2 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-critical">🔴 Critical</span>
+        <span class="issue-title">#2 — Brand confusion với zemaspa.com.vn</span>
+        <span style="color:#6b7280;font-size:12px">Traffic</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body open">
+        <p><strong>Hiện trạng</strong>: Tìm "zema" hoặc "zema spa" → zemaspa.com.vn xuất hiện song song với claim "Hệ thống làm đẹp #1 Việt Nam, 17 chi nhánh". Người chưa biết brand có thể nhầm sang đối thủ.</p>
+        <div class="track-card track-a">
+          <div class="track-label">🅰️ REBUILD</div>
+          <p>Xây dựng brand content pillar mạnh hơn: trang About với history, awards, chứng chỉ, case studies, leadership bio. Tạo trang so sánh khéo léo.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 5-7 ngày content</span><span class="effort-tag">Tác động: Cao dài hạn</span></div>
+        </div>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <ul>
+            <li>Ngay lập tức: Google Ads brand campaign bid "zema", "zema spa", "zema beauty"</li>
+            <li>Verify Google Business Profile mỗi chi nhánh với tên đúng "Zema Beauty & More"</li>
+            <li>Tối ưu trang Giới thiệu để rank cao hơn branded keyword</li>
+          </ul>
+          <div class="effort-row"><span class="effort-tag">Effort: 3-5 ngày</span><span class="effort-tag">Chi phí: Ads budget</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 3 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-critical">🔴 Critical</span>
+        <span class="issue-title">#3 — Không rank cho non-branded keywords</span>
+        <span style="color:#6b7280;font-size:12px">Traffic · SEO</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: "nail salon hà nội", "cắt tóc hà nội", "spa hà nội" — top 10 toàn directory sites (toplist.vn, fresha.com, igapilates.vn). Zema vô hình dù có 16 chi nhánh HCM+Hà Nội.</p>
+        <div class="track-card track-a">
+          <div class="track-label">🅰️ REBUILD</div>
+          <p>Xây Local SEO hub: trang riêng mỗi chi nhánh với LocalBusiness schema + unique content. Content pillar "Nail Salon [Quận] Hà Nội" × 20 trang. Link building với directory sites quan trọng.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 20-30 ngày</span><span class="effort-tag">Tác động: Rất cao dài hạn</span></div>
+        </div>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Tạo landing pages chi nhánh trong WordPress (e.g., <code>/chi-nhanh/150-pho-hue-ha-noi/</code>). Tối ưu H1 category pages. Submit GBP từng chi nhánh. Listing trên Foody, Fresha, Toplist.vn.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 10-15 ngày</span><span class="effort-tag">Giới hạn: Scale 20 chi nhánh khó trên Flatsome</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 4 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-high">🟠 High</span>
+        <span class="issue-title">#4 — H1 category pages nghèo nàn (/spa/ = "spa")</span>
+        <span style="color:#6b7280;font-size:12px">SEO</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: <code>/spa/</code> có H1 = "spa" (1 từ). Google coi H1 là tín hiệu chính về topic của trang.</p>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <ul>
+            <li><code>/spa/</code> → "Dịch vụ Spa Chuyên nghiệp tại Hà Nội & TP.HCM | Zema Beauty"</li>
+            <li><code>/cham-soc-toc/</code> → "Salon Tóc Chuẩn Châu Âu tại Hà Nội & TP.HCM | Zema"</li>
+            <li><code>/lam-nail/</code> → "Làm Nail Chuyên nghiệp | 20 Chi nhánh | Zema Beauty"</li>
+          </ul>
+          <div class="effort-row"><span class="effort-tag">Effort: 2-3 giờ</span><span class="effort-tag">Tác động: Tín hiệu on-page tốt hơn</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 5 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-high">🟠 High</span>
+        <span class="issue-title">#5 — Meta description ngắn và generic</span>
+        <span style="color:#6b7280;font-size:12px">SEO · Traffic</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: Homepage meta = 76 ký tự, thiếu CTA. Category pages dùng lại description chung của toàn site.</p>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Cài Yoast SEO / Rank Math → viết meta riêng cho top 20 trang. Formula: "[Benefit] tại [số] chi nhánh Hà Nội & HCM. Đặt lịch ngay → ưu đãi [X]K."</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 1 ngày</span><span class="effort-tag">Tác động: CTR SERP +10-30%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 6 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-high">🟠 High</span>
+        <span class="issue-title">#6 — Image alt text thiếu trên hầu hết hình ảnh</span>
+        <span style="color:#6b7280;font-size:12px">SEO · Accessibility</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: Site dịch vụ làm đẹp nhiều hình ảnh nhưng hầu hết thiếu alt text → bỏ lỡ Google Image Search traffic hoàn toàn.</p>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Dùng "Alt Text Auto" plugin hoặc bulk media editor. Priority: homepage images → service page images → blog thumbnails.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 3-5 ngày</span><span class="effort-tag">Tác động: Image SEO + Accessibility</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 7 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-medium">🟡 Medium</span>
+        <span class="issue-title">#7 — Hotline format gây nhầm lẫn (*8686 vs 0899 778 686)</span>
+        <span style="color:#6b7280;font-size:12px">UX</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: Website hiển thị *8686 (trunk shortcode). Facebook page có 0899 778 686. User dùng SIM nước ngoài hoặc app gọi không gọi được qua shortcode.</p>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Hiển thị: <strong>*8686 (mạng di động) | 0899 778 686</strong>. Thêm Zalo chat widget. Effort: 1 giờ.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 8 -->
+    <div class="issue">
+      <div class="issue-header" onclick="toggle(this)">
+        <span class="badge badge-medium">🟡 Medium</span>
+        <span class="issue-title">#8 — Thiếu AggregateRating schema (bỏ lỡ sao vàng Google)</span>
+        <span style="color:#6b7280;font-size:12px">SEO</span>
+        <span style="color:#6b7280">▼</span>
+      </div>
+      <div class="issue-body">
+        <p><strong>Hiện trạng</strong>: 40.000 lượt khách/tháng nhưng không có review schema → không có ★★★★★ trên SERP.</p>
+        <div class="track-card track-b">
+          <div class="track-label">🅱️ OPTIMIZE</div>
+          <p>Cài plugin Site Reviews hoặc WP Review. Collect reviews từ Facebook/Google. Markup AggregateRating. Tác động: CTR tăng 15-35%.</p>
+          <div class="effort-row"><span class="effort-tag">Effort: 3-5 ngày</span><span class="effort-tag">Tác động: Rich snippets sao vàng</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== QUICK WINS ===== -->
+  <div class="section" id="quickwins">
+    <div class="section-header">
+      <div class="section-num" style="background:#16a34a">⚡</div>
+      <div class="section-title">Quick Wins — 30 ngày đầu</div>
+    </div>
+    <div class="card">
+      <div class="quick-win">
+        <div class="qw-num">1</div>
+        <div class="qw-content">
+          <h4>Fix /tin-tuc/ 404 → 301 redirect về URL blog đúng</h4>
+          <p>Loại bỏ dead-end ngay lập tức cho user và crawler</p>
+          <div class="qw-meta"><span class="effort-tag">2 giờ</span><span class="badge badge-critical">Critical</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">2</div>
+        <div class="qw-content">
+          <h4>Sửa H1 tất cả category pages (spa, nail, tóc)</h4>
+          <p>Thêm từ khóa địa lý + service keywords vào H1</p>
+          <div class="qw-meta"><span class="effort-tag">3 giờ</span><span class="badge badge-high">High</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">3</div>
+        <div class="qw-content">
+          <h4>Viết meta description riêng cho top 10-20 trang</h4>
+          <p>CTR từ SERP có thể tăng 10-30%</p>
+          <div class="qw-meta"><span class="effort-tag">1 ngày</span><span class="badge badge-high">High</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">4</div>
+        <div class="qw-content">
+          <h4>Google Ads brand campaign cho "zema", "zema spa", "zema beauty"</h4>
+          <p>Defense branded traffic khỏi zemaspa.com.vn ngay</p>
+          <div class="qw-meta"><span class="effort-tag">2 ngày + Ads budget</span><span class="badge badge-critical">Critical</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">5</div>
+        <div class="qw-content">
+          <h4>Verify Google Business Profile cho top 8 chi nhánh lớn nhất</h4>
+          <p>Local SEO, Google Maps — ưu tiên HCM Q1, Q7, Hà Nội Cầu Giấy</p>
+          <div class="qw-meta"><span class="effort-tag">3 ngày</span><span class="badge badge-high">High</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">6</div>
+        <div class="qw-content">
+          <h4>Thêm số điện thoại đầy đủ (0899 778 686) bên cạnh *8686</h4>
+          <p>Giảm friction cho tất cả nhóm user</p>
+          <div class="qw-meta"><span class="effort-tag">1 giờ</span><span class="badge badge-medium">Medium</span></div>
+        </div>
+      </div>
+      <div class="quick-win">
+        <div class="qw-num">7</div>
+        <div class="qw-content">
+          <h4>Setup AggregateRating plugin + collect 10 reviews đầu tiên</h4>
+          <p>Rich snippet sao vàng trên Google SERP → CTR tăng 15-35%</p>
+          <div class="qw-meta"><span class="effort-tag">3-5 ngày</span><span class="badge badge-medium">Medium</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REBUILD ROADMAP ===== -->
+  <div class="section" id="rebuild">
+    <div class="section-header">
+      <div class="section-num" style="background:#1d4ed8">🅰</div>
+      <div class="section-title">Nếu chọn REBUILD — Roadmap</div>
+    </div>
+    <div class="card">
+      <h3>Tech stack đề xuất</h3>
+      <table>
+        <tr><td>Frontend</td><td><strong>Next.js (App Router)</strong> — SSG cho content, SSR cho dynamic, tối ưu Core Web Vitals</td></tr>
+        <tr><td>CMS</td><td><strong>Sanity.io hoặc Payload CMS</strong> — headless, editor-friendly</td></tr>
+        <tr><td>Booking</td><td>Giữ <code>datlich.zema.com.vn</code> nếu hoạt động tốt</td></tr>
+        <tr><td>Deployment</td><td><strong>Vercel</strong> + Cloudflare CDN</td></tr>
+        <tr><td>Search</td><td>Algolia nếu cần site search nội bộ</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>URL structure mới</h3>
+      <pre style="background:#f9fafb;padding:16px;border-radius:8px;font-size:12px;overflow-x:auto">/                          → Trang chủ
+/gioi-thieu/               → Về Zema (với full brand story)
+/dich-vu/toc/              → Chăm sóc tóc (pillar)
+/dich-vu/nail/             → Nail (pillar)
+/dich-vu/spa/              → Spa (pillar)
+/chi-nhanh/                → Tất cả chi nhánh
+/chi-nhanh/ha-noi/         → Chi nhánh Hà Nội (hub)
+/chi-nhanh/150-pho-hue/    → Chi nhánh cụ thể (LocalBusiness page)
+/blog/                     → Blog
+/lien-he/                  → Liên hệ</pre>
+    </div>
+    <div class="card">
+      <h3>Timeline & Budget</h3>
+      <div class="matrix-row"><span class="key">Timeline</span><span class="val">4-5 tháng</span></div>
+      <div class="matrix-row"><span class="key">Budget range</span><span class="val">200-350 triệu VND (thiết kế + dev + migration + QA)</span></div>
+      <div class="matrix-row"><span class="key">SEO migration</span><span class="val">Export URL cũ → 301 redirect map trước launch → submit sitemap mới → monitor GSC 30 ngày</span></div>
+    </div>
+  </div>
+
+  <!-- ===== OPTIMIZE ROADMAP ===== -->
+  <div class="section" id="optimize">
+    <div class="section-header">
+      <div class="section-num" style="background:#16a34a">🅱</div>
+      <div class="section-title">Nếu chọn OPTIMIZE — Roadmap 60 ngày</div>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>Tuần</th><th>Focus</th><th>Việc cụ thể</th></tr>
+        <tr><td><strong>1-2</strong></td><td>Bịt lỗ hổng critical</td><td>Fix /tin-tuc/ 404, sửa H1 categories, thêm số điện thoại đầy đủ, check meta description plugin</td></tr>
+        <tr><td><strong>3-4</strong></td><td>SEO On-page</td><td>Viết meta description top 30 trang, bắt đầu alt text audit (homepage + service pages), setup AggregateRating plugin</td></tr>
+        <tr><td><strong>5-6</strong></td><td>Local SEO</td><td>Verify + optimize GBP 8 chi nhánh, tạo location pages top 5 chi nhánh, submit listing Foody/Fresha/Toplist.vn</td></tr>
+        <tr><td><strong>7-8</strong></td><td>Content & Brand defense</td><td>Google Ads brand campaign live, quy ước blog URL mới, collect 10+ reviews đầu tiên cho AggregateRating</td></tr>
+      </table>
+      <p style="margin-top:12px;color:var(--text-light);font-size:12px"><strong>Giới hạn của Optimize track</strong>: Không thoát khỏi Flatsome look-and-feel; location pages khó scale 20 chi nhánh; performance bị giới hạn bởi WordPress + Flatsome architecture.</p>
+    </div>
+  </div>
+
+  <!-- ===== COMPETITORS ===== -->
+  <div class="section" id="competitors">
+    <div class="section-header">
+      <div class="section-num" style="background:#6b7280">≈</div>
+      <div class="section-title">Đối thủ Benchmark</div>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>Brand</th><th>URL</th><th>Điểm mạnh</th><th>So với Zema</th></tr>
+        <tr><td><strong>Zema Spa</strong></td><td>zemaspa.com.vn</td><td>URL "zema" pure, claim #1 VN</td><td>⚠️ Gây brand confusion trực tiếp</td></tr>
+        <tr><td><strong>30Shine</strong></td><td>30shine.com</td><td>200+ CN, brand recognition, rank mọi keyword tóc nam</td><td>Chỉ tóc nam — không cạnh tranh trực tiếp</td></tr>
+        <tr><td><strong>Maison de Beaute</strong></td><td>maisondebeaute.vn</td><td>Premium positioning, design đẹp</td><td>Ít chi nhánh hơn, giá cao hơn</td></tr>
+        <tr><td><strong>Toplist.vn</strong></td><td>toplist.vn</td><td>Rank top cho hầu hết keyword "nail salon/cắt tóc [thành phố]"</td><td>Directory — đối thủ gián tiếp nhưng chiếm hết top organic</td></tr>
+      </table>
+      <p style="margin-top:12px;color:var(--text-light);font-size:12px"><strong>Key insight</strong>: Zema nên tập trung vào Nail + Spa + Tóc nữ tại HCM/Hà Nội, không cạnh tranh với 30Shine. Cần "beat the directories" bằng local SEO pages riêng từng chi nhánh.</p>
+    </div>
+  </div>
+
+  <!-- Methodology -->
+  <div class="section" id="methodology">
+    <div class="section-header">
+      <div class="section-num" style="background:#6b7280">ℹ</div>
+      <div class="section-title">Methodology & Limitations</div>
+    </div>
+    <div class="card">
+      <p><strong>Pages audited</strong>: Homepage, /gioi-thieu/, /lien-he/, /cham-soc-toc/, /lam-nail/, /spa/, /he-thong-chi-nhanh-zema/, sitemap_index.xml, post-sitemap1.xml, page-sitemap.xml, robots.txt</p>
+      <p style="margin-top:8px"><strong>Tools</strong>: WebFetch (HTML analysis), sitemap parsing, robots.txt analysis, Yahoo Search (ranking signals proxy)</p>
+      <p style="margin-top:8px"><strong>Limitations</strong>: (1) Không có PageSpeed Insights — performance là estimated; (2) Không có GSC — search ranking là manual observation; (3) Không có GA — traffic data là estimated; (4) Google blocks automated queries — Yahoo Search dùng làm proxy.</p>
+      <p style="margin-top:8px"><strong>Để có audit đầy đủ</strong>: Cần thêm PageSpeed Insights, Google Search Console export, Ahrefs/Semrush crawl, và Screaming Frog full crawl.</p>
+    </div>
+  </div>
+
+</main>
+
+<button class="print-btn" onclick="window.print()">🖨 In / Lưu PDF</button>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('span:last-child');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+// Highlight active sidebar link on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

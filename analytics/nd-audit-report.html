@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Report — thammyvienngocdung.com</title>
+<style>
+  :root {
+    --brand: #27338c;
+    --brand-light: #3a4fa3;
+    --critical: #dc2626;
+    --critical-bg: #fef2f2;
+    --high: #ea580c;
+    --high-bg: #fff7ed;
+    --medium: #ca8a04;
+    --medium-bg: #fefce8;
+    --low: #2563eb;
+    --low-bg: #eff6ff;
+    --strength: #16a34a;
+    --strength-bg: #f0fdf4;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --sidebar-w: 260px;
+    --bg: #f8fafc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: var(--bg); }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: var(--sidebar-w);
+    background: var(--brand); color: white; overflow-y: auto; z-index: 100;
+    display: flex; flex-direction: column;
+  }
+  .sidebar-logo { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+  .sidebar-logo h2 { font-size: 14px; font-weight: 700; line-height: 1.3; }
+  .sidebar-logo .date { font-size: 11px; opacity: 0.6; margin-top: 4px; }
+  .sidebar-score { padding: 16px 20px; background: rgba(0,0,0,0.2); font-size: 13px; }
+  .sidebar-score .overall { font-size: 28px; font-weight: 800; }
+  .sidebar-score .label { font-size: 11px; opacity: 0.7; }
+  nav { flex: 1; padding: 8px 0; }
+  nav a {
+    display: block; padding: 10px 20px; color: rgba(255,255,255,0.8);
+    text-decoration: none; font-size: 13px; transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  nav a:hover, nav a.active { background: rgba(255,255,255,0.1); color: white; border-left-color: white; }
+  nav .nav-section { padding: 16px 20px 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
+  .print-btn {
+    margin: 12px; padding: 10px; background: rgba(255,255,255,0.15); border: none;
+    color: white; cursor: pointer; border-radius: 6px; font-size: 13px; text-align: center;
+  }
+  .print-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* MAIN */
+  .main { margin-left: var(--sidebar-w); min-height: 100vh; }
+  .header {
+    background: white; padding: 24px 32px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .header h1 { font-size: 20px; font-weight: 700; color: var(--brand); }
+  .header .meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* SCORECARD GRID */
+  .score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 24px 32px; background: white; border-bottom: 1px solid var(--border); }
+  .score-card { text-align: center; padding: 16px 8px; border-radius: 8px; border: 1px solid var(--border); }
+  .score-card .num { font-size: 28px; font-weight: 800; }
+  .score-card .lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.3; }
+  .score-card.s5 .num { color: var(--critical); }
+  .score-card.s6 .num { color: var(--medium); }
+  .score-card.s65 .num { color: var(--strength); }
+
+  /* CONTENT */
+  .content { padding: 24px 32px; max-width: 1100px; }
+  section { margin-bottom: 40px; }
+  section h2 { font-size: 18px; font-weight: 700; color: var(--brand); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  section h3 { font-size: 15px; font-weight: 600; margin: 20px 0 10px; }
+  p { font-size: 14px; line-height: 1.7; margin-bottom: 12px; color: var(--text); }
+
+  /* EXECUTIVE */
+  .exec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .exec-box { background: white; border-radius: 8px; border: 1px solid var(--border); padding: 16px; }
+  .exec-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .exec-box ul { list-style: none; }
+  .exec-box li { font-size: 13px; padding: 4px 0; border-bottom: 1px solid var(--bg); }
+  .exec-box li:last-child { border: none; }
+
+  /* RADAR CHART */
+  .chart-wrap { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+  .chart-wrap h4 { font-size: 13px; font-weight: 600; margin-bottom: 16px; color: var(--text-muted); }
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label { width: 180px; font-size: 12px; text-align: right; color: var(--text-muted); flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--border); border-radius: 4px; height: 20px; position: relative; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+  .bar-fill span { font-size: 11px; font-weight: 700; color: white; }
+  .bar-fill.c5 { background: var(--critical); width: 50%; }
+  .bar-fill.c6 { background: var(--medium); width: 60%; }
+  .bar-fill.c65 { background: var(--strength); width: 65%; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: white; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  th { background: var(--brand); color: white; padding: 10px 12px; text-align: left; font-size: 12px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border: none; }
+  tr:hover td { background: var(--bg); }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .badge-critical { background: var(--critical-bg); color: var(--critical); }
+  .badge-high { background: var(--high-bg); color: var(--high); }
+  .badge-medium { background: var(--medium-bg); color: var(--medium); }
+  .badge-low { background: var(--low-bg); color: var(--low); }
+  .badge-ok { background: var(--strength-bg); color: var(--strength); }
+
+  /* ISSUE CARDS */
+  .issue-card { background: white; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+  .issue-header {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    cursor: pointer; user-select: none; transition: background 0.15s;
+  }
+  .issue-header:hover { background: var(--bg); }
+  .issue-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; flex-shrink: 0; }
+  .issue-num.critical { background: var(--critical); }
+  .issue-num.high { background: var(--high); }
+  .issue-num.medium { background: var(--medium); }
+  .issue-num.low { background: var(--low); }
+  .issue-title { flex: 1; font-size: 14px; font-weight: 600; }
+  .issue-toggle { font-size: 18px; color: var(--text-muted); transition: transform 0.2s; }
+  .issue-toggle.open { transform: rotate(180deg); }
+  .issue-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .issue-body.open { display: block; }
+  .issue-desc { font-size: 13px; color: var(--text-muted); padding: 12px 0; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+  .tab-btn { padding: 8px 20px; background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+  .tab-btn.active { color: var(--brand); border-bottom-color: var(--brand); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .track-box { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .track-box h5 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .track-box ul { list-style: none; }
+  .track-box li { font-size: 13px; padding: 3px 0 3px 16px; position: relative; }
+  .track-box li::before { content: '→'; position: absolute; left: 0; color: var(--brand); }
+  .track-label { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+  .track-a { background: #dbeafe; color: #1d4ed8; }
+  .track-b { background: #dcfce7; color: #166534; }
+
+  /* DECISION MATRIX */
+  .matrix { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .matrix-header { background: var(--brand); color: white; padding: 10px 12px; font-size: 12px; font-weight: 700; }
+  .matrix-cell { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .matrix-a { background: #eff6ff; }
+  .matrix-b { background: #f0fdf4; }
+
+  /* QUICK WINS */
+  .quick-wins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .qw-card { background: white; border: 1px solid var(--border); border-left: 4px solid var(--strength); border-radius: 8px; padding: 14px; }
+  .qw-card .day { font-size: 11px; font-weight: 700; color: var(--strength); margin-bottom: 4px; }
+  .qw-card .action { font-size: 13px; font-weight: 600; }
+  .qw-card .desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* COMPETITOR TABLE */
+  .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .comp-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .comp-card .name { font-size: 14px; font-weight: 700; color: var(--brand); }
+  .comp-card .strength { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .comp-card .vs { font-size: 11px; margin-top: 8px; padding: 4px 8px; background: var(--high-bg); color: var(--high); border-radius: 4px; display: inline-block; }
+
+  /* SCROLLSPY */
+  section { scroll-margin-top: 80px; }
+
+  /* PRINT */
+  @media print {
+    .sidebar, .print-btn { display: none !important; }
+    .main { margin-left: 0 !important; }
+    .header { position: static !important; }
+    .issue-body { display: block !important; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+    .sidebar.open { transform: none; }
+    .main { margin-left: 0; }
+    .score-grid { grid-template-columns: repeat(3, 1fr); }
+    .exec-grid, .quick-wins, .comp-grid { grid-template-columns: 1fr; }
+    .content { padding: 16px; }
+    .header { padding: 16px; }
+    .mobile-toggle { display: flex !important; }
+  }
+  .mobile-toggle {
+    display: none; position: fixed; bottom: 20px; right: 20px; z-index: 200;
+    width: 48px; height: 48px; background: var(--brand); color: white;
+    border: none; border-radius: 50%; cursor: pointer; font-size: 20px;
+    align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h2>Website Audit Report</h2>
+    <div>thammyvienngocdung.com</div>
+    <div class="date">2026-05-06 · Claude Code</div>
+  </div>
+  <div class="sidebar-score">
+    <div class="overall">5.7<span style="font-size:16px;opacity:0.6">/10</span></div>
+    <div class="label">Overall Score</div>
+  </div>
+  <nav>
+    <div class="nav-section">Tổng quan</div>
+    <a href="#executive">Executive Summary</a>
+    <a href="#scorecard">Scorecard</a>
+    <div class="nav-section">5 Trục đánh giá</div>
+    <a href="#traffic">1. Traffic & Discoverability</a>
+    <a href="#seo">2. SEO</a>
+    <a href="#ui">3. UI Design</a>
+    <a href="#ux">4. UX</a>
+    <a href="#performance">5. Performance</a>
+    <div class="nav-section">Đề xuất</div>
+    <a href="#decision">Decision Matrix</a>
+    <a href="#issues">Vấn đề & Giải pháp</a>
+    <a href="#quickwins">Quick Wins 30 ngày</a>
+    <a href="#rebuild">Nếu REBUILD</a>
+    <a href="#optimize">Nếu OPTIMIZE</a>
+    <div class="nav-section">Phụ lục</div>
+    <a href="#competitors">Competitor Benchmark</a>
+    <a href="#keywords">Keyword Gaps</a>
+  </nav>
+  <button class="print-btn" onclick="window.print()">🖨️ In / Lưu PDF</button>
+</nav>
+
+<!-- MOBILE TOGGLE -->
+<button class="mobile-toggle" id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="header">
+    <h1>Audit Report — Thẩm Mỹ Viện Ngọc Dung</h1>
+    <div class="meta">URL: https://thammyvienngocdung.com · Ngành: Thẩm mỹ B2C · Mục tiêu: Lead gen + Booking · 2026-05-06</div>
+  </div>
+
+  <!-- SCORE CARDS -->
+  <div class="score-grid">
+    <div class="score-card s5">
+      <div class="num">5</div>
+      <div class="lbl">Traffic &<br>Discoverability</div>
+    </div>
+    <div class="score-card s6">
+      <div class="num">6</div>
+      <div class="lbl">SEO</div>
+    </div>
+    <div class="score-card s6">
+      <div class="num">6</div>
+      <div class="lbl">UI Design</div>
+    </div>
+    <div class="score-card s65">
+      <div class="num">6.5</div>
+      <div class="lbl">UX</div>
+    </div>
+    <div class="score-card s5">
+      <div class="num">5</div>
+      <div class="lbl">Performance</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section id="executive">
+      <h2>Executive Summary</h2>
+      <p>Thẩm Mỹ Viện Ngọc Dung là chuỗi 28 năm, 16+ chi nhánh, 1.100 nhân viên — đủ thương hiệu để tin tưởng. Nhưng website hiện tại <strong>đang bỏ lại rất nhiều organic traffic</strong> trên bàn do không rank được bất kỳ keyword nào ngoài brand. Ngoài ra, có <strong>script lạ từ IP domain</strong> cần điều tra ngay hôm nay.</p>
+
+      <div class="chart-wrap" id="scorecard">
+        <h4>SCORECARD — 5 Trục đánh giá</h4>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Traffic & Discoverability</div>
+            <div class="bar-track"><div class="bar-fill c5"><span>5/10</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">SEO</div>
+            <div class="bar-track"><div class="bar-fill c6"><span>6/10</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">UI Design</div>
+            <div class="bar-track"><div class="bar-fill c6"><span>6/10</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">UX</div>
+            <div class="bar-track"><div class="bar-fill c65"><span>6.5/10</span></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Performance</div>
+            <div class="bar-track"><div class="bar-fill c5"><span>5/10</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-grid">
+        <div class="exec-box">
+          <h4 style="color:var(--strength)">✅ Top 3 Điểm mạnh</h4>
+          <ul>
+            <li>🏆 Schema markup xuất sắc — multi-branch LocalBusiness + Person + Service</li>
+            <li>🏢 Trust signal mạnh — 28 năm, 16 chi nhánh, ĐKKD, 29 chuyên gia, giải thưởng</li>
+            <li>📱 UX booking tốt — hotline ở header, subdomain booking riêng, before/after gallery</li>
+          </ul>
+        </div>
+        <div class="exec-box">
+          <h4 style="color:var(--critical)">🔴 Top 3 Vấn đề cần xử lý ngay</h4>
+          <ul>
+            <li>⚠️ Script lạ từ IP domain sslip.io trên mọi trang — rủi ro bảo mật</li>
+            <li>🔍 0/5 service keywords test có mặt top 10 — vô hình với user mới</li>
+            <li>📰 Bài báo "hành nghề không phép" xuất hiện Page 1 brand SERP</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px; margin-top: 16px;">
+        <strong>Recommendation:</strong> HYBRID — xử lý khẩn cấp Track B (Optimize) trong 30 ngày đầu để vá lỗ hổng bảo mật + SEO. Lên kế hoạch REBUILD trong 6-9 tháng để giải quyết triệt để organic traffic với multi-location architecture.
+      </div>
+    </section>
+
+    <!-- TRAFFIC -->
+    <section id="traffic">
+      <h2>Phần 1 — Traffic & Discoverability</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <span class="badge badge-medium">5/10</span>
+        <span style="font-size:13px;color:var(--text-muted)">Brand SERP mạnh, nhưng vô hình với non-branded search</span>
+      </div>
+
+      <table>
+        <tr><th>Tiêu chí</th><th>Kết quả</th><th>Đánh giá</th></tr>
+        <tr><td>Brand keyword "thẩm mỹ viện Ngọc Dung"</td><td>Rank #1</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>"thẩm mỹ viện TP HCM"</td><td>Không trong top 10</td><td><span class="badge badge-critical">❌</span></td></tr>
+        <tr><td>"thẩm mỹ viện uy tín Hà Nội"</td><td>Không trong top 10</td><td><span class="badge badge-critical">❌</span></td></tr>
+        <tr><td>"trị nám tàn nhang TP HCM"</td><td>Không trong top 10</td><td><span class="badge badge-critical">❌</span></td></tr>
+        <tr><td>Google Search Console verified</td><td>Meta tag xác nhận</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Google Business Profile</td><td>GBP CID có trong schema</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Google rating</td><td>4.8/5 ⭐</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Directory presence</td><td>Trang Vàng, sur.ly, Luma</td><td><span class="badge badge-medium">🟡 TB</span></td></tr>
+        <tr><td>Social media</td><td>FB (multi-branch), IG, YT, TikTok</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Bài báo tiêu cực Page 1</td><td>"hành nghề không phép" vị trí 9-10</td><td><span class="badge badge-critical">🔴 ORM</span></td></tr>
+      </table>
+
+      <div style="background:var(--critical-bg);border:1px solid var(--critical);border-radius:8px;padding:14px;margin-top:8px">
+        <strong style="color:var(--critical)">Insight quan trọng:</strong> <span style="font-size:13px">Đối thủ chiếm toàn bộ non-branded SERP thông qua roundup articles từ bookingcare.vn, mytour.vn, topaz.vn, lavenderbychang.com. Ngọc Dung cần được xuất hiện trong các danh sách này VÀ tự tạo content ranking độc lập.</span>
+      </div>
+    </section>
+
+    <!-- SEO -->
+    <section id="seo">
+      <h2>Phần 2 — SEO</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <span class="badge badge-medium">6/10</span>
+        <span style="font-size:13px;color:var(--text-muted)">Nền tảng tốt (schema xuất sắc, HTTPS, canonical), nhiều lỗi on-page</span>
+      </div>
+
+      <h3>Technical SEO</h3>
+      <table>
+        <tr><th>Tiêu chí</th><th>Kết quả</th><th>Mức độ</th></tr>
+        <tr><td>HTTPS</td><td>✅ Valid</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>robots.txt</td><td>✅ Cấu hình hợp lý</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>sitemap_index.xml</td><td>❌ Khai báo trong robots.txt nhưng 404</td><td><span class="badge badge-critical">CRITICAL</span></td></tr>
+        <tr><td>Canonical tags</td><td>✅ Đúng trên tất cả trang test</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>Mobile responsive</td><td>✅ Viewport set đúng</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>URL structure</td><td>✅ /tri-nam/, /triet-long/ — sạch, có nghĩa</td><td><span class="badge badge-ok">OK</span></td></tr>
+      </table>
+
+      <h3>On-page SEO — Meta Tags</h3>
+      <table>
+        <tr><th>Trang</th><th>Title</th><th>Meta Description</th><th>Vấn đề</th></tr>
+        <tr><td>Homepage</td><td>✅ 52 ký tự</td><td>✅ 130 ký tự</td><td>H1 không có brand keyword đầy đủ</td></tr>
+        <tr><td>/gioi-thieu/</td><td>✅</td><td>⚠️ Bị cắt mid-sentence</td><td>Meta desc truncated "...Hệ thống"</td></tr>
+        <tr><td>/dich-vu/</td><td>✅</td><td style="color:var(--critical);font-weight:700">❌ "Khác"</td><td>Placeholder bị sót — CRITICAL</td></tr>
+      </table>
+
+      <h3>Schema & Structured Data</h3>
+      <table>
+        <tr><th>Schema Type</th><th>Có</th><th>Đánh giá</th></tr>
+        <tr><td>Organization</td><td>✅</td><td>Đầy đủ: sameAs, email, phone, openingHours, foundingDate, employees</td></tr>
+        <tr><td>HealthAndBeautyBusiness</td><td>✅</td><td>Multi-branch với GeoCoordinates, Maps CID — xuất sắc</td></tr>
+        <tr><td>WebSite</td><td>✅</td><td>OK</td></tr>
+        <tr><td>Person (Founder)</td><td>✅</td><td>jobTitle, description, birthDate, knowsAbout</td></tr>
+        <tr><td>Service + OfferCatalog</td><td>✅</td><td>Có trên /dich-vu/ — description cần cụ thể hơn</td></tr>
+        <tr><td>BreadcrumbList</td><td>❌</td><td>Thiếu — cần cho trang dịch vụ sâu</td></tr>
+        <tr><td>FAQPage</td><td>❌</td><td>Cơ hội rich snippet lớn — chưa dùng</td></tr>
+        <tr><td>AggregateRating</td><td>❌</td><td>4.8/5 Google nhưng chưa đưa vào schema</td></tr>
+      </table>
+    </section>
+
+    <!-- UI -->
+    <section id="ui">
+      <h2>Phần 3 — UI Design</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <span class="badge badge-medium">6/10</span>
+        <span style="font-size:13px;color:var(--text-muted)">Custom theme + brand color nhất quán. Một số lỗi asset chất lượng.</span>
+      </div>
+      <p><em>Lưu ý: UI đánh giá từ tín hiệu kỹ thuật trong HTML. Không có visual inspection trực tiếp — cần xác nhận thêm bằng cách mở site trực tiếp.</em></p>
+
+      <table>
+        <tr><th>Tiêu chí</th><th>Tín hiệu từ HTML</th><th>Đánh giá</th></tr>
+        <tr><td>Custom theme</td><td>ngocdung-child theme — đầu tư thiết kế riêng</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Brand color</td><td>#27338c (navy blue) — nhất quán ở footer</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Navigation</td><td>Dropdown rõ ràng, shortcut bar top</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>OG image</td><td>Logo 1024×640 — dưới chuẩn social (cần 1200×630)</td><td><span class="badge badge-high">⚠️</span></td></tr>
+        <tr><td>Image alt texts</td><td>/dich-vu/ rất tốt. Homepage có alts = filenames như "1503 KV BIOLIFT MATRIX"</td><td><span class="badge badge-medium">🟡 TB</span></td></tr>
+        <tr><td>WP Rocket lazy load</td><td>✅ Kích hoạt</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Risk: Flatsome theme</td><td>Theme thương mại phổ biến — có thể giống nhiều site</td><td><span class="badge badge-medium">Cần confirm</span></td></tr>
+      </table>
+    </section>
+
+    <!-- UX -->
+    <section id="ux">
+      <h2>Phần 4 — UX (User Experience)</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <span class="badge badge-ok">6.5/10</span>
+        <span style="font-size:13px;color:var(--text-muted)">Flow rõ ràng, trust signals tốt. Có thể thiếu Zalo widget — cần confirm.</span>
+      </div>
+
+      <table>
+        <tr><th>Tiêu chí</th><th>Kết quả</th><th>Đánh giá</th></tr>
+        <tr><td>Booking flow</td><td>datlich.thammyvienngocdung.com riêng, CTA persistent</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Hotline visibility</td><td>1800 6377 ở header, *3232 backup</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Before/after gallery</td><td>/cau-chuyen-khach-hang/ dedicated</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Branch finder</td><td>Section "Tìm TMV Ngọc Dung gần bạn nhất" ở homepage</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Trust signals</td><td>ĐKKD, 28 năm, 29 chuyên gia, giải thưởng, founder profile</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Privacy policy</td><td>✅ /chinh-sach-bao-mat/, /dieu-khoan-su-dung/</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Zalo OA widget</td><td>Không detect trong scripts</td><td><span class="badge badge-critical">⚠️ Cần xác nhận</span></td></tr>
+        <tr><td>Facebook Messenger</td><td>Không detect</td><td><span class="badge badge-high">⚠️</span></td></tr>
+        <tr><td>NAP email</td><td>Footer: info@ngocdung.com ≠ Schema: info@thammyvienngocdung.com</td><td><span class="badge badge-high">❌ Inconsistent</span></td></tr>
+        <tr><td>Rebuttal page /tham-my-vien-ngoc-dung-lua-dao/</td><td>Xuất hiện trong search — có thể gây lo ngại cho visitor mới</td><td><span class="badge badge-medium">⚠️</span></td></tr>
+      </table>
+    </section>
+
+    <!-- PERFORMANCE -->
+    <section id="performance">
+      <h2>Phần 5 — Performance</h2>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <span class="badge badge-critical">5/10</span>
+        <span style="font-size:13px;color:var(--text-muted)">WP Rocket giúp nhiều, nhưng script lạ từ IP domain là rủi ro nghiêm trọng</span>
+      </div>
+
+      <div style="background:var(--critical-bg);border:2px solid var(--critical);border-radius:8px;padding:16px;margin-bottom:20px">
+        <strong style="color:var(--critical)">🚨 CRITICAL — Script nguy hiểm phát hiện:</strong>
+        <br><code style="background:#fee2e2;padding:4px 8px;border-radius:4px;font-size:12px;display:inline-block;margin-top:8px">https://xow8cscockos4cc8oggg8co4.35.198.216.143.sslip.io/sdk.min.js</code>
+        <p style="margin-top:8px;font-size:13px">Script load trên <strong>mọi trang</strong>, đến từ IP-based domain (35.198.216.143 — Google Cloud). Domain kiểu <code>xow8cscockos4cc8oggg8co4</code> trông như obfuscated/generated. Cần xác định ngay từ plugin/theme nào và disable nếu không rõ nguồn gốc.</p>
+      </div>
+
+      <table>
+        <tr><th>Script/Resource</th><th>Type</th><th>Đánh giá</th></tr>
+        <tr><td>GTM (G-7SYMQ0BDS7)</td><td>Analytics</td><td><span class="badge badge-ok">✅ Standard</span></td></tr>
+        <tr><td>WP Rocket 3.21.1</td><td>Cache/optimization</td><td><span class="badge badge-ok">✅ Tốt</span></td></tr>
+        <tr><td>WP Rocket Lazy Load</td><td>Image optimization</td><td><span class="badge badge-ok">✅</span></td></tr>
+        <tr><td>Contact Form 7 (×2)</td><td>Form plugin</td><td><span class="badge badge-medium">🟡 Performance overhead</span></td></tr>
+        <tr><td>jQuery Validation (CDN)</td><td>JS library</td><td><span class="badge badge-medium">🟡 Cần verify lazy load</span></td></tr>
+        <tr><td style="color:var(--critical);font-weight:700">sslip.io/sdk.min.js</td><td>Unknown</td><td><span class="badge badge-critical">🔴 CRITICAL — điều tra ngay</span></td></tr>
+      </table>
+
+      <p style="font-size:13px;color:var(--text-muted);margin-top:8px">⚠️ Không có data PageSpeed Insights thực tế — cần chạy <a href="https://pagespeed.web.dev" target="_blank">pagespeed.web.dev</a> để có Core Web Vitals chính xác (LCP, INP, CLS).</p>
+    </section>
+
+    <!-- DECISION MATRIX -->
+    <section id="decision">
+      <h2>Decision Matrix — REBUILD vs OPTIMIZE</h2>
+
+      <div style="display:grid;grid-template-columns:140px 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:24px">
+        <div class="matrix-header" style="background:#475569">Tiêu chí</div>
+        <div class="matrix-header" style="background:#1d4ed8">🅰️ REBUILD</div>
+        <div class="matrix-header" style="background:#166534">🅱️ OPTIMIZE</div>
+
+        <div class="matrix-cell" style="font-weight:600">Effort</div>
+        <div class="matrix-cell matrix-a">60-90 ngày-người</div>
+        <div class="matrix-cell matrix-b">20-30 ngày-người</div>
+
+        <div class="matrix-cell" style="font-weight:600">Chi phí ước tính</div>
+        <div class="matrix-cell matrix-a">150-350 triệu VND</div>
+        <div class="matrix-cell matrix-b">20-50 triệu VND</div>
+
+        <div class="matrix-cell" style="font-weight:600">Timeline</div>
+        <div class="matrix-cell matrix-a">4-6 tháng</div>
+        <div class="matrix-cell matrix-b">4-8 tuần</div>
+
+        <div class="matrix-cell" style="font-weight:600">SEO dài hạn</div>
+        <div class="matrix-cell matrix-a">Cao — multi-location architecture</div>
+        <div class="matrix-cell matrix-b">TB — giới hạn WP + Flatsome</div>
+
+        <div class="matrix-cell" style="font-weight:600">Risk</div>
+        <div class="matrix-cell matrix-a">TB-Cao (migration, SEO regression)</div>
+        <div class="matrix-cell matrix-b">Thấp</div>
+
+        <div class="matrix-cell" style="font-weight:600">Phù hợp khi</div>
+        <div class="matrix-cell matrix-a">Muốn dominate organic, sẵn sàng scale lên</div>
+        <div class="matrix-cell matrix-b">Quick wins, budget hạn chế, cần kết quả nhanh</div>
+      </div>
+
+      <div style="background:#fef9c3;border:1px solid #fbbf24;border-radius:8px;padding:14px;font-size:13px">
+        <strong>Recommendation của audit này:</strong> Bắt đầu với Track B — fix 8 quick wins trong 30 ngày đầu. Song song lên spec cho Track A để có thể start rebuild trong 2-3 tháng tới khi đã ổn định vận hành.
+      </div>
+    </section>
+
+    <!-- ISSUES -->
+    <section id="issues">
+      <h2>Vấn đề & Giải pháp</h2>
+
+      <!-- Issue 1 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num critical">1</div>
+          <div class="issue-title">Script lạ từ IP domain — Rủi ro bảo mật</div>
+          <span class="badge badge-critical">🔴 Critical</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body open">
+          <div class="issue-desc">Script <code>sdk.min.js</code> từ <code>xow8cscockos4cc8oggg8co4.35.198.216.143.sslip.io</code> load trên mọi trang. Domain dạng IP-via-sslip.io không phải pattern vendor hợp lệ đã biết. Có thể là plugin bị compromise hoặc tracking vendor kém chất lượng.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-1-a')">🅰️ REBUILD</button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-1-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-1-a">
+            <div class="track-box">
+              <span class="track-label track-a">🅰️ REBUILD</span>
+              <ul>
+                <li>Audit toàn bộ plugin/theme khi rebuild — không migrate script không rõ nguồn</li>
+                <li>Chỉ whitelist các vendor đã biết trong CSP header</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-content" id="tab-1-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Cài Query Monitor plugin → tìm script origin</li>
+                <li>WP Admin → Plugins → tìm plugin inject script sslip.io</li>
+                <li>Disable plugin ngay cho đến khi xác minh an toàn</li>
+                <li>Effort: 1-2 giờ | Impact: loại bỏ rủi ro bảo mật + tăng tốc độ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 2 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num critical">2</div>
+          <div class="issue-title">Meta description /dich-vu/ = "Khác" — Placeholder bị sót</div>
+          <span class="badge badge-critical">🔴 Critical</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body open">
+          <div class="issue-desc">Trang /dich-vu/ — trang quan trọng nhất cho service overview — có meta description là từ "Khác". Khi Google hiển thị snippet này, CTR sẽ rất thấp. Đây là placeholder Rank Math bị sót khi config.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-2-a')">🅰️ REBUILD</button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-2-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-2-a">
+            <div class="track-box">
+              <span class="track-label track-a">🅰️ REBUILD</span>
+              <ul><li>Setup content template với validated meta descriptions. CMS enforce required fields trước khi publish.</li></ul>
+            </div>
+          </div>
+          <div class="tab-content" id="tab-2-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Rank Math → Edit /dich-vu/ → điền meta description 140-155 ký tự, có keyword + CTA</li>
+                <li>Ví dụ: "Khám phá 40+ dịch vụ thẩm mỹ tại TMV Ngọc Dung: phun xăm, triệt lông, trị nám, chăm sóc da. 28 năm kinh nghiệm, 16 chi nhánh toàn quốc."</li>
+                <li>Kiểm tra toàn bộ service sub-pages cùng lúc</li>
+                <li>Effort: 1 giờ | Impact: tăng CTR từ SERP</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 3 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num critical">3</div>
+          <div class="issue-title">sitemap_index.xml trả về 404</div>
+          <span class="badge badge-critical">🔴 Critical</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">robots.txt khai báo sitemap tại /sitemap_index.xml nhưng URL trả về 404. Google Search Console không biết cấu trúc site, ảnh hưởng indexing 100+ trang service và chi nhánh.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-3-a')">🅰️ REBUILD</button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-3-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-3-a">
+            <div class="track-box">
+              <span class="track-label track-a">🅰️ REBUILD</span>
+              <ul><li>Implement sitemap tự động với Next.js sitemap module hoặc equivalent</li></ul>
+            </div>
+          </div>
+          <div class="tab-content" id="tab-3-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>WP Admin → Settings → Permalinks → Save Changes (flush)</li>
+                <li>Verify sitemap URL trong Rank Math → Sitemap</li>
+                <li>Re-submit sitemap trong Google Search Console</li>
+                <li>Effort: 30 phút | Impact: Google crawl đầy đủ site</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 4 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num critical">4</div>
+          <div class="issue-title">Không rank non-branded + service keywords</div>
+          <span class="badge badge-critical">🔴 Critical</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">0/5 service keywords test có mặt top 10. "thẩm mỹ viện TP HCM", "trị nám tàn nhang TP HCM", "triệt lông vĩnh viễn TP HCM" — đều do roundup articles của đối thủ chiếm. Ngọc Dung chỉ hiển thị với user đã biết thương hiệu.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-4-a')">🅰️ REBUILD</button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-4-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-4-a">
+            <div class="track-box">
+              <span class="track-label track-a">🅰️ REBUILD</span>
+              <ul>
+                <li>Xây content architecture Pillar-Cluster: 1 pillar page ≥ 2000 từ + nhiều cluster pages</li>
+                <li>Tạo Geo+Service landing pages: /tri-nam-tp-hcm/, /triet-long-ha-noi/</li>
+                <li>FAQPage + HowTo schema trên pillar pages</li>
+                <li>Effort: 30-40 ngày content | Impact: +300-500% organic traffic trong 6-12 tháng</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-content" id="tab-4-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Mở rộng top 5 service pages lên 800-1200 từ, thêm FAQ sections</li>
+                <li>Thêm FAQPage schema qua Rank Math</li>
+                <li>Link outreach: email bookingcare.vn, mytour.vn, topaz.vn xin mention</li>
+                <li>Internal link từ blog → service pages</li>
+                <li>Effort: 15-20 ngày | Impact: top 10 một số long-tail trong 3-6 tháng</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 5 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num critical">5</div>
+          <div class="issue-title">Bài báo tiêu cực Page 1 brand SERP</div>
+          <span class="badge badge-critical">🔴 Critical</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">taichinhdoanhnghiep.net.vn có bài "Thẩm mỹ viện Ngọc Dung và chiêu trò hành nghề thẩm mỹ không phép" rank page 1 vị trí 9-10 cho brand keyword. Brand đã có rebuttal page nhưng chưa đủ để đẩy bài tiêu cực xuống.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-5-a')">🅰️ REBUILD</button>
+            <button class="tab-btn" onclick="switchTab(this, 'tab-5-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-5-a">
+            <div class="track-box">
+              <span class="track-label track-a">🅰️ REBUILD</span>
+              <ul>
+                <li>Xây hub ORM riêng với case studies, video testimonials, chứng nhận Bộ Y tế</li>
+                <li>Nhân brand-owned content để chiếm nhiều slots Page 1 hơn</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-content" id="tab-5-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Nâng quality rebuttal page: thêm video, legal documents, chứng chỉ Sở Y tế</li>
+                <li>Tạo thêm brand-owned assets: Google Business posts, press releases</li>
+                <li>PR pitching cho VnExpress, Dân Trí với success stories, milestone 28 năm</li>
+                <li>Xem xét legal notice nếu bài sai sự thật</li>
+                <li>Effort: 10-20 ngày PR | Impact: đẩy bài tiêu cực xuống page 2 trong 2-3 tháng</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 6 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num high">6</div>
+          <div class="issue-title">NAP Email inconsistency — local SEO confusion</div>
+          <span class="badge badge-high">🟠 High</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Footer: info@ngocdung.com ≠ Schema Organization: info@thammyvienngocdung.com. Google đọc cả hai, gây confusion cho local SEO và knowledge graph.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-6-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-6-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Chọn 1 email chính thức (khuyến nghị: info@thammyvienngocdung.com để nhất quán với domain)</li>
+                <li>Update: footer code, schema JSON-LD, Google Business Profile, Trang Vàng</li>
+                <li>Effort: 1-2 giờ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 7 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num high">7</div>
+          <div class="issue-title">Thiếu BreadcrumbList + FAQPage schema</div>
+          <span class="badge badge-high">🟠 High</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Schema rất tốt nhưng thiếu BreadcrumbList (giúp Google hiểu hierarchy) và FAQPage (rich snippets chiếm diện tích SERP — quan trọng cho service pages).</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-7-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-7-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Thêm BreadcrumbList via Rank Math cho tất cả service pages</li>
+                <li>Thêm FAQ section (5-7 câu hỏi) + FAQPage schema cho top 5 service pages</li>
+                <li>Effort: 1-2 ngày dev | Impact: potential rich snippet, +20-30% CTR</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 8 -->
+      <div class="issue-card">
+        <div class="issue-header" onclick="toggleIssue(this)">
+          <div class="issue-num high">8</div>
+          <div class="issue-title">Thiếu Zalo OA widget + Remarketing pixels</div>
+          <span class="badge badge-high">🟠 High</span>
+          <div class="issue-toggle">▾</div>
+        </div>
+        <div class="issue-body">
+          <div class="issue-desc">Không detect Zalo chat widget, Facebook Pixel, TikTok Pixel. Với B2C beauty ở VN, Zalo là kênh nhắn tin primary. Không có pixels = không retarget được.</div>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'tab-8-b')">🅱️ OPTIMIZE</button>
+          </div>
+          <div class="tab-content active" id="tab-8-b">
+            <div class="track-box">
+              <span class="track-label track-b">🅱️ OPTIMIZE</span>
+              <ul>
+                <li>Đăng ký Zalo Official Account → embed Zalo Social Plugin chat button</li>
+                <li>Cài Facebook Pixel + TikTok Pixel qua GTM (đã có GTM rồi)</li>
+                <li>Effort: 1 ngày setup | Impact: remarketing audience + Zalo conversion</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- QUICK WINS -->
+    <section id="quickwins">
+      <h2>Quick Wins — 30 ngày đầu</h2>
+      <p>Hành động ROI cao, tốn ít effort, làm ngay bất kể chọn rebuild hay optimize:</p>
+      <div class="quick-wins" style="margin-top:16px">
+        <div class="qw-card">
+          <div class="day">Ngày 1 — KHẨN CẤP</div>
+          <div class="action">Điều tra & disable script lạ sslip.io</div>
+          <div class="desc">Tìm plugin source, disable cho đến khi xác minh. Rủi ro bảo mật cao nhất.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Ngày 1-2</div>
+          <div class="action">Fix sitemap 404</div>
+          <div class="desc">Flush permalinks + re-submit trong Search Console. 30 phút, impact lớn.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Ngày 2</div>
+          <div class="action">Fix meta description /dich-vu/</div>
+          <div class="desc">Thay "Khác" bằng description 155 ký tự có keyword + CTA.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Ngày 2</div>
+          <div class="action">Fix NAP email inconsistency</div>
+          <div class="desc">Chọn 1 email, update footer + schema + GBP. 1-2 giờ.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Tuần 1</div>
+          <div class="action">Thêm FAQPage schema — top 3 service pages</div>
+          <div class="desc">Triệt lông, trị nám, phun xăm. Rich snippet tiềm năng.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Tuần 2</div>
+          <div class="action">Cài Zalo widget + Remarketing pixels</div>
+          <div class="desc">Zalo OA + Facebook Pixel + TikTok Pixel qua GTM.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Tuần 3</div>
+          <div class="action">ORM: nâng chất rebuttal page</div>
+          <div class="desc">Thêm video, chứng chỉ, legal docs. Đẩy bài tiêu cực xuống.</div>
+        </div>
+        <div class="qw-card">
+          <div class="day">Tuần 3-4</div>
+          <div class="action">Link outreach vào roundup articles</div>
+          <div class="desc">Email bookingcare.vn, mytour.vn, topaz.vn xin được listed.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REBUILD ROADMAP -->
+    <section id="rebuild">
+      <h2>Nếu chọn REBUILD</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px">
+          <h3 style="color:#1d4ed8;margin-top:0">Tech Stack đề xuất</h3>
+          <table style="margin:0">
+            <tr><td style="font-weight:600">Frontend</td><td>Next.js 14+ (App Router) + TypeScript</td></tr>
+            <tr><td style="font-weight:600">CMS</td><td>Sanity.io hoặc Payload CMS</td></tr>
+            <tr><td style="font-weight:600">Hosting</td><td>Vercel (frontend) + DO/AWS (backend)</td></tr>
+            <tr><td style="font-weight:600">SEO</td><td>next-sitemap + JSON-LD components</td></tr>
+          </table>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px">
+          <h3 style="color:#1d4ed8;margin-top:0">URL Architecture</h3>
+          <pre style="font-size:11px;background:var(--bg);padding:10px;border-radius:4px;overflow-x:auto">/
+/chi-nhanh/
+/chi-nhanh/quan-1/
+/chi-nhanh/ha-noi-cau-giay/
+/dich-vu/triet-long/
+/dich-vu/triet-long/nach/
+/tri-nam-tp-hcm/        ← Geo+service
+/triet-long-ha-noi/     ← Geo+service</pre>
+        </div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px">
+        <h3 style="margin-top:0">Timeline tham khảo</h3>
+        <div style="display:flex;gap:0;margin-top:8px">
+          <div style="flex:1;padding:10px;background:#dbeafe;border-radius:4px 0 0 4px;text-align:center;font-size:12px"><strong>Tháng 1</strong><br>Spec + Design</div>
+          <div style="flex:1;padding:10px;background:#bfdbfe;text-align:center;font-size:12px"><strong>Tháng 2-3</strong><br>Development</div>
+          <div style="flex:1;padding:10px;background:#93c5fd;text-align:center;font-size:12px"><strong>Tháng 4</strong><br>Content migration</div>
+          <div style="flex:1;padding:10px;background:#60a5fa;border-radius:0 4px 4px 0;text-align:center;font-size:12px"><strong>Tháng 5</strong><br>Launch + monitor</div>
+        </div>
+        <p style="font-size:13px;margin-top:10px;color:var(--text-muted)">Budget range: 150-350 triệu VND tùy vendor và scope content.</p>
+      </div>
+    </section>
+
+    <!-- OPTIMIZE ROADMAP -->
+    <section id="optimize">
+      <h2>Nếu chọn OPTIMIZE</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px;border-top:4px solid var(--critical)">
+          <strong style="font-size:12px">Tháng 1 — Security + Technical</strong>
+          <ul style="font-size:12px;margin-top:8px;padding-left:16px;color:var(--text-muted)">
+            <li>Disable script lạ</li>
+            <li>Fix sitemap 404</li>
+            <li>Fix meta descriptions</li>
+            <li>Fix NAP email</li>
+            <li>Cài Zalo + pixels</li>
+          </ul>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px;border-top:4px solid var(--high)">
+          <strong style="font-size:12px">Tháng 2-3 — Content SEO</strong>
+          <ul style="font-size:12px;margin-top:8px;padding-left:16px;color:var(--text-muted)">
+            <li>Mở rộng top 10 service pages lên 1000+ từ</li>
+            <li>FAQPage schema trên tất cả service pages</li>
+            <li>4 bài blog/tháng target service keywords</li>
+            <li>Submit vào bookingcare.vn, mytour.vn</li>
+          </ul>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:16px;border-top:4px solid var(--medium)">
+          <strong style="font-size:12px">Tháng 4+ — Authority</strong>
+          <ul style="font-size:12px;margin-top:8px;padding-left:16px;color:var(--text-muted)">
+            <li>Guest posts VnExpress, Zing</li>
+            <li>PR campaign 28 năm milestone</li>
+            <li>YouTube SEO optimization</li>
+            <li>ORM: đẩy bài tiêu cực xuống</li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px">⚠️ Không thể làm trên nền WP hiện tại: multi-location SEO architecture tối ưu, Core Web Vitals perfect score, fully decoupled CMS.</p>
+    </section>
+
+    <!-- COMPETITORS -->
+    <section id="competitors">
+      <h2>Competitor Benchmark</h2>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div class="name">Thu Cúc Clinics</div>
+          <div class="strength">~30 năm · Hanoi stronghold · Surgical + Non-surgical</div>
+          <div class="vs">Mạnh hơn về HN organic SEO</div>
+        </div>
+        <div class="comp-card">
+          <div class="name">Kangnam Hospital</div>
+          <div class="strength">Korean standard · 10 chi nhánh · Aggressive digital</div>
+          <div class="vs">Mạnh hơn về surgical keywords</div>
+        </div>
+        <div class="comp-card">
+          <div class="name">Lavender By Chang</div>
+          <div class="strength">Non-surgical focus · Digital-first · Celebrity clientele</div>
+          <div class="vs">Likely better organic traffic</div>
+        </div>
+        <div class="comp-card">
+          <div class="name">bookingcare.vn</div>
+          <div class="strength">Aggregator · Chiếm hết roundup SERPs</div>
+          <div class="vs">Cần được listed tại đây</div>
+        </div>
+        <div class="comp-card">
+          <div class="name">JW Korea Hospital</div>
+          <div class="strength">Korean franchise · Strong surgical positioning</div>
+          <div class="vs">Khác positioning — ít cạnh tranh trực tiếp</div>
+        </div>
+        <div class="comp-card">
+          <div class="name">Bệnh viện TM Sài Gòn</div>
+          <div class="strength">First specialized cosmetic hospital in VN · Medical authority</div>
+          <div class="vs">Mạnh hơn về medical trust signals</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEYWORD GAPS -->
+    <section id="keywords">
+      <h2>Keyword Gaps — Priority List</h2>
+      <table>
+        <tr><th>Keyword</th><th>Intent</th><th>Volume (ước tính)</th><th>Difficulty</th><th>Priority</th></tr>
+        <tr><td>thẩm mỹ viện TP HCM</td><td>Local</td><td>Cao</td><td>Cao</td><td><span class="badge badge-critical">P1</span></td></tr>
+        <tr><td>trị nám tàn nhang TP HCM</td><td>Service + Local</td><td>Cao</td><td>TB</td><td><span class="badge badge-critical">P1</span></td></tr>
+        <tr><td>triệt lông vĩnh viễn TP HCM</td><td>Service + Local</td><td>Cao</td><td>TB</td><td><span class="badge badge-critical">P1</span></td></tr>
+        <tr><td>phun xăm mày TP HCM</td><td>Service + Local</td><td>TB</td><td>TB</td><td><span class="badge badge-high">P2</span></td></tr>
+        <tr><td>chăm sóc da TP HCM</td><td>Service + Local</td><td>Cao</td><td>TB</td><td><span class="badge badge-high">P2</span></td></tr>
+        <tr><td>thẩm mỹ viện Ngọc Dung có tốt không</td><td>Review/MOFU</td><td>TB</td><td>Thấp</td><td><span class="badge badge-medium">P3</span></td></tr>
+        <tr><td>giá triệt lông Ngọc Dung</td><td>Branded + Price</td><td>TB</td><td>Thấp</td><td><span class="badge badge-medium">P3</span></td></tr>
+      </table>
+
+      <div style="margin-top:16px;padding:14px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;font-size:13px">
+        <strong>📊 Methodology note:</strong> Volume là ước tính định tính từ SERP analysis, không phải Ahrefs/Semrush data. Cần tool để có số chính xác trước khi prioritize content calendar.
+      </div>
+    </section>
+
+    <div style="background:var(--brand);color:white;padding:20px;border-radius:8px;margin-top:32px;font-size:13px">
+      <strong>Audit Report v1.0</strong> — thammyvienngocdung.com · 2026-05-06<br>
+      <span style="opacity:0.7">Generated by Claude Code · skill: seo_audit · Không chia sẻ dữ liệu ra ngoài phạm vi conversation này.</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggleIssue(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.issue-toggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+function switchTab(btn, targetId) {
+  const card = btn.closest('.issue-body');
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+}
+
+// Scrollspy
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+}, {passive: true});
+
+// Close sidebar on mobile link click
+navLinks.forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
