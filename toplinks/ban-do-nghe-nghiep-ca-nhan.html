@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản Đồ Nghề Nghiệp Cá Nhân — Lê Thị Thảo Trang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500&family=Roboto+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Meta Design System — Pure */
+  --primary:#0064E0;--primary-deep:#0457CB;--primary-soft:#0091FF;
+  --gold:#F7B928;--gold-light:#FFD966;--gold-dim:#D49A00;--gold-glow:rgba(0,100,224,.06);
+  --canvas:#ffffff;--surface:#f1f4f7;--surface-warm:#f8f6f2;
+  --ink-deep:#0a1317;--ink:#1c1e21;--charcoal:#444950;--slate:#4b4c4f;
+  --steel:#5d6c7b;--stone:#8595a4;
+  --hairline:#ced0d4;--hairline-soft:#dee3e9;
+  --success:#31a24c;--critical:#e41e3f;
+  --font-display:'Roboto Slab',Georgia,serif;
+  --font-body:'Roboto',sans-serif;
+  --font-ui:'Roboto',sans-serif;
+  --r-sm:8px;--r-md:16px;--r-lg:24px;--r-xl:32px;--r-pill:100px;
+  --max-w:780px;--side-w:260px;
+}
+html{scroll-behavior:smooth;font-size:16px;scrollbar-color:var(--hairline) var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-family:var(--font-body);font-weight:400;line-height:1.5;letter-spacing:-.16px;overflow-x:hidden}
+::selection{background:var(--primary);color:#fff}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:var(--hairline);border-radius:var(--r-pill)}
+
+/* ── Progress Bar ── */
+#progress{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--primary-deep),var(--primary),var(--primary-soft));z-index:1000;transition:width .1s}
+
+/* ── Sidebar TOC ── */
+#sidebar{position:fixed;top:0;left:0;width:var(--side-w);height:100vh;background:var(--ink-deep);overflow-y:auto;padding:2rem 1rem 2rem 1.2rem;z-index:100;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+#sidebar.open{transform:translateX(0)}
+#sidebar .logo{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:#fff;letter-spacing:.02em;margin-bottom:1.8rem;line-height:1.3}
+#sidebar nav a{display:block;font-family:var(--font-ui);font-size:13px;font-weight:400;color:var(--stone);text-decoration:none;padding:.4rem .6rem;border-left:2px solid transparent;margin-bottom:1px;border-radius:0 var(--r-sm) var(--r-sm) 0;transition:all .2s;line-height:1.4;letter-spacing:-.14px}
+#sidebar nav a:hover,#sidebar nav a.active{color:#fff;border-left-color:var(--primary-soft);background:rgba(0,100,224,.15)}
+#sidebar nav .part-label{font-weight:700;color:rgba(255,255,255,.5);font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin-top:1.2rem;margin-bottom:.3rem;padding-left:.6rem}
+#overlay{position:fixed;inset:0;background:rgba(10,19,23,.6);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s}
+#overlay.show{opacity:1;pointer-events:all}
+
+/* ── Toggle Button ── */
+#menu-btn{position:fixed;top:1rem;left:1rem;z-index:101;width:44px;height:44px;border-radius:var(--r-pill);background:var(--canvas);border:1px solid var(--hairline-soft);color:var(--ink);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 1px 4px rgba(20,22,26,.12)}
+#menu-btn:hover{background:var(--surface);border-color:var(--hairline)}
+
+/* ── Main Content ── */
+main{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem}
+
+/* ── Cover / Hero ── */
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem;position:relative;overflow:hidden;background:linear-gradient(170deg,#f0fafa 0%,#fff 40%,#fffcf5 100%)}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(0,100,224,.06) 0%,transparent 60%);pointer-events:none}
+.cover-tag{font-family:var(--font-ui);font-size:14px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--steel);margin-bottom:1.5rem}
+.cover h1{font-family:var(--font-display);font-size:clamp(2.6rem,7vw,4rem);font-weight:700;color:var(--primary);line-height:1.16;margin-bottom:1rem}
+.cover .subtitle{font-family:var(--font-body);font-size:clamp(1rem,2.5vw,1.2rem);color:var(--charcoal);font-weight:300;margin-bottom:3rem;line-height:1.5}
+.cover .author{font-family:var(--font-ui);font-size:14px;font-weight:400;color:var(--steel)}
+.cover .author strong{color:var(--primary);font-weight:700}
+.cover .divider{width:48px;height:2px;background:var(--primary);margin:1.5rem auto;border-radius:1px}
+.cover .scroll-hint{position:absolute;bottom:2rem;font-family:var(--font-ui);font-size:12px;font-weight:400;color:var(--stone);letter-spacing:.1em;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+
+/* ── Section Styles ── */
+.part-header{padding:5rem 0 3rem;text-align:center;position:relative}
+.part-header::before{content:'';display:block;width:48px;height:3px;background:var(--primary);margin:0 auto 1.5rem;border-radius:2px}
+.part-header .part-num{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:.6rem}
+.part-header h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.4rem);font-weight:500;color:var(--ink-deep);line-height:1.17}
+
+.chapter{padding:3rem 0 2rem;border-top:1px solid var(--hairline-soft);margin-top:2rem}
+.chapter .ch-label{font-family:var(--font-ui);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--primary);margin-bottom:.5rem}
+.chapter h3{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,1.75rem);font-weight:500;color:var(--ink-deep);line-height:1.25;margin-bottom:.4rem}
+.chapter .ch-desc{font-family:var(--font-ui);font-size:14px;font-weight:400;color:var(--steel);margin-bottom:2rem}
+
+h4{font-family:var(--font-display);font-size:1.25rem;font-weight:500;color:var(--ink-deep);margin:2.5rem 0 .8rem;line-height:1.28}
+h5{font-family:var(--font-ui);font-size:16px;font-weight:700;color:var(--ink);margin:1.8rem 0 .6rem;letter-spacing:-.16px}
+
+p{margin-bottom:1rem;color:var(--ink);font-weight:400;line-height:1.5}
+p strong{color:var(--primary-deep);font-weight:700}
+
+ul,ol{margin:0 0 1.2rem 1.2rem;color:var(--ink)}
+li{margin-bottom:.35rem;line-height:1.5}
+li::marker{color:var(--primary)}
+
+/* ── Callout / Quote Box ── */
+.callout{background:var(--surface);border-left:3px solid var(--primary);padding:1.2rem 1.5rem;margin:1.5rem 0;border-radius:0 var(--r-md) var(--r-md) 0;position:relative}
+.callout p{margin:0;color:var(--ink);font-style:italic;font-weight:400}
+.callout.question{border-left-color:var(--primary-soft)}
+.callout.question::before{content:'?';position:absolute;top:-.5rem;left:-.75rem;width:1.5rem;height:1.5rem;background:var(--primary);color:#fff;font-family:var(--font-display);font-weight:700;font-size:.8rem;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center;font-style:normal}
+.callout.insight{border-left-color:var(--gold)}
+.callout.insight::before{content:'!';position:absolute;top:-.5rem;left:-.75rem;width:1.5rem;height:1.5rem;background:var(--gold);color:var(--ink-deep);font-family:var(--font-display);font-weight:700;font-size:.8rem;border-radius:var(--r-pill);display:flex;align-items:center;justify-content:center;font-style:normal}
+.callout.message{border-left:none;background:linear-gradient(135deg,rgba(0,100,224,.04),rgba(0,100,224,.04));text-align:center;border:1px solid var(--hairline-soft);border-radius:var(--r-lg)}
+.callout.message::before{display:none}
+.callout.message p{font-family:var(--font-display);font-size:1.05rem;font-weight:500;color:var(--primary-deep);font-style:italic}
+
+/* ── Number Cards (Life Path) ── */
+.number-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:2rem 0}
+.number-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:2rem;position:relative;overflow:hidden;transition:all .25s;box-shadow:0 1px 3px rgba(20,22,26,.04)}
+.number-card:hover{border-color:var(--primary);box-shadow:0 2px 12px rgba(0,100,224,.08)}
+.number-card .num{font-family:var(--font-display);font-size:3.5rem;font-weight:700;color:var(--primary);opacity:.08;position:absolute;top:-.2rem;right:.8rem;line-height:1;pointer-events:none}
+.number-card .title{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--primary-deep);margin-bottom:.3rem}
+.number-card .tagline{font-family:var(--font-ui);font-size:13px;font-weight:400;color:var(--steel);font-style:italic;margin-bottom:1rem}
+.number-card .section-label{font-family:var(--font-ui);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);margin:1.2rem 0 .5rem}
+.number-card ul{margin-left:1rem;font-size:14px}
+.number-card li{margin-bottom:.3rem;color:var(--charcoal)}
+
+.careers-list{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 1rem;list-style:none;padding:0}
+.careers-list li{background:rgba(0,100,224,.06);border:1px solid rgba(0,100,224,.15);padding:.25rem .75rem;border-radius:var(--r-pill);font-family:var(--font-ui);font-size:12px;font-weight:500;color:var(--primary-deep);margin:0}
+
+/* ── Table ── */
+table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
+th{background:var(--surface);color:var(--primary-deep);font-family:var(--font-ui);font-weight:700;text-align:left;padding:.65rem .8rem;border-bottom:2px solid var(--primary);font-size:12px;letter-spacing:.03em;text-transform:uppercase}
+td{padding:.6rem .8rem;border-bottom:1px solid var(--hairline-soft);color:var(--ink);vertical-align:top}
+tr:hover td{background:rgba(0,100,224,.02)}
+
+/* ── Checklist ── */
+.checklist{list-style:none;margin-left:0;padding:0}
+.checklist li{padding:.4rem 0 .4rem 1.8rem;position:relative;font-family:var(--font-ui);font-size:14px;font-weight:400}
+.checklist li::before{content:'';position:absolute;left:0;top:.55rem;width:14px;height:14px;border:2px solid var(--primary);border-radius:4px}
+
+/* ── Roadmap ── */
+.roadmap{position:relative;padding-left:2rem;margin:1.5rem 0}
+.roadmap::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--primary),var(--primary-soft),var(--hairline))}
+.roadmap .year{position:relative;margin-bottom:2rem}
+.roadmap .year::before{content:'';position:absolute;left:-1.65rem;top:.35rem;width:12px;height:12px;background:var(--primary);border-radius:var(--r-pill);border:2px solid var(--canvas)}
+.roadmap .year h5{color:var(--primary-deep);margin-top:0}
+.roadmap .year .goal{font-family:var(--font-ui);font-size:13px;color:var(--primary);font-weight:700;margin-top:.5rem;background:rgba(0,100,224,.06);display:inline-block;padding:.25rem .75rem;border-radius:var(--r-pill)}
+
+/* ── Formula ── */
+.formula{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);padding:1.2rem 1.5rem;margin:1.5rem 0;text-align:center;font-family:var(--font-ui);font-size:15px;font-weight:500;color:var(--primary-deep);letter-spacing:.02em}
+
+/* ── Separator ── */
+.sep{text-align:center;padding:2rem 0;color:var(--hairline);font-size:.8rem;letter-spacing:.3em}
+
+/* ── Conclusion ── */
+.conclusion{padding:4rem 0;text-align:center}
+.conclusion h2{font-family:var(--font-display);font-size:2rem;font-weight:500;color:var(--primary-deep);margin-bottom:1.5rem}
+.conclusion p{max-width:600px;margin:0 auto 1rem;text-align:center}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--hairline-soft);padding:3rem 0;text-align:center;margin-top:3rem;background:var(--surface)}
+footer p{font-family:var(--font-ui);font-size:13px;font-weight:400;color:var(--steel)}
+footer p strong{font-weight:700;color:var(--ink)}
+
+/* ── Responsive ── */
+@media(min-width:1100px){
+  #sidebar{transform:translateX(0)}
+  #menu-btn{display:none}
+  main{margin-left:var(--side-w);padding:0 3rem}
+  #overlay{display:none!important}
+}
+@media(max-width:600px){
+  html{font-size:15px}
+  .cover h1{font-size:2.2rem}
+  .number-card{padding:1.3rem;border-radius:var(--r-lg)}
+  table{font-size:13px}
+  th,td{padding:.45rem .5rem}
+}
+
+/* ── Illustrations ── */
+.illus{text-align:center;margin:2rem auto;max-width:260px;opacity:.9}
+.illus svg{width:100%;height:auto}
+.illus-sm{max-width:180px;margin:1.5rem auto}
+.illus-lg{max-width:320px}
+.part-header .illus{margin-top:1.5rem;margin-bottom:0}
+.cover .illus{max-width:200px;margin:0 auto 2rem;opacity:.8}
+.number-card .card-icon{position:absolute;top:1.2rem;right:3.5rem;width:36px;height:36px;opacity:.2}
+.chapter-illus{text-align:center;margin:2.5rem auto 1.5rem;max-width:420px;padding:1.5rem;background:var(--surface);border-radius:var(--r-xl);border:1px solid var(--hairline-soft)}
+.chapter-illus svg{width:100%;max-width:320px;height:auto}
+
+/* ── Animations ── */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.fade-in{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<button id="menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+<div id="overlay" onclick="toggleSidebar()"></div>
+
+<aside id="sidebar">
+  <div class="logo">Bản Đồ<br>Nghề Nghiệp<br>Cá Nhân</div>
+  <nav id="toc">
+    <a href="#cover">Trang bìa</a>
+    <a href="#loingo">Lời ngỏ của tác giả</a>
+    <div class="part-label">Phần 1</div>
+    <a href="#ch1">Ch.1 Vì sao chọn sai ngành</a>
+    <a href="#ch2">Ch.2 Hiểu mình</a>
+    <div class="part-label">Phần 2</div>
+    <a href="#ch3">Ch.3 Cách tính số đường đời</a>
+    <a href="#ch4">Ch.4 Tổng quan 12 nhóm số</a>
+    <a href="#ch5">Ch.5 Phân tích từng số</a>
+    <div class="part-label">Phần 3</div>
+    <a href="#ch6">Ch.6 6 nhóm nghề chính</a>
+    <a href="#ch7">Ch.7 Kết nối số &amp; ngành</a>
+    <a href="#ch8">Ch.8 Bản đồ ngành VN</a>
+    <div class="part-label">Phần 4</div>
+    <a href="#ch9">Ch.9 Công thức chọn ngành</a>
+    <a href="#ch10">Ch.10 Khi không hợp số</a>
+    <div class="part-label">Phần 5</div>
+    <a href="#ch11">Ch.11 Lộ trình 4 năm ĐH</a>
+    <a href="#ch12">Ch.12 Khi đã chọn sai</a>
+    <div class="part-label">Phần 6</div>
+    <a href="#ch13">Ch.13 AI Career Coach</a>
+    <a href="#ch14">Ch.14 Career Coaching</a>
+    <a href="#ketluan">Kết luận</a>
+  </nav>
+</aside>
+
+<main>
+
+<!-- ═══════════ COVER ═══════════ -->
+<section class="cover" id="cover">
+  <!-- Cover illustration: brain network with key -->
+  <div class="illus" style="max-width:160px;margin-bottom:1.5rem;opacity:.6">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="85" r="55" stroke="#0064E0" stroke-width="2" fill="none"/>
+      <circle cx="60" cy="60" r="6" fill="#0064E0" opacity=".7"/><circle cx="140" cy="60" r="6" fill="#0064E0" opacity=".7"/>
+      <circle cx="50" cy="95" r="5" fill="#0064E0" opacity=".5"/><circle cx="150" cy="95" r="5" fill="#0064E0" opacity=".5"/>
+      <circle cx="75" cy="40" r="4" fill="#0064E0" opacity=".6"/><circle cx="125" cy="40" r="4" fill="#0064E0" opacity=".6"/>
+      <circle cx="70" cy="120" r="5" fill="#0064E0" opacity=".5"/><circle cx="130" cy="120" r="5" fill="#0064E0" opacity=".5"/>
+      <line x1="60" y1="60" x2="75" y2="40" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="140" y1="60" x2="125" y2="40" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="60" y1="60" x2="50" y2="95" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="140" y1="60" x2="150" y2="95" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="50" y1="95" x2="70" y2="120" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="150" y1="95" x2="130" y2="120" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="75" y1="40" x2="125" y2="40" stroke="#0064E0" stroke-width="1" opacity=".3"/>
+      <line x1="70" y1="120" x2="130" y2="120" stroke="#0064E0" stroke-width="1" opacity=".3"/>
+      <!-- Key icon -->
+      <circle cx="100" cy="80" r="10" stroke="#0064E0" stroke-width="2" fill="none"/>
+      <line x1="100" y1="90" x2="100" y2="115" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="105" x2="108" y2="105" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="110" x2="106" y2="110" stroke="#0064E0" stroke-width="2"/>
+      <!-- Person silhouette -->
+      <circle cx="100" cy="155" r="8" stroke="#0064E0" stroke-width="1.5" fill="none"/>
+      <path d="M85 180 Q100 168 115 180" stroke="#0064E0" stroke-width="1.5" fill="none"/>
+      <!-- Arrows pointing outward -->
+      <line x1="70" y1="170" x2="45" y2="185" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="130" y1="170" x2="155" y2="185" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <polygon points="42,182 45,190 50,184" fill="#0064E0" opacity=".4"/>
+      <polygon points="158,182 155,190 150,184" fill="#0064E0" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="cover-tag">Dành cho học sinh &mdash; sinh viên</div>
+  <h1>Bản Đồ<br>Nghề Nghiệp<br>Cá Nhân</h1>
+  <div class="subtitle">Hiểu mình qua con số &mdash; chọn nghề không mơ hồ</div>
+  <div class="divider"></div>
+  <div class="author"><strong>Lê Thị Thảo Trang</strong><br>CEO &amp; Founder TOPLINKS</div>
+  <div class="scroll-hint">&darr;&ensp;CUỘN XUỐNG ĐỂ ĐỌC&ensp;&darr;</div>
+</section>
+
+<!-- ═══════════ LỜI NGỎ ═══════════ -->
+<section id="loingo" class="chapter fade-in">
+  <div class="ch-label">Lời ngỏ của tác giả</div>
+  <h3>Sự "gồng"</h3>
+
+  <p>Trong hơn 20 năm làm việc trong lĩnh vực quản trị nhân sự, tư vấn và huấn luyện lãnh đạo, tôi có cơ hội quan sát rất nhiều hành trình nghề nghiệp khác nhau. Và có một điều lặp đi lặp lại qua nhiều thế hệ mà tôi không thể không trăn trở:</p>
+
+  <div class="callout insight">
+    <p>Sự "gồng".</p>
+  </div>
+
+  <p>Tôi là <strong>Lê Thị Thảo Trang</strong>, CEO &amp; Founder của TOPLINKS. Và nếu phải gọi tên một điều khiến con người lãng phí nhiều nhất trong hành trình cuộc đời, thì đó không chỉ là tiền bạc hay thời gian &mdash; mà là <strong>sự gồng để sống không đúng với bản thân mình</strong>.</p>
+
+  <h4>Khi còn là một đứa trẻ…</h4>
+  <p>Nhiều em bắt đầu việc học không phải từ sự lựa chọn, mà từ sự sắp đặt:</p>
+  <ul>
+    <li>Học vì ba mẹ nói nên học</li>
+    <li>Học vì bạn bè cùng học</li>
+    <li>Học vì thấy "có vẻ thích" ở một thời điểm</li>
+  </ul>
+  <p>Nhưng khi nhận ra không phù hợp, các em vẫn tiếp tục &mdash; vì đã lỡ theo. Và sự gồng bắt đầu từ đó.</p>
+
+  <div class="callout question">
+    <p>Mình đang học vì mình muốn, hay vì mình không dám dừng lại?</p>
+  </div>
+
+  <h4>Khi lớn hơn một chút…</h4>
+  <p>Việc học trở nên khó hơn, áp lực hơn. Nhưng điều đáng nói là không phải ai cũng hiểu <strong>mình học tốt theo cách nào</strong>.</p>
+  <ul>
+    <li>Có người học tốt khi được nghe</li>
+    <li>Có người cần nhìn thấy</li>
+    <li>Có người phải trải nghiệm</li>
+  </ul>
+
+  <div class="callout question">
+    <p>Mình cố rất nhiều, nhưng kết quả vẫn không phản ánh đúng năng lực của mình?</p>
+  </div>
+
+  <h4>Khi bước vào cấp 3…</h4>
+  <p>Áp lực không còn là điểm số đơn thuần, mà là <strong>lựa chọn</strong>. Chọn khối. Chọn ngành. Chọn một hướng đi mà nhiều khi chưa hiểu rõ chính mình.</p>
+
+  <div class="callout question">
+    <p>Mình đang chọn vì phù hợp, hay vì mình đang cố giữ tất cả lựa chọn mở?</p>
+  </div>
+
+  <h4>Khi vào đại học…</h4>
+  <p>Mục tiêu lại thay đổi. Không còn là "chọn đúng", mà là "không sai": không rớt môn, không thi lại, không tốn thêm tiền. Nhưng rồi đến gần lúc ra trường, một câu hỏi lớn xuất hiện:</p>
+
+  <div class="callout insight">
+    <p>"Mình thật sự sẽ làm gì?"</p>
+  </div>
+
+  <h4>Khi đi làm…</h4>
+  <p>Câu chuyện tiếp tục với: đổi việc, tìm hướng, thử và sai. Đến một thời điểm, khi bước vào giai đoạn trung niên: sức khỏe bắt đầu giảm, ý chí không còn "bốc lửa" như trước, áp lực không còn là "làm gì", mà là: <strong>tiếp tục hay dừng lại?</strong></p>
+
+  <div class="callout question">
+    <p>Nếu không dừng lại để hiểu mình sớm hơn, mình sẽ tiếp tục đi bao lâu trong sự mơ hồ này?</p>
+  </div>
+
+  <h4>Đây là lý do cuốn Ebook này ra đời</h4>
+  <p>Tôi không viết cuốn sách này để đưa ra một "công thức đúng tuyệt đối" cho tất cả mọi người. Nhưng trong cuốn Ebook này, tôi chọn một cách tiếp cận đơn giản hơn:</p>
+  <p><strong>Số đường đời</strong> &mdash; như một điểm bắt đầu. Không phải để quyết định thay bạn, mà để bạn có một góc nhìn rõ hơn về chính mình.</p>
+
+  <div class="callout insight">
+    <p>"Mình là ai &mdash; và mình đang sống có đúng với bản thân mình không?"</p>
+  </div>
+
+  <p>Nếu cuốn Ebook này giúp bạn dừng lại một chút để suy nghĩ, để soi chiếu, để đặt lại câu hỏi cho chính mình &mdash; thì nó đã hoàn thành một phần giá trị của nó.</p>
+  <p>Và có thể, từ đó… bạn sẽ bắt đầu một hành trình <strong>bớt gồng hơn</strong>.</p>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 1 ═══════════ -->
+<div class="part-header fade-in" id="part1">
+  <div class="part-num">Phần 1</div>
+  <h2>Hiểu Vì Sao Bạn Đang Mơ Hồ</h2>
+  <div class="illus">
+    <svg viewBox="0 0 260 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Person at crossroads -->
+      <circle cx="130" cy="45" r="12" stroke="#0064E0" stroke-width="2" fill="none"/>
+      <line x1="130" y1="57" x2="130" y2="90" stroke="#0064E0" stroke-width="2"/>
+      <line x1="130" y1="68" x2="115" y2="80" stroke="#0064E0" stroke-width="2"/>
+      <line x1="130" y1="68" x2="145" y2="80" stroke="#0064E0" stroke-width="2"/>
+      <line x1="130" y1="90" x2="120" y2="110" stroke="#0064E0" stroke-width="2"/>
+      <line x1="130" y1="90" x2="140" y2="110" stroke="#0064E0" stroke-width="2"/>
+      <!-- Arrows/paths diverging -->
+      <path d="M130 115 Q90 125 40 120" stroke="#0064E0" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity=".5"/>
+      <path d="M130 115 Q170 125 220 120" stroke="#0064E0" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity=".5"/>
+      <path d="M130 115 L130 150" stroke="#0064E0" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+      <!-- Question marks -->
+      <text x="35" y="118" font-family="Roboto Slab" font-size="18" fill="#0064E0" opacity=".4">?</text>
+      <text x="218" y="118" font-family="Roboto Slab" font-size="18" fill="#0064E0" opacity=".4">?</text>
+      <text x="125" y="155" font-family="Roboto Slab" font-size="14" fill="#0064E0" opacity=".6">!</text>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 1 -->
+<section class="chapter fade-in" id="ch1">
+  <div class="ch-label">Chương 1</div>
+  <h3>Vì sao nhiều người chọn sai ngành?</h3>
+  <div class="ch-desc">Những cách chọn ngành phổ biến và cái giá phải trả</div>
+
+  <p>Việc chọn ngành, chọn nghề là một trong những quyết định quan trọng nhất trong giai đoạn đầu đời. Tuy nhiên, nghịch lý ở chỗ: đây lại là quyết định được đưa ra trong lúc chúng ta hiểu bản thân mình ít nhất.</p>
+
+  <!-- Illustration: 3 doors (3 ways of choosing wrong) -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 340 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Door 1: Family -->
+      <rect x="25" y="15" width="55" height="75" rx="3" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.04)"/>
+      <circle cx="70" cy="55" r="3" fill="#0064E0" opacity=".3"/>
+      <text x="52" y="10" font-family="Roboto" font-size="7" fill="#0064E0" opacity=".5" text-anchor="middle">GIA ĐÌNH</text>
+      <text x="52" y="55" font-family="Roboto" font-size="20" fill="#0064E0" opacity=".15" text-anchor="middle">&#9993;</text>
+      <!-- Door 2: Score -->
+      <rect x="115" y="15" width="55" height="75" rx="3" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.04)"/>
+      <circle cx="160" cy="55" r="3" fill="#0064E0" opacity=".3"/>
+      <text x="142" y="10" font-family="Roboto" font-size="7" fill="#0064E0" opacity=".5" text-anchor="middle">ĐIỂM SỐ</text>
+      <text x="142" y="58" font-family="Roboto Slab" font-size="18" fill="#0064E0" opacity=".15" text-anchor="middle">7.5</text>
+      <!-- Door 3: Trend -->
+      <rect x="205" y="15" width="55" height="75" rx="3" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.04)"/>
+      <circle cx="250" cy="55" r="3" fill="#0064E0" opacity=".3"/>
+      <text x="232" y="10" font-family="Roboto" font-size="7" fill="#0064E0" opacity=".5" text-anchor="middle">XU HƯỚNG</text>
+      <text x="232" y="58" font-family="Roboto" font-size="16" fill="#0064E0" opacity=".15" text-anchor="middle">&#128293;</text>
+      <!-- X marks -->
+      <line x1="40" y1="95" x2="65" y2="95" stroke="#E06050" stroke-width="1" opacity=".3"/>
+      <text x="52" y="105" font-family="Roboto" font-size="8" fill="#E06050" opacity=".4" text-anchor="middle">&#10007;</text>
+      <text x="142" y="105" font-family="Roboto" font-size="8" fill="#E06050" opacity=".4" text-anchor="middle">&#10007;</text>
+      <text x="232" y="105" font-family="Roboto" font-size="8" fill="#E06050" opacity=".4" text-anchor="middle">&#10007;</text>
+      <!-- The right door (hidden, with ?) -->
+      <rect x="290" y="15" width="35" height="75" rx="3" stroke="#0064E0" stroke-width="1.5" stroke-dasharray="4 3" fill="rgba(0,100,224,.04)"/>
+      <text x="307" y="58" font-family="Roboto Slab" font-size="20" fill="#0064E0" opacity=".4" text-anchor="middle">?</text>
+    </svg>
+  </div>
+
+  <h4>1.1 Những cách chọn ngành phổ biến (và vì sao dễ sai)</h4>
+
+  <h5>Cách thứ nhất: Chọn theo định hướng của gia đình</h5>
+  <p>Đây là lựa chọn xuất phát từ sự quan tâm và mong muốn ổn định. Ba mẹ thường khuyên con theo những ngành mà họ tin là "an toàn", "dễ xin việc" hoặc "có thu nhập tốt". Tuy nhiên, điều phù hợp với một thế hệ trước chưa chắc còn phù hợp với bối cảnh hiện tại.</p>
+
+  <h5>Cách thứ hai: Chọn theo điểm số</h5>
+  <p>Nhiều bạn lựa chọn ngành dựa trên mức điểm thi đạt được, với suy nghĩ đơn giản: đủ điểm vào đâu thì học đó. Cách này giúp giải quyết bài toán trước mắt, nhưng lại bỏ qua yếu tố quan trọng hơn: sự phù hợp giữa con người và công việc.</p>
+
+  <h5>Cách thứ ba: Chọn theo xu hướng</h5>
+  <p>Khi một ngành được nhắc đến nhiều với những cụm từ như "hot", "lương cao", "cơ hội nhiều", rất dễ để bạn bị cuốn theo. Nhưng xu hướng luôn thay đổi, và không phải ai cũng phù hợp với cùng một môi trường làm việc.</p>
+
+  <div class="callout question">
+    <p>Nếu bỏ hết những yếu tố như điểm số, lời khuyên hay xu hướng, bạn có thật sự biết mình phù hợp với điều gì không?</p>
+  </div>
+
+  <h4>1.2 Cái giá của việc chọn sai</h4>
+  <p>Việc chọn sai ngành hiếm khi tạo ra hậu quả ngay lập tức. Nó diễn ra âm thầm, từng chút một. Ban đầu, bạn có thể vẫn học được. Sau đó, bạn bắt đầu thấy thiếu hứng thú. Rồi dần dần, việc học trở thành nghĩa vụ.</p>
+  <p>Một số dấu hiệu rất phổ biến:</p>
+  <ul>
+    <li>Học để qua môn, không còn học để hiểu</li>
+    <li>Không thấy ý nghĩa trong những gì mình đang học</li>
+    <li>Luôn cảm thấy mệt mỏi, dù không làm việc quá sức</li>
+  </ul>
+
+  <div class="callout insight">
+    <p>Bạn đang "không phù hợp với ngành", hay bạn chưa từng thật sự hiểu mình ngay từ đầu?</p>
+  </div>
+
+  <h4>1.3 Chọn ngành thực chất là chọn điều gì?</h4>
+  <p>Nhiều người nghĩ rằng chọn ngành là chọn một chương trình học. Nhưng thực tế, bạn đang chọn nhiều hơn thế. Bạn đang chọn:</p>
+  <ul>
+    <li>Kiểu công việc bạn sẽ làm mỗi ngày</li>
+    <li>Kiểu vấn đề bạn sẽ giải quyết</li>
+    <li>Kiểu môi trường bạn sẽ tồn tại</li>
+    <li>Và xa hơn, là kiểu con người bạn sẽ trở thành</li>
+  </ul>
+
+  <h4>1.4 Gốc rễ của vấn đề: chưa hiểu mình</h4>
+  <p>Sau tất cả, lý do cốt lõi không nằm ở ngành học, mà nằm ở việc chúng ta chưa hiểu rõ bản thân mình. Nếu bạn chỉ dựa vào điểm số, lời khuyên, xu hướng mà không hiểu tính cách, cách học, động lực bên trong &mdash; thì khả năng chọn sai là rất cao.</p>
+
+  <h4>1.5 Một cách tiếp cận khác</h4>
+  <p>Thay vì bắt đầu bằng câu hỏi: <strong>"Ngành nào tốt?"</strong> &mdash; có lẽ bạn nên bắt đầu bằng câu hỏi:</p>
+
+  <div class="callout insight">
+    <p>"Mình là ai, và mình phù hợp với kiểu công việc nào?"</p>
+  </div>
+
+  <p>Hiểu bản thân trước, rồi mới chọn ngành. Nếu bạn chưa hiểu mình, mọi lựa chọn đều mang tính may rủi.</p>
+</section>
+
+<!-- CHƯƠNG 2 -->
+<section class="chapter fade-in" id="ch2">
+  <div class="ch-label">Chương 2</div>
+  <h3>Hiểu mình &mdash; bước đầu tiên trước khi chọn ngành</h3>
+  <div class="ch-desc">Tại sao hiểu bản thân quan trọng hơn mọi thông tin về ngành</div>
+
+  <!-- Illustration: mirror / self-reflection -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mirror frame -->
+      <ellipse cx="140" cy="50" rx="55" ry="42" stroke="#0064E0" stroke-width="2" fill="rgba(0,100,224,.03)"/>
+      <ellipse cx="140" cy="50" rx="48" ry="36" stroke="#0064E0" stroke-width=".5" opacity=".3"/>
+      <!-- Person looking in mirror (left side) -->
+      <circle cx="70" cy="40" r="8" stroke="#0064E0" stroke-width="1.5" fill="none"/>
+      <line x1="70" y1="48" x2="70" y2="68" stroke="#0064E0" stroke-width="1.5"/>
+      <line x1="70" y1="55" x2="82" y2="50" stroke="#0064E0" stroke-width="1.5"/>
+      <!-- Reflection inside mirror with glow -->
+      <circle cx="155" cy="40" r="7" stroke="#0064E0" stroke-width="1" fill="none" opacity=".5"/>
+      <line x1="155" y1="47" x2="155" y2="62" stroke="#0064E0" stroke-width="1" opacity=".5"/>
+      <!-- Labels around reflection -->
+      <text x="120" y="30" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Learning</text>
+      <text x="168" y="30" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Working</text>
+      <text x="115" y="75" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Motivation</text>
+      <text x="165" y="75" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Tolerance</text>
+      <!-- Light dots -->
+      <circle cx="130" cy="25" r="1.5" fill="#0064E0" opacity=".3"/>
+      <circle cx="175" cy="45" r="1.5" fill="#0064E0" opacity=".3"/>
+      <circle cx="130" cy="70" r="1.5" fill="#0064E0" opacity=".3"/>
+      <circle cx="175" cy="65" r="1.5" fill="#0064E0" opacity=".3"/>
+    </svg>
+  </div>
+
+  <h4>2.1 "Hiểu mình" thực sự là gì?</h4>
+  <p>Hiểu mình không phải là việc bạn nói được mình thích gì trong một thời điểm. Bởi vì sở thích có thể thay đổi rất nhanh.</p>
+  <p>Hiểu mình, ở một mức sâu hơn, là hiểu:</p>
+  <ul>
+    <li>Bạn có xu hướng suy nghĩ như thế nào</li>
+    <li>Bạn làm việc tốt trong môi trường ra sao</li>
+    <li>Điều gì khiến bạn có động lực lâu dài</li>
+    <li>Và điều gì khiến bạn nhanh chóng mất năng lượng</li>
+  </ul>
+
+  <div class="callout question">
+    <p>Khi không ai ép buộc, mình thường bị thu hút bởi điều gì?<br>Và khi phải làm một việc lặp lại, mình phản ứng như thế nào?</p>
+  </div>
+
+  <h4>2.2 Vì sao nhiều người "tưởng là hiểu mình" nhưng thực ra không?</h4>
+  <p>Có một nhầm lẫn rất phổ biến: đồng nhất "mình thích" với "mình phù hợp".</p>
+  <p>Sự khác biệt nằm ở chỗ: <strong>Thích là cảm xúc ngắn hạn. Phù hợp là khả năng duy trì lâu dài.</strong></p>
+
+  <div class="callout question">
+    <p>Nếu phải làm việc này mỗi ngày trong 3–5 năm, mình có còn muốn tiếp tục không?</p>
+  </div>
+
+  <h4>2.3 Bốn yếu tố cốt lõi để hiểu mình</h4>
+
+  <div class="number-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="number-card">
+      <div class="num">1</div>
+      <div class="title">Learning Style</div>
+      <div class="tagline">Cách bạn tiếp nhận thông tin</div>
+      <p style="font-size:.9rem">Bạn học tốt hơn khi: Nghe? Nhìn? Hay phải tự làm, trải nghiệm? Nếu học sai cách, bạn sẽ luôn cảm thấy mình "đuối hơn người khác", dù thực tế không phải vậy.</p>
+    </div>
+    <div class="number-card">
+      <div class="num">2</div>
+      <div class="title">Working Style</div>
+      <div class="tagline">Cách bạn làm việc</div>
+      <p style="font-size:.9rem">Bạn phù hợp với: Môi trường ổn định hay thay đổi? Làm việc độc lập hay làm việc nhóm? Có quy trình rõ ràng hay linh hoạt sáng tạo?</p>
+    </div>
+    <div class="number-card">
+      <div class="num">3</div>
+      <div class="title">Motivation</div>
+      <div class="tagline">Động lực bên trong</div>
+      <p style="font-size:.9rem">Bạn được thúc đẩy bởi điều gì? Tiền bạc? Sự công nhận? Sự tự do? Hay cảm giác tạo ra giá trị cho người khác?</p>
+    </div>
+    <div class="number-card">
+      <div class="num">4</div>
+      <div class="title">Tolerance</div>
+      <div class="tagline">Ngưỡng chịu đựng áp lực</div>
+      <p style="font-size:.9rem">Mỗi ngành đều có áp lực riêng: áp lực doanh số, áp lực deadline, áp lực cảm xúc. Hiểu rõ giới hạn của mình giúp bạn tránh chọn môi trường khiến bạn kiệt sức.</p>
+    </div>
+  </div>
+
+  <h4>2.4 Vì sao hiểu mình lại khó?</h4>
+  <p>Có ba lý do chính:</p>
+  <ol>
+    <li>Chúng ta hiếm khi được dạy cách hiểu bản thân một cách hệ thống</li>
+    <li>Chúng ta bị ảnh hưởng bởi kỳ vọng của người khác</li>
+    <li>Chúng ta thiếu công cụ</li>
+  </ol>
+
+  <h4>2.5 Cần một "bản đồ" để bắt đầu</h4>
+  <p>Bạn không cần phải bắt đầu một cách mơ hồ. Bạn cần một "bản đồ" &mdash; một công cụ giúp bạn có điểm bắt đầu, có hướng để quan sát và soi chiếu.</p>
+  <p>Trong cuốn Ebook này, công cụ đó là: <strong>Số đường đời</strong></p>
+
+  <h4>2.6 Hiểu mình không phải là lựa chọn &mdash; mà là nền tảng</h4>
+  <p>Bạn có thể chọn sai ngành một lần. Bạn có thể đổi hướng một vài lần. Nhưng nếu không hiểu mình, bạn sẽ có xu hướng lặp lại cùng một kiểu sai &mdash; chỉ là trong những bối cảnh khác nhau.</p>
+  <p>Hiểu mình giúp bạn: sai nhanh hơn, sửa sớm hơn, và ít "gồng" hơn trong hành trình của mình.</p>
+
+  <h4>2.7 Một bước nhỏ nhưng quan trọng</h4>
+  <p>Bạn không cần phải hiểu hết bản thân ngay lập tức. Bạn chỉ cần bắt đầu. Một góc nhìn. Một công cụ. Một cách soi chiếu. Và từ đó, dần dần điều chỉnh.</p>
+  <p>Trong cuốn Ebook này, mình chọn một điểm bắt đầu đơn giản nhưng đủ mạnh: <strong>Số đường đời</strong></p>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 2 ═══════════ -->
+<div class="part-header fade-in" id="part2">
+  <div class="part-num">Phần 2</div>
+  <h2>Hiểu Mình Qua Số Đường Đời</h2>
+  <div class="illus">
+    <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Central circle -->
+      <circle cx="120" cy="90" r="40" stroke="#0064E0" stroke-width="1" stroke-dasharray="3 2" opacity=".3"/>
+      <circle cx="120" cy="90" r="65" stroke="#0064E0" stroke-width="1" stroke-dasharray="2 3" opacity=".2"/>
+      <!-- Numbers arranged in circle -->
+      <text x="116" y="58" font-family="Roboto Slab" font-size="16" fill="#0064E0" font-weight="600">1</text>
+      <text x="149" y="68" font-family="Roboto Slab" font-size="14" fill="#0064E0" opacity=".7">2</text>
+      <text x="163" y="95" font-family="Roboto Slab" font-size="15" fill="#0064E0" opacity=".6">3</text>
+      <text x="152" y="122" font-family="Roboto Slab" font-size="14" fill="#0064E0" opacity=".7">4</text>
+      <text x="116" y="135" font-family="Roboto Slab" font-size="16" fill="#0064E0" font-weight="500">5</text>
+      <text x="82" y="122" font-family="Roboto Slab" font-size="14" fill="#0064E0" opacity=".7">6</text>
+      <text x="70" y="95" font-family="Roboto Slab" font-size="15" fill="#0064E0" opacity=".6">7</text>
+      <text x="82" y="68" font-family="Roboto Slab" font-size="14" fill="#0064E0" opacity=".7">8</text>
+      <text x="100" y="55" font-family="Roboto Slab" font-size="13" fill="#0064E0" opacity=".5">9</text>
+      <!-- Master numbers outer ring -->
+      <text x="106" y="28" font-family="Roboto Slab" font-size="11" fill="#0064E0" opacity=".5">11</text>
+      <text x="185" y="95" font-family="Roboto Slab" font-size="11" fill="#0064E0" opacity=".5">22</text>
+      <text x="106" y="165" font-family="Roboto Slab" font-size="11" fill="#0064E0" opacity=".5">33</text>
+      <!-- Connecting lines -->
+      <line x1="120" y1="50" x2="155" y2="62" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="155" y1="62" x2="168" y2="90" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="168" y1="90" x2="155" y2="118" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="155" y1="118" x2="120" y2="130" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="120" y1="130" x2="85" y2="118" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="85" y1="118" x2="72" y2="90" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="72" y1="90" x2="85" y2="62" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <line x1="85" y1="62" x2="120" y2="50" stroke="#0064E0" stroke-width=".5" opacity=".2"/>
+      <!-- Center star -->
+      <circle cx="120" cy="90" r="4" fill="#0064E0" opacity=".4"/>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 3 -->
+<section class="chapter fade-in" id="ch3">
+  <div class="ch-label">Chương 3</div>
+  <h3>Cách tính số đường đời chuẩn</h3>
+  <div class="ch-desc">Hướng dẫn từng bước cho số 1–9 và Master Number 11/22/33</div>
+
+  <h4>3.1 Ngày sinh sử dụng để tính</h4>
+  <p>Trong cuốn Ebook này, ngày sinh dùng để tính số đường đời là <strong>ngày sinh dương lịch theo giấy khai sinh hoặc giấy tờ chính thức</strong>. Đây là mốc thời gian được xã hội ghi nhận và được sử dụng trong hệ thống giáo dục, pháp lý, hành chính và nghề nghiệp.</p>
+
+  <!-- Illustration: calculator / date to number -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 360 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Calendar icon -->
+      <rect x="30" y="20" width="60" height="55" rx="6" stroke="#0064E0" stroke-width="1.5" fill="none"/>
+      <line x1="30" y1="35" x2="90" y2="35" stroke="#0064E0" stroke-width="1.5"/>
+      <line x1="48" y1="15" x2="48" y2="25" stroke="#0064E0" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="72" y1="15" x2="72" y2="25" stroke="#0064E0" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="42" y="58" font-family="Roboto" font-size="11" fill="#0064E0" opacity=".7">15/08</text>
+      <text x="42" y="70" font-family="Roboto" font-size="9" fill="#0064E0" opacity=".5">2007</text>
+      <!-- Arrow -->
+      <line x1="100" y1="48" x2="140" y2="48" stroke="#0064E0" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <polygon points="140,44 148,48 140,52" fill="#0064E0"/>
+      <!-- Plus signs -->
+      <text x="155" y="42" font-family="Roboto" font-size="13" fill="#0064E0" opacity=".6">1+5+0+8</text>
+      <text x="155" y="58" font-family="Roboto" font-size="13" fill="#0064E0" opacity=".6">+2+0+0+7</text>
+      <text x="165" y="75" font-family="Roboto" font-size="11" fill="#0064E0" opacity=".4">= 23</text>
+      <!-- Arrow -->
+      <line x1="230" y1="48" x2="268" y2="48" stroke="#0064E0" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <polygon points="268,44 276,48 268,52" fill="#0064E0"/>
+      <!-- Result circle -->
+      <circle cx="310" cy="48" r="28" stroke="#0064E0" stroke-width="2" fill="rgba(0,100,224,.08)"/>
+      <text x="302" y="42" font-family="Roboto" font-size="9" fill="#0064E0" opacity=".5">2+3</text>
+      <text x="300" y="60" font-family="Roboto Slab" font-size="22" fill="#0064E0" font-weight="700">5</text>
+      <!-- Label -->
+      <text x="120" y="105" font-family="Roboto" font-size="10" fill="#0064E0" opacity=".4" text-anchor="middle" letter-spacing=".1em">NGÀY SINH</text>
+      <text x="290" y="105" font-family="Roboto" font-size="10" fill="#0064E0" opacity=".5" text-anchor="middle" letter-spacing=".1em">SỐ ĐƯỜNG ĐỜI</text>
+    </svg>
+  </div>
+
+  <h4>3.2 Công thức tính số đường đời</h4>
+  <p>Cách tính cơ bản là cộng tất cả các chữ số trong ngày, tháng và năm sinh dương lịch, sau đó rút gọn tổng về một chữ số từ 1 đến 9. Riêng các trường hợp tổng rút gọn ra <strong>11, 22 hoặc 33</strong> thì giữ lại, vì đây là các Master Number.</p>
+
+  <div class="formula">
+    Ngày sinh + Tháng sinh + Năm sinh &rarr; Cộng tất cả chữ số &rarr; Rút gọn về 1–9, ngoại trừ 11/22/33
+  </div>
+
+  <p><strong>Ví dụ:</strong> Ngày sinh: 15/08/2007</p>
+  <p>Ta cộng từng chữ số: 1 + 5 + 0 + 8 + 2 + 0 + 0 + 7 = 23</p>
+  <p>Sau đó rút gọn: 2 + 3 = <strong>5</strong></p>
+  <p>Kết quả: <strong>Số đường đời 5</strong></p>
+
+  <h4>3.3 Hướng dẫn tính cho số 1–9</h4>
+  <p>Khi tổng cuối cùng sau khi rút gọn là một số từ 1 đến 9, đó là số đường đời chính của bạn.</p>
+
+  <div class="callout insight">
+    <p><strong>Ví dụ số đường đời 1:</strong> Ngày sinh: 10/01/2008 &rarr; 1+0+0+1+2+0+0+8 = 12 &rarr; 1+2 = <strong>3</strong>. Trường hợp này không phải số 1 mà là số 3!</p>
+  </div>
+
+  <p><strong>Điểm cần nhớ:</strong> số đường đời không được tính riêng từ ngày sinh, tháng sinh hoặc năm sinh. Nó là tổng năng lượng của toàn bộ ngày, tháng, năm sinh theo giấy khai sinh.</p>
+
+  <h4>3.4 Cách xử lý Master Number 11/22/33</h4>
+  <p>Trong thần số học ứng dụng, <strong>11, 22 và 33</strong> thường được gọi là Master Number. Khi kết quả cuối cùng rơi vào một trong ba số này, chúng ta không rút tiếp về 2, 4 hoặc 6 ngay, mà ghi theo dạng kép:</p>
+  <ul>
+    <li><strong>11/2</strong></li>
+    <li><strong>22/4</strong></li>
+    <li><strong>33/6</strong></li>
+  </ul>
+  <p>Cách ghi này giúp người đọc hiểu rằng Master Number có hai tầng năng lượng. Số phía trước thể hiện tiềm năng mở rộng, còn số rút gọn phía sau thể hiện nền tảng vận hành thực tế.</p>
+
+  <h4>3.5 Cách đọc nhanh ý nghĩa của kết quả</h4>
+  <table>
+    <tr><th>Số</th><th>Năng lượng đại diện</th></tr>
+    <tr><td><strong>1</strong></td><td>Tiên phong, độc lập, chủ động và dẫn dắt</td></tr>
+    <tr><td><strong>2</strong></td><td>Kết nối, lắng nghe, hợp tác và tinh tế</td></tr>
+    <tr><td><strong>3</strong></td><td>Sáng tạo, biểu đạt, giao tiếp và ý tưởng</td></tr>
+    <tr><td><strong>4</strong></td><td>Hệ thống, kỷ luật, thực tế và xây nền</td></tr>
+    <tr><td><strong>5</strong></td><td>Tự do, linh hoạt, trải nghiệm và thích nghi</td></tr>
+    <tr><td><strong>6</strong></td><td>Chăm sóc, trách nhiệm, giáo dục và hài hòa</td></tr>
+    <tr><td><strong>7</strong></td><td>Phân tích, nghiên cứu, đào sâu và tìm bản chất</td></tr>
+    <tr><td><strong>8</strong></td><td>Quản trị, tài chính, thành tựu và ảnh hưởng</td></tr>
+    <tr><td><strong>9</strong></td><td>Nhân văn, sáng tạo, cộng đồng và lý tưởng</td></tr>
+    <tr><td><strong>11/2</strong></td><td>Trực giác, truyền cảm hứng và chiều sâu cảm xúc</td></tr>
+    <tr><td><strong>22/4</strong></td><td>Kiến tạo hệ thống, xây dựng quy mô và biến ý tưởng thành thực tế</td></tr>
+    <tr><td><strong>33/6</strong></td><td>Phụng sự, giáo dục, chữa lành và nâng đỡ con người</td></tr>
+  </table>
+
+  <h4>3.6 Những sai lầm thường gặp khi tính số đường đời</h4>
+  <ol>
+    <li><strong>Chỉ lấy ngày sinh để tính.</strong> Số đường đời phải được tính bằng toàn bộ ngày, tháng và năm sinh.</li>
+    <li><strong>Rút gọn Master Number quá sớm.</strong> Nếu tổng cuối cùng là 11, 22 hoặc 33, không nên rút ngay thành 2, 4 hoặc 6.</li>
+    <li><strong>Dùng ngày âm lịch hoặc ngày sinh không thống nhất.</strong> Trong Ebook này, ngày sinh chính thức theo giấy khai sinh là mốc chuẩn.</li>
+    <li><strong>Nghĩ rằng số đường đời quyết định toàn bộ con người.</strong> Thực tế, số đường đời chỉ là một chỉ số nền tảng.</li>
+    <li><strong>Dùng số để giới hạn bản thân.</strong> Mỗi số có một cách tiếp cận nghề nghiệp khác nhau.</li>
+  </ol>
+
+  <h4>3.8 Bảng kiểm nhanh sau khi tính số</h4>
+  <ul class="checklist">
+    <li>Tôi đã dùng ngày sinh dương lịch theo giấy khai sinh chưa?</li>
+    <li>Tôi đã cộng đủ ngày, tháng, năm sinh chưa?</li>
+    <li>Tôi có rút gọn đúng về 1–9 không?</li>
+    <li>Nếu kết quả là 11, 22 hoặc 33, tôi có giữ lại Master Number không?</li>
+    <li>Tôi có đang hiểu số này như công cụ tham khảo, không phải định mệnh không?</li>
+  </ul>
+</section>
+
+<!-- CHƯƠNG 4 -->
+<section class="chapter fade-in" id="ch4">
+  <div class="ch-label">Chương 4</div>
+  <h3>Tổng quan về số đường đời và ứng dụng trong cuộc sống</h3>
+  <div class="ch-desc">Hiểu mình để học đúng, làm đúng và sống đỡ "gồng" hơn</div>
+
+  <p>Trong cuốn Ebook này, số đường đời được nhìn như một dạng "năng lượng nền" của con người. Nó thể hiện xu hướng tự nhiên trong cách bạn suy nghĩ, học tập, giao tiếp, phản ứng với áp lực và tạo ra giá trị trong công việc hoặc các mối quan hệ.</p>
+
+  <h4>4.1 Số đường đời giúp chính mình như thế nào?</h4>
+  <p>Khi hiểu số đường đời, bạn sẽ bắt đầu nhận ra:</p>
+  <ul>
+    <li>Mình phù hợp với kiểu học nào</li>
+    <li>Mình cần môi trường ra sao để phát triển</li>
+    <li>Điều gì khiến mình có năng lượng</li>
+    <li>Điều gì khiến mình nhanh kiệt sức</li>
+    <li>Và kiểu công việc nào giúp mình phát huy tự nhiên hơn</li>
+  </ul>
+
+  <h4>4.2 Ứng dụng trong học tập và công việc</h4>
+  <p>Một trong những ứng dụng quan trọng nhất của số đường đời là giúp bạn hiểu cách mình học và làm việc hiệu quả hơn. Có người học tốt khi trải nghiệm thực tế. Có người tiếp thu nhanh qua hình ảnh và cảm xúc. Có người cần dữ liệu, logic và thời gian để đào sâu vấn đề.</p>
+
+  <h4>4.3 Ứng dụng trong giao tiếp và các mối quan hệ</h4>
+  <p>Hiểu năng lượng số đường đời cũng giúp bạn giao tiếp tốt hơn với người khác. Khi không hiểu sự khác biệt này, chúng ta rất dễ hiểu lầm nhau: người nói thẳng bị cho là lạnh lùng, người nhạy cảm bị cho là yếu đuối, người phân tích nhiều bị cho là khó gần, người sáng tạo bị cho là thiếu ổn định.</p>
+
+  <h4>4.5 Chọn môi trường phù hợp quan trọng hơn cố gắng quá mức</h4>
+  <p>Rất nhiều người nghĩ rằng chỉ cần cố gắng đủ nhiều thì sẽ thành công ở bất kỳ môi trường nào. Nhưng thực tế, môi trường phù hợp có thể giúp bạn phát triển nhanh hơn rất nhiều mà không cần phải "gồng" liên tục.</p>
+
+  <div class="callout message">
+    <p>Số đường đời không phải là công cụ để đóng khung con người hay quyết định thay tương lai của bạn. Nó là một công cụ giúp bạn hiểu cách mình vận hành.</p>
+  </div>
+</section>
+
+<!-- CHƯƠNG 5 -->
+<section class="chapter fade-in" id="ch5">
+  <div class="ch-label">Chương 5</div>
+  <h3>Phân tích chi tiết từng số đường đời</h3>
+  <div class="ch-desc">Điểm mạnh – Điểm yếu – Cơ hội – Thử thách nghề nghiệp</div>
+
+  <p>Mỗi số đường đời giống như một kiểu "năng lượng vận hành". Có người sinh ra đã thích dẫn dắt, có người giỏi kết nối, có người cần tự do, có người lại chỉ thật sự phát sáng khi được đào sâu và nghiên cứu. Không có số nào tốt hơn số nào. Điều quan trọng là bạn hiểu mình thuộc kiểu nào, từ đó chọn môi trường học tập và nghề nghiệp phù hợp hơn.</p>
+
+  <div class="number-grid">
+
+    <!-- SỐ 1 -->
+    <div class="number-card" id="so1">
+      <div class="num">1</div>
+      <div class="title">Số Đường Đời 1</div>
+      <div class="tagline">Người tiên phong – sinh ra để mở đường</div>
+      <p style="font-size:.9rem">Người có số đường đời 1 thường mang năng lượng của sự độc lập, chủ động và dẫn dắt. Đây là kiểu người không thích bị kiểm soát quá nhiều, không thích làm theo khuôn mẫu cứng nhắc và thường có nhu cầu được tự quyết trong việc mình làm.</p>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Tính chủ động, ra quyết định nhanh</li><li>Tinh thần tự lập, dám bắt đầu việc mới</li><li>Khả năng lãnh đạo hoặc ảnh hưởng người khác</li><li>Tư duy cạnh tranh, thích chinh phục mục tiêu</li><li>Có bản lĩnh khi phải tự chịu trách nhiệm</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ nóng vội, thiếu kiên nhẫn</li><li>Khó chịu khi bị kiểm soát</li><li>Cái tôi cao, khó nhận sai</li><li>Dễ làm một mình thay vì phối hợp</li><li>Có xu hướng muốn thắng hơn là muốn hiểu</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Quản trị kinh doanh</li><li>Marketing, Branding</li><li>Kinh doanh, Sales</li><li>Quản trị nhân sự</li><li>Công nghệ thông tin</li><li>Khởi nghiệp</li><li>Truyền thông, PR</li>
+      </ul>
+
+      <div class="section-label">Thử thách</div>
+      <p style="font-size:.9rem">Thử thách lớn nhất của số 1 không phải là thiếu năng lực, mà là <strong>học cách đi cùng người khác</strong>. Thử thách khác là học cách kiên trì với quá trình.</p>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn sinh ra để mở đường, nhưng con đường lớn luôn cần người đồng hành.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 2 -->
+    <div class="number-card" id="so2">
+      <div class="num">2</div>
+      <div class="title">Số Đường Đời 2</div>
+      <div class="tagline">Người kết nối – sinh ra để thấu hiểu và đồng hành</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Khả năng thấu hiểu con người</li><li>Hợp tác tốt, kiên nhẫn</li><li>Tinh tế trong giao tiếp</li><li>Làm việc nhóm tốt</li><li>Phù hợp với vai trò hỗ trợ, tư vấn, chăm sóc, điều phối</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ nhạy cảm quá mức</li><li>Sợ làm người khác thất vọng</li><li>Ngại tranh luận hoặc đối đầu</li><li>Dễ thiếu quyết đoán</li><li>Có xu hướng đặt nhu cầu của người khác lên trước bản thân</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Quản trị nhân sự</li><li>Tâm lý học, coaching</li><li>Giáo dục, sư phạm</li><li>Chăm sóc khách hàng</li><li>Account Executive</li><li>Công tác xã hội</li><li>Du lịch, dịch vụ</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn không cần trở nên ồn ào để có giá trị. Sự thấu hiểu của bạn chính là một năng lực.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 3 -->
+    <div class="number-card" id="so3">
+      <div class="num">3</div>
+      <div class="title">Số Đường Đời 3</div>
+      <div class="tagline">Người sáng tạo – sinh ra để biểu đạt và lan tỏa</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Sáng tạo, nhiều ý tưởng</li><li>Giao tiếp và biểu đạt tốt</li><li>Có khả năng kể chuyện</li><li>Dễ tạo thiện cảm</li><li>Phù hợp với môi trường năng động</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ phân tán, dễ bỏ dở</li><li>Thiếu kỷ luật nếu không có mục tiêu rõ</li><li>Cảm xúc lên xuống</li><li>Dễ nói nhiều hơn làm</li><li>Có thể sợ những công việc quá chi tiết, lặp lại</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Content Marketing</li><li>Truyền thông, PR</li><li>Thiết kế, mỹ thuật</li><li>Diễn xuất, MC, podcast</li><li>Giáo dục sáng tạo</li><li>Branding, quảng cáo</li><li>Ngôn ngữ, biên phiên dịch</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Ý tưởng khiến bạn nổi bật, nhưng kỷ luật mới giúp bạn đi xa.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 4 -->
+    <div class="number-card" id="so4">
+      <div class="num">4</div>
+      <div class="title">Số Đường Đời 4</div>
+      <div class="tagline">Người xây nền – sinh ra để tạo sự ổn định và hệ thống</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Kỷ luật và có trách nhiệm</li><li>Thực tế, logic, chắc chắn</li><li>Giỏi xây dựng hệ thống</li><li>Làm việc ổn định, bền bỉ</li><li>Phù hợp với công việc cần độ chính xác</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Ngại thay đổi</li><li>Dễ quá chú trọng chi tiết</li><li>Cứng nhắc với quy trình</li><li>Sợ sai nên chậm bắt đầu</li><li>Có thể thiếu sự mềm mại trong giao tiếp</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Công nghệ thông tin</li><li>Kế toán, kiểm toán</li><li>Kỹ thuật, xây dựng</li><li>Quản trị vận hành</li><li>Hành chính, pháp chế</li><li>Data Operations</li><li>Quản lý chất lượng</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn không cần đi nhanh nhất. Bạn mạnh ở chỗ có thể đi xa bằng sự bền bỉ.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 5 -->
+    <div class="number-card" id="so5">
+      <div class="num">5</div>
+      <div class="title">Số Đường Đời 5</div>
+      <div class="tagline">Người tự do – sinh ra để trải nghiệm và thích nghi</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Linh hoạt, thích nghi nhanh</li><li>Giao tiếp tốt, dễ kết nối</li><li>Tò mò, thích học từ trải nghiệm</li><li>Nắm bắt xu hướng nhanh</li><li>Phù hợp với môi trường năng động</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ bỏ cuộc giữa chừng</li><li>Thiếu kiên trì với việc lặp lại</li><li>Dễ bị cuốn theo xu hướng</li><li>Khó chịu với kỷ luật cứng</li><li>Có thể thiếu chiều sâu nếu trải nghiệm quá dàn trải</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Marketing, Digital Marketing</li><li>Sales, Business Development</li><li>Du lịch, khách sạn</li><li>Thương mại điện tử</li><li>Truyền thông, sáng tạo nội dung</li><li>Quan hệ đối tác</li><li>Tư vấn, đào tạo</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Tự do không đến từ việc không chọn gì, mà đến từ việc chọn đúng thứ khiến bạn muốn đi xa.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 6 -->
+    <div class="number-card" id="so6">
+      <div class="num">6</div>
+      <div class="title">Số Đường Đời 6</div>
+      <div class="tagline">Người chăm sóc – sinh ra để nuôi dưỡng và tạo sự hài hòa</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Có trách nhiệm cao</li><li>Biết chăm sóc, hỗ trợ</li><li>Tạo cảm giác tin cậy</li><li>Có xu hướng bảo vệ và nâng đỡ người khác</li><li>Phù hợp với môi trường cần sự tận tâm</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ ôm trách nhiệm thay người khác</li><li>Cầu toàn, sợ làm chưa đủ tốt</li><li>Dễ kiệt sức cảm xúc</li><li>Có xu hướng kiểm soát vì lo lắng</li><li>Khó nói "không"</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Giáo dục, sư phạm</li><li>Tâm lý, coaching</li><li>Y tế, điều dưỡng</li><li>Nhân sự, đào tạo nội bộ</li><li>Thiết kế nội thất</li><li>Dịch vụ khách hàng</li><li>Công tác xã hội</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn có thể chăm sóc thế giới, nhưng đừng quên chăm sóc chính mình.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 7 -->
+    <div class="number-card" id="so7">
+      <div class="num">7</div>
+      <div class="title">Số Đường Đời 7</div>
+      <div class="tagline">Người đào sâu – sinh ra để tìm bản chất</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Phân tích sâu</li><li>Tư duy độc lập</li><li>Khả năng nghiên cứu tốt</li><li>Quan sát sắc bén</li><li>Phù hợp với công việc cần chuyên môn sâu</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ cô lập bản thân</li><li>Khó chia sẻ cảm xúc</li><li>Hoài nghi quá mức</li><li>Suy nghĩ nhiều, hành động chậm</li><li>Có thể thiếu kỹ năng giao tiếp xã hội</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Công nghệ, lập trình</li><li>Data Analyst, Data Scientist</li><li>Nghiên cứu khoa học</li><li>Tài chính phân tích</li><li>Tâm lý học</li><li>Chiến lược, nghiên cứu thị trường</li><li>Y khoa, dược</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn mạnh khi hiểu sâu, nhưng bạn sẽ đi xa hơn khi biết chia sẻ điều mình hiểu.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 8 -->
+    <div class="number-card" id="so8">
+      <div class="num">8</div>
+      <div class="title">Số Đường Đời 8</div>
+      <div class="tagline">Người quản trị – sinh ra để tạo kết quả và ảnh hưởng</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Tư duy kinh doanh và kết quả</li><li>Khả năng quản lý, tổ chức nguồn lực</li><li>Có tham vọng phát triển</li><li>Chịu áp lực tốt</li><li>Phù hợp với môi trường cạnh tranh</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ áp lực vì thành công</li><li>Có xu hướng kiểm soát</li><li>Thiếu kiên nhẫn với người khác</li><li>Dễ đánh giá bản thân bằng thành tích</li><li>Có thể mất cân bằng giữa công việc và cuộc sống</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Quản trị kinh doanh</li><li>Tài chính, ngân hàng</li><li>Sales, Key Account</li><li>Quản trị vận hành</li><li>Bất động sản</li><li>Quản lý dự án</li><li>Khởi nghiệp</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn có thể tạo ra thành tựu lớn, nhưng hãy chắc rằng thành tựu đó phục vụ cuộc đời bạn, không nuốt chửng bạn.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 9 -->
+    <div class="number-card" id="so9">
+      <div class="num">9</div>
+      <div class="title">Số Đường Đời 9</div>
+      <div class="tagline">Người tạo giá trị – sinh ra để nhìn rộng và sống có ý nghĩa</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Có lý tưởng và tầm nhìn rộng</li><li>Giàu lòng trắc ẩn</li><li>Sáng tạo, cảm xúc sâu</li><li>Quan tâm đến cộng đồng</li><li>Có khả năng truyền cảm hứng</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ mơ mộng, lý tưởng hóa</li><li>Dễ thất vọng với thực tế</li><li>Cảm xúc sâu, khó buông</li><li>Có thể thiếu tính thực thi</li><li>Dễ phân tán vì quan tâm quá nhiều vấn đề</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Giáo dục, mentoring</li><li>Truyền thông xã hội</li><li>Nghệ thuật, thiết kế</li><li>NGO, dự án xã hội</li><li>Tâm lý, coaching</li><li>Viết lách, sáng tạo nội dung</li><li>Quan hệ công chúng</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn không cần cứu cả thế giới. Hãy bắt đầu bằng một việc nhỏ nhưng thật.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 11/2 -->
+    <div class="number-card" id="so11">
+      <div class="num">11</div>
+      <div class="title">Số Đường Đời 11/2</div>
+      <div class="tagline">Người truyền cảm hứng – sinh ra để cảm nhận sâu và đánh thức người khác</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Trực giác tốt</li><li>Nhạy cảm với cảm xúc con người</li><li>Có khả năng truyền cảm hứng</li><li>Sâu sắc, tinh tế</li><li>Phù hợp với vai trò hướng dẫn, giáo dục, sáng tạo</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Nhạy cảm, dễ lo âu</li><li>Dễ bị ảnh hưởng bởi đánh giá bên ngoài</li><li>Cảm hứng mạnh nhưng khó duy trì đều</li><li>Có thể thiếu thực tế</li><li>Dễ quá tải trong môi trường nhiều áp lực cảm xúc</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Tâm lý học, coaching</li><li>Giáo dục, mentoring</li><li>Truyền thông, storytelling</li><li>Nghệ thuật, viết lách</li><li>Nhân sự, văn hóa doanh nghiệp</li><li>Chăm sóc khách hàng</li><li>Dự án xã hội</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Sự nhạy cảm không phải điểm yếu. Nó là năng lực, nếu bạn biết đặt nó vào đúng nơi.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 22/4 -->
+    <div class="number-card" id="so22">
+      <div class="num">22</div>
+      <div class="title">Số Đường Đời 22/4</div>
+      <div class="tagline">Người kiến tạo hệ thống – sinh ra để biến tầm nhìn thành công trình</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Tư duy hệ thống</li><li>Khả năng xây dựng dự án dài hạn</li><li>Kỷ luật, thực tế</li><li>Có tầm nhìn lớn</li><li>Phù hợp với vai trò quản lý, vận hành, kiến tạo</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ áp lực vì mục tiêu lớn</li><li>Sợ thất bại nên chậm bắt đầu</li><li>Ôm trách nhiệm quá nhiều</li><li>Cứng nhắc nếu lệch về năng lượng 4 thấp</li><li>Dễ kiệt sức nếu không biết chia nguồn lực</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Quản trị dự án</li><li>Công nghệ, Product Management</li><li>Kỹ thuật, xây dựng</li><li>Quản trị vận hành</li><li>Khởi nghiệp</li><li>Giáo dục, EdTech</li><li>Quản trị tổ chức</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn có thể xây điều lớn, nhưng hãy bắt đầu bằng viên gạch đầu tiên.</p>
+      </div>
+    </div>
+
+    <!-- SỐ 33/6 -->
+    <div class="number-card" id="so33">
+      <div class="num">33</div>
+      <div class="title">Số Đường Đời 33/6</div>
+      <div class="tagline">Người phụng sự lớn – sinh ra để nâng đỡ và chữa lành</div>
+
+      <div class="section-label">Điểm mạnh</div>
+      <ul><li>Chăm sóc và chữa lành</li><li>Có trách nhiệm với cộng đồng</li><li>Khả năng giáo dục, nâng đỡ</li><li>Truyền cảm hứng bằng sự tử tế</li><li>Phù hợp với công việc phát triển con người</li></ul>
+
+      <div class="section-label">Điểm yếu</div>
+      <ul><li>Dễ ôm nỗi đau của người khác</li><li>Hy sinh quá mức</li><li>Khó đặt ranh giới</li><li>Cầu toàn trong việc giúp người</li><li>Dễ kiệt sức nếu thiếu chăm sóc bản thân</li></ul>
+
+      <div class="section-label">Cơ hội nghề nghiệp</div>
+      <ul class="careers-list">
+        <li>Giáo dục, mentoring</li><li>Tâm lý học, trị liệu</li><li>Coaching, phát triển cá nhân</li><li>Y tế, điều dưỡng</li><li>Công tác xã hội, NGO</li><li>Nghệ thuật chữa lành</li><li>Nhân sự, văn hóa tổ chức</li>
+      </ul>
+
+      <div class="callout message" style="margin-top:1rem">
+        <p>Bạn có thể là ánh sáng cho người khác, nhưng đừng quên giữ lửa cho chính mình.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout insight" style="margin-top:2rem">
+    <p><strong>Không có con số nào quyết định bạn.</strong> Sau khi đọc xong 12 nhóm số đường đời, điều quan trọng nhất không phải là bạn tìm được một chiếc nhãn để dán lên mình. Điều quan trọng là bạn có thêm một ngôn ngữ để hiểu bản thân rõ hơn.</p>
+  </div>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 3 ═══════════ -->
+<div class="part-header fade-in" id="part3">
+  <div class="part-num">Phần 3</div>
+  <h2>Bản Đồ Nghề Nghiệp Thực Tế Tại Việt Nam</h2>
+  <div class="illus">
+    <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Map outline (Vietnam simplified) -->
+      <path d="M130 15 Q140 25 138 40 Q142 55 135 70 Q128 80 132 95 Q130 110 125 120 Q120 130 118 145" stroke="#0064E0" stroke-width="2" fill="none" opacity=".4"/>
+      <!-- Location pins -->
+      <circle cx="80" cy="45" r="6" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.15)"/>
+      <circle cx="80" cy="43" r="2" fill="#0064E0"/>
+      <path d="M80 51 L80 58" stroke="#0064E0" stroke-width="1"/>
+      <circle cx="160" cy="65" r="6" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.1)"/>
+      <circle cx="160" cy="63" r="2" fill="#0064E0"/>
+      <path d="M160 71 L160 78" stroke="#0064E0" stroke-width="1"/>
+      <circle cx="100" cy="100" r="6" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.15)"/>
+      <circle cx="100" cy="98" r="2" fill="#0064E0"/>
+      <path d="M100 106 L100 113" stroke="#0064E0" stroke-width="1"/>
+      <circle cx="170" cy="110" r="6" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.1)"/>
+      <circle cx="170" cy="108" r="2" fill="#0064E0"/>
+      <path d="M170 116 L170 123" stroke="#0064E0" stroke-width="1"/>
+      <!-- Connecting dashed lines -->
+      <line x1="86" y1="45" x2="154" y2="65" stroke="#0064E0" stroke-width=".8" stroke-dasharray="3 2" opacity=".3"/>
+      <line x1="106" y1="100" x2="164" y2="110" stroke="#0064E0" stroke-width=".8" stroke-dasharray="3 2" opacity=".3"/>
+      <line x1="86" y1="48" x2="97" y2="95" stroke="#0064E0" stroke-width=".8" stroke-dasharray="3 2" opacity=".3"/>
+      <!-- Labels -->
+      <text x="55" y="42" font-family="Roboto" font-size="8" fill="#0064E0" opacity=".6">XH</text>
+      <text x="175" y="63" font-family="Roboto" font-size="8" fill="#0064E0" opacity=".5">KT</text>
+      <text x="75" y="118" font-family="Roboto" font-size="8" fill="#0064E0" opacity=".6">NT</text>
+      <text x="180" y="108" font-family="Roboto" font-size="8" fill="#0064E0" opacity=".5">QL</text>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 6 -->
+<section class="chapter fade-in" id="ch6">
+  <div class="ch-label">Chương 6</div>
+  <h3>6 nhóm ngành nghề chính</h3>
+  <div class="ch-desc">Bản đồ đầu tiên để hiểu thế giới nghề nghiệp</div>
+
+  <p>Dựa trên tài liệu định hướng nghề nghiệp, có thể chia ngành nghề thành 6 nhóm lớn: <strong>Xã hội, Nghệ thuật, Kỹ thuật, Nghiệp vụ, Nghiên cứu và Quản lý</strong>.</p>
+
+  <div class="number-grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">XH</div>
+      <div class="title">6.1 Nhóm Xã hội</div>
+      <div class="tagline">Phù hợp với số: 2, 6, 9, 11, 33</div>
+      <p style="font-size:.88rem">Phù hợp với những bạn có xu hướng quan tâm đến con người, thích giao tiếp, hỗ trợ, đào tạo, kết nối hoặc giải quyết các vấn đề liên quan đến cộng đồng.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Giáo dục, nhân sự, luật, truyền thông, du lịch, tâm lý, dịch vụ khách hàng, công tác xã hội.</p>
+    </div>
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">NT</div>
+      <div class="title">6.2 Nhóm Nghệ thuật</div>
+      <div class="tagline">Phù hợp với số: 3, 5, 9, 11</div>
+      <p style="font-size:.88rem">Dành cho những người yêu thích sáng tạo, hình ảnh, ngôn ngữ, biểu đạt, thẩm mỹ và cảm xúc. Bao gồm truyền thông, thiết kế, quảng cáo, nội dung, thời trang, kiến trúc.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Thiết kế, truyền thông, content, quảng cáo, mỹ thuật, thời trang, kiến trúc, nghệ thuật biểu diễn.</p>
+    </div>
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">KT</div>
+      <div class="title">6.3 Nhóm Kỹ thuật</div>
+      <div class="tagline">Phù hợp với số: 4, 7, 22</div>
+      <p style="font-size:.88rem">Phù hợp với những người thực tế, thích làm việc với hệ thống, máy móc, công nghệ, quy trình và sản phẩm cụ thể. Cần tư duy logic, khả năng giải quyết vấn đề và sự bền bỉ.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Công nghệ thông tin, cơ khí, điện – điện tử, tự động hóa, xây dựng, công nghệ thực phẩm.</p>
+    </div>
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">NV</div>
+      <div class="title">6.4 Nhóm Nghiệp vụ</div>
+      <div class="tagline">Phù hợp với số: 4, 6, 8</div>
+      <p style="font-size:.88rem">Bao gồm các công việc cần tính chính xác, quy trình, nguyên tắc và sự cẩn trọng. Phù hợp với những người làm tốt trong môi trường ổn định, rõ trách nhiệm.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Kế toán, kiểm toán, tài chính, ngân hàng, hành chính, thư ký, văn phòng, lưu trữ học.</p>
+    </div>
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">NC</div>
+      <div class="title">6.5 Nhóm Nghiên cứu</div>
+      <div class="tagline">Phù hợp với số: 7, 11, 22</div>
+      <p style="font-size:.88rem">Phù hợp với người thích đào sâu, phân tích, tìm hiểu bản chất và làm việc với tri thức. Cần sự kiên nhẫn, khả năng tự học và tư duy phản biện.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Khoa học tự nhiên, nghiên cứu thị trường, dữ liệu, tâm lý học, y khoa, dược, phát triển sản phẩm.</p>
+    </div>
+
+    <div class="number-card">
+      <div class="num" style="font-size:2.5rem">QL</div>
+      <div class="title">6.6 Nhóm Quản lý</div>
+      <div class="tagline">Phù hợp với số: 1, 8, 22</div>
+      <p style="font-size:.88rem">Dành cho những người thích tổ chức, điều phối, ra quyết định, chịu trách nhiệm và tạo kết quả thông qua con người hoặc hệ thống.</p>
+      <p style="font-size:.85rem"><strong>Ngành tiêu biểu:</strong> Quản trị kinh doanh, quản lý tài chính, quản lý giáo dục, quản lý dự án, vận hành, phát triển tổ chức.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHƯƠNG 7 -->
+<section class="chapter fade-in" id="ch7">
+  <div class="ch-label">Chương 7</div>
+  <h3>Kết nối số đường đời với nhóm ngành</h3>
+  <div class="ch-desc">Khi hiểu mình gặp hiểu nghề</div>
+
+  <!-- Illustration: connecting numbers to careers -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 320 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left: numbers -->
+      <circle cx="40" cy="25" r="12" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="36" y="30" font-family="Roboto Slab" font-size="12" fill="#0064E0">1</text>
+      <circle cx="40" cy="55" r="12" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="36" y="60" font-family="Roboto Slab" font-size="12" fill="#0064E0">5</text>
+      <circle cx="40" cy="85" r="12" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="36" y="90" font-family="Roboto Slab" font-size="12" fill="#0064E0">7</text>
+      <!-- Right: career groups -->
+      <rect x="230" y="12" width="70" height="22" rx="4" stroke="#0064E0" stroke-width="1" fill="rgba(0,100,224,.06)"/>
+      <text x="240" y="27" font-family="Roboto" font-size="8" fill="#0064E0">Quản lý</text>
+      <rect x="230" y="42" width="70" height="22" rx="4" stroke="#0064E0" stroke-width="1" fill="rgba(0,100,224,.06)"/>
+      <text x="240" y="57" font-family="Roboto" font-size="8" fill="#0064E0">Marketing</text>
+      <rect x="230" y="72" width="70" height="22" rx="4" stroke="#0064E0" stroke-width="1" fill="rgba(0,100,224,.06)"/>
+      <text x="240" y="87" font-family="Roboto" font-size="8" fill="#0064E0">Nghiên cứu</text>
+      <!-- Connecting lines -->
+      <path d="M52 25 Q140 15 230 23" stroke="#0064E0" stroke-width="1" opacity=".4" fill="none"/>
+      <path d="M52 55 Q140 50 230 53" stroke="#0064E0" stroke-width="1" opacity=".4" fill="none"/>
+      <path d="M52 85 Q140 88 230 83" stroke="#0064E0" stroke-width="1" opacity=".4" fill="none"/>
+      <!-- Cross connections (dashed) -->
+      <path d="M52 25 Q160 40 230 53" stroke="#0064E0" stroke-width=".5" stroke-dasharray="3 2" opacity=".2" fill="none"/>
+      <path d="M52 55 Q160 70 230 83" stroke="#0064E0" stroke-width=".5" stroke-dasharray="3 2" opacity=".2" fill="none"/>
+      <!-- Center label -->
+      <text x="130" y="52" font-family="Roboto" font-size="7" fill="#0064E0" opacity=".3" text-anchor="middle">KẾT NỐI</text>
+      <line x1="105" y1="54" x2="155" y2="54" stroke="#0064E0" stroke-width=".3" opacity=".2"/>
+    </svg>
+  </div>
+
+  <h4>7.1 Bảng kết nối tổng quan</h4>
+  <table>
+    <tr><th>Số đường đời</th><th>Nhóm ngành phù hợp</th><th>Vai trò nên ưu tiên</th></tr>
+    <tr><td><strong>1</strong></td><td>Quản lý, Kinh doanh, Truyền thông</td><td>Leader, founder, project lead</td></tr>
+    <tr><td><strong>2</strong></td><td>Xã hội, Giáo dục, Dịch vụ</td><td>Điều phối, tư vấn, chăm sóc</td></tr>
+    <tr><td><strong>3</strong></td><td>Nghệ thuật, Truyền thông</td><td>Content, sáng tạo, biểu đạt</td></tr>
+    <tr><td><strong>4</strong></td><td>Kỹ thuật, Nghiệp vụ, Vận hành</td><td>Hệ thống, quy trình, phân tích</td></tr>
+    <tr><td><strong>5</strong></td><td>Kinh doanh, Du lịch, Marketing</td><td>Sales, truyền thông, phát triển thị trường</td></tr>
+    <tr><td><strong>6</strong></td><td>Giáo dục, Y tế, Nhân sự</td><td>Chăm sóc, đào tạo, hỗ trợ</td></tr>
+    <tr><td><strong>7</strong></td><td>Nghiên cứu, Công nghệ, Dữ liệu</td><td>Phân tích, nghiên cứu, chuyên môn sâu</td></tr>
+    <tr><td><strong>8</strong></td><td>Quản lý, Tài chính, Kinh doanh</td><td>Quản trị, đầu tư, vận hành</td></tr>
+    <tr><td><strong>9</strong></td><td>Xã hội, Nghệ thuật, Giáo dục</td><td>Truyền cảm hứng, cộng đồng</td></tr>
+    <tr><td><strong>11/2</strong></td><td>Giáo dục, Tâm lý, Truyền thông</td><td>Coaching, truyền cảm hứng</td></tr>
+    <tr><td><strong>22/4</strong></td><td>Quản lý, Kỹ thuật, Công nghệ</td><td>Xây hệ thống, quản trị dự án</td></tr>
+    <tr><td><strong>33/6</strong></td><td>Giáo dục, Tâm lý, Cộng đồng</td><td>Chữa lành, phụng sự, phát triển con người</td></tr>
+  </table>
+
+  <h4>7.2 Không chỉ chọn ngành, hãy chọn vai trò trong ngành</h4>
+  <p>Đây là điểm rất quan trọng. Một bạn số 7 vẫn có thể học Marketing, nhưng có thể phù hợp hơn với <strong>Marketing Research, SEO, Data Marketing hoặc Consumer Insight</strong> thay vì làm content giải trí mỗi ngày.</p>
+
+  <h4>7.3 Công thức kết nối</h4>
+  <div class="formula">
+    Số đường đời &rarr; Nhóm năng lượng &rarr; Nhóm ngành &rarr; Vai trò cụ thể &rarr; Kỹ năng cần rèn
+  </div>
+
+  <div class="callout question">
+    <p>Bạn đang chọn ngành theo tên gọi, hay đang chọn đúng vai trò phù hợp với cách mình vận hành?</p>
+  </div>
+</section>
+
+<!-- CHƯƠNG 8 -->
+<section class="chapter fade-in" id="ch8">
+  <div class="ch-label">Chương 8</div>
+  <h3>Bản đồ chọn ngành tại Việt Nam</h3>
+  <div class="ch-desc">Ngành học – môi trường – cơ hội thực tế</div>
+
+  <p>Chọn ngành tại Việt Nam không chỉ là chọn một cái tên trên phiếu đăng ký xét tuyển. Đó là lựa chọn một hệ sinh thái: chương trình học, môi trường đào tạo, cơ hội thực tập, đầu ra nghề nghiệp và mức độ phù hợp với bản thân.</p>
+
+  <div class="number-grid" style="grid-template-columns:repeat(auto-fit,minmax(340px,1fr))">
+    <div class="number-card">
+      <div class="title">8.1 Nhóm Xã hội</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Tâm lý học, Quản trị nhân sự, Luật, Giáo dục học, Quan hệ công chúng, Công tác xã hội, Du lịch, Ngôn ngữ.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Chuyên viên nhân sự, Giáo viên, Tư vấn viên, Chăm sóc khách hàng, Hướng dẫn viên du lịch.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">8.2 Nhóm Nghệ thuật – Sáng tạo</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Thiết kế đồ họa, Thiết kế thời trang, Thiết kế nội thất, Truyền thông đa phương tiện, Marketing, Báo chí, Kiến trúc.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Content creator, Copywriter, Designer, Marketer, Photographer, Video editor, Art director.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">8.3 Nhóm Kỹ thuật – Công nghệ</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Công nghệ thông tin, Khoa học máy tính, Kỹ thuật phần mềm, Trí tuệ nhân tạo, An toàn thông tin, Cơ khí, Xây dựng.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Lập trình viên, Kỹ sư phần mềm, Tester/QA, Kỹ sư cơ khí, Chuyên viên an ninh mạng.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">8.4 Nhóm Nghiệp vụ – Tài chính</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Kế toán, Kiểm toán, Tài chính – ngân hàng, Thuế, Hành chính văn phòng, Bảo hiểm.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Kế toán viên, Kiểm toán viên, Chuyên viên ngân hàng, Nhân viên hành chính, Chuyên viên thuế.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">8.5 Nhóm Nghiên cứu – Phân tích</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Khoa học dữ liệu, Phân tích kinh doanh, Tâm lý học, Xã hội học, Sinh học, Y khoa, Nghiên cứu thị trường.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Data Analyst, Researcher, Chuyên viên R&D, Chuyên viên phân tích tài chính, Business Analyst.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">8.6 Nhóm Quản lý – Kinh doanh</div>
+      <p style="font-size:.85rem"><strong>Ngành học:</strong> Quản trị kinh doanh, Kinh doanh quốc tế, Marketing, Tài chính, Quản trị nhân sự, Logistics.</p>
+      <p style="font-size:.85rem"><strong>Cơ hội:</strong> Quản lý dự án, Business Development, Quản lý vận hành, Founder/startup, Quản lý chi nhánh.</p>
+    </div>
+  </div>
+
+  <h4>8.7 Cách kiểm tra một ngành có hợp mình không</h4>
+  <p>Trước khi chọn ngành, đừng chỉ đọc tên ngành. Hãy kiểm tra bằng 5 câu hỏi:</p>
+  <ol>
+    <li>Ngành này học những môn gì?</li>
+    <li>Sau khi ra trường có thể làm những công việc nào?</li>
+    <li>Một ngày làm việc thực tế của nghề này ra sao?</li>
+    <li>Người làm nghề này cần tính cách và kỹ năng gì?</li>
+    <li>Mình có thể thử ngành này bằng cách nào trước khi chọn chính thức?</li>
+  </ol>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 4 ═══════════ -->
+<div class="part-header fade-in" id="part4">
+  <div class="part-num">Phần 4</div>
+  <h2>Chọn Ngành Không Còn Mơ Hồ</h2>
+  <div class="illus">
+    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Target/bullseye -->
+      <circle cx="100" cy="75" r="50" stroke="#0064E0" stroke-width="1" opacity=".2"/>
+      <circle cx="100" cy="75" r="35" stroke="#0064E0" stroke-width="1" opacity=".3"/>
+      <circle cx="100" cy="75" r="20" stroke="#0064E0" stroke-width="1.5" opacity=".4"/>
+      <circle cx="100" cy="75" r="6" fill="#0064E0" opacity=".6"/>
+      <!-- Arrow hitting center -->
+      <line x1="165" y1="30" x2="106" y2="71" stroke="#0064E0" stroke-width="2"/>
+      <polygon points="104,69 108,74 112,68" fill="#0064E0"/>
+      <!-- Feathers -->
+      <line x1="165" y1="30" x2="172" y2="22" stroke="#0064E0" stroke-width="1" opacity=".5"/>
+      <line x1="165" y1="30" x2="170" y2="28" stroke="#0064E0" stroke-width="1" opacity=".5"/>
+      <!-- Compass needle below -->
+      <circle cx="100" cy="140" r="10" stroke="#0064E0" stroke-width="1" opacity=".3"/>
+      <polygon points="100,130 97,140 103,140" fill="#0064E0" opacity=".5"/>
+      <polygon points="100,150 97,140 103,140" fill="#0064E0" opacity=".3"/>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 9 -->
+<section class="chapter fade-in" id="ch9">
+  <div class="ch-label">Chương 9</div>
+  <h3>Công thức chọn ngành đúng</h3>
+  <div class="ch-desc">Kết hợp số đường đời – tính cách – thị trường</div>
+
+  <!-- Illustration: 5-step funnel -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Step boxes -->
+      <rect x="10" y="20" width="48" height="40" rx="4" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="22" y="35" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Bước 1</text>
+      <text x="16" y="50" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">Số đường</text>
+      <text x="25" y="57" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">đời</text>
+      <!-- Arrow -->
+      <line x1="62" y1="40" x2="72" y2="40" stroke="#0064E0" stroke-width="1"/><polygon points="72,37 77,40 72,43" fill="#0064E0" opacity=".6"/>
+      <rect x="80" y="20" width="48" height="40" rx="4" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="92" y="35" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Bước 2</text>
+      <text x="86" y="50" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">Môi trường</text>
+      <line x1="132" y1="40" x2="142" y2="40" stroke="#0064E0" stroke-width="1"/><polygon points="142,37 147,40 142,43" fill="#0064E0" opacity=".6"/>
+      <rect x="150" y="20" width="48" height="40" rx="4" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="162" y="35" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Bước 3</text>
+      <text x="156" y="50" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">Nhóm</text>
+      <text x="157" y="57" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">ngành</text>
+      <line x1="202" y1="40" x2="212" y2="40" stroke="#0064E0" stroke-width="1"/><polygon points="212,37 217,40 212,43" fill="#0064E0" opacity=".6"/>
+      <rect x="220" y="20" width="48" height="40" rx="4" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.06)"/>
+      <text x="232" y="35" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">Bước 4</text>
+      <text x="230" y="50" font-family="Roboto" font-size="7" fill="#0064E0" font-weight="500">Vai trò</text>
+      <line x1="272" y1="40" x2="282" y2="40" stroke="#0064E0" stroke-width="1"/><polygon points="282,37 287,40 282,43" fill="#0064E0" opacity=".6"/>
+      <!-- Final result -->
+      <rect x="290" y="17" width="25" height="46" rx="5" stroke="#0064E0" stroke-width="2" fill="rgba(0,100,224,.08)"/>
+      <text x="296" y="35" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".7">Kiểm</text>
+      <text x="295" y="42" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".7">chứng</text>
+      <text x="299" y="55" font-family="Roboto" font-size="10" fill="#0064E0">&#10003;</text>
+    </svg>
+  </div>
+
+  <h4>9.1 Bước 1: Xác định nhóm năng lượng từ số đường đời</h4>
+  <div class="number-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="number-card">
+      <div class="title">Nhóm Dẫn dắt</div>
+      <div class="tagline">Số: 1, 8, 22</div>
+      <p style="font-size:.88rem">Bạn thích kiểm soát kết quả, cơ hội thăng tiến, quyền quyết định, áp lực để phát triển.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">Nhóm Kết nối</div>
+      <div class="tagline">Số: 2, 6, 11, 33</div>
+      <p style="font-size:.88rem">Bạn phù hợp với môi trường làm việc với con người, có sự hỗ trợ, hợp tác, có ý nghĩa.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">Nhóm Sáng tạo</div>
+      <div class="tagline">Số: 3, 5, 9</div>
+      <p style="font-size:.88rem">Bạn phù hợp với môi trường linh hoạt, có không gian sáng tạo, có sự đổi mới.</p>
+    </div>
+    <div class="number-card">
+      <div class="title">Nhóm Phân tích – Hệ thống</div>
+      <div class="tagline">Số: 4, 7, 22</div>
+      <p style="font-size:.88rem">Bạn phù hợp với môi trường có hệ thống rõ ràng, có chiều sâu chuyên môn, có logic, quy trình.</p>
+    </div>
+  </div>
+
+  <h4>9.2 Bước 2: Xác định môi trường phù hợp</h4>
+  <p>Dựa trên nhóm năng lượng, hãy chọn mô tả đúng nhất với bạn: bạn thích môi trường nào và không phù hợp với môi trường nào.</p>
+
+  <h4>9.3 Bước 3: Lọc nhóm ngành phù hợp</h4>
+  <p>Hãy chọn 2–3 nhóm ngành bạn thấy phù hợp nhất.</p>
+
+  <h4>9.4 Bước 4: Chọn vai trò trong ngành</h4>
+  <p>Hãy chọn mô tả gần nhất với bạn:</p>
+  <ul>
+    <li>Bạn thích <strong>ra quyết định, chịu trách nhiệm</strong> &rarr; Vai trò quản lý / leader</li>
+    <li>Bạn thích <strong>làm việc với con người</strong> &rarr; HR / giáo dục / chăm sóc khách hàng</li>
+    <li>Bạn thích <strong>tạo ý tưởng, sáng tạo</strong> &rarr; Content / design / truyền thông</li>
+    <li>Bạn thích <strong>phân tích, giải quyết vấn đề</strong> &rarr; Data / IT / phân tích</li>
+  </ul>
+
+  <div class="formula">Ngành + Vai trò = Định hướng nghề</div>
+
+  <h4>9.5 Bước 5: Kiểm chứng thực tế</h4>
+  <p>Trước khi quyết định, hãy tự hỏi:</p>
+  <ul>
+    <li>Mình có chấp nhận công việc lặp lại mỗi ngày không?</li>
+    <li>Mình có chịu được áp lực của ngành này không?</li>
+    <li>Mình có thể làm việc này 3–5 năm không?</li>
+  </ul>
+  <p>Nếu câu trả lời là "có thể" &rarr; phù hợp. Nếu "không" &rarr; cần xem lại.</p>
+
+  <h4>9.6 Kết luận cuối cùng</h4>
+  <ul class="checklist">
+    <li>Số đường đời: __________</li>
+    <li>Nhóm năng lượng: __________</li>
+    <li>Môi trường phù hợp: __________</li>
+    <li>Nhóm ngành: __________</li>
+    <li>Vai trò: __________</li>
+  </ul>
+  <p><strong>Ngành phù hợp nhất hiện tại là: __________</strong></p>
+
+  <div class="callout insight">
+    <p>Bạn không cần chọn một ngành hoàn hảo ngay lập tức. Bạn chỉ cần chọn một hướng <strong>đúng với bản thân hơn trước</strong>.</p>
+  </div>
+</section>
+
+<!-- CHƯƠNG 10 -->
+<section class="chapter fade-in" id="ch10">
+  <div class="ch-label">Chương 10</div>
+  <h3>Khi bạn thích một ngành nhưng "không hợp số"</h3>
+  <div class="ch-desc">Đừng vội bỏ ước mơ, hãy tìm đúng vai trò</div>
+
+  <p>Một trong những điều dễ gây hiểu lầm khi đọc thần số học nghề nghiệp là nghĩ rằng mỗi số chỉ được làm một vài ngành nhất định. Điều này không đúng. Số đường đời không dùng để khóa bạn lại. Nó giúp bạn hiểu cách mình nên đi trong một ngành.</p>
+
+  <h4>10.1 Một ngành có nhiều vai trò</h4>
+  <p>Ví dụ ngành Marketing:</p>
+  <ul>
+    <li><strong>Số 3</strong> có thể hợp content, creative, social media</li>
+    <li><strong>Số 5</strong> có thể hợp event, growth, sales marketing</li>
+    <li><strong>Số 7</strong> có thể hợp research, SEO, data marketing</li>
+    <li><strong>Số 8</strong> có thể hợp brand management, business strategy</li>
+    <li><strong>Số 2</strong> có thể hợp community, customer insight, account</li>
+  </ul>
+
+  <h4>10.2 Khi số và ngành chưa khớp</h4>
+  <p>Nếu bạn thích một ngành nhưng thấy số của mình không nằm trong nhóm phù hợp, hãy hỏi:</p>
+  <ul>
+    <li>Trong ngành này có vai trò nào hợp với mình không?</li>
+    <li>Mình cần rèn thêm kỹ năng gì để thích nghi?</li>
+    <li>Môi trường nào trong ngành này phù hợp hơn với mình?</li>
+    <li>Mình thích bản chất ngành hay chỉ thích hình ảnh bên ngoài của ngành?</li>
+  </ul>
+
+  <h4>10.4 Không có lựa chọn hoàn hảo</h4>
+  <p>Mỗi ngành đều có phần bạn thích và phần bạn phải học cách chịu trách nhiệm. Chọn ngành phù hợp không có nghĩa là mọi thứ đều dễ. Nó có nghĩa là cái khó của ngành đó vẫn nằm trong vùng bạn có thể phát triển.</p>
+
+  <div class="callout question">
+    <p>Mình có đang bỏ qua một ngành chỉ vì hiểu nó quá hẹp không?</p>
+  </div>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 5 ═══════════ -->
+<div class="part-header fade-in" id="part5">
+  <div class="part-num">Phần 5</div>
+  <h2>Lộ Trình &amp; Hành Động</h2>
+  <div class="illus" style="max-width:280px">
+    <svg viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Stepping stones path -->
+      <path d="M20 70 Q80 30 150 50 Q220 70 280 35" stroke="#0064E0" stroke-width="1" stroke-dasharray="4 3" opacity=".3" fill="none"/>
+      <!-- Year markers -->
+      <circle cx="50" cy="62" r="14" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.08)"/>
+      <text x="44" y="66" font-family="Roboto Slab" font-size="10" fill="#0064E0" opacity=".6">N1</text>
+      <circle cx="120" cy="46" r="14" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.08)"/>
+      <text x="113" y="50" font-family="Roboto Slab" font-size="10" fill="#0064E0" opacity=".7">N2</text>
+      <circle cx="190" cy="55" r="14" stroke="#0064E0" stroke-width="1.5" fill="rgba(0,100,224,.08)"/>
+      <text x="183" y="59" font-family="Roboto Slab" font-size="10" fill="#0064E0" opacity=".8">N3</text>
+      <circle cx="260" cy="38" r="14" stroke="#0064E0" stroke-width="2" fill="rgba(0,100,224,.1)"/>
+      <text x="253" y="42" font-family="Roboto Slab" font-size="10" fill="#0064E0" font-weight="600">N4</text>
+      <!-- Flag at end -->
+      <line x1="260" y1="24" x2="260" y2="12" stroke="#0064E0" stroke-width="1.5"/>
+      <polygon points="260,12 275,16 260,20" fill="#0064E0" opacity=".5"/>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 11 -->
+<section class="chapter fade-in" id="ch11">
+  <div class="ch-label">Chương 11</div>
+  <h3>Lộ trình 4 năm đại học không lãng phí</h3>
+  <div class="ch-desc">Từ khám phá đến đi làm</div>
+
+  <p>Đại học không nên chỉ là nơi bạn học để lấy bằng. Đó là giai đoạn quan trọng để bạn thử, sai, điều chỉnh và xây nền cho sự nghiệp.</p>
+
+  <div class="roadmap">
+    <div class="year">
+      <h5>Năm 1: Khám phá</h5>
+      <p style="font-size:.9rem">Năm nhất là giai đoạn bạn nên mở rộng trải nghiệm. Đừng vội ép mình phải biết chính xác 100% tương lai.</p>
+      <ul style="font-size:.88rem">
+        <li>Tham gia câu lạc bộ</li>
+        <li>Gặp anh chị khóa trên</li>
+        <li>Tìm hiểu nghề thật qua workshop</li>
+        <li>Học kỹ năng nền: giao tiếp, tin học, tiếng Anh</li>
+        <li>Làm bài test tính cách, số đường đời, Holland</li>
+      </ul>
+      <div class="goal">Mục tiêu: Biết mình hợp và không hợp với kiểu môi trường nào.</div>
+    </div>
+
+    <div class="year">
+      <h5>Năm 2: Chọn hướng</h5>
+      <p style="font-size:.9rem">Năm hai là lúc bạn nên bắt đầu thu hẹp lựa chọn. Bạn không cần biết cả đời mình làm gì, nhưng cần chọn một hướng để thử nghiêm túc.</p>
+      <ul style="font-size:.88rem">
+        <li>Chọn chuyên môn phụ</li>
+        <li>Làm project nhỏ</li>
+        <li>Tìm mentor</li>
+        <li>Học công cụ nghề nghiệp</li>
+        <li>Bắt đầu xây portfolio</li>
+      </ul>
+      <div class="goal">Mục tiêu: Có một hướng thử nghiệm rõ ràng.</div>
+    </div>
+
+    <div class="year">
+      <h5>Năm 3: Va chạm thực tế</h5>
+      <p style="font-size:.9rem">Năm ba là lúc cần đi ra khỏi lớp học. Đây là giai đoạn thực tập, freelance, làm dự án thật hoặc tham gia môi trường doanh nghiệp.</p>
+      <ul style="font-size:.88rem">
+        <li>Thực tập</li>
+        <li>Làm part-time liên quan đến ngành</li>
+        <li>Xây LinkedIn/CV</li>
+        <li>Gặp người trong ngành</li>
+        <li>Nhìn lại xem ngành này có thật sự phù hợp không</li>
+      </ul>
+      <div class="goal">Mục tiêu: Kiểm chứng lựa chọn bằng trải nghiệm thật.</div>
+    </div>
+
+    <div class="year">
+      <h5>Năm 4: Chuyển đổi sang nghề</h5>
+      <p style="font-size:.9rem">Năm cuối là giai đoạn chuẩn bị bước vào thị trường lao động. Lúc này, bạn cần rõ hơn về vị trí đầu tiên mình muốn ứng tuyển.</p>
+      <ul style="font-size:.88rem">
+        <li>Hoàn thiện CV</li>
+        <li>Chuẩn bị phỏng vấn</li>
+        <li>Chọn 2–3 nhóm vị trí mục tiêu</li>
+        <li>Tối ưu portfolio</li>
+        <li>Tìm cơ hội thực tập chuyển thành việc làm</li>
+      </ul>
+      <div class="goal">Mục tiêu: Ra trường với một hướng nghề rõ, không phải một tấm bằng mơ hồ.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHƯƠNG 12 -->
+<section class="chapter fade-in" id="ch12">
+  <div class="ch-label">Chương 12</div>
+  <h3>Khi bạn đã chọn sai – làm gì tiếp theo?</h3>
+  <div class="ch-desc">Không phải bắt đầu lại từ đầu, mà là điều chỉnh thông minh</div>
+
+  <p>Nếu bạn đang đọc chương này và cảm thấy mình đã chọn sai, điều đầu tiên cần biết là: bạn không hề đơn độc. Rất nhiều người chỉ hiểu mình hơn sau khi đã đi một đoạn đường.</p>
+
+  <!-- Illustration: path redirect / pivot -->
+  <div class="chapter-illus">
+    <svg viewBox="0 0 300 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Original straight path (faded) -->
+      <line x1="20" y1="45" x2="180" y2="45" stroke="#0064E0" stroke-width="1.5" opacity=".2"/>
+      <line x1="180" y1="45" x2="280" y2="45" stroke="#E06050" stroke-width="1" stroke-dasharray="4 3" opacity=".2"/>
+      <text x="250" y="40" font-family="Roboto" font-size="7" fill="#E06050" opacity=".3">cũ</text>
+      <!-- X at the bend -->
+      <circle cx="180" cy="45" r="8" stroke="#E06050" stroke-width="1" fill="rgba(224,96,80,.05)" opacity=".4"/>
+      <!-- New redirected path -->
+      <path d="M180 45 Q200 35 220 20 Q240 10 275 15" stroke="#0064E0" stroke-width="2" fill="none"/>
+      <polygon points="275,11 282,15 275,19" fill="#0064E0"/>
+      <!-- Dots along old path -->
+      <circle cx="40" cy="45" r="3" fill="#0064E0" opacity=".2"/>
+      <circle cx="70" cy="45" r="3" fill="#0064E0" opacity=".25"/>
+      <circle cx="100" cy="45" r="3" fill="#0064E0" opacity=".3"/>
+      <circle cx="130" cy="45" r="3" fill="#0064E0" opacity=".35"/>
+      <circle cx="160" cy="45" r="3" fill="#0064E0" opacity=".4"/>
+      <!-- Label -->
+      <text x="240" y="10" font-family="Roboto" font-size="7" fill="#0064E0" opacity=".6">hướng mới</text>
+      <!-- Luggage/skills carried -->
+      <rect x="190" y="55" width="18" height="14" rx="2" stroke="#0064E0" stroke-width="1" fill="rgba(0,100,224,.05)" opacity=".5"/>
+      <text x="193" y="65" font-family="Roboto" font-size="6" fill="#0064E0" opacity=".5">skills</text>
+    </svg>
+  </div>
+
+  <h4>12.1 Đừng vội phủ nhận toàn bộ</h4>
+  <p>Khi cảm thấy không hợp ngành, nhiều bạn muốn bỏ hết. Nhưng trước khi làm vậy, hãy phân tích kỹ:</p>
+  <ul>
+    <li>Bạn không hợp ngành?</li>
+    <li>Không hợp trường?</li>
+    <li>Không hợp cách dạy?</li>
+    <li>Không hợp môi trường?</li>
+    <li>Hay chỉ đang mệt vì áp lực tạm thời?</li>
+  </ul>
+
+  <h4>12.2 Tìm phần có thể chuyển đổi</h4>
+  <p>Một ngành học dù không phù hợp 100% vẫn có thể để lại nhiều tài sản: kỹ năng phân tích, kỹ năng giao tiếp, kiến thức nền, mạng lưới bạn bè, trải nghiệm dự án, khả năng chịu áp lực.</p>
+
+  <div class="callout insight">
+    <p>Đừng hỏi: "Mình đã mất gì?" &mdash; Hãy hỏi: <strong>"Mình có thể mang theo gì sang hướng mới?"</strong></p>
+  </div>
+
+  <h4>12.3 Điều chỉnh theo 3 cấp độ</h4>
+  <ol>
+    <li><strong>Cấp độ 1:</strong> Điều chỉnh vai trò trong cùng ngành (VD: học Marketing nhưng không thích content, có thể chuyển sang research hoặc performance)</li>
+    <li><strong>Cấp độ 2:</strong> Điều chỉnh ngành gần (VD: học Kế toán nhưng thích con người, có thể chuyển sang nhân sự C&B, payroll hoặc tài chính nhân sự)</li>
+    <li><strong>Cấp độ 3:</strong> Chuyển hướng mạnh (Nếu thật sự không phù hợp, bạn có thể học bổ sung chứng chỉ, làm dự án, thực tập lại và xây lộ trình mới)</li>
+  </ol>
+
+  <h4>12.4 Chọn sai không đáng sợ bằng tiếp tục gồng</h4>
+  <p>Điều đáng sợ nhất không phải là chọn sai. Điều đáng sợ là biết sai nhưng vẫn tiếp tục chỉ vì sợ bắt đầu lại.</p>
+
+  <div class="callout question">
+    <p>Mình đang tiếp tục vì còn phù hợp, hay chỉ vì sợ thừa nhận mình cần đổi hướng?</p>
+  </div>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ PHẦN 6 ═══════════ -->
+<div class="part-header fade-in" id="part6">
+  <div class="part-num">Phần 6</div>
+  <h2>Cá Nhân Hóa Hành Trình Của Bạn</h2>
+  <div class="illus">
+    <svg viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Person with light/spark -->
+      <circle cx="100" cy="40" r="14" stroke="#0064E0" stroke-width="2" fill="none"/>
+      <line x1="100" y1="54" x2="100" y2="90" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="65" x2="82" y2="78" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="65" x2="118" y2="78" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="90" x2="88" y2="115" stroke="#0064E0" stroke-width="2"/>
+      <line x1="100" y1="90" x2="112" y2="115" stroke="#0064E0" stroke-width="2"/>
+      <!-- Gear/cog around person -->
+      <circle cx="100" cy="65" r="30" stroke="#0064E0" stroke-width=".8" stroke-dasharray="5 3" opacity=".2"/>
+      <!-- Sparks / stars -->
+      <circle cx="72" cy="30" r="2" fill="#0064E0" opacity=".6"/>
+      <circle cx="130" cy="35" r="1.5" fill="#0064E0" opacity=".4"/>
+      <circle cx="65" cy="55" r="1.5" fill="#0064E0" opacity=".5"/>
+      <circle cx="138" cy="60" r="2" fill="#0064E0" opacity=".6"/>
+      <!-- Light rays from head -->
+      <line x1="100" y1="22" x2="100" y2="14" stroke="#0064E0" stroke-width="1.5" opacity=".5"/>
+      <line x1="88" y1="30" x2="82" y2="22" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <line x1="112" y1="30" x2="118" y2="22" stroke="#0064E0" stroke-width="1" opacity=".4"/>
+      <!-- Chat bubble -->
+      <rect x="140" y="40" width="45" height="25" rx="5" stroke="#0064E0" stroke-width="1" fill="rgba(0,100,224,.06)"/>
+      <text x="150" y="56" font-family="Roboto" font-size="8" fill="#0064E0" opacity=".5">AI Coach</text>
+      <polygon points="145,65 150,72 155,65" fill="rgba(0,100,224,.06)" stroke="#0064E0" stroke-width="1"/>
+    </svg>
+  </div>
+</div>
+
+<!-- CHƯƠNG 13 -->
+<section class="chapter fade-in" id="ch13">
+  <div class="ch-label">Chương 13</div>
+  <h3>Trợ lý AI Career Coach</h3>
+  <div class="ch-desc">Cá nhân hóa hành trình chọn nghề của bạn</div>
+
+  <p>Cuốn Ebook này giúp bạn hiểu mình và có một quy trình định hướng rõ ràng. Tuy nhiên, mỗi người luôn có một bối cảnh riêng. Vì vậy, để đi sâu hơn, bạn cần một công cụ có thể phản hồi theo chính trường hợp của bạn.</p>
+
+  <h4>13.1 Chatbot Career Coach hoạt động như thế nào?</h4>
+  <p>Sau khi quét QR, bạn chỉ cần nhập một số thông tin cơ bản như họ tên và ngày tháng năm sinh theo giấy khai sinh, cùng với câu hỏi bạn đang quan tâm. Dựa trên dữ liệu này, chatbot sẽ:</p>
+  <ul>
+    <li>Xác định số đường đời</li>
+    <li>Gợi ý nhóm ngành và hướng nghề phù hợp</li>
+    <li>Phân tích nhanh điểm mạnh – điểm yếu</li>
+    <li>Đặt câu hỏi để bạn tự nhìn lại vấn đề</li>
+    <li>Gợi ý bước tiếp theo phù hợp với tình huống của bạn</li>
+  </ul>
+
+  <h4>13.2 Cách Chatbot hỗ trợ bạn ra quyết định</h4>
+  <p>Career Coach AI được tích hợp phương pháp <strong>Reflective Coaching 4F</strong>, giúp bạn đi qua 4 bước:</p>
+  <ul>
+    <li><strong>Feel:</strong> Nhận diện cảm xúc thật của bạn</li>
+    <li><strong>Fact:</strong> Làm rõ thực tế đang diễn ra</li>
+    <li><strong>Find:</strong> Tìm ra nguyên nhân cốt lõi</li>
+    <li><strong>Future:</strong> Định hướng bước đi tiếp theo</li>
+  </ul>
+
+  <h4>13.3 Cách sử dụng hiệu quả</h4>
+  <ul>
+    <li>Đặt câu hỏi thật &mdash; đúng với điều bạn đang phân vân</li>
+    <li>Trả lời trung thực &mdash; không cần "đúng", chỉ cần "thật"</li>
+    <li>Xem chatbot như người đồng hành, không phải công cụ trả lời nhanh</li>
+  </ul>
+</section>
+
+<!-- CHƯƠNG 14 -->
+<section class="chapter fade-in" id="ch14">
+  <div class="ch-label">Chương 14</div>
+  <h3>Career Coaching – đi nhanh hơn với người dẫn đường</h3>
+  <div class="ch-desc">Không chỉ là tư vấn, mà là đồng hành chuyên nghiệp</div>
+
+  <h4>14.1 Career Coaching dành cho ai?</h4>
+  <ul>
+    <li>Học sinh cấp 3 chưa biết chọn khối, chọn ngành</li>
+    <li>Học sinh lớp 12 đang chuẩn bị đăng ký nguyện vọng</li>
+    <li>Sinh viên năm 1–2 cảm thấy ngành học không như kỳ vọng</li>
+    <li>Sinh viên năm 3–4 hoang mang trước khi ra trường</li>
+    <li>Người trẻ đi làm vài năm nhưng muốn đổi hướng</li>
+    <li>Phụ huynh muốn hiểu con để đồng hành đúng cách</li>
+  </ul>
+
+  <h4>14.2 Coaching khác gì tư vấn thông thường?</h4>
+  <p>Tư vấn thường đưa ra lời khuyên. Coaching giúp bạn tự nhìn rõ vấn đề và ra quyết định có cơ sở hơn.</p>
+  <p>Một buổi Career Coaching tốt không chỉ trả lời câu hỏi "em nên học ngành gì", mà giúp bạn hiểu:</p>
+  <ul>
+    <li>Vì sao bạn đang mơ hồ</li>
+    <li>Bạn đang bị ảnh hưởng bởi ai</li>
+    <li>Điểm mạnh thật sự của bạn là gì</li>
+    <li>Bạn đang né tránh điều gì</li>
+    <li>Hướng nào phù hợp hơn với năng lượng và bối cảnh hiện tại</li>
+  </ul>
+
+  <h4>14.3 Các gói coaching gợi ý</h4>
+  <div class="number-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="number-card">
+      <div class="title">Gói 1: Giải mã bản thân</div>
+      <div class="tagline">Phù hợp với học sinh – sinh viên chưa rõ mình mạnh gì, yếu gì</div>
+      <ul style="font-size:.85rem"><li>Phân tích số đường đời</li><li>Nhận diện điểm mạnh – điểm yếu</li><li>Xác định phong cách học và làm việc</li><li>Gợi ý nhóm ngành phù hợp</li></ul>
+    </div>
+    <div class="number-card">
+      <div class="title">Gói 2: Chọn ngành – chọn trường</div>
+      <div class="tagline">Phù hợp với học sinh cấp 3 chuẩn bị đăng ký nguyện vọng</div>
+      <ul style="font-size:.85rem"><li>Đối chiếu số đường đời với nhóm ngành</li><li>Phân tích năng lực học tập</li><li>Lọc nhóm ngành phù hợp</li><li>Gợi ý tiêu chí chọn trường</li><li>Lập danh sách lựa chọn ưu tiên</li></ul>
+    </div>
+    <div class="number-card">
+      <div class="title">Gói 3: Roadmap 4 năm đại học</div>
+      <div class="tagline">Phù hợp với sinh viên muốn học đại học không lãng phí</div>
+      <ul style="font-size:.85rem"><li>Xác định mục tiêu từng năm</li><li>Gợi ý kỹ năng cần học</li><li>Gợi ý hoạt động nên tham gia</li><li>Xây kế hoạch thực tập, portfolio, networking</li></ul>
+    </div>
+    <div class="number-card">
+      <div class="title">Gói 4: Chuyển hướng nghề nghiệp</div>
+      <div class="tagline">Phù hợp với sinh viên hoặc người trẻ đã chọn sai ngành</div>
+      <ul style="font-size:.85rem"><li>Phân tích lý do không phù hợp</li><li>Tìm kỹ năng có thể chuyển đổi</li><li>Gợi ý ngành gần hoặc vai trò mới</li><li>Xây lộ trình học bổ sung</li><li>Chuẩn bị bước chuyển nghề thực tế</li></ul>
+    </div>
+  </div>
+
+  <h4>14.4 Điều quan trọng nhất khi coaching</h4>
+  <p>Coaching không phải là nơi ai đó quyết định cuộc đời thay bạn. Đó là nơi bạn được lắng nghe, được soi chiếu và được hỗ trợ để đưa ra lựa chọn rõ ràng hơn.</p>
+  <p><em>Một người dẫn đường tốt không kéo bạn đi theo con đường của họ. Họ giúp bạn nhìn rõ con đường của mình.</em></p>
+</section>
+
+<div class="sep">&middot;&ensp;&middot;&ensp;&middot;</div>
+
+<!-- ═══════════ KẾT LUẬN ═══════════ -->
+<section class="conclusion fade-in" id="ketluan">
+  <!-- Footsteps / path forward -->
+  <div class="illus" style="max-width:200px;margin-bottom:1rem">
+    <svg viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Footsteps walking forward -->
+      <ellipse cx="30" cy="55" rx="8" ry="12" transform="rotate(-15 30 55)" stroke="#0064E0" stroke-width="1" opacity=".2" fill="none"/>
+      <ellipse cx="55" cy="45" rx="8" ry="12" transform="rotate(10 55 45)" stroke="#0064E0" stroke-width="1" opacity=".3" fill="none"/>
+      <ellipse cx="85" cy="50" rx="8" ry="12" transform="rotate(-10 85 50)" stroke="#0064E0" stroke-width="1.2" opacity=".4" fill="none"/>
+      <ellipse cx="115" cy="40" rx="8" ry="12" transform="rotate(8 115 40)" stroke="#0064E0" stroke-width="1.2" opacity=".5" fill="none"/>
+      <ellipse cx="145" cy="45" rx="8" ry="12" transform="rotate(-5 145 45)" stroke="#0064E0" stroke-width="1.5" opacity=".6" fill="none"/>
+      <ellipse cx="175" cy="35" rx="8" ry="12" transform="rotate(12 175 35)" stroke="#0064E0" stroke-width="1.5" opacity=".8" fill="rgba(0,100,224,.06)"/>
+      <!-- Horizon line -->
+      <line x1="0" y1="70" x2="200" y2="70" stroke="#0064E0" stroke-width=".5" opacity=".15"/>
+      <!-- Star ahead -->
+      <polygon points="195,15 197,20 202,20 198,24 199,29 195,26 191,29 192,24 188,20 193,20" fill="#0064E0" opacity=".4"/>
+    </svg>
+  </div>
+  <h2>Kết Luận</h2>
+  <p><strong>Bạn không cần biết hết tương lai &mdash; bạn chỉ cần hiểu bước tiếp theo</strong></p>
+  <p>Không ai có thể đảm bảo rằng một lựa chọn hôm nay sẽ đúng mãi mãi. Thế giới thay đổi. Thị trường thay đổi. Con người bạn cũng sẽ thay đổi.</p>
+  <p>Nhưng nếu bạn hiểu mình hơn, bạn sẽ ít chọn theo đám đông hơn. Nếu bạn hiểu ngành hơn, bạn sẽ ít bị hấp dẫn bởi những cái tên nghe "hot" hơn. Nếu bạn có trải nghiệm thật, bạn sẽ ít phải gồng hơn trong một con đường không thuộc về mình.</p>
+
+  <div class="callout insight" style="max-width:600px;margin:2rem auto">
+    <p>Số đường đời không phải là định mệnh. Nó là một bản đồ khởi đầu. Và bản đồ chỉ có ý nghĩa khi bạn dùng nó để bước đi.</p>
+  </div>
+
+  <p>Bạn vẫn là người bước đi, thử, sai, điều chỉnh và trưởng thành.</p>
+  <p>Có thể bạn chưa cần biết chính xác mình sẽ là ai trong 10 năm tới. Nhưng sau cuốn Ebook này, hy vọng bạn có thể rõ hơn một điều:</p>
+
+  <div class="callout message" style="max-width:500px;margin:2rem auto">
+    <p>Bước tiếp theo của mình nên bắt đầu từ đâu.</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Bản Đồ Nghề Nghiệp Cá Nhân</strong></p>
+  <p>Tác giả: Lê Thị Thảo Trang &mdash; CEO &amp; Founder TOPLINKS</p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:var(--cream-faint)">Hiểu mình qua con số &mdash; chọn nghề không mơ hồ</p>
+</footer>
+
+</main>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+
+// Sidebar toggle
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+
+// Close sidebar on link click (mobile)
+document.querySelectorAll('#sidebar nav a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    if(window.innerWidth<1100){
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+  });
+});
+
+// Active TOC highlight
+const sections=document.querySelectorAll('section[id],div.part-header[id]');
+const tocLinks=document.querySelectorAll('#toc a');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(l=>{
+        l.classList.toggle('active',l.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(s=>observer.observe(s));
+
+// Fade in on scroll
+const fadeEls=document.querySelectorAll('.fade-in');
+const fadeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');fadeObs.unobserve(e.target);}
+  });
+},{threshold:0,rootMargin:'0px 0px 200px 0px'});
+fadeEls.forEach(el=>fadeObs.observe(el));
+// Safety: make all fade-in visible after 3s in case observer misses
+setTimeout(()=>{fadeEls.forEach(el=>el.classList.add('visible'))},3000);
+</script>
+
+</body>
+</html>
