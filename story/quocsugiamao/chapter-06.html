@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 06 — Thiên Cơ Phản Ứng | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-05.html">&larr; CHƯƠNG TRƯỚC</a>
+      <span class="chapter-indicator">06/30</span>
+      <a href="chapter-07.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 06</div>
+      <h1>Thiên Cơ Phản Ứng</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Ba ngày sau cái chết của Lý đại nhân, Tạ Cảnh Minh vẫn không ngủ được.</p>
+
+<p>Không phải vì sợ. Hay không chỉ vì sợ. Mà vì đầu hắn không chịu dừng.</p>
+
+<p>Hắn ngồi ở mép giường trong Minh Nguyệt Đường, lưng tựa vách gỗ, chân co lên. Nến tắt từ lâu, chỉ có ánh trăng lọt qua song cửa, kẻ vạch trắng trên sàn. Ngoài sân, tiếng dế kêu đều đặn, bình yên kiểu hoàng cung nửa đêm, thứ bình yên giả tạo.</p>
+
+<p class="thought"><em>Ba ngày. Ba ngày và mình vẫn đang nghĩ về Lý đại nhân.</em></p>
+
+<p>Không phải vì thương. Hắn không quen gã, không biết gã là người tốt hay xấu, thậm chí không nhớ rõ mặt gã. Hắn chỉ nhớ mắt gã, khoảnh khắc hắn nói "không qua mùa thu". Mắt trắng bệch, tay run, miệng há mà không phát ra tiếng.</p>
+
+<p>Và gã chết thật.</p>
+
+<p class="thought"><em>Bệnh cũ tái phát. Ngự y nói vậy. Lục Thanh Dao cũng nói vậy. Mình cũng muốn tin vậy.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p>Hắn vuốt cằm. Thói quen suy nghĩ kiếp trước, kiếp này vẫn giữ, vì thân xác này gầy nên cằm nhọn, vuốt lên đau tay.</p>
+
+<p class="thought"><em>Ngồi lại. Nghĩ lại. Từ đầu.</em></p>
+
+<p>Hắn nhắm mắt. Không phải nhắm để ngủ, mà nhắm để nhớ. Từng sự kiện một.</p>
+
+<p>Ngày đầu tiên. Pháp trường. Hắn hét lên một câu bịa, trời nổi sấm. Trùng hợp? Có thể. Xác suất? Thấp, nhưng không phải bằng không. Mùa hè nào mà chẳng có sấm, Vương Bách Nhẫn nói đúng.</p>
+
+<p>Nhưng, sấm đúng lúc hắn nói, đúng khoảnh khắc hắn cần, đúng cái giây mà đao phủ đang giơ dao.</p>
+
+<p class="thought"><em>Trùng hợp cực kỳ may mắn. Hoặc không phải trùng hợp.</em></p>
+
+<p>Ngày thứ hai. Trường Xuân Cung. Hắn phán "khí uất", "bí mật", toàn lời mơ hồ. Nhưng thái giám dẫn đường sợ hãi, tự nguyện đến kể cho hắn nghe bí mật điện thờ. Không phải vì hắn giỏi, mà vì gã tin hắn đã biết, nên tự khai.</p>
+
+<p class="thought"><em>Niềm tin của gã khiến gã hành động theo đúng kịch bản mà mình không hề viết.</em></p>
+
+<p>Đêm gặp vua. Hắn nói "Thiên Cơ giữ bệ hạ sống", nói "Thiên Cơ có thể cảnh báo". Hoàn toàn bịa. Nhưng vua tin, vua ngủ được. Và sáng hôm sau, cả hoàng cung tin rằng Quốc Sư đã chữa bệnh cho vua.</p>
+
+<p class="thought"><em>Mình không chữa gì cả. Mình chỉ nói cho vua nghe điều vua muốn nghe. Nhưng kết quả: vua ngủ thật. Cơ thể vua thật sự phục hồi.</em></p>
+
+<p class="thought"><em>Vì niềm tin.</em></p>
+
+<p>Đêm tiếng khóc. Thái giám chết. Khí đen. Ký ức người chết tràn vào. Đó không phải bịa. Đó là thật. Thiên Diễn Đồng thật sự tiến hóa, thật sự cho hắn thấy thứ mà mắt thường không thấy.</p>
+
+<p class="thought"><em>Nhưng Thiên Diễn Đồng mạnh lên khi nào? Sau khi cả pháp trường tin mình. Sau khi vua tin mình. Sau khi thái giám tin mình.</em></p>
+
+<p class="thought"><em>Mỗi lần có thêm người tin, mình mạnh lên.</em></p>
+
+<p>Và cuối cùng. Triều hội. "Không qua mùa thu." Lý đại nhân chết.</p>
+
+<p>Hắn mở mắt. Nhìn trăng.</p>
+
+<p class="thought"><em>Bốn lần. Bốn lần mình nói điều gì đó, nhiều người tin, và nó xảy ra.</em></p>
+
+<p class="thought"><em>Sấm. Thái giám tự khai. Vua ngủ. Lý đại nhân chết.</em></p>
+
+<p class="thought"><em>Bốn lần liên tiếp.</em></p>
+
+<p class="thought"><em>Nếu là kiếp trước, mình sẽ nói: xác suất. Hiệu ứng chung chung. Thiên kiến xác nhận. Mình nói mơ hồ, người ta tự điền chi tiết, rồi nhớ những lần đúng, quên những lần sai.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p>Hắn ngồi thẳng dậy.</p>
+
+<p class="thought"><em>Mình không sai lần nào.</em></p>
+
+<p class="thought"><em>Không. Một. Lần.</em></p>
+
+<p class="thought"><em>Kiếp trước, đọc vị giỏi nhất cũng chỉ trúng sáu bảy phần mười. Còn lại dùng kỹ thuật để che. Nhưng ở đây, mình trúng mười phần mười. Không phải vì mình giỏi hơn. Mà vì...</em></p>
+
+<p>Hắn đứng dậy. Bước ra sân.</p>
+
+<p>Đêm mát. Gió nhẹ, mang theo mùi hoa nào đó, ngọt và lạnh. Sân Minh Nguyệt Đường nhỏ, có một cây tùng già, mấy viên đá kê thành ghế. Hắn ngồi xuống đá, lạnh buốt qua lớp áo mỏng.</p>
+
+<p class="thought"><em>Giả thuyết.</em></p>
+
+<p class="thought"><em>Nếu ở thế giới này, niềm tin không chỉ là trạng thái tâm lý, mà là một lực. Một dòng chảy. Và khi đủ nhiều người tin một điều, dòng chảy đó đẩy hiện thực lệch đi.</em></p>
+
+<p class="thought"><em>Thì...</em></p>
+
+<p class="thought"><em>Mình nói "sấm sẽ đến", cả pháp trường ngàn người nín thở chờ, và sấm đến.</em></p>
+
+<p class="thought"><em>Mình nói "Thiên Cơ giữ bệ hạ sống", vua tin bằng cả tấm lòng tuyệt vọng, và vua thật sự sống.</em></p>
+
+<p class="thought"><em>Mình nói "không qua mùa thu", cả triều đình tin, và Lý đại nhân chết.</em></p>
+
+<p class="thought"><em>Không phải mình đoán đúng. Mình tạo ra kết quả.</em></p>
+
+<p>Gió lạnh thổi qua. Hắn rùng mình, không phải vì lạnh.</p>
+
+<p class="thought"><em>Đây không phải đọc vị. Đây là cái gì khác. Cái gì đó lớn hơn nhiều.</em></p>
+
+<p class="thought"><em>Thiên Cơ. Dòng chảy vận mệnh mà thế giới này nói đến. Nó tồn tại. Và mình đang... tác động vào nó.</em></p>
+
+<p>Hắn nhìn hai bàn tay. Gầy, dài, tay kẻ đọc sách chứ không phải tay cầm kiếm. Nhưng bàn tay này đã phán chết một người.</p>
+
+<p class="thought"><em>Bằng một câu nói.</em></p>
+
+<p class="thought"><em>Nếu giả thuyết đúng, thì quy luật là gì?</em></p>
+
+<p>Hắn vuốt cằm. Nghĩ.</p>
+
+<p class="thought"><em>Điều kiện một: mình phải nói. Thiên Cơ không phản ứng với suy nghĩ, chỉ phản ứng với lời nói.</em></p>
+
+<p class="thought"><em>Sai. Không chắc. Có thể mình chưa thử đủ.</em></p>
+
+<p class="thought"><em>Điều kiện hai: phải có người nghe. Sấm trên pháp trường, cả ngàn người. Trị liệu cho vua, một người nhưng tin cực sâu. Triều hội, hàng chục đại thần.</em></p>
+
+<p class="thought"><em>Điều kiện ba: người nghe phải tin. Không phải nghe, mà TIN. Thái giám dẫn đường tin mình biết bí mật, nên gã tự khai. Vua tin mình cứu được, nên vua bình tĩnh. Triều đình tin mình thấy thiên cơ, nên Lý đại nhân...</em></p>
+
+<p>Hắn dừng lại.</p>
+
+<p class="thought"><em>Vậy cốt lõi là: lời nói + niềm tin = hiện thực lệch.</em></p>
+
+<p class="thought"><em>Và mình, tên bịp, là kẻ giỏi nhất trong việc khiến người ta tin.</em></p>
+
+<p>Lạnh. Lạnh đến từ bên trong.</p>
+
+<p class="thought"><em>Kiếp trước, lời nói dối chỉ lấy được tiền. Kiếp này, lời nói dối giết người.</em></p>
+
+<p>Hắn đứng dậy. Đi qua đi lại trong sân, bước nhanh, kiểu đi của kẻ đang cố chạy trốn suy nghĩ mà chân không biết chạy đi đâu.</p>
+
+<p class="thought"><em>Dừng lại. Đừng hoảng. Nghĩ tiếp.</em></p>
+
+<p class="thought"><em>Nếu giả thuyết đúng, mình cần chứng minh. Kiếp trước mình không tin gì nếu không có bằng chứng. Kiếp này cũng vậy.</em></p>
+
+<p class="thought"><em>Thử nghiệm.</em></p>
+
+<p>Ý nghĩ đó vừa hình thành, hắn đã biết mình sẽ làm.</p>
+
+<p class="thought"><em>Thử nghiệm nhỏ. Nói một dự đoán vô hại trước mặt vài người. Xem có đúng không. Nếu đúng, giả thuyết được củng cố. Nếu sai, mình chỉ đang tưởng tượng.</em></p>
+
+<p class="thought"><em>Thí nghiệm. Kiểm soát biến số. Quan sát kết quả.</em></p>
+
+<p class="thought"><em>Phương pháp khoa học, dùng trong thế giới tu tiên. Hơi buồn cười.</em></p>
+
+<p>Hắn quay vào phòng. Nằm xuống. Lần đầu tiên trong ba ngày, đầu hắn yên tĩnh hơn một chút.</p>
+
+<p>Vì hắn có kế hoạch. Và kẻ lừa đảo có kế hoạch thì ngủ ngon hơn kẻ lừa đảo đang hoảng.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau, Tạ Cảnh Minh dậy sớm hơn mọi ngày.</p>
+
+<p>Hắn ngồi ở bàn trà, mặc áo trắng, tóc buộc lỏng, mặt bình thản. Diễn. Nhưng lần này, diễn có mục đích rõ ràng.</p>
+
+<p>Hai người hầu trong Minh Nguyệt Đường: một thái giám già tên Phúc An, phụ trách dọn dẹp, ít nói, mắt láo liên kiểu đã ở cung quá lâu. Một cung nữ tên Xuân Nhi, mười sáu mười bảy tuổi, rụt rè, hay cúi đầu.</p>
+
+<p class="thought"><em>Hai người. Ít, nhưng đủ cho thí nghiệm nhỏ.</em></p>
+
+<p>Hắn gọi Phúc An vào rót trà. Gã bước vào, cúi thấp, rót cẩn thận. Tay hơi run, kiểu run của kẻ hầu người mà cả kinh thành đang sợ.</p>
+
+<p class="thought"><em>Gã sợ mình. Tốt. Sợ là nền tảng của tin.</em></p>
+
+<p>Tạ Cảnh Minh uống một ngụm trà. Rồi buông ra, giọng nhẹ, kiểu vô tình:</p>
+
+<p>— Phúc An.</p>
+
+<p>— Dạ, Quốc Sư.</p>
+
+<p>— Hôm nay trời quang. Nhưng...</p>
+
+<p>Hắn ngừng, nhìn ra cửa sổ, mắt hơi nheo, kiểu đang "thấy" gì đó.</p>
+
+<p>— Chiều nay sẽ có mưa.</p>
+
+<p>Phúc An ngẩng lên, rồi cúi xuống ngay.</p>
+
+<p>— Dạ. Quốc Sư nói vậy thì chắc... sẽ có mưa.</p>
+
+<p>Không hỏi tại sao. Không nghi ngờ. Tin tuyệt đối. Vì Quốc Sư đã phán chết Lý đại nhân, Quốc Sư nói gì cũng đúng.</p>
+
+<p class="thought"><em>Thí nghiệm một: dự đoán thời tiết.</em></p>
+
+<p class="thought"><em>Nhưng khoan, mình cần kiểm soát biến số. Trời hôm nay quang mây. Mùa này, xác suất mưa chiều khoảng... bốn năm phần mười? Thời tiết nhiệt đới, mưa rào buổi chiều là chuyện bình thường.</em></p>
+
+<p class="thought"><em>Không đủ rõ ràng. Cần thử thêm.</em></p>
+
+<p>Hắn gọi Xuân Nhi. Cô gái bước vào, mắt nhìn xuống, vai hơi co.</p>
+
+<p>— Xuân Nhi.</p>
+
+<p>— Dạ.</p>
+
+<p>— Ngươi có cái trâm trên tóc, đẹp. Ai cho?</p>
+
+<p>Xuân Nhi sờ lên đầu, mặt đỏ nhẹ.</p>
+
+<p>— Dạ... mẹ để lại.</p>
+
+<p class="thought"><em>Thiên Diễn Đồng: nhớ nhung, buồn nhẹ. Mẹ chết hoặc mẹ ở xa. Kỷ vật quan trọng.</em></p>
+
+<p>Hắn gật đầu, rồi nói, giọng rất bình thản:</p>
+
+<p>— Giữ cẩn thận. Hôm nay... ngươi sẽ suýt đánh rơi nó.</p>
+
+<p>Xuân Nhi mắt mở to. Tay lập tức ôm lấy trâm.</p>
+
+<p>— Dạ! Con sẽ cẩn thận!</p>
+
+<p>— Không sao. Chỉ suýt thôi, không mất.</p>
+
+<p>Cô gái gật đầu liên tục, rồi lui ra, tay vẫn giữ trâm.</p>
+
+<p class="thought"><em>Thí nghiệm hai: dự đoán sự kiện cá nhân.</em></p>
+
+<p class="thought"><em>Cái này khó hơn. "Suýt đánh rơi trâm" là sự kiện cụ thể. Nếu không xảy ra, chứng minh mình sai.</em></p>
+
+<p class="thought"><em>Nhưng... mình vừa nói vậy, cô ta sẽ cả ngày chú ý đến cái trâm. Sờ liên tục, kiểm tra liên tục. Và khi bạn liên tục sờ một vật trên đầu tóc, xác suất nó tuột ra tăng lên đáng kể.</em></p>
+
+<p class="thought"><em>Vậy nếu nó rơi, là vì Thiên Cơ, hay vì tâm lý?</em></p>
+
+<p class="thought"><em>Đó là vấn đề. Mình không tách được hai biến số.</em></p>
+
+<p>Hắn nhíu mày. Nghĩ tiếp.</p>
+
+<p class="thought"><em>Cần thêm một thí nghiệm. Thứ mà hành vi con người không giải thích được.</em></p>
+
+<p>Trưa.</p>
+
+<p>Hắn ngồi ở sân, giả vờ nhìn trời, thực ra đang chờ. Phúc An qua lại dọn dẹp. Hắn gọi gã lại.</p>
+
+<p>— Phúc An. Ta muốn hỏi. Chiều nay có khách đến thăm ta không?</p>
+
+<p>— Dạ, Quốc Sư. Chưa có ai báo trước.</p>
+
+<p>— Vậy mà...</p>
+
+<p>Hắn nheo mắt.</p>
+
+<p>— ...Ta thấy sẽ có khách. Chiều nay. Trước giờ Dậu.</p>
+
+<p>Phúc An cúi đầu.</p>
+
+<p>— Dạ. Quốc Sư nói vậy thì... con sẽ chuẩn bị trà.</p>
+
+<p>Gã đi rồi. Tạ Cảnh Minh ngồi lại, tay chắp sau lưng.</p>
+
+<p class="thought"><em>Thí nghiệm ba: dự đoán sự kiện ngẫu nhiên.</em></p>
+
+<p class="thought"><em>Không ai hẹn trước. Nếu có khách đến, không phải vì tâm lý, không phải vì hành vi, mà vì... gì đó khác.</em></p>
+
+<p class="thought"><em>Hoặc không ai đến, và mình chỉ đang tưởng tượng.</em></p>
+
+<p class="thought"><em>Chờ.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều.</p>
+
+<p>Tạ Cảnh Minh ngồi uống trà, mắt nhìn ra sân, đếm thời gian.</p>
+
+<p>Giờ Mùi. Nắng xiên. Không mưa. Trời vẫn quang.</p>
+
+<p class="thought"><em>Thí nghiệm một: chưa xảy ra. Còn thời gian.</em></p>
+
+<p>Giờ Thân. Mây kéo đến từ phía tây. Nhẹ, mỏng. Gió mạnh hơn.</p>
+
+<p>Rồi nặng hơn. Mây xám, dày, che nửa trời.</p>
+
+<p>Giờ Thân gần hết. Mưa.</p>
+
+<p>Không phải mưa rào. Mưa nhẹ, lất phất, thứ mưa mùa hè đến rồi đi. Nhưng mưa.</p>
+
+<p>Phúc An chạy vào thu quần áo phơi ngoài sân. Vừa chạy vừa liếc hắn, mắt đầy vẻ kính sợ.</p>
+
+<p class="thought"><em>Mưa thật. Nhưng xác suất mưa chiều mùa hè là cao. Chưa đủ kết luận.</em></p>
+
+<p class="thought"><em>Chờ tiếp.</em></p>
+
+<p>Giờ Dậu.</p>
+
+<p>Tạ Cảnh Minh ngồi thẳng.</p>
+
+<p>Ngoài sân, mưa vừa tạnh. Nắng chiều le lói. Và có tiếng chân.</p>
+
+<p>Tiếng chân nhiều người. Không phải tiếng chân quen, không phải lính tuần, không phải người hầu Minh Nguyệt Đường. Tiếng chân lạ. Và đang đến gần.</p>
+
+<p>Phúc An chạy vào, hơi thở gấp.</p>
+
+<p>— Quốc Sư! Có người xin gặp. Nội quan phòng Thượng thư bộ Lễ đưa thiệp, nói Hoàng đại nhân muốn mời Quốc Sư thưởng trà.</p>
+
+<p>Tạ Cảnh Minh không nhúc nhích. Mặt bình thản. Nhưng dưới tay áo, ngón tay siết chặt.</p>
+
+<p>— Ta biết.</p>
+
+<p>Hai chữ. Phúc An cúi đầu, mắt sáng lên vì kính phục. "Quốc Sư đã biết trước," gã nghĩ. Rõ ràng.</p>
+
+<p class="thought"><em>Gã đang nghĩ mình thấy thiên cơ. Thực ra mình chỉ đang làm thí nghiệm.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Có khách thật.</em></p>
+
+<p class="thought"><em>Hoàng đại nhân, Thượng thư bộ Lễ. Mình không biết gã, không biết gì về gã. Không ai hẹn trước. Mà gã đến.</em></p>
+
+<p class="thought"><em>Trùng hợp?</em></p>
+
+<p class="thought"><em>Ba lần liên tiếp? Mưa, khách, và...</em></p>
+
+<p>Tiếng "keng" nhẹ ngoài hành lang. Rồi tiếng Xuân Nhi kêu thất thanh:</p>
+
+<p>— Ôi!</p>
+
+<p>Tạ Cảnh Minh quay lại. Xuân Nhi đang cúi xuống nhặt thứ gì đó trên sàn, mặt tái mét. Cái trâm.</p>
+
+<p>Cô ta ngẩng lên, nhìn hắn, mắt mở to. Sợ hãi, kinh ngạc, và kính sợ, ba thứ trộn lẫn.</p>
+
+<p>— Quốc... Quốc Sư... con suýt... đúng như Quốc Sư nói...</p>
+
+<p>— Không sao.</p>
+
+<p>Hắn nói, giọng bình thản.</p>
+
+<p>— Ta đã nói, chỉ suýt thôi.</p>
+
+<p>Xuân Nhi ôm trâm vào ngực, cúi đầu, lui ra. Hắn nghe tiếng cô ta thì thầm với Phúc An ngoài hành lang:</p>
+
+<p>— Quốc Sư nói sáng nay con sẽ suýt đánh rơi trâm. Và con suýt đánh rơi thật!</p>
+
+<p>— Quốc Sư phán gì cũng đúng.</p>
+
+<p>Giọng Phúc An trầm, tin tưởng tuyệt đối.</p>
+
+<p>— Sáng Quốc Sư nói chiều mưa, chiều mưa thật. Nói có khách, có khách thật.</p>
+
+<p>Im lặng.</p>
+
+<p>Rồi Phúc An nói thêm, rất nhỏ, gần như thì thầm:</p>
+
+<p>— Quốc Sư là thần nhân. Không ai tin cũng mặc, lão đây tin.</p>
+
+<p>Tạ Cảnh Minh ngồi trong phòng, nghe rõ từng chữ.</p>
+
+<p class="thought"><em>Ba phần ba. Mưa. Khách. Trâm.</em></p>
+
+<p class="thought"><em>Trâm, mình giải thích được. Cô ta lo lắng, sờ nhiều, trâm tuột. Tâm lý.</em></p>
+
+<p class="thought"><em>Mưa, mình giải thích được. Mùa hè, mây chiều, xác suất.</em></p>
+
+<p class="thought"><em>Khách...</em></p>
+
+<p>Hắn nhìn tấm thiệp Phúc An để trên bàn.</p>
+
+<p class="thought"><em>Khách, mình không giải thích được. Hoàng đại nhân muốn thưởng trà, không ai biết trước, không ai sắp xếp. Gã có lý do riêng, có thể là muốn kết giao sau vụ Lý đại nhân, có thể là tò mò, có thể là nhiều thứ. Nhưng gã chọn hôm nay, chiều nay, đúng lúc mình nói.</em></p>
+
+<p class="thought"><em>Có thể giải thích bằng xác suất không? Có. Mình ở hoàng cung, có tiếng, quan lại muốn gặp là chuyện bình thường. Xác suất có người ghé thăm một ngày bất kỳ, không thấp.</em></p>
+
+<p class="thought"><em>Nhưng ba cái cùng đúng. Cùng lúc. Với ba "thí nghiệm" mà mình chỉ nói trước mặt hai người.</em></p>
+
+<p class="thought"><em>Hai người tin tuyệt đối.</em></p>
+
+<p>Hắn vuốt cằm. Chậm.</p>
+
+<p class="thought"><em>Chỉ hai người. Nhưng niềm tin cá nhân cũng đếm? Không chỉ niềm tin đám đông?</em></p>
+
+<p class="thought"><em>Hay hai người này chỉ là hạt giống, và niềm tin lan ra? Phúc An đi lại trong cung cả ngày, gã nói cho ai nghe? Xuân Nhi hẳn kể cho cung nữ khác. Tin "Quốc Sư nói chiều mưa" có thể đã lan đến vài chục người trước khi chiều đến.</em></p>
+
+<p class="thought"><em>Và vài chục người tin mưa... đủ để Thiên Cơ đẩy mây?</em></p>
+
+<p class="thought"><em>Điên rồ.</em></p>
+
+<p class="thought"><em>Nhưng Lý đại nhân cũng điên rồ. Và gã vẫn chết.</em></p>
+
+<p>Hắn đặt chén trà xuống. Không uống nữa. Miệng đắng.</p>
+
+<p class="thought"><em>Kết luận sơ bộ: có tương quan giữa lời nói, niềm tin, và sự kiện xảy ra. Chưa đủ để khẳng định nhân quả. Nhưng đủ để mình phải... cẩn thận.</em></p>
+
+<p class="thought"><em>Rất cẩn thận.</em></p>
+
+<p class="thought"><em>Vì nếu giả thuyết đúng, mỗi câu mình nói trước mặt người tin mình, đều có thể thay đổi hiện thực.</em></p>
+
+<p class="thought"><em>Và mình, tên bịp, đang ngồi trong hoàng cung, nơi cả kinh thành vừa chứng kiến mình phán chết một đại thần.</em></p>
+
+<p class="thought"><em>Bao nhiêu người đang tin mình? Vài trăm? Vài nghìn?</em></p>
+
+<p class="thought"><em>Mỗi lời mình nói từ giờ... nặng hơn mình tưởng.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hắn từ chối khách. Bảo Phúc An nói hắn đang "quan thiên tượng", không tiện gặp. Lý do đủ bí ẩn để Hoàng đại nhân không dám phiền.</p>
+
+<p>Đêm xuống.</p>
+
+<p>Tạ Cảnh Minh ra sân, ngồi dưới cây tùng. Đêm lạnh. Trời trong, sao nhiều, loại sao mà kiếp trước ở thành phố hắn không bao giờ thấy.</p>
+
+<p>Hắn ngẩng đầu nhìn lên.</p>
+
+<p>Và bật Thiên Diễn Đồng.</p>
+
+<p>Không phải nhìn người. Lần đầu tiên, hắn hướng Thiên Diễn Đồng lên trời.</p>
+
+<p>Không có kỳ vọng. Hắn chỉ muốn thử. Kiểu tò mò của kẻ vừa phát hiện mình có khả năng mới, muốn biết giới hạn ở đâu.</p>
+
+<p>Lúc đầu, không có gì. Bầu trời, sao, mây mỏng. Bình thường.</p>
+
+<p>Rồi, từ từ, Thiên Diễn Đồng bắt đầu phản ứng.</p>
+
+<p>Không phải nhìn thấy. Không phải hình ảnh. Mà là cảm giác.</p>
+
+<p>Áp lực.</p>
+
+<p>Nhẹ, rất nhẹ. Như ai đó đặt tay lên vai hắn, nhưng không phải tay, mà là... sự chú ý. Cảm giác bị nhìn. Cảm giác mà hắn từng có khi bước vào phòng và biết có người đang quan sát mình từ góc tối.</p>
+
+<p>Nhưng lớn hơn. Rộng hơn. Sự chú ý không đến từ một người, mà từ... khắp nơi.</p>
+
+<p>Hắn hạ mắt xuống. Nhìn tay mình.</p>
+
+<p>Quanh bàn tay hắn, trong ánh trăng, thứ gì đó nhấp nháy. Mờ. Gần như không thấy. Nhưng Thiên Diễn Đồng bắt được: những sợi khói mỏng, không phải trắng, không phải đen, mà là thứ gì đó ở giữa, đang quấn quanh ngón tay hắn. Nhẹ nhàng. Như dây tơ nhện. Như sương sớm bám vào cỏ.</p>
+
+<p class="thought"><em>Khí vận?</em></p>
+
+<p>Hắn nhớ lần đầu ở pháp trường, nhìn thấy sợi khói vàng quanh Lục Thanh Dao, khói đen quanh mình. Lần đó mờ mịt, tưởng ảo giác. Nhưng giờ, rõ hơn. Nhiều hơn.</p>
+
+<p>Sợi khói quanh tay hắn chuyển động. Không theo gió. Theo nhịp riêng.</p>
+
+<p>Và khi hắn nhìn lên trời lần nữa, lần này Thiên Diễn Đồng đã mở hết, hắn thấy.</p>
+
+<p>Bầu trời không chỉ có sao. Giữa những vì sao, có dòng chảy. Mờ, rất mờ, như sông nước trên nền đen. Uốn lượn, đan xen, lúc sáng lúc tối.</p>
+
+<p>Thiên Cơ.</p>
+
+<p>Dòng chảy vận mệnh.</p>
+
+<p>Hắn thấy nó.</p>
+
+<p>Và nó...</p>
+
+<p>Hắn hít mạnh.</p>
+
+<p>Nó đang chảy. Đang chảy ngang kinh thành. Đang chảy qua hoàng cung. Và có một nhánh, rất nhỏ, rất mỏng, đang chảy về phía hắn.</p>
+
+<p>Không phải chảy qua. Chảy <em>về phía</em>.</p>
+
+<p>Như sông gặp hố. Như nước bị hút.</p>
+
+<p class="thought"><em>Mình đang hút Thiên Cơ.</em></p>
+
+<p>Áp lực trên vai nặng hơn. Không đau. Không khó chịu. Nhưng nặng. Kiểu nặng của ánh mắt cả phòng đổ dồn vào mình khi đứng trên sân khấu.</p>
+
+<p class="thought"><em>Mình đang bị nhìn.</em></p>
+
+<p>Hắn đứng dậy. Bước lùi một bước, bản năng.</p>
+
+<p>Áp lực không giảm.</p>
+
+<p class="thought"><em>Thiên Cơ đang chú ý đến mình. Vì mình tác động vào nó. Vì mình khiến nó lệch.</em></p>
+
+<p class="thought"><em>Và nó không thích.</em></p>
+
+<p>Không, sai. Không phải "không thích". Không có cảm xúc. Đây là dòng nước gặp vật cản. Dòng nước không ghét vật cản. Nó chỉ đổi hướng.</p>
+
+<p>Nhưng nếu vật cản quá lớn...</p>
+
+<p>Hắn rùng mình.</p>
+
+<p class="thought"><em>Nếu mình tiếp tục nói, tiếp tục khiến người ta tin, tiếp tục khiến Thiên Cơ lệch... nó sẽ phản ứng. Mạnh hơn. Rõ ràng hơn.</em></p>
+
+<p class="thought"><em>Và mình không biết phản ứng đó là gì.</em></p>
+
+<p>Hắn ngồi xuống lại. Chắp tay sau lưng. Tư thế thiền sư mà hắn đã quen diễn, nhưng lần này, lưng hắn lạnh. Mồ hôi ướt áo sau.</p>
+
+<p class="thought"><em>Bình tĩnh. Nghĩ.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình lừa đảo vì tiền. Rủi ro: bị bắt, bị đánh, bị kiện. Có thể tính toán, có thể chạy.</em></p>
+
+<p class="thought"><em>Kiếp này, mình "lừa đảo" vận mệnh. Rủi ro: vận mệnh trả đòn. Không chạy được.</em></p>
+
+<p class="thought"><em>Chơi tất cả kiểu mới.</em></p>
+
+<p>Gió ngừng. Đêm tĩnh lặng hoàn toàn. Không có tiếng dế, không có tiếng lá. Im như thể cả thế giới đang nín thở.</p>
+
+<p>Hắn ngẩng đầu lần nữa.</p>
+
+<p>Dòng chảy trên trời vẫn ở đó. Mờ, nhưng có thật. Nhánh nhỏ vẫn chảy về phía hắn. Áp lực vẫn đè.</p>
+
+<p>Và trong khoảnh khắc đó, giữa sân Minh Nguyệt Đường, dưới trời sao lạnh, Tạ Cảnh Minh cảm thấy rõ ràng hơn bao giờ hết:</p>
+
+<p>Có thứ gì đó đang nhìn hắn.</p>
+
+<p>Không phải người. Không phải hồn ma. Không phải tổ chức nào hay phe phái nào. Lớn hơn tất cả. Bao trùm hơn tất cả.</p>
+
+<p>Dòng chảy vận mệnh, hay thứ đứng sau nó.</p>
+
+<p class="thought"><em>Mình đang chơi trò gì?</em></p>
+
+<p>Hắn tự hỏi. Nhưng câu hỏi mới đáng sợ hơn:</p>
+
+<p class="thought"><em>Ai đang chơi mình?</em></p>
+
+<p>Đêm trôi. Hắn không vào phòng. Ngồi dưới cây tùng, nhìn trời, nghĩ.</p>
+
+<p>Và ở đâu đó trong kinh thành, giấc mơ của Phúc An và Xuân Nhi nở rộ. Gã thái giám già kể cho người quen trong cung: "Quốc Sư nói chiều mưa, chiều mưa thật. Nói có khách, có khách thật." Cô cung nữ trẻ kể cho bạn đồng hành: "Quốc Sư nói con suýt đánh rơi trâm, và con suýt đánh rơi thật."</p>
+
+<p>Tin lan.</p>
+
+<p>Niềm tin dày thêm.</p>
+
+<p>Và Thiên Cơ, dòng chảy mà Tạ Cảnh Minh vừa nhìn thấy lần đầu, ghi nhận.</p>
+
+<p>Thêm một chút. Thêm một nhánh nhỏ. Chảy về phía kẻ nằm ngoài mọi quy luật.</p>
+
+<p>Kẻ không thuộc về dòng chảy, nhưng đang buộc dòng chảy phải nghe.</p>
+
+<p>Tạ Cảnh Minh không biết điều đó. Hắn chỉ biết: từ đêm nay, hắn không còn là tên lừa đảo giả Quốc Sư.</p>
+
+<p>Hắn là kẻ vừa phát hiện ra rằng lời nói dối có trọng lực.</p>
+
+<p>Và trọng lực thì không phân biệt dối hay thật.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-05.html">&larr; CHƯƠNG 05</a>
+      <a href="chapter-07.html">CHƯƠNG 07 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.751 TỪ</div>
+
+  </div>
+</body>
+</html>

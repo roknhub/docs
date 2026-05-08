@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 09 — Người Đầu Tiên Tin Tuyệt Đối | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">09/30</span>
+      <a href="chapter-10.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 09</div>
+      <h1>Người Đầu Tiên Tin Tuyệt Đối</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Sau ngày cầu mưa, mọi thứ thay đổi.</p>
+
+<p>Không phải thay đổi kiểu từ từ, êm ái. Thay đổi kiểu lũ quét. Một ngày, Tạ Cảnh Minh là "Quốc Sư có vẻ giỏi". Ngày hôm sau, hắn là "thần nhân giáng thế".</p>
+
+<p>Phúc An kể cho hắn nghe mỗi sáng, mắt sáng rực, giọng hào hứng kiểu đang kể chuyện thần thoại chứ không phải báo tin:</p>
+
+<p>— Quốc Sư! Ngoài kinh thành, dân lập miếu nhỏ thờ Quốc Sư rồi!</p>
+
+<p>— Quốc Sư! Có người từ ngoại tỉnh đi ba ngày đường đến kinh thành, chỉ để nhìn mặt Quốc Sư!</p>
+
+<p>— Quốc Sư! Chợ bán tranh vẽ Quốc Sư đứng trên đàn gọi mưa, mỗi tấm hai lạng bạc, cháy hàng!</p>
+
+<p>Tạ Cảnh Minh ngồi uống trà, nghe, gật đầu. Mặt bình thản.</p>
+
+<p>Bên trong, bụng quặn.</p>
+
+<p class="thought"><em>Miếu thờ. Tranh vẽ. Ba ngày đường.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình từng mơ có được lượng "khán giả trung thành" kiểu này. Kiếp này, có rồi, và mình chỉ muốn nôn.</em></p>
+
+<p class="thought"><em>Vì mình biết: mỗi người tin, là thêm một sợi dây. Và bây giờ, không phải vài nghìn sợi. Vài vạn. Có thể nhiều hơn.</em></p>
+
+<p class="thought"><em>Mình không còn đang đóng vai. Vai đang đóng mình.</em></p>
+
+<p>Hắn đặt chén trà xuống. Nhìn ra sân. Trời sau mưa, xanh trong, mát mẻ. Cây tùng già ướt đẫm, lá bóng.</p>
+
+<p class="thought"><em>Bình tĩnh. Phân tích. Đừng hoảng.</em></p>
+
+<p class="thought"><em>Niềm tin tập thể vạn người đã dồn vào mình ngày cầu mưa. Thiên Diễn Đồng cảm nhận được: khí vận quanh mình sáng hơn, dày hơn. Thiên Cơ đang chảy mạnh hơn về phía mình.</em></p>
+
+<p class="thought"><em>Nhưng tập thể là tập thể. Mỗi người tin một ít, tổng lại thành nhiều. Mình muốn hiểu sâu hơn: niềm tin cá nhân hoạt động thế nào?</em></p>
+
+<p class="thought"><em>Một người. Tin tuyệt đối. Chỉ một. Hiệu ứng khác gì so với vạn người tin một ít?</em></p>
+
+<p>Câu hỏi đó quay trong đầu hắn cả buổi sáng.</p>
+
+<p>Và buổi chiều, câu trả lời tự đi đến.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tiểu Phúc là thái giám mười bốn tuổi.</p>
+
+<p>Gã nhỏ con, gầy, mặt tròn, mắt to, kiểu mắt của đứa trẻ chưa kịp lớn đã bị ném vào hoàng cung. Gã được phân về Minh Nguyệt Đường hai ngày sau lễ cầu mưa, thay cho một thái giám già vừa nghỉ.</p>
+
+<p>Phúc An giới thiệu:</p>
+
+<p>— Quốc Sư, đây là Tiểu Phúc, mới được điều về hầu hạ.</p>
+
+<p>Tiểu Phúc quỳ. Không phải quỳ kiểu người hầu quỳ chủ. Quỳ kiểu... tín đồ quỳ trước thần tượng.</p>
+
+<p>— Tiểu Phúc bái kiến Quốc Sư!</p>
+
+<p>Giọng run, nhưng không phải run vì sợ. Run vì xúc động.</p>
+
+<p>Tạ Cảnh Minh nhìn xuống. Đứa trẻ quỳ dưới chân, mắt to, sáng, đầy vẻ sùng bái.</p>
+
+<p class="thought"><em>Mình đã thấy ánh mắt này. Kiếp trước, những "khách hàng trung thành" nhất cũng nhìn mình kiểu này. Tin tuyệt đối. Không nghi ngờ. Không câu hỏi.</em></p>
+
+<p class="thought"><em>Nguy hiểm nhất, và... hữu ích nhất.</em></p>
+
+<p>— Đứng lên.</p>
+
+<p>Tiểu Phúc đứng dậy. Mắt vẫn sáng. Nhìn hắn không chớp.</p>
+
+<p>— Tiểu Phúc. Ngươi bao nhiêu tuổi?</p>
+
+<p>— Dạ, mười bốn ạ!</p>
+
+<p>— Vào cung lâu chưa?</p>
+
+<p>— Dạ, ba năm. Tiểu nhân trước ở phòng bếp. Sau ngày Quốc Sư cầu mưa, Tiểu nhân xin được chuyển về Minh Nguyệt Đường.</p>
+
+<p class="thought"><em>Gã xin. Chủ động xin. Không phải bị phân công.</em></p>
+
+<p>— Tại sao muốn đến đây?</p>
+
+<p>Tiểu Phúc ngập ngừng. Rồi nói, giọng rất nhỏ, như đang thú nhận bí mật:</p>
+
+<p>— Vì... ngày cầu mưa, Tiểu nhân đứng rất xa, gần rìa đám đông. Tiểu nhân nhìn lên, thấy Quốc Sư đứng trên đàn, giơ tay, và mưa rơi.</p>
+
+<p>Gã dừng. Mắt ướt.</p>
+
+<p>— Tiểu nhân chưa bao giờ thấy ai làm được chuyện đó. Cả đời Tiểu nhân, không ai quan tâm Tiểu nhân. Nhưng hôm đó, mưa rơi lên mặt Tiểu nhân, Tiểu nhân khóc, vì lần đầu tiên cảm thấy... có người ở trên cao nhìn xuống, biết Tiểu nhân đang khát.</p>
+
+<p>Im lặng.</p>
+
+<p>Tạ Cảnh Minh nhìn đứa trẻ. Mười bốn tuổi. Ba năm trong cung. Phòng bếp. Không ai quan tâm.</p>
+
+<p>Và hắn, tên lừa đảo đứng trên đàn đá tính xác suất, đã vô tình trở thành hy vọng duy nhất của đứa trẻ này.</p>
+
+<p class="thought"><em>Mình không gọi mưa cho nhóc. Mình gọi mưa cho mình. Để sống.</em></p>
+
+<p class="thought"><em>Nhưng nhóc nghĩ mình gọi mưa cho nhóc.</em></p>
+
+<p class="thought"><em>Và niềm tin đó... thật hơn sự thật.</em></p>
+
+<p>— Tiểu Phúc.</p>
+
+<p>Hắn nói, giọng nhẹ hơn bình thường.</p>
+
+<p>— Ở đây, nghe lời Phúc An. Làm việc cẩn thận. Đừng nghĩ nhiều.</p>
+
+<p>— Dạ! Tiểu nhân nghe Quốc Sư!</p>
+
+<p>Gã cúi đầu, lui ra, bước nhanh, hào hứng.</p>
+
+<p>Tạ Cảnh Minh nhìn theo. Vuốt cằm.</p>
+
+<p class="thought"><em>Tín đồ đầu tiên. Thật sự, hoàn toàn, tuyệt đối tin.</em></p>
+
+<p class="thought"><em>Và mình vừa có ý tưởng thí nghiệm mới.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ba ngày sau. Tạ Cảnh Minh quan sát Tiểu Phúc.</p>
+
+<p>Không phải quan sát kiểu canh chừng. Quan sát kiểu nhà nghiên cứu nhìn mẫu thử. Mỗi sáng, khi Tiểu Phúc vào dọn phòng, hắn bật Thiên Diễn Đồng.</p>
+
+<p>Và hắn thấy.</p>
+
+<p>Quanh Tiểu Phúc, sợi khí vận mỏng, nhẹ, nhưng sáng. Không phải sáng rực như quanh Lục Thanh Dao. Sáng dịu, kiểu sáng của đèn nhỏ trong đêm tối. Ấm.</p>
+
+<p class="thought"><em>Khí vận sáng. Xung quanh thái giám mười bốn tuổi phòng bếp.</em></p>
+
+<p class="thought"><em>Vua có khí đen, bệnh, suy. Lục Thanh Dao có khí vàng, mạnh, uy. Dân thường, hắn chưa nhìn kỹ, nhưng ước tính mờ nhạt, gần như không thấy.</em></p>
+
+<p class="thought"><em>Tiểu Phúc: sáng. Dịu. Ấm.</em></p>
+
+<p class="thought"><em>Tại sao?</em></p>
+
+<p>Hắn nghĩ. Và nhận ra.</p>
+
+<p class="thought"><em>Không phải khí vận bẩm sinh. Là niềm tin. Tiểu Phúc tin mình tuyệt đối. Niềm tin đó tạo ra khí vận quanh gã. Không phải khí vận của gã, mà là khí vận mà gã đang cho mình.</em></p>
+
+<p class="thought"><em>Niềm tin tập thể tạo dòng chảy lớn. Niềm tin cá nhân tạo dòng chảy nhỏ, nhưng tập trung. Đậm đặc hơn.</em></p>
+
+<p class="thought"><em>Thú vị.</em></p>
+
+<p>Ngày thứ tư. Hắn thử.</p>
+
+<p>Sáng, Tiểu Phúc mang trà vào. Hắn uống, rồi buông ra, giọng bình thản:</p>
+
+<p>— Tiểu Phúc. Hôm nay... ngươi sẽ gặp may.</p>
+
+<p>Gã mắt sáng rỡ.</p>
+
+<p>— Gặp may ạ? Gặp may gì ạ?</p>
+
+<p>— Ta không nói trước. Nhưng trước khi tối, ngươi sẽ có chuyện vui.</p>
+
+<p>— Dạ!</p>
+
+<p>Gã chạy đi, bước nhảy, kiểu nhảy của đứa trẻ vừa được hứa quà.</p>
+
+<p class="thought"><em>Thí nghiệm: dự đoán mơ hồ, "gặp may" + "chuyện vui", với một người tin tuyệt đối. Xem kết quả.</em></p>
+
+<p class="thought"><em>Biến số kiểm soát: "gặp may" và "chuyện vui" cực kỳ mơ hồ. Trong một ngày bình thường, bất kỳ sự kiện tích cực nhỏ nào cũng có thể được diễn giải là "may" hoặc "vui". Xác suất Tiểu Phúc tìm thấy "chuyện vui" trong ngày là gần như chắc chắn, vì gã đang tích cực tìm kiếm.</em></p>
+
+<p class="thought"><em>Nói cách khác: mình vừa dùng hiệu ứng chung chung kinh điển, giống y kiếp trước đọc vị.</em></p>
+
+<p class="thought"><em>Nhưng câu hỏi thật sự không phải "nó có xảy ra không". Mà là "nó xảy ra nhanh thế nào và mạnh thế nào".</em></p>
+
+<p>Hắn chờ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Buổi trưa. Tiểu Phúc chạy vào, mặt đỏ bừng, hơi thở gấp.</p>
+
+<p>— Quốc Sư! Quốc Sư!</p>
+
+<p>— Sao?</p>
+
+<p>— Tiểu nhân... Tiểu nhân vừa được quản lý thái giám khen! Nói Tiểu nhân dọn phòng sạch nhất cung! Và thưởng cho Tiểu nhân một miếng bánh nhân đậu!</p>
+
+<p>Gã giơ miếng bánh lên, mắt long lanh, như đang giơ thỏi vàng.</p>
+
+<p>— Quốc Sư nói đúng! Tiểu nhân gặp may thật!</p>
+
+<p>Tạ Cảnh Minh nhìn. Miếng bánh nhân đậu. Lời khen từ quản lý thái giám.</p>
+
+<p class="thought"><em>Bình thường. Hoàn toàn bình thường. Dọn sạch thì được khen. Được khen thì được thưởng. Không có gì siêu nhiên.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Tiểu Phúc dọn phòng hôm nay có sạch hơn mọi ngày không?</em></p>
+
+<p class="thought"><em>Có. Vì gã tin hôm nay sẽ gặp may. Niềm tin khiến gã hào hứng. Hào hứng khiến gã làm việc tốt hơn. Làm tốt hơn dẫn đến được khen.</em></p>
+
+<p class="thought"><em>Vậy "may" đến từ đâu? Từ Thiên Cơ, hay từ hành vi gã thay đổi vì niềm tin?</em></p>
+
+<p class="thought"><em>Lại không tách được biến số.</em></p>
+
+<p>— Tốt.</p>
+
+<p>Hắn gật đầu.</p>
+
+<p>— Ăn đi.</p>
+
+<p>Tiểu Phúc ngồi xổm ở góc phòng, ăn bánh, mắt nhìn hắn, đầy biết ơn.</p>
+
+<p class="thought"><em>Lần sau thử cụ thể hơn. Thứ mà hành vi không ảnh hưởng được.</em></p>
+
+<p>Ngày thứ năm.</p>
+
+<p>Sáng, Tiểu Phúc mang trà. Hắn uống. Rồi nói:</p>
+
+<p>— Tiểu Phúc. Hôm nay, ngươi sẽ tìm được thứ mình mất từ lâu.</p>
+
+<p>Gã ngẩng lên. Mắt mở to.</p>
+
+<p>— Mất từ lâu?</p>
+
+<p>— Ta không nói rõ. Nhưng ngươi sẽ tìm thấy.</p>
+
+<p>Gã gật đầu, mắt sáng. Chạy đi.</p>
+
+<p class="thought"><em>"Thứ mình mất từ lâu." Cụ thể hơn "gặp may", nhưng vẫn mơ hồ. Ai cũng từng mất thứ gì đó. Nhưng tìm lại thứ đã mất, trong một ngày cụ thể, sau lời dự đoán, không dễ giải thích bằng hành vi.</em></p>
+
+<p class="thought"><em>Chờ.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Tiểu Phúc không chạy vào. Gã bước vào. Chậm. Mắt đỏ.</p>
+
+<p>— Quốc Sư...</p>
+
+<p>Giọng run. Không phải run vì hào hứng. Run vì khóc.</p>
+
+<p>— Sao?</p>
+
+<p>Hắn hỏi, hơi lo.</p>
+
+<p>Tiểu Phúc giơ tay ra. Trong lòng bàn tay nhỏ, một mảnh vải. Cũ. Sờn. Thêu một bông hoa, chỉ đỏ, đã phai.</p>
+
+<p>— Đây là... mảnh khăn của mẹ Tiểu nhân. Mẹ cho trước khi Tiểu nhân vào cung. Tiểu nhân giữ ba năm, rồi mất. Tìm mãi không thấy. Tưởng mất rồi.</p>
+
+<p>Gã nghẹn.</p>
+
+<p>— Hôm nay, Tiểu nhân dọn kho chứa đồ cũ, thấy nó. Nằm trong góc, dưới đống vải rách. Ba năm.</p>
+
+<p>Gã ngẩng lên, mắt ướt đẫm, nhìn hắn. Không phải nhìn sùng bái nữa. Nhìn tuyệt đối. Kiểu nhìn của người vừa được trả lại thứ quý nhất đời.</p>
+
+<p>— Quốc Sư nói Tiểu nhân sẽ tìm thấy thứ mình mất. Và Tiểu nhân tìm thấy thật.</p>
+
+<p>Im lặng.</p>
+
+<p>Tạ Cảnh Minh nhìn mảnh vải trong tay Tiểu Phúc. Cũ. Sờn. Bông hoa thêu chỉ đỏ phai.</p>
+
+<p class="thought"><em>Phân tích.</em></p>
+
+<p class="thought"><em>Tiểu Phúc dọn kho đồ cũ. Tại sao hôm nay dọn kho? Vì quản lý thái giám phân công? Hay vì gã đang tìm "thứ mình mất"?</em></p>
+
+<p class="thought"><em>Nếu gã dọn kho vì phân công, thì tìm thấy mảnh khăn là trùng hợp.</em></p>
+
+<p class="thought"><em>Nếu gã dọn kho vì đang vô thức tìm kiếm, thì hành vi gã bị ảnh hưởng bởi niềm tin. Gã tin sẽ tìm thấy, nên gã tìm. Và tìm thấy.</em></p>
+
+<p class="thought"><em>Nhưng... gã không biết khăn ở trong kho. Gã không chủ đích đến kho để tìm khăn. Gã đến kho vì công việc. Và tình cờ thấy.</em></p>
+
+<p class="thought"><em>Trùng hợp?</em></p>
+
+<p class="thought"><em>Hay Thiên Cơ đẩy gã đến đúng chỗ?</em></p>
+
+<p>Hắn vuốt cằm.</p>
+
+<p class="thought"><em>Mình nói "sẽ tìm thấy thứ mình mất". Tiểu Phúc tin tuyệt đối. Niềm tin đó, một người, nhưng tuyệt đối, đẩy vào Thiên Cơ. Thiên Cơ điều chỉnh, nhẹ, vừa đủ: gã được phân công dọn kho thay vì quét sân. Mảnh khăn đã nằm đó ba năm, chờ gã tìm.</em></p>
+
+<p class="thought"><em>Nếu giả thuyết đúng: niềm tin cá nhân tuyệt đối tạo hiệu ứng cục bộ. Không mạnh bằng niềm tin tập thể, nhưng chính xác hơn. Tập trung hơn. Và nhanh hơn.</em></p>
+
+<p class="thought"><em>Vạn người tin mơ hồ = mưa lớn nhưng không biết rơi đâu.</em></p>
+
+<p class="thought"><em>Một người tin tuyệt đối = giọt nước nhỏ nhưng rơi đúng chỗ.</em></p>
+
+<p>— Tiểu Phúc.</p>
+
+<p>Hắn nói, giọng bình thản.</p>
+
+<p>— Giữ lấy. Đừng để mất nữa.</p>
+
+<p>— Dạ! Tiểu nhân sẽ giữ bằng mạng!</p>
+
+<p>Gã ôm mảnh vải vào ngực, cúi đầu, lui ra. Ở cửa, gã quay lại, mắt ướt, nói nhỏ:</p>
+
+<p>— Quốc Sư... Tiểu nhân tin Quốc Sư. Tin hơn bất kỳ ai trên đời.</p>
+
+<p>Rồi gã đi.</p>
+
+<p>Tạ Cảnh Minh ngồi lại. Một mình.</p>
+
+<p>Phòng yên tĩnh. Nến cháy. Gió nhẹ thổi qua cửa sổ, mang theo mùi đất ẩm sau mưa.</p>
+
+<p>Hắn nhìn bàn tay mình.</p>
+
+<p class="thought"><em>"Tin hơn bất kỳ ai trên đời."</em></p>
+
+<p class="thought"><em>Nhóc mười bốn tuổi. Ba năm trong cung. Không ai thèm nhìn. Không ai quan tâm. Và mình, tên bịp, vô tình trở thành người duy nhất gã tin.</em></p>
+
+<p class="thought"><em>Mình đang dùng niềm tin của gã làm thí nghiệm.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình cũng dùng niềm tin của người khác. Lấy tiền, lừa đảo, bỏ chạy. Không bao giờ nghĩ đến hậu quả.</em></p>
+
+<p class="thought"><em>Nhưng kiếp này...</em></p>
+
+<p>Hắn nhớ ánh mắt Tiểu Phúc. Ướt, sáng, tuyệt đối.</p>
+
+<p class="thought"><em>Nếu một ngày gã phát hiện mình bịa, gã sẽ như thế nào?</em></p>
+
+<p class="thought"><em>Gã sẽ không tức giận. Gã sẽ sụp đổ. Vì mình là thứ duy nhất gã tin.</em></p>
+
+<p class="thought"><em>Và mình đang lừa gã.</em></p>
+
+<p>Tay hắn nắm chặt. Không phải nắm vì giận. Nắm vì thứ gì đó hắn chưa từng cảm thấy ở kiếp trước.</p>
+
+<p>Áy náy.</p>
+
+<p class="thought"><em>Đừng tin ta như vậy, nhóc.</em></p>
+
+<p>Hắn muốn nói câu đó. Nhưng không nói được. Vì nếu nói, gã mất niềm tin. Và niềm tin, ở thế giới này, là thứ giữ người ta sống.</p>
+
+<p class="thought"><em>Ta chỉ là tên bịp.</em></p>
+
+<p class="thought"><em>Nhưng tên bịp mà nhóc tin, có lẽ, tốt hơn sự thật mà không ai tin.</em></p>
+
+<p>Hắn thở dài. Đứng dậy. Bước ra sân.</p>
+
+<p>Đêm. Trăng sáng. Cây tùng im lặng.</p>
+
+<p>Và quanh hắn, Thiên Diễn Đồng cho thấy: sợi khí vận mỏng, sáng dịu, bay từ phía Tiểu Phúc ở phòng người hầu, qua sân, đến hắn. Mỏng. Nhưng rõ ràng. Liên tục.</p>
+
+<p>Một sợi dây vô hình, nối tên lừa đảo với đứa trẻ tin hắn hơn cả trời.</p>
+
+<p class="thought"><em>Niềm tin cá nhân. Sợi dây riêng. Không hòa vào dòng chảy tập thể. Nó nối trực tiếp.</em></p>
+
+<p class="thought"><em>Và mình, ở đầu bên kia, mạnh hơn mỗi khi sợi dây này rung.</em></p>
+
+<p>Hắn nhìn sợi khí vận. Lâu.</p>
+
+<p>Rồi quay vào phòng. Ngồi xuống. Nghĩ.</p>
+
+<p class="thought"><em>Kết luận: niềm tin cá nhân tuyệt đối tạo hiệu ứng khác niềm tin tập thể.</em></p>
+
+<p class="thought"><em>Tập thể: dòng chảy lớn, mạnh, nhưng phân tán. Đẩy Thiên Cơ theo hướng chung.</em></p>
+
+<p class="thought"><em>Cá nhân: sợi dây nhỏ, yếu, nhưng trực tiếp. Kết nối mình với người đó. Và lời mình nói, với người đó, chính xác hơn.</em></p>
+
+<p class="thought"><em>Vạn người tin mình, mình gọi được mưa. Một người tin mình, mình tìm được mảnh khăn.</em></p>
+
+<p class="thought"><em>Quy mô khác. Nhưng bản chất giống: niềm tin tạo hiện thực.</em></p>
+
+<p class="thought"><em>Và mình đang tích lũy cả hai loại.</em></p>
+
+<p>Hắn vuốt cằm.</p>
+
+<p class="thought"><em>Nguy hiểm. Cực kỳ nguy hiểm. Vì mình đang trở thành thứ mà thế giới này gọi là "Quốc Sư thật". Không phải vì mình có phép thuật. Mà vì mình có niềm tin.</em></p>
+
+<p class="thought"><em>Của vạn người. Và của một đứa trẻ.</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p>Và trong bóng tối sau mi mắt, hắn thấy khuôn mặt Tiểu Phúc. Mười bốn tuổi. Mắt sáng. Cầm mảnh khăn cũ của mẹ. Khóc vì vui.</p>
+
+<p class="thought"><em>Đừng tin ta, nhóc. Ta chỉ là tên bịp.</em></p>
+
+<p>Nhưng câu đó, hắn biết, sẽ không bao giờ nói ra.</p>
+
+<p>Vì đôi khi, lời nói dối mang đến niềm vui thật sự.</p>
+
+<p>Và hắn không nhẫn tâm lấy niềm vui đó đi.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-08.html">&larr; CHƯƠNG 08</a>
+      <a href="chapter-10.html">CHƯƠNG 10 &rarr;</a>
+    </nav>
+
+    <div class="word-count">2.611 TỪ</div>
+
+  </div>
+</body>
+</html>

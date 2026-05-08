@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 04: Phỏng Vấn — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-03.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 4 / 30</span>
+    <a href="chapter-05.html">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 04</div>
+    <h1 class="chapter-title">Phỏng Vấn</h1>
+    <div class="chapter-meta">Phần I — Thức Tỉnh &middot; 3.950 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Hắn đếm từng bước chân.</p>
+
+    <p>Không phải vì buồn. Vì đói. Ba ngày gần như không ăn gì, thân xác này bắt đầu phản đối bằng cách run nhẹ ở đầu gối mỗi khi bước nhanh. Hắn giảm tốc, giữ nhịp đều, và bắt đầu đếm. Ngàn năm tu luyện dạy hắn một điều: khi cơ thể yếu, dùng trí óc kiểm soát nó. Đếm bước là cách đơn giản nhất.</p>
+
+    <p>Bước thứ hai nghìn ba trăm bốn mươi, hắn nhìn thấy tòa nhà.</p>
+
+    <p>Vạn Lý Group. Mười lăm tầng, mặt kính xanh đậm, nằm trên một con phố thương mại không quá đông, không quá vắng. Bảng hiệu công ty bằng kim loại nhạt màu, kiểu chữ cũ, loại thiết kế của mười năm trước chưa ai thay. Cây xanh trước sảnh được cắt tỉa qua loa, vài chiếc lá vàng rụng trên bậc thang đá.</p>
+
+    <p class="thought">Tông môn hạng trung. Nhìn bên ngoài đã biết bên trong đang mục.</p>
+
+    <p class="short">Hắn dừng lại trước cổng, hít một hơi chậm.</p>
+
+    <p>Mười một ngày kể từ khi trọng sinh. Bảy ngày kể từ khi quyết định sẽ đến nơi này. Bảy ngày hắn dùng để nghiên cứu, chuẩn bị, và ép thân xác này chịu đựng cái đói.</p>
+
+    <p>Hôm qua, cuộc gọi từ phòng nhân sự đến lúc hắn đang uống nước lã thay bữa trưa. Giọng nữ, trẻ, lịch sự kiểu thuộc lòng: "Anh Lục Trường An ạ? Bên em là phòng Nhân sự Vạn Lý. Chị Lâm Tuệ muốn gặp anh sáng mai lúc chín giờ, về tình hình công việc của anh ạ."</p>
+
+    <p class="thought">Tình hình công việc. Cách nói lịch sự của "chúng tôi đang cân nhắc đuổi anh."</p>
+
+    <p>Hắn nhìn lên tòa nhà. Mặt kính phản chiếu bầu trời xám. Mười lăm tầng.</p>
+
+    <p>Đói. Chóng mặt nhẹ. Nhưng đầu óc tỉnh. Ngàn năm trước, hắn từng đàm phán với Thiên Kiếm Tông khi đang bị nội thương, máu rỉ trong ngực mà mặt không biến sắc. Cái đói của thân xác phàm chưa bằng một phần mười.</p>
+
+    <p class="short">Bước vào.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Sảnh lớn, trần cao, sàn đá hoa bóng loáng nhưng có vết xước dài ở góc, loại vết do kéo đồ nặng mà không lót. Quầy lễ tân bằng gỗ công nghiệp phủ giấy giả vân, cạnh bong ở mép phải. Hai cô lễ tân ngồi sau quầy, một đang nhìn điện thoại dưới gầm bàn, một đang nói chuyện qua tai nghe, giọng nhỏ, cười khúc khích.</p>
+
+    <p>Bảo vệ ngồi ở ghế bên trái cửa. Trung niên, bụng to, mắt lờ đờ. Nhìn hắn từ đầu đến chân. Sơ mi trắng nhàu, quần tây sờn gối, giày da nứt mũi. Ánh mắt bảo vệ thay đổi, từ thờ ơ sang khinh nhẹ, chỉ trong nửa giây, nhưng hắn nhận ra.</p>
+
+    <p class="thought">Nơi nào cũng vậy. Kẻ giữ cổng luôn đánh giá người bằng áo quần.</p>
+
+    <p>Hắn bước đến quầy lễ tân. Cô gái đang nhìn điện thoại ngẩng lên, nụ cười chuyên nghiệp, loại cười không vào mắt.</p>
+
+    <p>— Anh có hẹn ạ?</p>
+
+    <p>— Lục Trường An. Phòng Nhân sự hẹn chín giờ.</p>
+
+    <p>Cô gái gõ máy tính, mắt dừng lại ở màn hình lâu hơn bình thường. Hắn biết cô ta đang thấy gì: hồ sơ nhân viên, ghi chú trạng thái, có lẽ dòng chữ "vắng mặt không phép" hoặc tương đương.</p>
+
+    <p>— Dạ, anh lên tầng bảy, phòng 703 ạ. Thang máy bên phải.</p>
+
+    <p>Giọng lịch sự, nhưng không còn nụ cười. Cô ta đã phân loại hắn: nhân viên có vấn đề.</p>
+
+    <p>Hắn gật đầu, đi về phía thang máy. Qua sảnh, mắt lướt nhanh: bảng thông báo nội bộ dán trên tường kính, giấy vàng ố, nội dung về liên hoan cuối năm ngoái chưa ai gỡ. Cạnh đó, ảnh chụp tập thể ban giám đốc, CEO Trần Quốc Huy đứng giữa, cười ha hả, tay vỗ vai người bên cạnh. VP Phạm Đức Minh đứng ở rìa, mặt phẳng, tay khoanh trước ngực.</p>
+
+    <p class="thought">Nhìn ảnh cũng biết ai ghét ai.</p>
+
+    <p>Thang máy mở. Hắn bước vào. Gương trong thang phản chiếu một người đàn ông gầy, quầng thâm, sơ mi trắng bạc màu. Nhưng lưng thẳng. Mắt tỉnh.</p>
+
+    <p class="short">Tầng bảy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Hành lang dài, đèn huỳnh quang, trần thạch cao có vài miếng hơi lệch. Mùi điều hòa lạnh trộn với mùi giấy tờ và chút nước hoa rẻ. Trên tường, khung kính treo khẩu hiệu bằng chữ mạ vàng: "Vạn Lý Đồng Hành, Vạn Lý Thành Công."</p>
+
+    <p class="short">Bụi bám ở nét cuối cùng của chữ "Công."</p>
+
+    <p class="thought">Tông huấn. Ở đâu cũng giống nhau. Luôn hoành tráng. Luôn rỗng.</p>
+
+    <p>Phòng 703 ở cuối hành lang, cửa kính mờ, bên ngoài có khu vực chờ: bốn chiếc ghế nhựa bọc da giả, ba chiếc đã có người ngồi.</p>
+
+    <p class="short">Hắn ngồi xuống ghế thứ tư.</p>
+
+    <p class="short">Quan sát.</p>
+
+    <p>Người thứ nhất: đàn ông, khoảng ba mươi, com-lê xám, cà vạt đỏ, tóc vuốt gọn. Ngồi thẳng, hai tay đặt trên đùi, ngón cái gõ nhẹ lên vải quần. Nhịp gõ nhanh, đều, không tự nhiên. Mắt nhìn thẳng trước mặt nhưng cứ hai mươi giây lại liếc về phía cửa phòng 703.</p>
+
+    <p class="thought">Tự tin quá mức. Loại tự tin bù đắp cho sự bất an bên trong. Hắn đã tập dượt câu trả lời, có lẽ mười lần, và bây giờ đang sợ quên. Sẽ nói quá nhiều trong phòng phỏng vấn. Người phỏng vấn sẽ mệt trước khi hắn kịp kết thúc.</p>
+
+    <p>Người thứ hai: phụ nữ trẻ, hai lăm hoặc hai sáu, áo sơ mi trắng bỏ trong váy đen, tóc buộc đuôi ngựa. Lưng hơi cong, hai tay ôm cặp tài liệu trước ngực như cầm khiên. Mắt nhìn xuống sàn, thỉnh thoảng liếm môi.</p>
+
+    <p class="thought">Lo lắng. Không phải vì thiếu năng lực, vì đã từng thất bại quá nhiều lần. Cách cô ta ôm cặp, phòng thủ, che chắn. Cô ta sợ bị từ chối hơn sợ bản thân không giỏi. Nếu vào phỏng vấn, sẽ tự phá mình bằng cách nói lắp hoặc trả lời quá ngắn.</p>
+
+    <p>Người thứ ba: đàn ông, ba mươi lăm, sơ mi đen, không cà vạt, ngồi tựa lưng, chân bắt chéo, mắt lướt điện thoại. Không liếc ai. Không nhìn đồng hồ. Khuôn mặt phẳng, không biểu cảm. Nhưng góc miệng hơi nhếch, loại nhếch không phải cười, là khinh.</p>
+
+    <p class="thought">Có thực lực. Biết mình có thực lực. Và muốn cả phòng biết điều đó. Kiêu ngạo che đậy bằng sự thờ ơ. Loại này nguy hiểm ở chỗ: giỏi thật, nhưng sẽ gây thù chuốc oán với đồng nghiệp trong ba tháng đầu.</p>
+
+    <p class="short">Ba ứng viên. Và hắn, người thứ tư, không phải ứng viên.</p>
+
+    <p class="thought">Họ đang xin vào. Ta đang cố không bị đuổi ra. Nhưng bản chất cuộc chơi giống nhau: thuyết phục kẻ cầm quyền rằng mình có giá trị.</p>
+
+    <p>Cửa phòng 703 mở. Một người bước ra, mặt đỏ, mắt tránh nhìn mọi người, đi nhanh về phía thang máy. Không được nhận. Nhìn cách vai co, bước chân vội, hắn biết ngay.</p>
+
+    <p class="short">Cô lễ tân của phòng Nhân sự bước ra, cầm bảng danh sách.</p>
+
+    <p>— Anh Trần Hoàng Quân?</p>
+
+    <p>Com-lê xám đứng dậy, chỉnh cà vạt, bước vào. Bước chân hơi rộng, cố tạo vẻ tự tin. Kẻ sắp vào chiến trường mà mặc giáp cho người khác thấy chứ không phải để bảo vệ mình.</p>
+
+    <p class="short">Hắn ngồi chờ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Hai mươi phút. Com-lê xám bước ra, mặt tươi, bước chân nhẹ. Tự tin mình đã phỏng vấn tốt.</p>
+
+    <p class="thought">Nhưng mắt phải giật nhẹ. Dấu hiệu nghi ngờ bản thân mà ý thức chưa nhận ra. Hắn nói quá nhiều. Đúng như dự đoán.</p>
+
+    <p>— Chị Nguyễn Phương Linh?</p>
+
+    <p>Cô gái trẻ đứng dậy, nuốt nước bọt, bước vào. Ngón tay siết chặt góc cặp tài liệu đến trắng đốt.</p>
+
+    <p>Hắn nhắm mắt. Không phải nghỉ ngơi. Đang tiết kiệm năng lượng. Thân xác đói quá lâu, mỗi cử động thừa đều tiêu hao. Ngàn năm tu luyện dạy hắn: khi không cần di chuyển, đừng di chuyển. Khi không cần nhìn, đừng nhìn. Giữ sức cho lúc cần.</p>
+
+    <p>Mười lăm phút. Cô gái bước ra, mắt đỏ hoe, bước nhanh. Không dám nhìn lại.</p>
+
+    <p class="thought">Tự phá mình. Đáng tiếc.</p>
+
+    <p>— Anh Đặng Minh Tuấn?</p>
+
+    <p>Sơ mi đen đứng dậy, bỏ điện thoại vào túi, bước vào phòng như bước vào quán quen. Không chỉnh áo, không nhìn ai.</p>
+
+    <p class="thought">Kẻ này sẽ được nhận. Hoặc bị loại ngay phút thứ năm. Không có trung gian.</p>
+
+    <p>Hắn mở mắt, nhìn dọc hành lang.</p>
+
+    <p>Vắng. Đèn huỳnh quang nhấp nháy ở cuối hành lang, bóng đèn sắp hỏng mà không ai thay. Qua cửa kính phòng đối diện, thấy nhân viên ngồi trước máy tính, gõ phím, nhìn màn hình, uống nước. Lặp lại. Tất cả lặp lại.</p>
+
+    <p class="thought">Một trăm người ngồi trong tòa nhà này. Chín mươi người đang mong đến giờ tan làm. Chín người đang nghĩ cách leo lên. Một người đang rút ruột công ty.</p>
+
+    <p class="short">Bước chân ngoài hành lang.</p>
+
+    <p class="short">Hắn quay đầu.</p>
+
+    <p>Một phụ nữ đi ngang. Khoảng ba mươi, có thể hơn. Tóc ngắn ngang vai, buộc gọn phía sau. Áo sơ mi trắng không một nếp nhăn, váy công sở đen qua gối, bước chân đều, không nhanh không chậm. Loại bước chân của người biết chính xác mình đang đi đâu.</p>
+
+    <p class="short">Nhưng không phải bước chân khiến hắn nhìn.</p>
+
+    <p class="short">Là ánh mắt.</p>
+
+    <p>Trong một tòa nhà mà ai cũng hoặc cúi đầu vào màn hình hoặc liếc trộm đồng hồ, cô ta nhìn thẳng phía trước. Không liếc ngang, không nhìn điện thoại, không nhìn xuống. Nhìn thẳng, như thể hành lang này là của cô.</p>
+
+    <p>Và trong khoảnh khắc cô ta đi ngang chỗ hắn ngồi, mắt cô lướt qua. Chỉ nửa giây. Không dừng, không chậm lại. Nhưng hắn nhận ra: đó không phải cái nhìn lướt. Đó là cái nhìn đánh giá. Nhanh, chính xác, tự động, loại chỉ có ở người quen quan sát.</p>
+
+    <p class="short">Rồi cô ta đi qua, rẽ vào cầu thang cuối hành lang, biến mất.</p>
+
+    <p class="thought">Người này... không giống những kẻ khác ở đây.</p>
+
+    <p class="short">Hắn ghi nhận. Không nghĩ thêm. Chưa cần.</p>
+
+    <p>Cửa phòng 703 mở. Sơ mi đen bước ra. Mặt phẳng như lúc vào, không đọc được gì. Kẻ giỏi giấu cảm xúc. Bước đi không vội, không chậm. Nhưng ngón tay trỏ bên phải gõ nhẹ vào đùi, nhịp nhanh. Bực. Không được như ý.</p>
+
+    <p class="thought">Bị loại phút thứ năm. Đoán đúng.</p>
+
+    <p>— Anh Lục Trường An?</p>
+
+    <p class="short">Hắn đứng dậy. Hít một hơi. Cơn chóng mặt thoáng qua rồi biến mất.</p>
+
+    <p class="short">Bước vào.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Phòng 703 nhỏ hơn hắn tưởng. Một bàn, hai ghế, tường trắng, cửa sổ nhìn ra tòa nhà đối diện. Trên bàn: máy tính xách tay, cốc trà đã nguội, chồng hồ sơ.</p>
+
+    <p class="short">Và Lâm Tuệ.</p>
+
+    <p>Phụ nữ, bốn mươi, có thể bốn hai. Tóc uốn ngắn, nhuộm nâu sẫm, vài sợi bạc lộ ở chân tóc, chưa kịp nhuộm lại. Mặt vuông, góc hàm cứng, loại khuôn mặt được sinh ra để nói "không." Áo khoác ngoài ghi xám, bên trong sơ mi xanh nhạt, cài khuy đến cổ. Không trang sức ngoài đôi khuyên tai ngọc trai nhỏ, loại đeo vì thói quen chứ không phải vì thích.</p>
+
+    <p>Cô ta không ngẩng lên khi hắn vào. Đang đọc hồ sơ trên bàn. Hồ sơ của hắn.</p>
+
+    <p>Hắn ngồi xuống ghế đối diện. Không chờ mời. Trong tông môn, kẻ chờ người khác cho phép là kẻ tự đặt mình ở dưới.</p>
+
+    <p class="short">Lâm Tuệ ngẩng lên.</p>
+
+    <p>Mắt nhìn hắn. Không lạnh, không ấm. Mệt. Đôi mắt của người đã ngồi ở vị trí này quá lâu, đã nói "không" quá nhiều lần, và đã nghe quá nhiều lời bào chữa giống nhau.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Tay phải đặt trên hồ sơ, ngón cái ấn mạnh vào gáy giấy. Thói quen khi đọc hồ sơ tệ, không phải lần đầu. Vai hơi so, dấu hiệu đau cổ mãn tính, ngồi bàn quá nhiều năm. Cốc trà nguội, nghĩa là pha từ sáng sớm, chưa kịp uống, bận liên tục. Nếp nhăn ở khóe mắt trái sâu hơn bên phải. Cô ta hay nhíu mày bên trái khi khó chịu, thói quen lâu năm, không đều hai bên. Sơ mi cài khuy đến cổ dù trong phòng có điều hòa: phòng thủ, che chắn, không muốn bị đánh giá bởi bất cứ thứ gì ngoài lời nói.</p>
+
+    <p class="thought">Và quan trọng hơn: trên bàn có bốn bộ hồ sơ ứng viên mới, nhưng năm cốc giấy dùng rồi trong thùng rác bên dưới. Cô ta đã phỏng vấn nhiều hơn bốn người sáng nay. Đang tuyển gấp. Áp lực từ trên.</p>
+
+    <p class="short">Lâm Tuệ mở miệng:</p>
+
+    <p>— Anh Lục Trường An. Phòng Kinh doanh. Vào công ty hai năm.</p>
+
+    <p class="short">Không phải câu hỏi. Là mở đầu cho bản cáo trạng.</p>
+
+    <p>— Sáu tháng gần đây, không hoàn thành chỉ tiêu bất kỳ tháng nào. Hai lần bị quản lý trực tiếp ghi nhận thái độ thiếu hợp tác. Và gần nhất: vắng mặt không phép mười một ngày.</p>
+
+    <p class="short">Cô ta đặt hồ sơ xuống, nhìn hắn.</p>
+
+    <p>— Anh có muốn giải thích không?</p>
+
+    <p>Giọng bình thản. Kiểu bình thản của người đã biết câu trả lời trước khi hỏi. Cô ta không hỏi vì muốn nghe. Cô ta hỏi vì quy trình bắt phải hỏi trước khi ký giấy cho thôi việc.</p>
+
+    <p class="short">Hắn nhìn cô ta. Im lặng.</p>
+
+    <p class="short">Một giây. Hai giây. Ba giây.</p>
+
+    <p>Ba giây trong phòng phỏng vấn dài hơn ba giây bên ngoài. Người ngồi đối diện sẽ bắt đầu khó chịu ở giây thứ hai, tự hỏi ở giây thứ ba. Đó là khoảng trống hắn cần.</p>
+
+    <p>— Chị Lâm, tôi có thể hỏi một câu trước không?</p>
+
+    <p class="short">Lâm Tuệ hơi nhíu mày. Bên trái, đúng như dự đoán.</p>
+
+    <p class="short">— Anh hỏi.</p>
+
+    <p>— Sáng nay chị phỏng vấn bao nhiêu người?</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Lâm Tuệ không trả lời ngay. Mắt cô ta thu hẹp, chỉ một phần mười giây, rồi trở lại bình thường. Bất ngờ. Không ai hỏi ngược người phỏng vấn.</p>
+
+    <p>— Chuyện đó không liên quan đến anh.</p>
+
+    <p class="short">— Liên quan.</p>
+
+    <p class="short">Hắn nói, giọng bình tĩnh. Không thách thức, không khiêu khích. Chỉ trình bày sự thật.</p>
+
+    <p>— Nếu chị đang tuyển gấp, nghĩa là công ty đang thiếu người. Nếu thiếu người, thì việc đuổi một nhân viên cũ tốn kém hơn việc giữ lại.</p>
+
+    <p class="short">Lâm Tuệ đặt bút xuống.</p>
+
+    <p>— Anh nghĩ tôi gọi anh lên đây để đuổi việc?</p>
+
+    <p>— Tôi nghĩ chị gọi tôi lên đây vì quy trình bắt phải gọi. Nhưng quyết định thì chị đã có sẵn rồi, trước khi tôi ngồi xuống ghế này.</p>
+
+    <p>Mắt Lâm Tuệ không rời hắn. Tay phải buông hồ sơ, đặt phẳng lên bàn, ngón tay không gõ. Cô ta đang nghe. Thật sự nghe, không phải kiểu nghe cho có. Lần đầu trong buổi sáng hôm nay.</p>
+
+    <p class="thought">Tốt. Cô ta đã chuyển từ "hoàn thành thủ tục" sang "tò mò." Bước đầu.</p>
+
+    <p class="short">Hắn tiếp:</p>
+
+    <p>— Hồ sơ của tôi tệ. Tôi biết. Lục Trường An sáu tháng trước là nhân viên kém, không có gì phải bào chữa.</p>
+
+    <p class="short">Hắn dừng lại.</p>
+
+    <p>— Nhưng chị không gọi tôi lên để nghe bào chữa, đúng không? Chị gọi vì cần ký giấy cho xong. Vậy trước khi ký, cho tôi năm phút.</p>
+
+    <p>Lâm Tuệ tựa lưng vào ghế. Khoanh tay. Tư thế phòng thủ, nhưng cũng là tư thế "nói đi, tôi nghe."</p>
+
+    <p class="short">— Năm phút.</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p>— Chị đang tuyển cho phòng Kinh doanh. Ít nhất ba vị trí, có thể bốn. Hạn chót tuyển dụng là cuối tháng, có thể sớm hơn vì quý mới sắp bắt đầu và phòng cần đủ người để chạy chỉ tiêu. Chị đã phỏng vấn ít nhất sáu người sáng nay, chưa ai khiến chị hài lòng. Người com-lê xám nói quá nhiều, chị phải cắt lời hắn ít nhất hai lần. Cô gái trẻ có tiềm năng nhưng chưa đủ chín. Sơ mi đen giỏi nhưng kiêu, chị lo hắn sẽ gây rắc rối nội bộ.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Lâm Tuệ không nhúc nhích. Mắt cô ta mở hơi rộng hơn, chỉ một chút, nhưng hắn thấy rõ.</p>
+
+    <p>— Anh... làm sao biết những điều đó?</p>
+
+    <p>— Tôi ngồi ngoài kia bốn mươi phút. Tôi quan sát.</p>
+
+    <p class="thought">Không phải nói dối. Chỉ không nói hết.</p>
+
+    <p>Lâm Tuệ nhìn hắn. Lâu. Kiểu nhìn khác hẳn lúc mở hồ sơ. Không còn mệt mỏi. Sắc.</p>
+
+    <p>— Anh quan sát giỏi. Nhưng quan sát không giải thích được mười một ngày vắng mặt.</p>
+
+    <p>— Đúng. Không giải thích được. Nhưng nó cho thấy tôi có thể làm được gì nếu ở lại phòng Kinh doanh.</p>
+
+    <p class="short">— Cụ thể hơn đi.</p>
+
+    <p>— Tôi đọc người. Không phải kiểu linh cảm. Kiểu có cơ sở. Tôi nhìn cách người ta ngồi, cách họ nói, nhịp thở, hướng mắt, và tôi biết họ muốn gì, sợ gì, đang giấu gì. Trong kinh doanh, đó là thứ quyết định ký được hợp đồng hay không.</p>
+
+    <p>Lâm Tuệ im lặng. Ngón tay trỏ gõ nhẹ lên mặt bàn, một lần, hai lần. Cô ta đang cân nhắc.</p>
+
+    <p>— Anh nói anh đọc được người.</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">— Vậy đọc tôi xem.</p>
+
+    <p>Câu nói có vẻ thách thức, nhưng giọng không sắc. Tò mò nhiều hơn. Ma Tâm Quan cho biết: cô ta đang thử hắn, nhưng cũng đang hy vọng. Hy vọng hắn nói đúng. Vì nếu hắn nói đúng, cô ta vừa tìm được lý do hợp lệ để không đuổi hắn, và bớt đi một vị trí cần tuyển.</p>
+
+    <p class="thought">Cô ta cần ta ở lại không kém gì ta cần ở lại. Chỉ là cô ta chưa biết điều đó.</p>
+
+    <p class="short">Hắn nhìn thẳng vào mắt Lâm Tuệ. Không lâu, chỉ đủ.</p>
+
+    <p>— Chị làm ở vị trí này ít nhất bảy năm. Giỏi, nhưng không được thăng tiến. Không phải vì thiếu năng lực, vì phòng Nhân sự không phải chỗ ban giám đốc muốn đầu tư. Chị là người giữ cho công ty chạy đúng quy trình, nhưng không ai cảm ơn vì điều đó.</p>
+
+    <p class="short">Tay Lâm Tuệ dừng gõ.</p>
+
+    <p>— Chị đang chịu áp lực tuyển người gấp. Không phải từ phòng Kinh doanh yêu cầu, từ ban giám đốc. Ai đó ở trên ép hạn chót phải đủ quân số trước quý mới. Chị bực vì bị ép thời gian nhưng không được phép hạ chuẩn chất lượng ứng viên. Và chị biết rằng nếu tuyển sai người, kẻ chịu trách nhiệm là chị, không phải người ép hạn.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Dài.</p>
+
+    <p>Lâm Tuệ nuốt nước bọt. Cổ họng cô ta di chuyển rõ ràng. Không phải sợ. Là bất ngờ, loại bất ngờ khi ai đó nói ra thứ mình giấu kỹ mà tưởng không ai nhìn thấy.</p>
+
+    <p class="short">Rồi cô ta nói, giọng thấp hơn trước:</p>
+
+    <p class="short">— Năm phút của anh hết rồi.</p>
+
+    <p class="short">Nhưng cô ta không đuổi hắn ra.</p>
+
+    <p>Hắn biết. Cuộc đối thoại đã thay đổi hướng. Không còn là "tại sao không đuổi anh" mà thành "giữ anh bằng cách nào cho hợp lý."</p>
+
+    <p>— Tôi không xin chị cho cơ hội. Tôi đang cho chị thấy: giữ tôi lại, chị bớt một đầu việc tuyển dụng, và phòng Kinh doanh có một người biết đọc khách hàng. Đuổi tôi, chị phải tuyển thêm một người nữa, trong khi chưa ai ngoài kia đạt yêu cầu của chị.</p>
+
+    <p>Lâm Tuệ nhìn hắn. Lâu hơn bất kỳ lần nào trước đó. Mắt không còn mệt, không còn sắc. Thứ gì đó khác. Kiểu ánh mắt của người bất ngờ bị kéo ra khỏi vòng lặp hàng ngày, chưa kịp phân loại cảm xúc.</p>
+
+    <p class="short">Rồi cô ta mở ngăn kéo, lấy ra một tờ giấy.</p>
+
+    <p>— Anh ký xác nhận quay lại làm việc. Từ thứ Hai tuần sau. Tôi sẽ xử lý phần vắng mặt trong hồ sơ.</p>
+
+    <p>Hắn cầm bút. Ký. Nét chữ đều, không vội, không run. Đói nhưng tay vẫn vững. Ngàn năm rèn luyện không phải để run trước một tờ giấy.</p>
+
+    <p class="short">Đặt bút xuống.</p>
+
+    <p class="short">— Nhưng, anh Lục.</p>
+
+    <p class="short">Hắn ngẩng lên.</p>
+
+    <p class="short">Lâm Tuệ nhìn hắn. Giọng không lạnh, không ấm, chỉ rất rõ ràng:</p>
+
+    <p>— Lần sau mà biến mất mười một ngày, không ai cứu được anh. Kể cả anh tự cứu.</p>
+
+    <p class="short">— Tôi hiểu.</p>
+
+    <p class="short">Hắn đứng dậy.</p>
+
+    <p class="short">Bước đến cửa, tay nắm nắm cửa, dừng lại. Không quay đầu.</p>
+
+    <p class="short">— Chị Lâm.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p>— Cô gái trẻ lúc nãy, Nguyễn Phương Linh, hồ sơ có lẽ không tệ. Chỉ là cô ấy sợ thất bại. Nếu chị cho cô ấy phỏng vấn lần hai, hỏi về chuyên môn thay vì câu hỏi tình huống, có thể chị sẽ thấy khác.</p>
+
+    <p class="short">Im lặng sau lưng.</p>
+
+    <p class="short">Rồi tiếng Lâm Tuệ, nhẹ, gần như thì thầm:</p>
+
+    <p class="short">— Ra đi.</p>
+
+    <p class="short">Hắn mở cửa, bước ra.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Hành lang vắng. Đèn huỳnh quang vẫn nhấp nháy ở cuối. Hắn đi về phía thang máy, bước chân chậm, đều. Cơn chóng mặt quay lại, nhẹ thôi, nhưng dai dẳng. Cần ăn. Trong ví không còn gì.</p>
+
+    <p class="thought">Lương. Cuối tháng. Còn mười mấy ngày. Phải sống qua.</p>
+
+    <p>Thang máy xuống sảnh. Bước qua quầy lễ tân, không nhìn ngang. Ra cửa.</p>
+
+    <p class="short">Nắng. Nóng. Mười giờ sáng, phố đã bắt đầu ồn.</p>
+
+    <p>Hắn đứng trước cổng Vạn Lý Group, ngẩng đầu nhìn lên tòa nhà mười lăm tầng.</p>
+
+    <p class="thought">Mười lăm tầng. CEO ngồi trên cùng. Ta sẽ bắt đầu từ tầng mười hai, phòng Kinh doanh. Mười ba tầng dưới kẻ nắm quyền.</p>
+
+    <p class="thought">Nhưng trong bất kỳ tông môn nào, kẻ ngồi trên đỉnh chưa chắc là kẻ mạnh nhất. Chỉ là kẻ ngồi lâu nhất.</p>
+
+    <p class="short">Điện thoại rung.</p>
+
+    <p class="message">Anh Lục Trường An, xác nhận anh quay lại làm việc thứ Hai, 8h sáng. Phòng Kinh doanh, tầng 12. Liên hệ quản lý Ngô Hải để nhận bàn giao.</p>
+
+    <p class="short">Ngô Hải.</p>
+
+    <p>Ký ức thân xác gốc nhạt nhòa, nhưng có một thứ rõ ràng: cảm giác sợ. Lục Trường An cũ sợ Ngô Hải. Không phải loại sợ bạo lực. Loại sợ âm thầm, ngày qua ngày, bị chèn ép mà không dám nói, bị giao việc tạp nhặt mà không dám từ chối, bị nhìn bằng ánh mắt khinh thường mà cúi đầu chịu.</p>
+
+    <p class="thought">Sợ hãi. Thứ xiềng xích không cần sắt thép.</p>
+
+    <p class="short">Hắn tắt màn hình, bỏ điện thoại vào túi.</p>
+
+    <p>Nhìn tòa nhà lần cuối. Rồi quay lưng, đi bộ về nhà. Bốn mươi phút nữa. Bụng đói. Chân hơi run. Nắng trên đầu.</p>
+
+    <p class="short">Nhưng góc miệng hắn hơi nhếch. Nhẹ. Rất nhẹ.</p>
+
+    <p class="thought">Bước đầu tiên vào tông môn. Bao giờ cũng là dễ nhất.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-03.html">&larr; Chương trước</a>
+    <a href="chapter-05.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.950 từ &middot; Chương 04 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

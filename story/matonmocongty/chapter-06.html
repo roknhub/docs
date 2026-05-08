@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 06: Bản Đồ Quyền Lực — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-05.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 6 / 30</span>
+    <a href="chapter-07.html" href="chapter-07.html">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 06</div>
+    <h1 class="chapter-title">Bản Đồ Quyền Lực</h1>
+    <div class="chapter-meta">Phần I — Thức Tỉnh &middot; 3.626 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>— Chín giờ, họp toàn công ty. Tầng mười lăm. Không được vắng.</p>
+
+    <p>Ngô Hải nói xong, quay đi, không đợi trả lời. Sáng thứ Năm, ngày thứ tư đi làm, và đây là lần đầu tiên hắn nghe ba chữ "họp toàn công ty."</p>
+
+    <p>Tầng mười lăm. Tầng của ban giám đốc. Nơi mà nhân viên bình thường không có lý do để lên, trừ khi bị triệu hoặc bị đuổi.</p>
+
+    <p class="thought">Hoặc trừ khi muốn nhìn rõ mặt kẻ nắm quyền.</p>
+
+    <p>Hắn tắt máy tính, đứng dậy. Chồng hồ sơ nhập liệu đã xong từ hôm qua, trước hạn nửa ngày. Ngô Hải nhìn lướt, không nói gì, chỉ gật đầu rồi đi. Không khen. Không chê. Loại im lặng của kẻ bực vì không tìm được cớ phàn nàn.</p>
+
+    <p>Thang máy lên tầng mười lăm. Cửa mở.</p>
+
+    <p class="short">Khác.</p>
+
+    <p>Sảnh tầng mười lăm khác hẳn phần còn lại của tòa nhà. Sàn đá hoa bóng loáng, không xước. Tường ốp gỗ sẫm, loại gỗ thật, không phải giấy dán. Đèn âm trần vàng ấm thay vì huỳnh quang trắng. Hoa tươi trên quầy tiếp tân, bình sứ trắng, hoa ly. Mùi nước hoa phòng thoang thoảng, loại mùi đắt tiền, nhẹ nhưng đủ để biết ai đó bỏ tiền ra khiến nơi này khác biệt.</p>
+
+    <p class="thought">Tông chủ luôn ở nơi đẹp nhất. Ngàn năm trước cũng vậy. Đại điện Huyền Minh Tông xây bằng huyền thiết, trấn bằng linh trận mười hai lớp. Đệ tử ở lều vải, tông chủ ở cung điện. Bản chất quyền lực không bao giờ thay đổi.</p>
+
+    <p>Phòng họp lớn ở cuối sảnh. Cửa kính hai cánh mở rộng. Bên trong, bàn chữ U dài, ghế xoay da đen, màn hình chiếu lớn trên tường. Khoảng tám mươi người đã ngồi, đại diện tất cả phòng ban. Ồn ào nhẹ, tiếng nói chuyện, tiếng ghế xoay, tiếng cốc nước đặt lên bàn.</p>
+
+    <p>Hắn ngồi ở hàng ghế cuối cùng, góc phải, sát tường. Vị trí của kẻ không muốn bị nhìn thấy. Nhưng nhìn thấy tất cả.</p>
+
+    <p class="short">Quan sát.</p>
+
+    <p>Phòng họp chia thành ba vùng rõ rệt, giống canteen nhưng đậm nét hơn. Hàng ghế đầu, sát bàn chính: quản lý cấp trung, trưởng phòng. Hàng giữa: nhân viên lâu năm, người có vị trí. Hàng cuối: nhân viên mới, nhân viên thấp, những kẻ đến vì bắt buộc, không phải vì muốn.</p>
+
+    <p>Ngô Hải ngồi hàng đầu, ghế thứ ba từ trái. Lưng thẳng, tay đặt trên bàn, mắt nhìn thẳng phía trước. Tư thế của kẻ muốn được thấy bởi người ngồi giữa bàn chính.</p>
+
+    <p class="short">Chín giờ đúng. Cửa bên phải mở.</p>
+
+    <p>Và CEO Trần Quốc Huy bước vào.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Ảnh trên trang web và sảnh chỉ cho hắn một phần. Trực tiếp cho hắn tất cả.</p>
+
+    <p>Năm mươi hai tuổi, nhưng cố trông trẻ hơn. Tóc bạc nhuộm đen, nhuộm không đều, sáng đèn thì thấy rõ vệt bạc ở thái dương. Bụng bia ẩn sau áo com-lê xanh đậm, cúc vest cài chật, vải kéo ở nếp. Đắt tiền nhưng không vừa, loại đồ mua vì giá chứ không phải vì hợp. Đồng hồ vàng, to, lấp lánh mỗi khi vung tay. Mặt tròn, má bóng, nụ cười rộng, kiểu cười của người quen chụp ảnh sự kiện.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Bước chân rộng, hơi nặng, gót chạm sàn trước mũi. Tự tin, nhưng là tự tin từ vị trí, không phải từ năng lực. Mắt quét phòng khi bước vào, nhanh, không dừng ở ai cụ thể, nhưng liếc về phía bên trái lâu hơn nửa giây. Bên trái là chỗ VP ngồi.</p>
+
+    <p class="thought">Sợ. Kẻ này đang sợ kẻ ngồi bên trái. Nhưng cười to để che.</p>
+
+    <p>CEO đi đến ghế giữa bàn chính. Ngồi xuống. Vỗ tay lên mặt bàn, kiểu vỗ thân thiện nhưng đủ to để cả phòng quay lại.</p>
+
+    <p>— Nào, sáng nay mọi người khỏe không? Tốt. Tốt lắm.</p>
+
+    <p>Giọng to, ấm, loại giọng luyện từ bao nhiêu buổi phát biểu. Nhưng hắn nghe ra: hơi thở hơi nhanh, nuốt nước bọt giữa câu, dấu hiệu của người nói nhiều hơn nghĩ.</p>
+
+    <p>— Quý mới rồi, mọi người. Quý ba. Tôi biết mọi người đã rất cố gắng quý vừa rồi. Kết quả có chỗ tốt, có chỗ cần cải thiện. Nhưng tôi tin, tôi tin vào đội ngũ của mình.</p>
+
+    <p>Câu quen thuộc. Sáo rỗng đến mức nhân viên có thể đoán trước từ tiếp theo. Hàng ghế giữa bắt đầu nhìn điện thoại dưới bàn. Hàng ghế cuối thì đã nhìn từ lâu.</p>
+
+    <p class="short">Nhưng hắn không nghe nội dung. Hắn đọc cơ thể.</p>
+
+    <p class="thought">CEO nói "đoàn kết" thì mắt liếc về trái. VP ngồi đó. Nói "thử thách" thì tay phải siết bút. Lo lắng thật sự, không phải lo cho công ty, lo cho vị trí. Nói "tương lai" thì giọng cao hơn nửa cung, cố truyền cảm hứng nhưng chính hắn không tin điều mình nói.</p>
+
+    <p class="thought">Kẻ này lên CEO nhờ quan hệ, không phải năng lực. Trang web công ty ghi "thành tích xuất sắc", nhưng mắt hắn kể câu chuyện khác. Mắt của kẻ ngồi trên ghế quá lớn cho mình và biết điều đó. Mỗi sáng thức dậy đều tự hỏi: hôm nay có ai kéo ta xuống không?</p>
+
+    <p>CEO nói thêm mười phút. Hắn ghi nhận ba câu có giá trị giữa mười phút lời rỗng: "dự án quan trọng đang triển khai," "ngân sách sẽ được xem xét lại," và "tôi đã trao đổi với hội đồng quản trị." Ba câu. Ba manh mối.</p>
+
+    <p class="thought">Dự án quan trọng: dự án X? Ngân sách xem xét lại: rút tiền thêm? Trao đổi hội đồng quản trị: ai ở trên hắn?</p>
+
+    <p>Hắn quét mắt quanh phòng trong lúc CEO nói. Phản ứng của khán giả cũng là dữ liệu.</p>
+
+    <p>Hàng đầu: Ngô Hải gật đầu mỗi khi CEO nói "cố gắng." Gật đúng nhịp, không sớm, không muộn. Đã luyện. Bên cạnh, một phụ nữ trung niên mặc áo com-lê đen, tay ghi chép liên tục, nhưng bút không chạm giấy, chỉ vờ viết. Trưởng phòng Hành chính, nếu hắn nhớ đúng sơ đồ tổ chức trên trang web.</p>
+
+    <p>Hàng giữa: phần lớn nhìn thẳng nhưng mắt mờ, kiểu mắt của người đang nghĩ chuyện khác. Một người đàn ông trẻ, sơ mi trắng, cà vạt xám, ngồi thẳng, tay đặt trên gối, mắt chăm chú theo từng cử động của VP. Không phải nhìn CEO. Nhìn VP. Thuộc hạ phe VP, đang chờ phản ứng của chủ.</p>
+
+    <p>Hàng cuối: ba người nhìn điện thoại dưới gầm bàn. Hai người nhắm mắt, giả vờ nghe. Và hắn, ngồi góc, mắt mở, ghi nhận tất cả.</p>
+
+    <p>CEO nói thêm năm phút. Giọng cao dần, cố truyền cảm hứng. Kết thúc bằng: "Chúng ta là một gia đình. Một gia đình Vạn Lý."</p>
+
+    <p class="thought">"Gia đình." Từ đó. Ở bất kỳ tông môn nào, khi tông chủ bắt đầu gọi đệ tử là "gia đình", nghĩa là hắn đang mất kiểm soát. "Gia đình" là sợi dây cuối cùng trước khi "trung thành" biến thành "phản bội."</p>
+
+    <p>Vỗ tay thưa thớt. CEO cười, kiểu cười không để ý vỗ tay thưa hay không. Rồi quay sang trái.</p>
+
+    <p>— Mời anh Minh bổ sung.</p>
+
+    <p>Và VP Phạm Đức Minh mở miệng lần đầu tiên.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Khác.</p>
+
+    <p class="short">Hoàn toàn khác.</p>
+
+    <p>Phạm Đức Minh không đứng dậy. Ngồi tại chỗ, ghế bên trái bàn chính, lưng tựa nhẹ, hai tay đan trước bụng. Bốn mươi lăm tuổi, gầy, mặt góc cạnh, xương hàm sắc. Sơ mi trắng cài tay, không com-lê, không đồng hồ to. Tóc cắt ngắn, gọn, không gel. Mắt nhỏ nhưng sắc, loại mắt nhìn ai cũng như đang đo.</p>
+
+    <p>Hắn nói. Giọng thấp, chậm, rõ từng chữ.</p>
+
+    <p>— Quý vừa rồi, doanh thu tăng bảy phần trăm so với cùng kỳ. Nhưng chi phí vận hành tăng mười hai phần trăm. Biên lợi nhuận giảm. Tôi sẽ không nói "cố gắng hơn" vì câu đó không giải quyết vấn đề. Vấn đề là hiệu quả. Chúng ta cần làm nhiều hơn với ít hơn.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Không phải im lặng vì chán. Im lặng vì bất ngờ. CEO nói mười phút không ai nhớ gì. VP nói ba mươi giây, cả phòng nghe.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Tay đan trước bụng: kiểm soát, không để tay tiết lộ cảm xúc. Lưng tựa nhẹ nhưng không xụi: thoải mái có chủ đích, muốn phòng thấy hắn không cần cố. Mắt không quét phòng như CEO, nhìn thẳng vào khoảng giữa, để mọi người tự cảm thấy đang bị nhìn. Giọng thấp: không cần to vì biết người ta sẽ phải im lặng để nghe.</p>
+
+    <p class="thought">Kẻ này giỏi hơn CEO. Giỏi hơn nhiều. Và hắn biết điều đó. Nguy hiểm.</p>
+
+    <p class="thought">Nhưng, nguy hiểm theo cách khác. CEO nguy hiểm vì sợ, sẽ cắn khi bị dồn. VP nguy hiểm vì tham vọng, sẽ cắn khi thấy cơ hội. Hai loại nguy hiểm. Hai cách đối phó.</p>
+
+    <p>VP nói thêm hai phút. Mỗi câu có số liệu. Mỗi số liệu có ý nghĩa. Không một từ thừa.</p>
+
+    <p>— Phòng Kinh doanh quý trước ký mới sáu hợp đồng, thấp hơn chỉ tiêu bốn mươi phần trăm. Phòng Kế hoạch đề xuất ba dự án, hai bị hoãn. Phòng Tài chính báo dòng tiền âm tháng thứ hai liên tiếp.</p>
+
+    <p>Hắn nhìn Ngô Hải khi VP đọc số liệu phòng Kinh doanh. Mặt Ngô Hải đỏ nhẹ ở vành tai. Cố giữ bình tĩnh nhưng cổ cứng, nuốt nước bọt. VP không nhìn Ngô Hải khi nói, nhưng cả phòng biết đang nói về ai.</p>
+
+    <p class="thought">VP dùng số liệu như kiếm. Không chĩa thẳng, nhưng ai cũng biết mũi kiếm hướng về đâu. Kỹ thuật cao. Giết người không cần rút kiếm ra.</p>
+
+    <p class="short">VP kết thúc:</p>
+
+    <p>— Tôi đề nghị các trưởng phòng nộp báo cáo chi tiết chi phí quý trước thứ Hai tuần sau. Đặc biệt các dự án đang triển khai, tôi muốn thấy so sánh ngân sách duyệt ban đầu với chi tiêu thực tế.</p>
+
+    <p class="short">Câu cuối. Hắn nhận ra ngay.</p>
+
+    <p class="thought">"So sánh ngân sách duyệt ban đầu với chi tiêu thực tế." VP đang nhắm vào dự án X. Hắn biết có vấn đề. Hoặc ít nhất, hắn nghi.</p>
+
+    <p>Ngô Hải ở hàng đầu siết bút. Báo cáo chi phí nghĩa là phải giải trình ngân sách, và Ngô Hải ghét giải trình. Hắn liếc về phía CEO, như tìm cứu viện.</p>
+
+    <p class="short">CEO cười:</p>
+
+    <p>— Ha ha, anh Minh lúc nào cũng kỹ. Tốt, tốt. Các trưởng phòng chuẩn bị nhé. Nào, còn gì nữa không?</p>
+
+    <p class="thought">"Anh Minh lúc nào cũng kỹ." Câu có vẻ khen. Nhưng giọng hơi gằn ở chữ "lúc nào cũng." Đang bực. VP vừa ra lệnh trước mặt cả công ty mà không hỏi ý CEO trước. Quyền lực thật sự lộ ra ở những khoảnh khắc nhỏ như thế.</p>
+
+    <p>Không ai hỏi thêm. CEO vỗ tay kết thúc. Mọi người đứng dậy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn không đứng dậy ngay. Ngồi lại, nhìn.</p>
+
+    <p>Cánh cửa mở. Dòng người đổ ra. Và ở đây, bản đồ quyền lực hiện ra rõ nhất.</p>
+
+    <p>Bốn người đi thẳng về phía CEO, vây quanh, cười nói. Quản lý cấp trung, phe CEO. Bắt tay, vỗ vai, "Trần tổng nói hay quá." Sáo rỗng đáp sáo rỗng. CEO cười ha hả, nhưng mắt liếc qua vai họ, nhìn VP đang đi ra cửa bên kia.</p>
+
+    <p>VP đi một mình. Không ai vây quanh ngay lập tức. Nhưng khi bước ra hành lang, hai người tách khỏi đám đông, rẽ theo hướng VP, khoảng cách đủ xa để không ai để ý, đủ gần để kịp nói chuyện khi vào thang máy. Kín đáo. Chuyên nghiệp. Phe VP không vây quanh, họ đi theo.</p>
+
+    <p class="thought">Phe CEO ồn ào, phô trương, mạnh vì số đông. Phe VP im lặng, kín kẽ, mạnh vì chất lượng. Hai phong cách. Ở tu tiên giới, chính đạo thích hội nghị đông đúc. Ma đạo thích gặp riêng trong bóng tối.</p>
+
+    <p>Một chi tiết nhỏ. CEO đang bắt tay đám thuộc hạ, cười, vỗ vai. Nhưng khi quay lưng với họ để bước về phòng, nụ cười tắt ngay. Không phải tắt dần, là tắt ngắt, như bấm công tắc. Khuôn mặt dưới nụ cười là khuôn mặt mệt mỏi. Rồi CEO vào phòng, đóng cửa.</p>
+
+    <p class="thought">Kẻ mệt vì diễn. Diễn vai ông chủ tốt bụng, nhưng bên trong đang cạn kiệt. Cạn kiệt vì sợ, vì phải giữ mặt, vì biết VP đang chờ sai lầm.</p>
+
+    <p class="thought">Thú vị. Ở cung điện cũ của Huyền Minh Tông, ta từng thấy y hệt: trưởng lão nào cười nhiều nhất thường là kẻ mất ngủ nhiều nhất.</p>
+
+    <p>Và giữa hai phe, đám đông còn lại. Nhân viên bình thường, đứng dậy, lấy cốc nước, đi về phòng mình. Không theo ai. Chưa chọn phe.</p>
+
+    <p>Hắn đứng dậy, bước ra cuối cùng.</p>
+
+    <p>Hành lang tầng mười lăm vắng hơn. Hầu hết đã xuống thang máy. Hắn đi chậm, nhìn ngang.</p>
+
+    <p>Phòng CEO: cửa gỗ nặng, có thư ký ngồi ngoài, đang nói điện thoại.</p>
+
+    <p>Phòng VP: cửa kính mờ, nhỏ hơn, không thư ký. Đèn trong phòng bật. VP đã về bàn.</p>
+
+    <p>Phòng họp hội đồng quản trị: cửa đóng, khóa điện tử. Trên cửa có bảng tên nhỏ, hắn liếc nhanh: "Phòng họp HĐQT." Nơi quyết định vận mệnh công ty.</p>
+
+    <p>Hắn ghi nhận vị trí từng phòng, khoảng cách, bố trí. Thói quen của kẻ từng bố trí trận pháp, mọi không gian đều có thể trở thành chiến trường.</p>
+
+    <p>Một cánh cửa hé mở ở cuối hành lang. Phòng nhỏ, không bảng tên. Bên trong, hắn thoáng thấy: tủ hồ sơ, máy hủy giấy, và một người đang đứng quay lưng, đọc gì đó. Người đó quay lại, nhìn ra hành lang, nhìn hắn.</p>
+
+    <p>Hắn bước tiếp, không dừng, không quay đầu. Nhưng đã ghi nhận: người đó mặc sơ mi trắng, đeo kính, tóc bạc phơ, khoảng sáu mươi. Không phải nhân viên bình thường. Tóc bạc thế kia, ở tuổi đó, nếu vẫn làm ở Vạn Lý thì hoặc là thành viên hội đồng quản trị, hoặc là cố vấn. Hoặc là người nhà.</p>
+
+    <p class="thought">Ghi nhận. Chưa đủ thông tin để phân loại.</p>
+
+    <p class="short">Thang máy. Xuống.</p>
+
+    <p class="short">Tầng mười hai.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Bước ra khỏi thang máy, hắn gần như đâm phải một người.</p>
+
+    <p class="short">Tô Vãn.</p>
+
+    <p>Lần thứ hai hắn thấy cô ta. Lần đầu ở hành lang tầng bảy, hôm phỏng vấn. Lần này, tầng mười hai, trước cửa phòng Kinh doanh.</p>
+
+    <p>Cô đang cầm chồng tài liệu, bước nhanh, đầu hơi cúi nhìn giấy tờ. Tóc ngắn buộc gọn, áo sơ mi trắng không nếp nhăn, váy đen, bước chân đều. Giống như lần trước, không nhìn điện thoại, không nhìn ngang, chỉ nhìn vào thứ cô đang làm.</p>
+
+    <p>Hắn dừng lại. Cô cũng dừng. Ngẩng lên.</p>
+
+    <p>Mắt nhìn hắn. Nửa giây. Không có vẻ bất ngờ, không có vẻ xin lỗi. Chỉ nhìn, đánh giá nhanh, rồi bước sang bên.</p>
+
+    <p>— Xin lỗi.</p>
+
+    <p>Giọng bình thản, không lạnh, không ấm. Rồi đi tiếp, rẽ vào hành lang dẫn đến phòng Kế hoạch.</p>
+
+    <p class="thought">Phòng Kế hoạch. Tầng mười hai. Cô ta làm ở đây.</p>
+
+    <p>Hắn nhìn theo. Lưng thẳng, bước chân không nhanh hơn, không chậm hơn vì vừa suýt đâm phải ai đó. Kiểu bước chân của người không để chuyện nhỏ ảnh hưởng đến nhịp.</p>
+
+    <p class="thought">Lần trước, ở tầng bảy, ánh mắt cô ta lướt qua ta nửa giây. Lần này, cũng nửa giây. Đủ để đánh giá. Không thừa, không thiếu.</p>
+
+    <p class="thought">Người này quan sát giỏi. Không phải kiểu Ma Tâm Quan. Kiểu được rèn bởi kinh nghiệm. Kiểu của kẻ đã từng tin sai người và từ đó nhìn ai cũng đo trước.</p>
+
+    <p class="thought">Thú vị. Nhưng chưa phải lúc.</p>
+
+    <p class="short">Hắn quay về bàn.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Chiều. Ngô Hải gọi hắn.</p>
+
+    <p>— Lục Trường An, danh sách khách hàng quá hạn thanh toán, lọc ra từ hệ thống, in cho tôi. Trước ba giờ.</p>
+
+    <p>Hắn nhìn đồng hồ. Một giờ rưỡi. Chín mươi phút cho công việc cần ít nhất hai tiếng nếu hệ thống chạy bình thường, mà máy tính cũ của hắn không bao giờ chạy bình thường.</p>
+
+    <p class="short">— Được.</p>
+
+    <p class="short">Ngô Hải đi. Hắn mở hệ thống, bắt đầu lọc.</p>
+
+    <p class="short">Tiểu Lý ghé qua, giọng nhỏ:</p>
+
+    <p>— Anh Lục, cần em giúp gì không? Em rảnh.</p>
+
+    <p class="short">— Không cần. Cảm ơn.</p>
+
+    <p>Tiểu Lý gật đầu, quay về. Hắn nhìn theo, nửa giây.</p>
+
+    <p class="thought">Kẻ tử tế. Và đang cố thân thiện. Có lẽ vì tò mò: tại sao một nhân viên bị coi là đồ bỏ lại quay về? Hoặc có lẽ chỉ đơn giản là tử tế. Ở tông môn này, cả hai lý do đều hiếm.</p>
+
+    <p>Hai giờ bốn lăm. Hắn in xong danh sách, đặt lên bàn Ngô Hải. Sớm mười lăm phút.</p>
+
+    <p>Ngô Hải nhìn lướt, mặt không biến sắc. Không khen, không chê. Lần thứ hai trong tuần.</p>
+
+    <p class="thought">Kẻ này đang mất dần cớ để ép ta. Và hắn đang bực vì điều đó.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Sáu giờ chiều. Hắn rời công ty. Đi bộ bốn mươi phút về căn hộ. Leo sáu tầng. Vào phòng. Bật đèn.</p>
+
+    <p>Không ăn ngay. Ngồi xuống bàn. Lấy tờ giấy từ túi quần, tờ sơ đồ sơ bộ vẽ hôm thứ Hai. Mở ra.</p>
+
+    <p>Chưa đủ. Hôm thứ Hai, hắn chỉ có phòng Kinh doanh và canteen. Bây giờ, sau cuộc họp toàn công ty, hắn có tầng mười lăm. Có CEO. Có VP. Có toàn cảnh.</p>
+
+    <p class="short">Hắn lật mặt sau tờ giấy, lấy bút, bắt đầu vẽ lại.</p>
+
+    <p class="short">Ở giữa: một hình chữ nhật lớn. "Vạn Lý Group."</p>
+
+    <p class="short">Phía trên, hai hình tròn, ngang hàng nhưng không chạm nhau.</p>
+
+    <p>Bên trái: "Trần Quốc Huy, CEO." Bên dưới ghi: "Lên nhờ quan hệ. Năng lực trung bình. Đang sợ VP. Nói nhiều hơn làm. Liếc VP mỗi khi nói 'đoàn kết.' Có dự án đang triển khai, ngân sách đáng ngờ."</p>
+
+    <p>Bên phải: "Phạm Đức Minh, VP." Bên dưới: "Thực lực. Tham vọng. Kiểm soát tốt. Không cần to tiếng vì biết mình đúng. Phe ngầm, kín kẽ. Ra lệnh trước mặt CEO mà CEO không dám phản đối. Nguy hiểm hơn CEO gấp mười lần."</p>
+
+    <p>Giữa hai hình tròn, hắn vẽ một đường đứt đoạn. Ghi: "Đối đầu ngầm. Chưa nổ."</p>
+
+    <p class="short">Phía dưới, các ô nhỏ hơn. Từng phòng ban.</p>
+
+    <p>Phòng Kinh doanh: "Ngô Hải, quản lý, phe CEO. Hai thuộc hạ trung thành. Tiểu Lý, trung gian. Hạnh, tàng hình."</p>
+
+    <p>Phòng Kế hoạch: "Có người phụ nữ đáng chú ý, tóc ngắn, mắt sắc, đi một mình. Chưa biết tên. Không thuộc phe nào."</p>
+
+    <p>Phòng Tài chính: "Có liên lạc viên cho phe VP. Chưa xác định ai."</p>
+
+    <p>Hội đồng quản trị: "CEO nhắc 'trao đổi với HĐQT.' Ai ở trên CEO? Cần tìm."</p>
+
+    <p class="short">Và ở góc dưới cùng, hắn viết:</p>
+
+    <p>"Dự án X. Đội vốn 30%. Nhà thầu Đại Phong, mới thành lập. Tiền chảy đi đâu? Ai duyệt? Ai chịu trách nhiệm?"</p>
+
+    <p>Hắn nhìn tờ giấy. Bản đồ quyền lực, phiên bản thứ hai. Đầy đủ hơn. Nhưng vẫn còn ô trống. Vẫn còn dấu hỏi.</p>
+
+    <p class="thought">HĐQT. Ai ở trên cùng? CEO sợ VP, nhưng CEO cũng sợ ai đó khác. Kẻ bổ nhiệm CEO. Kẻ thật sự nắm Vạn Lý.</p>
+
+    <p class="short">Hắn chưa biết. Chưa đủ thông tin.</p>
+
+    <p class="short">Nhưng bản đồ đang rõ dần.</p>
+
+    <p>Hắn nhìn tờ giấy thêm một phút. Rồi lấy bút, vẽ thêm một hình tròn ở trên cùng, phía trên cả CEO và VP. Bên trong viết: "?"</p>
+
+    <p class="short">Một dấu hỏi.</p>
+
+    <p class="thought">Kẻ ở trên cùng. Kẻ bổ nhiệm CEO. Kẻ CEO sợ khi nhắc đến "hội đồng quản trị." Tông môn nào cũng có thái thượng trưởng lão, kẻ không xuất hiện nhưng nắm mệnh mạch. Ở Vạn Lý, kẻ đó là ai?</p>
+
+    <p class="thought">Chưa biết. Nhưng sẽ biết.</p>
+
+    <p>Hắn gấp tờ giấy, cất vào ngăn kéo bàn, dưới đáy, dưới lớp giấy tờ cũ của Lục Trường An.</p>
+
+    <p>Đứng dậy, nấu mì. Ăn. Uống nước. Rửa bát.</p>
+
+    <p>Rồi tắt đèn, nằm xuống giường.</p>
+
+    <p>Trần nhà tối. Bên ngoài, tiếng xe cộ xa xa, tiếng ai đó cãi nhau ở tầng dưới, tiếng quạt trần cọt kẹt.</p>
+
+    <p>Hắn nhắm mắt. Trong bóng tối, bản đồ vẫn hiện rõ sau mi mắt. Mỗi cái tên, mỗi khuôn mặt, mỗi ánh mắt hắn đã đọc trong tuần qua.</p>
+
+    <p class="thought">Cuộc chiến tông chủ giữa Trần Quốc Huy và Phạm Đức Minh.</p>
+
+    <p>Hắn lật người. Gối cứng, nệm mỏng. Thân xác mỏi sau một ngày dài.</p>
+
+    <p class="thought">Cả hai đều nghĩ đối thủ là nhau.</p>
+
+    <p>Quạt trần quay chậm, bóng cánh quạt lướt trên trần nhà như kim đồng hồ đếm ngược.</p>
+
+    <p class="thought">Cả hai đều sẽ thua.</p>
+
+    <p>Hắn mở mắt. Nhìn lên trần nhà tối. Không cười. Không nhếch môi. Chỉ ánh mắt, trong bóng tối, sáng hơn một chút.</p>
+
+    <p class="thought">Vì cả hai đều không biết ta đang ở đây.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-05.html">&larr; Chương trước</a>
+    <a href="chapter-07.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.626 từ &middot; Chương 06 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

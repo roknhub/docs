@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 07 — Nữ Nhân Nguy Hiểm Nhất Đại Ly | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">07/30</span>
+      <a href="chapter-08.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 07</div>
+      <h1>Nữ Nhân Nguy Hiểm Nhất Đại Ly</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Sáng hôm sau, lời mời đến.</p>
+
+<p>Không phải lời mời bằng giấy. Một cung nữ áo xanh bước vào Minh Nguyệt Đường, cúi đầu, nói đúng một câu:</p>
+
+<p>— Nhiếp Chính Vương mời Quốc Sư thưởng trà. Giờ Tỵ. Thanh Phong Các.</p>
+
+<p>Rồi quay người đi, không chờ trả lời.</p>
+
+<p>Tạ Cảnh Minh ngồi ở bàn trà, nhìn theo bóng cung nữ khuất sau cổng. Phúc An đứng bên cạnh, tay cầm ấm trà, mặt lo lắng.</p>
+
+<p>— Quốc Sư... Nhiếp Chính Vương...</p>
+
+<p>— Ta biết.</p>
+
+<p class="thought"><em>Lục Thanh Dao. Cuối cùng nàng cũng chính thức mời.</em></p>
+
+<p class="thought"><em>Hai lần trước, nàng đến phòng giam và đến Minh Nguyệt Đường. Lần này, nàng mời mình đến chỗ nàng. Ý nghĩa khác hẳn.</em></p>
+
+<p class="thought"><em>Đến chỗ người khác nghĩa là chơi trên sân của họ. Họ kiểm soát không gian, thời gian, và ai được phép vào. Mình là khách, nhưng cũng là con mồi trong lãnh thổ thợ săn.</em></p>
+
+<p class="thought"><em>Kiếp trước, đây là kiểu mời họp "thân mật" mà mấy ông chủ tập đoàn dùng khi muốn thăm dò đối tác. Bề ngoài: trà, cười, nhẹ nhàng. Bên trong: mỗi câu hỏi là một cái bẫy.</em></p>
+
+<p>Hắn đứng dậy. Chỉnh áo.</p>
+
+<p>— Phúc An. Chuẩn bị áo ngoài.</p>
+
+<p>— Dạ. Quốc Sư định... đi?</p>
+
+<p>— Nhiếp Chính Vương mời. Từ chối là khinh. Đi là bước vào bẫy.</p>
+
+<p>Hắn mỉm cười, kiểu cười mà hắn tự biết trông rất "Quốc Sư".</p>
+
+<p>— Nhưng bẫy chỉ nguy hiểm khi mình không biết nó là bẫy.</p>
+
+<p>Phúc An cúi đầu, mắt sáng lên. Trong đầu gã, câu đó chắc chắn đã trở thành "Quốc Sư nhìn thấu mọi thứ, kể cả bẫy của Nhiếp Chính Vương."</p>
+
+<p class="thought"><em>Tốt. Cứ để gã nghĩ vậy. Thêm một người tin.</em></p>
+
+<p>Nhưng bên trong, bụng hắn thắt lại.</p>
+
+<p class="thought"><em>Lục Thanh Dao. Nữ nhân duy nhất khiến Thiên Diễn Đồng đọc không rõ. Nữ nhân biết mình bịa mà vẫn bảo vệ. Nữ nhân mà ánh mắt nguy hiểm hơn đao phủ.</em></p>
+
+<p class="thought"><em>Và hấp dẫn hơn.</em></p>
+
+<p class="thought"><em>Đm. Lại nghĩ vậy.</em></p>
+
+<p>Hắn tự tát nhẹ vào má. Lần thứ hai trong tuần.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Thanh Phong Các nằm ở góc tây hoàng cung, tách biệt. Không phải điện lớn, không phải phòng họp. Một gác nhỏ hai tầng, mái cong, bốn bề trúc xanh. Gió thổi qua lá trúc nghe như mưa rơi.</p>
+
+<p class="thought"><em>Đẹp. Và kín. Kiểu chỗ mà cuộc trò chuyện không ai nghe được.</em></p>
+
+<p>Hai lính canh đứng ngoài cổng, không mang giáp nặng, mang kiếm mỏng. Thị vệ riêng của Nhiếp Chính Vương, không phải lính triều đình. Cả hai nhìn hắn, mặt lạnh, không cúi đầu.</p>
+
+<p class="thought"><em>Người của nàng. Trung thành tuyệt đối. Không cúi đầu trước Quốc Sư, nghĩa là nàng không yêu cầu họ cúi.</em></p>
+
+<p class="thought"><em>Thông điệp: ở đây, nàng là chủ.</em></p>
+
+<p>Hắn bước vào.</p>
+
+<p>Lục Thanh Dao ngồi ở bàn trà, một mình. Bàn gỗ trắc, hai ghế, hai chén trà đã rót sẵn. Hơi nước bốc lên mỏng. Nàng mặc áo lam nhạt, đơn giản hơn long bào trong triều hội, tóc búi cao, chỉ cài một trâm ngọc.</p>
+
+<p>Đẹp. Kiểu đẹp mà kiếp trước hắn chỉ thấy trên tạp chí, và ở kiếp này, ngồi cách hắn hai bước chân.</p>
+
+<p>Nàng ngẩng lên. Mắt gặp mắt.</p>
+
+<p>— Quốc Sư đến đúng giờ.</p>
+
+<p>Giọng nhẹ, bình thản.</p>
+
+<p>— Mời ngồi.</p>
+
+<p>— Cảm ơn Vương gia.</p>
+
+<p>Hắn ngồi xuống. Lưng thẳng, tay đặt trên đùi, mặt bình thản. Diễn. Như mọi khi.</p>
+
+<p>Nhưng bên trong, hắn đang bật Thiên Diễn Đồng.</p>
+
+<p>Nhẹ nhàng. Không ép. Chỉ mở, như mở cửa sổ để gió lùa vào.</p>
+
+<p>Và Thiên Diễn Đồng chạm vào Lục Thanh Dao.</p>
+
+<p>Lần đầu ở pháp trường, hắn không đọc được gì. Lần hai ở triều hội, đọc được "thú vị, đánh giá lại". Lần ba ở Minh Nguyệt Đường, đọc được "cân nhắc tiếp cận".</p>
+
+<p>Lần này...</p>
+
+<p>Tường. Thành.</p>
+
+<p>Không phải trống rỗng. Mà là tường thành dày đặc. Nàng không phải người không có cảm xúc. Nàng là người kiểm soát cảm xúc tốt đến mức Thiên Diễn Đồng chỉ thấy bề mặt: bình tĩnh, tỉnh táo, chủ động.</p>
+
+<p class="thought"><em>Nàng đang đợi mình mở lời trước. Ai mở lời trước, người đó ở thế yếu hơn.</em></p>
+
+<p class="thought"><em>Kiếp trước, đây là chiêu cơ bản trong đàm phán: im lặng ép đối phương nói.</em></p>
+
+<p class="thought"><em>Hai có thể chơi trò này.</em></p>
+
+<p>Im lặng. Năm giây. Mười giây.</p>
+
+<p>Nàng nhấp trà. Hắn nhấp trà. Trà ngon, đắng nhẹ, hậu ngọt. Kiểu trà đắt mà kiếp trước hắn chỉ nghe tên.</p>
+
+<p>Mười lăm giây.</p>
+
+<p>Lục Thanh Dao đặt chén xuống. Môi hơi cong. Nụ cười nhỏ, không đến mắt.</p>
+
+<p>— Quốc Sư uống trà như người sành.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Bản vương tưởng Quốc Sư chỉ sành thiên cơ.</p>
+
+<p class="thought"><em>Nàng mở lời trước. Nhưng không phải vì thua. Nàng chủ động mở, vì nàng muốn kiểm soát hướng đi cuộc trò chuyện.</em></p>
+
+<p>— Thần không sành trà.</p>
+
+<p>Hắn nói, giọng nhẹ.</p>
+
+<p>— Chỉ biết uống chậm. Thiên cơ dạy thần: vội vàng thì bỏng miệng.</p>
+
+<p class="thought"><em>Câu vô nghĩa. Nhưng nghe như triết lý. Kiểu câu mà mình dùng trên sân khấu phát trực tiếp, nói gì cũng được miễn giọng trầm và gật đầu chậm.</em></p>
+
+<p>Lục Thanh Dao nhìn hắn. Lâu. Mắt sắc.</p>
+
+<p>— Bản vương nghe nói, Quốc Sư từ chối Hoàng đại nhân hôm qua. Nói đang "quan thiên tượng".</p>
+
+<p>Giọng bình thản.</p>
+
+<p>— Thiên tượng có gì đáng xem?</p>
+
+<p class="thought"><em>Nàng biết mình từ chối khách. Nàng có tai mắt trong cung. Không ngạc nhiên.</em></p>
+
+<p>— Có.</p>
+
+<p>Hắn trả lời, không giải thích thêm.</p>
+
+<p>Im lặng.</p>
+
+<p>Nàng chờ. Hắn không nói.</p>
+
+<p class="thought"><em>Để nàng tự điền chi tiết. Đọc vị cơ bản: nói ít, để người nghe tự tưởng tượng.</em></p>
+
+<p>Lục Thanh Dao nghiêng đầu nhẹ.</p>
+
+<p>— Quốc Sư giỏi im lặng.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Nhưng bản vương không mời ngươi đến để ngồi im.</p>
+
+<p class="thought"><em>Thẳng. Sắc. Đi thẳng vào trọng tâm. Nàng không chơi vòng vo.</em></p>
+
+<p>— Vương gia muốn hỏi gì, xin hỏi.</p>
+
+<p>Hắn khép mắt ba phần, tư thế "đang nhìn thiên cơ".</p>
+
+<p>— Thần lắng nghe.</p>
+
+<p>Nàng đặt hai tay trên bàn. Ngón tay thon, không đeo nhẫn, móng cắt ngắn. Tay người cầm quyền, không phải tay tiểu thư.</p>
+
+<p>— Lý đại nhân chết.</p>
+
+<p>Nàng nói, giọng phẳng.</p>
+
+<p>— Triều đình tin Quốc Sư tiên tri. Bản vương muốn biết: ngươi có thật sự thấy trước?</p>
+
+<p class="thought"><em>Câu hỏi thẳng. Không vòng vo. Và nguy hiểm.</em></p>
+
+<p class="thought"><em>Nếu nói "có", nàng sẽ thử tiếp. Nếu nói "không", nàng có bằng chứng mình bịa.</em></p>
+
+<p class="thought"><em>Kiếp trước, đây là lúc dùng "câu trả lời tầng ba": không nói có, không nói không, nói thứ gì đó khiến người hỏi quên mất câu hỏi ban đầu.</em></p>
+
+<p>— Vương gia...</p>
+
+<p>Hắn nói, mở mắt, nhìn thẳng nàng.</p>
+
+<p>— Hỏi thần có thấy trước hay không. Nhưng câu hỏi thật sự của Vương gia không phải vậy.</p>
+
+<p>Nàng nhướng mày. Nhẹ, gần như không thấy.</p>
+
+<p>— Ồ?</p>
+
+<p>— Câu hỏi thật sự là: thần có nguy hiểm không.</p>
+
+<p>Im lặng.</p>
+
+<p>Thiên Diễn Đồng nhấp nháy. Tường thành của nàng rung nhẹ, chỉ một khoảnh khắc. Hắn bắt được: ngạc nhiên. Thật sự ngạc nhiên. Nàng không ngờ hắn đọc được ý nàng.</p>
+
+<p>Nhưng nhanh lắm. Tường thành đóng lại. Mặt nàng trở lại bình thản.</p>
+
+<p>— Ngươi nghĩ ngươi nguy hiểm?</p>
+
+<p>Nàng hỏi.</p>
+
+<p>— Thần nghĩ, Vương gia nghĩ thần nguy hiểm. Và điều đó quan trọng hơn sự thật.</p>
+
+<p class="thought"><em>Đọc vị: đừng trả lời câu hỏi, hãy trả lời nỗi sợ đằng sau câu hỏi.</em></p>
+
+<p>Lục Thanh Dao im. Nhìn hắn. Lâu.</p>
+
+<p>Rồi nàng cười.</p>
+
+<p>Không phải nụ cười lịch sự. Không phải nụ cười mỉa mai. Cười thật. Ngắn, nhẹ, nhưng thật. Khóe miệng cong lên, mắt hẹp lại, và trong khoảnh khắc đó, nàng trông khác hẳn. Trẻ hơn. Sống hơn.</p>
+
+<p>— Thú vị.</p>
+
+<p>Nàng nói. Lần thứ hai dùng từ đó với hắn.</p>
+
+<p>— Ngươi không trả lời câu hỏi. Ngươi đọc người hỏi.</p>
+
+<p class="thought"><em>Nàng nhận ra. Nhanh. Quá nhanh.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình dùng chiêu này với hàng trăm người, không ai nhận ra. Nàng nhận ra trong một lần.</em></p>
+
+<p>— Vương gia cũng đọc người.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Nếu không, sao ngồi ở vị trí này.</p>
+
+<p>— Bản vương đọc người bằng kinh nghiệm. Còn ngươi đọc bằng... gì?</p>
+
+<p class="thought"><em>Câu hỏi sắc. Nàng đang thăm dò phương pháp. Nếu mình nói "thiên cơ", nàng không tin. Nếu nói "kỹ năng", nàng sẽ đào sâu.</em></p>
+
+<p>— Thiên cơ.</p>
+
+<p>Hắn trả lời. Cố ý chọn đáp án nàng không tin.</p>
+
+<p>— Thiên cơ.</p>
+
+<p>Nàng lặp lại, giọng phẳng.</p>
+
+<p>— Vậy thiên cơ nói gì về bản vương?</p>
+
+<p class="thought"><em>Bẫy. Nàng muốn mình đọc nàng. Nếu đọc đúng, nàng biết mình có khả năng thật. Nếu đọc sai, nàng biết mình bịa.</em></p>
+
+<p class="thought"><em>Nhưng đọc đúng Lục Thanh Dao... Thiên Diễn Đồng gần như không xuyên được tường thành. Mình không có đủ dữ liệu.</em></p>
+
+<p class="thought"><em>Chỉ có một cách: không đọc nàng. Đọc câu hỏi.</em></p>
+
+<p>Tạ Cảnh Minh nhìn nàng. Nhìn thật lâu. Không nói.</p>
+
+<p>Mười giây. Hai mươi giây. Gió thổi qua trúc, lá rung. Hắn nhìn nàng, nàng nhìn hắn, và giữa hai người, không khí đặc lại.</p>
+
+<p>Rồi hắn nói, rất nhẹ:</p>
+
+<p>— Thiên cơ nói... Vương gia mệt lắm rồi.</p>
+
+<p>Nàng không nhúc nhích. Mặt không đổi. Nhưng tay nàng, tay đang đặt trên bàn, ngón giữa khẽ co vào. Rất nhẹ. Nếu không nhìn kỹ, không ai thấy.</p>
+
+<p>Nhưng Tạ Cảnh Minh nhìn kỹ.</p>
+
+<p class="thought"><em>Dính.</em></p>
+
+<p class="thought"><em>Mình không đọc nàng bằng Thiên Diễn Đồng. Mình đọc bằng logic. Nàng là Nhiếp Chính Vương, nắm thực quyền từ khi hoàng đế yếu. Gánh cả triều đình. Đối phó phe phái. Kiểm soát mọi thứ. Người nào gánh nhiều như vậy, đều mệt. Không ngoại lệ.</em></p>
+
+<p class="thought"><em>Câu "mệt lắm rồi" không phải tiên tri. Là suy luận. Nhưng suy luận đúng thì trông giống tiên tri.</em></p>
+
+<p>Lục Thanh Dao nhấp trà. Chậm. Mắt không rời hắn.</p>
+
+<p>— Ai cũng đoán được điều đó.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Đúng.</p>
+
+<p>Hắn gật đầu.</p>
+
+<p>— Nhưng ai cũng đoán được, mà không ai dám nói.</p>
+
+<p>Im lặng. Dài.</p>
+
+<p>Thiên Diễn Đồng bắt được: tường thành rung lần nữa. Lần này lâu hơn. Và hắn thấy, rất mờ, thứ gì đó bên trong.</p>
+
+<p>Không phải giận. Không phải khinh.</p>
+
+<p>Cô đơn.</p>
+
+<p>Sâu, nặng, và cũ. Kiểu cô đơn của người đã quen một mình quá lâu, đến nỗi quên mất cảm giác có người nhìn thấy mình.</p>
+
+<p class="thought"><em>Nàng cô đơn. Nàng nắm quyền, nhưng không có ai... thật sự nói chuyện với nàng. Mọi người xung quanh đều nói điều nàng muốn nghe, hoặc nói điều họ cần nàng nghe. Không ai nói thật.</em></p>
+
+<p class="thought"><em>Và mình vừa nói thật. Dù chỉ một câu.</em></p>
+
+<p>Nàng đặt chén xuống. Mắt hẹp lại.</p>
+
+<p>— Quốc Sư muốn gì ở bản vương?</p>
+
+<p class="thought"><em>Câu hỏi đổi chiều. Nàng không muốn bị đọc thêm. Chuyển sang tấn công.</em></p>
+
+<p>— Thần muốn sống.</p>
+
+<p>Hắn nói thật. Lần hiếm hoi nói thật.</p>
+
+<p>— Ở vị trí thần, sống đã là xa xỉ.</p>
+
+<p>— Sống thì dễ. Đừng nói bậy là sống.</p>
+
+<p>— Vương gia thừa biết, thần không thể dừng nói.</p>
+
+<p>Nàng nhìn hắn. Sắc.</p>
+
+<p>— Vì ngươi đang cưỡi lưng hổ.</p>
+
+<p class="thought"><em>Chính xác. Nàng hiểu tình thế mình rõ hơn mình tưởng.</em></p>
+
+<p>— Đúng.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Thần đang cưỡi lưng hổ. Và Vương gia đang xem thần cưỡi.</p>
+
+<p>— Bản vương không xem. Bản vương đang quyết định: nên để ngươi cưỡi tiếp, hay đẩy ngươi xuống.</p>
+
+<p class="thought"><em>Thẳng. Lạnh. Và thành thật đến mức đáng sợ.</em></p>
+
+<p class="thought"><em>Nàng không giấu ý định. Nàng để mình biết: mạng mình nằm trong tay nàng. Đây là thế mạnh của kẻ có quyền: không cần bịa, chỉ cần nói thật.</em></p>
+
+<p>Tạ Cảnh Minh cảm thấy lạnh. Không phải gió. Mà là cảm giác ngồi đối diện với người có thể giết mình bằng một lệnh, và đang cân nhắc có nên giết hay không.</p>
+
+<p class="thought"><em>Bình tĩnh. Nghĩ.</em></p>
+
+<p class="thought"><em>Nàng chưa quyết. Nếu đã quyết, mình không ngồi đây. Nàng đang thăm dò. Và thăm dò nghĩa là: mình còn cơ hội thuyết phục.</em></p>
+
+<p>— Vương gia...</p>
+
+<p>Hắn nói, giọng trầm, chậm.</p>
+
+<p>— Nếu đẩy thần xuống, Vương gia mất vũ khí.</p>
+
+<p>— Vũ khí?</p>
+
+<p>— Cái chết Lý đại nhân. Tin đồn "Quốc Sư phán, người chết." Cả kinh thành sợ thần. Và người sợ thần, cũng sợ người đứng sau thần.</p>
+
+<p>Hắn dừng. Nhìn nàng.</p>
+
+<p>— Không ai biết Vương gia đứng sau thần. Nhưng nếu cần, Vương gia có thể để thiên hạ biết.</p>
+
+<p>Thiên Diễn Đồng mở. Lần này, hắn đọc được rõ hơn: nàng đang cân nhắc. Không phải cân nhắc cảm xúc. Cân nhắc lợi ích. Lạnh. Chính xác. Như đếm quân trên bàn cờ.</p>
+
+<p class="thought"><em>Nàng đang tính: giữ mình lại lợi hơn hay bỏ mình lợi hơn.</em></p>
+
+<p>— Ngươi tự ví mình là vũ khí.</p>
+
+<p>Nàng nói, giọng nhẹ.</p>
+
+<p>— Vũ khí thì không có ý chí riêng. Ngươi có ý chí riêng không, Quốc Sư?</p>
+
+<p class="thought"><em>Câu hỏi bẫy đẹp. Nếu nói "có", nàng coi mình là mối đe dọa. Nếu nói "không", nàng coi mình là con rối.</em></p>
+
+<p class="thought"><em>Cần đáp án thứ ba.</em></p>
+
+<p>— Thần có ý chí.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Nhưng ý chí của thần và lợi ích của Vương gia, hiện tại, trùng nhau.</p>
+
+<p>— Hiện tại.</p>
+
+<p>— Hiện tại.</p>
+
+<p>Hắn lặp lại.</p>
+
+<p>— Thần không hứa mãi mãi. Ai hứa mãi mãi là nói dối.</p>
+
+<p>Lục Thanh Dao nhìn hắn. Lâu. Rất lâu.</p>
+
+<p>Thiên Diễn Đồng bắt được: nàng đang... đánh giá lại. Lần nữa. Nâng thêm một bậc. Từ "đối thủ ngang tầm" lên... thứ gì đó chưa có tên.</p>
+
+<p>— Được.</p>
+
+<p>Nàng nói. Một chữ. Gọn.</p>
+
+<p>Hắn chờ.</p>
+
+<p>Nàng rót thêm trà cho hắn. Tự tay. Nhiếp Chính Vương tự tay rót trà cho Quốc Sư.</p>
+
+<p class="thought"><em>Tín hiệu. Nàng chấp nhận mình vào bàn cờ. Chưa phải đồng minh, nhưng không phải kẻ thù.</em></p>
+
+<p>— Bản vương có một việc.</p>
+
+<p>Nàng nói, đặt ấm trà xuống.</p>
+
+<p>— Muốn xem Quốc Sư... xem thiên cơ.</p>
+
+<p class="thought"><em>Đây rồi. Bài toán thử thách.</em></p>
+
+<p>— Vương gia nói.</p>
+
+<p>— Biên giới phía bắc.</p>
+
+<p>Nàng nói, giọng thấp hơn.</p>
+
+<p>— Có tin mật: quân Bắc Nguyên đang tập trung ở biên ải. Triều đình chia hai phe. Phe chủ chiến nói đánh trước, phe chủ hòa nói cống nạp. Hoàng đế hỏi bản vương, bản vương chưa quyết.</p>
+
+<p>Nàng nhìn hắn.</p>
+
+<p>— Quốc Sư xem thiên cơ. Nên chiến hay nên hòa?</p>
+
+<p class="thought"><em>Bẫy lớn. Nàng đang thử mình bằng bài toán triều chính thật.</em></p>
+
+<p class="thought"><em>Nếu mình nói "chiến" và sai, mất uy tín. Nếu nói "hòa" và sai, cũng vậy. Nếu nói "thiên cơ bất khả lộ", nàng sẽ biết mình né.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Mình không biết gì về quân sự. Không biết lực lượng Bắc Nguyên, không biết lực lượng Đại Ly, không biết địa hình, hậu cần, gì cả.</em></p>
+
+<p class="thought"><em>Nếu là kiếp trước, đây là lúc mình sẽ dùng "chiêu gương": không trả lời, quay câu hỏi lại cho người hỏi.</em></p>
+
+<p>Hắn khép mắt ba phần. Đợi. Mười giây.</p>
+
+<p>Rồi mở mắt.</p>
+
+<p>— Vương gia đã có đáp án.</p>
+
+<p>Nàng không phản ứng.</p>
+
+<p>— Vương gia không hỏi thần nên chiến hay hòa. Vương gia muốn biết thần có đọc được Vương gia đang nghiêng về bên nào hay không.</p>
+
+<p>Im lặng.</p>
+
+<p>Lá trúc rung. Gió lạnh.</p>
+
+<p>Lục Thanh Dao mắt hẹp lại. Lần này, Thiên Diễn Đồng bắt được rõ: nàng bị bất ngờ. Thật sự bị bất ngờ. Lần thứ hai trong cuộc trò chuyện.</p>
+
+<p class="thought"><em>Mình đoán đúng. Nàng là Nhiếp Chính Vương, nàng đã có quyết định riêng trước khi hỏi ai. Người ở vị trí nàng không hỏi để tìm đáp án. Hỏi để xem người khác có cùng đáp án không.</em></p>
+
+<p>— Ngươi...</p>
+
+<p>Nàng bắt đầu.</p>
+
+<p>— Vương gia nghiêng về hòa.</p>
+
+<p>Hắn nói, cắt ngang. Liều.</p>
+
+<p>— Nhưng không phải hòa vì sợ. Hòa vì chưa đủ mạnh để chiến. Và Vương gia muốn dùng thời gian mua được từ hòa ước để chuẩn bị chiến.</p>
+
+<p>Im lặng. Kéo dài.</p>
+
+<p>Thiên Diễn Đồng: tường thành rung mạnh nhất từ đầu cuộc trò chuyện. Bên trong, cảm xúc dâng lên rồi bị ép xuống ngay. Hắn chỉ kịp bắt được một mảnh: kinh ngạc, và phía sau kinh ngạc, một thứ gì đó giống như... khoái trá.</p>
+
+<p>Nàng thích bị đọc đúng. Vì chưa bao giờ có ai đọc đúng nàng.</p>
+
+<p>— Ngươi không nhìn thiên cơ.</p>
+
+<p>Nàng nói, rất nhẹ.</p>
+
+<p>— Ngươi đọc ta.</p>
+
+<p class="thought"><em>Nguy hiểm. Nàng nhận ra.</em></p>
+
+<p>— Thần đọc thiên cơ.</p>
+
+<p>Hắn giữ mặt bình thản.</p>
+
+<p>— Thiên cơ ở trong con người. Không phải trên trời.</p>
+
+<p class="thought"><em>Câu bịa, nhưng, sau đêm qua nhìn thấy dòng chảy Thiên Cơ thật sự, câu này không hoàn toàn sai nữa.</em></p>
+
+<p>Lục Thanh Dao nhìn hắn. Lâu. Mắt nàng thay đổi, tinh tế, như ánh nến lung linh. Không còn nhìn đánh giá. Nhìn... tò mò. Thật sự tò mò.</p>
+
+<p>— Ngươi đoán đúng.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Bản vương đúng là nghiêng về hòa. Và đúng, không phải vì sợ.</p>
+
+<p>Hắn không thở phào. Không được. Phải giữ mặt.</p>
+
+<p>— Nhưng...</p>
+
+<p>Nàng nói tiếp.</p>
+
+<p>— Ngươi đoán bằng suy luận, không phải thiên cơ. Bản vương nhìn ra.</p>
+
+<p class="thought"><em>Nàng biết mình bịa. Lần nữa.</em></p>
+
+<p>— Vương gia nhìn ra điều Vương gia muốn nhìn ra.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Còn sự thật... thiên cơ bất khả lộ.</p>
+
+<p>Nàng cười nhẹ. Lần thứ hai.</p>
+
+<p>— Ngươi giỏi vòng vo.</p>
+
+<p>— Thần sống nhờ vòng vo.</p>
+
+<p>— Và ngươi sẽ chết vì vòng vo. Khi gặp người không cho ngươi vòng.</p>
+
+<p class="thought"><em>Lời cảnh báo. Hay lời hứa?</em></p>
+
+<p>Nàng đứng dậy. Buổi trà kết thúc. Hắn cũng đứng, cúi đầu nhẹ.</p>
+
+<p>— Cảm ơn Vương gia mời trà. Trà ngon.</p>
+
+<p>— Trà là trà.</p>
+
+<p>Nàng nói, bước ra phía cửa.</p>
+
+<p>— Cuộc trò chuyện mới đáng giá.</p>
+
+<p>Nàng dừng ở ngưỡng cửa. Quay lại. Ánh sáng chiếu từ sau lưng, khuôn mặt nàng nửa sáng nửa tối.</p>
+
+<p>— Quốc Sư. Bản vương sẽ theo dõi ngươi. Mỗi ngày.</p>
+
+<p>Giọng nhẹ. Không đe dọa. Không hứa hẹn. Chỉ là sự thật.</p>
+
+<p>Rồi nàng đi.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tạ Cảnh Minh ngồi lại một mình trong Thanh Phong Các. Chén trà nguội. Gió thổi lá trúc rào rào.</p>
+
+<p class="thought"><em>Phân tích.</em></p>
+
+<p class="thought"><em>Cuộc trò chuyện kéo dài bao lâu? Nửa canh giờ? Một canh? Mình không biết. Cảm giác như cả năm.</em></p>
+
+<p class="thought"><em>Nàng hỏi gì?</em></p>
+
+<p class="thought"><em>Một: mình có thật sự tiên tri không. Đáp án nàng tự rút ra: không. Mình đọc người, không đọc trời.</em></p>
+
+<p class="thought"><em>Hai: mình có nguy hiểm không. Đáp án: có. Nhưng nguy hiểm có kiểm soát được.</em></p>
+
+<p class="thought"><em>Ba: mình có dùng được không. Đáp án: chưa chắc. Nhưng đáng thử.</em></p>
+
+<p class="thought"><em>Bốn, câu hỏi nàng không nói ra: mình có đáng để tin không. Đáp án: nàng chưa biết. Nhưng lần đầu tiên, nàng muốn tìm hiểu.</em></p>
+
+<p>Hắn vuốt cằm.</p>
+
+<p class="thought"><em>Mình đọc được gì ở nàng?</em></p>
+
+<p class="thought"><em>Ít. Rất ít. Tường thành quá dày. Nhưng có vài kẽ hở:</em></p>
+
+<p class="thought"><em>Một, nàng cô đơn. Sâu, cũ, đã quen.</em></p>
+
+<p class="thought"><em>Hai, nàng thích bị đọc đúng. Vì chưa bao giờ có ai làm được.</em></p>
+
+<p class="thought"><em>Ba, nàng đã quyết định về Bắc Nguyên trước khi hỏi mình. Nàng không cần ý kiến. Nàng cần người hiểu quyết định của nàng.</em></p>
+
+<p class="thought"><em>Bốn, nàng biết mình bịa. Biết rõ. Và vẫn giữ mình sống. Vì mình hữu dụng.</em></p>
+
+<p class="thought"><em>Nguy hiểm? Cực kỳ.</em></p>
+
+<p class="thought"><em>Hấp dẫn? ...</em></p>
+
+<p>Hắn tự tát vào má. Lần thứ ba trong tuần.</p>
+
+<p class="thought"><em>Dừng. Lại.</em></p>
+
+<p class="thought"><em>Nàng vừa nói "theo dõi ngươi mỗi ngày". Đây không phải lời tán tỉnh. Đây là tuyên bố của kẻ nắm quyền sinh sát, rằng con mồi đã lọt vào tầm ngắm.</em></p>
+
+<p class="thought"><em>Và con mồi, thay vì sợ, lại thấy thợ săn hấp dẫn.</em></p>
+
+<p class="thought"><em>Có lẽ mình thật sự bị điên.</em></p>
+
+<p>Hắn đứng dậy. Bước ra khỏi Thanh Phong Các. Hai thị vệ vẫn đứng ngoài, mặt lạnh, không cúi đầu.</p>
+
+<p>Hắn đi dọc hành lang trúc, gió mát, lá xanh. Đẹp. Yên bình. Và hoàn toàn giả tạo.</p>
+
+<p class="thought"><em>Tổng kết: nàng chấp nhận mình trên bàn cờ. Chưa phải đồng minh. Chưa phải kẻ thù. Là quân cờ mà nàng muốn giữ, nhưng sẵn sàng bỏ nếu cần.</em></p>
+
+<p class="thought"><em>Và mình, quân cờ, vừa phát hiện ra rằng người chơi cờ cũng cô đơn.</em></p>
+
+<p class="thought"><em>Đây mới là trùm cuối thật.</em></p>
+
+<p>Hắn bước về Minh Nguyệt Đường, mặt bình thản, lưng thẳng, tay chắp sau lưng. Hoàn hảo trong vai Quốc Sư.</p>
+
+<p>Nhưng trong đầu, một ý nghĩ quay vòng:</p>
+
+<p class="thought"><em>Nàng biết mình bịa. Mình biết nàng biết. Nàng biết mình biết nàng biết.</em></p>
+
+<p class="thought"><em>Và cả hai vẫn ngồi uống trà, cười nhẹ, nói vòng vo.</em></p>
+
+<p class="thought"><em>Đây không phải đối đầu. Đây là khiêu vũ.</em></p>
+
+<p class="thought"><em>Và bước nhảy tiếp theo, ai dẫn?</em></p>
+
+<p>Gió thổi. Lá trúc rơi trước mặt hắn, xoay một vòng, rồi nằm yên.</p>
+
+<p>Ở đâu đó trong Thanh Phong Các, Lục Thanh Dao ngồi lại một mình. Chén trà của hắn vẫn trên bàn. Nàng nhìn chén trà đó, lâu.</p>
+
+<p>Rồi nàng nói, rất nhỏ, chỉ mình nàng nghe:</p>
+
+<p>— Kẻ này... không giống bất kỳ ai ta từng gặp.</p>
+
+<p>Mắt nàng sáng lên. Không phải ánh sáng ấm. Ánh sáng lạnh. Kiểu sáng của người vừa tìm thấy ván cờ đáng chơi.</p>
+
+<p>— Tốt.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Rất tốt.</p>
+
+<p>Nàng đứng dậy. Bước ra. Và mỉm cười.</p>
+
+<p>Nụ cười mà nếu Tạ Cảnh Minh nhìn thấy, hắn sẽ không ngủ được thêm nhiều đêm nữa.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-06.html">&larr; CHƯƠNG 06</a>
+      <a href="chapter-08.html">CHƯƠNG 08 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.862 TỪ</div>
+
+  </div>
+</body>
+</html>

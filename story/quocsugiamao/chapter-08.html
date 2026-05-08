@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 08 — Thiên Tượng Giả | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">08/30</span>
+      <a href="chapter-09.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 08</div>
+      <h1>Thiên Tượng Giả</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hạn hán đến vào tuần thứ ba.</p>
+
+<p>Không phải hạn nhẹ kiểu nắng gắt vài ngày. Hạn thật. Đất nứt, giếng cạn, lúa khô. Dân ngoại thành bắt đầu kéo vào kinh thành xin cứu đói. Chợ vắng, quán trà đóng, đường phố nóng đến mức đá lát nhả hơi.</p>
+
+<p>Tạ Cảnh Minh biết chuyện từ Phúc An, gã thái giám bây giờ đã trở thành "bản tin sáng" không chính thức của hắn.</p>
+
+<p>— Quốc Sư, dân kéo về kinh thành mỗi ngày mỗi đông. Ngự sử đài dâng sớ nói quốc vận có biến, cần Quốc Sư cầu mưa.</p>
+
+<p class="thought"><em>Cầu mưa.</em></p>
+
+<p class="thought"><em>Hai chữ mà kiếp trước nghe thì cười. Kiếp này nghe thì lạnh sống lưng.</em></p>
+
+<p>— Triều đình nói gì?</p>
+
+<p>— Dạ, Thái Sư Vương Bách Nhẫn đề xuất: nếu Quốc Sư thật sự thông thiên cơ, hãy cầu mưa cho thiên hạ thấy.</p>
+
+<p class="thought"><em>Ông già này lại ra đòn. Thua triều hội, giờ dùng hạn hán để ép mình. Nếu mình cầu mưa thành công, dân tin thêm, nhưng ông ta cũng không mất gì. Nếu thất bại, mình chết.</em></p>
+
+<p class="thought"><em>Đòn đẹp. Ông ta biết mình không thể từ chối.</em></p>
+
+<p>Hắn uống trà. Chậm. Mặt không đổi.</p>
+
+<p>— Bệ hạ nói gì?</p>
+
+<p>— Dạ... bệ hạ chưa quyết. Nhưng...</p>
+
+<p>Phúc An ngập ngừng.</p>
+
+<p>— Dân chúng đã bắt đầu đồn: "Quốc Sư nhìn thấy mọi thứ, tại sao không cầu mưa?"</p>
+
+<p class="thought"><em>Áp lực từ dưới lên. Không phải triều đình ép. Dân ép. Và áp lực từ dân nguy hiểm hơn từ triều đình, vì dân không chơi theo luật.</em></p>
+
+<p class="thought"><em>Nếu mình không cầu mưa, dân mất niềm tin. Niềm tin mất, Thiên Cơ yếu. Và mình mất vũ khí duy nhất.</em></p>
+
+<p class="thought"><em>Nếu mình cầu mưa và thất bại, tất cả sụp.</em></p>
+
+<p class="thought"><em>Nếu cầu mưa và thành công...</em></p>
+
+<p>Hắn đặt chén xuống.</p>
+
+<p class="thought"><em>Mình cần mưa. Không phải phép thuật. Mình cần xác suất.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ba ngày sau, Tạ Cảnh Minh ngồi trên mái Minh Nguyệt Đường, nhìn trời.</p>
+
+<p>Không phải "quan thiên tượng" kiểu bịa. Lần này, hắn thật sự nhìn.</p>
+
+<p>Bầu trời xanh, không mây. Nắng chói. Gió khô, nóng, thổi từ phía tây bắc.</p>
+
+<p class="thought"><em>Kiếp trước, mình không phải chuyên gia khí tượng. Nhưng mình từng lừa đảo bằng "dự báo thời tiết tâm linh" trên mạng, nên phải học đủ kiến thức cơ bản để bịa cho giống.</em></p>
+
+<p class="thought"><em>Quy luật: hạn hán ở vùng nhiệt đới gió mùa không kéo dài vĩnh viễn. Gió mùa sẽ đến. Câu hỏi là khi nào.</em></p>
+
+<p class="thought"><em>Dấu hiệu gió mùa sắp đổi: gió chuyển hướng từ tây bắc sang đông nam. Mây tích từ chân trời phía đông. Không khí oi hơn, nặng hơn, dù vẫn nắng.</em></p>
+
+<p>Hắn nhìn về phía đông. Chân trời sạch. Không mây.</p>
+
+<p class="thought"><em>Chưa.</em></p>
+
+<p>Hắn leo xuống. Ngày mai lên nhìn tiếp.</p>
+
+<p>Ngày thứ hai. Trời vẫn quang. Nhưng gió, hắn nhận ra, hơi đổi. Không mạnh, nhưng khác. Kiếp trước hắn không để ý gió. Kiếp này, Thiên Diễn Đồng nhạy hơn mắt thường, hắn cảm nhận được: luồng không khí ẩm hơn, nhẹ, từ phía đông.</p>
+
+<p>Ngày thứ ba. Sáng vẫn nắng. Nhưng chiều, chân trời phía đông có một dải mỏng. Trắng nhạt. Mây.</p>
+
+<p class="thought"><em>Gió mùa đang đến. Chậm, nhưng đang đến.</em></p>
+
+<p class="thought"><em>Câu hỏi: bao lâu nữa?</em></p>
+
+<p class="thought"><em>Kiếp trước, dự báo thời tiết chính xác cần vệ tinh, ra đa, máy tính. Mình có: hai con mắt và kinh nghiệm bịa.</em></p>
+
+<p class="thought"><em>Nhưng mình cũng có Thiên Diễn Đồng.</em></p>
+
+<p>Đêm. Hắn lên mái, bật Thiên Diễn Đồng, hướng lên trời.</p>
+
+<p>Dòng chảy Thiên Cơ vẫn ở đó, mờ mờ giữa các vì sao. Nhưng lần này hắn không nhìn Thiên Cơ. Hắn nhìn... không khí.</p>
+
+<p>Thiên Diễn Đồng đọc cảm xúc con người. Nhưng cảm xúc không chỉ có ở con người. Vạn vật đều có "xu hướng", "dòng chảy". Gió có hướng. Mây có đường đi. Và Thiên Diễn Đồng, nếu hắn mở đủ rộng, có thể cảm nhận xu hướng của thời tiết.</p>
+
+<p>Không chính xác. Không phải dự báo. Nhưng là cảm giác: cái gì đó lớn đang di chuyển từ phía đông. Ẩm. Nặng. Đang đến gần.</p>
+
+<p class="thought"><em>Ba ngày nữa. Có thể bốn. Mưa sẽ đến.</em></p>
+
+<p class="thought"><em>Không chắc chắn. Nhưng xác suất cao.</em></p>
+
+<p class="thought"><em>Đủ để đặt cược.</em></p>
+
+<p>Hắn leo xuống mái. Đi thẳng vào phòng. Ngồi xuống bàn.</p>
+
+<p class="thought"><em>Kế hoạch.</em></p>
+
+<p class="thought"><em>Bước một: chấp nhận cầu mưa. Nhưng không cầu ngay. Nói cần "ba ngày chuẩn bị, trai giới, tịnh tâm" để thiên cơ sẵn sàng. Mua thời gian cho gió mùa đến gần.</em></p>
+
+<p class="thought"><em>Bước hai: chọn ngày. Ngày thứ tư hoặc thứ năm kể từ giờ. Xác suất mưa cao nhất.</em></p>
+
+<p class="thought"><em>Bước ba: dàn dựng nghi lễ hoành tráng. Không phải để cầu mưa. Để tạo trình diễn. Kiếp trước mình dựng sự kiện phát trực tiếp cho hàng chục nghìn người xem. Kiếp này, khán giả đứng trước mặt thay vì sau màn hình. Nguyên tắc giống nhau: ánh sáng, âm thanh, nhịp điệu, cao trào.</em></p>
+
+<p class="thought"><em>Bước bốn: nếu mưa, thắng. Nếu không mưa... chạy.</em></p>
+
+<p class="thought"><em>Không, không chạy được. Nếu không mưa, mình chết.</em></p>
+
+<p class="thought"><em>Vậy mưa phải đến.</em></p>
+
+<p>Hắn vuốt cằm. Nhìn ra cửa sổ. Đêm tối, sao thưa.</p>
+
+<p class="thought"><em>Kiếp trước, xác suất này mình sẽ không đặt cược. Quá rủi ro. Nhưng kiếp này, mình có thêm một biến số mà kiếp trước không có.</em></p>
+
+<p class="thought"><em>Thiên Cơ.</em></p>
+
+<p class="thought"><em>Nếu lời nói + niềm tin = hiện thực lệch, thì khi hàng vạn người đứng dưới đàn cầu mưa, tin rằng Quốc Sư sẽ gọi được mưa, niềm tin đó có đẩy Thiên Cơ không?</em></p>
+
+<p class="thought"><em>Mình không biết. Nhưng nếu xác suất tự nhiên đã bảy phần mười, thêm Thiên Cơ, có thể lên tám, chín.</em></p>
+
+<p class="thought"><em>Đủ.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau, Tạ Cảnh Minh vào triều.</p>
+
+<p>Hắn đứng giữa đại điện, mặt nghiêm, tay chắp sau lưng. Vương Bách Nhẫn ngồi ở vị trí quen thuộc, mắt sắc. Hoàng đế sau rèm, mệt hơn lần trước. Lục Thanh Dao ở vị trí riêng, mắt nhìn hắn, không biểu cảm.</p>
+
+<p>— Bệ hạ.</p>
+
+<p>Hắn cúi đầu.</p>
+
+<p>— Thần đã quan thiên tượng ba ngày. Thiên cơ cho thấy: hạn hán sắp kết thúc.</p>
+
+<p>Xì xào.</p>
+
+<p>— Quốc Sư nói sắp kết thúc.</p>
+
+<p>Vương Bách Nhẫn lên tiếng.</p>
+
+<p>— Sắp là bao lâu? Dân đang chết khát.</p>
+
+<p class="thought"><em>Ông ta ép mình nói cụ thể. Nói mơ hồ thì bị chê. Nói cụ thể mà sai thì chết.</em></p>
+
+<p>— Ba ngày nữa.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Thần sẽ lập đàn cầu mưa tại đàn tế ngoại thành. Ngày thứ ba, mưa sẽ đến.</p>
+
+<p>Im lặng.</p>
+
+<p>Vương Bách Nhẫn nhướng mày. Rồi mỉm cười, kiểu cười của kẻ vừa nghe đối thủ tự đào hố.</p>
+
+<p>— Tốt. Lão thần ủng hộ. Nếu Quốc Sư cầu được mưa, lão thần xin bái phục.</p>
+
+<p class="thought"><em>Ông ta đang cá. Cá rằng mình không cầu được. Và nếu mình thất bại trước mặt hàng vạn người, không cần ông ta ra tay, dân sẽ xé mình.</em></p>
+
+<p>Hoàng đế gật đầu.</p>
+
+<p>— Chuẩn y. Bộ Lễ chuẩn bị đàn tế. Quốc Sư cần gì, triều đình đáp ứng.</p>
+
+<p>Hắn cúi đầu. Mặt bình thản.</p>
+
+<p>Bên trong, tim đập nhanh.</p>
+
+<p class="thought"><em>Ba ngày. Mình vừa đặt cược mạng mình vào dự báo thời tiết bằng mắt thường.</em></p>
+
+<p class="thought"><em>Điên.</em></p>
+
+<p>Khi rời đại điện, hắn đi ngang vị trí Lục Thanh Dao. Nàng không nhìn hắn. Chỉ nói, rất nhỏ, khi hắn đi qua:</p>
+
+<p>— Ngươi liều.</p>
+
+<p>Hai chữ. Không phải khen. Không phải chê. Nhận xét.</p>
+
+<p class="thought"><em>Nàng biết mình đang đánh bạc. Và nàng xem.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ba ngày chuẩn bị.</p>
+
+<p>Tạ Cảnh Minh không chuẩn bị "tâm linh". Hắn chuẩn bị sân khấu.</p>
+
+<p>Đàn tế ngoại thành là một nền đá cao ba trượng, hình bát giác, nằm trên đồi thấp phía nam kinh thành. Xung quanh là đồng trống, đủ chỗ cho hàng vạn người đứng.</p>
+
+<p>Hắn ra đàn tế ngày đầu. Đi vòng quanh, quan sát.</p>
+
+<p class="thought"><em>Sân khấu. Nghĩ như sân khấu.</em></p>
+
+<p class="thought"><em>Vấn đề: hàng vạn khán giả, không có loa, không có đèn, không có màn hình. Mình chỉ có giọng nói, cơ thể, và nghi lễ.</em></p>
+
+<p class="thought"><em>Giải pháp: dùng đám đông.</em></p>
+
+<p>Hắn gọi quan bộ Lễ đến, ra một loạt yêu cầu:</p>
+
+<p>Một, đặt trống lớn bốn góc đàn. Trống tạo nhịp, nhịp tạo cảm xúc. Khi trống dồn, tim người nghe đập theo.</p>
+
+<p>Hai, hương trầm, nhiều. Khói hương tạo bầu không khí huyền bí. Kiếp trước, mấy buổi "thiền định tập thể" mà hắn từng tổ chức cũng dùng mùi trầm để đưa người tham gia vào trạng thái dễ ám thị.</p>
+
+<p>Ba, sắp xếp đám đông theo vòng tròn quanh đàn, không để lộn xộn. Đám đông có trật tự dễ kiểm soát hơn đám đông hỗn loạn. Và khi cả vòng tròn cùng quỳ, hiệu ứng tập thể mạnh gấp trăm lần.</p>
+
+<p>Bốn, hắn sẽ đứng trên đỉnh đàn, một mình. Cao hơn mọi người. Ánh sáng chiếu từ trên xuống. Hình ảnh: một người đứng giữa trời, nói chuyện với thiên cơ.</p>
+
+<p class="thought"><em>Diễn giả đa cấp kiếp trước, chủ tế kiếp này. Khác tên, cùng nguyên tắc.</em></p>
+
+<p>Quan bộ Lễ ghi chép, mắt kính sợ. "Quốc Sư chuẩn bị kỹ quá," gã nghĩ. "Chắc lần này sẽ thành công."</p>
+
+<p class="thought"><em>Không, mình chuẩn bị kỹ vì sợ chết.</em></p>
+
+<p>Ngày thứ hai. Hắn lên mái nhìn trời.</p>
+
+<p>Mây phía đông dày hơn. Gió đổi rõ, từ đông nam. Ẩm hơn.</p>
+
+<p class="thought"><em>Đúng hướng. Gió mùa đang đến.</em></p>
+
+<p>Thiên Diễn Đồng xác nhận: luồng ẩm lớn, di chuyển chậm, sẽ đến vùng kinh thành trong khoảng một đến hai ngày nữa.</p>
+
+<p class="thought"><em>Trùng khớp. Ngày cầu mưa là ngày mai. Xác suất mưa: cao.</em></p>
+
+<p class="thought"><em>Nhưng "cao" không phải "chắc chắn".</em></p>
+
+<p>Đêm. Hắn không ngủ. Ngồi dưới cây tùng, nhìn sao.</p>
+
+<p class="thought"><em>Nếu ngày mai không mưa, mình chết. Đơn giản vậy.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn sẽ dâng sớ "yêu đạo lừa dân". Dân sẽ từ quỳ lạy sang ném đá. Hoàng đế sẽ không bảo vệ nổi. Lục Thanh Dao sẽ bỏ rơi quân cờ hỏng.</em></p>
+
+<p class="thought"><em>Và mình sẽ quay lại pháp trường, nơi mình bắt đầu.</em></p>
+
+<p>Hắn nhìn tay mình. Run nhẹ.</p>
+
+<p class="thought"><em>Nhưng nếu mưa đến...</em></p>
+
+<p class="thought"><em>Hàng vạn người chứng kiến Quốc Sư gọi mưa. Niềm tin sẽ vượt kinh thành, lan khắp Đại Ly. Mình sẽ không còn là "Quốc Sư có vẻ giỏi". Mình sẽ thành "thần nhân".</em></p>
+
+<p class="thought"><em>Và "thần nhân" thì không ai dám chạm vào.</em></p>
+
+<p class="thought"><em>Trừ Thiên Cơ.</em></p>
+
+<p>Hắn nhìn lên trời. Dòng chảy Thiên Cơ mờ mờ. Nhánh nhỏ vẫn chảy về phía hắn.</p>
+
+<p class="thought"><em>Ngày mai, nếu hàng vạn người tin mình gọi được mưa, nhánh đó sẽ thành sông.</em></p>
+
+<p class="thought"><em>Và mình không biết sông đó sẽ cuốn mình đi đâu.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ngày cầu mưa.</p>
+
+<p>Sáng. Trời nắng. Nóng. Mây phía đông dày hơn hôm qua nhưng vẫn xa. Gió ẩm, rõ, nhưng mặt trời vẫn chói.</p>
+
+<p class="thought"><em>Mây chưa đến. Còn cách. Nửa ngày? Cả ngày?</em></p>
+
+<p class="thought"><em>Nghi lễ bắt đầu giờ Ngọ. Nếu mưa đến chiều hoặc tối, mình cần kéo dài nghi lễ. Không thể để nghi lễ kết thúc mà trời vẫn nắng.</em></p>
+
+<p class="thought"><em>Kế hoạch B: kéo dài. Nói "thiên cơ cần thời gian", dùng các bước nghi lễ phụ, thêm lượt hương, thêm vòng kinh, câu giờ.</em></p>
+
+<p>Hắn mặc áo trắng tinh, tóc búi cao, tay cầm phất trần. Trông đúng kiểu cao nhân xuất thế, thực ra là kiểu diễn giả đa cấp mặc đồ trắng để trông "sạch sẽ, đáng tin" mà kiếp trước hắn dùng hoài.</p>
+
+<p>Kiệu đưa hắn ra ngoại thành. Dọc đường, dân đứng hai bên, quỳ lạy. Hắn ngồi trong kiệu, mặt bình thản, bụng thắt.</p>
+
+<p class="thought"><em>Đông. Đông quá. Không phải vài nghìn. Vài vạn.</em></p>
+
+<p class="thought"><em>Kiếp trước, buổi phát trực tiếp đông nhất mình có hai mươi nghìn người xem. Hôm nay, gấp mấy lần.</em></p>
+
+<p class="thought"><em>Và hôm nay, nếu thất bại, khán giả không tắt màn hình bỏ đi. Khán giả ném đá.</em></p>
+
+<p>Đàn tế hiện ra. Nền đá bát giác, cao, bốn góc có trống đại. Hương trầm đã đốt, khói bay lên, trắng xám, uốn lượn trong gió nóng. Xung quanh, dân đứng thành vòng tròn, lớp trong lớp ngoài, mắt ngẩng lên.</p>
+
+<p>Hắn bước xuống kiệu. Bước lên đàn.</p>
+
+<p>Mỗi bước, trống đánh một nhịp. Chậm. Nặng. "Thùng." Tim hắn đập theo.</p>
+
+<p>Đến đỉnh. Hắn đứng. Nhìn xuống.</p>
+
+<p>Biển người. Mặt ngẩng lên, mắt sáng, đầy kỳ vọng. Nông dân, thương nhân, lính, quan nhỏ, cung nữ, thái giám. Tất cả nhìn hắn, một người, đứng trên đàn đá, giữa trời nắng gắt.</p>
+
+<p class="thought"><em>Đông quá. Tin quá.</em></p>
+
+<p class="thought"><em>Và mình đang bịa.</em></p>
+
+<p>Hắn hít sâu. Nhắm mắt.</p>
+
+<p class="thought"><em>Diễn. Như mọi khi. Chỉ là sân khấu lớn hơn.</em></p>
+
+<p>Hắn mở mắt. Giơ phất trần.</p>
+
+<p>— Thiên hạ!</p>
+
+<p>Giọng vang. Hắn đã luyện cách nói vang không cần khuếch đại từ kiếp trước, kỹ thuật của diễn giả sân khấu. Hít sâu bằng bụng, đẩy hơi từ cơ hoành, để âm thanh vang từ ngực chứ không phải cổ.</p>
+
+<p>Im lặng. Vạn người im.</p>
+
+<p>— Hạn hán ba tuần. Đất khô. Giếng cạn. Dân khổ.</p>
+
+<p>Mỗi câu ngắn, mỗi câu dừng. Để im lặng giữa các câu nặng hơn lời nói.</p>
+
+<p>— Thiên cơ đã cho ta thấy: mưa sẽ đến. Nhưng mưa cần một thứ.</p>
+
+<p>Dừng. Ba giây.</p>
+
+<p>— Niềm tin.</p>
+
+<p>Bên dưới, vạn mắt sáng lên.</p>
+
+<p>— Trời không phụ người có lòng thành. Ta đứng đây, không phải để ra lệnh cho trời. Ta đứng đây để dẫn lòng thành của các ngươi lên cao.</p>
+
+<p class="thought"><em>Kỹ thuật: không nói "ta sẽ gọi mưa". Nói "niềm tin của các ngươi sẽ gọi mưa". Nếu thành công, công của tập thể. Nếu thất bại, lỗi của tập thể "chưa đủ thành".</em></p>
+
+<p class="thought"><em>Bịa. Nhưng đây là bài cơ bản nhất của diễn giả: biến khán giả thành người đồng hành, không phải người xem.</em></p>
+
+<p>— Quỳ xuống.</p>
+
+<p>Hắn nói.</p>
+
+<p>— Nhắm mắt. Nghĩ đến mưa.</p>
+
+<p>Và vạn người quỳ.</p>
+
+<p>Không phải quỳ vì sợ. Quỳ vì tin. Quỳ vì muốn mưa, muốn lúa sống, muốn giếng đầy. Quỳ vì Quốc Sư đã phán chết đại thần, đã gọi sấm, đã nhìn thấy mọi thứ.</p>
+
+<p>Hắn đứng trên đàn, một mình, nhìn vạn người quỳ dưới chân.</p>
+
+<p>Và Thiên Diễn Đồng mở, không cần ép, tự mở.</p>
+
+<p>Niềm tin.</p>
+
+<p>Dày, nặng, ào ạt. Như sóng biển. Từ vạn người, vạn tấm lòng, dội lên. Hắn cảm nhận nó, không phải cảm xúc một người mà cảm xúc tập thể, một dòng chảy khổng lồ, nóng, rực, đổ vào hắn.</p>
+
+<p class="thought"><em>Trời ơi.</em></p>
+
+<p>Thiên Diễn Đồng nhấp nháy điên cuồng. Hắn chưa bao giờ nhận lượng niềm tin lớn thế. Sợi khói quanh tay hắn, mờ mờ mấy ngày trước, giờ sáng rõ. Không phải khói nữa. Ánh sáng. Nhẹ, ấm, quấn quanh cánh tay, vai, ngực.</p>
+
+<p class="thought"><em>Khí vận. Đang dày lên. Ngay bây giờ.</em></p>
+
+<p>Hắn nhìn lên trời.</p>
+
+<p>Mây phía đông, sáng nay còn xa, giờ đã gần hơn. Nhanh hơn hắn dự đoán. Gió đổi mạnh, ẩm, mát, thổi vào mặt hắn.</p>
+
+<p class="thought"><em>Mây đến nhanh hơn. Tại sao?</em></p>
+
+<p class="thought"><em>Vì gió mùa vốn sẽ đến hôm nay? Hay vì vạn người đang quỳ, đang tin, đang đẩy Thiên Cơ?</em></p>
+
+<p class="thought"><em>Mình không biết. Không quan trọng. Mây đang đến.</em></p>
+
+<p>Nhưng chưa đủ. Mây vẫn xa. Nắng vẫn chói. Cần thời gian.</p>
+
+<p class="thought"><em>Kéo dài.</em></p>
+
+<p>— Giữ tâm thành!</p>
+
+<p>Hắn hét, giọng vang khắp đàn.</p>
+
+<p>— Thiên cơ đang chuyển. Ta thấy rồi!</p>
+
+<p>Trống dồn. Bốn góc, bốn trống đại đánh cùng lúc. "Thùng thùng thùng." Nhịp nhanh hơn. Tim đám đông đập theo.</p>
+
+<p>Hương trầm cháy mạnh, khói cuồn cuộn. Gió ẩm thổi khói bay ngang, tạo cảnh tượng huyền ảo: người đứng trên đàn, giữa khói trắng, phất trần giơ cao.</p>
+
+<p class="thought"><em>Sân khấu hoàn hảo. Bây giờ cần thiên nhiên hợp tác.</em></p>
+
+<p>Hắn nhìn mây. Gần hơn. Dày hơn. Xám hơn.</p>
+
+<p class="thought"><em>Nhanh lên. Nhanh lên.</em></p>
+
+<p>Một giờ trôi qua. Nắng yếu dần. Mây che nửa trời. Gió mạnh hơn, lay áo hắn phần phật.</p>
+
+<p>Đám đông bắt đầu nhận ra: trời thay đổi. Tiếng xì xào lan trong vạn người, kiểu xì xào kích động, hy vọng.</p>
+
+<p class="thought"><em>Gần rồi.</em></p>
+
+<p>— Thiên cơ đã nghe!</p>
+
+<p>Hắn hét, lần này không cần diễn. Tim hắn cũng đang đập.</p>
+
+<p>— Ngẩng đầu lên! Nhìn trời!</p>
+
+<p>Vạn người ngẩng đầu.</p>
+
+<p>Mây đen kéo ngang kinh thành. Nhanh. Nặng. Gió gào.</p>
+
+<p>Rồi, giọt đầu tiên.</p>
+
+<p>Rơi trên má một đứa trẻ đang ngồi trên vai cha.</p>
+
+<p>Giọt thứ hai. Trên đàn đá, ngay cạnh chân hắn.</p>
+
+<p>Giọt thứ ba, thứ tư, thứ mười.</p>
+
+<p>Mưa.</p>
+
+<p>Không phải mưa phùn. Mưa rào. Ào ào, xối xả, kiểu mưa mùa hè đổ xuống như thác. Nước chảy trên mặt đàn đá, trên tóc hắn, trên áo trắng, trên vạn khuôn mặt ngẩng lên đón mưa.</p>
+
+<p>Và đám đông bùng nổ.</p>
+
+<p>Không phải bùng nổ bằng lời nói. Bằng tiếng gào. Tiếng khóc. Tiếng cười. Vạn người cùng lúc, cùng âm thanh, trộn lẫn mưa và gió thành một bản giao hưởng hỗn loạn.</p>
+
+<p>— QUỐC SƯ! QUỐC SƯ HIỂN LINH!</p>
+
+<p>— MƯA! MƯA RỒI!</p>
+
+<p>— QUỐC SƯ LÀ THẦN NHÂN!</p>
+
+<p>Rồi họ quỳ lại. Không phải quỳ cầu mưa. Quỳ lạy hắn.</p>
+
+<p>Vạn người. Quỳ dưới mưa. Lạy một tên lừa đảo đang đứng ướt sũng trên đàn đá.</p>
+
+<p>Tạ Cảnh Minh đứng đó. Mưa xối trên mặt. Áo trắng dính sát người, lạnh. Tóc xõa, phất trần rơi lúc nào không biết.</p>
+
+<p>Và hắn cảm thấy.</p>
+
+<p>Không phải tự hào. Không phải nhẹ nhõm. Không hẳn sợ.</p>
+
+<p>Mà là cảm giác kỳ lạ nhất hắn từng trải: hắn đứng trên đàn, mưa đổ, vạn người quỳ, và hắn không biết mình vừa lừa thành công, hay vừa thật sự gọi được mưa.</p>
+
+<p class="thought"><em>Mình tính toán xác suất. Mình dàn dựng sân khấu. Mình chọn đúng ngày.</em></p>
+
+<p class="thought"><em>Nhưng mây đến nhanh hơn dự đoán. Mưa đến đúng lúc, không sớm không muộn. Và Thiên Diễn Đồng cho mình thấy: niềm tin tập thể vừa ào vào Thiên Cơ như nước vỡ đê.</em></p>
+
+<p class="thought"><em>Mình gọi mưa? Hay mưa tự đến và mình chỉ đứng đúng chỗ?</em></p>
+
+<p class="thought"><em>Hay cả hai?</em></p>
+
+<p>Hắn nhìn xuống. Biển người quỳ. Mắt sáng. Môi mấp máy cầu nguyện. Và quanh mỗi người, hắn thấy, sợi khí vận mỏng đang bay lên, tụ lại, chảy về phía hắn.</p>
+
+<p>Dòng sông niềm tin.</p>
+
+<p class="thought"><em>Mình vừa trở thành... thần?</em></p>
+
+<p>Câu hỏi không có đáp án. Hắn đứng trong mưa, để nước rửa mặt, và không cười. Không khóc. Chỉ đứng.</p>
+
+<p>Vì hắn nhận ra: từ giờ, hắn không thể dừng nữa. Vạn người đã thấy Quốc Sư gọi mưa. Tin đồn sẽ lan khắp Đại Ly. Và mỗi người tin, là thêm một sợi dây buộc hắn vào vai diễn.</p>
+
+<p class="thought"><em>Diễn giả đa cấp kiếp trước: mọi người tin mình vì mình giỏi nói. Quốc Sư kiếp này: mọi người tin mình vì... mưa rơi.</em></p>
+
+<p class="thought"><em>Và mình không thể nói: "Xin lỗi, mưa tự đến, tôi chỉ tính xác suất."</em></p>
+
+<p class="thought"><em>Vì không ai nghe.</em></p>
+
+<p>Mưa vẫn rơi. Trống vẫn đánh. Dân vẫn quỳ.</p>
+
+<p>Và ở phía xa, ngoài rìa đám đông, một bóng người đứng dưới mái hiên, không quỳ, không hét. Gã mặc áo xám, tay cầm bút, đang ghi chép gì đó vào cuộn giấy.</p>
+
+<p>Gã nhìn Tạ Cảnh Minh rất lâu. Rồi cuộn giấy lại, nhét vào tay áo, quay người đi.</p>
+
+<p>Không ai trong đám đông để ý gã. Tạ Cảnh Minh cũng không thấy. Hắn đang bận đứng trong mưa, giả vờ bình thản trong khi bên trong hắn đang run.</p>
+
+<p>Nhưng Thiên Diễn Đồng, trước khi hắn tắt, bắt được một thoáng từ phía gã áo xám:</p>
+
+<p>Tò mò. Lạnh lùng. Và... đánh giá.</p>
+
+<p>Kiểu đánh giá của người đang xem một mẫu vật, không phải một con người.</p>
+
+<p>Gã biến mất trong mưa. Không để lại dấu vết.</p>
+
+<p>Và Tạ Cảnh Minh, ướt sũng, đứng trên đàn, vạn người dưới chân, không biết rằng từ hôm nay, hắn không chỉ bị Thiên Cơ nhìn.</p>
+
+<p>Còn có người khác.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-07.html">&larr; CHƯƠNG 07</a>
+      <a href="chapter-09.html">CHƯƠNG 09 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.500 TỪ</div>
+
+  </div>
+</body>
+</html>

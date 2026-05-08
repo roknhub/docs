@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 07: Thử Thách Đầu Tiên — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-06.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 7 / 30</span>
+    <a href="chapter-08.html" class="nav-disabled">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 07</div>
+    <h1 class="chapter-title">Thử Thách Đầu Tiên</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.297 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Hồ sơ mỏng. Một trang.</p>
+
+    <p>Ngô Hải đặt nó lên bàn hắn vào sáng thứ Hai, tuần thứ hai. Không nói gì thêm ngoài:</p>
+
+    <p>— Khách hàng Vương Gia. Chủ chuỗi bán lẻ Vương Gia Mart. Từ chối Vạn Lý ba lần. Không ai ở phòng này muốn nhận. Tôi giao cho cậu.</p>
+
+    <p>Rồi quay đi. Nhưng trước khi quay, hắn mỉm cười. Nhanh, chỉ góc miệng, nhưng Ma Tâm Quan bắt được. Nụ cười của kẻ vừa đặt bẫy và biết con mồi sẽ sập.</p>
+
+    <p class="thought">Hắn muốn ta thất bại. Khách hàng này là án tử. Ba lần từ chối nghĩa là đã xếp Vạn Lý vào danh sách đen. Giao cho nhân viên mới quay lại, nhân viên có vết, để khi thất bại thì có cớ nói: "Thấy chưa, cho cơ hội rồi mà không làm được."</p>
+
+    <p class="thought">Mưu kế cấp thấp. Nhưng ở tông môn nhỏ, mưu kế cấp thấp cũng giết được người.</p>
+
+    <p>Hắn nhìn tờ hồ sơ. Vương Gia. Chủ chuỗi Vương Gia Mart. Mười hai cửa hàng, phân khúc trung cấp, tập trung khu vực ngoại ô. Doanh thu ước tính bảy mươi đến chín mươi tỷ một năm. Đối tác tiềm năng hạng A cho Vạn Lý.</p>
+
+    <p class="short">Và ba lần từ chối.</p>
+
+    <p class="short">Hắn gấp tờ giấy, bỏ túi.</p>
+
+    <p>Không mở lại. Thông tin trong đó hắn đã thuộc. Một trang không nhiều. Nhưng vấn đề không phải ở hồ sơ.</p>
+
+    <p class="thought">Vấn đề là: tại sao Vương Gia từ chối? Ba lần. Không phải một. Ba.</p>
+
+    <p class="thought">Một lần từ chối có thể vì không cần. Hai lần có thể vì chưa đúng lúc. Ba lần nghĩa là thù ghét. Kẻ bị chào hàng ba lần mà vẫn từ chối là kẻ đang nói: "Đừng bao giờ quay lại."</p>
+
+    <p class="thought">Nhưng thù ghét gì? Ghét Vạn Lý? Hay ghét cách Vạn Lý tiếp cận?</p>
+
+    <p class="thought">Cần biết thêm. Không phải về công ty. Về con người.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn không nghiên cứu Vương Gia Mart.</p>
+
+    <p>Giờ nghỉ trưa, thay vì xuống canteen, hắn ngồi lại bàn, mở máy tính. Nhưng không tìm báo cáo tài chính hay cơ cấu tổ chức chuỗi bán lẻ. Hắn tìm Vương Gia, con người.</p>
+
+    <p>Bài phỏng vấn trên báo kinh tế, hai năm trước. Vương Gia ngồi trong văn phòng, sau lưng là kệ sách đầy, bàn gỗ lớn, ảnh gia đình đặt ở góc. Tiêu đề: "Từ một sạp hàng đến mười hai cửa hàng: hành trình Vương Gia Mart." Hắn đọc, không đọc nội dung ca ngợi, đọc cách Vương Gia nói.</p>
+
+    <p class="thought">"Tôi không tin vào quảng cáo. Tôi tin vào sản phẩm tự nói."</p>
+
+    <p class="thought">"Người ta hỏi tôi bí quyết thành công. Tôi nói: đừng nghe tư vấn. Tự mình hiểu khách hàng."</p>
+
+    <p class="thought">"Tôi ghét nhất là ngồi nghe ai đó trình bày mười lăm trang rồi bảo tôi ký."</p>
+
+    <p class="short">Hắn đọc ba câu đó ba lần.</p>
+
+    <p class="thought">Tự lập. Tự tin đến mức ngạo mạn. Ghét bị coi là khách hàng, muốn được coi là đối tác. Ghét bị bán hàng, ghét bài thuyết trình, ghét cảm giác bị ai đó "chốt đơn." Ba lần Vạn Lý đến, ba lần làm đúng những gì Vương Gia ghét.</p>
+
+    <p class="thought">Không phải Vương Gia ghét Vạn Lý. Ghét cách bị đối xử.</p>
+
+    <p>Hắn tìm thêm. Trang cá nhân trên mạng xã hội, công khai. Vương Gia đăng ảnh đi câu cá, đi núi, đọc sách. Không đăng ảnh xe sang hay nhà hàng đắt. Sở thích: cờ tướng, trà đạo, đọc sách lịch sử. Bình luận dưới bài đăng: nhân viên gọi "anh Gia" chứ không gọi "sếp." Kiểu người ghét hình thức, thích chất.</p>
+
+    <p class="thought">Hắn tự xây từ đầu. Không thừa kế, không quan hệ. Kiểu người đó tôn trọng năng lực thật, khinh bỉ kẻ nói giỏi làm dở.</p>
+
+    <p>Hắn tìm thêm: tin tức ngành bán lẻ gần đây. Vương Gia Mart đang bị chuỗi lớn hơn ép giá ở ba khu vực ngoại ô. Doanh thu quý gần nhất giảm. Hai cửa hàng đang lỗ. Vương Gia chưa lên tiếng công khai, nhưng một bài báo nhỏ nhắc đến "áp lực cạnh tranh từ chuỗi ngoại."</p>
+
+    <p class="thought">Đang bị ép. Đang cần giải pháp. Nhưng sẽ không bao giờ thừa nhận trước mặt kẻ bán hàng.</p>
+
+    <p>Hắn mở thêm ảnh. Sự kiện ngành bán lẻ năm ngoái. Vương Gia đứng trong nhóm, nhưng không đứng giữa. Đứng rìa, tay cầm cốc, mắt nhìn sang chỗ khác. Không thích sự kiện. Đến vì phải đến, không phải vì muốn.</p>
+
+    <p>Một bức ảnh khác: Vương Gia trao giải cho nhân viên xuất sắc tại Vương Gia Mart. Ông ta cười, tay bắt nhân viên, nhưng mắt nhìn thẳng vào mắt người kia. Không phải cười kiểu CEO chụp ảnh. Cười kiểu người thật sự vui.</p>
+
+    <p class="thought">Kẻ này trân trọng người làm thật. Khinh kẻ nói giỏi. Nếu ta đến bằng bài thuyết trình mười lăm trang, ta chết trước khi mở trang thứ hai.</p>
+
+    <p class="short">Hắn đóng máy tính.</p>
+
+    <p class="thought">Ta không bán. Ta hỏi. Ta để hắn tự muốn mua.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Hắn gọi điện cho Vương Gia chiều hôm đó. Số điện thoại có trong hồ sơ, di động cá nhân. Vương Gia nhấc máy sau ba hồi chuông.</p>
+
+    <p class="short">— Ai đấy?</p>
+
+    <p class="short">Giọng trầm, ngắn, kiểu giọng của người quen ra lệnh và không thích lãng phí thời gian.</p>
+
+    <p>— Tôi là Lục Trường An, Vạn Lý Group. Tôi biết ông đã từ chối công ty tôi ba lần. Tôi không gọi để bán gì cho ông.</p>
+
+    <p class="short">Im lặng. Ba giây.</p>
+
+    <p class="short">— Vậy gọi làm gì?</p>
+
+    <p>— Tôi muốn hỏi ông một câu về ngành bán lẻ. Không liên quan đến Vạn Lý. Nếu ông cho tôi mười lăm phút, tôi mời ông uống trà. Nếu sau mười lăm phút ông thấy lãng phí thời gian, tôi sẽ không bao giờ gọi lại.</p>
+
+    <p class="short">Im lặng. Dài hơn.</p>
+
+    <p class="thought">Đang cân nhắc. Không phải cân nhắc có gặp hay không. Cân nhắc vì tò mò. Chưa ai từ Vạn Lý gọi mà không bán hàng. Sự khác biệt tạo ra khe hở.</p>
+
+    <p>— Mười lăm phút. Không hơn. Quán trà Lão Trần, đường Nguyễn Du. Chiều mai, ba giờ.</p>
+
+    <p class="short">— Cảm ơn ông.</p>
+
+    <p class="short">Tắt máy. Hắn nhìn điện thoại.</p>
+
+    <p class="thought">Bước một: có cuộc hẹn. Không phải vì ta giỏi thuyết phục. Vì ta nói đúng thứ hắn muốn nghe: "Tôi không bán."</p>
+
+    <p class="thought">Kiếp trước, muốn gặp trưởng lão nào đó, ta cũng dùng cách tương tự. Không xin. Không nài. Cho kẻ kia lý do để tự muốn gặp.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Quán trà Lão Trần. Nhỏ, cũ, nằm trong hẻm. Bàn gỗ thấp, ghế mây, đèn vàng, mùi trà sen thoang thoảng. Loại quán mà người bình thường không biết, nhưng dân sành trà thì thuộc lòng.</p>
+
+    <p class="thought">Vương Gia chọn quán này. Không phải nhà hàng sang. Không phải quán cà phê hiện đại. Quán trà. Giản dị, chất, đúng con người hắn.</p>
+
+    <p class="short">Hắn đến sớm mười phút. Ngồi ở bàn trong cùng, gọi ấm trà, chờ.</p>
+
+    <p class="short">Ba giờ đúng. Vương Gia bước vào.</p>
+
+    <p>Năm mươi lăm tuổi, nhưng dáng vẫn chắc. Cao, vai rộng, tay to, loại tay của người từng khuân hàng thời trẻ. Mặt rám nắng, nếp nhăn sâu ở khóe mắt và trán, loại nếp nhăn do nắng gió chứ không phải lo lắng. Áo sơ mi kẻ, quần kaki, giày vải. Không đồng hồ. Không nhẫn. Không gì thừa.</p>
+
+    <p class="thought">Kẻ tự xây. Mỗi đồng tiền kiếm được đều bằng tay mình. Loại người này khinh kẻ ăn sẵn.</p>
+
+    <p>Vương Gia nhìn quanh, thấy hắn, bước đến. Ngồi xuống, không bắt tay, không chào xã giao. Nhìn hắn từ đầu đến chân, nhanh, kiểu nhìn đánh giá bẩm sinh của người buôn bán.</p>
+
+    <p class="short">— Cậu trẻ nhỉ.</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">— Vạn Lý bây giờ cử trẻ con đi gặp tôi à?</p>
+
+    <p>Không phải xúc phạm. Là thử. Ma Tâm Quan đọc: mắt Vương Gia không khinh, đang tò mò. Câu nói cộc để xem hắn phản ứng thế nào. Nếu hắn lúng túng, Vương Gia sẽ uống trà xong rồi đi. Nếu hắn nịnh, cũng đi.</p>
+
+    <p class="short">— Vạn Lý không cử tôi. Không ai muốn nhận cuộc hẹn này. Tôi tự xin.</p>
+
+    <p class="short">Vương Gia nhíu mày. Tay với ấm trà, rót, chậm.</p>
+
+    <p class="short">— Tự xin à? Tại sao?</p>
+
+    <p class="short">— Vì ba người trước đến gặp ông đều bán hàng. Tôi muốn thử cách khác.</p>
+
+    <p class="short">— Cách nào?</p>
+
+    <p class="short">— Hỏi.</p>
+
+    <p>Vương Gia nhấc chén trà, uống một ngụm. Mắt nhìn hắn qua vành chén. Không nói gì. Kiểu im lặng cho phép. "Hỏi đi."</p>
+
+    <p class="short">Hắn hỏi.</p>
+
+    <p>— Ông mở Vương Gia Mart từ một sạp hàng hai mươi năm trước. Mười hai cửa hàng bây giờ. Khu vực ngoại ô, phân khúc trung cấp, khách hàng trung thành. Nhưng hai quý gần đây, chuỗi lớn từ nước ngoài mở ba điểm ngay cạnh ông. Giá thấp hơn mười đến mười lăm phần trăm. Hai cửa hàng của ông đang lỗ.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Vương Gia đặt chén trà xuống. Chậm. Mắt thay đổi, từ tò mò sang sắc.</p>
+
+    <p class="short">— Cậu biết nhiều nhỉ.</p>
+
+    <p class="short">— Thông tin công khai. Ai cũng tìm được. Nhưng không ai hỏi ông về chuyện đó, đúng không?</p>
+
+    <p class="short">Im lặng. Dài.</p>
+
+    <p class="short">Rồi Vương Gia nói, giọng thấp hơn:</p>
+
+    <p>— Không. Không ai hỏi. Bọn họ đến, mở bài thuyết trình, nói sản phẩm của mình tốt thế nào, giải pháp của mình hay thế nào. Không ai hỏi tôi đang gặp vấn đề gì. Không ai quan tâm.</p>
+
+    <p class="thought">Đúng. Đây là vết thương. Không phải vết thương kinh doanh. Vết thương cái tôi. Vương Gia tự xây đế chế bằng tay, giờ bị ép bởi chuỗi ngoại có tiền vô hạn, và không ai coi ông ta đủ quan trọng để hỏi: "Ông ổn không?"</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p class="short">— Vậy tôi hỏi bây giờ. Ông đang gặp vấn đề gì?</p>
+
+    <p>Vương Gia nhìn hắn. Lâu. Kiểu nhìn của người đang quyết định có tin hay không.</p>
+
+    <p class="short">Rồi ông ta bắt đầu nói.</p>
+
+    <p>Không phải nói kiểu trình bày. Nói kiểu trút. Kiểu người mang nặng quá lâu, bất ngờ gặp ai đó hỏi đúng câu, và mọi thứ đổ ra.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hai mươi phút. Không phải mười lăm.</p>
+
+    <p>Vương Gia nói, và hắn nghe. Không ngắt, không gật đầu quá nhiều, không ghi chép. Chỉ nghe.</p>
+
+    <p>Vương Gia Mart đang bị ép từ ba phía. Chuỗi ngoại giá rẻ ở phía nam. Chuỗi tiện lợi 24/7 ở trung tâm. Và mua sắm trực tuyến cướp khách trẻ. Hai mươi năm kinh nghiệm bán lẻ, nhưng thế giới đang thay đổi nhanh hơn ông ta thích nghi.</p>
+
+    <p>— Hai mươi năm tôi xây cái này. Từ một sạp trái cây ngoài chợ. Mỗi đồng tiền đều là mồ hôi. Giờ mấy thằng nước ngoài đổ tiền tỷ vào, mở chuỗi ngay cạnh, bán lỗ ba tháng để giết tôi. Chúng nó không cần lời, chỉ cần tôi chết. Rồi khi tôi chết, chúng nó tăng giá lại.</p>
+
+    <p class="short">Ông ta uống trà. Tay hơi siết chén, móng tay trắng.</p>
+
+    <p>— Tôi biết phải làm gì. Nâng trải nghiệm, giữ khách trung thành, tối ưu vận hành. Tôi biết. Nhưng mười hai cửa hàng, ba trăm nhân viên, hệ thống cũ. Thay đổi cần thời gian. Mà thời gian...</p>
+
+    <p class="short">Ông ta dừng lại. Đặt chén xuống.</p>
+
+    <p class="short">— Thời gian là thứ tôi không có.</p>
+
+    <p>Hắn nghe xong. Im lặng ba giây. Để câu nói lắng xuống. Không vội, không tỏ vẻ thông cảm. Thông cảm kiểu bán hàng là sáo rỗng. Vương Gia sẽ ngửi thấy ngay.</p>
+
+    <p class="short">Rồi nói.</p>
+
+    <p>— Ông nói đúng. Nâng trải nghiệm và tối ưu vận hành là hướng đi duy nhất. Nhưng ông không cần làm cả hai cùng lúc. Ông cần ưu tiên.</p>
+
+    <p class="short">Vương Gia nhíu mày.</p>
+
+    <p class="short">— Ưu tiên cái gì?</p>
+
+    <p>— Hai cửa hàng đang lỗ. Ông có hai lựa chọn: đóng, hoặc biến chúng thành thí điểm. Đóng thì mất mặt. Nhưng nếu biến thành thí điểm, thử mô hình mới ở đó, thành công thì nhân rộng, thất bại thì cũng chỉ mất hai cửa hàng đã lỗ sẵn.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Vương Gia nhìn hắn. Mắt thay đổi. Không còn tò mò, không còn sắc. Thứ gì đó khác. Như thể ông ta vừa nghe ai đó nói ra điều ông ta đã nghĩ nhưng chưa dám thừa nhận.</p>
+
+    <p>Vương Gia đặt chén trà xuống. Nhìn hắn, kiểu nhìn khác hẳn lúc mới vào. Lúc mới vào là nhìn xuống, nhìn đứa trẻ con Vạn Lý cử đến. Bây giờ là nhìn ngang, nhìn kẻ vừa nói ra điều hắn đang nghĩ.</p>
+
+    <p class="short">— Thí điểm...</p>
+
+    <p class="short">Ông ta lẩm bẩm, như đang tự nói với mình.</p>
+
+    <p class="short">— Cửa hàng số ba và số bảy. Đang lỗ nặng nhất. Nếu thí điểm ở đó...</p>
+
+    <p class="short">Rồi ngẩng lên.</p>
+
+    <p class="short">— Cậu đã từng làm bán lẻ à?</p>
+
+    <p class="short">— Chưa.</p>
+
+    <p class="short">— Vậy sao cậu biết?</p>
+
+    <p class="thought">Vì ta đã quản lý tông môn ngàn đệ tử. Khi mười hai chi nhánh yếu, không cứu cả mười hai. Chọn hai chi nhánh yếu nhất, biến thành tiền tuyến. Thắng thì tốt. Thua thì chỉ mất tiền tuyến, không mất hậu phương.</p>
+
+    <p>— Tôi không biết bán lẻ. Nhưng tôi biết logic. Khi nguồn lực có hạn, đánh dàn trải là cách chắc chắn thua. Tập trung vào điểm yếu nhất, biến nó thành thí nghiệm, là cách rẻ nhất để học.</p>
+
+    <p class="short">Vương Gia gật đầu. Chậm. Rồi gật thêm lần nữa.</p>
+
+    <p class="short">Rồi ông ta hỏi, giọng bình thường, như hỏi thời tiết:</p>
+
+    <p class="short">— Thế Vạn Lý có cái gì giúp tôi chuyện này không?</p>
+
+    <p class="thought">Đây rồi.</p>
+
+    <p class="short">Hắn không vội. Uống một ngụm trà. Đặt chén xuống.</p>
+
+    <p>— Vạn Lý có giải pháp quản lý chuỗi và tối ưu vận hành. Tôi không nói nó tốt nhất. Nhưng nó đủ tốt để thí điểm ở hai cửa hàng, chi phí hợp lý, và triển khai trong bốn tuần. Nếu sau ba tháng ông thấy không hiệu quả, hủy hợp đồng, không phạt.</p>
+
+    <p class="short">Vương Gia nhìn hắn. Lâu.</p>
+
+    <p class="short">— Cậu nói "không phạt." Cậu có quyền quyết định điều đó không?</p>
+
+    <p class="short">— Không. Nhưng tôi sẽ đàm phán với công ty tôi. Đó là vấn đề của tôi, không phải của ông.</p>
+
+    <p class="thought">Nửa sự thật. Ta không có quyền. Nhưng khi hợp đồng đã ký, Vạn Lý sẽ phải theo. Kẻ nào mang hợp đồng về, kẻ đó có tiếng nói.</p>
+
+    <p>Vương Gia cười. Lần đầu tiên trong buổi gặp. Nụ cười không lớn, chỉ ở mắt, nhưng thật.</p>
+
+    <p class="short">— Cậu khác những đứa trước.</p>
+
+    <p class="short">— Tôi biết.</p>
+
+    <p class="short">— Tôi thích cách cậu nói. Không bán. Không nịnh. Và không sợ.</p>
+
+    <p class="short">Ông ta với tay lấy ấm trà, rót cho cả hai.</p>
+
+    <p class="short">— Gửi hợp đồng. Tôi xem.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Ba ngày sau. Hắn ngồi trước máy tính, soạn hợp đồng. Không phải hợp đồng mẫu của Vạn Lý, quá dài, quá nhiều điều khoản sáo rỗng. Hắn viết lại, ngắn gọn, rõ ràng, mỗi điều khoản một câu, không chỗ nào mơ hồ. Thêm điều khoản hủy không phạt sau ba tháng. Ngô Hải không biết hắn đang làm gì, không ai biết.</p>
+
+    <p>Gửi cho Vương Gia qua thư điện tử. Kèm một dòng: "Hợp đồng bốn trang. Không có trang nào thừa."</p>
+
+    <p class="short">Một ngày sau, Vương Gia gọi lại.</p>
+
+    <p class="short">— Hợp đồng gọn. Tôi thích. Ký.</p>
+
+    <p>Hắn in hợp đồng, mang đến Vương Gia Mart, ký trực tiếp. Không ăn mừng, không bắt tay kiểu thắng trận. Chỉ ký, cảm ơn, và đi.</p>
+
+    <p class="short">Trước khi hắn ra cửa, Vương Gia gọi:</p>
+
+    <p class="short">— Này. Cậu tên gì nhỉ?</p>
+
+    <p class="short">— Lục Trường An.</p>
+
+    <p class="short">— Lục Trường An. Tôi sẽ nhớ.</p>
+
+    <p class="short">Hắn gật đầu, bước ra.</p>
+
+    <p>Trên đường về, hắn cầm bản hợp đồng đã ký trong cặp. Giá trị: không lớn so với quy mô Vạn Lý. Nhưng ý nghĩa: khách hàng từ chối ba lần, nhân viên bị coi là đồ bỏ ký được.</p>
+
+    <p class="thought">Không phải ta giỏi bán hàng. Ta giỏi đọc người. Vương Gia không cần sản phẩm. Ông ta cần ai đó nhìn ông ta như đối tác, không phải con mồi. Ba người trước đến bán. Ta đến hỏi. Khác biệt chỉ có vậy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Sáng thứ Hai. Tuần thứ ba.</p>
+
+    <p class="short">Phòng Kinh doanh, tầng mười hai. Tám giờ. Hắn bước vào, cặp trên tay.</p>
+
+    <p>Ngô Hải đang ngồi ở bàn, gõ bút, kiểu gõ quen thuộc, đều, chậm, đầy quyền lực nhỏ bé. Thấy hắn, Ngô Hải ngẩng lên, mắt nheo.</p>
+
+    <p class="short">— Lục Trường An. Khách hàng Vương Gia sao rồi?</p>
+
+    <p class="short">Giọng nhẹ, kiểu nhẹ có mục đích. Đang chờ nghe "thất bại." Đang chờ cái cớ.</p>
+
+    <p class="short">Hắn không trả lời.</p>
+
+    <p>Bước đến bàn Ngô Hải. Mở cặp. Lấy ra bản hợp đồng. Đặt lên bàn. Ngay ngắn, chính giữa, trước mặt Ngô Hải.</p>
+
+    <p class="short">Rồi quay đi. Về bàn mình. Ngồi xuống. Bật máy tính.</p>
+
+    <p class="short">Không nói một từ.</p>
+
+    <p class="short">Sau lưng, im lặng.</p>
+
+    <p>Hắn không quay đầu. Không cần. Ma Tâm Quan không cần nhìn để đọc. Hắn cảm nhận được: tiếng gõ bút dừng. Tiếng giấy lật. Im lặng kéo dài. Loại im lặng của kẻ đang nhìn thứ không tin nổi.</p>
+
+    <p>Tiểu Lý ở bàn bên liếc sang, thấy Ngô Hải đang đọc hợp đồng, mắt mở to. Rồi Tiểu Lý nhìn hắn, mắt cũng mở to.</p>
+
+    <p>Hạnh ở bàn đối diện dừng gõ phím, nhìn lướt, rồi quay lại màn hình. Nhưng ngón tay không gõ, đang nghe.</p>
+
+    <p class="short">Cả phòng, bằng cách này hay cách khác, đều biết chuyện gì vừa xảy ra.</p>
+
+    <p>Ngô Hải không nói gì. Cả sáng. Không đi qua bàn hắn. Không gõ bút. Không kiểm tra màn hình.</p>
+
+    <p class="thought">Kẻ vừa mất cái cớ duy nhất để đuổi ta. Và bây giờ đang phải giải thích với cấp trên tại sao nhân viên tệ nhất phòng lại ký được khách hàng mà không ai ký được.</p>
+
+    <p>Hai thuộc hạ Ngô Hải ở góc trái thì thầm, liếc hắn, liếc Ngô Hải, rồi quay lại làm việc. Phòng yên hơn bình thường. Loại yên khi có chuyện xảy ra mà không ai muốn nói trước.</p>
+
+    <p>Mười giờ, Ngô Hải đứng dậy, cầm hợp đồng, đi lên tầng mười lăm. Mặt cứng, bước nhanh. Đi báo cáo. Không phải báo tin vui, là đi giải thích tại sao nhân viên yếu nhất phòng lại mang về thứ này.</p>
+
+    <p class="short">Hắn nhìn theo bóng Ngô Hải khuất vào thang máy.</p>
+
+    <p class="thought">Kẻ giao bẫy giờ phải giải thích tại sao bẫy không hoạt động. Thú vị.</p>
+
+    <p class="short">Hắn nhập liệu, gõ phím, nhìn màn hình.</p>
+
+    <p class="short">Mặt không biểu cảm.</p>
+
+    <p>Nhưng trong lồng ngực gầy gò, trái tim đang đập đều hơn bất kỳ ngày nào kể từ khi trọng sinh.</p>
+
+    <p class="thought">Bước đầu tiên vào tông môn là dễ nhất. Bước thứ hai, khiến tông môn biết ta tồn tại, khó hơn một chút.</p>
+
+    <p class="thought">Nhưng cũng chỉ một chút.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-06.html">&larr; Chương trước</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.297 từ &middot; Chương 07 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

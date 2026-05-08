@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 10 — Thiếu Nữ Ăn Mày | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">10/30</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 10</div>
+      <h1>Thiếu Nữ Ăn Mày</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Lần đầu tiên kể từ khi xuyên không, Tạ Cảnh Minh bước ra khỏi hoàng cung.</p>
+
+<p>Không phải trốn. Được phép. Hoàng đế ban chỉ: sau lễ cầu mưa, Quốc Sư được tự do đi lại kinh thành, có thị vệ hộ tống.</p>
+
+<p>Hắn đứng trước cổng cung, nheo mắt. Nắng. Nắng kiểu khác với nắng trong cung. Trong cung, nắng lọt qua mái ngói, qua lá cây, qua rèm lụa, đã được thuần hóa. Ngoài cung, nắng đổ thẳng, nóng, thô, trung thực.</p>
+
+<p class="thought"><em>Kinh thành Đại Ly. Lần đầu nhìn bằng mắt thường, không qua song sắt hay cửa sổ Minh Nguyệt Đường.</em></p>
+
+<p>Bốn thị vệ đi theo, hai trước hai sau, mặc giáp nhẹ, mang kiếm. Không phải thị vệ của Lục Thanh Dao, mà thị vệ triều đình. Hắn biết: ít nhất một trong bốn là tai mắt của ai đó. Lục Thanh Dao, Vương Bách Nhẫn, hoặc cả hai.</p>
+
+<p class="thought"><em>Không sao. Để họ nhìn. Mình chỉ đi dạo.</em></p>
+
+<p>Phố chính kinh thành rộng, lát đá, hai bên là nhà gỗ hai tầng, mái ngói xám. Người đông, xe ngựa, gánh hàng, tiếng rao. Sống động kiểu mà hoàng cung không bao giờ có.</p>
+
+<p>Và khi hắn bước qua, mọi người nhận ra.</p>
+
+<p>Không phải vì áo đẹp hay thị vệ. Mà vì tranh. Tranh vẽ hắn đứng trên đàn gọi mưa, bán khắp chợ. Mặt hắn, dù vẽ hơi sai, đủ để dân nhận ra.</p>
+
+<p>— Quốc Sư! Quốc Sư đi ngoài phố!</p>
+
+<p>— Nhìn kìa! Đó là Quốc Sư gọi mưa!</p>
+
+<p>Xì xào. Rồi quỳ. Người đầu tiên quỳ, người thứ hai theo, rồi cả phố. Như hiệu ứng domino, từ chỗ hắn đứng lan ra hai bên, dân quỳ xuống đường, cúi đầu.</p>
+
+<p class="thought"><em>Quỳ. Cả phố quỳ. Mình chỉ đi ngang mà cả phố quỳ.</em></p>
+
+<p class="thought"><em>Kiếp trước, đi ngang phố, may ra được nhìn. Kiếp này, đi ngang phố, cả phố quỳ.</em></p>
+
+<p class="thought"><em>Quyền lực này... đáng sợ hơn mình nghĩ.</em></p>
+
+<p>Hắn giơ tay, kiểu cao nhân ban phước.</p>
+
+<p>— Đứng lên. Không cần quỳ. Ta chỉ đi dạo.</p>
+
+<p>Nhưng không ai đứng. Họ quỳ cho đến khi hắn đi qua, rồi mới từ từ đứng dậy, quay lại nhìn theo, thì thầm.</p>
+
+<p>Thiên Diễn Đồng mở nhẹ. Hắn cảm nhận: niềm tin, kính sợ, sùng bái, trộn lẫn tò mò và hy vọng. Dòng chảy ấm, liên tục, từ mọi phía đổ vào hắn. Khí vận quanh hắn sáng hơn, rõ hơn.</p>
+
+<p class="thought"><em>Mỗi người quỳ, mỗi người tin, là thêm một giọt. Và giọt đang thành suối.</em></p>
+
+<p>Hắn đi tiếp. Qua phố chính, rẽ vào chợ lớn. Chợ đông hơn, hỗn tạp hơn. Gánh rau, thúng gạo, thịt treo, vải lụa. Mùi thức ăn, mùi mồ hôi, mùi đường phố.</p>
+
+<p class="thought"><em>Đây mới là Đại Ly thật. Không phải đại điện. Không phải hoàng cung. Là đây.</em></p>
+
+<p>Dân trong chợ cũng nhận ra hắn. Quỳ ít hơn, nhưng cúi đầu, dạt sang hai bên. Nhường đường. Mắt nhìn, rụt rè nhưng tò mò.</p>
+
+<p>Hắn đi chậm. Quan sát. Kiếp trước, hắn hay đi chợ để "đọc" khách hàng tiềm năng. Kiếp này, thói quen vẫn còn: nhìn mặt, đọc tay, đoán nghề, đoán tâm trạng.</p>
+
+<p>Người bán rau, mắt mệt, lưng còng. Gánh nặng quá tuổi. Người bán thịt, mặt đỏ, giọng to, kiểu chất phác. Cô bán vải, mắt láo liên, tay nhanh, kiểu khôn ngoan.</p>
+
+<p class="thought"><em>Dân bình thường. Sống bình thường. Và tin rằng mình là thần nhân.</em></p>
+
+<p class="thought"><em>Nếu họ biết mình kiếp trước bán bói trên mạng...</em></p>
+
+<p>Hắn mỉm cười. Tự nhạo. Rồi đi tiếp.</p>
+
+<p>Và dừng lại.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ở góc chợ, gần hàng bánh, một đứa trẻ ngồi.</p>
+
+<p>Không, không phải ngồi. Co ro. Lưng dựa tường, chân co, tay ôm gối. Quần áo rách, bẩn, kiểu bẩn của nhiều ngày không tắm. Tóc rối, mặt lấm. Gầy, nhỏ, kiểu gầy của đói lâu ngày.</p>
+
+<p>Ăn mày. Kinh thành đầy ăn mày, nhất là sau hạn hán. Hắn đã thấy vài chục trên đường đi.</p>
+
+<p>Nhưng đứa trẻ này...</p>
+
+<p>Hắn dừng lại vì mắt.</p>
+
+<p>Đôi mắt không hợp với hoàn cảnh. Quần áo rách, mặt bẩn, nhưng mắt sáng. Không phải sáng kiểu khỏe mạnh. Sáng kiểu... trong. Như nước suối. Như kính lọc nắng. Kiểu sáng mà hắn, đọc vị cả đời, hiếm khi thấy.</p>
+
+<p class="thought"><em>Mắt đó... không phải mắt ăn mày.</em></p>
+
+<p>Thiên Diễn Đồng tự mở. Không cần ép. Như thể nó nhận ra thứ gì đó trước hắn.</p>
+
+<p>Và hắn thấy.</p>
+
+<p>Quanh đứa trẻ, khí vận mỏng, nhưng lạ. Không sáng như Lục Thanh Dao. Không đen như hoàng đế. Không dịu như Tiểu Phúc. Mà là... trống. Gần như trống rỗng. Như trang giấy trắng chưa viết gì.</p>
+
+<p class="thought"><em>Trống. Không có khí vận rõ ràng. Hoặc... chưa có.</em></p>
+
+<p class="thought"><em>Tất cả người mình từng nhìn đều có khí vận. Mờ hay rõ, sáng hay tối, đều có. Nhưng đứa trẻ này: trống.</em></p>
+
+<p class="thought"><em>Nghĩa là gì?</em></p>
+
+<p>Hắn chưa kịp nghĩ thêm, đứa trẻ ngẩng lên.</p>
+
+<p>Nhìn hắn.</p>
+
+<p>Không phải nhìn sợ. Không phải nhìn cầu xin. Nhìn... thẳng. Kiểu nhìn mà người lớn không dám nhìn hắn, nhưng đứa trẻ thì dám. Vì nó không biết phải sợ.</p>
+
+<p>— Ông ơi. Cho con miếng bánh.</p>
+
+<p>Giọng nhỏ. Khàn. Nhưng rõ ràng.</p>
+
+<p>Tạ Cảnh Minh nhìn xuống. Bốn thị vệ đứng sau lưng, mặt khó chịu. Dân xung quanh đang nhìn: Quốc Sư dừng lại trước ăn mày.</p>
+
+<p>— Tên gì?</p>
+
+<p>— A Ly.</p>
+
+<p>— Bao nhiêu tuổi?</p>
+
+<p>— Không biết. Mười hai? Mười ba?</p>
+
+<p class="thought"><em>Không biết tuổi mình. Mồ côi? Bị bỏ rơi?</em></p>
+
+<p>Hắn nhìn đứa trẻ. Thiên Diễn Đồng vẫn mở. Vẫn thấy khoảng trống kỳ lạ quanh nó. Và sâu hơn, qua khoảng trống, hắn đọc được: đói, mệt, nhưng không tuyệt vọng. Kiểu không tuyệt vọng của kẻ đã quen sống dưới đáy, nên không còn chỗ để rơi.</p>
+
+<p class="thought"><em>Bướng. Cứng. Sống mà không ai dạy cách sống.</em></p>
+
+<p>Hắn móc túi. Không có tiền. Quốc Sư không mang tiền, có người mang hộ. Hắn quay lại, ra hiệu cho thị vệ.</p>
+
+<p>— Cho ta ít bạc.</p>
+
+<p>Thị vệ ngập ngừng, rồi đưa mấy đồng bạc nhỏ. Hắn cầm, cúi xuống, đặt vào tay đứa trẻ.</p>
+
+<p>A Ly nhìn bạc. Rồi nhìn hắn. Mắt sáng hơn.</p>
+
+<p>— Cảm ơn ông.</p>
+
+<p>— Đừng gọi ông. Ta là...</p>
+
+<p>Hắn dừng. Xung quanh, dân chúng đã tụ lại. Đông. Vòng trong vòng ngoài. Mắt nhìn. Quốc Sư cho tiền ăn mày. Tin này sẽ lan ngay.</p>
+
+<p class="thought"><em>Đám đông. Lại đám đông. Và đám đông đang chờ mình nói gì đó.</em></p>
+
+<p class="thought"><em>Vì Quốc Sư không bao giờ chỉ cho tiền. Quốc Sư phải nói gì đó mang ý nghĩa.</em></p>
+
+<p class="thought"><em>Áp lực.</em></p>
+
+<p>Hắn cảm nhận áp lực rõ ràng. Không phải từ người cụ thể. Từ cả đám đông. Từ kỳ vọng. Họ đang chờ. Chờ Quốc Sư nhìn đứa bé, rồi phán một câu. Vì Quốc Sư luôn phán.</p>
+
+<p class="thought"><em>Mình không cần nói gì. Mình có thể đứng dậy, đi thẳng. Nhưng...</em></p>
+
+<p class="thought"><em>Nếu đi thẳng, đám đông sẽ thất vọng. "Quốc Sư cho tiền rồi đi, không phán gì." Bình thường quá. Không xứng với "thần nhân".</em></p>
+
+<p class="thought"><em>Và mình đang cần giữ hình ảnh.</em></p>
+
+<p class="thought"><em>Một câu. Chỉ cần một câu. Mơ hồ, đẹp, kiểu cao nhân ban phước. Rồi đi.</em></p>
+
+<p>Hắn nhìn A Ly. Đứa trẻ vẫn ngẩng mặt, mắt trong, cầm mấy đồng bạc, chờ.</p>
+
+<p>Và miệng hắn mở. Không phải mở vì kế hoạch. Không phải mở vì tính toán. Mở vì... thói quen. Thói quen của tên lừa đảo kiếp trước: khi đám đông chờ, phải nói. Phải nói ngay. Và phải nói hay.</p>
+
+<p>— Con bé này...</p>
+
+<p>Hắn dừng. Nhìn A Ly. Nhìn đôi mắt sáng lạ. Nhìn khoảng trống khí vận kỳ quái.</p>
+
+<p>Và câu tiếp theo tuôn ra, trơn tru, tự nhiên, kiểu câu mà hắn đã nói hàng nghìn lần kiếp trước khi "ban phước" cho khách hàng:</p>
+
+<p>— ...Sau này sẽ thay đổi thiên hạ.</p>
+
+<p>Im lặng.</p>
+
+<p>Không phải im lặng bình thường. Im lặng nặng. Kiểu im lặng mà hắn cảm nhận bằng cả cơ thể, như không khí đột ngột đặc lại.</p>
+
+<p>Và Thiên Cơ rung.</p>
+
+<p>Mạnh.</p>
+
+<p>Mạnh hơn ngày cầu mưa. Mạnh hơn lần phán chết Lý đại nhân. Mạnh hơn bất kỳ lần nào trước đó.</p>
+
+<p>Thiên Diễn Đồng bùng sáng trong đầu hắn, gần như đau. Hắn thấy: dòng chảy Thiên Cơ, bình thường mờ mờ, giờ sáng rực, xoay cuồn cuộn quanh hắn và A Ly. Như hai viên đá ném xuống mặt nước cùng lúc, sóng giao thoa, nhân lên.</p>
+
+<p>Và khoảng trống quanh A Ly, khoảng trống mà hắn thấy trống rỗng, giờ bắt đầu... rung. Như trang giấy trắng vừa chạm mực. Chưa có hình, nhưng mực đã thấm.</p>
+
+<p>A Ly ngẩng đầu. Mắt sáng. Sáng hơn. Sáng đến mức hắn giật mình.</p>
+
+<p>Không phải sáng vì vui. Không phải sáng vì biết ơn. Sáng vì thứ gì đó bên trong đứa trẻ vừa được đánh thức, và hắn, tên bịp, là người đánh thức nó.</p>
+
+<p>Đứa trẻ nhìn hắn. Lâu. Mắt không chớp.</p>
+
+<p>Rồi A Ly đứng dậy. Nhanh. Nhét bạc vào túi. Và chạy.</p>
+
+<p>Không chạy kiểu sợ. Chạy kiểu hoảng. Kiểu ai đó vừa bị đánh thức giữa giấc mơ và không biết mình đang ở đâu.</p>
+
+<p>— Khoan!</p>
+
+<p>Hắn giơ tay. Nhưng đứa trẻ đã biến mất vào đám đông, nhanh, nhỏ, lách qua kẽ hở giữa người như cá lách qua kẽ đá.</p>
+
+<p>Mất. Không thấy nữa.</p>
+
+<p>Tạ Cảnh Minh đứng giữa chợ. Tay giơ giữa chừng. Mắt nhìn theo, không tìm thấy.</p>
+
+<p class="thought"><em>Mình vừa nói cái gì?</em></p>
+
+<p class="thought"><em>"Sau này sẽ thay đổi thiên hạ."</em></p>
+
+<p class="thought"><em>Mình thuận miệng. Kiểu "ban phước" kiếp trước. Câu vô nghĩa, nói cho đẹp, cho đám đông vỗ tay.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Thiên Cơ rung. Mạnh hơn mọi lần. Và khoảng trống quanh con bé bắt đầu thay đổi.</em></p>
+
+<p class="thought"><em>Mình vừa... gieo gì đó.</em></p>
+
+<p class="thought"><em>Mình vừa nói một câu, trước mặt vài trăm người, về một đứa trẻ ăn mày. Và vài trăm người đó sẽ kể lại. Và hàng nghìn người sẽ nghe.</em></p>
+
+<p class="thought"><em>"Quốc Sư nói con bé ăn mày sẽ thay đổi thiên hạ."</em></p>
+
+<p class="thought"><em>Và nếu đủ người tin...</em></p>
+
+<p>Tay hắn run. Nhẹ. Hắn nắm lại, giấu trong tay áo.</p>
+
+<p class="thought"><em>Mình vừa tạo ra "Thiên Mệnh" cho một đứa trẻ ăn mày.</em></p>
+
+<p class="thought"><em>Bằng một câu nói.</em></p>
+
+<p class="thought"><em>Bằng thói quen.</em></p>
+
+<p>Xung quanh, đám đông bùng nổ. Không phải bùng nổ hỗn loạn. Bùng nổ thì thầm. Kiểu thì thầm ồn ào, mỗi người nói nhỏ nhưng cả trăm người nói nhỏ cùng lúc thì nghe như ong vỡ tổ.</p>
+
+<p>— Quốc Sư vừa chỉ ra Thiên Mệnh!</p>
+
+<p>— Con bé ăn mày đó, Quốc Sư nói sẽ thay đổi thiên hạ!</p>
+
+<p>— Thiên Mệnh! Quốc Sư tìm thấy Thiên Mệnh!</p>
+
+<p class="thought"><em>Thiên Mệnh. Họ gọi nó là Thiên Mệnh.</em></p>
+
+<p class="thought"><em>Mình chỉ nói "thay đổi thiên hạ". Họ tự nâng lên thành "Thiên Mệnh". Đám đông luôn phóng đại. Luôn luôn.</em></p>
+
+<p class="thought"><em>Và mỗi lần phóng đại, niềm tin dày thêm. Và Thiên Cơ ghi nhận.</em></p>
+
+<p>Hắn quay người. Bước đi. Nhanh. Thị vệ vội chạy theo.</p>
+
+<p>Suốt đường về, hắn không nói. Mặt bình thản. Lưng thẳng. Kiểu đi hoàn hảo của Quốc Sư vừa làm xong việc lớn.</p>
+
+<p>Nhưng bên trong, đầu hắn quay cuồng.</p>
+
+<p class="thought"><em>A Ly. Đứa trẻ mắt sáng. Khí vận trống rỗng.</em></p>
+
+<p class="thought"><em>Trống rỗng. Không phải yếu. Mà là TRỐNG. Như chưa được viết. Chưa có vận mệnh.</em></p>
+
+<p class="thought"><em>Và mình vừa viết lên đó: "thay đổi thiên hạ".</em></p>
+
+<p class="thought"><em>Bằng một câu nói thuận miệng.</em></p>
+
+<p class="thought"><em>Bằng thói quen lừa đảo.</em></p>
+
+<p class="thought"><em>Nếu giả thuyết niềm tin đúng, câu đó sẽ bám vào con bé. Vì bây giờ hàng trăm người tin nó. Và tin đồn sẽ lan. Hàng nghìn sẽ tin. Rồi hàng vạn.</em></p>
+
+<p class="thought"><em>Và con bé, dù muốn dù không, sẽ bắt đầu thay đổi. Vì Thiên Cơ sẽ đẩy nó đi theo hướng mà niềm tin tập thể đã vạch.</em></p>
+
+<p class="thought"><em>Mình vừa quyết định vận mệnh một đứa trẻ.</em></p>
+
+<p class="thought"><em>Bằng một câu nói.</em></p>
+
+<p class="thought"><em>Trong khi mình chỉ muốn giữ hình ảnh trước đám đông.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Minh Nguyệt Đường.</p>
+
+<p>Tạ Cảnh Minh ngồi dưới cây tùng. Quen thuộc rồi. Mỗi khi đầu rối, hắn ra đây.</p>
+
+<p>Đêm trong. Sao sáng. Gió nhẹ.</p>
+
+<p>Hắn bật Thiên Diễn Đồng. Nhìn lên trời.</p>
+
+<p>Dòng chảy Thiên Cơ vẫn ở đó. Nhưng hắn thấy khác. Hôm nay, có thêm một nhánh mới. Nhỏ, mỏng, nhưng rõ ràng. Không chảy về phía hắn. Chảy ra ngoài kinh thành. Về phía nào đó mà hắn không biết.</p>
+
+<p class="thought"><em>Nhánh mới. Hình thành sau câu mình nói chiều nay.</em></p>
+
+<p class="thought"><em>Chảy về phía A Ly? Con bé chạy đi đâu?</em></p>
+
+<p>Hắn không biết. Và điều đó khiến hắn lo hơn biết.</p>
+
+<p class="thought"><em>Mỗi lần mình nói, Thiên Cơ thay đổi. Lần đầu: sấm. Lần hai: thái giám tự khai. Lần ba: vua ngủ. Lần bốn: Lý đại nhân chết. Lần năm: mưa. Lần sáu: khăn Tiểu Phúc.</em></p>
+
+<p class="thought"><em>Và bây giờ: Thiên Mệnh.</em></p>
+
+<p class="thought"><em>Mỗi lần, stakes cao hơn. Sấm không hại ai. Khăn Tiểu Phúc không hại ai. Nhưng Lý đại nhân chết. Và bây giờ, mình vừa vẽ vận mệnh lên một đứa trẻ mà mình không biết gì.</em></p>
+
+<p class="thought"><em>Mình đang vô thức leo thang. Và không biết dừng.</em></p>
+
+<p class="thought"><em>Vì không thể dừng. Đám đông chờ. Kỳ vọng chờ. Và thói quen lừa đảo, đã ngấm vào xương, tự động phản ứng trước khi não kịp nghĩ.</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>A Ly. Mắt sáng. Mười hai, mười ba tuổi. Ăn mày.</em></p>
+
+<p class="thought"><em>Con bé đó sẽ sống cuộc đời khác vì một câu mình nói.</em></p>
+
+<p class="thought"><em>Tốt hơn? Xấu hơn?</em></p>
+
+<p class="thought"><em>Mình không biết.</em></p>
+
+<p class="thought"><em>Và đó là phần đáng sợ nhất.</em></p>
+
+<p>Gió thổi. Lá tùng rung. Hắn ngồi lặng.</p>
+
+<p>Ở đâu đó trong kinh thành, tin đã lan. Quán trà, góc chợ, cổng thành. "Quốc Sư chỉ ra Thiên Mệnh. Con bé ăn mày. Thay đổi thiên hạ."</p>
+
+<p>Mỗi người kể, thêm một chi tiết. Mắt con bé sáng như sao. Quốc Sư quỳ xuống ban phước. Trời đổi gió khi Quốc Sư nói. Có ánh sáng bao quanh con bé.</p>
+
+<p>Không có gì trong đó là thật. Nhưng tất cả đều sẽ thành thật.</p>
+
+<p>Vì ở Đại Ly, niềm tin tạo hiện thực.</p>
+
+<p>Và Tạ Cảnh Minh, ngồi dưới cây tùng, nhìn sao, biết rõ điều đó hơn ai hết.</p>
+
+<p>Nhưng biết không có nghĩa là kiểm soát được.</p>
+
+<p>Hắn mở mắt. Nhìn bàn tay. Bàn tay vừa đặt bạc vào tay đứa trẻ. Bàn tay vừa vẽ vận mệnh lên trang giấy trắng.</p>
+
+<p class="thought"><em>Mình vừa trở thành kẻ viết số phận.</em></p>
+
+<p class="thought"><em>Và bút, một khi đã chấm mực, không xóa được.</em></p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-09.html">&larr; CHƯƠNG 09</a>
+      <span class="disabled">CHƯƠNG 11 &rarr;</span>
+    </nav>
+
+    <div class="word-count">2.529 TỪ</div>
+
+  </div>
+</body>
+</html>
