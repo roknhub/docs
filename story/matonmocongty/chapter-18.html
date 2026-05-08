@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 18: Hàn Kiêu — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-17.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 18 / 30</span>
+    <a href="chapter-19.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 18</div>
+    <h1 class="chapter-title">Hàn Kiêu</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.605 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Mười giờ đêm. Thứ Bảy.</p>
+
+    <p>Hắn đi bộ về nhà sau buổi tối ở lại công ty soạn kế hoạch tiếp cận Đỗ Quốc Bảo. Con đường quen, bốn mươi phút, qua hai con phố lớn rồi rẽ vào khu dân cư. Đèn đường thưa, vỉa hè gập ghềnh, mùi rác và mùi nước cống xen lẫn mùi hoa sữa từ hàng cây già.</p>
+
+    <p>Tuần thứ mười một. Hai tháng rưỡi kể từ khi trọng sinh. Bước chân nhẹ hơn nhiều so với ngày đầu tiên. Bụng no, ví đã có lương, và trong đầu có bản đồ rõ ràng. VP đã vào liên minh. CEO đang tin. Bằng chứng đang nằm trong giày cũ. Đội năm người đang hình thành.</p>
+
+    <p class="thought">Mọi thứ đang đi đúng hướng. Nhưng vẫn thiếu.</p>
+
+    <p class="thought">Thiếu người bên ngoài. Tất cả quân cờ hiện tại đều ở trong Vạn Lý. Nếu CEO phản đòn, nếu Lão Từ can thiệp, ta cần người hoạt động bên ngoài công ty. Kẻ không bị ràng buộc bởi hợp đồng lao động, không sợ bị đuổi, không nằm trong bất kỳ hệ thống nào.</p>
+
+    <p class="thought">Kẻ đường phố.</p>
+
+    <p>Hắn rẽ vào con hẻm tắt. Hẻm dài, hẹp, tường gạch hai bên, đèn chỉ có một bóng ở đầu hẻm, phía cuối tối mịt.</p>
+
+    <p class="short">Tiếng động.</p>
+
+    <p>Không phải tiếng bình thường. Tiếng thịt đập vào thịt. Tiếng rên. Tiếng chửi, thấp, gằn, kiểu chửi có mục đích.</p>
+
+    <p class="short">Hắn dừng bước.</p>
+
+    <p>Cuối hẻm, dưới bóng tối, ba bóng người đứng quanh một bóng nằm dưới đất. Một trong ba đang đá. Hai còn lại đứng canh.</p>
+
+    <p class="thought">Ba đánh một. Kẻ nằm dưới không kêu cứu. Không gọi công an. Nghĩa là kẻ đó không dám gọi. Nợ. Đây là đòi nợ.</p>
+
+    <p class="short">Hắn đứng im. Quan sát.</p>
+
+    <p class="thought">Thân xác này không biết đánh nhau. Gầy, yếu, không biết võ, không có vũ khí. Xông vào là tự chết. Nhưng...</p>
+
+    <p class="short">Ma Tâm Quan đọc ba kẻ đứng.</p>
+
+    <p>Kẻ đá: to con, bụng bia, tay có hình xăm cổ tay (hình rắn, kiểu xăm rẻ tiền, xăm hồi trẻ). Đá mạnh nhưng không nhắm vào đầu. Dọa, không giết. Kẻ đòi nợ thuê, không phải xã hội đen thực thụ. Làm thuê, ăn lương, về nhà vẫn có vợ con.</p>
+
+    <p>Kẻ canh thứ nhất: gầy, cao, mặt dài, mắt liên tục liếc về đầu hẻm. Lo. Sợ có người thấy. Kẻ mới vào nghề, chưa quen bạo lực, đang cầm điện thoại, sẵn sàng chạy.</p>
+
+    <p>Kẻ canh thứ hai: trung niên, áo đen, tay khoanh trước ngực, đứng xa nhất. Mắt không nhìn người bị đánh, nhìn đồng hồ. Sếp nhỏ. Kẻ chỉ huy ca đòi nợ tối nay.</p>
+
+    <p class="thought">Sếp nhỏ là người cần nói chuyện. Kẻ đá và kẻ canh chỉ nghe lệnh.</p>
+
+    <p class="short">Hắn nhìn kỹ sếp nhỏ.</p>
+
+    <p class="thought">Áo đen, nhưng cổ áo có thêu chữ nhỏ, sáng quá không đọc được từ xa. Giày da, không phải giày thể thao, kiểu giày đi làm. Kẻ này ban ngày có công việc khác, tối đi đòi nợ kiếm thêm. Đồng hồ trên tay trái, mặt kính lớn, dây kim loại, nhưng không phải hàng hiệu, hàng nhái. Muốn có vẻ sang nhưng không đủ tiền.</p>
+
+    <p class="thought">Và quan trọng nhất: túi quần sau phình nhẹ. Không phải ví. Dẹt, cứng, hình chữ nhật. Bộ đàm hoặc điện thoại thứ hai. Kẻ này báo cáo cho ai đó. Có sếp bên trên.</p>
+
+    <p class="thought">Kẻ có sếp bên trên luôn sợ sếp hơn sợ mọi thứ khác. Vì sếp trả lương. Và sếp cũng có thể cho chúng ra đường.</p>
+
+    <p class="short">Hắn bước vào hẻm.</p>
+
+    <p>Bước chân vang trên nền xi măng, đều, chậm. Không vội, không sợ. Kiểu bước chân khiến người nghe quay đầu.</p>
+
+    <p class="short">Ba kẻ quay lại.</p>
+
+    <p>Kẻ đá dừng chân, nhìn hắn. Kẻ canh gầy lùi một bước. Sếp nhỏ nhíu mày, mắt quét: gầy, sơ mi trắng, quần tây, cặp xách tay. Nhân viên văn phòng. Không đáng lo.</p>
+
+    <p class="short">— Ê, đi chỗ khác. Không liên quan.</p>
+
+    <p class="short">Kẻ đá nói, giọng gằn, kiểu gằn dọa người qua đường.</p>
+
+    <p>Hắn không dừng. Tiếp tục bước. Đến cách ba kẻ bốn bước chân, dừng lại.</p>
+
+    <p class="short">Nhìn thẳng sếp nhỏ.</p>
+
+    <p class="short">— Anh Thành.</p>
+
+    <p class="short">Sếp nhỏ giật mình. Mắt mở rộng, nửa giây.</p>
+
+    <p class="thought">Tên. Ta đoán tên. Trên cổ áo đen, chữ thêu nhỏ, bây giờ đủ gần để đọc: "Thành." Có thể là tên, có thể là biệt danh, có thể là tên quán. Nhưng phản ứng giật mình cho thấy: đó là tên hắn. Và hắn không ngờ ai đó biết.</p>
+
+    <p class="short">— Anh biết tôi?</p>
+
+    <p class="short">— Tôi biết người thuê anh. Và tôi biết hạn thu nợ của anh là cuối tháng.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="thought">Hạn cuối tháng: đoán. Đòi nợ thuê luôn có hạn. Cuối tháng là hạn phổ biến nhất vì chủ nợ cần tiền trả lãi ngân hàng đầu tháng sau. Và đoán cuối tháng lúc nào cũng an toàn vì nếu sai, kẻ đòi nợ sẽ nghĩ "hắn biết gần đúng," không phải "hắn bịa."</p>
+
+    <p>Sếp nhỏ nhìn hắn. Mắt thu hẹp. Đang tính: kẻ này là ai? Biết tên mình, biết hạn thu nợ. Công an chìm? Luật sư? Người nhà con nợ?</p>
+
+    <p class="short">— Anh là ai?</p>
+
+    <p class="short">Hắn không trả lời câu hỏi. Nhìn xuống người nằm dưới đất.</p>
+
+    <p>Đàn ông, ba mươi hai ba mươi ba, cao, gầy, mặt xương xẩu, bầm tím ở gò má trái và mắt phải. Sẹo nhỏ trên sống mũi, cũ, đã lành lâu. Tóc rối, áo sơ mi xám bẩn, quần bò rách đầu gối. Nằm co, tay ôm bụng, nhưng mắt mở, nhìn lên hắn.</p>
+
+    <p class="short">Mắt không sợ. Đau, nhưng không sợ. Kiểu mắt của kẻ đã bị đánh nhiều lần đến mức quen.</p>
+
+    <p>Và giữa đau đớn, kẻ nằm dưới đất... mỉm cười. Méo mó, môi nứt, nhưng cười.</p>
+
+    <p class="short">— Ông ơi... ông đi đi. Mấy thằng này nó đánh ông luôn đấy.</p>
+
+    <p class="short">Giọng khàn, nhưng vẫn cố đùa. Kẻ bị đánh mà vẫn lo cho người lạ, và vẫn cười.</p>
+
+    <p class="thought">Thú vị.</p>
+
+    <p class="short">Ma Tâm Quan đọc nhanh.</p>
+
+    <p class="thought">Tay ôm bụng nhưng không nằm co hoàn toàn. Chân phải hơi co, sẵn sàng đứng dậy nếu cần. Kẻ này đã quen bị đánh, biết cách chịu đòn, biết bảo vệ chỗ hiểm. Xã hội đen cũ? Có thể. Sẹo trên mũi, cũ, kiểu sẹo đánh nhau thời trẻ.</p>
+
+    <p class="thought">Nhưng quan trọng hơn: mắt hắn. Nhìn ta, không cầu cứu, không van xin. Nhìn đánh giá. Dù đang nằm dưới đất, bầm mặt, kẻ này vẫn đang đánh giá: "Thằng này là ai? Có giúp được không? Nếu không thì đi đi cho đỡ dính."</p>
+
+    <p class="thought">Liều. Cứng. Và biết đọc tình huống ngay cả khi đang bị đấm.</p>
+
+    <p class="thought">Dùng được.</p>
+
+    <p class="short">Hắn quay lại nhìn sếp nhỏ.</p>
+
+    <p>— Tôi không phải công an. Không phải luật sư. Tôi chỉ là người biết: nếu anh đánh thằng này chết, người thuê anh sẽ không chịu trách nhiệm. Anh chịu. Và nếu anh không đánh chết, thằng này cũng không có tiền trả. Vậy anh đang lãng phí thời gian.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Sếp nhỏ nhìn hắn. Đang cân nhắc. Câu hắn nói không phải đe dọa. Là phân tích. Và phân tích đúng. Đánh chết thì dính án. Đánh không chết thì không thu được tiền. Cả hai đều lỗ.</p>
+
+    <p class="thought">Kẻ đòi nợ thuê nghĩ bằng tiền. Nói bằng tiền, chúng nghe.</p>
+
+    <p class="short">— Ông nói vậy nghĩa là sao?</p>
+
+    <p>— Nghĩa là tôi sẽ xử lý khoản nợ này. Không phải hôm nay. Nhưng tôi bảo đảm, trong một tháng, người thuê anh sẽ nhận được phương án. Còn bây giờ, anh để thằng này cho tôi, về báo cáo sếp: "con nợ có người bảo lãnh, chờ phương án." Anh không mất gì. Sếp anh không mất gì. Chỉ chờ.</p>
+
+    <p>Sếp nhỏ nhìn hắn. Lâu. Đang cân: tin hay không? Kẻ gầy nhom, sơ mi trắng, mặt phẳng, giọng lạnh. Không giống người qua đường. Giống ai đó... có vị trí.</p>
+
+    <p class="thought">Hắn đang đoán ta là ai. Để hắn đoán. Không cần giải thích. Kẻ đòi nợ sợ nhất là kẻ mà chúng không phân loại được. Vì không phân loại được nghĩa là không biết mức nguy hiểm.</p>
+
+    <p class="short">Kẻ đá nhìn sếp nhỏ, chờ lệnh. Kẻ canh gầy vẫn liếc đầu hẻm.</p>
+
+    <p class="short">Sếp nhỏ quyết định.</p>
+
+    <p>— Một tháng. Nếu không có phương án, chúng tôi quay lại. Và lần sau, không phải ba người.</p>
+
+    <p class="short">— Được.</p>
+
+    <p class="short">Sếp nhỏ ra hiệu. Ba kẻ rút đi, bước nhanh về đầu hẻm, biến mất vào bóng tối.</p>
+
+    <p class="short">Hẻm im lặng trở lại. Chỉ còn tiếng thở nặng của kẻ nằm dưới đất.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hàn Kiêu.</p>
+
+    <p>Hắn nằm trên nền xi măng lạnh, nhìn lên bầu trời qua khe giữa hai mái nhà. Không có sao. Trời thành phố ít khi có sao.</p>
+
+    <p>Đau. Bụng, sườn, mặt. Quen rồi. Ba tháng nay, cứ hai tuần lại bị đánh một lần. Ban đầu sợ. Giờ chỉ đau. Sợ thì hết rồi. Sợ hết thì còn mỗi đau.</p>
+
+    <p>Nợ hai trăm triệu. Nghe ít so với mấy vụ trên báo, nhưng với thằng phá sản, hai trăm triệu nặng bằng hai tỷ. Lãi chồng lãi, phí chồng phí. Mỗi tháng, con số lớn thêm mà hắn thì nhỏ đi.</p>
+
+    <p class="thought">Mẹ nó. Thua.</p>
+
+    <p class="short">Rồi thằng kia xuất hiện.</p>
+
+    <p>Hắn nhìn thằng đó bước vào hẻm. Gầy. Sơ mi trắng, quần tây, cặp xách tay. Nhân viên văn phòng. Kiểu thằng ngày đi làm tối về xem phim, cuối tuần đi siêu thị. Loại không dính dáng gì đến hẻm tối, đòi nợ, hay máu trên mặt.</p>
+
+    <p class="short">Nhưng thằng đó bước vào.</p>
+
+    <p>Không chạy. Không gọi công an. Không rút điện thoại quay phim. Bước vào, bình tĩnh, như đi vào phòng họp.</p>
+
+    <p class="short">Rồi nó nói.</p>
+
+    <p>Nói bằng giọng lạnh, đều, không lên không xuống. Gọi tên thằng Thành. Nói đúng hạn thu nợ. Nói logic, nói số, nói phân tích. Ba thằng đấm thuê đứng nghe, không cắt lời, không đánh.</p>
+
+    <p class="thought">Ba thằng đấm thuê. Thằng Thành cao mét bảy lăm, tay xăm rắn, đánh người không ghê tay. Mà đứng nghe một thằng gầy nhom nói chuyện, rồi rút.</p>
+
+    <p class="thought">Ai mà làm được chuyện đó bằng mồm?</p>
+
+    <p>Hàn Kiêu nằm dưới đất, nhìn lên thằng gầy nhom đứng trước mặt. Đèn hẻm hắt bóng từ phía sau, mặt thằng đó tối, chỉ thấy đường viền. Lưng thẳng. Tay buông. Không run.</p>
+
+    <p class="thought">Không run. Ba thằng đấm thuê vừa đi, mùi thuốc lá và mồ hôi còn trong hẻm, mà thằng này không run.</p>
+
+    <p class="short">— Đứng dậy được không?</p>
+
+    <p>Giọng thằng đó. Bình tĩnh. Không phải kiểu bình tĩnh giả. Kiểu bình tĩnh của người... đã thấy chuyện tệ hơn nhiều.</p>
+
+    <p class="short">Hàn Kiêu cười, đau, môi nứt.</p>
+
+    <p class="short">— Được. Tôi quen rồi.</p>
+
+    <p>Hắn chống tay, ngồi dậy. Đau sườn, có thể nứt, có thể không. Lau máu mũi bằng tay áo. Nhìn thằng gầy nhom.</p>
+
+    <p class="short">— Ông ơi, ông là ai vậy? Tại sao cứu tôi?</p>
+
+    <p>Thằng đó nhìn hắn. Mắt đọc hắn, kiểu nhìn lạ, như nhìn xuyên qua mặt, qua xương, vào bên trong. Không phải nhìn thương hại. Không phải tò mò. Là... đánh giá. Như nhìn một món đồ trong tiệm, cân xem có đáng mua không.</p>
+
+    <p class="thought">Mẹ. Thằng này nhìn mình như nhìn hàng.</p>
+
+    <p>Nhưng kỳ lạ thay, Hàn Kiêu không ghét. Hắn đã bị nhiều người nhìn: nhìn khinh, nhìn thương, nhìn sợ, nhìn ghê. Ánh mắt thằng này khác. Không khinh. Không thương. Chỉ... tính toán. Lạnh, nhưng không ác. Kiểu lạnh của kẻ biết chính xác mình muốn gì.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn nhìn Hàn Kiêu.</p>
+
+    <p class="short">Ma Tâm Quan đọc sâu hơn ánh đèn hẻm cho phép.</p>
+
+    <p class="thought">Ba mươi hai. Có thể ba mươi ba. Xương mặt sắc, gò má cao, hàm rộng. Kiểu mặt bán hàng tốt: thân thiện mà không hiền, cứng mà không ác. Sẹo trên mũi, cũ, tối thiểu năm năm. Đánh nhau thời trẻ. Nhưng không đánh nhau nữa: tay không có vết chai mới, không có dấu hiệu tập võ. Đã bỏ bạo lực.</p>
+
+    <p class="thought">Quần áo bẩn nhưng không rách, trừ đầu gối. Áo sơ mi xám, loại sơ mi bán hàng, kiểu nhân viên bất động sản mặc. Từng có tiền. Giày da nứt mũi, giống giày ta hai tháng trước. Từng có, mất hết.</p>
+
+    <p class="thought">Và giữa đau đớn, cười. Môi nứt, máu trên mặt, mà cười. Không phải cười gượng. Cười vì đã thua quá nhiều, nên thua thêm lần nữa chỉ là bình thường. Kiểu cười của kẻ đã chạm đáy.</p>
+
+    <p class="thought">Nhưng mắt. Mắt hắn không chết. Bầm, sưng, mà mắt vẫn sáng. Vẫn nhìn quanh, vẫn đánh giá. Kẻ chạm đáy mà mắt còn sáng là kẻ chưa bỏ cuộc. Chỉ chưa tìm được lý do để đứng dậy.</p>
+
+    <p class="thought">Liều. Cứng. Quen bạo lực nhưng đã bỏ. Giỏi giao tiếp, ngay cả khi bị đánh vẫn nói đùa để giảm căng thẳng. Trung thành kiểu cũ: nghĩa khí, ai cứu hắn thì hắn theo.</p>
+
+    <p class="thought">Ngàn năm trước, kẻ như thế trong tông môn gọi là "chiến khuyển." Không phải mưu sĩ, không phải kiếm khách. Là kẻ xông trước, chết trước, trung thành đến hơi thở cuối. Hiếm. Và đắt giá.</p>
+
+    <p class="short">— Đi được không? Nhà tôi gần đây. Băng vết thương cho.</p>
+
+    <p class="short">Hàn Kiêu nhìn hắn.</p>
+
+    <p class="short">— Ông muốn gì ở tôi?</p>
+
+    <p class="short">— Anh nợ bao nhiêu?</p>
+
+    <p>— Hai trăm triệu. Gốc một trăm năm mươi, lãi chồng. Vay mua đất, bị lừa. Đất không ra giấy, tiền mất, nợ ở lại.</p>
+
+    <p class="short">— Anh làm gì trước đây?</p>
+
+    <p>— Bán bất động sản. Giỏi lắm. Một năm bán được mười mấy căn. Rồi tham, tự đầu tư, tin sai người. Xong.</p>
+
+    <p class="short">Giọng Hàn Kiêu kể ngắn, gọn, không bào chữa. Kiểu kể của kẻ đã nhận lỗi từ lâu, không cần ai tha thứ.</p>
+
+    <p class="short">— Bán hàng giỏi mà phá sản?</p>
+
+    <p>— Bán hàng khác đầu tư. Bán hàng giỏi thì hiểu khách. Đầu tư giỏi thì hiểu thị trường. Tôi hiểu người, không hiểu thị trường. Sai chỗ đó.</p>
+
+    <p class="thought">Tự nhận điểm mạnh và điểm yếu. Chính xác. Kẻ biết mình sai ở đâu có thể sửa. Kẻ đổ lỗi cho người khác thì không bao giờ.</p>
+
+    <p class="short">Hắn đưa tay. Hàn Kiêu nhìn tay hắn, rồi nắm lấy. Hắn kéo, Hàn Kiêu đứng dậy, loạng choạng, tay ôm sườn.</p>
+
+    <p class="short">— Đi theo tôi.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Căn hộ tầng sáu. Cầu thang tối.</p>
+
+    <p>Hàn Kiêu leo theo, thở nặng, tay vịn tường. Hắn đi trước, không chờ, không ngoái lại. Biết Hàn Kiêu sẽ theo. Kẻ vừa được cứu luôn theo kẻ cứu, ít nhất đến khi hiểu chuyện gì đang xảy ra.</p>
+
+    <p class="short">Vào phòng. Bật đèn. Hai mươi lăm mét vuông, bàn nhỏ, giường đơn, tủ quần áo cũ.</p>
+
+    <p>Hàn Kiêu nhìn quanh. Mắt lướt: phòng nhỏ, đồ ít, sạch sẽ. Không ảnh gia đình, không đồ trang trí. Phòng của người sống một mình và không cần thêm ai.</p>
+
+    <p class="short">— Ngồi xuống. Bồn rửa mặt ở góc kia.</p>
+
+    <p>Hàn Kiêu rửa máu trên mặt. Hắn lấy hộp sơ cứu trong ngăn kéo. Băng gạc, thuốc sát trùng, băng dính. Đưa cho Hàn Kiêu.</p>
+
+    <p class="short">— Tự băng được không?</p>
+
+    <p class="short">— Được. Quen rồi.</p>
+
+    <p>Hàn Kiêu tự băng. Nhanh, gọn, kiểu quen tay. Mắt vẫn nhìn hắn, giữa những lần xé băng dính.</p>
+
+    <p class="short">— Ông chưa trả lời. Ông muốn gì ở tôi?</p>
+
+    <p class="short">Hắn ngồi đối diện, cốc nước lọc trên bàn, nhìn Hàn Kiêu.</p>
+
+    <p class="short">— Anh tên gì?</p>
+
+    <p class="short">— Hàn Kiêu.</p>
+
+    <p>— Hàn Kiêu. Anh bán bất động sản, bán được mười mấy căn một năm. Giỏi. Rồi phá sản. Giờ nợ hai trăm triệu, bị đánh mỗi hai tuần, không có việc, không có nhà, đang sống ở đâu?</p>
+
+    <p class="short">Hàn Kiêu nhìn hắn. Không trả lời ngay. Đang cân: nói thật hay không?</p>
+
+    <p>— Ở tạm nhà bạn. Bạn cho ở nhờ, nhưng sắp bị đuổi vì mấy thằng đòi nợ đến tìm. Bạn sợ.</p>
+
+    <p class="short">— Vậy anh sắp ra đường.</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p class="short">— Và khi ra đường, anh sẽ làm gì?</p>
+
+    <p>Im lặng. Hàn Kiêu nuốt nước bọt. Mắt nhìn xuống, nửa giây, rồi nhìn lên.</p>
+
+    <p>— Chưa biết. Có lẽ quay lại đi đòi nợ thuê cho người khác. Ít nhất có tiền ăn.</p>
+
+    <p class="thought">Kẻ chạm đáy. Đã từng ở đáy xã hội đen, leo lên bán hàng, rồi rơi xuống đáy lần nữa. Đang cân nhắc quay lại đáy cũ vì không còn lựa chọn.</p>
+
+    <p class="thought">Trừ khi ai đó cho hắn lựa chọn mới.</p>
+
+    <p class="short">— Tôi cho anh lựa chọn khác.</p>
+
+    <p class="short">Hàn Kiêu nhìn hắn. Mắt sáng, kiểu sáng của kẻ vừa nghe thấy thứ đã không nghe lâu lắm.</p>
+
+    <p>— Tôi đang xây một đội. Cần người bán hàng. Không phải bán bất động sản. Bán giải pháp cho doanh nghiệp. Anh giỏi đọc người, giỏi nói chuyện, giỏi thuyết phục. Đó là thứ tôi cần.</p>
+
+    <p class="short">— Tôi đang nợ hai trăm triệu. Ai thuê thằng nợ nần?</p>
+
+    <p>— Tôi. Lương tháng, cộng hoa hồng theo hợp đồng ký được. Về nợ, tôi sẽ nói chuyện với chủ nợ. Không trả hộ, nhưng đàm phán giãn thời gian. Anh có thu nhập, anh trả dần. Không ai đánh anh nữa.</p>
+
+    <p>Hàn Kiêu nhìn hắn. Lâu. Mắt đọc hắn, kiểu đọc của kẻ đường phố: tìm dấu hiệu lừa đảo, tìm cái bẫy, tìm mục đích ẩn.</p>
+
+    <p class="short">— Tại sao? Ông không biết tôi. Tại sao giúp?</p>
+
+    <p class="short">— Vì tôi cần người. Và anh là người tôi cần.</p>
+
+    <p class="short">— Ông cần tôi vì tôi giỏi bán hàng?</p>
+
+    <p>— Vì anh giỏi bán hàng, và vì anh vừa bị đánh bầm mặt mà vẫn cười. Kẻ cười được khi ở đáy là kẻ sẽ cười khi ở đỉnh. Tôi cần kiểu người đó.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Hàn Kiêu nhìn hắn. Lâu hơn bất kỳ lần nào trong đêm. Mắt hắn, bầm sưng, nhưng sáng. Kiểu sáng của kẻ vừa tìm thấy thứ không dám hy vọng.</p>
+
+    <p class="short">Rồi hắn cười. Lần này không phải cười đau. Cười thật. Rộng, nứt môi, chảy máu lại, nhưng cười.</p>
+
+    <p class="short">— Ông ơi.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p class="short">— Ông là ai vậy? Thật sự?</p>
+
+    <p class="short">Hắn nhìn Hàn Kiêu. Im lặng. Rồi nói, giọng đều, nhẹ, không cảm xúc thừa.</p>
+
+    <p class="short">— Người sẽ cho anh việc làm. Nếu anh muốn.</p>
+
+    <p>Hàn Kiêu nhìn hắn thêm ba giây. Rồi gật. Nhanh. Dứt khoát. Kiểu gật của kẻ đã quyết trước khi kịp nghĩ, vì bản năng nói "theo."</p>
+
+    <p class="short">— Sếp bảo nhảy, em hỏi nhảy từ tầng mấy.</p>
+
+    <p class="thought">Sếp. Từ "ông" chuyển sang "sếp" trong một câu. Không cần hợp đồng, không cần ký tên. Kẻ nghĩa khí đời cũ: ai cứu mình, người đó là chủ. Đơn giản. Tàn bạo. Và đẹp, theo cách mà chỉ kẻ ở đáy mới hiểu.</p>
+
+    <p class="short">Hắn đứng dậy. Lấy chăn từ tủ, đặt lên giường.</p>
+
+    <p class="short">— Tối nay ngủ đây. Sáng mai nói chuyện tiếp.</p>
+
+    <p class="short">Hàn Kiêu nhìn giường, nhìn hắn.</p>
+
+    <p class="short">— Còn ông?</p>
+
+    <p class="short">— Tôi ngồi bàn. Quen rồi.</p>
+
+    <p class="thought">Không phải quen. Ngàn năm tu luyện, nhiều đêm ngồi thiền trên đỉnh Cửu U Sơn, gió rét xuyên xương. Một đêm ngồi ghế trong phòng hai mươi lăm mét vuông không tính là gì.</p>
+
+    <p class="short">Hàn Kiêu nằm xuống. Đau sườn, nhăn mặt, nhưng không kêu. Kéo chăn.</p>
+
+    <p class="short">— Sếp.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p class="short">— Cảm ơn.</p>
+
+    <p class="short">— Đừng cảm ơn. Làm việc.</p>
+
+    <p class="short">Hàn Kiêu cười trong bóng tối. Nhỏ, khàn, nhưng ấm.</p>
+
+    <p class="short">— Xong rồi. Từ mai em làm.</p>
+
+    <p class="short">Hắn ngồi ở bàn, lưng tựa tường. Tắt đèn.</p>
+
+    <p>Bóng tối. Tiếng thở của Hàn Kiêu dần đều, sâu. Ngủ nhanh. Kiểu ngủ của kẻ mệt đến xương nhưng vừa tìm được chỗ an toàn.</p>
+
+    <p class="short">Hắn nhắm mắt.</p>
+
+    <p class="thought">Hàn Kiêu. Chiến khuyển. Không phải mưu sĩ, không phải quân sư. Là kẻ xông trước, bán trước, chạy trước. Cần huấn luyện, cần phương hướng, cần ai đó nói "đi" thì đi, "dừng" thì dừng.</p>
+
+    <p class="thought">Mạng lưới thêm một mắt xích. Tiểu Lý, Trương Phong, Tô Vãn, đội năm người, và bây giờ Hàn Kiêu. Bên trong Vạn Lý có người. Bên ngoài, bắt đầu có.</p>
+
+    <p class="thought">Tông môn đang lớn.</p>
+
+    <p>Bên ngoài, đêm yên tĩnh. Gió nhẹ qua khe cửa. Đâu đó trong thành phố, ba tay đòi nợ đang báo cáo sếp rằng con nợ có "người bảo lãnh." Sếp nhỏ sẽ chờ. Một tháng. Đủ thời gian.</p>
+
+    <p class="thought">Và ở đáy của đáy, một kẻ bầm mặt, nợ nần, không nhà, vừa gọi một người lạ gầy nhom là "sếp."</p>
+
+    <p class="thought">Kiếp trước, ta thu phục hàng ngàn. Nhưng kẻ đầu tiên luôn là kẻ đáng nhớ nhất.</p>
+
+    <p class="thought">"Sếp bảo nhảy, em hỏi nhảy từ tầng mấy."</p>
+
+    <p class="thought">Đệ tử kiểu này... lâu rồi không gặp.</p>
+
+    <p>Hắn mỉm cười trong bóng tối. Nhẹ. Lần thứ ba kể từ khi trọng sinh.</p>
+
+    <p class="short">Rồi ngủ.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-17.html">&larr; Chương trước</a>
+    <a href="chapter-19.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.605 từ &middot; Chương 18 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

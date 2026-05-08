@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 16: Bí Mật — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-15.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 16 / 30</span>
+    <a href="chapter-17.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 16</div>
+    <h1 class="chapter-title">Bí Mật</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.003 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Trương Phong gọi lúc chín giờ tối.</p>
+
+    <p>Không nhắn tin. Gọi. Trương Phong không bao giờ gọi điện trừ khi quan trọng. Kẻ kỹ thuật ghét gọi điện vì không lưu lại bằng chứng. Khi hắn chịu gọi, nghĩa là thứ hắn muốn nói không nên để lại bằng chứng.</p>
+
+    <p class="short">— Lục Trường An. Cần gặp. Không phải ở công ty.</p>
+
+    <p>Giọng Trương Phong thấp hơn bình thường. Nhanh. Kiểu nhanh của người đã cân nhắc lâu trước khi bấm số.</p>
+
+    <p class="short">— Ở đâu?</p>
+
+    <p class="short">— Quán phở cuối đường Lý Thường Kiệt. Cái quán có mái tôn xanh. Mười giờ.</p>
+
+    <p class="short">— Được.</p>
+
+    <p class="short">Tắt máy. Hắn nhìn đồng hồ. Chín giờ mười lăm. Bốn mươi lăm phút.</p>
+
+    <p class="thought">Trương Phong. Kẻ nắm hệ thống nội bộ. Từ ngày giúp hắn viết lại đề xuất nâng cấp, Trương Phong vẫn giữ liên lạc, nhưng ít. Tin nhắn ngắn, thỉnh thoảng, kiểu cập nhật: "đề xuất được duyệt, đang triển khai," "hệ thống nâng cấp xong giai đoạn một." Kẻ kỷ luật, chỉ nói khi có gì đáng nói.</p>
+
+    <p class="thought">Và tối nay hắn gọi. Không nhắn. Không ở công ty. Quán phở cuối đường.</p>
+
+    <p class="thought">Hắn tìm được thứ gì đó.</p>
+
+    <p class="short">Hắn lấy áo khoác, bước ra khỏi căn hộ. Xuống sáu tầng cầu thang. Ra phố.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Quán phở cuối đường Lý Thường Kiệt nhỏ, bốn bàn, mái tôn xanh đã rỉ, đèn vàng treo thấp. Mùi phở bò trộn với mùi hành phi, nước dùng sôi sùng sục trong nồi lớn. Mười giờ tối, chỉ còn một bàn có khách: hai công nhân đang ăn, mặc đồ bảo hộ, mệt.</p>
+
+    <p>Trương Phong ngồi bàn góc, lưng quay vào tường, mắt nhìn cửa. Tay cầm cốc trà đá, chưa uống. Áo thun đen, quần kaki, dép lê. Không mang máy tính. Bất thường.</p>
+
+    <p class="short">Hắn ngồi xuống đối diện.</p>
+
+    <p class="short">— Gọi phở không?</p>
+
+    <p class="short">— Không. Nghe thôi.</p>
+
+    <p class="short">Trương Phong nhìn quanh. Hai công nhân đang ăn, không để ý. Chủ quán bận sau bếp.</p>
+
+    <p class="short">Rồi nói, giọng thấp.</p>
+
+    <p>— Tuần trước tôi bảo trì máy chủ tầng hầm. Nâng cấp giai đoạn hai, kiểm tra log hệ thống, dọn dẹp dữ liệu cũ. Bình thường.</p>
+
+    <p class="short">Hắn im. Nghe.</p>
+
+    <p>— Khi dọn log, tôi thấy một nhóm giao dịch lạ. Phòng Tài chính chuyển tiền cho một công ty tên "Phú Thịnh Consulting." Tần suất: mỗi tháng một lần, từ hai năm nay. Số tiền mỗi lần: từ hai trăm đến bốn trăm triệu. Tổng cộng khoảng bảy tỷ.</p>
+
+    <p class="thought">Bảy tỷ. Hai năm. Chuyển đều đặn. Công ty tư vấn.</p>
+
+    <p class="short">— Phú Thịnh Consulting. Tôi chưa nghe tên.</p>
+
+    <p>— Không ai nghe. Vì đó là công ty vỏ. Tôi tra: thành lập hai năm trước, cùng thời điểm bắt đầu chuyển tiền. Địa chỉ đăng ký: một căn hộ ở quận bảy. Không có trang mạng, không có nhân viên, không có hoạt động kinh doanh thật. Chỉ có một thứ: tài khoản ngân hàng nhận tiền từ Vạn Lý.</p>
+
+    <p class="short">Ma Tâm Quan đọc Trương Phong.</p>
+
+    <p class="thought">Mắt nhìn thẳng, không liếc ngang. Tay cầm cốc trà nhưng không uống, ngón tay siết thành cốc, trắng đốt. Không phải sợ. Là phẫn nộ. Kiểu phẫn nộ của kẻ vừa phát hiện mình bị lừa bằng chính hệ thống hắn quản lý.</p>
+
+    <p class="short">— Ai ký duyệt chuyển tiền?</p>
+
+    <p>— Phòng Tài chính ký thực hiện. Nhưng phê duyệt ban đầu, tôi tìm được trên hệ thống: đều đi qua một tài khoản quản trị cấp cao. Tài khoản đó chỉ hai người có quyền truy cập: trưởng phòng Tài chính và CEO.</p>
+
+    <p class="short">Im lặng. Nặng.</p>
+
+    <p class="thought">CEO. Trần Quốc Huy. Tiền chảy từ Vạn Lý vào Phú Thịnh Consulting. Phú Thịnh không có hoạt động thật. Nghĩa là tiền chảy vào túi ai đó.</p>
+
+    <p class="short">— Phú Thịnh Consulting do ai sở hữu?</p>
+
+    <p>— Tôi tra: cổ đông duy nhất tên Trần Minh Đạt. Không có ảnh, không có thông tin công khai. Nhưng tôi tìm được: Trần Minh Đạt là em họ Trần Quốc Huy.</p>
+
+    <p class="thought">Em họ CEO. Công ty vỏ. Bảy tỷ trong hai năm. Rút ruột.</p>
+
+    <p class="thought">Và dự án X. Đội vốn ba mươi phần trăm. Nhà thầu Đại Phong, công ty mới thành lập. Bây giờ thêm Phú Thịnh Consulting. Hai đường ống khác nhau, cùng một đích: túi CEO.</p>
+
+    <p class="thought">Ngàn năm trước, trưởng lão Chu Vạn Lý rút linh thạch từ quỹ tông môn qua chi nhánh do chính hắn lập. Ta đã đoán đúng từ chương năm: thủ đoạn ngàn năm không đổi.</p>
+
+    <p class="short">Hắn nhìn Trương Phong.</p>
+
+    <p class="short">— Còn gì nữa?</p>
+
+    <p>— Còn. Khoản chuyển tiền gần nhất, tháng trước, bốn trăm triệu. Lý do ghi trên hệ thống: "Phí tư vấn chiến lược quý." Nhưng không có hợp đồng tư vấn nào giữa Vạn Lý và Phú Thịnh trong hồ sơ pháp lý. Tôi kiểm tra: phòng Pháp chế không có bản sao. Nghĩa là hợp đồng hoặc không tồn tại, hoặc được giữ ngoài hệ thống.</p>
+
+    <p class="short">— Ai ngoài cậu biết chuyện này?</p>
+
+    <p>— Không ai. Tôi phát hiện khi dọn log. Bình thường không ai xem log cũ, và giao dịch tài chính nằm ở phân hệ riêng. Tôi có quyền truy cập vì đang nâng cấp hệ thống.</p>
+
+    <p class="thought">Trương Phong là người duy nhất biết. Kẻ nắm chìa khóa dữ liệu. Và hắn mang chìa khóa đến cho ta.</p>
+
+    <p class="short">— Tại sao nói cho tôi?</p>
+
+    <p>Trương Phong nhìn hắn. Mắt sắc, nhưng bên dưới có thứ gì khác. Mệt. Kiểu mệt của kẻ giỏi bị bỏ quên, giờ phát hiện mình bị bỏ quên vì lý do. Vì kẻ ăn cắp cần người giữ hệ thống ngây thơ.</p>
+
+    <p>— Vì hai năm tôi xin ngân sách nâng cấp, CEO nói "không có tiền." Bảy tỷ chảy vào công ty vỏ mà CEO nói không có tiền cho hệ thống bảo mật. Tôi không chấp nhận.</p>
+
+    <p>Giọng Trương Phong bình tĩnh, nhưng ngón tay siết cốc trà đến nứt nhựa.</p>
+
+    <p>— Và vì cậu là người duy nhất tôi tin. Cậu giúp tôi đề xuất nâng cấp. Cậu không nợ CEO, không nợ VP, không thuộc phe nào. Cậu là người duy nhất ở Vạn Lý mà khi tôi nói chuyện, tôi không phải đoán cậu đang nghĩ gì.</p>
+
+    <p class="thought">Không đúng. Cậu ta phải đoán ta nghĩ gì mỗi giây. Nhưng cậu ta tin ta vì ta đã cho cậu ta thứ không ai cho: sự tôn trọng. Đề xuất nâng cấp được duyệt. Ngân sách về. Lần đầu trong ba năm, Trương Phong được hệ thống thừa nhận. Nợ ân đó nặng hơn cậu ta nghĩ.</p>
+
+    <p class="short">Hắn gật đầu. Chậm.</p>
+
+    <p class="short">— Tôi sẽ xử lý. Nhưng không phải bây giờ.</p>
+
+    <p class="short">— Tại sao?</p>
+
+    <p>— Vì nếu hành động ngay, CEO sẽ biết có người tìm ra. Hắn sẽ xóa dấu vết, đóng Phú Thịnh, mở công ty mới. Và kẻ phát hiện, là cậu, sẽ bị đuổi trước khi kịp nói.</p>
+
+    <p class="short">Trương Phong im lặng. Ngón tay buông cốc trà. Đang nghĩ.</p>
+
+    <p class="short">— Vậy chờ đến khi nào?</p>
+
+    <p>— Đến khi bằng chứng đủ nặng để CEO không thể xóa. Và đến khi ta có đủ đồng minh để bằng chứng đó đến đúng người.</p>
+
+    <p class="short">— HĐQT?</p>
+
+    <p>— Đúng. Nhưng HĐQT không dễ. Trong đó có người của CEO, có người trung lập, và có kẻ mà ta chưa biết thuộc về ai.</p>
+
+    <p class="thought">Và có Lão Từ. Kẻ ở trên cùng bản đồ, dấu chấm hỏi mà ta vẫn chưa giải mã. Tiền chảy từ Vạn Lý vào Phú Thịnh, nhưng có chảy tiếp đi đâu không? Phú Thịnh là đích cuối, hay chỉ là trạm trung chuyển?</p>
+
+    <p class="thought">Chưa biết. Cần thêm thông tin.</p>
+
+    <p class="short">— Trương Phong.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p>— Giữ nguyên mọi thứ. Không xóa log, không sao chép thêm, không nói với ai. Khi nào tôi cần, tôi sẽ gọi.</p>
+
+    <p class="short">Trương Phong nhìn hắn. Cân nhắc. Rồi gật.</p>
+
+    <p class="short">— Được. Tôi tin cậu.</p>
+
+    <p>Ba chữ. Nhẹ, nhưng nặng hơn bảy tỷ. Vì niềm tin của kẻ không tin ai là thứ đắt nhất.</p>
+
+    <p class="short">Hắn đứng dậy. Để tiền phở trên bàn dù không ăn.</p>
+
+    <p class="short">— Trương Phong.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p class="short">— Cảm ơn.</p>
+
+    <p>Trương Phong nhìn hắn, hơi bất ngờ. Rồi gật, cười nhẹ, lần đầu hắn thấy Trương Phong cười.</p>
+
+    <p class="short">— Đừng cảm ơn. Dùng nó.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Đường về. Mười giờ bốn mươi lăm. Phố vắng, đèn đường hắt bóng dài trên vỉa hè. Gió đêm mang theo mùi mưa sắp đến.</p>
+
+    <p class="short">Hắn đi bộ, không vội. Đầu chạy.</p>
+
+    <p class="thought">Hai đường ống rút tiền. Dự án X qua nhà thầu Đại Phong: đội vốn ba mươi phần trăm, từ bốn tỷ lên gần sáu tỷ, chênh lệch khoảng hai tỷ. Phú Thịnh Consulting: bảy tỷ trong hai năm. Tổng cộng: ít nhất chín tỷ. Có thể nhiều hơn.</p>
+
+    <p class="thought">Chín tỷ. Cho một công ty tầm trung như Vạn Lý, đó là máu. CEO đang hút máu công ty để nuôi gia đình và phe cánh. Mà ai bảo kê? Trưởng phòng Tài chính ký thực hiện. CEO duyệt. Có ai nữa không?</p>
+
+    <p class="thought">Lão Từ.</p>
+
+    <p class="thought">Nếu Lão Từ là cổ đông lớn nhất, hắn phải biết. Không ai rút chín tỷ mà cổ đông lớn nhất không hay. Hoặc Lão Từ cho phép, hoặc Lão Từ chủ đạo. Cả hai đều nghĩa là: CEO không phải kẻ chủ mưu. CEO là kẻ thực hiện.</p>
+
+    <p class="thought">Bản đồ quyền lực cần vẽ lại. Ở trên cùng không phải CEO. Là Lão Từ. CEO chỉ là cánh tay.</p>
+
+    <p>Hắn dừng bước. Đứng ở góc phố, nhìn lên tòa nhà cao phía xa. Đèn sáng rải rác. Thành phố vẫn thức.</p>
+
+    <p class="thought">Bằng chứng này là vũ khí. Nhưng vũ khí mạnh nhất là vũ khí chưa dùng. Rút ra sớm, đối thủ phòng bị. Giữ lại, chờ đúng lúc, một đòn chết.</p>
+
+    <p class="thought">Kiếp trước, ta phải mất ba mươi năm mới thu đủ bí mật của mười hai tông phái chính đạo. Kiếp này, mười tuần đã đủ. Thế giới phàm nhân sơ hở hơn tu tiên giới nhiều.</p>
+
+    <p class="short">Tiếp tục đi. Về nhà.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ngày hôm sau. Giờ trưa.</p>
+
+    <p class="short">Hắn không xuống nhà ăn. Gửi tin nhắn cho Tô Vãn: "Quán cà phê Hương Mộc, 12h15."</p>
+
+    <p>Tô Vãn đến đúng giờ. Quán vắng như mọi khi. Trần gỗ, đèn vàng, mùi cà phê phin. Bàn góc, hai cốc trà.</p>
+
+    <p class="short">Cô ngồi xuống. Không hỏi tại sao gặp ngoài công ty. Chỉ nhìn hắn, chờ.</p>
+
+    <p class="thought">Cô ta biết khi nào ta muốn nói chuyện thật. Và đây là một trong những lần đó.</p>
+
+    <p>— Tô Vãn, tôi sẽ nói cho cô một thứ. Sau khi nghe xong, cô có quyền bỏ đi. Nhưng nếu ở lại, cô phải giữ im lặng cho đến khi tôi nói được.</p>
+
+    <p>Tô Vãn nhìn hắn. Mắt sau gọng kính không nhấp nháy. Cô đang đánh giá mức độ nghiêm trọng. Câu mở đầu đó không phải kiểu mở đầu bình thường.</p>
+
+    <p class="short">— Tôi nghe.</p>
+
+    <p>Hắn nói. Ngắn, gọn, chỉ sự thật. Phú Thịnh Consulting. Bảy tỷ. Hai năm. Em họ CEO. Dự án X. Nhà thầu Đại Phong. Tổng cộng ít nhất chín tỷ. CEO rút ruột Vạn Lý.</p>
+
+    <p>Tô Vãn nghe. Không ngắt lời, không hỏi giữa chừng. Mặt không thay đổi, nhưng tay cầm cốc trà siết lại dần. Khi hắn nói xong, cô đặt cốc xuống, nhẹ, chính xác, kiểu đặt của người kiểm soát cảm xúc bằng hành động.</p>
+
+    <p class="short">Im lặng. Dài.</p>
+
+    <p class="short">Rồi cô nói, giọng thấp hơn bình thường.</p>
+
+    <p class="short">— Tôi biết.</p>
+
+    <p class="short">Hắn nhìn cô.</p>
+
+    <p class="short">— Cô biết?</p>
+
+    <p>— Không biết chi tiết. Không biết Phú Thịnh, không biết số tiền cụ thể. Nhưng tôi biết tài chính Vạn Lý bất thường. Từ tháng đầu tiên tôi vào.</p>
+
+    <p class="thought">Cô ta biết. Không phải đoán. Biết. Kinh nghiệm từ công ty cũ.</p>
+
+    <p>— Ở công ty cũ, tôi phụ trách phân tích tài chính. Phát hiện sếp rút tiền qua công ty sân sau, giống hệt mô hình này. Tôi báo cáo. Kết quả: sếp đó dùng hệ thống đẩy tôi ra, nói tôi "không phù hợp vị trí." Tôi mất việc. Sếp vẫn ngồi ghế.</p>
+
+    <p>Giọng Tô Vãn bình tĩnh. Quá bình tĩnh. Kiểu bình tĩnh của người đã sống qua đau rồi, kể lại không còn đau nữa, chỉ còn sẹo.</p>
+
+    <p>— Khi vào Vạn Lý, tôi thấy dấu hiệu quen thuộc. Chi phí tư vấn cao bất thường. Nhà thầu lạ trúng thầu dự án lớn. Ngân sách phòng kỹ thuật bị cắt trong khi ngân sách "chiến lược" tăng. Giống hệt. Nhưng tôi không nói. Vì lần trước nói, tôi mất tất cả.</p>
+
+    <p class="thought">Cô ta im lặng hai năm. Biết mà không nói. Không phải vì hèn. Vì đã học được bài học đắt nhất: nói đúng sự thật không đủ. Phải nói đúng lúc, với đúng người.</p>
+
+    <p class="thought">Và bây giờ, cô chọn nói. Với ta.</p>
+
+    <p>Hắn nhìn cô. Không phải Ma Tâm Quan. Nhìn bằng mắt thường. Khuôn mặt Tô Vãn bình thản, nhưng tay đặt trên bàn hơi run. Nhẹ. Gần như không thấy.</p>
+
+    <p class="thought">Cô ta đang sợ. Không phải sợ CEO. Sợ lịch sử lặp lại. Sợ tin người, rồi bị phản bội lần nữa.</p>
+
+    <p class="short">— Tô Vãn.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p>— Tôi không phải sếp cũ của cô. Và tôi không báo cáo cho hệ thống. Tôi dùng hệ thống.</p>
+
+    <p>Cô nhìn hắn. Lâu. Mắt đọc mắt. Tìm dấu hiệu nói dối, tìm tính toán, tìm thứ gì đó giấu sau câu nói. Cô là kẻ đã bị lừa bởi người giỏi giấu. Cô biết tìm ở đâu.</p>
+
+    <p class="short">Rồi cô gật. Nhẹ.</p>
+
+    <p>— Anh Lục, nếu chạm vào chuyện này, anh sẽ không thể quay đầu. CEO có hội đồng quản trị đằng sau. Có luật sư. Có người. Và anh chỉ là phó phòng.</p>
+
+    <p class="short">— Tôi chưa bao giờ có thói quen quay đầu.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Tô Vãn nhìn hắn thêm một giây. Rồi, lần đầu tiên kể từ khi hai người quen nhau, cô cười. Không phải cười xã giao, không phải nhếch môi. Cười thật. Nhẹ, nhanh, nhưng thật.</p>
+
+    <p class="short">— Tôi biết. Vì vậy tôi mới ngồi đây.</p>
+
+    <p class="thought">Lần đầu cô ta cười trước mặt ta. Và lần đầu cô ta thừa nhận: cô ở đây vì chọn, không phải vì bị phân công.</p>
+
+    <p class="thought">Tô Vãn. Từ hôm nay, không chỉ là đồng nghiệp dự án. Là đồng minh.</p>
+
+    <p class="short">Hắn uống trà. Đặt cốc xuống.</p>
+
+    <p>— Tôi cần cô giúp một việc. Phân tích dòng tiền Vạn Lý hai năm qua. Không cần chi tiết Phú Thịnh, chỉ cần nhìn tổng: tiền vào bao nhiêu, tiền ra bao nhiêu, chênh lệch bao nhiêu. Bằng số liệu công khai, không truy cập hệ thống. Để không ai nghi.</p>
+
+    <p class="short">— Tôi làm được. Mấy ngày?</p>
+
+    <p class="short">— Một tuần.</p>
+
+    <p class="short">— Ba ngày.</p>
+
+    <p class="short">Hắn nhìn cô. Cô nhìn lại, mắt sáng hơn bình thường.</p>
+
+    <p class="thought">Ba ngày. Cô ta muốn nhanh hơn ta yêu cầu. Không phải vì muốn gây ấn tượng. Vì cô ta đã chờ hai năm. Đã biết, đã im, đã chịu. Bây giờ có người cùng đi, cô muốn chạy.</p>
+
+    <p class="short">— Ba ngày.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tối. Căn hộ.</p>
+
+    <p class="short">Hắn ngồi trước bàn. Điện thoại, máy tính, cốc nước lọc.</p>
+
+    <p class="short">Mở máy tính. Tạo một thư mục mới, đặt tên bằng ký tự ngẫu nhiên. Trong đó, lưu:</p>
+
+    <p>Một: bản chụp nhật ký giao dịch Phú Thịnh mà Trương Phong gửi qua tin nhắn mã hóa.</p>
+    <p>Hai: bản phân tích Ngô Hải sửa số liệu chi phí (từ chương mười hai).</p>
+    <p>Ba: ghi chú cá nhân về dự án X, nhà thầu Đại Phong, đội vốn ba mươi phần trăm.</p>
+    <p>Bốn: sơ đồ quan hệ: Trần Quốc Huy → Trần Minh Đạt (em họ) → Phú Thịnh Consulting → tài khoản nhận tiền.</p>
+
+    <p>Sao chép toàn bộ vào một ổ lưu trữ nhỏ. Rút ra. Nhìn. Nhỏ bằng ngón tay, nhẹ bằng mười gam. Nhưng bên trong chứa đủ bằng chứng để kết thúc sự nghiệp một CEO.</p>
+
+    <p>Hắn đứng dậy. Đi đến góc phòng, nơi có tủ quần áo cũ. Mở ngăn dưới cùng, lấy ra một đôi giày cũ không dùng nữa. Nhét ổ lưu trữ vào lót giày. Đặt lại. Đóng tủ.</p>
+
+    <p class="thought">Ngàn năm trước, ta giấu trúc giản bí mật trong mộ phần giả ở hậu sơn Huyền Minh. Kiếp này, giày cũ trong tủ. Bản chất giống nhau: nơi không ai nghĩ sẽ tìm.</p>
+
+    <p class="short">Quay lại bàn. Xóa thư mục trên máy tính. Xóa sạch. Kiểm tra thùng rác. Xóa lần nữa.</p>
+
+    <p class="short">Ngồi xuống. Nhìn màn hình trống.</p>
+
+    <p class="thought">Chín tỷ. CEO rút ruột. VP muốn lật CEO. Ta có bằng chứng mà cả hai bên đều không biết ta có.</p>
+
+    <p class="thought">VP muốn bằng chứng. Ta không đưa. Chưa phải lúc. Đưa bây giờ, VP dùng ngay, CEO ngã, VP lên. Nhưng VP lên thì ta chỉ là quân cờ đã hoàn thành nhiệm vụ. Bỏ được.</p>
+
+    <p class="thought">Giữ bằng chứng. Chờ. Đến khi ta kiểm soát được cả CEO lẫn VP lẫn HĐQT. Khi đó, ta đưa bằng chứng cho đúng người, đúng lúc, đúng cách. Một đòn. Cả hai phe ngã.</p>
+
+    <p class="thought">Và ta đứng lại.</p>
+
+    <p class="short">Hắn tắt máy tính. Tắt đèn.</p>
+
+    <p class="short">Nằm xuống. Nhắm mắt.</p>
+
+    <p>Bên ngoài, mưa bắt đầu rơi. Nặng hơn mọi đêm. Gió thổi qua khe cửa sổ, lạnh nhẹ.</p>
+
+    <p class="thought">Thiên cơ đã lộ. Chín tỷ. Hai đường ống. Một bàn tay.</p>
+
+    <p class="thought">Chỉ cần đợi đúng thời điểm.</p>
+
+    <p>Hắn ngủ. Giấc ngủ sâu, không mơ. Kiểu ngủ của kẻ vừa nắm trong tay con dao, và biết chính xác khi nào sẽ rút ra.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-15.html">&larr; Chương trước</a>
+    <a href="chapter-17.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.003 từ &middot; Chương 16 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

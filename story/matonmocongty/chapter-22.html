@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 22: Bóng Đen — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-21.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 22 / 30</span>
+    <a href="index.html" class="nav-disabled">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 22</div>
+    <h1 class="chapter-title">Bóng Đen</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.050 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>Tiền không dừng ở Phú Thịnh.</p>
+
+    <p>Trương Phong gửi thêm dữ liệu, muộn, gần nửa đêm, kiểu gửi của kẻ vừa tìm được thứ khiến hắn mất ngủ. Tin nhắn mã hóa, ngắn gọn: "Xem đính kèm. Tôi không ngủ được."</p>
+
+    <p>Hắn mở. Bảng tính. Dòng tiền Phú Thịnh Consulting hai năm qua, nhưng lần này Trương Phong đã đào sâu hơn. Không chỉ tiền vào Phú Thịnh. Mà tiền ra.</p>
+
+    <p>Phú Thịnh nhận bảy tỷ từ Vạn Lý. Nhưng tài khoản Phú Thịnh không giữ tiền. Mỗi tháng, sau khi nhận, chuyển ngay sang một tài khoản khác. Tên: "Quỹ đầu tư Vĩnh An." Số tiền chuyển: gần như bằng số nhận, trừ đi vài phần trăm. Phú Thịnh chỉ là trạm trung chuyển. Đích cuối ở nơi khác.</p>
+
+    <p class="thought">Quỹ đầu tư Vĩnh An.</p>
+
+    <p>Hắn tra. Không tìm được nhiều. Quỹ tư nhân, đăng ký ở nước ngoài, không có trang mạng công khai. Nhưng Trương Phong tìm được một thứ: trong hồ sơ đăng ký doanh nghiệp cũ của Vạn Lý, cổ đông sáng lập, có một dòng nhỏ. Lão Từ, tên thật Từ Đại Phú, sở hữu ba mươi lăm phần trăm cổ phần Vạn Lý qua... Quỹ đầu tư Vĩnh An.</p>
+
+    <p class="thought">Tiền chảy từ Vạn Lý → Phú Thịnh (em họ CEO) → Vĩnh An (Lão Từ). CEO rút tiền công ty, nhưng không giữ cho mình. Chuyển ngược lên cho Lão Từ. CEO không phải kẻ ăn cắp. CEO là kẻ chuyển tiền.</p>
+
+    <p class="thought">CEO là con rối.</p>
+
+    <p>Hắn đặt điện thoại xuống. Nhìn trần nhà.</p>
+
+    <p>Căn hộ tối. Hàn Kiêu đã ngủ, tiếng thở đều bên kia phòng. Đèn tắt. Chỉ có ánh sáng nhạt từ màn hình điện thoại phản chiếu lên trần, tạo vùng sáng nhỏ giữa bóng tối lớn.</p>
+
+    <p class="thought">Lão Từ. Dấu chấm hỏi ở góc trên bản đồ. Bây giờ không còn là dấu chấm hỏi. Là câu trả lời.</p>
+
+    <p class="thought">Trần Quốc Huy không phải ông chủ. Là tay sai. Tiền rút từ Vạn Lý không phải vào túi CEO. Vào túi Lão Từ. CEO chỉ được hưởng phần nhỏ qua em họ Trần Minh Đạt. Còn phần lớn chảy ngược lên, về quỹ Vĩnh An, về Lão Từ.</p>
+
+    <p class="thought">Lão Từ kiểm soát Vạn Lý từ đầu. Đặt CEO lên ghế. Dùng CEO rút tiền. Và ngồi đâu đó, không bao giờ xuất hiện, không bao giờ để tên trên bất kỳ giấy tờ nào có thể truy ra.</p>
+
+    <p class="thought">Ngàn năm trước, ta gọi loại này là "ảo chủ." Kẻ nắm tông môn mà không ngồi ghế tông chủ. Kẻ giật dây mà dây không bao giờ lộ. Ở tu tiên giới, ảo chủ nguy hiểm hơn bất kỳ tông chủ nào. Vì không ai biết phải đánh ai.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Sáng hôm sau. Hắn gọi Tô Vãn.</p>
+
+    <p>Không gặp ở nhà ăn. Không gặp ở Hương Mộc. Gặp ở công viên nhỏ cách Vạn Lý ba con phố. Ghế đá, cây xanh, tiếng chim. Xa đủ để không ai từ công ty thấy.</p>
+
+    <p class="short">Tô Vãn đến, cặp kẹp nách, mắt hỏi.</p>
+
+    <p class="short">— Lão Từ.</p>
+
+    <p class="short">Một từ. Đủ để Tô Vãn hiểu.</p>
+
+    <p class="short">Cô ngồi xuống. Im lặng mười giây. Rồi nói.</p>
+
+    <p class="short">— Từ Đại Phú. Tôi đã nghe tên.</p>
+
+    <p class="short">— Ở đâu?</p>
+
+    <p>— Công ty cũ. Không phải trực tiếp. Nhưng khi tôi điều tra sếp cũ rút tiền, có một lần tôi thấy tên "Vĩnh An" trong danh sách đối tác. Không nghĩ gì lúc đó. Nhưng bây giờ...</p>
+
+    <p class="short">Cô nhìn hắn.</p>
+
+    <p class="short">— Lão Từ không chỉ ở Vạn Lý.</p>
+
+    <p class="thought">Không chỉ ở Vạn Lý. Nghĩa là Lão Từ có mạng lưới. Nhiều công ty, cùng mô hình: đặt người lên ghế, rút tiền, chuyển về quỹ. Vĩnh An không phải quỹ đầu tư. Là hệ thống hút máu.</p>
+
+    <p class="short">— Cô biết gì thêm về Lão Từ?</p>
+
+    <p>Tô Vãn mở sổ tay. Cô đã chuẩn bị. Luôn chuẩn bị.</p>
+
+    <p>— Từ Đại Phú. Sáu mươi tám tuổi. Thế hệ doanh nhân cũ, thời mở cửa. Bắt đầu từ buôn bán vật liệu, sau chuyển sang đầu tư. Không có trang mạng cá nhân, không xuất hiện trên báo từ mười năm nay. Ảnh duy nhất tôi tìm được: một bức chụp hội nghị doanh nhân năm hai nghìn không tám.</p>
+
+    <p>Cô đưa điện thoại cho hắn. Ảnh cũ, chất lượng thấp. Hội nghị, bàn tròn, nhiều người. Và ở góc phải, một người đàn ông: tóc bạc, mặt gầy, mắt nhỏ, miệng khép. Ngồi xa ánh đèn, không cười, không nhìn vào ống kính.</p>
+
+    <p class="thought">Tóc bạc. Mặt gầy. Mắt nhỏ.</p>
+
+    <p>Hắn nhớ.</p>
+
+    <p>Cuộc họp toàn công ty, tuần thứ ba. Tầng mười lăm. Sau họp, hắn đi ngang hành lang, liếc vào phòng nhỏ cuối hành lang. Một người ngồi trong đó. Tóc bạc, khoảng sáu mươi, mặt quay sang cửa sổ. Hắn nhìn nửa giây, rồi đi tiếp. Ghi nhận: "Người tóc bạc bí ẩn tầng 15."</p>
+
+    <p class="thought">Đó là Lão Từ. Ông ta đã ở Vạn Lý từ tuần thứ ba. Ở đó, im lặng, không ai giới thiệu, không ai nhắc. Ngồi trong phòng nhỏ, nhìn ra cửa sổ. Nghe. Xem.</p>
+
+    <p class="thought">Và ta đã đi ngang mà không biết.</p>
+
+    <p class="short">— Anh Lục?</p>
+
+    <p class="short">Tô Vãn nhìn hắn. Mắt lo. Hắn im lặng lâu hơn bình thường.</p>
+
+    <p class="short">— Lão Từ từng xử lý ai chống đối hắn không?</p>
+
+    <p class="short">Tô Vãn gật.</p>
+
+    <p>— Năm hai nghìn mười hai, một doanh nhân tên Hoàng Minh Trí cố gắng mua lại cổ phần của Lão Từ ở một công ty vận tải. Sáu tháng sau, công ty của Hoàng Minh Trí bị kiện bởi ba đối tác cùng lúc. Phá sản. Hoàng Minh Trí mất tất cả, bán nhà trả nợ. Không ai chứng minh được Lão Từ liên quan. Nhưng ba đối tác kiện đều có liên hệ gián tiếp với quỹ Vĩnh An.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="thought">Phá sản đối thủ mà không để dấu vết. Dùng hệ thống pháp lý, dùng đối tác, dùng tiền. Không cần bạo lực. Chỉ cần quyền lực và sự kiên nhẫn.</p>
+
+    <p class="thought">Ngàn năm trước, ta phá mười hai tông phái bằng kiếm và pháp thuật. Lão Từ phá đối thủ bằng luật và tiền. Vũ khí khác, kết quả giống nhau.</p>
+
+    <p class="short">— Còn gì nữa?</p>
+
+    <p>— Lão Từ có ít nhất bốn công ty mà tôi tìm được, đều qua Vĩnh An. Mỗi công ty có một CEO do ông ta đặt. Mỗi CEO đều chuyển tiền ngược về Vĩnh An. Vạn Lý là một trong bốn.</p>
+
+    <p class="thought">Bốn công ty. Cùng mô hình. Lão Từ ngồi trên mạng nhện, mỗi sợi tơ nối đến một con mồi. Hút máu từ từ, không giết, để mồi còn sống mà cung cấp.</p>
+
+    <p>— Anh Lục, nếu anh lật CEO, Lão Từ sẽ biết. Và nếu Lão Từ biết có ai đó đang đe dọa hệ thống của ông ta, ông ta sẽ phản ứng. Không phải kiểu CEO phản ứng. Kiểu khác. Kiểu mà Hoàng Minh Trí không bao giờ gượng dậy.</p>
+
+    <p class="thought">Cô ta đúng. Lật CEO là đánh vào tay sai. Lão Từ sẽ mất một con rối, nhưng hệ thống vẫn còn. Và kẻ phá con rối sẽ trở thành mục tiêu tiếp theo.</p>
+
+    <p class="thought">Ta đang chơi cờ trên bàn cờ của kẻ khác. Lão Từ là chủ bàn cờ.</p>
+
+    <p class="short">Hắn nhìn Tô Vãn.</p>
+
+    <p class="short">— Cô sợ?</p>
+
+    <p>— Có. Lão Từ không phải CEO. Không ngu, không hoảng, không để lộ sơ hở. Đây là tầng khác.</p>
+
+    <p class="short">— Đúng. Tầng khác.</p>
+
+    <p>Im lặng. Gió thổi nhẹ, lá cây rung, bóng nắng nhảy trên mặt đất.</p>
+
+    <p class="thought">Tầng khác. Lần đầu tiên kể từ khi trọng sinh, ta gặp kẻ mà ta không biết cách đánh. CEO thì đoán được. VP thì đọc được. Ngô Hải thì dễ. Nhưng Lão Từ? Kẻ không xuất hiện, không để dấu vết, phá đối thủ bằng hệ thống?</p>
+
+    <p class="thought">Ta không biết kẻ này nghĩ gì. Không biết hắn ở đâu. Không biết hắn biết gì về ta.</p>
+
+    <p class="thought">Lần đầu tiên... ta không chắc mình sẽ thắng.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Chiều hôm đó. Vạn Lý Group.</p>
+
+    <p>Hắn đang ngồi phòng họp nhỏ B, soạn lịch phân công cho phòng Kinh doanh tuần tới. Tiểu Lý ngồi cạnh, giúp sắp xếp hồ sơ.</p>
+
+    <p class="short">Tiểu Linh gõ cửa. Mắt hơi tròn hơn bình thường.</p>
+
+    <p>— Anh Lục, có khách ở sảnh. Ông già, tóc bạc, đi cùng một người trẻ. Bảo vệ nói đó là thành viên hội đồng quản trị. Ông ấy lên thẳng tầng mười lăm, không qua lễ tân.</p>
+
+    <p class="thought">Lão Từ. Ông ta ở đây.</p>
+
+    <p class="short">— Cảm ơn Tiểu Linh. Tiếp tục làm việc.</p>
+
+    <p class="short">Tiểu Linh gật, đi ra. Hắn đứng dậy.</p>
+
+    <p class="short">— Tiểu Lý, tôi lên tầng mười lăm.</p>
+
+    <p class="short">— Có chuyện gì không anh?</p>
+
+    <p class="short">— Chỉ xem thôi.</p>
+
+    <p>Hắn lên thang máy. Tầng mười lăm. Hành lang quen. Đèn sáng, im lặng.</p>
+
+    <p>Đi chậm qua phòng CEO. Cửa đóng. Bên trong, tiếng nói chuyện, nhỏ, không nghe rõ. Hai giọng: một giọng CEO (hơi cao, nhanh), một giọng khác (thấp, chậm, đều, kiểu giọng của kẻ không cần nói to vì biết ai cũng nghe).</p>
+
+    <p class="short">Hắn không dừng. Đi tiếp. Đến bình nước cuối hành lang, rót nước, uống chậm.</p>
+
+    <p class="short">Hai mươi phút.</p>
+
+    <p class="short">Cửa phòng CEO mở.</p>
+
+    <p>Hai người bước ra. CEO đi trước, mặt hơi đỏ, cười gượng, kiểu cười của kẻ vừa bị mắng mà phải giả vờ vui. Và phía sau, Lão Từ.</p>
+
+    <p class="short">Từ Đại Phú.</p>
+
+    <p>Sáu mươi tám tuổi. Nhưng bước chân không già. Chậm, đều, vững, kiểu bước của kẻ chưa bao giờ phải vội vì thế giới chờ hắn, không phải ngược lại. Tóc bạc, cắt ngắn, gọn. Mặt gầy, xương gò má cao, da sạm, nhiều nếp nhăn nhưng không nhão. Mắt nhỏ, rất nhỏ, gần như nheo, nhưng khi mở ra thì sâu, kiểu mắt nhìn xuyên tường. Mặc áo sơ mi trắng, không com-lê, quần tây xám, giày da đen đánh bóng. Đơn giản. Kiểu đơn giản của kẻ không cần quần áo nói thay mình.</p>
+
+    <p class="short">Và đi cùng: một người trẻ, ba mươi, com-lê đen, cặp da, bước chân nhanh, mắt liếc quanh. Trợ lý. Hoặc luật sư.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Lão Từ. Lưng thẳng, nhưng không cố ý thẳng. Tự nhiên. Kẻ chưa bao giờ phải cố gắng tạo ấn tượng. Tay buông hai bên, ngón không nắm, không gõ, không có cử chỉ thừa. Kiểm soát tuyệt đối. Không phải kiểm soát bằng nỗ lực. Bằng thói quen. Ngàn lần luyện tập cho đến khi bình tĩnh trở thành bản năng.</p>
+
+    <p class="thought">Mắt. Mắt ông ta mới đáng sợ. Nhỏ, nhưng khi lướt qua hành lang, lướt qua từng chi tiết: bức tranh trên tường, vết xước trên sàn, cốc nước trong tay ta. Không bỏ sót. Kiểu mắt mà ngàn năm trước ta chỉ thấy ở hai loại người: đại tông sư, hoặc kẻ đã giết đủ nhiều để luôn cảnh giác.</p>
+
+    <p>CEO nói gì đó, cười, vỗ vai Lão Từ. Lão Từ không cười. Không đáp. Chỉ gật nhẹ, kiểu gật của kẻ cho phép con rối tiếp tục biểu diễn.</p>
+
+    <p class="short">Rồi, trên đường đi về phía thang máy, Lão Từ nhìn hắn.</p>
+
+    <p class="short">Không phải liếc ngang. Nhìn thẳng.</p>
+
+    <p>Mắt ông lão dừng lại ở hắn, đúng một giây. Không lâu hơn. Không ngắn hơn. Một giây, vừa đủ để nói: "Ta thấy mày."</p>
+
+    <p>Hắn đứng cạnh bình nước, cốc trong tay, mặt phẳng. Không gật, không chào, không tránh mắt. Nhìn lại.</p>
+
+    <p class="short">Một giây.</p>
+
+    <p class="short">Rồi Lão Từ quay đi, bước vào thang máy. Cửa đóng.</p>
+
+    <p class="thought">Một giây. Đủ rồi.</p>
+
+    <p class="thought">Ông ta nhìn ta. Không phải nhìn nhân viên. Nhìn mối đe dọa. Ông ta biết ta là ai. Không phải biết tên. Biết loại. Ông ta đã thấy cách Vạn Lý thay đổi ba tháng qua: Ngô Hải bị đuổi, khách hàng tăng, phòng Kinh doanh có lãnh đạo mới, VP bị cắt quyền. Ông ta nhìn những thay đổi đó và thấy bàn tay. Và bàn tay đó thuộc về ai?</p>
+
+    <p class="thought">Thuộc kẻ đang đứng cầm cốc nước ở cuối hành lang. Kẻ duy nhất ông ta không nhận ra trong danh sách nhân viên cũ. Kẻ mới. Kẻ thay đổi.</p>
+
+    <p class="thought">Lão Từ không cần bằng chứng. Ông ta đọc mô hình. Giống cách ta đọc người. Nhưng ông ta đọc cả hệ thống.</p>
+
+    <p>Hắn đặt cốc nước xuống. Bước vào thang máy khác. Xuống tầng mười hai.</p>
+
+    <p>Tim đập bình thường. Mặt bình thường. Nhưng bên trong, thứ gì đó khác. Không phải sợ. Chưa đến mức sợ. Là cảnh giác. Kiểu cảnh giác mà hắn đã không cảm thấy từ ngàn năm trước, từ khi liên minh chính đạo bao vây Cửu U Sơn.</p>
+
+    <p class="thought">Lão Từ đã biết ta. Và ta đã biết Lão Từ biết.</p>
+
+    <p class="thought">Trò chơi vừa lên tầng mới.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tối. Căn hộ.</p>
+
+    <p>Hàn Kiêu đi gặp khách hàng, chưa về. Hắn một mình.</p>
+
+    <p>Không bật đèn. Ngồi ở bàn, bóng tối quanh. Ánh đèn đường hắt vào trần nhà qua khe cửa sổ, vệt sáng mỏng di chuyển khi có xe chạy ngang.</p>
+
+    <p>Hắn không mở sổ tay. Không lấy tờ giấy sơ đồ. Không lên kế hoạch.</p>
+
+    <p>Lần đầu tiên kể từ khi trọng sinh, hắn ngồi im. Không phải thiền. Không phải nghỉ. Là nghĩ. Nghĩ thật.</p>
+
+    <p class="thought">Lão Từ. Sáu mươi tám tuổi. Bốn mươi năm thương trường. Bốn công ty, cùng mô hình, không ai phát hiện. Phá sản đối thủ bằng luật, bằng quan hệ, bằng tiền. Không bao giờ lộ mặt. Không bao giờ để dấu vết.</p>
+
+    <p class="thought">Ta có gì? Hai mươi bảy tuổi. Ba tháng ở Vạn Lý. Một đội năm người. Một đồng minh tên Tô Vãn. Một chiến khuyển tên Hàn Kiêu. Một kỹ sư hệ thống tên Trương Phong. Và một ổ lưu trữ giấu trong giày cũ.</p>
+
+    <p class="thought">Lão Từ có gì? Bốn mươi năm. Bốn công ty. Luật sư. Quan hệ. Tiền. Hệ thống. Và sự vô hình.</p>
+
+    <p class="thought">So sánh... chênh lệch.</p>
+
+    <p class="short">Hắn nhắm mắt.</p>
+
+    <p class="thought">Ngàn năm trước, ta luôn là kẻ mạnh nhất trong phòng. Khi liên minh, ta mạnh hơn đồng minh. Khi đấu, ta mạnh hơn đối thủ. Khi bao vây, ta mạnh hơn kẻ bao vây. Cho đến đêm cuối cùng trên Cửu U Sơn.</p>
+
+    <p class="thought">Đêm đó, mười hai đại tông phái hợp sức. Mười hai. Ta một mình. Và ta thua. Lần duy nhất. Lần cuối cùng.</p>
+
+    <p class="thought">Kiếp này, ta không có linh lực, không có pháp bảo, không có ngàn đệ tử. Chỉ có trí tuệ và Ma Tâm Quan. Đó là tất cả.</p>
+
+    <p class="thought">Đủ không?</p>
+
+    <p class="thought">Không biết.</p>
+
+    <p>Hắn mở mắt. Nhìn trần nhà.</p>
+
+    <p class="thought">Lần đầu tiên kể từ khi trọng sinh, ta không biết câu trả lời.</p>
+
+    <p class="thought">Lần đầu tiên kể từ khi trọng sinh, ta thấy... bé.</p>
+
+    <p>Bóng tối trong phòng đặc hơn. Đèn đường bên ngoài nhấp nháy, rồi tắt, rồi sáng lại. Tiếng xe máy xa xa. Tiếng ai đó cãi nhau ở tầng dưới, rồi im.</p>
+
+    <p>Hắn ngồi trong bóng tối. Không vẽ sơ đồ. Không soạn kế hoạch. Không nhắn tin. Không gọi ai.</p>
+
+    <p class="thought">Nhưng...</p>
+
+    <p>Hắn hít thở sâu. Chậm. Kiểu thở mà ngàn năm tu luyện đã khắc vào xương: khi không biết phải làm gì, hít thở. Khi tất cả sụp đổ, hít thở. Khi cả thế giới chống lại, hít thở. Vì kẻ còn thở là kẻ còn sống. Và kẻ còn sống là kẻ còn cơ hội.</p>
+
+    <p class="thought">Ta đã thua một lần. Trên Cửu U Sơn. Mười hai tông phái bao vây. Kiếm xuyên ngực. Chết.</p>
+
+    <p class="thought">Nhưng ta đang ngồi đây. Nghĩa là chết cũng không phải kết thúc.</p>
+
+    <p class="thought">Lão Từ mạnh hơn ta bây giờ. Đúng. Nhưng "bây giờ" không phải "mãi mãi." Ba tháng trước, ta là nhân viên cạnh nhà vệ sinh. Bây giờ ta quản lý hai mươi hai người và có bằng chứng đủ để lật CEO.</p>
+
+    <p class="thought">Ba tháng nữa, ta sẽ ở đâu?</p>
+
+    <p class="thought">Lão Từ không biết. Và đó là lợi thế duy nhất của ta: kẻ bị đánh giá thấp luôn có yếu tố bất ngờ.</p>
+
+    <p>Hắn đứng dậy. Đi đến cửa sổ. Nhìn ra ngoài.</p>
+
+    <p>Thành phố đêm. Đèn sáng. Hàng triệu người đang ngủ, đang thức, đang vui, đang khổ. Không ai biết ở tầng sáu một chung cư cũ, một kẻ đang nhìn xuống thành phố và lần đầu tiên trong ngàn năm, cảm thấy nhỏ bé.</p>
+
+    <p class="thought">Ngàn năm trước, ta luôn là kẻ mạnh nhất trong phòng.</p>
+
+    <p class="thought">Kiếp này... chưa chắc.</p>
+
+    <p class="thought">Nhưng "chưa chắc" không phải "chắc chắn thua."</p>
+
+    <p class="thought">Và Ma Tôn chưa bao giờ biết thua.</p>
+
+    <p>Hắn quay lại bàn. Bật đèn.</p>
+
+    <p>Lấy tờ giấy sơ đồ. Mở ra. Nhìn.</p>
+
+    <p>Ở góc trên, nơi trước đây chỉ có dấu chấm hỏi, hắn viết. Chữ nhỏ, nét cứng.</p>
+
+    <p class="short">"Từ Đại Phú. Lão Từ. Quỹ Vĩnh An. Chủ bàn cờ."</p>
+
+    <p class="short">Rồi bên dưới, một dòng mới. Gạch chân.</p>
+
+    <p class="short">"Thay bàn cờ."</p>
+
+    <p class="short">Gấp lại. Cất đi. Tắt đèn.</p>
+
+    <p class="short">Nằm xuống. Nhắm mắt.</p>
+
+    <p>Không ngủ ngay. Nằm trong bóng tối, mắt mở, nhìn trần nhà.</p>
+
+    <p class="thought">Ngày mai. Kế hoạch mới. Không chỉ lật CEO. Phải tách Vạn Lý khỏi Lão Từ. Phải cắt dây tơ mà không làm nhện tỉnh.</p>
+
+    <p class="thought">Hoặc phải giết nhện.</p>
+
+    <p>Mắt hắn dần nhắm. Giấc ngủ đến muộn, nặng, kiểu ngủ của kẻ vừa nhìn thấy đối thủ thật sự lần đầu tiên.</p>
+
+    <p class="short">Bên ngoài, gió đêm lặng. Thành phố ngủ.</p>
+
+    <p>Nhưng ở đâu đó trong thành phố, trong một biệt thự kín cổng, một ông lão tóc bạc ngồi uống trà, mắt nhìn ra vườn tối. Và nghĩ về một kẻ trẻ tuổi đứng cuối hành lang tầng mười lăm, cầm cốc nước, mắt không tránh.</p>
+
+    <p class="short">Ông lão nhấp trà. Chậm. Đặt cốc xuống.</p>
+
+    <p>Và lần đầu tiên trong nhiều năm, ông ta ghi nhận một cái tên mới.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-21.html">&larr; Chương trước</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.050 từ &middot; Chương 22 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

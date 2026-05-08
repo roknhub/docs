@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 26 — Câu Nói Không Nên Nói | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-25.html">&larr; CHƯƠNG 25</a>
+      <span class="chapter-indicator">26/30</span>
+      <a href="chapter-27.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 26</div>
+      <h1>Câu Nói Không Nên Nói</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hắn về kinh thành sáng hôm sau. Diệp Trúc Khanh đi trước, biến vào mái nhà. Hắn đi sau, vào phủ, thay áo, vào cung.</p>
+
+<p>Trấn khí vận cho vua. Như mỗi ngày.</p>
+
+<p>Nhưng hôm nay khác. Hôm nay, hắn nhìn Thiên Cơ bằng đôi mắt mới.</p>
+
+<p>Ngồi cạnh vua. Nhắm mắt. Không bật Thiên Diễn Đồng. Để rỗng. Và nhìn.</p>
+
+<p>Lưới hiện. Mờ, nhưng có. Và nút ở vị trí vua, hắn thấy rõ hơn bao giờ hết.</p>
+
+<p>Nút đen. Không phải đen kiểu khí vận xấu mà hắn từng thấy bằng Thiên Diễn Đồng. Đen kiểu... tắt. Nút đang tắt dần. Sợi nối giữa vua và lưới Thiên Cơ mỏng, đứt dần, như dây đàn căng quá sẽ đứt.</p>
+
+<p class="thought"><em>Vua đang tách khỏi Thiên Cơ. Không phải Thiên Cơ bỏ vua. Vua đang rời khỏi lưới.</em></p>
+
+<p class="thought"><em>Nghĩa là gì?</em></p>
+
+<p class="thought"><em>Nghĩa là vua sắp chết.</em></p>
+
+<p class="thought"><em>Sợi nối đứt = vận mệnh kết thúc. Và sợi của vua, đang đứt.</em></p>
+
+<p class="thought"><em>Bao lâu?</em></p>
+
+<p>Hắn tập trung. Cố nhìn. Sợi mỏng, rung, nhưng chưa đứt hẳn. Còn bám. Yếu.</p>
+
+<p class="thought"><em>Không biết chính xác. Nhưng... không lâu. Không phải năm. Tháng? Có thể. Năm? Khó.</em></p>
+
+<p class="thought"><em>Ba năm?</em></p>
+
+<p class="thought"><em>Ba năm.</em></p>
+
+<p class="thought"><em>Câu mình nói ngày đầu tiên trên pháp trường: "Quốc vận sụp trong ba năm."</em></p>
+
+<p class="thought"><em>Mình bịa. Lúc đó mình bịa. Nhưng bây giờ...</em></p>
+
+<p class="thought"><em>Bây giờ, nhìn sợi dây vận mệnh của vua, "ba năm" có thể đúng. Hoặc ít hơn.</em></p>
+
+<p class="thought"><em>Mình bịa, và lời bịa thành thật. Lại.</em></p>
+
+<p>Hắn mở mắt. Nhìn vua. Vua đang ngủ. Mệt. Gầy. Tay đặt trên đùi, xương lộ.</p>
+
+<p class="thought"><em>Vua không sống quá ba năm.</em></p>
+
+<p class="thought"><em>Mình biết. Bây giờ mình biết thật, không phải đoán.</em></p>
+
+<p class="thought"><em>Và mình không thể nói cho ai.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Buổi tối. Quốc Sư Phủ.</p>
+
+<p>Hắn ngồi trong phòng. Một mình. Đèn dầu. Yên tĩnh.</p>
+
+<p>Tiểu Phúc mang trà vào. Gã nhìn hắn, mắt lo:</p>
+
+<p>— Quốc Sư, mấy ngày Quốc Sư đi, Tiểu nhân lo lắm. Phúc An cũng chưa về.</p>
+
+<p class="thought"><em>Phúc An chưa về. Hơn hai tuần rồi.</em></p>
+
+<p>— Tiểu Phúc, có tin gì từ Phúc An không?</p>
+
+<p>— Dạ, không. Không một tin.</p>
+
+<p class="thought"><em>Không tin. Hai tuần. Ba ngày đường. Lẽ ra đã về.</em></p>
+
+<p class="thought"><em>Nút Thanh Hà rung. Gặp chuyện.</em></p>
+
+<p>Hắn vuốt cằm. Nghĩ.</p>
+
+<p class="thought"><em>Phải gửi người thứ hai. Hoặc tự đi. Nhưng không thể tự đi. Vua cần mình trấn khí vận mỗi ngày. Bỏ đi = vua mất niềm tin = khí vận sụp nhanh hơn.</em></p>
+
+<p class="thought"><em>Bị kẹt. Lại bị kẹt.</em></p>
+
+<p>— Tiểu Phúc, gọi Trần Phú vào.</p>
+
+<p>Tiểu Phúc đi. Trần Phú vào. Quản gia, lính cũ, gián điệp Vương Bách Nhẫn.</p>
+
+<p class="thought"><em>Mình biết gã là gián điệp. Gã không biết mình biết. Và hôm nay, mình sẽ dùng gã.</em></p>
+
+<p>— Trần Phú, ta cần người đi trấn Thanh Hà. Phúc An đi lâu chưa về, ta lo. Ngươi chọn hai người đáng tin, đi ngay sáng mai.</p>
+
+<p>Trần Phú gật đầu.</p>
+
+<p>— Thần xin tuân lệnh.</p>
+
+<p class="thought"><em>Gã sẽ đi. Hoặc sai người đi. Và sẽ báo Vương Bách Nhẫn: "Quốc Sư đang tìm con bé Thiên Mệnh."</em></p>
+
+<p class="thought"><em>Kệ. Bây giờ cần tìm Phúc An hơn cần giấu. Và nếu Vương Bách Nhẫn biết, ít nhất gã sẽ không dám hại A Ly công khai. Vì A Ly là "Thiên Mệnh" mà cả thiên hạ tin.</em></p>
+
+<p>Trần Phú lui ra.</p>
+
+<p>Hắn ngồi lại. Uống trà. Và nghĩ.</p>
+
+<p class="thought"><em>Vua không sống quá ba năm. Mình biết. Và mình phải giữ bí mật này.</em></p>
+
+<p class="thought"><em>Vì nếu lộ, mọi thứ sụp.</em></p>
+
+<p class="thought"><em>Nếu dân biết vua sắp chết, hoảng loạn. Nếu triều đình biết, tranh giành ngai. Nếu Bắc Nguyên biết, tấn công.</em></p>
+
+<p class="thought"><em>Bí mật. Phải giữ.</em></p>
+
+<p>Gõ cửa. Nhẹ.</p>
+
+<p>— Ai?</p>
+
+<p>— Quốc Sư, Xuân Nhi mang canh.</p>
+
+<p>— Vào.</p>
+
+<p>Xuân Nhi vào. Đặt bát canh trên bàn. Cúi đầu. Lui.</p>
+
+<p>Hắn nhìn canh. Bùi nấu. Gián điệp Vương Bách Nhẫn nấu.</p>
+
+<p class="thought"><em>Phúc An không ở đây kiểm tra. Mình ăn canh do gián điệp nấu.</em></p>
+
+<p class="thought"><em>Nhưng Bùi không dám đầu độc bây giờ. Mình vừa chỉ ra nội gián Hoắc Quang Nghĩa. Giết Quốc Sư lúc này = tự sát.</em></p>
+
+<p class="thought"><em>An toàn. Tạm thời.</em></p>
+
+<p>Hắn uống canh. Nóng. Ngon. Gã Bùi nấu ăn giỏi thật, bất kể gã là gián điệp.</p>
+
+<p>Rồi cửa phòng mở. Không gõ. Mở thẳng.</p>
+
+<p>Hắn ngẩng lên.</p>
+
+<p>Lục Thanh Dao đứng ở cửa.</p>
+
+<p>Không báo trước. Không thị vệ. Một mình. Áo xanh nhạt, tóc xổ, kiểu nàng khi gặp riêng.</p>
+
+<p>— Vương gia?</p>
+
+<p>— Ngươi đi hai ngày. Ta đến kiểm tra.</p>
+
+<p class="thought"><em>Nàng kiểm tra. Nàng biết mình đi. Thị vệ báo? Hay nàng có cách riêng?</em></p>
+
+<p>— Thần đi gặp... người quen. Bên ngoài.</p>
+
+<p>Nàng không hỏi ai. Bước vào. Ngồi.</p>
+
+<p>Hắn rót trà. Nàng nhận. Uống.</p>
+
+<p>Im lặng. Kiểu im lặng quen thuộc giữa hai người. Không nặng. Không nhẹ. Chỉ là hai người ngồi cạnh nhau, không cần nói.</p>
+
+<p>Rồi nàng hỏi:</p>
+
+<p>— Bệ hạ thế nào?</p>
+
+<p class="thought"><em>Câu hỏi bình thường. Nhưng Thiên Diễn Đồng đọc: lo lắng thật. Nàng lo cho vua. Dù nàng nắm quyền, dù vua sợ nàng, nàng vẫn lo.</em></p>
+
+<p class="thought"><em>Và mình biết câu trả lời thật. Vua không sống quá ba năm.</em></p>
+
+<p class="thought"><em>Nói không?</em></p>
+
+<p>— Bệ hạ ổn. Khí vận đang hồi. Chậm, nhưng hồi.</p>
+
+<p class="thought"><em>Dối. Mình dối nàng. Lần đầu tiên kể từ khi hai người bắt đầu nói thật với nhau.</em></p>
+
+<p class="thought"><em>Nhưng không thể nói thật. Nàng là Nhiếp Chính Vương. Nếu nàng biết vua sắp chết, nàng sẽ phải chuẩn bị. Và chuẩn bị, ở triều đình, nghĩa là chính trị. Nghĩa là phe phái. Nghĩa là hỗn loạn.</em></p>
+
+<p class="thought"><em>Giữ bí mật. Vì vua. Vì nước. Và vì nàng.</em></p>
+
+<p>Nàng nhìn hắn. Lâu. Thiên Diễn Đồng đọc: nàng không tin. Không hoàn toàn. Nàng đọc hắn đủ giỏi để biết hắn đang giấu.</p>
+
+<p>Nhưng nàng không hỏi thêm. Vì nàng cũng giấu. Và hai kẻ giấu, tôn trọng khoảng giấu của nhau.</p>
+
+<p>Im lặng tiếp. Trà. Gió. Đèn.</p>
+
+<p>Rồi hắn nói. Không biết tại sao. Không tính toán. Chỉ nói, vì cần nói cho ai đó nghe:</p>
+
+<p>— Vương gia, nếu... nếu bệ hạ không khỏe trong thời gian dài, nàng sẽ làm gì?</p>
+
+<p>Nàng nhìn hắn.</p>
+
+<p>— Giữ.</p>
+
+<p>Một chữ.</p>
+
+<p>— Giữ ngai cho bệ hạ. Giữ nước cho bệ hạ. Giữ đến khi bệ hạ khỏe.</p>
+
+<p class="thought"><em>"Giữ đến khi bệ hạ khỏe." Nàng vẫn tin vua sẽ khỏe.</em></p>
+
+<p class="thought"><em>Và mình biết vua sẽ không.</em></p>
+
+<p>Hắn mở miệng. Và câu tiếp theo tuôn ra, không qua não, như mọi câu định mệnh mà hắn đã nói:</p>
+
+<p>— Bệ hạ... có thể không khỏe. Lâu.</p>
+
+<p>Nàng nhìn hắn. Mắt sắc lại.</p>
+
+<p>— Ngươi nói gì?</p>
+
+<p class="thought"><em>Mình nói gì? Mình vừa nói gì?</em></p>
+
+<p class="thought"><em>Mình vừa gợi ý vua sẽ không khỏe. Trước mặt Nhiếp Chính Vương.</em></p>
+
+<p class="thought"><em>Tại sao? Vì lo cho nàng? Vì muốn nàng chuẩn bị? Vì không chịu nổi việc dối nàng?</em></p>
+
+<p>— Thần... thần nhìn thấy khí vận bệ hạ. Chưa tốt. Và Thiên Cơ...</p>
+
+<p>Dừng. Cắn môi.</p>
+
+<p class="thought"><em>Dừng. Dừng ngay. Đừng nói thêm.</em></p>
+
+<p>Nhưng nàng đã nghe. Và nàng đủ thông minh để hiểu thứ hắn không nói.</p>
+
+<p>— Ngươi đang nói bệ hạ sẽ...</p>
+
+<p>— Thần không nói gì cụ thể. Thiên Cơ không chắc chắn.</p>
+
+<p class="thought"><em>Rút. Rút lại. Như mọi lần.</em></p>
+
+<p>Nhưng đã muộn. Nàng đã nghe. Và trong mắt nàng, hắn thấy: hiểu. Nàng hiểu. Không cần hắn nói rõ.</p>
+
+<p>Im lặng. Nặng nhất kể từ khi hai người quen nhau.</p>
+
+<p>Rồi nàng đứng dậy.</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Giọng lạnh. Lạnh hơn Thanh Phong Các. Lạnh kiểu "bản vương," không phải "ta."</p>
+
+<p>— Chuyện này, đừng nói với ai.</p>
+
+<p>— Thần biết.</p>
+
+<p>— Không. Ngươi không biết.</p>
+
+<p>Nàng nhìn hắn. Mắt không mềm như lần trước. Sắc. Đau. Kiểu đau của người vừa nhận tin mà mình đã ngờ nhưng không muốn tin.</p>
+
+<p>— Nếu lời này lọt ra, ngươi chết. Không phải ta giết. Triều đình giết. Dân giết. Vì ngươi vừa phán tử hình cho vua.</p>
+
+<p>Rồi nàng đi.</p>
+
+<p>Cửa đóng. Bước chân xa. Im.</p>
+
+<p>Tạ Cảnh Minh ngồi một mình. Tay run.</p>
+
+<p class="thought"><em>Mình vừa nói gì?</em></p>
+
+<p class="thought"><em>Mình vừa gợi ý vua sắp chết. Trước mặt Lục Thanh Dao.</em></p>
+
+<p class="thought"><em>Nàng sẽ không nói. Nàng sẽ giữ. Vì nàng cũng biết giữ bí mật.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Nàng đến không báo trước. Cửa phòng mở. Xuân Nhi vừa ra. Trần Phú ở hành lang.</em></p>
+
+<p class="thought"><em>Ai đã nghe?</em></p>
+
+<p>Hắn đứng dậy. Mở cửa. Nhìn hành lang. Trống.</p>
+
+<p class="thought"><em>Trống. Không ai.</em></p>
+
+<p class="thought"><em>Hay đã đi rồi?</em></p>
+
+<p class="thought"><em>Trần Phú. Quản gia. Gián điệp Vương Bách Nhẫn. Gã đứng ở hành lang khi Lục Thanh Dao vào. Gã có nghe không?</em></p>
+
+<p class="thought"><em>Mình nói nhỏ. Trong phòng. Cửa đóng.</em></p>
+
+<p class="thought"><em>Nhưng cửa gỗ mỏng. Và gián điệp biết cách nghe.</em></p>
+
+<p class="thought"><em>Nếu Trần Phú nghe được "bệ hạ có thể không khỏe lâu"...</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn sẽ biết. Và gã sẽ dùng.</em></p>
+
+<p class="thought"><em>"Quốc Sư phán vua sắp chết."</em></p>
+
+<p class="thought"><em>Câu đó, trong tay Vương Bách Nhẫn, là vũ khí.</em></p>
+
+<p>Hắn ngồi xuống. Tay nắm chặt.</p>
+
+<p class="thought"><em>Mình vừa tự bắn vào chân.</em></p>
+
+<p class="thought"><em>Vì không kiểm soát được miệng. Vì lo cho Lục Thanh Dao. Vì muốn nói thật.</em></p>
+
+<p class="thought"><em>Và lần đầu tiên, nói thật có thể giết mình.</em></p>
+
+<p>Gió đêm lùa qua cửa sổ. Lạnh. Đèn lay.</p>
+
+<p>Và ở đâu đó trong phủ, có thể, một đôi tai đã nghe thứ không nên nghe.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-25.html">&larr; CHƯƠNG 25</a>
+      <a href="chapter-27.html">CHƯƠNG 27 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.634 TỪ</div>
+
+  </div>
+</body>
+</html>

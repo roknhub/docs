@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 17 — Thiên Ngoại Các | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-16.html">&larr; CHƯƠNG 16</a>
+      <span class="chapter-indicator">17/30</span>
+      <a href="chapter-18.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 17</div>
+      <h1>Thiên Ngoại Các</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Sáng hôm sau, Tạ Cảnh Minh quay lại Trường Xuân Cung.</p>
+
+<p>Bàn cờ vẫn ở đó. Quân mã hắn đã đi tối qua vẫn ở vị trí mới. Và bên cạnh, một nước đáp. Xe đen tiến lên, chặn mã.</p>
+
+<p>Nước hay. Nhanh. Nghĩa là gã đã đến ngay sau khi hắn đi.</p>
+
+<p>Và dưới bàn cờ, một mảnh giấy mới.</p>
+
+<p>Hắn cầm lên. Đọc:</p>
+
+<p>"Thiên Ngoại Các không phải kẻ thù. Nhưng cũng không phải bạn. Chúng tôi là người ghi chép. Ghi chép Thiên Cơ từ ba trăm năm trước. Mỗi Quốc Sư, chúng tôi đều xem. Ngươi là người thứ mười bảy."</p>
+
+<p>Lật mặt sau:</p>
+
+<p>"Người thứ mười sáu, Quốc Sư thật, có thể nhìn Thiên Cơ nhưng không thể uốn nó. Ngươi, kẻ giả, uốn Thiên Cơ mà không biết mình đang uốn. Đó là lý do chúng tôi chú ý."</p>
+
+<p class="thought"><em>Ba trăm năm. Mười bảy Quốc Sư. Tổ chức quan sát xuyên suốt lịch sử.</em></p>
+
+<p class="thought"><em>Và mình khác tất cả: uốn Thiên Cơ mà không biết.</em></p>
+
+<p class="thought"><em>"Uốn." Không phải "nhìn." Uốn. Bẻ cong. Thay đổi.</em></p>
+
+<p class="thought"><em>Quốc Sư thật nhìn được Thiên Cơ, như đọc sách. Mình không đọc được, nhưng mỗi lời mình nói, sách tự viết lại.</em></p>
+
+<p class="thought"><em>Tại sao?</em></p>
+
+<p>Hắn đặt giấy xuống. Lấy bút. Viết mặt sau:</p>
+
+<p>"Ta muốn hiểu. Nhưng trước hết, ta cần sửa tin Bắc Nguyên. Ngươi có cách nào?"</p>
+
+<p>Đặt lại bàn cờ. Đi một nước: tượng chéo, mở đường cho xe trắng.</p>
+
+<p>Rồi quay về phủ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Vấn đề Bắc Nguyên không thể chờ thêm.</p>
+
+<p>Tin "Quốc Sư phán Bắc Nguyên rút quân" đã lan khắp kinh thành. Quán trà, chợ, cổng thành, ngoại tỉnh. Dân bình thản, không lo. Vì Quốc Sư đã nói.</p>
+
+<p>Nhưng khí đen phía bắc ngày càng dày. Hắn nhìn mỗi đêm. Không giảm. Tăng.</p>
+
+<p class="thought"><em>Bắc Nguyên không rút. Và dân đang tin mình nói rút. Khoảng cách giữa thực tế và niềm tin ngày càng rộng. Khi khoảng cách đó bị lấp, bằng tin tình báo, bằng quân Bắc Nguyên tràn biên giới, bằng bất kỳ cách nào, niềm tin sẽ sụp.</em></p>
+
+<p class="thought"><em>Và khi niềm tin sụp, Thiên Cơ quanh mình sẽ vỡ. Không phải vỡ từ từ. Vỡ như đập nước.</em></p>
+
+<p class="thought"><em>Phải sửa. Nhưng không thể nói thẳng "ta nói sai." Mất tất cả.</em></p>
+
+<p class="thought"><em>Phải xoay. Kiểu mà kiếp trước mình gọi là "điều chỉnh thông điệp." Không phủ nhận cũ, không khẳng định mới. Thay đổi góc nhìn.</em></p>
+
+<p>Hắn ngồi nghĩ cả buổi chiều. Rồi tìm ra.</p>
+
+<p class="thought"><em>Không nói "rút" hay "không rút." Nói "thay đổi." Thiên Cơ phía bắc đang thay đổi. Trước đây có dấu hiệu lui, bây giờ dấu hiệu khác. Thiên Cơ không cố định, nó chuyển động.</em></p>
+
+<p class="thought"><em>Kiểu giải thích này hợp lý trong hệ thống Quốc Sư: Thiên Cơ không phải lời phán cuối cùng, mà là dòng chảy, có thể đổi hướng. Mình không sai vì mình nhìn đúng tại thời điểm đó. Chỉ là bây giờ nó đổi.</em></p>
+
+<p class="thought"><em>Hoàn hảo. Kiếp trước gọi đây là "pivot." Không nhận sai. Chỉ nói hoàn cảnh thay đổi.</em></p>
+
+<p>Hắn vào cung chiều hôm đó. Xin triệu kiến.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hoàng đế ngồi trên ngai. Mệt hơn. Khí đen dày hơn. Tạ Cảnh Minh cố không nhìn quá lâu vào lớp khí quanh vua.</p>
+
+<p>— Bệ hạ, thần có chuyện khẩn.</p>
+
+<p>Vua nhìn hắn. Mắt mệt nhưng tỉnh.</p>
+
+<p>— Nói.</p>
+
+<p>— Thiên Cơ phía bắc đang thay đổi. Trước đây thần cảm nhận hai luồng khí giằng co, luồng lui có phần mạnh. Nhưng mấy ngày gần đây, luồng tiến mạnh lên. Rõ ràng.</p>
+
+<p>Dừng. Nhìn vua.</p>
+
+<p>— Bệ hạ, Bắc Nguyên có thể đã quyết định không lui.</p>
+
+<p>Vua nhíu mày.</p>
+
+<p>— Vậy khanh trước đó nói...</p>
+
+<p>— Thần nói Thiên Cơ đang giằng co. Dân nghe thành "rút quân." Thần không phán "rút." Thần phán "biến." Và biến, bây giờ, nghiêng về phía nguy.</p>
+
+<p class="thought"><em>Đổ cho dân hiểu sai. Không phải mình nói sai. Dân nghe sai. Kiểu chính trị gia kiếp trước: "Tôi không nói vậy, truyền thông hiểu sai."</em></p>
+
+<p class="thought"><em>Rẻ tiền. Nhưng hiệu quả.</em></p>
+
+<p>Vua im lặng. Lâu. Rồi:</p>
+
+<p>— Nghĩa là Bắc Nguyên có thể đánh?</p>
+
+<p>— Có thể. Thần không chắc. Nhưng thần muốn bệ hạ chuẩn bị. Tốt hơn là chuẩn bị mà không cần, còn hơn cần mà không chuẩn bị.</p>
+
+<p class="thought"><em>Câu này thật. Lần hiếm hoi mình nói thật hoàn toàn trong đại điện.</em></p>
+
+<p>Vua gật đầu. Chậm. Không giận. Không nghi.</p>
+
+<p class="thought"><em>Tại sao không nghi? Vì mình không phán "rút." Mình phán "biến." Và giờ mình nói "biến đổi hướng." Logic. Hợp lý. Thiên Cơ thay đổi là chuyện bình thường. Quốc Sư đọc Thiên Cơ liên tục, cập nhật là đúng.</em></p>
+
+<p class="thought"><em>Kiếp trước, nhà khí tượng dự báo nắng rồi mưa, cũng không ai đuổi việc. Vì thời tiết thay đổi.</em></p>
+
+<p class="thought"><em>Thiên Cơ cũng là thời tiết. Chỉ là thời tiết của vận mệnh.</em></p>
+
+<p>— Quốc Sư, khanh đề nghị gì?</p>
+
+<p>— Bệ hạ nên cho bộ Binh chuẩn bị. Không huy động toàn quân, gây hoảng loạn. Nhưng tăng cường biên giới phía bắc. Và cho Trần Tử Kính biết: Thiên Cơ đang nghiêng.</p>
+
+<p class="thought"><em>Cho Trần Tử Kính thứ gã muốn: cớ tăng quân. Nhưng không cho hết: chỉ tăng cường, không huy động toàn bộ. Vương Bách Nhẫn không bị mất mặt quá nhiều. Giữ cân bằng.</em></p>
+
+<p>Vua gật.</p>
+
+<p>— Truyền chỉ cho bộ Binh. Tăng cường biên giới phía bắc. Không huy động toàn quân.</p>
+
+<p>Hắn cúi đầu. Lui ra.</p>
+
+<p>Suốt đường về, hắn thở nhẹ. Nhẹ hơn nhiều ngày.</p>
+
+<p class="thought"><em>Sửa xong. Không hoàn hảo, nhưng đủ. "Thiên Cơ thay đổi" thay vì "ta nói sai." Dân sẽ nghe: "Quốc Sư cập nhật, Bắc Nguyên nguy hiểm hơn." Không mất niềm tin. Chỉ chuyển hướng niềm tin.</em></p>
+
+<p class="thought"><em>Và nếu Bắc Nguyên thật sự đánh, mình đã cảnh báo. "Quốc Sư nói trước." Lại đúng.</em></p>
+
+<p class="thought"><em>Nếu Bắc Nguyên không đánh, "Quốc Sư cảnh báo nên Bắc Nguyên sợ." Cũng đúng.</em></p>
+
+<p class="thought"><em>Kiểu nào cũng thắng. Lại kiểu nào cũng thắng.</em></p>
+
+<p class="thought"><em>Nhưng mỗi lần thắng kiểu này, mình mất đi một phần gì đó. Không biết gọi là gì. Liêm sỉ? Đạo đức? Hay chỉ là sự trung thực với chính mình?</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quay lại Trường Xuân Cung.</p>
+
+<p>Bàn cờ. Nước mới. Xe đen lùi, nhường đường. Không phải nước tấn công. Nước... mở.</p>
+
+<p>Và giấy mới:</p>
+
+<p>"Cách ngươi sửa tin Bắc Nguyên, giỏi. Nhưng ngươi biết: mỗi lần xoay, niềm tin bị mài mỏng đi một lớp. Xoay đủ lần, niềm tin sẽ mỏng đến mức vỡ."</p>
+
+<p>Lật:</p>
+
+<p>"Quốc Sư thứ mười hai cũng từng xoay. Gã xoay bảy lần. Lần thứ tám, dân không tin nữa. Gã bị xử trảm trên chính pháp trường mà ngươi đã đứng."</p>
+
+<p class="thought"><em>Quốc Sư thứ mười hai. Xoay bảy lần. Bị xử trảm.</em></p>
+
+<p class="thought"><em>Trên cùng pháp trường với mình.</em></p>
+
+<p class="thought"><em>Gã đang cảnh báo. Không phải đe dọa. Cảnh báo bằng lịch sử.</em></p>
+
+<p class="thought"><em>Và lịch sử mà gã biết, mình không biết. Vì lịch sử này không có trong sách. Chỉ có trong ghi chép của Thiên Ngoại Các. Ba trăm năm ghi chép.</em></p>
+
+<p>Hắn ngồi xuống. Nhìn bàn cờ. Nghĩ.</p>
+
+<p class="thought"><em>Thiên Ngoại Các. "Những người xem cờ." Ba trăm năm. Mười bảy Quốc Sư. Ghi chép mọi thứ.</em></p>
+
+<p class="thought"><em>Họ biết Thiên Cơ hoạt động thế nào. Biết Quốc Sư nào thành công, nào thất bại. Biết quy luật.</em></p>
+
+<p class="thought"><em>Và mình, tên lừa đảo, đang phá vỡ quy luật của họ.</em></p>
+
+<p class="thought"><em>Quốc Sư thật: nhìn Thiên Cơ, đọc dòng chảy, phán theo dòng. Mình: không nhìn, không đọc, chỉ nói, và dòng chảy tự uốn theo.</em></p>
+
+<p class="thought"><em>Ngược. Hoàn toàn ngược.</em></p>
+
+<p class="thought"><em>Tại sao?</em></p>
+
+<p>Hắn lấy bút. Viết:</p>
+
+<p>"Mười sáu Quốc Sư trước, ai mạnh nhất?"</p>
+
+<p>Đi nước cờ: pháo trắng nhảy qua, đe dọa tướng đen.</p>
+
+<p>Rồi đứng dậy. Bước ra. Nhìn lên trời.</p>
+
+<p>Thiên Cơ chảy. Nhánh lớn sáng từ kinh thành, từ miếu thờ, từ triều đình. Và nhánh tối từ phía bắc. Hai dòng, sáng và tối, chảy song song, chưa va chạm.</p>
+
+<p class="thought"><em>Chưa. Nhưng sẽ.</em></p>
+
+<p class="thought"><em>Và khi hai dòng va nhau, chuyện gì xảy ra?</em></p>
+
+<p class="thought"><em>Mình không biết. Thiên Ngoại Các có lẽ biết. Nhưng họ không nói. Họ chỉ xem.</em></p>
+
+<p class="thought"><em>Xem cờ.</em></p>
+
+<p>Hắn quay về phủ. Đi qua sân hoàng cung. Đêm khuya, vắng, chỉ có tiếng bước chân tuần tra.</p>
+
+<p>Và trên đường về, hắn nghĩ đến câu hỏi mà không ai hỏi, nhưng hắn tự hỏi mình mỗi ngày:</p>
+
+<p class="thought"><em>Nếu Thiên Cơ chọn nghe một tên lừa đảo thay vì Quốc Sư thật...</em></p>
+
+<p class="thought"><em>Thì Thiên Cơ muốn gì?</em></p>
+
+<p class="thought"><em>Hay Thiên Cơ, cũng đang bị lừa?</em></p>
+
+<p>Không có câu trả lời. Chỉ có gió đêm, và tiếng bước chân, và bóng tối, và dòng chảy trên trời mà chỉ mình hắn nhìn thấy.</p>
+
+<p>Và ở đâu đó trong kinh thành, trong căn phòng tối, Thiên Ngoại Các đang viết.</p>
+
+<p>Dòng mới nhất trong ghi chép ba trăm năm:</p>
+
+<p>"Quốc Sư thứ mười bảy. Ngày thứ sáu mươi ba. Gã bắt đầu hỏi đúng câu hỏi."</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-16.html">&larr; CHƯƠNG 16</a>
+      <a href="chapter-18.html">CHƯƠNG 18 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.560 TỪ</div>
+
+  </div>
+</body>
+</html>

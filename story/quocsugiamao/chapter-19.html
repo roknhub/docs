@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 19 — Quốc Sư Cũng Biết Sợ | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-18.html">&larr; CHƯƠNG 18</a>
+      <span class="chapter-indicator">19/30</span>
+      <a href="chapter-20.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 19</div>
+      <h1>Quốc Sư Cũng Biết Sợ</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Sau ngày Hoắc Quang Nghĩa bị bắt, Tạ Cảnh Minh ngừng nói.</p>
+
+<p>Không phải ngừng hẳn. Vẫn nói chuyện vặt với Phúc An, vẫn trả lời Tiểu Phúc. Nhưng ngừng phán. Ngừng tiên tri. Ngừng mở miệng nói bất kỳ thứ gì có thể được hiểu là "Quốc Sư phán."</p>
+
+<p>Ba ngày. Không phán gì. Không gặp ai. Không vào cung. Lấy cớ "thiền định đọc Thiên Cơ, cần tĩnh lặng."</p>
+
+<p>Phúc An không hỏi. Tiểu Phúc không dám hỏi. Thị vệ báo về cung: "Quốc Sư đang thiền."</p>
+
+<p>Và trong ba ngày đó, hắn ngồi trong phòng. Một mình. Nghĩ.</p>
+
+<p class="thought"><em>Hoắc Quang Nghĩa. Mình chỉ tay, gã chết. Hai chữ, một mạng.</em></p>
+
+<p class="thought"><em>Gã đáng chết. Nội gián. Bán nước. Bằng chứng rõ ràng.</em></p>
+
+<p class="thought"><em>Nhưng mình không chỉ vì biết gã là nội gián. Mình chỉ vì Thiên Diễn Đồng đọc gã hoảng loạn. Mình đánh cược. Chín mươi phần trăm.</em></p>
+
+<p class="thought"><em>Nếu là tám mươi thì sao? Bảy mươi? Năm mươi?</em></p>
+
+<p class="thought"><em>Bao nhiêu phần trăm đủ để giết một người?</em></p>
+
+<p class="thought"><em>Và lần sau, nếu mình lại phải chỉ, mà xác suất chỉ sáu mươi?</em></p>
+
+<p>Hắn nhìn ngón tay. Ngón trỏ và giữa. Ngón tay chỉ.</p>
+
+<p class="thought"><em>Từ giờ, mỗi lần mình mở miệng, có thể có người chết. Không phải có thể. Chắc chắn. Vì bây giờ, lời mình có trọng lượng. Vua nghe. Triều đình nghe. Dân nghe.</em></p>
+
+<p class="thought"><em>Và mình không kiểm soát được hậu quả.</em></p>
+
+<p class="thought"><em>Mình nói "Thiên Cơ phía bắc có biến," vua điều quân. Mình nói "có nội gián," người chết. Mình nói "con bé ăn mày sẽ thay đổi thiên hạ," Thiên Cơ tạo Thiên Mệnh.</em></p>
+
+<p class="thought"><em>Mỗi câu, một hậu quả. Mỗi hậu quả, không rút lại được.</em></p>
+
+<p class="thought"><em>Vậy giải pháp là gì? Không nói?</em></p>
+
+<p>Hắn thử. Ba ngày không nói. Và phát hiện:</p>
+
+<p>Im lặng cũng tạo ảnh hưởng.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ngày thứ hai, Phúc An báo: "Ngoài kinh thành đang đồn: Quốc Sư im lặng ba ngày, nghĩa là Thiên Cơ đang biến lớn. Quốc Sư không dám nói, nghĩa là chuyện quá lớn."</p>
+
+<p class="thought"><em>Im lặng. Mình im lặng, và dân tự suy diễn. "Quốc Sư không nói = chuyện quá lớn để nói."</em></p>
+
+<p class="thought"><em>Mình không nói gì. Nhưng im lặng cũng là một câu. Và câu đó, dân tự viết.</em></p>
+
+<p>Ngày thứ ba, tin tệ hơn. Phúc An mặt trắng:</p>
+
+<p>— Quốc Sư, chợ phía đông có người hoảng loạn. Nói Quốc Sư im lặng vì nhìn thấy đại họa. Có người bắt đầu tích trữ lương thực. Có người muốn rời kinh thành.</p>
+
+<p class="thought"><em>Hoảng loạn. Vì mình im lặng.</em></p>
+
+<p class="thought"><em>Mình không nói gì. Và dân hoảng.</em></p>
+
+<p class="thought"><em>Nói cũng hậu quả. Im cũng hậu quả. Mình bị kẹt.</em></p>
+
+<p>Hắn đứng dậy. Thở dài.</p>
+
+<p class="thought"><em>Không thể im nữa. Im lặng đang gây hại hơn cả nói sai.</em></p>
+
+<p class="thought"><em>Phải nói gì đó. Cái gì đó an toàn, trung tính, không ai chết.</em></p>
+
+<p>— Phúc An, chuẩn bị. Ta vào cung.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đại điện. Hoàng đế triệu kiến riêng.</p>
+
+<p>Vua ngồi trên ngai, mắt lo. Khí đen quanh vua dày hơn. Mỗi lần gặp, hắn thấy dày hơn.</p>
+
+<p>— Quốc Sư, khanh ba ngày không vào cung. Trẫm lo.</p>
+
+<p class="thought"><em>Vua cũng lo vì mình im lặng. Cả kinh thành lo vì mình im lặng. Mình im lặng ba ngày, cả nước rung.</em></p>
+
+<p class="thought"><em>Quyền lực này... không phải quyền lực mình muốn.</em></p>
+
+<p>— Bệ hạ, thần xin lỗi. Thần cần tĩnh lặng để đọc Thiên Cơ sau biến cố lớn.</p>
+
+<p>Dừng.</p>
+
+<p>— Thiên Cơ hiện đang ổn. Không có đại họa. Biên giới phía bắc đã được tăng cường. Nội gián đã bị trừ. Quốc vận đang hồi.</p>
+
+<p class="thought"><em>Bốn câu. An toàn. Trung tính. Không ai chết.</em></p>
+
+<p class="thought"><em>"Quốc vận đang hồi." Có thật không? Mình không biết. Nhưng câu này sẽ khiến dân bớt hoảng. Và dân bớt hoảng thì quốc vận thật sự sẽ hồi, vì niềm tin tạo hiện thực.</em></p>
+
+<p class="thought"><em>Mình vừa dùng lời nói để tạo sự thật. Lại.</em></p>
+
+<p>Vua thở phào.</p>
+
+<p>— Tốt. Tốt.</p>
+
+<p>Rồi vua nghiêng người tới. Giọng nhỏ:</p>
+
+<p>— Quốc Sư, còn chuyện khác. Nhiếp Chính Vương muốn gặp khanh.</p>
+
+<p class="thought"><em>Lục Thanh Dao.</em></p>
+
+<p>— Vương gia muốn gặp thần?</p>
+
+<p>— Nàng ấy nói: có chuyện liên quan Bắc Nguyên, cần bàn với Quốc Sư. Trẫm đã đồng ý.</p>
+
+<p class="thought"><em>Lục Thanh Dao. Vắng sáu chương. Và bây giờ nàng muốn gặp.</em></p>
+
+<p class="thought"><em>Tại sao bây giờ? Vì Bắc Nguyên đánh thật? Vì mình chỉ ra nội gián? Vì mình im lặng ba ngày?</em></p>
+
+<p class="thought"><em>Hay vì tất cả?</em></p>
+
+<p>— Thần tuân chỉ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Thanh Phong Các. Chiều.</p>
+
+<p>Lần thứ hai hắn đến đây. Lần đầu là buổi trà đấu trí. Bao lâu rồi? Hai tháng? Ba tháng? Cảm giác như kiếp trước.</p>
+
+<p>Cùng phòng. Cùng bàn trà. Cùng ánh nắng chiều lọt qua cửa sổ.</p>
+
+<p>Nhưng hắn khác. Lần trước, hắn là tên bịp đang sống sót. Lần này, hắn là Quốc Sư vừa giết người.</p>
+
+<p>Lục Thanh Dao ngồi chờ. Áo tím sẫm. Tóc búi cao. Mặt bình thản. Nhưng Thiên Diễn Đồng đọc: mệt. Nàng mệt. Kiểu mệt mà hắn từng đọc lần đầu gặp: gánh nặng quá lâu, xương bắt đầu kêu.</p>
+
+<p class="thought"><em>Nàng mệt hơn lần trước. Bắc Nguyên, nội gián, phe phái, tất cả đang đè.</em></p>
+
+<p>— Quốc Sư.</p>
+
+<p>— Vương gia.</p>
+
+<p>Hắn ngồi. Nàng rót trà. Lần này, nàng rót trước, không chờ hắn rót.</p>
+
+<p class="thought"><em>Nàng rót trước. Lần trước, hắn rót, nàng cầm, không uống. Lần này nàng rót trước. Thay đổi nhỏ. Nhưng với Lục Thanh Dao, không gì là nhỏ.</em></p>
+
+<p>— Quốc Sư, ta sẽ nói thẳng.</p>
+
+<p>— Vương gia luôn nói thẳng.</p>
+
+<p>Khóe miệng nàng hơi cong. Gần như không thấy.</p>
+
+<p>— Hoắc Quang Nghĩa. Ngươi chỉ đúng.</p>
+
+<p>— Thần nhìn thấy khí phản.</p>
+
+<p>— Ngươi nhìn thấy gã mồ hôi trán giữa mùa thu. Và đoán.</p>
+
+<p>Im lặng.</p>
+
+<p class="thought"><em>Nàng biết. Đương nhiên nàng biết. Nàng là Lục Thanh Dao.</em></p>
+
+<p>Hắn không phủ nhận. Uống trà.</p>
+
+<p>— Vương gia gọi thần đến để nói điều đó?</p>
+
+<p>— Không. Ta gọi ngươi đến để nói điều này: Vương Bách Nhẫn sẽ trả thù.</p>
+
+<p>Hắn nhìn nàng.</p>
+
+<p>— Hoắc Quang Nghĩa là người của gã. Ngươi chỉ ra, gã mất một tay chân quan trọng. Gã sẽ không nuốt được.</p>
+
+<p class="thought"><em>Biết rồi. Mình biết. Nhưng nghe từ miệng Lục Thanh Dao, nặng hơn.</em></p>
+
+<p>— Vương gia có đề nghị gì?</p>
+
+<p>— Một đề nghị. Và một câu hỏi.</p>
+
+<p>Nàng đặt chén xuống. Nhìn thẳng hắn.</p>
+
+<p>— Đề nghị: đừng nói nữa. Ít nhất một thời gian. Ngươi đã nói quá nhiều, quá nhanh, quá mạnh. Mỗi lời ngươi nói, sóng lan xa, và sóng đó bây giờ đã lớn hơn ngươi kiểm soát được.</p>
+
+<p class="thought"><em>"Đừng nói nữa." Nàng đang nói điều mình vừa tự nghĩ ba ngày. Im lặng. Ngừng phán.</em></p>
+
+<p class="thought"><em>Nhưng mình vừa phát hiện: im lặng cũng tạo sóng.</em></p>
+
+<p>— Thần vừa thử im lặng ba ngày. Dân hoảng loạn.</p>
+
+<p>Nàng gật.</p>
+
+<p>— Ta biết. Ngươi đã quá lớn để im. Nhưng cũng quá nguy hiểm để nói. Đó là bàn cờ ngươi đang đứng.</p>
+
+<p>Dừng.</p>
+
+<p>— Câu hỏi.</p>
+
+<p>Nàng nghiêng đầu. Mắt sắc nhưng không lạnh. Có thứ gì đó khác trong đó. Thứ mà hắn từng bắt được lần đầu: cô đơn.</p>
+
+<p>— Ngươi có sợ không?</p>
+
+<p>Câu hỏi đơn giản. Bốn chữ. Nhưng Thiên Diễn Đồng bắt được: nàng hỏi thật. Không phải thử. Không phải bẫy. Hỏi thật.</p>
+
+<p class="thought"><em>Nàng muốn biết mình có sợ. Tại sao?</em></p>
+
+<p class="thought"><em>Vì nàng cũng sợ?</em></p>
+
+<p>Hắn nhìn nàng. Lâu.</p>
+
+<p class="thought"><em>Nói thật hay nói dối?</em></p>
+
+<p class="thought"><em>Với Lục Thanh Dao, nói dối không có ích. Nàng đọc dối như đọc sách.</em></p>
+
+<p>— Có.</p>
+
+<p>Một chữ. Nhẹ. Thật.</p>
+
+<p>— Thần sợ. Sợ mỗi lần mở miệng. Vì mỗi câu mình nói, có thể có người chết. Hoặc sống. Hoặc thay đổi vận mệnh. Và thần không kiểm soát được.</p>
+
+<p>Im lặng.</p>
+
+<p>Lục Thanh Dao nhìn hắn. Lâu. Thiên Diễn Đồng đọc: thứ gì đó rung, sâu, sau tường thành. Không phải đồng cảm. Gần hơn đồng cảm. Kiểu rung của người nhận ra mình không cô đơn.</p>
+
+<p>— Tốt.</p>
+
+<p>Nàng nói.</p>
+
+<p>— Quốc Sư biết sợ, nghĩa là Quốc Sư chưa điên.</p>
+
+<p>Dừng. Giọng nhẹ hơn.</p>
+
+<p>— Ta cũng sợ. Mỗi ngày. Mỗi chiếu chỉ ta ký, mỗi lệnh ta ban, có thể sai. Và sai, nghĩa là người chết. Nhưng không ký cũng người chết. Không ban cũng người chết.</p>
+
+<p>Nàng nhìn ra cửa sổ. Nắng chiều đổ trên mặt nàng, sắc cạnh, mệt.</p>
+
+<p>— Khác biệt giữa người nắm quyền và người không nắm quyền, không phải "ai giỏi hơn." Mà là "ai chịu được nặng hơn."</p>
+
+<p>Quay lại nhìn hắn.</p>
+
+<p>— Ngươi chịu được không?</p>
+
+<p class="thought"><em>Câu hỏi. Nàng đang hỏi mình có chịu được gánh nặng quyền lực không.</em></p>
+
+<p class="thought"><em>Và nàng hỏi vì... nàng cần biết. Vì nàng đang gánh một mình. Và nàng mệt.</em></p>
+
+<p class="thought"><em>Và có lẽ, sâu bên trong, nàng đang tìm ai đó cũng gánh được.</em></p>
+
+<p>— Thần chưa biết.</p>
+
+<p>Hắn nói. Thật.</p>
+
+<p>— Nhưng thần chưa bỏ chạy.</p>
+
+<p>Nàng nhìn hắn. Rồi, lần đầu tiên kể từ khi hắn quen nàng, Lục Thanh Dao cười.</p>
+
+<p>Không phải cười mỉa. Không phải cười chính trị. Cười thật. Nhẹ. Ngắn. Như nắng chiều lóe qua mây rồi tắt.</p>
+
+<p>— Chưa bỏ chạy. Được.</p>
+
+<p>Nàng đứng dậy.</p>
+
+<p>— Quốc Sư, ta sẽ nói thêm một điều. Không phải đề nghị. Không phải cảnh báo. Chỉ là... chia sẻ.</p>
+
+<p>Hắn chờ.</p>
+
+<p>— Lời nói có sức mạnh. Nhưng im lặng cũng có sức mạnh. Bí quyết không phải "nói hay im." Mà là "biết khi nào nói, khi nào im."</p>
+
+<p>Dừng.</p>
+
+<p>— Và cái giá của "biết," là phải chịu "không biết" rất lâu.</p>
+
+<p>Rồi nàng đi. Bước chân nhẹ. Cửa đóng.</p>
+
+<p>Tạ Cảnh Minh ngồi một mình trong Thanh Phong Các. Chén trà nàng rót cho hắn, lần này, hắn uống hết.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quốc Sư Phủ.</p>
+
+<p>Hắn ngồi dưới mái hiên. Nhìn trời.</p>
+
+<p class="thought"><em>Lục Thanh Dao cười. Nàng cười thật. Lần đầu.</em></p>
+
+<p class="thought"><em>Và nàng nói "ta cũng sợ." Lần đầu nàng thừa nhận sợ trước mặt ai đó.</em></p>
+
+<p class="thought"><em>Trước mặt mình.</em></p>
+
+<p class="thought"><em>Tại sao?</em></p>
+
+<p class="thought"><em>Vì mình nói thật "thần sợ"? Vì nàng cần ai đó cũng sợ? Vì cô đơn quá lâu, cần ai đó hiểu?</em></p>
+
+<p class="thought"><em>Hay vì mình, tên bịp, là người duy nhất nàng dám nói thật, vì nàng biết mình cũng đang nói dối cả thế giới?</em></p>
+
+<p class="thought"><em>Hai kẻ nói dối, gặp nhau, nói thật.</em></p>
+
+<p class="thought"><em>Buồn cười.</em></p>
+
+<p>Hắn nhìn Thiên Cơ. Dòng chảy sáng, đều, chảy về phía hắn.</p>
+
+<p>Và hắn nhận ra: ba ngày im lặng, khí vận không giảm. Ngược lại, có phần tăng.</p>
+
+<p class="thought"><em>Im lặng. Dân hoảng. Hoảng tạo niềm tin mạnh hơn bình thường. Niềm tin mạnh hơn = khí vận tăng.</em></p>
+
+<p class="thought"><em>Mình sợ, dân hoảng, khí vận tăng.</em></p>
+
+<p class="thought"><em>Nói cũng tăng. Im cũng tăng. Sợ cũng tăng.</em></p>
+
+<p class="thought"><em>Mọi thứ mình làm, đều nuôi Thiên Cơ.</em></p>
+
+<p class="thought"><em>Mình không phải quân cờ. Không phải bàn cờ. Mình là lò lửa. Và Thiên Cơ đang đốt mình để sáng.</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>Lục Thanh Dao nói: "lấy thân làm nến, soi sáng bóng tối." Nến tự cháy mình.</em></p>
+
+<p class="thought"><em>Nàng nói đúng. Từ đầu.</em></p>
+
+<p>Gió thổi. Lạnh. Và Tạ Cảnh Minh, lần đầu tiên, cảm thấy mệt kiểu Lục Thanh Dao mệt.</p>
+
+<p>Kiểu mệt của người gánh nặng quá lâu.</p>
+
+<p>Nhưng không bỏ xuống được.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-18.html">&larr; CHƯƠNG 18</a>
+      <a href="chapter-20.html">CHƯƠNG 20 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.986 TỪ</div>
+
+  </div>
+</body>
+</html>

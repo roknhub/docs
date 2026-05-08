@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 21 — Khí Vận Của Thiên Tử | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-20.html">&larr; CHƯƠNG 20</a>
+      <span class="chapter-indicator">21/30</span>
+      <a href="chapter-22.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 21</div>
+      <h1>Khí Vận Của Thiên Tử</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hoàng đế ho ra máu.</p>
+
+<p>Không phải ho nhẹ. Ho kiểu người bệnh nặng cố giấu nhưng không giấu nổi nữa. Tạ Cảnh Minh ngồi đối diện vua trong phòng ngự, thấy giọt máu rơi trên khăn trắng, đỏ sẫm, kiểu đỏ của bệnh đã lâu.</p>
+
+<p>Vua vội giấu khăn. Nhưng muộn. Hắn đã thấy.</p>
+
+<p>Và Thiên Diễn Đồng đã thấy nhiều hơn.</p>
+
+<p>Khí đen quanh vua không còn bao quanh. Nó đã ngấm vào. Sâu. Như rễ cây bám vào xương. Mỗi lần gặp vua, hắn thấy khí đen dày hơn, nhưng lần này khác. Lần này, khí đen không chỉ dày. Nó đang ăn.</p>
+
+<p class="thought"><em>Vua bệnh. Bệnh thật. Không phải mệt, không phải sợ. Bệnh.</em></p>
+
+<p class="thought"><em>Khí đen ngấm quá sâu. Mình đã thấy nó từ lần đầu gặp vua, nhưng lúc đó mỏng. Bây giờ, nó đang nuốt.</em></p>
+
+<p class="thought"><em>Quốc vận. Khí đen quanh vua là quốc vận suy. Hay vua bệnh nên quốc vận suy? Cái nào gây ra cái nào?</em></p>
+
+<p>— Bệ hạ.</p>
+
+<p>Hắn nói, giọng nhẹ.</p>
+
+<p>— Thần nhìn thấy khí vận bệ hạ... không ổn.</p>
+
+<p>Vua nhìn hắn. Mắt mệt. Không giật mình. Không sợ. Kiểu người đã biết mình bệnh, chỉ chờ ai đó nói ra.</p>
+
+<p>— Trẫm biết.</p>
+
+<p>Hai chữ. Nặng.</p>
+
+<p>— Thái y nói gì?</p>
+
+<p>— Thái y nói trẫm cần nghỉ ngơi. Nói mãi một câu. Nhưng trẫm không nghỉ được. Bắc Nguyên ở ngoài, nội gián ở trong, phe phái khắp nơi. Trẫm nghỉ ngày nào, ngai vàng rung ngày đó.</p>
+
+<p class="thought"><em>Vua biết. Vua biết mình bệnh. Và không dám nghỉ.</em></p>
+
+<p class="thought"><em>Kiểu người gánh nặng đến chết mà không buông. Vì buông thì tất cả đổ.</em></p>
+
+<p class="thought"><em>Giống mình. Giống Lục Thanh Dao. Ba người gánh ba thứ khác nhau, nhưng đều không bỏ xuống được.</em></p>
+
+<p>— Bệ hạ, thần nói thẳng. Khí vận quanh bệ hạ đang tối. Thần nhìn thấy từ lâu, nhưng giờ tối hơn. Nếu bệ hạ không nghỉ, khí vận sẽ không hồi.</p>
+
+<p>Vua cười. Cười mệt. Kiểu cười của người biết lời khuyên đúng nhưng không làm được.</p>
+
+<p>— Quốc Sư, nếu trẫm nghỉ, ai giữ ngai?</p>
+
+<p>— Nhiếp Chính Vương.</p>
+
+<p>Vua im lặng. Lâu.</p>
+
+<p>— Lục Thanh Dao giỏi. Trẫm biết. Nhưng nàng ấy nắm quyền quá lâu rồi. Nếu trẫm nghỉ, nàng ấy sẽ nắm thêm. Và đến lúc trẫm muốn lấy lại...</p>
+
+<p>Không nói hết. Nhưng hắn hiểu.</p>
+
+<p class="thought"><em>Vua sợ Lục Thanh Dao. Không phải sợ nàng hại. Sợ nàng giỏi quá, quen nắm quyền quá, đến lúc không trả lại.</em></p>
+
+<p class="thought"><em>Và sợ đó, giữ vua ngồi trên ngai, bệnh, mệt, ho ra máu, mà không dám nghỉ.</em></p>
+
+<p class="thought"><em>Chính trị. Bệnh tật. Quyền lực. Trộn lại thành xiềng.</em></p>
+
+<p>— Bệ hạ, thần có thể giúp khí vận hồi. Nhưng cần thời gian. Và cần bệ hạ tin thần.</p>
+
+<p>Vua nhìn hắn.</p>
+
+<p>— Trẫm tin khanh. Từ ngày khanh cứu trẫm khỏi thích khách.</p>
+
+<p class="thought"><em>Tin. Vua tin mình. Và niềm tin đó, ở thế giới này, có sức mạnh.</em></p>
+
+<p class="thought"><em>Nhưng mình chữa được bệnh vua không? Mình không phải thầy thuốc. Không có thuốc. Chỉ có lời nói và Thiên Cơ.</em></p>
+
+<p class="thought"><em>Lời nói chữa được bệnh?</em></p>
+
+<p class="thought"><em>Ở thế giới bình thường: không. Ở Đại Ly: có thể. Nếu vua tin mình chữa được, niềm tin đó ảnh hưởng Thiên Cơ quanh vua, Thiên Cơ đẩy khí vận, khí vận ảnh hưởng sức khỏe.</em></p>
+
+<p class="thought"><em>Hiệu ứng giả dược. Cấp quốc gia.</em></p>
+
+<p class="thought"><em>Nhưng giả dược có giới hạn. Bệnh nhẹ thì được. Bệnh nặng, giả dược chỉ kéo dài, không chữa khỏi.</em></p>
+
+<p class="thought"><em>Và nhìn khí đen quanh vua, bệnh không nhẹ.</em></p>
+
+<p>— Bệ hạ, thần sẽ "trấn khí vận" cho bệ hạ. Mỗi ngày. Giúp khí tối lui. Nhưng bệ hạ cũng phải nghe thái y. Nghỉ ngơi. Ăn uống. Không thức khuya phê tấu chương.</p>
+
+<p>Vua gật đầu.</p>
+
+<p>— Được.</p>
+
+<p class="thought"><em>Mình vừa hứa "trấn khí vận" cho vua. Thực chất là ngồi cạnh vua, giả vờ tịnh tọa, để vua tin mình đang chữa, và niềm tin đó kéo dài thời gian.</em></p>
+
+<p class="thought"><em>Kéo dài. Không phải chữa.</em></p>
+
+<p class="thought"><em>Mình biết sự khác biệt. Vua không biết.</em></p>
+
+<p class="thought"><em>Và mình không nói.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quốc Sư Phủ.</p>
+
+<p>Hắn ngồi một mình. Nghĩ.</p>
+
+<p class="thought"><em>Vua bệnh. Khí đen ngấm sâu. Quốc vận suy.</em></p>
+
+<p class="thought"><em>Nếu vua chết...</em></p>
+
+<p class="thought"><em>Ai lên ngôi? Vua có con? Mình không biết. Chưa ai nhắc. Nếu không có người kế vị rõ ràng, Lục Thanh Dao sẽ nắm toàn quyền. Hoặc phe phái tranh giành. Hoặc nội chiến.</em></p>
+
+<p class="thought"><em>Và Bắc Nguyên đang ở biên giới.</em></p>
+
+<p class="thought"><em>Vua chết + nội chiến + Bắc Nguyên = Đại Ly mất.</em></p>
+
+<p class="thought"><em>Mình phải giữ vua sống. Ít nhất đến khi Bắc Nguyên rút. Ít nhất đến khi triều đình ổn.</em></p>
+
+<p class="thought"><em>Nhưng mình không phải thầy thuốc. Mình là tên lừa đảo.</em></p>
+
+<p class="thought"><em>Và tên lừa đảo, ở thế giới này, đôi khi chữa bệnh giỏi hơn thầy thuốc. Vì thầy thuốc chữa bằng thuốc. Mình chữa bằng niềm tin. Và niềm tin, ở đây, mạnh hơn thuốc.</em></p>
+
+<p class="thought"><em>Nhưng niềm tin không chữa được mọi bệnh.</em></p>
+
+<p class="thought"><em>Và bệnh vua, mình sợ, đã quá sâu.</em></p>
+
+<p>Hắn nhìn lên trời. Thiên Cơ chảy. Nhánh sáng từ kinh thành, từ miếu thờ, từ dân chúng. Đổ về hắn. Mạnh. Đều.</p>
+
+<p>Nhưng có thứ hắn chưa thấy trước: ở trung tâm dòng chảy, gần đoạn chảy về phía hoàng cung, một vệt đen. Nhỏ. Nhưng rõ.</p>
+
+<p class="thought"><em>Vệt đen giữa dòng sáng. Ở vị trí hoàng cung. Ở chỗ vua ngồi.</em></p>
+
+<p class="thought"><em>Khí đen của vua đang ảnh hưởng Thiên Cơ. Không chỉ quanh vua. Đang lan ra.</em></p>
+
+<p class="thought"><em>Quốc vận. Vua là tâm điểm quốc vận. Vua bệnh, quốc vận bệnh. Quốc vận bệnh, dân bất an. Dân bất an, niềm tin giảm. Niềm tin giảm, Thiên Cơ yếu.</em></p>
+
+<p class="thought"><em>Vòng lặp ngược. Vòng lặp chết.</em></p>
+
+<p class="thought"><em>Và mình đang ngồi giữa vòng lặp đó, cố giữ cho nó không quay.</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>Kiếp trước, mình chạy. Thấy sắp sập thì chạy. Kiếp này...</em></p>
+
+<p class="thought"><em>Kiếp này, mình ngồi lại. Không phải vì dũng cảm. Vì không có chỗ chạy.</em></p>
+
+<p class="thought"><em>Và vì, lạ thay, mình không muốn chạy nữa.</em></p>
+
+<p class="thought"><em>Vì Tiểu Phúc. Vì Phúc An. Vì A Ly đâu đó ngoài kia. Vì Lục Thanh Dao mệt mà không buông. Vì vua ho ra máu mà vẫn ngồi trên ngai.</em></p>
+
+<p class="thought"><em>Vì ở đây, lần đầu trong hai kiếp, có người cần mình. Thật sự cần. Không phải cần mình lừa. Cần mình ở đây.</em></p>
+
+<p class="thought"><em>Và mình, tên lừa đảo, đang bắt đầu muốn xứng đáng với niềm tin đó.</em></p>
+
+<p class="thought"><em>Dù chỉ một chút.</em></p>
+
+<p>Gió thổi. Lạnh hơn. Mùa thu sâu.</p>
+
+<p>Và Tạ Cảnh Minh, ngồi dưới mái hiên Quốc Sư Phủ, nhìn vệt đen giữa dòng sáng Thiên Cơ, tự hỏi liệu tên lừa đảo có thể cứu một ông vua không.</p>
+
+<p>Không phải bằng phép thuật.</p>
+
+<p>Bằng thứ duy nhất hắn có.</p>
+
+<p>Lời nói.</p>
+
+<p>Và niềm tin rằng lời nói đó, có lẽ, sẽ đủ.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-20.html">&larr; CHƯƠNG 20</a>
+      <a href="chapter-22.html">CHƯƠNG 22 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.190 TỪ</div>
+
+  </div>
+</body>
+</html>

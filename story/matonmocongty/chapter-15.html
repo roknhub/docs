@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 15: Thăng Chức — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-14.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 15 / 30</span>
+    <a href="chapter-16.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 15</div>
+    <h1 class="chapter-title">Thăng Chức</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.531 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>Thông báo dán trên bảng nội bộ lúc tám giờ sáng thứ Hai.</p>
+
+    <p>Giấy trắng, con dấu đỏ, chữ ký CEO. Hắn đọc khi đi ngang sảnh tầng mười hai, cùng lúc với mười bảy người khác đang đứng chen nhau trước bảng.</p>
+
+    <div class="board-notice">"Quyết định nhân sự số 47/QĐ-VL. Bổ nhiệm ông Lục Trường An giữ chức Phó phòng Kinh doanh, phụ trách bộ phận Khách hàng Trọng điểm, có hiệu lực từ ngày ký. Chuyển ông Ngô Hải sang phòng Hỗ trợ Vận hành, giữ chức quản lý, có hiệu lực cùng ngày."</div>
+
+    <p class="short">Hai dòng. Hai số phận.</p>
+
+    <p>Phòng Kinh doanh im lặng kiểu im lặng trước bão. Mọi người đọc, liếc nhau, rồi quay về bàn. Không ai nói gì to. Nhưng bàn phím gõ chậm hơn bình thường, và tin nhắn nội bộ chắc chắn đang cháy.</p>
+
+    <p class="short">Hắn đi về bàn. Ngồi xuống. Mở máy tính.</p>
+
+    <p class="thought">Tuần thứ tám. Hai tháng trước, ta ngồi bàn cuối cạnh nhà vệ sinh. Bây giờ, phó phòng.</p>
+
+    <p class="thought">Nhanh. Nhưng không bất ngờ. Sau vụ Hoàng Long, CEO cần thưởng công. Và cần ai đó thay Ngô Hải trước khi phòng Kinh doanh mất thêm khách.</p>
+
+    <p class="short">Tiểu Lý xuất hiện bên bàn. Mắt sáng, miệng mím cố giấu cười.</p>
+
+    <p class="short">— Chúc mừng anh Lục.</p>
+
+    <p class="short">— Cảm ơn.</p>
+
+    <p class="short">— Anh Hải... phòng Hỗ trợ Vận hành à?</p>
+
+    <p class="short">— Ừ.</p>
+
+    <p>Tiểu Lý không hỏi thêm. Nhưng cả hai biết: phòng Hỗ trợ Vận hành là nơi Vạn Lý đẩy người không muốn đuổi nhưng cũng không muốn giữ. Phòng chờ trước khi tự nghỉ. Ngô Hải không bị sa thải. Bị chôn sống.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Chín giờ. Ngô Hải đến.</p>
+
+    <p>Hắn bước vào phòng Kinh doanh lần cuối cùng. Sơ mi xanh đậm, tóc vuốt keo như mọi ngày, nhưng bước chân khác. Nhanh hơn, ngắn hơn, kiểu bước của người muốn xong nhanh cho hết nhục.</p>
+
+    <p>Đi thẳng đến bàn mình. Mở ngăn kéo. Lấy đồ cá nhân: cốc cà phê, lọ keo vuốt tóc, vài cuốn sổ. Bỏ vào túi giấy. Không nhiều. Ba năm ngồi bàn này, đồ cá nhân chỉ đầy một túi.</p>
+
+    <p class="short">Cả phòng giả vờ không nhìn. Nhưng ai cũng nhìn.</p>
+
+    <p class="short">Hắn ngồi ở bàn mình, gõ phím, không ngẩng lên.</p>
+
+    <p class="thought">Không cần nhìn. Nghe cũng đủ. Tiếng ngăn kéo đóng, mạnh hơn cần thiết. Tiếng túi giấy sột soạt. Tiếng bước chân dừng lại, hai giây, rồi đi tiếp. Hắn dừng ở bàn ta. Nhìn ta. Ta biết mà không cần nhìn lại.</p>
+
+    <p class="short">Ngô Hải đứng sau lưng hắn ba giây. Không nói gì.</p>
+
+    <p>Hắn cảm nhận được. Ánh mắt sau lưng, nặng, kiểu nặng của thù hận đã cô đặc thành im lặng. Ngô Hải muốn nói gì đó. Muốn chửi, muốn đe dọa, muốn ít nhất được nhìn thấy mặt kẻ đã thay thế mình nhìn lại.</p>
+
+    <p class="short">Hắn không quay đầu.</p>
+
+    <p class="short">Bước chân đi tiếp. Ra cửa. Gót giày gõ trên sàn, đều, chậm, lần cuối cùng.</p>
+
+    <p class="thought">Kẻ này sẽ hận ta. Nhưng hận không nguy hiểm. Hận mà không có quyền lực chỉ là tiếng chó sủa sau hàng rào. Ngô Hải đã mất hàng rào.</p>
+
+    <p>Hai thuộc hạ Ngô Hải ngồi góc trái, mặt xám. Không đứng dậy theo sếp cũ. Không nói lời chia tay. Chó mất chủ, đang liếc quanh tìm chủ mới.</p>
+
+    <p class="thought">Kẻ trung thành kiểu bầy đàn. Khi đàn tan, chúng sẽ tìm đàn khác. Không đáng quan tâm.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Mười giờ. CEO gọi hắn lên tầng mười lăm.</p>
+
+    <p class="short">Phòng CEO. Cửa đóng. Hai người.</p>
+
+    <p>— Cậu Lục, chúc mừng. Từ hôm nay cậu là phó phòng. Nhưng tôi không giao cậu quản lý cả phòng Kinh doanh.</p>
+
+    <p class="short">— Tôi hiểu.</p>
+
+    <p>— Tôi tách ra bộ phận mới: Khách hàng Trọng điểm. Cậu phụ trách. Năm người, cậu tự chọn hoặc nhận người tôi giao. Nhiệm vụ: giữ và phát triển tốp năm khách hàng lớn nhất. Báo cáo trực tiếp cho tôi.</p>
+
+    <p class="thought">Bộ phận mới, báo cáo trực tiếp, không qua trưởng phòng. CEO đang cắt phòng Kinh doanh thành hai: phần cũ cho trưởng phòng mới (chưa bổ nhiệm), phần quan trọng nhất cho ta. Chia để trị. Kiểu cũ.</p>
+
+    <p>— Về nhân sự, tôi đã sắp xếp. Năm người từ các phòng ban, chuyển sang đội cậu.</p>
+
+    <p class="short">CEO đưa danh sách. Năm cái tên.</p>
+
+    <p class="short">Hắn đọc. Ma Tâm Quan chưa cần, chỉ cần đọc cách CEO chọn người là biết.</p>
+
+    <p class="thought">Năm người không ai muốn. Hai từ phòng Kinh doanh cũ: một nhân viên kết quả trung bình, một vừa hết thời gian thử việc. Một từ phòng Tài chính, bị đánh giá "không phù hợp vị trí." Một từ phòng Kế hoạch, nhân viên mới ba tháng. Và một từ phòng Hỗ trợ, nhân viên cũ, lâu năm nhưng không thăng tiến.</p>
+
+    <p class="thought">Toàn "đồ bỏ đi" trong mắt các trưởng phòng. CEO giao cho ta năm quân cờ mà không ai muốn giữ, vừa để test ta, vừa để các phòng khác bớt gánh.</p>
+
+    <p class="short">— Tôi nhận.</p>
+
+    <p class="short">CEO nhìn hắn, hơi bất ngờ.</p>
+
+    <p class="short">— Cậu không xem trước à? Không yêu cầu đổi?</p>
+
+    <p class="short">— Không. Người nào cũng được. Quan trọng là cách dùng.</p>
+
+    <p class="short">CEO cười, kiểu cười vỗ đùi.</p>
+
+    <p>— Tự tin ha. Được, tôi thích. Bắt đầu từ thứ Tư. Phòng họp nhỏ B tầng mười hai, dành cho đội cậu.</p>
+
+    <p class="short">Hắn đứng dậy. Gật đầu. Ra cửa.</p>
+
+    <p class="thought">Năm người. Bị bỏ rơi, bị đẩy đi, bị coi thường. Giống hệt Lục Trường An hai tháng trước.</p>
+
+    <p class="thought">Và giống hệt năm đệ tử đầu tiên của Huyền Minh Tông, ngàn năm trước. Năm kẻ bị các tông phái chính đạo ruồng bỏ: một người mù, một người câm, một kẻ bị trục xuất vì học tà công, một cô gái bị gia tộc bán, một lão già bị phế tu vi. Năm kẻ bỏ đi. Ta nhặt về. Mười năm sau, cả năm đứng trên đỉnh ma đạo.</p>
+
+    <p class="thought">Không có đệ tử nào sinh ra đã mạnh. Mạnh hay yếu là do sư phụ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Tư. Phòng họp nhỏ B. Tầng mười hai.</p>
+
+    <p>Phòng bé, vừa đủ một bàn họp sáu ghế, bảng trắng, không cửa sổ. Đèn huỳnh quang, trần thấp. Phòng mà không ai giành vì không ai muốn.</p>
+
+    <p class="short">Năm người ngồi quanh bàn. Hắn đứng trước bảng trắng.</p>
+
+    <p class="short">Nhìn từng người.</p>
+
+    <p>Người thứ nhất: Tiểu Lý. Đàn ông trẻ, hai bốn, mặt tròn, hay cười. Người duy nhất hắn quen. Tiểu Lý ngồi thẳng, mắt sáng, kiểu mắt của người được gọi vào đội mà nghĩ mình may mắn thay vì bị đẩy đi.</p>
+
+    <p class="thought">Trung thành bẩm sinh. Đã vào mạng lưới từ tuần đầu. Không giỏi nhất nhưng không bao giờ phản. Loại đệ tử xây nền.</p>
+
+    <p>Người thứ hai: Phạm Tiểu Linh. Phụ nữ trẻ, hai ba tuổi, nhỏ nhắn, tóc dài buộc đuôi ngựa. Từ phòng Kế hoạch, vào Vạn Lý mới ba tháng. Ngồi co vai, tay ôm sổ tay trước ngực, mắt nhìn bàn. Sợ. Không biết tại sao mình ở đây.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Vai co, cằm hơi cúi, nhưng mắt di chuyển. Liên tục. Nhìn từng người quanh bàn, nhanh, rồi quay lại nhìn bàn. Không phải sợ mọi người. Đang đọc mọi người. Cô ta quan sát, chỉ là chưa biết mình đang quan sát.</p>
+
+    <p class="thought">Thú vị. Bản năng quan sát tự nhiên, giống Ma Tâm Quan phiên bản thô. Nếu được dạy, kẻ này sẽ đọc người gần bằng ta. Ngàn năm trước, kẻ có bản năng này hiếm lắm, vài ngàn người mới gặp một.</p>
+
+    <p>Người thứ ba: Vũ Đại Dũng. Đàn ông, ba mươi lăm, to con, mặt vuông, ngồi tựa lưng, tay khoanh trước ngực. Từ phòng Hỗ trợ, nhân viên lâu năm, sáu năm không thăng tiến. Mắt lờ đờ, kiểu mắt của người đã thôi cố gắng.</p>
+
+    <p class="thought">Kẻ bỏ cuộc. Nhưng xương to, vai rộng, ngồi chiếm không gian. Từng có năng lượng, từng muốn leo lên. Bây giờ mệt. Không phải lười, mệt vì không ai thấy hắn cố gắng. Kiểu tàn lụi vì bị bỏ quên.</p>
+
+    <p>Người thứ tư: Trần Thị Hà. Phụ nữ, hai tám, từ phòng Tài chính, bị đánh giá "không phù hợp vị trí." Gọn gàng, lịch sự, ngồi ngay ngắn. Nhưng mắt hơi đỏ, mới khóc hoặc mất ngủ.</p>
+
+    <p class="thought">Bị đuổi khỏi phòng cũ bằng cách "chuyển sang vị trí phù hợp hơn." Cô ta biết sự thật: bị đẩy đi. Tự ái bị tổn thương, nhưng không dám phản đối. Kiểu người chịu đựng thay vì đánh lại. Cần được cho lý do để đánh lại.</p>
+
+    <p>Người thứ năm: Lê Quang. Đàn ông trẻ, hai sáu, vừa hết thời gian thử việc phòng Kinh doanh. Gầy, cao, đeo kính, tay cầm bút bi liên tục xoay. Lo lắng.</p>
+
+    <p class="thought">Vừa hết thử việc. Kết quả không tệ nhưng không nổi bật. Bị đẩy sang đội mới vì không ai chịu giữ. Kẻ này có năng lực nhưng thiếu tự tin. Loại cần được thắng một lần để biết mình thắng được.</p>
+
+    <p>Năm người. Năm kiểu khác nhau. Một trung thành, một biết quan sát, một đã bỏ cuộc, một bị tổn thương, một thiếu tự tin.</p>
+
+    <p class="thought">Nguyên liệu thô. Chưa được luyện. Nhưng ta đã luyện nguyên liệu thô cả đời.</p>
+
+    <p class="short">Hắn cầm bút, viết lên bảng trắng. Chữ to, rõ.</p>
+
+    <div class="whiteboard">BA QUY TẮC</div>
+
+    <p class="short">Năm người nhìn lên.</p>
+
+    <p class="short">Hắn viết:</p>
+
+    <div class="whiteboard">1. Không bao giờ bán sản phẩm. Bán giải pháp.</div>
+
+    <div class="whiteboard">2. Trước khi nói, nghe. Trước khi nghe, quan sát.</div>
+
+    <div class="whiteboard">3. Kỷ luật tuyệt đối. Không ngoại lệ.</div>
+
+    <p class="short">Đặt bút xuống. Quay lại nhìn năm người.</p>
+
+    <p>— Tôi là Lục Trường An. Phó phòng Kinh doanh, phụ trách bộ phận Khách hàng Trọng điểm. Từ hôm nay, năm người ngồi đây là đội của tôi.</p>
+
+    <p>Im lặng. Năm cặp mắt nhìn hắn. Mỗi người một kiểu: Tiểu Lý chờ đợi, Tiểu Linh sợ, Đại Dũng thờ ơ, Hà lo lắng, Quang bồn chồn.</p>
+
+    <p class="short">— Tôi biết tại sao các bạn ở đây. Không phải vì giỏi. Vì không ai muốn giữ.</p>
+
+    <p>Câu đó rơi xuống phòng như đá rơi xuống nước. Mặt Hà đỏ hơn. Đại Dũng nhíu mày. Quang nuốt nước bọt. Tiểu Linh co vai thêm.</p>
+
+    <p class="short">Chỉ Tiểu Lý bình tĩnh, vì đã biết cách hắn nói chuyện.</p>
+
+    <p class="short">— Nhưng tôi không quan tâm tại sao các bạn bị đẩy đi. Tôi quan tâm các bạn có thể trở thành gì.</p>
+
+    <p class="short">Hắn nhìn từng người.</p>
+
+    <p>— Từ tuần này, mỗi người sẽ được giao một khách hàng. Không phải khách dễ. Khách khó. Khách mà người khác từ chối hoặc bỏ rơi.</p>
+
+    <p class="short">Đại Dũng cười nhạt. Kiểu cười của kẻ đã nghe quá nhiều lời hứa.</p>
+
+    <p class="short">— Khách khó thì làm kiểu gì?</p>
+
+    <p class="short">Hắn nhìn Đại Dũng. Thẳng.</p>
+
+    <p>— Kiểu mà tôi đã ký được Vương Gia khi ba người trước thất bại. Kiểu mà tôi vừa giữ Hoàng Long khi cả công ty hoảng loạn.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Đại Dũng không cười nữa.</p>
+
+    <p>— Tôi sẽ dạy. Không phải dạy kiểu tập huấn. Dạy bằng thực chiến. Mỗi tuần, một buổi họp ngắn, mỗi người trình bày khách hàng của mình: họ là ai, họ sợ gì, họ cần gì. Không trình bày bằng bảng tính. Bằng hiểu biết.</p>
+
+    <p class="short">— Và nếu không bán được?</p>
+
+    <p class="short">Câu hỏi từ Quang, giọng nhỏ, run nhẹ.</p>
+
+    <p>— Nếu không bán được, ta tìm hiểu tại sao. Rồi thử lại. Không ai bị phạt vì thất bại. Nhưng bị phạt nếu không cố gắng.</p>
+
+    <p class="thought">Ngàn năm trước, ta nói với đệ tử mới: "Tu luyện không có đường tắt. Chỉ có kẻ chịu đau và kẻ bỏ cuộc." Kiếp này, ngôn ngữ khác, bản chất giống.</p>
+
+    <p class="short">Hắn nhìn Tiểu Linh. Cô vẫn co vai, mắt nhìn bàn.</p>
+
+    <p class="short">— Tiểu Linh.</p>
+
+    <p class="short">Cô giật mình. Ngẩng lên.</p>
+
+    <p class="short">— Dạ?</p>
+
+    <p class="short">— Cô làm phòng Kế hoạch ba tháng. Tại sao chuyển sang đây?</p>
+
+    <p class="short">— Dạ... trưởng phòng nói tôi phù hợp hơn ở bộ phận khác.</p>
+
+    <p class="short">— Cô tin điều đó?</p>
+
+    <p class="short">Im lặng. Mắt Tiểu Linh rưng rưng, nhưng không khóc. Cô lắc đầu, nhẹ.</p>
+
+    <p class="short">— Không.</p>
+
+    <p>— Tốt. Đừng bao giờ tin khi ai đó nói cô không phù hợp. Câu đó nghĩa là họ không biết cách dùng cô.</p>
+
+    <p class="short">Tiểu Linh nhìn hắn. Mắt mở rộng hơn, kiểu mắt của người vừa được nói điều chưa ai nói.</p>
+
+    <p class="thought">Kẻ nhút nhát nhưng có bản năng quan sát. Nếu dạy đúng cách, cô ta sẽ trở thành mắt và tai của ta trong phòng, trong công ty, trong mọi cuộc họp. Đôi mắt thầm lặng là đôi mắt nguy hiểm nhất.</p>
+
+    <p class="short">Hắn quay lại bảng trắng.</p>
+
+    <p>— Tuần này, mỗi người nhận một tập hồ sơ khách hàng. Đọc. Không phải đọc số liệu. Đọc con người. Tìm hiểu người quyết định ký hợp đồng là ai, sống thế nào, sợ gì, thích gì. Thứ Hai tuần sau, mỗi người lên trình bày. Không cần bảng tính. Kể cho tôi nghe về một con người.</p>
+
+    <p class="short">Năm người nhìn nhau. Lạ. Không giống bất kỳ kiểu quản lý nào họ từng gặp.</p>
+
+    <p class="short">— Giải tán. Bắt đầu làm việc.</p>
+
+    <p class="short">Bốn người đứng dậy, ra cửa. Tiểu Lý nán lại.</p>
+
+    <p class="short">— Anh Lục, anh có cần tôi giúp gì thêm không?</p>
+
+    <p class="short">— Tiểu Lý.</p>
+
+    <p class="short">— Dạ?</p>
+
+    <p>— Coi như anh cả trong đội. Ai mới, ai sợ, em để ý. Không cần báo cáo cho tôi. Cứ giúp.</p>
+
+    <p class="short">Tiểu Lý gật. Mắt sáng. Ra cửa.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Một tuần.</p>
+
+    <p>Hắn giao hồ sơ. Năm khách hàng, mỗi người một khách. Không phải khách lớn nhất, nhưng khách khó: kẻ bỏ dở hợp đồng, kẻ khiếu nại nhiều, kẻ chưa ai tiếp cận được.</p>
+
+    <p>Tiểu Lý nhận khách đầu tiên, làm ngay, gọi điện, hẹn gặp. Quen tay. Kết quả chưa rõ nhưng đang đi đúng hướng.</p>
+
+    <p>Quang nhận khách, nghiên cứu kỹ, soạn bảng phân tích chi tiết. Đúng kiểu phòng Kinh doanh cũ dạy. Hắn đọc bản phân tích, gạch bỏ.</p>
+
+    <p class="short">— Bỏ số liệu. Kể cho tôi: ông ta là người thế nào.</p>
+
+    <p>Quang ngồi im, lúng túng. Rồi kể: "Ông ấy hay cười, nhưng cười không vào mắt. Lần gặp trước, ông ấy hỏi rất nhiều về bảo hành. Có lẽ đã bị lừa bao giờ." Hắn gật: "Bắt đầu từ đó."</p>
+
+    <p>Hà nhận khách hàng bên phòng Tài chính chuyển sang, khách cô đã biết từ trước. Cô ngại vì "tôi bị đuổi khỏi phòng Tài chính, khách đó biết, sẽ mất uy tín." Hắn nói: "Cô bị chuyển, không bị đuổi. Và cô biết khách đó rõ hơn bất kỳ ai trong phòng này. Đó là lợi thế, không phải nhược điểm."</p>
+
+    <p class="short">Đại Dũng nhận khách hàng khó nhất. Khách hàng cũ, khiếu nại nhiều, sắp hủy hợp đồng. Đại Dũng đọc hồ sơ, thở dài.</p>
+
+    <p class="short">— Ông này ai gặp cũng bị mắng. Tôi gặp cũng bị mắng thôi.</p>
+
+    <p>— Đúng. Ông ấy sẽ mắng. Và anh sẽ nghe. Nghe xong, hỏi: "Ông muốn chúng tôi làm gì?" Rồi làm. Không hứa, không giải thích, làm. Khi ông ấy thấy anh làm thật thay vì nói suông, ông ấy sẽ ngừng mắng.</p>
+
+    <p class="short">Đại Dũng nhìn hắn. Lần đầu trong buổi sáng, mắt không lờ đờ.</p>
+
+    <p class="short">— Anh làm kiểu đó thật à? Không hứa, chỉ làm?</p>
+
+    <p class="short">— Tôi chưa bao giờ hứa.</p>
+
+    <p class="thought">Đúng. Ma Tôn không hứa. Ma Tôn làm. Khi đã làm xong, không ai cần lời hứa nữa.</p>
+
+    <p>Và Tiểu Linh. Cô nhận khách hàng nhỏ nhất, một chủ chuỗi cửa hàng bốn chi nhánh. Hắn không giao khách khó cho cô. Giao khách dễ, để cô thắng lần đầu.</p>
+
+    <p class="thought">Kẻ nhút nhát cần thắng một trận nhỏ trước khi có thể đánh trận lớn. Cho cô chiến thắng để cô biết mình thắng được.</p>
+
+    <p class="short">Tiểu Linh nghiên cứu ba ngày. Rồi đến gặp hắn, sổ tay đầy ghi chú.</p>
+
+    <p>— Anh Lục, khách hàng của tôi, ông Trần Văn Bắc, chủ chuỗi Bắc Phương. Ông ấy... tôi tìm trên mạng không có nhiều. Nhưng tôi gọi điện, nói chuyện với nhân viên cửa hàng trước. Họ nói ông Bắc hay đến kiểm tra đột xuất, luôn hỏi nhân viên có bao giờ bị khách phàn nàn không. Có lẽ ông ấy rất sợ mất khách.</p>
+
+    <p class="short">Hắn nhìn cô. Im lặng.</p>
+
+    <p class="thought">Gọi điện cho nhân viên cửa hàng. Không ai dạy cô làm điều đó. Cô tự nghĩ ra. Đi đường vòng để hiểu con người, thay vì đọc báo cáo. Đúng kiểu Ma Tâm Quan: không nhìn vào mặt, nhìn vào xung quanh.</p>
+
+    <p class="short">— Tiểu Linh.</p>
+
+    <p class="short">— Dạ?</p>
+
+    <p class="short">— Giỏi lắm. Tiếp tục.</p>
+
+    <p class="short">Mắt cô sáng lên. Nhanh, rồi cúi xuống sổ, mặt đỏ nhẹ. Không quen được khen.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Hai tuần sau. Họp đội.</p>
+
+    <p class="short">Phòng họp nhỏ B. Năm người ngồi quanh bàn. Hắn đứng trước bảng trắng.</p>
+
+    <p class="short">Lần lượt, mỗi người trình bày. Không bảng tính, không biểu đồ. Kể về một con người.</p>
+
+    <p>Tiểu Lý kể gọn, đúng trọng tâm. Quang lúng túng lúc đầu, nhưng khi kể xong, tự mình nhận ra: "Ông ấy sợ bị lừa. Vậy tôi nên bắt đầu bằng sự thật, không phải bằng lời hứa." Hắn gật.</p>
+
+    <p>Hà kể khách hàng cũ bằng giọng tự tin hơn bình thường. Cô biết rõ người này. Và lần đầu, cô được dùng sự hiểu biết đó thay vì bị gạt ra ngoài. Mắt cô không đỏ hôm nay.</p>
+
+    <p>Đại Dũng kể ngắn nhất. "Ông ấy mắng tôi hai mươi phút. Tôi nghe. Xong tôi hỏi: ông muốn gì? Ông ấy dừng lại. Rồi nói. Lần đầu có ai hỏi ông ấy muốn gì." Ngồi xuống.</p>
+
+    <p class="short">Hắn nhìn Đại Dũng.</p>
+
+    <p class="short">— Kết quả?</p>
+
+    <p class="short">— Ông ấy cho tôi một tuần chứng minh. Chưa ký lại, nhưng chưa hủy.</p>
+
+    <p class="short">— Tốt.</p>
+
+    <p>Đại Dũng nhìn hắn, kiểu nhìn khác hẳn tuần trước. Không còn lờ đờ. Là ngạc nhiên, kiểu ngạc nhiên khi thấy mình làm được thứ tưởng không thể.</p>
+
+    <p class="short">Và Tiểu Linh. Cô đứng lên, tay cầm sổ, giọng nhỏ nhưng rõ.</p>
+
+    <p>— Ông Trần Văn Bắc, chuỗi Bắc Phương. Ông ấy bắt đầu từ một cửa hàng, mở thêm ba chi nhánh trong năm năm. Không vay ngân hàng, tự xoay vốn. Rất thận trọng, sợ rủi ro. Ông ấy sợ mất khách nhất vì chuỗi bán lẻ sống nhờ khách quen. Tôi gặp ông ấy, không nói về sản phẩm. Hỏi ông ấy khách quen quan trọng nhất là ai. Ông ấy kể một tiếng.</p>
+
+    <p class="short">Cô dừng.</p>
+
+    <p>— Rồi ông ấy hỏi: "Cô có cách nào giúp tôi giữ mấy người khách đó không?" Tôi nói có. Ông ấy ký.</p>
+
+    <p class="short">Im lặng trong phòng.</p>
+
+    <p class="short">Hắn nhìn Tiểu Linh. Cô đứng, tay hơi run, nhưng mắt sáng.</p>
+
+    <p class="thought">Ký được. Lần đầu trong đời. Và cô làm đúng cách: hỏi thay vì bán. Không ai dạy cô. Bản năng.</p>
+
+    <p class="short">— Ngồi xuống.</p>
+
+    <p>Tiểu Linh ngồi. Tiểu Lý vỗ nhẹ vai cô, cười. Đại Dũng nhìn cô, gật đầu. Quang ghi chép. Hà mỉm cười nhẹ.</p>
+
+    <p class="thought">Bắt đầu hình thành. Chưa phải đội. Chưa phải tông môn. Nhưng đang hình thành.</p>
+
+    <p class="short">Hắn đứng trước bảng trắng, nhìn năm người.</p>
+
+    <p class="short">Trong một khoảnh khắc, mắt hắn mờ đi.</p>
+
+    <p class="short">Không phải mệt. Là nhớ.</p>
+
+    <p class="thought">Đại điện Huyền Minh Tông. Ngàn năm trước. Ngàn đệ tử quỳ dưới, áo đen, đầu cúi, hàng dài kéo đến chân trời. Hắn đứng trên đài cao, nhìn xuống, mà không thấy mặt ai. Ngàn người, mà cô đơn.</p>
+
+    <p class="short">Mắt hắn trở lại.</p>
+
+    <p>Năm người ngồi trước mặt. Phòng họp bé, trần thấp, đèn huỳnh quang. Không có đại điện. Không có áo đen. Chỉ có sơ mi trắng, cà phê hòa tan, và năm cặp mắt đang nhìn hắn, chờ.</p>
+
+    <p class="thought">Tông môn nào cũng bắt đầu từ năm người.</p>
+
+    <p>— Tuần sau, mỗi người mang thêm một khách hàng mới. Tự tìm. Tự tiếp cận. Tự ký.</p>
+
+    <p class="short">Năm cặp mắt nhìn nhau. Sợ. Nhưng không từ chối.</p>
+
+    <p class="thought">Sợ mà không từ chối. Đó là khởi đầu của trung thành.</p>
+
+    <p class="short">Hắn quay lưng, xóa bảng trắng. Viết ba chữ mới.</p>
+
+    <div class="whiteboard">TUẦN SAU: THỰC CHIẾN.</div>
+
+    <p class="short">Rồi đi ra cửa. Không nhìn lại.</p>
+
+    <p class="short">Nhưng ở bậc cửa, hắn dừng. Nửa giây. Rồi bước tiếp.</p>
+
+    <p class="thought">Ngàn đệ tử, ta không nhớ mặt ai.</p>
+
+    <p class="thought">Năm người này, ta nhớ hết.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-14.html">&larr; Chương trước</a>
+    <a href="chapter-16.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.531 từ &middot; Chương 15 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

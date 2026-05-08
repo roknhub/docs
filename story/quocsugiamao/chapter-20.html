@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 20 — Thiên Mệnh | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-19.html">&larr; CHƯƠNG 19</a>
+      <span class="chapter-indicator">20/30</span>
+      <a href="chapter-21.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 20</div>
+      <h1>Thiên Mệnh</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Tin đến từ Tiểu Phúc. Gã chạy vào phủ, mặt đỏ, hơi thở gấp, kiểu chạy của đứa trẻ vừa nghe chuyện kinh thiên động địa:</p>
+
+<p>— Quốc Sư! Con bé! Con bé Thiên Mệnh! Có người thấy!</p>
+
+<p>Tạ Cảnh Minh đặt bút xuống. Đang viết thư trả lời Trần Tử Kính về tình hình biên giới.</p>
+
+<p>— Con bé nào?</p>
+
+<p>— A Ly! Con bé ăn mày mà Quốc Sư phán sẽ thay đổi thiên hạ! Có thương nhân từ ngoại tỉnh vào kinh thành, nói ở trấn Thanh Hà, cách kinh thành ba ngày đường, có con bé ăn mày chữa bệnh cho dân!</p>
+
+<p class="thought"><em>A Ly. Chín chương. Chín chương mình không nghe tin.</em></p>
+
+<p class="thought"><em>Con bé chạy mất ở chợ. Mắt sáng. Khí vận trống rỗng. Mình thuận miệng: "Sau này sẽ thay đổi thiên hạ." Thiên Cơ rung mạnh nhất.</em></p>
+
+<p class="thought"><em>Và bây giờ, con bé đang chữa bệnh cho dân. Ở trấn cách kinh thành ba ngày đường.</em></p>
+
+<p>— Chữa bệnh? Chữa kiểu gì?</p>
+
+<p>— Dạ, nghe nói con bé đặt tay lên người bệnh, nói mấy câu, bệnh nhẹ đi. Không phải khỏi hẳn. Nhưng nhẹ đi. Dân gọi con bé là "Thiên Nữ." Nói Quốc Sư đã chỉ ra con bé, nên con bé có phép.</p>
+
+<p class="thought"><em>"Thiên Nữ." Dân tự đặt tên. Như "thần nhân" cho mình.</em></p>
+
+<p class="thought"><em>Và "đặt tay lên, nói mấy câu, bệnh nhẹ đi." Giống y kỹ thuật trị liệu tâm lý kiếp trước: hiệu ứng giả dược. Bệnh nhân tin sẽ khỏi, nên cơ thể tự phản ứng. Bệnh nhẹ nhẹ đi thật.</em></p>
+
+<p class="thought"><em>Nhưng ở thế giới này, hiệu ứng giả dược không chỉ là tâm lý. Niềm tin tạo Thiên Cơ. Và Thiên Cơ có thể tạo hiện thực.</em></p>
+
+<p class="thought"><em>A Ly, con bé khí vận trống rỗng, bây giờ đang dùng niềm tin của dân để chữa bệnh. Không phải vì con bé biết y thuật. Mà vì dân TIN con bé chữa được.</em></p>
+
+<p class="thought"><em>Vì mình đã nói "thay đổi thiên hạ."</em></p>
+
+<p>Hắn vuốt cằm. Nghĩ.</p>
+
+<p class="thought"><em>Con bé đang hoạt động dựa trên niềm tin mà mình tạo ra. Mình gieo hạt, hạt nảy mầm. Và cây đang mọc, ngoài tầm kiểm soát.</em></p>
+
+<p>— Còn gì nữa không?</p>
+
+<p>Tiểu Phúc gãi đầu.</p>
+
+<p>— Dạ, nghe nói... có người đang tìm con bé. Không phải dân thường. Người mặc áo đen, đi ngựa, hỏi khắp nơi. Thương nhân nói gặp bọn họ ở trấn Thanh Hà, hỏi "Thiên Nữ ở đâu."</p>
+
+<p class="thought"><em>Người tìm. Áo đen. Đi ngựa. Hỏi khắp nơi.</em></p>
+
+<p class="thought"><em>Ai? Vương Bách Nhẫn? Thiên Ngoại Các? Phe nào đó mình chưa biết?</em></p>
+
+<p class="thought"><em>Tại sao tìm A Ly?</em></p>
+
+<p class="thought"><em>Vì "Thiên Mệnh." Mình phán con bé sẽ thay đổi thiên hạ. Nếu ai đó muốn kiểm soát "thiên hạ sẽ thay đổi theo hướng nào," họ cần kiểm soát A Ly.</em></p>
+
+<p class="thought"><em>Hoặc giết A Ly.</em></p>
+
+<p>Tay hắn nắm chặt dưới bàn.</p>
+
+<p class="thought"><em>Mình tạo ra "Thiên Mệnh" bằng một câu thuận miệng. Và bây giờ, vì câu đó, có người đang săn một đứa trẻ mười hai tuổi.</em></p>
+
+<p class="thought"><em>Hậu quả. Lại hậu quả.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Hắn vào Trường Xuân Cung.</p>
+
+<p>Bàn cờ. Nước mới. Và giấy.</p>
+
+<p>Hắn viết:</p>
+
+<p>"A Ly ở trấn Thanh Hà. Chữa bệnh. Có người áo đen đang tìm con bé. Của ai?"</p>
+
+<p>Đi nước cờ. Chờ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hôm sau. Quay lại.</p>
+
+<p>Nước đáp. Và giấy:</p>
+
+<p>"Không phải của chúng tôi. Chúng tôi không can thiệp Thiên Mệnh. Nhưng biết ai đó đang tìm. Không phải triều đình. Không phải Vương Bách Nhẫn. Người khác."</p>
+
+<p>Lật:</p>
+
+<p>"A Ly là hạt giống ngươi gieo. Nếu hạt chết, Thiên Cơ sẽ phản ứng. Mạnh. Vì niềm tin về Thiên Mệnh đã lan rộng. Nếu Thiên Mệnh chết, dân sẽ hỏi: Quốc Sư phán sai? Hay có kẻ dám giết Thiên Mệnh?"</p>
+
+<p class="thought"><em>Nếu A Ly chết...</em></p>
+
+<p class="thought"><em>Niềm tin về "Thiên Mệnh" sẽ sụp. Kéo theo niềm tin về Quốc Sư. Kéo theo khí vận. Kéo theo tất cả.</em></p>
+
+<p class="thought"><em>Hoặc ngược lại: niềm tin biến thành phẫn nộ. "Ai dám giết Thiên Mệnh?" Dân nổi giận. Và phẫn nộ tập thể, ở thế giới này, cũng là niềm tin. Cũng tạo Thiên Cơ. Nhưng Thiên Cơ kiểu phẫn nộ, không ai kiểm soát được.</em></p>
+
+<p class="thought"><em>Cách nào cũng tệ.</em></p>
+
+<p class="thought"><em>Phải tìm A Ly trước. Bảo vệ con bé. Không phải vì thương. Mà vì con bé là sợi dây nối mình với Thiên Mệnh, và sợi dây đó đứt, mình rơi.</em></p>
+
+<p class="thought"><em>Không. Không chỉ vì vậy.</em></p>
+
+<p>Hắn dừng.</p>
+
+<p class="thought"><em>Mình thương con bé không?</em></p>
+
+<p class="thought"><em>Con bé mười hai tuổi. Ăn mày. Mắt sáng. Mình cho bạc, nói một câu, rồi quên. Quên chín chương. Và con bé, trong chín chương đó, đã trở thành "Thiên Nữ," đang chữa bệnh, đang bị săn, đang sống cuộc đời mà mình vẽ bằng một câu thuận miệng.</em></p>
+
+<p class="thought"><em>Mình có quyền gì? Mình không phải cha, không phải thầy, không phải ai. Mình chỉ là tên bịp nói hay trước đám đông.</em></p>
+
+<p class="thought"><em>Nhưng câu mình nói đã thay đổi đời con bé. Vĩnh viễn.</em></p>
+
+<p class="thought"><em>Và bây giờ, con bé đang bị săn. Vì câu mình nói.</em></p>
+
+<p class="thought"><em>Mình có trách nhiệm không?</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>Có. Dù không muốn. Có.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quốc Sư Phủ.</p>
+
+<p>Tạ Cảnh Minh gọi Phúc An.</p>
+
+<p>— Phúc An, ta cần người tin cậy. Đi trấn Thanh Hà. Tìm A Ly. Đưa về kinh thành. An toàn.</p>
+
+<p>Phúc An gật đầu. Không hỏi tại sao.</p>
+
+<p>— Dạ. Bao nhiêu người?</p>
+
+<p>— Hai người đủ. Không mang vũ khí lộ liễu. Đi nhanh, về nhanh. Không để ai biết Quốc Sư sai đi.</p>
+
+<p class="thought"><em>Nếu mình công khai tìm A Ly, mọi phe đều biết. Và mọi phe đều sẽ muốn tìm trước mình.</em></p>
+
+<p class="thought"><em>Bí mật. Nhanh.</em></p>
+
+<p>Phúc An lui ra. Chuẩn bị.</p>
+
+<p>Hắn ngồi lại. Một mình. Nhìn lên trời.</p>
+
+<p>Thiên Cơ. Dòng chảy sáng từ kinh thành, mạnh, đều. Và nhánh nhỏ chảy ra ngoài, về phía tây nam, về phía trấn Thanh Hà.</p>
+
+<p class="thought"><em>Nhánh đó. Mình đã thấy nó từ đêm đầu tiên sau khi gặp A Ly. Nhỏ. Mỏng. Nhưng không mất.</em></p>
+
+<p class="thought"><em>Bây giờ, nhánh đó sáng hơn. Rõ hơn. Vì A Ly đang "chữa bệnh," đang tạo niềm tin ở trấn xa, đang nuôi Thiên Cơ bằng cách riêng của con bé.</em></p>
+
+<p class="thought"><em>Hai nguồn. Mình ở kinh thành. A Ly ở ngoại tỉnh. Hai nguồn niềm tin, hai nhánh Thiên Cơ.</em></p>
+
+<p class="thought"><em>Và nếu ai đó muốn phá Thiên Cơ quanh mình, giết A Ly là cách nhanh nhất. Vì A Ly là bằng chứng sống rằng "Quốc Sư phán đúng." Mất bằng chứng, niềm tin lung lay.</em></p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>A Ly. Mười hai tuổi. Mắt sáng. Chạy nhanh như cá lách qua kẽ đá.</em></p>
+
+<p class="thought"><em>Mình gieo hạt lên con bé. Bây giờ phải giữ cho cây không bị chặt.</em></p>
+
+<p class="thought"><em>Không phải vì mình tốt. Vì mình cần.</em></p>
+
+<p class="thought"><em>Hay vì mình tốt hơn mình nghĩ?</em></p>
+
+<p>Gió thổi. Lá bay. Và ở đâu đó ngoài kinh thành, trên con đường về trấn Thanh Hà, có kẻ áo đen đang đi. Tìm đứa trẻ mà Quốc Sư gọi là Thiên Mệnh.</p>
+
+<p>Và Quốc Sư, ngồi trong phủ, lần đầu tiên cảm thấy thứ mà kiếp trước hắn chưa bao giờ cảm:</p>
+
+<p>Trách nhiệm với hậu quả của lời mình.</p>
+
+<p>Không phải vì ai ép. Không phải vì luật. Không phải vì Thiên Cơ.</p>
+
+<p>Mà vì, ở đâu đó sâu bên trong tên lừa đảo, có thứ gì đó đang thức dậy.</p>
+
+<p>Thứ mà kiếp trước, hắn đã chôn rất sâu.</p>
+
+<p>Lương tri.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-19.html">&larr; CHƯƠNG 19</a>
+      <a href="chapter-21.html">CHƯƠNG 21 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.288 TỪ</div>
+
+  </div>
+</body>
+</html>

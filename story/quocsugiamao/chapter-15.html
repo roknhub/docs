@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 15 — Ván Cờ Đầu Tiên | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-14.html">&larr; CHƯƠNG 14</a>
+      <span class="chapter-indicator">15/30</span>
+      <a href="chapter-16.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 15</div>
+      <h1>Ván Cờ Đầu Tiên</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Lời mời đến cùng lúc. Hai lá thư, hai con dấu, hai phe.</p>
+
+<p>Phúc An mang vào buổi sáng, đặt trên bàn, mặt lo:</p>
+
+<p>— Quốc Sư, hai bức thư. Một từ Thái Sư Vương Bách Nhẫn, một từ Thượng thư bộ Binh Trần Tử Kính.</p>
+
+<p>Tạ Cảnh Minh nhìn hai phong thư. Giấy tốt, mực thơm, dấu sáp đỏ. Kiểu thư mời chính thức, không từ chối được mà không mất mặt.</p>
+
+<p>Mở thư Vương Bách Nhẫn trước. Ngắn. Lịch sự. Mời Quốc Sư dự yến tối nay tại phủ Thái Sư. "Bàn việc quốc gia, mong Quốc Sư chỉ giáo."</p>
+
+<p class="thought"><em>Vương Bách Nhẫn. Gã nuốt giận trong lễ phong. Gã cài Trần Phú và Bùi vào phủ mình. Và bây giờ gã mời mình ăn tối.</em></p>
+
+<p class="thought"><em>Không phải thiện ý. Là thăm dò. Hoặc chiêu dụ. Hoặc cả hai.</em></p>
+
+<p>Mở thư Trần Tử Kính. Dài hơn. Hoa mỹ hơn. Mời Quốc Sư đến phủ bộ Binh sáng mai. "Biên cương có biến, xin Quốc Sư chiêm nghiệm Thiên Cơ phương bắc."</p>
+
+<p class="thought"><em>Trần Tử Kính. Thượng thư bộ Binh. Phe quân sự. Gã muốn mình phán về Bắc Nguyên.</em></p>
+
+<p class="thought"><em>Hai phe. Một đêm, một sáng. Mình phải chọn đi đâu trước, và cách đi sẽ cho cả hai phe biết mình nghiêng về ai.</em></p>
+
+<p class="thought"><em>Hoặc mình đi cả hai. Và không nghiêng về ai.</em></p>
+
+<p>Hắn vuốt cằm. Nghĩ.</p>
+
+<p class="thought"><em>Phân tích. Triều đình Đại Ly, theo những gì mình biết, có ít nhất ba phe lớn.</em></p>
+
+<p class="thought"><em>Phe một: Vương Bách Nhẫn, Thái Sư. Phe bảo thủ. Già, thâm, kiểm soát bộ máy quan lại. Muốn giữ nguyên trạng, không thay đổi. Ghét mình vì mình là biến số ngoài tầm kiểm soát.</em></p>
+
+<p class="thought"><em>Phe hai: Trần Tử Kính, bộ Binh. Phe quân sự. Muốn đánh Bắc Nguyên trước khi bị đánh. Cần mình phán "Thiên Cơ ủng hộ chiến tranh" để có cớ huy động quân.</em></p>
+
+<p class="thought"><em>Phe ba: Lục Thanh Dao, Nhiếp Chính Vương. Phe nàng không rõ ràng. Nàng nghiêng hòa để chuẩn bị chiến, nhưng không công khai. Nàng giữ cân bằng giữa các phe, và mình là quân cờ nàng muốn giữ trên bàn.</em></p>
+
+<p class="thought"><em>Ba phe. Ba mục đích. Và mình ở giữa.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình từng gặp tình huống này. Hai tay buôn lậu tranh nhau mình làm "cố vấn truyền thông." Mình chọn cả hai. Lấy tiền cả hai. Và khi hai bên phát hiện, mình chạy.</em></p>
+
+<p class="thought"><em>Kiếp này, không chạy được. Nên phải chơi khác.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối. Phủ Thái Sư.</p>
+
+<p>Phủ lớn. Lớn hơn Quốc Sư Phủ gấp ba. Cổng cao, tường dày, lính canh đông. Bên trong, đèn lồng sáng trưng, bàn tiệc dài, rượu ngon, thức ăn sang.</p>
+
+<p>Vương Bách Nhẫn đứng đón ở sân. Già, gầy, lưng thẳng. Mắt sắc kiểu người đã sống đủ lâu để biết mọi trò. Áo lụa tím, đai bạc, tóc bạc búi cao.</p>
+
+<p>— Quốc Sư quá bộ, lão phu vinh hạnh.</p>
+
+<p>Giọng ấm. Lịch sự. Kiểu lịch sự của rắn trước khi cắn.</p>
+
+<p class="thought"><em>Thiên Diễn Đồng đọc: tính toán, kiểm soát, một chút khinh thường giấu rất sâu. Gã không kính mình. Gã đánh giá mình.</em></p>
+
+<p>— Thái Sư khách khí. Thần đến học hỏi.</p>
+
+<p>— Quốc Sư khiêm tốn quá. Mời, mời.</p>
+
+<p>Vào tiệc. Không chỉ có hai người. Năm đại thần khác, đều phe Vương Bách Nhẫn. Tạ Cảnh Minh nhận ra: đây không phải bữa tối. Đây là cuộc họp phe, và hắn là khách mời đặc biệt.</p>
+
+<p class="thought"><em>Sáu người. Cả bàn nhìn mình. Và mình phải diễn một mình.</em></p>
+
+<p>Rượu rót. Chúc mừng. Nói chuyện vặt. Rồi Vương Bách Nhẫn đi vào trọng tâm. Không vòng vo. Kiểu người quen cầm quyền, nói thẳng:</p>
+
+<p>— Quốc Sư, lão phu muốn hỏi thẳng.</p>
+
+<p>— Thái Sư cứ nói.</p>
+
+<p>— Gần đây, thiên hạ đồn Quốc Sư phán Bắc Nguyên sẽ rút quân. Nếu đúng, triều đình không cần chuẩn bị chiến tranh. Nhưng nếu sai...</p>
+
+<p>Gã dừng. Mắt nhìn thẳng.</p>
+
+<p>— ...thì ai chịu trách nhiệm?</p>
+
+<p class="thought"><em>Câu hỏi dao. Gã đang ép mình vào góc. Nếu mình khẳng định "Bắc Nguyên rút," gã sẽ chờ. Khi không rút, gã dùng câu này hạ mình trước triều đình. Nếu mình phủ nhận, gã cũng dùng: "Quốc Sư nói sai, dân tin sai, ai gánh?"</em></p>
+
+<p class="thought"><em>Cách nào cũng thua. Trừ khi...</em></p>
+
+<p>Hắn uống rượu. Chậm. Đặt chén xuống.</p>
+
+<p>— Thái Sư, Thiên Cơ phương bắc đang chuyển động. Thần nói "chuyển động," dân nghe thành "rút quân." Dân gian thường nghe thứ họ muốn nghe.</p>
+
+<p>Dừng. Nhìn Vương Bách Nhẫn.</p>
+
+<p>— Nhưng Thái Sư không phải dân gian. Thái Sư hiểu: Thiên Cơ không nói "rút" hay "tiến." Thiên Cơ nói "biến." Và ai chuẩn bị tốt hơn cho "biến," người đó thắng.</p>
+
+<p class="thought"><em>Không đứng về phe nào. Không phán cụ thể. Chỉ nói "biến" và "chuẩn bị." Ai nghe cũng tự hiểu theo ý mình.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn muốn nghe "không cần đánh"? Gã sẽ hiểu "chuẩn bị" là chuẩn bị ngoại giao.</em></p>
+
+<p class="thought"><em>Trần Tử Kính muốn nghe "cần đánh"? Gã sẽ hiểu "chuẩn bị" là chuẩn bị quân sự.</em></p>
+
+<p class="thought"><em>Cùng một câu. Hai nghĩa. Kiếp trước gọi đây là "ngôn ngữ hai chiều." Chính trị gia kiếp trước dùng suốt.</em></p>
+
+<p>Vương Bách Nhẫn nhìn hắn. Lâu. Mắt hẹp lại.</p>
+
+<p class="thought"><em>Thiên Diễn Đồng đọc: gã không bị lừa. Gã biết mình đang vòng. Nhưng gã không thể bắt bẻ, vì câu trả lời đúng cả về logic lẫn lễ nghi.</em></p>
+
+<p class="thought"><em>Gã đang đánh giá lại mình. Từ "tên bịp may mắn" lên "đối thủ cần cẩn thận."</em></p>
+
+<p>— Quốc Sư nói hay.</p>
+
+<p>Vương Bách Nhẫn gật đầu. Chậm. Rồi đổi hướng.</p>
+
+<p>— Lão phu còn muốn hỏi chuyện khác. Chuyện cũ. Về Trường Xuân Cung.</p>
+
+<p>Tạ Cảnh Minh giữ mặt bình thản. Nhưng bên trong, giật mình.</p>
+
+<p class="thought"><em>Trường Xuân Cung. Gã hỏi Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Chương hai. Cung nữ Tiểu Hoàn chết bí ẩn. Điện thờ bí khóa. Có người ra vào đêm. Mình đã phong tỏa cung đó và... quên. Quên mất. Quá nhiều chuyện xảy ra sau đó, mình quên mất Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Nhưng Vương Bách Nhẫn không quên.</em></p>
+
+<p>— Trường Xuân Cung? Thái Sư muốn hỏi gì?</p>
+
+<p>— Quốc Sư phong tỏa Trường Xuân Cung từ khi mới vào cung. Đã hơn hai tháng. Nhưng chưa có kết luận. Nội giám ty muốn mở lại cung đó, vì có vài phòng chứa đồ cũ cần dọn.</p>
+
+<p>Gã nghiêng đầu.</p>
+
+<p>— Lão phu muốn biết: Quốc Sư có còn cần phong tỏa không? Hay đã xong việc rồi?</p>
+
+<p class="thought"><em>Bẫy. Gã đang thử. Nếu mình nói "xong rồi, mở đi," nghĩa là mình phong tỏa nhưng không tìm ra gì, mất uy. Nếu mình nói "chưa xong," gã sẽ hỏi "vậy tìm được gì?" Và mình không có gì để trả lời.</em></p>
+
+<p class="thought"><em>Vì mình thật sự chưa điều tra gì thêm. Quá bận sinh tồn, quên mất.</em></p>
+
+<p class="thought"><em>Nhưng mình không thể nói "quên."</em></p>
+
+<p>Hắn vuốt cằm.</p>
+
+<p>— Trường Xuân Cung chưa xong.</p>
+
+<p>Giọng trầm. Chắc.</p>
+
+<p>— Thần phong tỏa vì lý do. Lý do đó vẫn còn. Thần sẽ quay lại kiểm tra. Sớm.</p>
+
+<p class="thought"><em>"Sớm." Mơ hồ nhất có thể. Nhưng đủ để gã không ép thêm.</em></p>
+
+<p>Vương Bách Nhẫn gật đầu. Không hỏi thêm. Nhưng Thiên Diễn Đồng bắt được: hài lòng. Không phải hài lòng vì câu trả lời. Hài lòng vì gã đã nhìn thấy kẽ hở.</p>
+
+<p class="thought"><em>Gã biết mình chưa điều tra Trường Xuân Cung. Gã hỏi để xác nhận. Và mình vừa xác nhận bằng cách vòng.</em></p>
+
+<p class="thought"><em>Kẽ hở. Gã sẽ dùng.</em></p>
+
+<p class="thought"><em>Mình phải quay lại Trường Xuân Cung. Thật. Trước khi gã dùng nó chống mình.</em></p>
+
+<p>Tiệc kết thúc. Hắn về phủ. Đêm khuya.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau. Phủ bộ Binh.</p>
+
+<p>Trần Tử Kính khác hẳn Vương Bách Nhẫn. Năm mươi, to con, da ngăm, tay chai kiếm. Tướng chiến trường về triều, mặc áo quan nhưng đi đứng như lính. Giọng to, thẳng, không vòng vo.</p>
+
+<p>— Quốc Sư! Mời ngồi! Không tiệc tùng gì đâu, ta nói thẳng!</p>
+
+<p class="thought"><em>Thẳng. Tốt. Dễ xử hơn Vương Bách Nhẫn.</em></p>
+
+<p>— Thượng thư cứ nói.</p>
+
+<p>— Bắc Nguyên đang tập trung ba vạn quân ở biên giới phía bắc. Tin tình báo, không phải tin đồn. Ba vạn. Đủ để đánh.</p>
+
+<p>Gã vỗ bàn.</p>
+
+<p>— Ta muốn xin vua cho huy động quân. Nhưng Thái Sư chặn. Nói "chờ xem." Chờ cái gì? Chờ chúng tràn qua biên giới rồi mới đánh?</p>
+
+<p class="thought"><em>Ba vạn quân. Con số cụ thể. Tin tình báo quân sự, không phải tin đồn. Mình không có cách kiểm chứng.</em></p>
+
+<p class="thought"><em>Nhưng gã muốn gì ở mình?</em></p>
+
+<p>— Thượng thư muốn thần làm gì?</p>
+
+<p>— Quốc Sư phán! Phán cho triều đình nghe! "Thiên Cơ phương bắc có biến, nên chuẩn bị!" Quốc Sư nói, vua nghe. Vua nghe, ta có quân. Có quân, ta giữ được biên giới.</p>
+
+<p class="thought"><em>Rõ. Gã muốn mình làm công cụ. Phán cho gã có cớ huy động quân.</em></p>
+
+<p class="thought"><em>Không khác gì kiếp trước: "Anh ơi, viết cho em bài truyền thông, nói sản phẩm này tốt, em bán." Cùng bản chất. Khác sản phẩm.</em></p>
+
+<p>Hắn nhìn Trần Tử Kính. Thiên Diễn Đồng mở. Đọc: lo lắng thật, yêu nước thật, nhưng cũng tính toán. Gã tin Bắc Nguyên nguy hiểm, nhưng cũng biết huy động quân = tăng quyền bộ Binh = tăng quyền gã.</p>
+
+<p class="thought"><em>Nửa thật nửa tính. Như mọi người.</em></p>
+
+<p>— Thượng thư. Thần hiểu lo ngại của ngài. Thiên Cơ phương bắc đang chuyển, thần đã tâu vua.</p>
+
+<p>Dừng.</p>
+
+<p>— Nhưng thần không thể phán "nên đánh" hay "không nên đánh." Đó là việc của tướng quân và triều đình. Thần chỉ nhìn Thiên Cơ, không chỉ huy quân.</p>
+
+<p>Trần Tử Kính nhíu mày.</p>
+
+<p>— Vậy Quốc Sư nhìn thấy gì?</p>
+
+<p>— Thần nhìn thấy: nếu Đại Ly chuẩn bị, Thiên Cơ thuận. Nếu Đại Ly lơ là, Thiên Cơ nghịch. Chuẩn bị bằng cách nào, tùy triều đình quyết.</p>
+
+<p class="thought"><em>Lại ngôn ngữ hai chiều. "Chuẩn bị" có thể là chuẩn bị quân sự (phe Trần), cũng có thể là chuẩn bị ngoại giao (phe Vương). Mình không chọn.</em></p>
+
+<p>Trần Tử Kính nhìn hắn. Không vui. Nhưng không giận.</p>
+
+<p>— Quốc Sư nói khéo quá.</p>
+
+<p>— Thần nói thật. Thiên Cơ không thiên vị phe nào, Thượng thư.</p>
+
+<p>Gã thở dài. Gật đầu.</p>
+
+<p>— Ta hiểu. Quốc Sư giữ trung lập. Được. Nhưng ta nhờ Quốc Sư một việc.</p>
+
+<p>— Gì?</p>
+
+<p>— Nếu Thiên Cơ cho Quốc Sư thấy Bắc Nguyên sắp đánh thật, xin nói sớm. Đừng để muộn.</p>
+
+<p class="thought"><em>Câu này thật lòng. Thiên Diễn Đồng xác nhận: lo lắng thật. Gã sợ biên giới vỡ.</em></p>
+
+<p>— Thần nhớ. Nếu Thiên Cơ cảnh báo, thần sẽ nói.</p>
+
+<p class="thought"><em>Câu trả lời an toàn. "Nếu" là từ hay nhất trong ngôn ngữ chính trị.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Quốc Sư Phủ.</p>
+
+<p>Tạ Cảnh Minh ngồi một mình. Đóng cửa. Nghĩ.</p>
+
+<p class="thought"><em>Hai cuộc gặp. Hai phe. Hai bẫy.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn muốn kéo mình, hoặc ép mình lộ kẽ hở. Gã đã nhìn ra: Trường Xuân Cung là điểm yếu. Mình phong tỏa nhưng không điều tra. Gã sẽ dùng điều đó.</em></p>
+
+<p class="thought"><em>Trần Tử Kính muốn mình làm cái loa. Phán "nên đánh" để gã có quyền huy động quân. Mình không phán, nhưng gã chưa bỏ cuộc.</em></p>
+
+<p class="thought"><em>Và Lục Thanh Dao, ở đâu đó trong bức tranh này, đang nhìn. Nàng biết mình gặp cả hai. Thị vệ sẽ báo. Và nàng sẽ đánh giá: Quốc Sư nghiêng về ai?</em></p>
+
+<p class="thought"><em>Câu trả lời: không ai. Mình giữ giữa. Kiểu "cố vấn trung lập" kiếp trước. Không đứng về phe nào, nhưng để cả hai nghĩ mình có thể đứng về phe họ.</em></p>
+
+<p class="thought"><em>Nguy hiểm. Vì giữ giữa chỉ được khi cả hai phe còn cần mình. Khi một phe thắng, mình phải chọn. Và chọn muộn thì mất cả hai.</em></p>
+
+<p>Hắn lấy giấy. Viết:</p>
+
+<p>Việc cần làm:<br>
+1. Trường Xuân Cung. Quay lại. Điều tra thật. Trước khi Vương Bách Nhẫn dùng nó.<br>
+2. Bắc Nguyên. Tìm thông tin thật, không phải đoán. Hỏi Lục Thanh Dao?<br>
+3. Kẻ lạ ngoài tường. Vẫn chưa biết ai. Cần biết.</p>
+
+<p>Hắn nhìn danh sách. Ba việc. Mỗi việc đều có thể giết hắn nếu làm sai.</p>
+
+<p class="thought"><em>Trường Xuân Cung: điện thờ bí ẩn, bóng người mắt trắng, cung nữ chết không vết thương. Mình phong tỏa rồi bỏ. Bây giờ phải quay lại.</em></p>
+
+<p class="thought"><em>Bắc Nguyên: ba vạn quân ở biên giới. Thật hay phóng đại? Và tin giả "rút quân" của mình đã lan. Nếu Bắc Nguyên đánh thật trong khi dân tin "rút quân," hỗn loạn sẽ gấp mười.</em></p>
+
+<p class="thought"><em>Kẻ lạ: "Quốc Sư nhìn thấy mọi thứ." Giọng ngang hàng. Có tổ chức. Đang thẩm định mình.</em></p>
+
+<p>Hắn xé giấy. Đốt. Nhìn tro.</p>
+
+<p class="thought"><em>Kiếp trước, mình chạy khi mọi thứ phức tạp. Kiếp này, mình không thể.</em></p>
+
+<p class="thought"><em>Vì mình là Quốc Sư. Và Quốc Sư không chạy.</em></p>
+
+<p class="thought"><em>Quốc Sư ngồi giữa bàn cờ, mặt bình thản, và chơi.</em></p>
+
+<p>Hắn đứng dậy. Bước ra sân. Nhìn lên trời.</p>
+
+<p>Thiên Cơ chảy. Nhánh lớn, sáng, đổ về phía hắn từ khắp nơi. Từ miếu thờ, từ kinh thành, từ tin đồn, từ niềm tin. Đổ vào hắn, liên tục, không ngừng.</p>
+
+<p>Và ở phía bắc, hắn thấy lần đầu: một nhánh khác. Không sáng. Tối. Đục. Chảy chậm, nặng, từ phía biên giới. Kiểu khí vận mà hắn từng thấy quanh vua, quanh xác người chết.</p>
+
+<p class="thought"><em>Khí đen. Phía bắc.</em></p>
+
+<p class="thought"><em>Bắc Nguyên không rút.</em></p>
+
+<p>Hắn hạ mắt. Nhìn bàn tay. Tay nắm chặt.</p>
+
+<p class="thought"><em>Mình bịa "Bắc Nguyên rút quân." Thiên Cơ phía bắc có khí đen. Nghĩa là không rút. Nghĩa là tin giả của mình sẽ sai. Và khi sai, cả kinh thành sẽ biết Quốc Sư phán sai.</em></p>
+
+<p class="thought"><em>Trừ khi...</em></p>
+
+<p class="thought"><em>Trừ khi mình sửa trước khi nó sai.</em></p>
+
+<p class="thought"><em>Nhưng sửa bằng cách nào?</em></p>
+
+<p>Gió thổi. Lá bay. Nến trong phòng lay.</p>
+
+<p>Và Tạ Cảnh Minh, lần đầu tiên kể từ khi trở thành Quốc Sư, nhận ra: hắn đang chơi ván cờ mà cả bốn phía đều có đối thủ, và hắn chỉ có một quân.</p>
+
+<p>Chính mình.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-14.html">&larr; CHƯƠNG 14</a>
+      <a href="chapter-16.html">CHƯƠNG 16 &rarr;</a>
+    </nav>
+
+    <div class="word-count">2.424 TỪ</div>
+
+  </div>
+</body>
+</html>

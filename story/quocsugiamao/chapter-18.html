@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 18 — Một Người Phải Chết | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-17.html">&larr; CHƯƠNG 17</a>
+      <span class="chapter-indicator">18/30</span>
+      <a href="chapter-19.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 18</div>
+      <h1>Một Người Phải Chết</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Tin đến lúc giờ Ngọ. Nhanh. Gấp.</p>
+
+<p>Phúc An chạy vào, mồ hôi đầm đìa:</p>
+
+<p>— Quốc Sư! Biên giới phía bắc bị đánh! Bắc Nguyên tập kích đồn Vân Quan! Đồn thất thủ!</p>
+
+<p>Tạ Cảnh Minh đặt chén trà xuống. Chậm. Tay không run.</p>
+
+<p class="thought"><em>Đồn Vân Quan. Đồn biên giới phía bắc. Thất thủ.</em></p>
+
+<p class="thought"><em>Bắc Nguyên đánh thật.</em></p>
+
+<p class="thought"><em>Và mình đã cảnh báo vua tăng cường biên giới. Nhưng đồn Vân Quan vẫn thất thủ. Nghĩa là tăng cường chưa đủ. Hoặc tăng cường sai chỗ.</em></p>
+
+<p class="thought"><em>Hoặc có ai đó cố ý để sai chỗ.</em></p>
+
+<p>— Phúc An, chuẩn bị. Ta vào cung ngay.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đại điện. Triều hội khẩn.</p>
+
+<p>Lần đầu tiên Tạ Cảnh Minh thấy cả triều đình hoảng. Không phải hoảng kiểu dân gian. Hoảng kiểu quyền lực: mỗi người hoảng theo cách riêng, tùy vào phe nào sẽ mất, phe nào sẽ được.</p>
+
+<p>Hoàng đế ngồi trên ngai, mặt trắng. Khí đen quanh vua dày đến mức Tạ Cảnh Minh gần như nhìn thấy bằng mắt thường.</p>
+
+<p>Trần Tử Kính quỳ giữa điện, giọng vang:</p>
+
+<p>— Bệ hạ! Thần đã tâu nhiều lần: Bắc Nguyên tập trung quân, phải tăng cường toàn tuyến! Nhưng chỉ được tăng cường hai đồn giữa! Đồn Vân Quan ở cánh đông không có thêm một lính nào! Ai quyết định chỉ tăng hai đồn giữa?</p>
+
+<p>Im lặng. Nặng.</p>
+
+<p>Rồi Vương Bách Nhẫn lên tiếng. Bình tĩnh. Kiểu bình tĩnh của người đã quen bị buộc tội:</p>
+
+<p>— Bệ hạ, quyết định tăng cường hai đồn giữa là của Tổng quản Cấm vệ Lưu Chấn, dựa trên tình báo của bộ Binh. Lão thần không liên quan.</p>
+
+<p>Trần Tử Kính nhìn Vương Bách Nhẫn. Mắt đỏ.</p>
+
+<p>— Lưu Chấn nhận lệnh từ ai? Ai ký phê duyệt phân bổ quân? Ai chặn đề xuất tăng cường toàn tuyến?</p>
+
+<p class="thought"><em>Ai chặn. Câu hỏi thật. Trần Tử Kính muốn tăng toàn tuyến, ai đó chặn lại chỉ cho hai đồn. Và đồn bị đánh là đồn không được tăng.</em></p>
+
+<p class="thought"><em>Trùng hợp? Hay ai đó biết đồn nào sẽ bị đánh?</em></p>
+
+<p>Tạ Cảnh Minh đứng ở góc điện, im lặng. Thiên Diễn Đồng mở. Quét toàn bộ triều đình.</p>
+
+<p>Trần Tử Kính: giận thật, lo thật. Gã muốn đánh. Gã muốn quyền. Nhưng gã cũng thật sự sợ biên giới vỡ.</p>
+
+<p>Vương Bách Nhẫn: bình tĩnh bề ngoài. Bên trong, Thiên Diễn Đồng đọc: lo lắng, nhưng không phải lo vì biên giới. Lo vì mình. Gã đang tính toán cách thoát.</p>
+
+<p class="thought"><em>Gã lo cho mình. Không lo cho biên giới. Tại sao?</em></p>
+
+<p class="thought"><em>Vì gã có liên quan đến việc chặn tăng cường? Hay vì gã biết ai đó trong phe mình đã rò rỉ thông tin cho Bắc Nguyên?</em></p>
+
+<p>Hắn nhìn kỹ hơn. Quét phe Vương Bách Nhẫn. Năm đại thần đứng sau gã. Một người, đứng sau cùng, mặt tái, mồ hôi trên trán.</p>
+
+<p class="thought"><em>Mồ hôi. Giữa mùa thu, trong đại điện mát, mồ hôi trán. Thiên Diễn Đồng đọc: sợ hãi tột độ. Kiểu sợ của người có tội, không phải sợ vì tình hình.</em></p>
+
+<p class="thought"><em>Gã. Gã biết gì đó.</em></p>
+
+<p>Hắn nhìn kỹ. Gã đại thần đó: trung niên, mập, áo xanh lam, đai bạc. Không nhớ tên. Nhưng nhớ mặt: gã ngồi cạnh Vương Bách Nhẫn trong bữa yến.</p>
+
+<p class="thought"><em>Phe Vương. Và đang sợ.</em></p>
+
+<p class="thought"><em>Sợ gì? Sợ bị lộ. Lộ gì? Rò rỉ thông tin quân sự? Cho ai? Bắc Nguyên?</em></p>
+
+<p class="thought"><em>Nếu đúng, gã là nội gián. Và việc đồn Vân Quan bị đánh đúng chỗ yếu, vì ai đó cho Bắc Nguyên biết chỗ yếu.</em></p>
+
+<p class="thought"><em>Nếu đúng...</em></p>
+
+<p class="thought"><em>Nếu mình chỉ ra gã, Vương Bách Nhẫn mất một người. Phe Trần thắng. Mình nghiêng về phe quân sự. Và gã đại thần đó chết. Tội thông địch, tử hình.</em></p>
+
+<p class="thought"><em>Nếu mình không chỉ, nội gián vẫn hoạt động. Bắc Nguyên tiếp tục có thông tin. Biên giới tiếp tục lỗ hổng.</em></p>
+
+<p class="thought"><em>Chọn.</em></p>
+
+<p>Vua lên tiếng:</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Cả điện quay sang nhìn hắn.</p>
+
+<p>— Khanh nhìn thấy gì?</p>
+
+<p class="thought"><em>Câu hỏi quen thuộc. "Khanh nhìn thấy gì." Và mỗi lần trả lời, hậu quả lớn hơn.</em></p>
+
+<p class="thought"><em>Lần này, hậu quả là mạng người.</em></p>
+
+<p>Hắn bước ra giữa điện. Chậm. Mặt nghiêm.</p>
+
+<p class="thought"><em>Phân tích. Nhanh.</em></p>
+
+<p class="thought"><em>Mình không chắc 100% gã đại thần kia là nội gián. Thiên Diễn Đồng đọc cảm xúc, không đọc sự thật. Gã sợ, nhưng có thể sợ vì lý do khác. Có thể gã tham nhũng, có thể gã giấu bệnh, có thể gã sợ bị liên lụy dù vô tội.</em></p>
+
+<p class="thought"><em>Nhưng... xác suất. Đồn bị đánh đúng chỗ không tăng cường. Ai đó rò rỉ thông tin phân bổ quân. Gã đứng trong phe kiểm soát phân bổ. Gã sợ.</em></p>
+
+<p class="thought"><em>Bao nhiêu phần trăm? Bảy mươi? Tám mươi?</em></p>
+
+<p class="thought"><em>Và mình sắp quyết định mạng người dựa trên bảy mươi phần trăm.</em></p>
+
+<p>— Bệ hạ.</p>
+
+<p>Hắn nói. Giọng trầm. Cả điện im.</p>
+
+<p>— Thiên Cơ cho thần thấy: đồn Vân Quan thất thủ không phải vì thiếu quân. Mà vì có kẻ báo cho Bắc Nguyên biết chỗ yếu.</p>
+
+<p>Tiếng xì xào. Vua nhổm người.</p>
+
+<p>— Nội gián?</p>
+
+<p>— Thần nhìn thấy khí đen. Trong triều đình này. Không phải khí đen của bệnh. Khí đen của phản.</p>
+
+<p class="thought"><em>Nói rồi. Không rút lại được.</em></p>
+
+<p>Im lặng. Chết chóc.</p>
+
+<p>Năm mươi đại thần nhìn nhau. Mỗi người tự hỏi: "có phải mình không?"</p>
+
+<p>Và gã đại thần mập áo xanh, đứng sau cùng phe Vương, mặt trắng bệch. Mồ hôi chảy.</p>
+
+<p class="thought"><em>Gã. Thiên Diễn Đồng đọc: hoảng loạn. Tuyệt đối hoảng loạn. Kiểu hoảng của kẻ bị bắt quả tang.</em></p>
+
+<p class="thought"><em>Nếu gã vô tội, gã sẽ sợ như mọi người. Sợ bình thường. Nhưng gã hoảng loạn. Kiểu hoảng khác hẳn.</em></p>
+
+<p class="thought"><em>Tám mươi lăm phần trăm.</em></p>
+
+<p class="thought"><em>Đủ không? Đủ để giết một người?</em></p>
+
+<p>Vua nhìn quanh.</p>
+
+<p>— Quốc Sư, khanh nhìn thấy ai?</p>
+
+<p class="thought"><em>Câu hỏi. Và mình phải trả lời.</em></p>
+
+<p class="thought"><em>Nếu chỉ thẳng, gã chết. Nếu không chỉ, biên giới chết.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình không bao giờ phải chọn ai sống ai chết. Mình lừa tiền, không lừa mạng. Kiếp này...</em></p>
+
+<p>Hắn nhìn gã đại thần mập. Mắt gã gặp mắt hắn. Một giây. Gã hiểu.</p>
+
+<p>Và Thiên Diễn Đồng bắt được thêm một thứ: tội lỗi. Sâu. Cũ. Kiểu tội lỗi của người đã làm rồi, không phải sắp làm.</p>
+
+<p class="thought"><em>Chín mươi phần trăm.</em></p>
+
+<p class="thought"><em>Đủ rồi.</em></p>
+
+<p>Hắn giơ tay. Ngón trỏ và giữa chụm, đưa qua. Tư thế quen thuộc. "Sờ khí vận."</p>
+
+<p>Rồi chỉ.</p>
+
+<p>— Người đó.</p>
+
+<p>Gã đại thần mập đổ sụp. Quỳ. Không phải quỳ vì lễ. Quỳ vì chân không đứng nổi.</p>
+
+<p>— Thần... thần không...</p>
+
+<p>Giọng run. Đứt quãng. Mắt hoảng.</p>
+
+<p>Vua đứng dậy.</p>
+
+<p>— Bắt. Tra. Lục phủ.</p>
+
+<p>Lính ào vào. Kéo gã đi. Gã la hét. Giẫy giụa. Rồi im.</p>
+
+<p>Đại điện im lặng.</p>
+
+<p>Vương Bách Nhẫn đứng im. Mặt không đổi. Nhưng Thiên Diễn Đồng đọc: giận. Giận lạnh. Giận kiểu người vừa mất quân cờ.</p>
+
+<p class="thought"><em>Gã biết. Gã biết gã đại thần đó có vấn đề. Và gã biết mình vừa chỉ ra.</em></p>
+
+<p class="thought"><em>Chiến tranh giữa mình và Vương Bách Nhẫn, chính thức bắt đầu.</em></p>
+
+<p>Trần Tử Kính nhìn hắn. Mắt sáng. Gật đầu nhẹ. Kiểu gật của người vừa được đồng minh.</p>
+
+<p class="thought"><em>Mình không chọn phe Trần. Mình chỉ ra nội gián. Nhưng trong mắt triều đình, mình vừa tấn công phe Vương.</em></p>
+
+<p class="thought"><em>Và phe Trần coi mình là bạn.</em></p>
+
+<p class="thought"><em>Mình không muốn bạn. Mình muốn trung lập. Nhưng trung lập, hôm nay, không phải lựa chọn.</em></p>
+
+<p>Vua nhìn hắn. Mắt phức tạp. Biết ơn. Sợ. Và thêm thứ gì mới: kính nể.</p>
+
+<p>— Quốc Sư, khanh lại nhìn đúng.</p>
+
+<p>— Thần chỉ nhìn thấy thứ Thiên Cơ cho thần thấy.</p>
+
+<p class="thought"><em>Câu cũ. Nói mãi. Nhưng mỗi lần nói, nó nặng hơn.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quốc Sư Phủ.</p>
+
+<p>Phúc An kể: gã đại thần tên Hoắc Quang Nghĩa. Bộ Hộ. Phụ trách điều phối hậu cần quân đội. Có quyền truy cập bản đồ phân bổ quân.</p>
+
+<p>Lục phủ tìm thấy: thư từ mật mã, vàng Bắc Nguyên giấu trong hầm, và danh sách đồn biên giới kèm quân số chi tiết.</p>
+
+<p class="thought"><em>Đúng. Gã là nội gián thật.</em></p>
+
+<p class="thought"><em>Chín mươi phần trăm thành một trăm.</em></p>
+
+<p class="thought"><em>Mình đoán đúng. Thiên Diễn Đồng đọc đúng. Và gã sẽ chết.</em></p>
+
+<p class="thought"><em>Mình giết gã. Không phải bằng tay. Bằng ngón tay chỉ. Bằng một câu nói. "Người đó."</em></p>
+
+<p class="thought"><em>Hai chữ. Một mạng.</em></p>
+
+<p>Hắn ngồi trong phòng. Đèn tắt. Một mình.</p>
+
+<p class="thought"><em>Hoắc Quang Nghĩa. Nội gián. Bán thông tin cho Bắc Nguyên. Đáng chết.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Mình không chắc 100% khi chỉ. Mình chỉ dựa trên xác suất. Cảm xúc. Suy luận. Và Thiên Diễn Đồng.</em></p>
+
+<p class="thought"><em>Nếu gã vô tội thì sao?</em></p>
+
+<p class="thought"><em>Gã không vô tội. Bằng chứng đã tìm thấy.</em></p>
+
+<p class="thought"><em>Nhưng mình không biết điều đó khi chỉ. Mình đánh cược. Bằng mạng người.</em></p>
+
+<p class="thought"><em>Và thắng.</em></p>
+
+<p class="thought"><em>Nhưng thắng cược bằng mạng người, có phải chiến thắng không?</em></p>
+
+<p>Hắn nhìn bàn tay. Ngón trỏ và giữa. Ngón tay vừa chỉ.</p>
+
+<p class="thought"><em>Kiếp trước, mình dùng ngón tay này để đếm tiền lừa đảo. Kiếp này, dùng để chỉ ai chết.</em></p>
+
+<p class="thought"><em>Mình đã thay đổi. Không phải thay đổi tốt hơn. Thay đổi nguy hiểm hơn.</em></p>
+
+<p class="thought"><em>Tên lừa đảo kiếp trước lấy tiền người ta, tệ. Quốc Sư kiếp này lấy mạng người ta, tệ hơn.</em></p>
+
+<p class="thought"><em>Nhưng tên lừa đảo lấy tiền vì tham. Quốc Sư lấy mạng vì... vì gì?</em></p>
+
+<p class="thought"><em>Vì biên giới. Vì quốc gia. Vì nội gián phải bị trừng phạt.</em></p>
+
+<p class="thought"><em>Hay vì mình muốn chứng minh mình đúng?</em></p>
+
+<p>Không có câu trả lời. Hắn biết không có.</p>
+
+<p>Hắn đứng dậy. Ra sân. Nhìn lên trời.</p>
+
+<p>Thiên Cơ chảy. Nhánh sáng từ kinh thành, mạnh hơn tối qua. Tin "Quốc Sư chỉ ra nội gián" đã lan. Niềm tin tăng. Khí vận tăng. Nhánh sáng dày hơn, rõ hơn.</p>
+
+<p>Và nhánh tối phía bắc vẫn ở đó. Nhưng nhỏ hơn một chút. Như bị đẩy lùi.</p>
+
+<p class="thought"><em>Niềm tin tăng, khí vận sáng, Thiên Cơ nghiêng về Đại Ly. Bắc Nguyên bị đẩy.</em></p>
+
+<p class="thought"><em>Mình vừa giết một người. Và Thiên Cơ thưởng cho mình.</em></p>
+
+<p class="thought"><em>Thưởng bằng khí vận. Bằng niềm tin. Bằng sức mạnh.</em></p>
+
+<p class="thought"><em>Vì mình đã làm đúng? Hay vì mình đã cho thiên hạ thứ họ muốn: một kẻ ác bị trừng phạt, một anh hùng chỉ đúng người?</em></p>
+
+<p class="thought"><em>Thiên Cơ không phân biệt đúng sai. Thiên Cơ phản ứng với niềm tin. Và hôm nay, niềm tin nói: Quốc Sư giỏi.</em></p>
+
+<p class="thought"><em>Vậy nếu ngày nào đó mình chỉ sai người, nhưng thiên hạ vẫn tin mình đúng, Thiên Cơ có thưởng không?</em></p>
+
+<p class="thought"><em>Có. Vì Thiên Cơ không biết đúng sai. Chỉ biết tin.</em></p>
+
+<p class="thought"><em>Và đó là điều đáng sợ nhất.</em></p>
+
+<p>Gió thổi. Lạnh.</p>
+
+<p>Ở đâu đó trong ngục, Hoắc Quang Nghĩa đang chờ chết. Ở đâu đó trong phủ Thái Sư, Vương Bách Nhẫn đang lên kế hoạch trả thù. Ở đâu đó trong bóng tối, Thiên Ngoại Các đang ghi chép.</p>
+
+<p>Và ở Quốc Sư Phủ, Tạ Cảnh Minh đứng dưới trời sao, nhìn dòng chảy Thiên Cơ, và lần đầu tiên cảm thấy nặng thật sự.</p>
+
+<p>Không phải nặng kiểu xiềng vàng. Không phải nặng kiểu trách nhiệm.</p>
+
+<p>Nặng kiểu máu.</p>
+
+<p>Hai chữ. Một mạng. Và Thiên Cơ gọi đó là đúng.</p>
+
+<p>Nhưng hắn, tên lừa đảo, biết: đúng và sai, ở thế giới này, chỉ là thứ mà đủ người tin.</p>
+
+<p>Và hắn vừa trở thành người quyết định ai tin gì.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-17.html">&larr; CHƯƠNG 17</a>
+      <a href="chapter-19.html">CHƯƠNG 19 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.949 TỪ</div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 23 — Đêm Đốt Đèn Trắng | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-22.html">&larr; CHƯƠNG 22</a>
+      <span class="chapter-indicator">23/30</span>
+      <a href="chapter-24.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 23</div>
+      <h1>Đêm Đốt Đèn Trắng</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Đèn trắng treo trước cổng phủ Vương Bách Nhẫn lúc canh ba.</p>
+
+<p>Đèn trắng là đèn tang. Ai đó chết.</p>
+
+<p>Nhưng không phải Vương Bách Nhẫn. Phủ bên cạnh. Phủ của Phó Đô Ngự Sử Trịnh Hoài An, đại thần phe trung lập, người đứng giữa hai phe mà không nghiêng bên nào.</p>
+
+<p>Diệt môn. Cả phủ. Đêm qua. Không ai sống sót.</p>
+
+<p>Tạ Cảnh Minh nhận tin lúc giờ Mão. Tiểu Phúc chạy vào, mặt trắng bệch, giọng run:</p>
+
+<p>— Quốc Sư! Phủ Trịnh đại nhân bị giết! Cả nhà! Đêm qua!</p>
+
+<p>Hắn đặt chén trà xuống. Chậm.</p>
+
+<p class="thought"><em>Diệt môn. Cả phủ. Trong kinh thành. Ngay cạnh phủ Thái Sư.</em></p>
+
+<p class="thought"><em>Ai? Tại sao?</em></p>
+
+<p>— Bao nhiêu người?</p>
+
+<p>— Dạ, nghe nói hơn ba mươi. Gia nhân, thê thiếp, con cái. Tất cả.</p>
+
+<p class="thought"><em>Ba mươi người. Một đêm. Trong kinh thành.</em></p>
+
+<p class="thought"><em>Không phải cướp. Cướp không giết cả nhà. Không phải thù cá nhân. Thù cá nhân giết một người, không diệt môn.</em></p>
+
+<p class="thought"><em>Đây là thông điệp. Giết cả nhà để gửi thông điệp cho ai đó.</em></p>
+
+<p class="thought"><em>Cho ai?</em></p>
+
+<p>— Còn gì nữa?</p>
+
+<p>— Dạ, nghe nói... hiện trường kỳ lạ. Không có dấu đánh nhau. Như thể... mọi người chết trong giấc ngủ. Không vết kiếm. Không vết đao. Chỉ chết.</p>
+
+<p class="thought"><em>Không vết thương. Chết trong giấc ngủ. Ba mươi người.</em></p>
+
+<p class="thought"><em>Giống...</em></p>
+
+<p class="thought"><em>Giống cung nữ Tiểu Hoàn ở Trường Xuân Cung. Giống thái giám chết. Không vết thương, tư thế ngay ngắn, chết vì kinh hoàng.</em></p>
+
+<p class="thought"><em>Cùng phương pháp?</em></p>
+
+<p>Tim hắn đập nhanh.</p>
+
+<p class="thought"><em>Ai đó dùng cùng cách giết ở Trường Xuân Cung, giờ giết cả phủ Trịnh. Quy mô lớn hơn. Và lần này, không phải cung nữ hay thái giám. Là đại thần.</em></p>
+
+<p>— Tiểu Phúc, chuẩn bị. Ta đi xem hiện trường.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Phủ Trịnh. Giờ Thìn.</p>
+
+<p>Lính canh bao quanh. Cổng mở. Đèn trắng hai bên, lung linh trong gió sáng.</p>
+
+<p>Tạ Cảnh Minh bước vào. Mùi nhang, mùi máu, mùi thứ gì đó ngọt kiểu thối rữa. Quen. Mùi Trường Xuân Cung.</p>
+
+<p>Sân chính. Xác đã được phủ vải trắng, xếp hàng. Nhiều. Hắn đếm: hai mươi tám tấm vải.</p>
+
+<p class="thought"><em>Hai mươi tám. Không phải ba mươi. Tin đồn phóng đại, như mọi khi.</em></p>
+
+<p>Thiên Diễn Đồng mở. Và hắn thấy.</p>
+
+<p>Khí đen. Dày. Nặng. Bao phủ cả phủ như sương mù. Không phải khí đen quanh xác, kiểu Trường Xuân Cung. Khí đen ở khắp nơi. Trên tường, trên mái, trên đất. Như ai đó đã rải thứ gì đó, và thứ đó giết.</p>
+
+<p class="thought"><em>Khí đen rải khắp phủ. Không tập trung ở xác. Ở khắp nơi.</em></p>
+
+<p class="thought"><em>Trường Xuân Cung: khí đen quanh xác, tập trung, nhỏ. Ở đây: khí đen phủ toàn bộ, lớn, dày.</em></p>
+
+<p class="thought"><em>Cùng loại. Khác quy mô.</em></p>
+
+<p>Hắn đi vào nhà chính. Xác Trịnh Hoài An nằm trên giường. Mặt bình thản. Như đang ngủ. Không vết thương.</p>
+
+<p>Cúi xuống. Thiên Diễn Đồng đẩy mạnh. Cố đọc khí quanh xác.</p>
+
+<p>Và bắt được.</p>
+
+<p>Không phải cảm xúc. Cảm xúc đã tán. Mà là dấu vết. Kiểu dấu vết mà hắn từng thấy ở Trường Xuân Cung: hình ảnh mờ, ký ức cuối cùng của người chết.</p>
+
+<p class="thought"><em>Bóng tối. Mùi nhang. Và mắt. Mắt trắng. Đôi mắt trắng, không có đồng tử, nhìn xuống.</em></p>
+
+<p class="thought"><em>Cùng hình ảnh. Cùng đôi mắt trắng.</em></p>
+
+<p class="thought"><em>Ai đó, hoặc thứ gì đó, có đôi mắt trắng, đã giết cung nữ, giết thái giám, và bây giờ giết cả phủ đại thần.</em></p>
+
+<p>Hắn đứng lên. Tay run nhẹ.</p>
+
+<p class="thought"><em>Đôi mắt trắng. Mình đã thấy hình ảnh này từ ký ức thái giám chết. Đã ghi nhận. Đã quên. Vì quá bận.</em></p>
+
+<p class="thought"><em>Nhưng bây giờ, nó quay lại. Lớn hơn. Mạnh hơn. Và đang giết người trong kinh thành.</em></p>
+
+<p>Tiếng bước chân ngoài sân. Nhanh. Nhẹ. Khác với bước chân lính.</p>
+
+<p>Hắn quay ra.</p>
+
+<p>Và thấy nàng.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Cô gái đứng giữa sân, giữa hàng xác phủ vải trắng, tay cầm kiếm.</p>
+
+<p>Trẻ. Hai mươi, hai mươi hai. Áo trắng, bẩn, rách ở vai. Tóc dài, xổ, lộn xộn. Mặt đẹp nhưng lạnh, kiểu lạnh của người quen nhìn chết chóc. Và mắt sáng, sắc, kiểu mắt của kẻ đã giết người và không hối hận.</p>
+
+<p>Kiếm trong tay cô ta dính máu. Khô. Máu cũ.</p>
+
+<p class="thought"><em>Ai?</em></p>
+
+<p>Cô gái nhìn hắn. Mắt quét. Nhanh. Đánh giá.</p>
+
+<p>— Ngươi là Quốc Sư?</p>
+
+<p>Giọng ngắn. Sắc. Không lễ nghi. Không kính sợ.</p>
+
+<p>— Ta là Quốc Sư. Ngươi là ai?</p>
+
+<p>— Diệp Trúc Khanh.</p>
+
+<p class="thought"><em>Diệp Trúc Khanh. Kiếm tiên nữ. Nhân vật trong hồ sơ nhân vật mà mình chưa từng gặp. Từ tông môn ngoài kinh thành.</em></p>
+
+<p class="thought"><em>Và nàng đang đứng giữa hiện trường diệt môn, tay cầm kiếm dính máu.</em></p>
+
+<p>— Diệp cô nương đến đây vì...</p>
+
+<p>— Vì ta đang truy kẻ giết người.</p>
+
+<p>Nàng nói. Thẳng. Không vòng.</p>
+
+<p>— Kẻ giết phủ này, không phải người. Là thứ khác. Ta theo dấu nó từ ngoài kinh thành vào đây. Mất dấu ở phủ này.</p>
+
+<p class="thought"><em>"Không phải người. Là thứ khác."</em></p>
+
+<p class="thought"><em>Mắt trắng. Không đồng tử. "Thứ khác."</em></p>
+
+<p>— Thứ gì?</p>
+
+<p>— Ta không biết tên. Tông môn gọi là "Khí Thi." Xác chết bị khí đen điều khiển. Giết không cần vũ khí. Giết bằng khí.</p>
+
+<p class="thought"><em>Khí Thi. Xác chết điều khiển. Giết bằng khí.</em></p>
+
+<p class="thought"><em>Thế giới tu tiên. Mình quên mất. Mình bận chính trị, bận lừa đảo, bận Thiên Cơ, quên rằng thế giới này có thứ gì đó ngoài chính trị.</em></p>
+
+<p class="thought"><em>Có thứ giết người bằng khí đen. Và nó đang ở trong kinh thành.</em></p>
+
+<p>Thiên Diễn Đồng mở. Đọc Diệp Trúc Khanh: thẳng thắn, dũng cảm, hơi nóng nảy. Không che giấu. Không tính toán. Kiểu người nói gì nghĩ nấy, chém gì chém nấy.</p>
+
+<p class="thought"><em>Ngược hoàn toàn với mình. Và với Lục Thanh Dao.</em></p>
+
+<p>— Diệp cô nương, "Khí Thi" này do ai điều khiển?</p>
+
+<p>— Không biết. Nhưng cần người có pháp lực cao để tạo Khí Thi. Không phải tu sĩ bình thường.</p>
+
+<p>Nàng nhìn quanh phủ. Mắt lạnh.</p>
+
+<p>— Ba mươi mạng. Một đêm. Kẻ này mạnh.</p>
+
+<p>Rồi nhìn hắn.</p>
+
+<p>— Ngươi là Quốc Sư. Ngươi nhìn thấy Thiên Cơ. Ngươi có thấy gì không?</p>
+
+<p class="thought"><em>Mình thấy khí đen. Mình thấy mắt trắng trong ký ức xác chết. Mình thấy cùng dấu vết ở Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Nhưng mình không biết Khí Thi là gì. Không biết ai điều khiển. Không biết cách chống.</em></p>
+
+<p class="thought"><em>Mình là tên lừa đảo. Không phải tu sĩ. Không có kiếm.</em></p>
+
+<p class="thought"><em>Nhưng cô ta không biết điều đó.</em></p>
+
+<p>— Ta thấy. Khí đen phủ kín nơi này. Và dấu vết giống nơi khác ta từng xem. Trường Xuân Cung.</p>
+
+<p>Diệp Trúc Khanh nhíu mày.</p>
+
+<p>— Trường Xuân Cung? Trong hoàng cung?</p>
+
+<p>— Đúng. Cung nữ và thái giám chết bí ẩn. Cùng cách. Không vết thương. Khí đen.</p>
+
+<p>Nàng siết chặt chuôi kiếm.</p>
+
+<p>— Vậy nó đã ở đây lâu rồi. Không phải mới đến.</p>
+
+<p class="thought"><em>"Đã ở đây lâu rồi." Từ khi mình mới xuyên không. Hoặc trước đó.</em></p>
+
+<p class="thought"><em>Và mình phong tỏa Trường Xuân Cung, nhốt nó ở đó. Nhưng khóa bị cạy. Ai đó mở. Và nó ra ngoài.</em></p>
+
+<p class="thought"><em>Hoặc nó chưa bao giờ bị nhốt.</em></p>
+
+<p>— Diệp cô nương, nếu cô nương đang truy kẻ này, ta có thể giúp.</p>
+
+<p>Nàng nhìn hắn. Nghi ngờ. Thiên Diễn Đồng đọc: không tin. Nàng không tin Quốc Sư. Nàng tin kiếm.</p>
+
+<p>— Ngươi giúp bằng cách nào? Ngươi không có kiếm. Không có pháp lực.</p>
+
+<p class="thought"><em>Thẳng. Đau. Và đúng.</em></p>
+
+<p>— Ta có mắt. Ta nhìn thấy thứ ngươi không thấy. Và ta có triều đình. Ngươi cần lính, ta có lính. Ngươi cần thông tin, ta có thông tin.</p>
+
+<p>Nàng nhìn hắn. Lâu. Đánh giá.</p>
+
+<p>— Được. Nhưng ta nói trước: ta không tin ngươi. Ta tin kiếm của ta. Nếu ngươi lừa ta, ta chém.</p>
+
+<p class="thought"><em>Đúng kiểu Diệp Trúc Khanh trong hồ sơ nhân vật. "Nói thẳng đi." "Đừng vòng vo." "Nếu sai, ta chém."</em></p>
+
+<p>— Công bằng.</p>
+
+<p>Hắn gật đầu.</p>
+
+<p>Và giữa phủ đại thần bị diệt môn, giữa hai mươi tám xác phủ vải trắng, tên lừa đảo và kiếm tiên nữ bắt tay lần đầu.</p>
+
+<p>Không phải bắt tay kiểu đồng minh. Kiểu hai người cùng sợ một thứ, và biết một mình không đủ.</p>
+
+<p>Gió thổi qua sân. Đèn trắng lay. Mùi nhang nặng.</p>
+
+<p>Và ở đâu đó trong kinh thành, thứ gì đó có đôi mắt trắng đang ẩn mình.</p>
+
+<p>Chờ.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-22.html">&larr; CHƯƠNG 22</a>
+      <a href="chapter-24.html">CHƯƠNG 24 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.465 TỪ</div>
+
+  </div>
+</body>
+</html>

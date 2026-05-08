@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 16 — Người Chơi Cờ | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-15.html">&larr; CHƯƠNG 15</a>
+      <span class="chapter-indicator">16/30</span>
+      <a href="chapter-17.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 16</div>
+      <h1>Người Chơi Cờ</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hắn quay lại Trường Xuân Cung vào buổi chiều, trước khi Vương Bách Nhẫn kịp dùng kẽ hở đó.</p>
+
+<p>Phúc An đi cùng. Tiểu Phúc ở phủ. Hai thị vệ canh ngoài cổng cung.</p>
+
+<p>Trường Xuân Cung không thay đổi. Vẫn vắng. Vẫn lạnh. Vẫn kiểu lạnh không phải vì thời tiết. Cỏ dại mọc cao hơn lần trước. Mái ngói rêu phong. Cửa khóa.</p>
+
+<p>Tạ Cảnh Minh đứng trước cổng cung, nhìn bên trong qua khe cửa.</p>
+
+<p class="thought"><em>Lần cuối mình đến đây là chương hai. Hơn hai tháng trước. Cung nữ Tiểu Hoàn chết bí ẩn. Thái giám chết. Điện thờ có người ra vào đêm. Bóng người mắt trắng trong ký ức người chết.</em></p>
+
+<p class="thought"><em>Mình phong tỏa rồi bỏ. Vì quá bận sống sót.</em></p>
+
+<p class="thought"><em>Bây giờ phải quay lại. Không phải vì muốn. Vì Vương Bách Nhẫn đã hỏi, và nếu mình không có câu trả lời, gã sẽ tự tìm.</em></p>
+
+<p>— Phúc An, mở cửa.</p>
+
+<p>Phúc An lấy chìa khóa. Mở. Cửa kẹt, rỉ, kêu cót két.</p>
+
+<p>Bước vào.</p>
+
+<p>Sân rộng, hoang. Lá khô. Bụi. Mùi ẩm mốc. Ánh nắng chiều chiếu xiên qua mái, vệt sáng dài trên sàn đá.</p>
+
+<p>Thiên Diễn Đồng mở. Tự động. Như thể nó nhớ nơi này.</p>
+
+<p>Và hắn cảm nhận.</p>
+
+<p>Khí. Lạnh. Nặng. Không phải khí bình thường. Kiểu khí mà hắn từng cảm nhận quanh xác thái giám ở chương bốn. Khí chết. Nhưng lần này, không chỉ quanh một chỗ. Khí tỏa ra từ phía điện thờ, nhẹ nhưng liên tục, như hơi thở.</p>
+
+<p class="thought"><em>Điện thờ. Vẫn đang hoạt động. Hai tháng mình phong tỏa, nhưng bên trong, thứ gì đó vẫn ở đó.</em></p>
+
+<p>— Phúc An. Đứng ngoài. Đừng vào điện thờ.</p>
+
+<p>— Dạ.</p>
+
+<p>Hắn đi một mình. Qua sân. Qua hành lang. Đến trước điện thờ.</p>
+
+<p>Cửa điện đóng. Khóa. Nhưng khóa bị cạy. Ai đó đã vào.</p>
+
+<p class="thought"><em>Khóa bị cạy. Trong khi cung bị phong tỏa. Ai?</em></p>
+
+<p>Hắn đẩy cửa. Mở.</p>
+
+<p>Bên trong tối. Mùi nhang cũ, mùi gỗ mục, mùi thứ gì đó ngọt, kiểu ngọt của thối rữa.</p>
+
+<p>Và trên bàn thờ, hắn thấy.</p>
+
+<p>Một bàn cờ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Bàn cờ gỗ. Cũ. Đặt ngay giữa bàn thờ, trên chỗ mà lần trước hắn nhìn thấy "vật thể lạ" trong ký ức người chết.</p>
+
+<p>Quân cờ bày sẵn. Hai bên. Đen trắng. Ván cờ đang chơi dở, không phải mới bắt đầu. Khoảng hai mươi nước đã đi.</p>
+
+<p>Và bên cạnh bàn cờ, một mảnh giấy. Gấp đôi. Mực mới.</p>
+
+<p>Hắn cầm lên. Mở.</p>
+
+<p>Bốn chữ. Viết bằng bút lông, nét thanh, kiểu chữ của người luyện nhiều năm:</p>
+
+<p>"Quốc Sư muốn chơi?"</p>
+
+<p>Tim hắn đập nhanh.</p>
+
+<p class="thought"><em>Bàn cờ. Giấy mời. Để trong điện thờ Trường Xuân Cung. Cung bị phong tỏa. Khóa bị cạy.</em></p>
+
+<p class="thought"><em>Ai đó vào đây, đặt bàn cờ, để giấy, rồi đi. Biết mình sẽ quay lại. Hoặc muốn mình quay lại.</em></p>
+
+<p class="thought"><em>Cùng một người? Kẻ lạ ngoài tường? Gã áo xám ngày cầu mưa?</em></p>
+
+<p>Hắn nhìn bàn cờ. Nhìn các quân. Thiên Diễn Đồng mở, cố đọc thứ gì đó từ đồ vật. Không đọc được cảm xúc từ gỗ. Nhưng khí quanh bàn cờ, nhẹ, lạnh, trung tính. Giống khí của kẻ lạ ngoài tường.</p>
+
+<p class="thought"><em>Cùng một người. Hoặc cùng tổ chức.</em></p>
+
+<p>Hắn nhìn ván cờ kỹ hơn.</p>
+
+<p class="thought"><em>Mình biết chơi cờ. Kiếp trước chơi cờ vua, không phải cờ vây hay cờ tướng. Nhưng cờ tướng thì... cũng biết cơ bản. Đủ để nhìn.</em></p>
+
+<p>Ván cờ đang ở thế giằng co. Bên trắng (phía gần hắn) bị ép nhưng có một nước hay: mã nhảy, cắt đường xe đen. Nếu đi đúng, trắng lật ngược.</p>
+
+<p class="thought"><em>Gã để ván cờ cho mình. Để mình đi nước tiếp.</em></p>
+
+<p class="thought"><em>Thử thách? Trò chơi? Hay lời mời?</em></p>
+
+<p>Hắn không chạm quân cờ. Đặt giấy lại. Lùi ra.</p>
+
+<p class="thought"><em>Không đi nước. Chưa. Mình không biết luật chơi. Không phải luật cờ. Luật của gã. Gã muốn gì khi để bàn cờ ở đây?</em></p>
+
+<p class="thought"><em>Nếu mình đi nước, nghĩa là mình chấp nhận chơi. Chấp nhận luật của gã. Và mình không biết gã là ai.</em></p>
+
+<p class="thought"><em>Nếu mình không đi, nghĩa là mình từ chối. Gã sẽ hiểu mình sợ. Hoặc không đủ giỏi.</em></p>
+
+<p class="thought"><em>Hoặc...</em></p>
+
+<p>Hắn lấy bút từ trong tay áo. Luôn mang theo, thói quen từ khi viết 12 câu khai thiên.</p>
+
+<p>Lật mảnh giấy. Viết mặt sau. Bốn chữ:</p>
+
+<p>"Ai đi trước?"</p>
+
+<p>Đặt lại lên bàn cờ. Quay người. Bước ra.</p>
+
+<p class="thought"><em>Không đi nước. Không từ chối. Hỏi ngược.</em></p>
+
+<p class="thought"><em>Kiếp trước, khi ai đó mời mình vào trò chơi mà mình không hiểu luật, mình không chơi theo luật họ. Mình hỏi. Và người trả lời, thường lộ nhiều hơn người hỏi.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Quốc Sư Phủ.</p>
+
+<p>Hắn ngồi trong phòng đông. Đèn tắt. Thiên Diễn Đồng mở.</p>
+
+<p>Chờ.</p>
+
+<p>Kẻ lạ ngoài tường không đến. Đêm thứ nhất không đến. Đêm thứ hai không đến.</p>
+
+<p>Đêm thứ ba, hắn quay lại Trường Xuân Cung.</p>
+
+<p>Một mình. Không Phúc An. Không thị vệ. Đêm, trốn ra, kiểu trốn mà hắn biết thị vệ sẽ thấy nhưng giả vờ không biết, vì Quốc Sư ra ngoài đêm là chuyện của Quốc Sư.</p>
+
+<p>Cổng cung không khóa. Ai đó đã mở.</p>
+
+<p class="thought"><em>Gã biết mình sẽ quay lại.</em></p>
+
+<p>Hắn đi vào. Qua sân. Qua hành lang. Đến điện thờ.</p>
+
+<p>Cửa mở. Bên trong, một ngọn nến. Và bên bàn cờ, một bóng người ngồi.</p>
+
+<p>Hắn dừng ở cửa.</p>
+
+<p>Bóng người quay lại. Mặt trong bóng tối, chỉ thấy đường viền. Áo xám. Tóc búi. Không già, không trẻ.</p>
+
+<p class="thought"><em>Áo xám. Cùng gã ngày cầu mưa?</em></p>
+
+<p>— Quốc Sư đến rồi.</p>
+
+<p>Giọng trầm. Nhẹ. Trung tính. Giọng mà hắn đã nghe qua tường: "Quốc Sư nhìn thấy mọi thứ."</p>
+
+<p>— Ngươi là ai?</p>
+
+<p>Hắn hỏi. Đứng ở cửa. Không vào.</p>
+
+<p>— Người chơi cờ.</p>
+
+<p>— Tên?</p>
+
+<p>— Không quan trọng.</p>
+
+<p>— Tổ chức?</p>
+
+<p>Im lặng. Rồi:</p>
+
+<p>— Quốc Sư hỏi nhiều quá. Ngồi xuống. Chơi.</p>
+
+<p class="thought"><em>Gã không trả lời. Không cho tên. Không cho tổ chức. Nhưng cũng không đe dọa. Không tấn công. Chỉ mời chơi cờ.</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng đọc: bình tĩnh tuyệt đối. Không sợ. Không giận. Không hào hứng. Kiểu bình tĩnh của người đã làm việc này nhiều lần. Chuyên nghiệp. Kỷ luật.</em></p>
+
+<p class="thought"><em>Và thêm thứ gì đó: tò mò. Thật sự tò mò. Không phải tò mò kiểu gián điệp. Tò mò kiểu nhà nghiên cứu gặp mẫu vật mới.</em></p>
+
+<p class="thought"><em>Gã coi mình là mẫu vật.</em></p>
+
+<p>Hắn bước vào. Ngồi xuống. Đối diện gã, qua bàn cờ. Nến giữa hai người, ánh sáng lung linh.</p>
+
+<p>Nhìn gã rõ hơn. Mặt bình thường. Không đẹp, không xấu. Kiểu mặt mà nhìn rồi quên, lẫn vào đám đông. Nhưng mắt khác. Mắt sáng, tĩnh, sâu. Kiểu mắt của người nhìn nhiều hơn nói.</p>
+
+<p>— Quốc Sư hỏi "ai đi trước."</p>
+
+<p>Gã chỉ mảnh giấy hắn để lại.</p>
+
+<p>— Câu trả lời: Quốc Sư đã đi trước. Từ lâu rồi.</p>
+
+<p class="thought"><em>Mình đã đi trước? Nghĩa là gì?</em></p>
+
+<p>— Ta không hiểu.</p>
+
+<p>— Quốc Sư bước lên pháp trường, nói một câu, sấm nổ. Đó là nước đầu tiên. Từ đó, mỗi lời Quốc Sư nói, mỗi "tiên tri," mỗi lần Thiên Cơ rung, đều là nước cờ. Quốc Sư đã đi rất nhiều nước. Và chúng tôi đã xem.</p>
+
+<p class="thought"><em>"Chúng tôi." Số nhiều. Có tổ chức.</em></p>
+
+<p>— Chúng tôi là ai?</p>
+
+<p>Gã nghiêng đầu. Nhẹ.</p>
+
+<p>— Những người xem cờ.</p>
+
+<p class="thought"><em>Không trả lời. Lại vòng. Nhưng "những người xem cờ" cho mình một gợi ý: họ quan sát. Không can thiệp. Xem.</em></p>
+
+<p class="thought"><em>Thiên Ngoại Các? "Ngoài trời" là "ngoài bàn cờ." Xem cờ từ bên ngoài.</em></p>
+
+<p>— Ngươi muốn gì ở ta?</p>
+
+<p>— Không muốn gì. Chỉ muốn hiểu.</p>
+
+<p>Dừng. Gã nhìn hắn. Lâu.</p>
+
+<p>— Quốc Sư, ngươi không phải Quốc Sư thật. Chúng tôi biết.</p>
+
+<p>Không khí đặc lại.</p>
+
+<p>Tạ Cảnh Minh giữ mặt bình thản. Tay dưới bàn nắm chặt.</p>
+
+<p class="thought"><em>Gã biết. Gã biết mình không phải Quốc Sư thật.</em></p>
+
+<p class="thought"><em>Ai đó biết.</em></p>
+
+<p class="thought"><em>Bình tĩnh. Bình tĩnh.</em></p>
+
+<p>— Ngươi nói gì?</p>
+
+<p>Giọng hắn không run. Kiểm soát được.</p>
+
+<p>— Quốc Sư giả gốc bị bắt vì lừa đảo. Ngươi xuyên vào thân xác gã, nói một câu, sấm nổ, và bắt đầu lừa lại từ đầu. Chúng tôi biết.</p>
+
+<p>Im lặng.</p>
+
+<p class="thought"><em>Gã biết. Chi tiết. Không phải đoán. Biết.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Gã biết và không nói cho ai. Không báo vua. Không báo Vương Bách Nhẫn. Không lật tẩy. Tại sao?</em></p>
+
+<p>— Nếu ngươi biết, tại sao không lật tẩy?</p>
+
+<p>— Vì chúng tôi không quan tâm ngươi thật hay giả.</p>
+
+<p>Gã nói. Bình thản. Kiểu bình thản đáng sợ.</p>
+
+<p>— Chúng tôi quan tâm: tại sao Thiên Cơ phản ứng với ngươi. Ngươi không có pháp lực. Không có tu vi. Không có dòng dõi Quốc Sư. Nhưng mỗi lời ngươi nói, Thiên Cơ rung. Mạnh. Mạnh hơn bất kỳ Quốc Sư thật nào trong ba trăm năm.</p>
+
+<p>Dừng.</p>
+
+<p>— Tại sao?</p>
+
+<p class="thought"><em>Câu hỏi. Gã đến vì câu hỏi này. Không phải đe dọa. Không phải chiêu dụ. Đến vì không hiểu.</em></p>
+
+<p class="thought"><em>Và mình...</em></p>
+
+<p class="thought"><em>Mình cũng không hiểu.</em></p>
+
+<p>— Ta cũng muốn biết.</p>
+
+<p>Hắn nói. Thật. Lần đầu tiên, trước mặt ai đó, hắn nói thật.</p>
+
+<p>— Ta không biết tại sao Thiên Cơ phản ứng. Ta chỉ nói, và nó xảy ra. Ta không kiểm soát. Ta không hiểu.</p>
+
+<p>Gã nhìn hắn. Lâu. Thiên Diễn Đồng đọc: bất ngờ. Nhẹ, nhưng có. Gã không ngờ hắn trả lời thật.</p>
+
+<p>— Thú vị.</p>
+
+<p>Gã nói. Rồi đứng dậy.</p>
+
+<p>— Quốc Sư, chúng tôi sẽ tiếp tục xem. Không can thiệp. Chưa. Nhưng nếu ngươi muốn hiểu tại sao Thiên Cơ phản ứng với mình, ngươi có thể đến đây. Bàn cờ sẽ ở đây.</p>
+
+<p>Gã bước ra cửa. Dừng.</p>
+
+<p>— Và Quốc Sư, một lời khuyên.</p>
+
+<p>Hắn nhìn.</p>
+
+<p>— Tin "Bắc Nguyên rút quân" mà ngươi bịa, nên sửa sớm. Thiên Cơ phía bắc đang tối. Nếu ngươi không sửa, khi sự thật lộ, niềm tin sụp, khí vận quanh ngươi sẽ vỡ. Và vỡ nhanh hơn ngươi nghĩ.</p>
+
+<p>Rồi gã đi. Bước chân nhẹ. Biến vào bóng tối.</p>
+
+<p>Tạ Cảnh Minh ngồi một mình trong điện thờ. Nến cháy. Bàn cờ trước mặt. Quân cờ im lìm.</p>
+
+<p class="thought"><em>Gã biết mình giả. Gã biết mình bịa tin Bắc Nguyên. Gã biết Thiên Cơ phía bắc đang tối.</em></p>
+
+<p class="thought"><em>Gã biết mọi thứ.</em></p>
+
+<p class="thought"><em>Và gã không lật tẩy. Vì gã không quan tâm mình giả hay thật. Gã quan tâm: tại sao Thiên Cơ phản ứng.</em></p>
+
+<p class="thought"><em>Nghĩa là: có thứ gì đó ở mình mà ngay cả tổ chức hiểu Thiên Cơ cũng không giải thích được.</em></p>
+
+<p class="thought"><em>Và điều đó, lạ thay, không khiến mình sợ.</em></p>
+
+<p class="thought"><em>Mà khiến mình tò mò.</em></p>
+
+<p class="thought"><em>Vì lần đầu tiên, có ai đó nhìn mình và thấy thứ mà mình không thấy ở chính mình.</em></p>
+
+<p>Hắn nhìn bàn cờ. Nhìn quân trắng. Nhìn nước mã nhảy mà gã đã bày sẵn.</p>
+
+<p>Rồi hắn đưa tay. Cầm quân mã. Đặt.</p>
+
+<p>Nước đi.</p>
+
+<p class="thought"><em>Mình chấp nhận chơi. Không phải vì biết luật. Mà vì muốn biết đối thủ.</em></p>
+
+<p class="thought"><em>Và muốn biết chính mình.</em></p>
+
+<p>Hắn đứng dậy. Bước ra. Đêm. Trăng sáng.</p>
+
+<p>Trường Xuân Cung im lặng sau lưng. Bàn cờ trong điện thờ, quân mã vừa nhảy, chờ nước tiếp.</p>
+
+<p>Và ở đâu đó trong bóng tối, những người xem cờ đang ghi chép.</p>
+
+<p>Về tên lừa đảo mà Thiên Cơ chọn nghe.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-15.html">&larr; CHƯƠNG 15</a>
+      <a href="chapter-17.html">CHƯƠNG 17 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.969 TỪ</div>
+
+  </div>
+</body>
+</html>

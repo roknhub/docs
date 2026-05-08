@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 14: Đàm Phán — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-13.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 14 / 30</span>
+    <a href="chapter-15.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 14</div>
+    <h1 class="chapter-title">Đàm Phán</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.610 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Ba ngày chuẩn bị.</p>
+
+    <p>Ngày đầu, hắn gọi cho Lưu Đức Thắng. Không gọi ban ngày. Gọi lúc tám giờ tối, giờ ông lão đã ăn xong, đang uống trà, xem tin tức. Hắn biết thói quen này vì Tô Vãn tìm được một bài phỏng vấn cũ: "Tôi là người của buổi tối. Ban ngày bận rộn, tối mới nghĩ được."</p>
+
+    <p class="short">— Ông Lưu, tôi là Lục Trường An, Vạn Lý Group.</p>
+
+    <p class="short">— À, cậu Lục. Trần tổng gọi tôi nói cậu sẽ liên hệ.</p>
+
+    <p>Giọng ông lão đều, trầm, kiểu giọng quen nói chuyện lớn. Không vồn vã, không lạnh. Lịch sự kiểu người cũ.</p>
+
+    <p class="short">— Tôi muốn mời ông dùng cơm. Không mang hợp đồng, không mang bài thuyết trình. Chỉ nói chuyện.</p>
+
+    <p class="short">Im lặng ba giây.</p>
+
+    <p class="short">— Chỉ nói chuyện?</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p>— Thú vị. Mấy người trước của Vạn Lý gọi tôi luôn mang theo cặp dày. Cậu không mang gì?</p>
+
+    <p class="short">— Tôi mang trà. Tôi nghe nói ông thích trà Thái Nguyên.</p>
+
+    <p class="short">Tiếng cười nhẹ bên kia. Kiểu cười bất ngờ, không phải cười xã giao.</p>
+
+    <p class="short">— Được. Thứ Năm tối, nhà hàng Thanh Trúc, bảy giờ. Tôi quen chỗ đó.</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">Tắt máy.</p>
+
+    <p class="thought">Ông ta chọn nhà hàng. Chọn giờ. Chọn sân nhà. Kẻ già đời trong thương trường luôn đàm phán ở nơi mình quen. Nhưng ta không cần sân nhà. Ta chỉ cần người ngồi đối diện.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ngày thứ hai, hắn và Tô Vãn hoàn thiện hồ sơ.</p>
+
+    <p class="short">Không phải hồ sơ Vạn Lý. Hồ sơ Lưu Đức Thắng.</p>
+
+    <p>Ba mươi năm xây Hoàng Long. Mọi bài phỏng vấn, mọi bài báo, mọi phát biểu công khai. Tô Vãn sắp xếp theo thời gian, đánh dấu những câu ông nói đi nói lại: "ổn định," "lâu dài," "đối tác là gia đình." Kiểu người coi quan hệ kinh doanh như quan hệ huyết thống. Không dễ bỏ, không dễ thay.</p>
+
+    <p class="short">Và hồ sơ Lưu Hoàng Khải. Con trai.</p>
+
+    <p>Tô Vãn tìm được thêm: Lưu Hoàng Khải tham dự ba sự kiện khởi nghiệp trong năm qua. Ảnh chụp cùng giám đốc Tân Phát ở hai sự kiện. Và một bài đăng trên mạng xã hội của Khải, tháng trước: "Doanh nghiệp cần dũng cảm thay đổi, đừng bám vào quá khứ." Bên dưới, hai mươi ba lượt thích, bốn bình luận, trong đó có bình luận của giám đốc Tân Phát: biểu tượng vỗ tay.</p>
+
+    <p class="thought">Con trai kích động cha. Không phải ác ý. Là muốn chứng minh giá trị. Cha nghe con không phải vì phân tích đúng. Vì sợ mất con hơn sợ mất tiền.</p>
+
+    <p class="short">— Anh Lục, tôi có thêm một thứ.</p>
+
+    <p class="short">Tô Vãn xoay màn hình.</p>
+
+    <p>— Năm ngoái, Hoàng Long có một đối tác cung ứng phụ, công ty Minh Phát. Ký hợp đồng hai năm, giá rẻ hơn đối tác cũ mười lăm phần trăm. Sau bảy tháng, Minh Phát giao hàng chậm liên tục, chất lượng giảm, cuối cùng phá sản. Hoàng Long mất ba tháng tìm đối tác thay thế, thiệt hại ước tính hai tỷ.</p>
+
+    <p class="thought">Tuyệt. Lưu Đức Thắng đã từng bị lừa bởi "giá rẻ" một lần. Vết thương cũ. Nếu ta nhắc đúng chỗ, ông ấy sẽ tự liên tưởng.</p>
+
+    <p class="short">— Ai ký hợp đồng Minh Phát?</p>
+
+    <p>— Lưu Hoàng Khải. Đề xuất của anh ấy. Sau vụ đó, Lưu Đức Thắng không nhắc đến công khai, nhưng có một thay đổi nhân sự: Khải bị chuyển từ phụ trách thu mua sang chuỗi cung ứng nội bộ. Giáng chức ngầm.</p>
+
+    <p class="thought">Giáng chức ngầm. Cha phạt con nhưng không nói ra, vì nói ra là mất mặt cả hai. Nhưng bây giờ, con lại đề xuất thay đổi đối tác. Lần trước bị lừa. Lần này có khác không?</p>
+
+    <p class="thought">Lưu Đức Thắng đang ở giữa hai nỗi sợ: sợ lạc hậu nếu không nghe con, và sợ bị lừa lần nữa nếu nghe con. Ta chỉ cần nghiêng cán cân.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ngày thứ ba. Hắn mua trà.</p>
+
+    <p>Không mua ở siêu thị. Đi bộ đến một tiệm trà nhỏ ở phố cũ, loại tiệm có ông chủ ngồi pha trà mời khách trước khi bán. Chọn Thái Nguyên loại tốt, gói trong hộp thiếc đơn giản, không phô trương. Loại gói mà người sành trà nhìn là biết ngay chất lượng.</p>
+
+    <p class="thought">Quà không phải mua bằng tiền. Mua bằng sự hiểu. Lưu Đức Thắng uống trà Thái Nguyên, không phải trà ngoại. Ông ta là người hoài cổ. Hộp thiếc đơn giản, không có ruy băng, không có bao bì sang trọng. Kiểu quà mà người cùng tầng mới tặng nhau.</p>
+
+    <p class="short">Tối hôm đó, hắn ngồi trong căn hộ, nhìn hộp trà trên bàn.</p>
+
+    <p class="thought">Ngàn năm trước, trước mỗi trận đại chiến, ta ngồi tĩnh lặng một đêm. Không luyện công, không lên kế hoạch. Chỉ ngồi. Để tâm trí trống rỗng. Vì khi vào trận, mọi kế hoạch đều vỡ. Chỉ có bản năng và trực giác sống sót.</p>
+
+    <p class="thought">Ngày mai, ta không đàm phán. Ta đấu pháp.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Năm. Bảy giờ tối.</p>
+
+    <p>Nhà hàng Thanh Trúc nằm trên tầng hai của một tòa nhà cũ, phố trung tâm. Lối vào kín đáo, cầu thang gỗ, đèn vàng, mùi trầm hương nhẹ. Loại nhà hàng không có bảng hiệu to, khách đến vì quen chứ không vì quảng cáo.</p>
+
+    <p>Hắn đến trước mười phút. Tô Vãn đi cùng, áo sơ mi trắng, váy đen, máy tính trong cặp nhưng không mở ra. Hắn dặn trước: "Không mở máy tính. Không lấy giấy tờ. Chỉ ngồi. Khi nào tôi nhìn cô, cô nói."</p>
+
+    <p class="short">Tô Vãn gật. Không hỏi tại sao.</p>
+
+    <p>Bàn góc, cạnh cửa sổ nhìn ra phố. Hắn đặt hộp trà lên bàn, bên cạnh bình trà nóng nhà hàng đã pha sẵn. Ngồi xuống. Chờ.</p>
+
+    <p class="short">Bảy giờ đúng. Lưu Đức Thắng bước vào.</p>
+
+    <p>Sáu mươi hai tuổi, nhưng trông già hơn vì vai nặng. Dáng trung bình, bụng hơi to, tóc bạc cắt ngắn. Mặc áo sơ mi xanh nhạt, không com-lê, quần tây, giày da đã cũ nhưng đánh bóng kỹ. Loại giày mua từ lâu, vẫn giữ, không thay. Người trọng nghĩa cũ hơn đồ mới.</p>
+
+    <p>Đi cùng ông: một người trẻ. Lưu Hoàng Khải. Hai mươi tám tuổi, cao hơn cha nửa đầu, sơ mi trắng bỏ ngoài quần, đồng hồ thông minh trên cổ tay, tóc vuốt gọn. Bước chân nhanh, mắt liếc khắp phòng trước khi ngồi. Kiểu bước chân của người muốn mọi thứ diễn ra theo ý mình.</p>
+
+    <p class="thought">Ông ta mang con trai theo. Không bất ngờ. Nếu Khải là người đề xuất Tân Phát, ông ta muốn con nghe cuộc đàm phán này. Hoặc: con đòi đi theo, ông không từ chối được.</p>
+
+    <p class="thought">Hai đối thủ thay vì một. Nhưng hai đối thủ có xung đột nội bộ thì dễ hơn một đối thủ đồng nhất.</p>
+
+    <p class="short">Hắn đứng dậy.</p>
+
+    <p class="short">— Ông Lưu. Cảm ơn ông dành thời gian.</p>
+
+    <p class="short">Lưu Đức Thắng bắt tay, chặt, kiểu bắt tay của người quen đánh giá người khác qua lực tay.</p>
+
+    <p class="short">— Cậu Lục. Trẻ quá. Vạn Lý cử cậu ra à?</p>
+
+    <p class="short">— Trần tổng tin tôi.</p>
+
+    <p class="short">— Ừ. Thì xem cậu nói gì.</p>
+
+    <p>Ông ngồi xuống. Khải ngồi bên cạnh, không bắt tay, chỉ gật đầu. Mắt nhìn hắn, đánh giá, kiểu đánh giá của người trẻ nhìn người trẻ khác: "Mày ngang tuổi tao, mày có gì?"</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Lưu Đức Thắng: lưng tựa ghế, tay đặt trên bàn, ngón không gõ. Bình tĩnh. Nhưng vai phải hơi thấp hơn vai trái, nghiêng nhẹ về phía con. Bảo vệ. Vô thức. Ông ta đến đây không chỉ vì Vạn Lý. Vì muốn con thấy ông ta quyết định đúng, dù quyết định đó là gì.</p>
+
+    <p class="thought">Lưu Hoàng Khải: ngồi thẳng, hai tay trên bàn, ngón gõ nhẹ. Bồn chồn. Muốn nói. Muốn chứng minh. Mắt không nhìn ta, nhìn cha, canh chừng. Kẻ đang đợi cơ hội phát biểu.</p>
+
+    <p class="thought">Cha sợ mất mặt trước con. Con sợ mất tiếng nói trước cha. Cả hai đều sợ, và cả hai đều giấu.</p>
+
+    <p class="thought">Đây không phải đàm phán kinh doanh. Là hòa giải gia đình mà không ai biết mình cần hòa giải.</p>
+
+    <p class="short">Hắn đẩy hộp trà về phía Lưu Đức Thắng.</p>
+
+    <p class="short">— Thái Nguyên. Tiệm trà ông Bảy, phố Hàng Điếu. Tôi nghe nói ông thích loại này.</p>
+
+    <p class="short">Lưu Đức Thắng cầm hộp, mở nắp, ngửi. Mắt ông hơi dịu lại, nửa giây.</p>
+
+    <p class="short">— Biết chỗ ông Bảy à? Ít người trẻ biết chỗ đó.</p>
+
+    <p class="short">— Tôi đi bộ nhiều. Hay ghé phố cũ.</p>
+
+    <p class="thought">Nửa thật. Tô Vãn tìm ra tiệm từ một bài phỏng vấn cũ. Nhưng ta đi bộ đến mua thật.</p>
+
+    <p>Ông đặt hộp trà xuống, gật đầu nhẹ. Không cười, nhưng mắt bớt cứng. Quà đúng, cách tặng đúng, thời điểm đúng. Ba yếu tố đó nói với Lưu Đức Thắng nhiều hơn bất kỳ bài thuyết trình nào: "Tôi hiểu ông."</p>
+
+    <p class="short">— Vậy nói chuyện đi. Tôi nghe.</p>
+
+    <p>Hắn không vội. Rót trà cho ông, cho Khải, cho Tô Vãn, cuối cùng cho mình. Chậm, đều. Ngàn năm luyện tĩnh tâm, rót trà cũng là một dạng thiền.</p>
+
+    <p class="short">— Ông Lưu, tôi không đến đây để xin ông ở lại Vạn Lý.</p>
+
+    <p class="short">Lưu Đức Thắng ngẩng lên. Khải cũng ngẩng.</p>
+
+    <p class="short">— Vậy cậu đến làm gì?</p>
+
+    <p class="short">— Để hỏi ông một câu.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>— Năm ngoái, Hoàng Long ký với Minh Phát. Giá rẻ hơn mười lăm phần trăm. Bảy tháng sau, Minh Phát phá sản. Hoàng Long mất ba tháng xoay sở, thiệt hại gần hai tỷ.</p>
+
+    <p>Không khí bàn ăn thay đổi. Lưu Đức Thắng không nhúc nhích, nhưng ngón tay trên bàn siết lại, nhẹ, hầu như không thấy. Khải thì khác. Mặt đỏ nhẹ, mắt nhìn xuống, tay rút khỏi bàn, đặt lên đùi. Phản xạ. Cậu ta biết đang bị nhắc đến, dù hắn không nói tên.</p>
+
+    <p class="thought">Đúng. Khải biết. Cha cũng biết. Vết thương chưa lành, chỉ phủ bụi.</p>
+
+    <p class="short">Hắn tiếp, giọng nhẹ, không sắc, không buộc tội.</p>
+
+    <p class="short">— Câu hỏi của tôi là: khi Tân Phát chào giá thấp hơn hai mươi phần trăm, ông nghĩ gì?</p>
+
+    <p>Lưu Đức Thắng nhìn hắn. Mắt ông lão sâu, kiểu mắt đã thấy quá nhiều để bị bất ngờ, nhưng vẫn hơi co lại khi bị hỏi đúng chỗ đau.</p>
+
+    <p class="short">— Tôi nghĩ hai mươi phần trăm là con số lớn.</p>
+
+    <p class="short">— Đúng. Lớn đến mức đáng hỏi: vì sao Tân Phát có thể rẻ hơn hai mươi phần trăm?</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Hắn nhìn Tô Vãn. Cô hiểu. Nói.</p>
+
+    <p>— Tân Phát được thành lập ba năm trước, vốn ban đầu hai mươi tỷ, gọi vốn vòng một năm mươi tỷ. Doanh thu năm ngoái khoảng tám mươi tỷ, nhưng chi phí vận hành một trăm mười tỷ. Lỗ ba mươi tỷ. Hiện tại, Tân Phát đang tìm nhà đầu tư vòng hai. Nếu không gọi được vốn trong mười bốn đến mười sáu tháng, họ sẽ phải cắt dịch vụ hoặc tăng giá đáng kể.</p>
+
+    <p>Giọng Tô Vãn đều, không nhanh không chậm. Mỗi con số rõ ràng, không cần giấy tờ, thuộc lòng. Lưu Đức Thắng nghe, mắt không rời cô. Kẻ coi trọng số liệu đang nghe người nói bằng số liệu.</p>
+
+    <p class="short">Khải nhíu mày.</p>
+
+    <p class="short">— Thông tin đó từ đâu? Tân Phát là công ty tư nhân, không công bố tài chính.</p>
+
+    <p class="short">Hắn trả lời thay Tô Vãn.</p>
+
+    <p>— Báo cáo ngành. Số liệu gọi vốn công khai trên các nền tảng đầu tư. Và suy luận: khi một công ty ba năm tuổi chào giá thấp hơn hai mươi phần trăm so với đối thủ lâu năm, hoặc họ có công nghệ đột phá giảm chi phí, hoặc họ đang lỗ để chiếm thị phần. Tân Phát không có công nghệ đột phá. Vậy họ đang lỗ.</p>
+
+    <p>Khải mở miệng, muốn phản bác. Nhưng Lưu Đức Thắng giơ tay nhẹ. Chỉ giơ tay, không nói gì. Khải im. Phản xạ ngàn lần lặp lại: cha giơ tay, con im.</p>
+
+    <p class="thought">Quyền lực gia đình. Mạnh hơn quyền lực công ty. Khải giận, nhưng không dám cãi cha trước mặt người ngoài.</p>
+
+    <p class="short">Lưu Đức Thắng nhìn hắn.</p>
+
+    <p class="short">— Cậu nói Tân Phát sẽ sập?</p>
+
+    <p>— Tôi không nói sẽ sập. Tôi nói có rủi ro sập. Rủi ro cao. Nếu ông ký hợp đồng năm năm với Tân Phát, và họ gặp vấn đề ở năm thứ hai, ông mất đối tác giữa chừng. Lần trước với Minh Phát, thiệt hại hai tỷ. Lần này, Hoàng Long lớn hơn, hợp đồng lớn hơn. Thiệt hại có thể gấp năm, gấp mười.</p>
+
+    <p class="short">Im lặng. Nặng.</p>
+
+    <p>Lưu Đức Thắng uống trà. Chậm. Mắt nhìn xuống cốc, không nhìn ai. Đang nghĩ. Đang nhớ. Minh Phát, bảy tháng, phá sản, ba tháng xoay sở. Ông nhớ. Mỗi đêm mất ngủ lúc đó, ông đều nhớ.</p>
+
+    <p class="short">Khải không chịu nổi.</p>
+
+    <p class="short">— Nhưng Tân Phát không phải Minh Phát. Tân Phát có đội ngũ mạnh, có nhà đầu tư lớn. Không thể so sánh.</p>
+
+    <p class="short">Hắn nhìn Khải. Lần đầu nhìn thẳng.</p>
+
+    <p class="thought">Kẻ trẻ, hăng, muốn chứng minh. Nhưng đang tự vệ, không phải tấn công. Cậu ta biết vụ Minh Phát là do mình. Và đang sợ lịch sử lặp lại.</p>
+
+    <p>— Anh Khải đúng. Tân Phát không phải Minh Phát. Nhưng mô hình giống nhau: giá thấp, công ty mới, chưa có lãi. Câu hỏi không phải "Tân Phát có tốt không" mà là "nếu Tân Phát gặp vấn đề, Hoàng Long có chịu nổi không."</p>
+
+    <p>Khải nhìn hắn. Mắt sắc, muốn phản bác, nhưng không tìm được lỗ hổng. Vì hắn không tấn công Tân Phát. Hắn hỏi về Hoàng Long. Hỏi về rủi ro của chính Hoàng Long. Không ai phản bác được câu hỏi về rủi ro của chính mình.</p>
+
+    <p class="short">Lưu Đức Thắng đặt cốc xuống.</p>
+
+    <p class="short">— Vậy cậu đề xuất gì?</p>
+
+    <p class="thought">Đến rồi. Ông ta hỏi. Nghĩa là đã nghe. Nghĩa là nỗi sợ đã thắng tham vọng. Bây giờ chỉ cần cho ông ta lối ra mà không mất mặt trước con.</p>
+
+    <p>— Tôi đề xuất ông không cần quyết định hôm nay. Cho tôi ba ngày. Tôi sẽ gửi ông một bản phân tích chi tiết: so sánh rủi ro Tân Phát với chi phí tiếp tục với Vạn Lý. Bằng số liệu, không bằng lời. Ông đọc xong, tự quyết định.</p>
+
+    <p class="short">— Tôi không cần ai phân tích hộ.</p>
+
+    <p>— Tôi biết. Ông là người tự quyết. Nhưng đọc thêm một bản phân tích không mất gì. Và nếu phân tích của tôi sai, ông cứ ký với Tân Phát. Tôi không cản.</p>
+
+    <p class="thought">"Tôi không cản." Ba chữ quan trọng nhất. Không cầu xin. Không ép. Cho ông ta cảm giác vẫn kiểm soát. Lưu Đức Thắng là người cần kiểm soát mọi quyết định. Nếu ta ép, ông ta sẽ đẩy ra vì bản năng. Nếu ta lùi, ông ta sẽ kéo vào vì tò mò.</p>
+
+    <p>Lưu Đức Thắng nhìn hắn. Lâu. Kiểu nhìn của người đàn ông sáu mươi hai tuổi đánh giá người trẻ ba mươi năm kinh nghiệm ít hơn mình.</p>
+
+    <p class="short">— Cậu bao nhiêu tuổi?</p>
+
+    <p class="short">— Hai mươi bảy.</p>
+
+    <p class="short">— Hai mươi bảy mà nói chuyện kiểu này. Lạ.</p>
+
+    <p class="short">— Tôi đọc nhiều.</p>
+
+    <p>Ông lão nhìn hắn thêm một giây. Rồi nhìn con trai. Khải ngồi im, mặt căng, không nói gì từ lúc bị cắt lời.</p>
+
+    <p class="short">— Được. Ba ngày. Gửi bản phân tích cho tôi.</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p>Bữa tối tiếp tục. Hắn không nhắc đến Vạn Lý, Tân Phát, hay hợp đồng nữa. Nói chuyện bình thường. Hỏi ông Lưu về ngành vật liệu xây dựng, về thời kỳ đầu khởi nghiệp, về thay đổi thị trường ba mươi năm qua. Lưu Đức Thắng nói, dần dần nhiều hơn, giọng bớt cứng. Ông lão thích kể chuyện. Thích có người trẻ biết nghe.</p>
+
+    <p class="short">Khải ngồi im, ăn, thỉnh thoảng nhìn hắn bằng ánh mắt nửa bực nửa tò mò.</p>
+
+    <p class="thought">Cậu ta đang cố hiểu: thằng này vừa đập tan lập luận của mình mà cha vẫn vui vẻ ngồi kể chuyện. Sao? Vì ta không đánh cậu ta. Ta đánh vào vấn đề. Và sau đó, ta cho cha cậu ta sân khấu. Kẻ già thích kể, kẻ trẻ biết nghe. Đó là cách ngàn năm trước ta thu phục trưởng lão trong tông môn.</p>
+
+    <p class="short">Chín giờ. Bữa tối kết thúc.</p>
+
+    <p>Lưu Đức Thắng bắt tay hắn ở cửa. Lần này, lực tay nhẹ hơn lúc đầu. Không phải yếu. Là dịu.</p>
+
+    <p class="short">— Cậu Lục, ba ngày. Tôi đợi.</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">Ông đi. Khải đi theo, không quay đầu.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ba ngày sau.</p>
+
+    <p>Hắn gửi bản phân tích. Mười hai trang. Tô Vãn soạn số liệu, hắn viết lời. Không hoa mỹ. Toàn bảng biểu, so sánh, kịch bản rủi ro. Ba kịch bản: Tân Phát gọi vốn thành công (tốt nhất), Tân Phát gọi vốn một phần (trung bình), Tân Phát không gọi được vốn (tệ nhất). Ở kịch bản tệ nhất, thiệt hại ước tính cho Hoàng Long: mười hai tỷ.</p>
+
+    <p>Và ở trang cuối, một đề xuất ngắn: "Hợp đồng mới với Vạn Lý, hai năm, điều chỉnh giá tăng mười lăm phần trăm, đổi lại cam kết dịch vụ ưu tiên và đầu mối liên hệ trực tiếp." Không giảm giá. Tăng giá. Nhưng tăng kèm giá trị.</p>
+
+    <p class="thought">Tăng giá khi đối thủ giảm giá. Ngược đời. Nhưng đúng. Vì khi ta tăng giá, ta nói với Lưu Đức Thắng: "Chúng tôi tự tin, không cần hạ mình." Kẻ tự tin hấp dẫn hơn kẻ cầu xin.</p>
+
+    <p class="short">Chiều hôm đó, Lưu Đức Thắng gọi.</p>
+
+    <p class="short">— Mười hai trang. Đọc hết rồi.</p>
+
+    <p class="short">— Ông thấy sao?</p>
+
+    <p class="short">Im lặng. Dài.</p>
+
+    <p class="short">— Kịch bản tệ nhất, mười hai tỷ. Con số đó tôi tin.</p>
+
+    <p class="short">— Vì nó đúng.</p>
+
+    <p class="short">— Vì nó đúng. Và vì cậu không bảo tôi phải làm gì. Cậu chỉ cho tôi thấy. Để tôi tự chọn.</p>
+
+    <p class="thought">Đúng. Để ông tự chọn. Đó là cách duy nhất. Kẻ già đời không bao giờ chấp nhận bị dẫn dắt. Họ chỉ chấp nhận tự đi, theo hướng mà ai đó đã lặng lẽ đặt đèn.</p>
+
+    <p class="short">— Hợp đồng mới. Hai năm. Giá tăng mười lăm phần trăm. Gửi bản thảo cho tôi xem.</p>
+
+    <p class="short">Hắn nhắm mắt. Mở ra.</p>
+
+    <p class="short">— Sáng mai ông sẽ nhận được.</p>
+
+    <p class="short">Tắt máy.</p>
+
+    <p class="thought">Không chỉ giữ khách. Tăng giá trị mười lăm phần trăm. CEO sẽ vui. VP sẽ ấn tượng. Và cả Vạn Lý sẽ biết: Lục Trường An không chỉ cứu công ty khỏi khủng hoảng, hắn biến khủng hoảng thành lợi nhuận.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ngày ký hợp đồng. Tầng mười lăm, phòng họp lớn.</p>
+
+    <p>Lưu Đức Thắng đến cùng luật sư. Không mang Khải theo. Ông ký nhanh, gọn, bắt tay CEO, bắt tay hắn.</p>
+
+    <p class="short">Khi bắt tay hắn, ông nói nhỏ:</p>
+
+    <p class="short">— Lần sau gọi tôi uống trà, đừng chờ đến lúc có chuyện.</p>
+
+    <p class="short">— Vâng, ông Lưu.</p>
+
+    <p class="short">CEO cười ha hả, vỗ vai hắn trước mặt mọi người. VP đứng bên, gật đầu, mắt đánh giá. Ngô Hải đứng cuối phòng, mặt xám.</p>
+
+    <p class="thought">Thắng.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ra khỏi phòng họp. Hành lang tầng mười lăm. Hắn đi về phía thang máy.</p>
+
+    <p class="short">Tô Vãn đi bên cạnh. Im lặng. Bước chân đều.</p>
+
+    <p class="short">Vào thang máy. Hai người. Cửa đóng.</p>
+
+    <p class="short">Tô Vãn nói, mắt nhìn thẳng cửa thang.</p>
+
+    <p class="short">— Thông tin Tân Phát đang tìm nhà đầu tư vòng hai. Anh lấy từ đâu?</p>
+
+    <p>Hắn nhìn cô trong gương phản chiếu của thang máy. Khuôn mặt cô bình thản, nhưng mắt sắc. Không phải hỏi vì tò mò. Hỏi vì muốn biết ta có bịa không. Vì nếu ta bịa, cô đã giúp ta lừa một ông lão sáu mươi hai tuổi bằng dữ liệu giả.</p>
+
+    <p class="short">— Tôi đoán.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Cửa thang mở. Tầng mười hai.</p>
+
+    <p class="short">Hắn bước ra. Dừng lại. Quay đầu nhìn cô, vẫn đứng trong thang.</p>
+
+    <p class="short">— Nhưng tôi đoán rất giỏi.</p>
+
+    <p class="short">Rồi bước đi.</p>
+
+    <p>Tô Vãn đứng trong thang máy. Cửa đóng lại. Cô nhìn cánh cửa đóng, nơi hắn vừa biến mất.</p>
+
+    <p class="thought">"Tôi đoán."</p>
+
+    <p class="thought">Nói dối.</p>
+
+    <p class="thought">Hắn không đoán. Hắn biết. Bằng cách nào đó, hắn biết. Và hắn sẽ không bao giờ nói cho cô.</p>
+
+    <p>Cửa mở lại ở tầng mười hai. Cô bước ra, đi về bàn. Ngồi xuống. Mở máy tính.</p>
+
+    <p class="short">Gõ vào thanh tìm kiếm: "Tân Phát gọi vốn vòng hai."</p>
+
+    <p class="short">Không có kết quả nào.</p>
+
+    <p>Cô nhìn màn hình trống. Rồi nhìn sang bàn đối diện, nơi Lục Trường An đang ngồi, gõ phím, mặt phẳng, như mọi ngày.</p>
+
+    <p class="thought">Hắn đoán. Và đoán đúng.</p>
+
+    <p class="thought">Hoặc hắn biết thứ mà cả mạng không có.</p>
+
+    <p class="short">Cô đóng thanh tìm kiếm. Quay lại bảng tính. Gõ tiếp.</p>
+
+    <p class="short">Nhưng trong đầu, câu hỏi không tắt.</p>
+
+    <p class="thought">Người này là ai?</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-13.html">&larr; Chương trước</a>
+    <a href="chapter-15.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.610 từ &middot; Chương 14 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

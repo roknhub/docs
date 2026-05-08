@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 19: Bẫy — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-18.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 19 / 30</span>
+    <a href="chapter-20.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 19</div>
+    <h1 class="chapter-title">Bẫy</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 2.627 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Hắn không rò rỉ trực tiếp.</p>
+
+    <p>Trực tiếp là ngu. Kẻ rò rỉ trực tiếp luôn bị truy ngược. Thay vào đó, hắn dùng Hàn Kiêu.</p>
+
+    <p>Hàn Kiêu bắt đầu làm việc từ thứ Hai tuần trước. Chưa chính thức vào Vạn Lý, nhưng hắn giao Hàn Kiêu đi gặp khách hàng nhỏ bên ngoài, kiểu làm tự do, "thử việc." Hàn Kiêu bán giỏi. Hơn một tuần, ký được hai hợp đồng nhỏ. Năng lượng, liều, miệng mồm mượt mà khi cần. Đúng như Ma Tâm Quan đọc.</p>
+
+    <p>Nhưng Hàn Kiêu còn có một giá trị khác: hắn không thuộc Vạn Lý. Không ai biết hắn. Không ai theo dõi.</p>
+
+    <p class="short">Thứ Ba, tuần mười hai. Hắn gọi Hàn Kiêu.</p>
+
+    <p class="short">— Kiêu, tôi cần anh làm một việc. Không liên quan bán hàng.</p>
+
+    <p class="short">— Sếp nói, em làm.</p>
+
+    <p>— Đi đến quán cà phê Hạ Long, phố Bà Triệu. Ngồi bàn gần cửa. Khoảng mười giờ sáng, sẽ có một người đàn ông trung niên ngồi bàn trong. Tên Lê Hùng Cường, thành viên hội đồng quản trị Vạn Lý Group. Ông ta uống cà phê ở đó mỗi thứ Ba.</p>
+
+    <p class="short">— Rồi sao?</p>
+
+    <p>— Không cần nói chuyện với ông ta. Chỉ cần ngồi gần, gọi điện cho ai đó, nói to vừa đủ để ông ta nghe. Nội dung cuộc gọi: "Nghe nói có người trong Vạn Lý đang điều tra tài chính công ty. Mấy giao dịch bất thường gì đó. Không biết thật hay đồn."</p>
+
+    <p class="short">— Nói xong thì sao?</p>
+
+    <p class="short">— Nói xong, uống hết cà phê, đi. Không nhìn ông ta. Không nói thêm.</p>
+
+    <p class="short">Im lặng. Rồi Hàn Kiêu hỏi, giọng thấp hơn.</p>
+
+    <p class="short">— Sếp, em không hỏi tại sao. Nhưng nếu em hiểu đúng, sếp đang gieo tin.</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p class="short">— Gieo cho ai?</p>
+
+    <p class="short">— Cho kẻ sẽ mang tin đó về nơi cần đến.</p>
+
+    <p class="thought">Lê Hùng Cường, phe CEO. Trong danh sách VP, đánh dấu "phe CEO." Ông ta uống cà phê thứ Ba với ai? Kiểm tra: Tô Vãn tìm được lịch trình. Cường uống cà phê một mình, nhưng mỗi thứ Ba đều gặp thư ký CEO vào buổi chiều. Thói quen cũ. Nghĩa là bất kỳ thông tin nào Cường nghe được sáng, chiều sẽ đến tai CEO.</p>
+
+    <p class="thought">Ta không nói cho CEO. Cường nói cho CEO. Và Cường không biết ai đã nói cho Cường. Vì "ai đó gọi điện trong quán cà phê" không phải nguồn tin. Là tin đồn. Và tin đồn thì không truy được nguồn.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Ba. Mười giờ sáng.</p>
+
+    <p>Hàn Kiêu ngồi quán cà phê Hạ Long, bàn gần cửa. Gọi một ly nâu đá, rút điện thoại, giả vờ gọi. Giọng to vừa đủ, tự nhiên, kiểu người nói chuyện điện thoại không để ý xung quanh.</p>
+
+    <p class="short">Hắn không ở đó. Không cần ở đó. Tin Hàn Kiêu.</p>
+
+    <p>Chiều, Hàn Kiêu nhắn: "Xong rồi sếp. Ông già ngồi bàn trong, nghe hết. Tai ông ấy nghiêng về phía em khi em nói 'giao dịch bất thường.' Xong thì ông ấy gọi điện cho ai đó, nói nhỏ, mặt nghiêm."</p>
+
+    <p class="thought">Xong. Hạt giống đã gieo. Bây giờ chờ nó mọc.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Tư. Không có gì xảy ra.</p>
+
+    <p>Thứ Năm. CEO hủy một cuộc họp dự án mà VP đồng chủ trì. Lý do: "lịch trình thay đổi." Không giải thích thêm.</p>
+
+    <p class="thought">Bắt đầu rồi.</p>
+
+    <p>Thứ Sáu. CEO ra thông báo nội bộ: "Tất cả dự án trên năm tỷ phải được CEO phê duyệt trực tiếp. Không ủy quyền cho phó tổng." Trước đó, VP có quyền phê duyệt dự án đến mười tỷ.</p>
+
+    <p class="thought">Cắt quyền. CEO đang thu hẹp phạm vi VP. Không nói lý do. Không cần nói. Mọi người trong ban giám đốc đều hiểu: CEO không tin VP nữa.</p>
+
+    <p>Hắn ngồi ở bàn phòng Kinh doanh, đọc thông báo trên hệ thống nội bộ. Mặt phẳng. Xung quanh, đồng nghiệp xì xào. Ngô Hải, dù đã chuyển phòng, vẫn có mạng lưới tin tức cũ. Tin lan nhanh: CEO cắt quyền VP.</p>
+
+    <p class="short">Tiểu Lý ghé bàn.</p>
+
+    <p class="short">— Anh Lục, CEO cắt quyền phó tổng. Chuyện gì đang xảy ra?</p>
+
+    <p class="short">— Chính trị nội bộ. Không liên quan đến đội mình. Tập trung làm việc.</p>
+
+    <p class="short">Tiểu Lý gật. Nhưng mắt lo.</p>
+
+    <p class="thought">Kẻ trung thành bẩm sinh lo cho sếp, không lo cho mình. Tiểu Lý lo vì thấy bầu không khí thay đổi, và không muốn ta dính vào.</p>
+
+    <p class="thought">Nhưng ta không dính. Ta là kẻ tạo ra bầu không khí đó.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Bảy. VP gọi.</p>
+
+    <p class="short">— Gặp tôi. Ngay. Cầu thang phụ tầng mười lăm.</p>
+
+    <p class="short">Giọng VP sắc hơn bình thường. Không bình tĩnh. Kiểm soát, nhưng rõ ràng đang giận.</p>
+
+    <p>Hắn lên tầng mười lăm. Cầu thang phụ, vị trí quen. VP đứng, không ngồi. Tay cầm điện thoại, ngón siết mạnh.</p>
+
+    <p class="short">— Có kẻ phản bội.</p>
+
+    <p class="short">Thẳng. Không chào, không mở đầu.</p>
+
+    <p class="short">— Phản bội?</p>
+
+    <p>— CEO vừa cắt quyền tôi ở tất cả dự án lớn. Hủy cuộc họp tôi đồng chủ trì. Và sáng nay, trưởng phòng Tài chính bị gọi lên phòng CEO hai tiếng. Hai tiếng, cửa đóng.</p>
+
+    <p class="short">VP nhìn hắn. Mắt sắc, nhưng bên dưới là lo. Lần đầu hắn thấy VP lo thật sự.</p>
+
+    <p class="short">— CEO biết. Biết có ai đó đang điều tra tài chính. Và hắn nghi tôi.</p>
+
+    <p class="short">Ma Tâm Quan đọc.</p>
+
+    <p class="thought">Vai VP hơi so, khác bình thường. Cằm không ngẩng. Tay nắm điện thoại chặt, ngón trắng. Lo, giận, và bối rối. VP không biết tin rò rỉ từ đâu. Kế hoạch của hắn chưa bắt đầu mà đã bị nghi. Hắn đang mất kiểm soát, và kẻ quen kiểm soát mà mất kiểm soát thì phản ứng dữ.</p>
+
+    <p class="short">— Ai rò rỉ?</p>
+
+    <p>— Tôi không biết. Nhưng chỉ có vài người biết kế hoạch: tôi, cậu, Đặng Thị Hoa, Lê Văn Toản. Bốn người.</p>
+
+    <p class="thought">Bốn người. VP đang tính: ai trong bốn người rò rỉ? Và "ai" gồm cả ta. Hắn đang nhìn ta, cân nhắc.</p>
+
+    <p class="short">— Phạm phó tổng, tôi không rò rỉ.</p>
+
+    <p class="short">— Tôi không nói cậu rò rỉ. Nhưng tôi cần biết: cậu có nói với ai không? Bất kỳ ai?</p>
+
+    <p class="short">— Không.</p>
+
+    <p class="thought">Nói dối. Sạch. Mặt phẳng. Mắt thẳng. Giọng đều. Vì đây không phải rò rỉ kế hoạch lật CEO. Đây là rò rỉ thông tin "có người điều tra tài chính." Hai thứ khác nhau. CEO nghi có kẻ điều tra tài chính, không nghi có kẻ lật ghế mình. Nhưng VP tự suy: nếu CEO biết có điều tra, hắn sẽ truy nguồn, và nguồn dẫn đến VP.</p>
+
+    <p class="thought">VP đang tự sợ mình. Không phải ta gây. Là bóng của chính hắn.</p>
+
+    <p class="short">— Tôi sẽ tìm hiểu. Trong phe mình, nếu có ai nói gì, tôi sẽ biết.</p>
+
+    <p class="short">VP nhìn hắn. Cân nhắc. Rồi gật.</p>
+
+    <p class="short">— Tìm nhanh. Nếu CEO biết kế hoạch thật, tất cả chúng ta nguy.</p>
+
+    <p class="short">— Tôi hiểu.</p>
+
+    <p>VP quay đi, bước lên cầu thang. Bước chân nhanh hơn bình thường. Gót giày gõ sắc trên bậc đá.</p>
+
+    <p class="thought">VP đang lo. Lần đầu tiên kể từ khi ta gặp hắn, VP không kiểm soát được tình huống. Và kẻ không kiểm soát được tình huống sẽ hành động vội. Hành động vội là phạm sai lầm.</p>
+
+    <p class="thought">Tốt.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Chiều. Hắn ngồi trong phòng họp nhỏ B, đội năm người đã tan, chỉ còn mình. Đóng cửa.</p>
+
+    <p class="short">Lấy điện thoại, gọi Tô Vãn.</p>
+
+    <p class="short">— Gặp tôi ở nhà ăn, năm giờ rưỡi. Lúc mọi người đã đi hết.</p>
+
+    <p>Năm giờ ba mươi. Nhà ăn vắng, chỉ còn nhân viên dọn dẹp. Hai người ngồi góc cuối, cốc trà, tiếng chảo rửa xa xa.</p>
+
+    <p>Tô Vãn nhìn hắn. Mắt sau gọng kính mảnh bình tĩnh, nhưng cô đã nghe tin CEO cắt quyền VP. Cả công ty đã nghe.</p>
+
+    <p class="short">— Chuyện CEO cắt quyền phó tổng. Có liên quan đến anh không?</p>
+
+    <p class="short">Thẳng. Kiểu Tô Vãn: không vòng vo.</p>
+
+    <p>Hắn nhìn cô. Cân nhắc. Tô Vãn đã biết bằng chứng CEO rút ruột. Đã biết main và VP liên minh. Cô đủ thông minh để ghép mảnh.</p>
+
+    <p class="short">— Có.</p>
+
+    <p>Tô Vãn không bất ngờ. Mắt cô không mở rộng, không nhíu mày. Chỉ gật, nhẹ, kiểu gật xác nhận điều đã đoán.</p>
+
+    <p class="short">— Anh rò rỉ thông tin cho CEO. Để CEO nghi VP.</p>
+
+    <p class="short">Không phải câu hỏi. Là nhận định.</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p class="short">— Tại sao? Anh vừa liên minh với VP.</p>
+
+    <p>— Vì liên minh không có nghĩa là tin. VP dùng tôi, tôi dùng VP. Nhưng nếu để VP lật CEO theo kế hoạch của hắn, hắn lên ghế, tôi vẫn chỉ là quân cờ. Cần cả hai phe yếu đi cùng lúc.</p>
+
+    <p class="short">Tô Vãn im lặng. Nhìn cốc trà, không nhìn hắn. Đang xử lý.</p>
+
+    <p class="thought">Cô ta đang cân nhắc: ta nguy hiểm đến mức nào? Liên minh với VP rồi đâm sau lưng VP. Đó là đúng nghĩa "người hai mặt." Cô ta đang tự hỏi: nếu ta làm thế với VP, có ngày ta làm thế với cô không?</p>
+
+    <p class="short">— Tô Vãn.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p>— Tôi biết cô đang nghĩ gì. Và tôi không giải thích. Tôi chỉ nói: tôi không đâm cô. Vì cô không phải quân cờ.</p>
+
+    <p class="short">Tô Vãn nhìn lên. Mắt gặp mắt.</p>
+
+    <p class="short">— Vậy tôi là gì?</p>
+
+    <p class="short">— Cô là người tôi cần ở bên khi mọi thứ xong.</p>
+
+    <p class="short">Im lặng. Dài. Nhà ăn yên tĩnh, chỉ tiếng nước chảy từ bếp.</p>
+
+    <p class="short">Tô Vãn không trả lời. Uống trà. Đặt cốc xuống.</p>
+
+    <p class="short">— Bước tiếp theo là gì?</p>
+
+    <p class="thought">Không hỏi thêm. Không đòi giải thích. Chấp nhận. Không phải vì tin hoàn toàn. Vì cô đã chọn: đi theo con đường này, dù không biết nó dẫn đến đâu. Kẻ thông minh biết rằng đôi khi, đi theo người đúng quan trọng hơn hiểu đúng đường.</p>
+
+    <p>— CEO đang hoảng. Hắn sẽ bắt đầu nghi ngờ tất cả mọi người, không chỉ VP. Sẽ siết chặt kiểm soát. Sẽ dùng người cũ để điều tra. Và "người cũ" khả năng cao là Ngô Hải.</p>
+
+    <p class="short">— Ngô Hải? Ngô Hải đã bị chuyển phòng.</p>
+
+    <p>— Ngô Hải bị chuyển, nhưng vẫn thuộc phe CEO. Và CEO tin người cũ hơn người mới. Khi hoảng, CEO sẽ gọi Ngô Hải quay lại, giao điều tra ai đang "điều tra tài chính."</p>
+
+    <p class="short">— Và Ngô Hải sẽ nhắm vào anh.</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p class="short">Tô Vãn nhìn hắn. Mắt lo, lần đầu cô để lộ.</p>
+
+    <p class="short">— Anh chuẩn bị thế nào?</p>
+
+    <p>— Để Ngô Hải tìm. Hắn sẽ tìm ra: tôi gặp VP nhiều lần. Hắn sẽ báo CEO. CEO sẽ gọi tôi lên hỏi. Và tôi sẽ trả lời.</p>
+
+    <p class="short">— Trả lời sao?</p>
+
+    <p class="short">— Nhận lỗi.</p>
+
+    <p class="short">Tô Vãn nhíu mày.</p>
+
+    <p class="short">— Nhận lỗi?</p>
+
+    <p>— CEO muốn nghe gì, tôi nói đó. Ông ta muốn tin tôi vô hại. Muốn tin tôi gặp VP vì lý do công việc. Muốn tin mình vẫn kiểm soát được mọi thứ. Tôi cho ông ta tất cả những thứ đó. Và ông ta sẽ tha. Vì tha tôi dễ hơn mất tôi.</p>
+
+    <p class="thought">Kiếp trước, khi bị Thiên Kiếm Tông bao vây ở Huyền Minh Sơn, ta đã dùng cách này. Giả hàng. Giả thua. Giả yếu. Để đối phương tưởng đã thắng, hạ cảnh giác. Rồi đêm đó, ta rút kiếm. Kiếm Tông chủ chết trên giường, không kịp mở mắt.</p>
+
+    <p class="thought">CEO không phải Kiếm Tông chủ. Dễ hơn nhiều.</p>
+
+    <p class="short">Tô Vãn nhìn hắn. Lâu. Rồi gật.</p>
+
+    <p>— Tôi sẽ chuẩn bị dữ liệu dự phòng. Nếu CEO hỏi anh đang làm gì với VP, anh cần có bằng chứng "công việc hợp lý" để đưa ra.</p>
+
+    <p>— Tốt. Soạn một bản đề xuất hợp tác liên phòng giữa phòng Kinh doanh và VP. Ngày tháng trước cuộc gặp đầu tiên của tôi và VP. Nội dung: cải thiện quy trình bán hàng. Đủ thật để tin.</p>
+
+    <p class="short">— Tôi làm tối nay.</p>
+
+    <p class="thought">Cô ta không hỏi "có hợp pháp không" hay "có đúng không." Cô biết: trong cuộc chiến này, đúng sai là thứ xa xỉ. Chỉ có thắng và thua.</p>
+
+    <p>Hai người đứng dậy. Ra khỏi nhà ăn. Hành lang tối, đèn đã tắt một nửa.</p>
+
+    <p class="short">Tô Vãn dừng lại.</p>
+
+    <p class="short">— Anh Lục.</p>
+
+    <p class="short">— Gì?</p>
+
+    <p class="short">— Anh đang chơi trò nguy hiểm.</p>
+
+    <p class="short">— Tôi biết.</p>
+
+    <p class="short">— Và anh thích điều đó.</p>
+
+    <p>Không phải câu hỏi. Là nhận xét. Sắc, đúng, kiểu chỉ Tô Vãn mới dám nói.</p>
+
+    <p class="short">Hắn nhìn cô. Không phủ nhận.</p>
+
+    <p>— Tôi không thích nguy hiểm. Tôi thích kiểm soát. Và kiểm soát tình huống nguy hiểm là kiểu kiểm soát cao nhất.</p>
+
+    <p class="short">Tô Vãn nhìn hắn thêm một giây. Rồi quay đi, bước về phía thang máy.</p>
+
+    <p class="short">Hắn đứng lại. Nhìn theo.</p>
+
+    <p class="thought">Cô ta biết. Biết ta đang chơi cả hai phe. Biết ta đâm sau lưng VP. Biết ta sắp bị CEO hỏi tội. Và cô vẫn ở đây. Vẫn soạn tài liệu cho ta. Vẫn đi cùng.</p>
+
+    <p class="thought">Không phải vì mù quáng. Vì cô nhìn thấy bức tranh lớn. Cô biết: nếu VP lên, cô vẫn chỉ là nhân viên cấp trung. Nếu CEO ở lại, cô còn tệ hơn. Chỉ có một kịch bản cô lên: ta lên.</p>
+
+    <p class="thought">Và cô đang đặt cược vào ta.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tối. Căn hộ.</p>
+
+    <p>Hắn ngồi trước bàn, tờ giấy sơ đồ mở ra. Bản đồ quyền lực đã dày, đầy mũi tên, ghi chú, tên.</p>
+
+    <p class="short">Lấy bút đỏ. Vẽ thêm.</p>
+
+    <p>Từ ô "Lục Trường An" ở giữa, hai đường lên CEO và VP. Nhưng bây giờ, thêm một đường nét đứt mới: từ ô "Lê Hùng Cường" (phe CEO, HĐQT) lên ô "CEO." Cạnh đường đó, ghi: "Tin rò rỉ qua Cường → CEO. Đã kích hoạt."</p>
+
+    <p>Và từ ô "CEO," một mũi tên đỏ chỉ xuống ô "VP": "Cắt quyền. Nghi ngờ."</p>
+
+    <p>Từ ô "VP," một mũi tên chỉ sang ô mình: "Nghi có kẻ phản bội. Chưa nghi ta."</p>
+
+    <p class="short">Ở góc dưới, hắn viết:</p>
+
+    <p>"Ly gián kế: giai đoạn 1 hoàn thành. CEO nghi VP. VP nghi có gián điệp. Cả hai mất bình tĩnh."</p>
+
+    <p class="short">Gấp lại. Cất đi.</p>
+
+    <p class="thought">Ly gián kế. Đơn giản nhưng hiệu quả. Ngàn năm trước, khi muốn hai tông phái tự diệt nhau, ta chỉ cần gieo một tin đồn. Không cần bằng chứng. Không cần logic. Chỉ cần đúng lúc, đúng tai.</p>
+
+    <p class="thought">CEO và VP đã nghi nhau từ lâu. Ta chỉ đổ thêm dầu vào lửa đã có sẵn. Khi hai con hổ bắt đầu nghi ngờ nhau, chúng sẽ quay lại cắn. Không cần ai xúi.</p>
+
+    <p class="thought">Và ta ngồi giữa. Bình tĩnh.</p>
+
+    <p class="short">Hắn tắt đèn. Nằm xuống.</p>
+
+    <p>Bên ngoài, thành phố về đêm. Tiếng xe thưa. Gió nhẹ. Trời không mưa nhưng không khí nặng, kiểu nặng trước bão.</p>
+
+    <p class="thought">Tuần tới, CEO sẽ gọi Ngô Hải. Ngô Hải sẽ tìm ta. CEO sẽ hỏi tội ta. Và ta sẽ thoát.</p>
+
+    <p class="thought">Rồi sau đó, Ngô Hải sẽ trả giá.</p>
+
+    <p class="thought">Không phải vì thù hận. Vì Ngô Hải ngu ngốc đến mức nguy hiểm. Kẻ ngu mà có quyền là kẻ phải loại. Không phải vì ác. Vì an toàn.</p>
+
+    <p class="thought">Từ bi kiểu ma đạo.</p>
+
+    <p class="short">Hắn nhắm mắt. Ngủ.</p>
+
+    <p>Giấc ngủ nhẹ. Kiểu ngủ của kẻ đang chờ bẫy sập, và biết chính xác bẫy sẽ sập vào ai.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-18.html">&larr; Chương trước</a>
+    <a href="chapter-20.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>2.627 từ &middot; Chương 19 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

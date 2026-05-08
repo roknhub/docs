@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 25 — Người Bị Thiên Cơ Ghét | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-24.html">&larr; CHƯƠNG 24</a>
+      <span class="chapter-indicator">25/30</span>
+      <a href="chapter-26.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 25</div>
+      <h1>Người Bị Thiên Cơ Ghét</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Lão Quốc Sư dạy hắn nhìn bằng cách bắt hắn không nhìn.</p>
+
+<p>— Nhắm mắt. Tắt Thiên Diễn Đồng. Tắt hết.</p>
+
+<p>Tạ Cảnh Minh ngồi trước lều, bên suối, nhắm mắt. Cố tắt Thiên Diễn Đồng. Khó. Nó đã thành phản xạ, mở mỗi khi gặp người, mở mỗi khi cảm xúc ai đó lóe lên gần hắn.</p>
+
+<p>— Ngươi dùng nó như mắt thứ ba. Nhưng nó không phải mắt. Nó là tai. Nó nghe, không nhìn. Và ngươi đang dùng tai để nhìn, nên thấy sai.</p>
+
+<p class="thought"><em>Tai, không phải mắt. Thiên Diễn Đồng đọc cảm xúc, xu hướng hành động. Đó là "nghe." Còn "nhìn" Thiên Cơ là thứ khác. Thứ mà lão biết mà mình không.</em></p>
+
+<p>— Muốn nhìn Thiên Cơ, phải tĩnh. Không phải tĩnh kiểu thiền. Tĩnh kiểu... rỗng. Không muốn gì. Không sợ gì. Không tính gì.</p>
+
+<p class="thought"><em>Rỗng. Mình? Rỗng?</em></p>
+
+<p class="thought"><em>Mình chưa bao giờ rỗng. Đầu mình lúc nào cũng tính. Ai đang nghĩ gì, ai muốn gì, mình nên nói gì. Liên tục. Không dừng.</em></p>
+
+<p class="thought"><em>Lão bảo tắt hết. Mình không biết cách.</em></p>
+
+<p>— Không được. Đầu ta không tắt.</p>
+
+<p>Lão cười. Khàn. Kiểu cười của người đã nghe câu này nhiều lần.</p>
+
+<p>— Đương nhiên không tắt. Ngươi là kẻ lừa đảo. Đầu ngươi chạy cả đời. Nhưng Thiên Cơ không chảy cho kẻ chạy. Nó chảy cho kẻ đứng yên.</p>
+
+<p>Dừng.</p>
+
+<p>— Thử lại. Không phải tắt đầu. Mà để đầu chạy, nhưng ngươi không chạy theo. Nhìn nó chạy. Như nhìn suối chảy. Không nhảy vào.</p>
+
+<p class="thought"><em>Nhìn suy nghĩ chạy mà không chạy theo. Kiểu thiền quán. Kiếp trước, mình từng thử thiền. Bỏ sau hai ngày vì ngồi không yên.</em></p>
+
+<p class="thought"><em>Nhưng kiếp này, nếu không học, mình sẽ tiếp tục ném đá vào nước mà không biết nước sâu bao nhiêu.</em></p>
+
+<p>Hắn thử. Ngồi. Nhắm mắt. Để suy nghĩ chạy.</p>
+
+<p class="thought"><em>Chạy: Phúc An chưa về. A Ly. Vua bệnh. Vương Bách Nhẫn. Khí Thi. Lục Thanh Dao.</em></p>
+
+<p>Lão nói: không chạy theo. Nhìn nó.</p>
+
+<p>Hắn nhìn. Suy nghĩ chạy qua như mây. Nhanh. Loạn. Rồi chậm dần. Rồi... thưa.</p>
+
+<p>Và trong khoảng trống giữa hai suy nghĩ, hắn thấy.</p>
+
+<p>Không phải thấy bằng mắt. Thấy bằng thứ gì đó sâu hơn. Như cảm nhận nhiệt độ mà không cần chạm. Như nghe tiếng mà không có âm thanh.</p>
+
+<p>Thiên Cơ.</p>
+
+<p>Không phải dòng chảy trên trời mà hắn từng thấy bằng Thiên Diễn Đồng. Thứ đó là bề mặt. Bây giờ, hắn thấy sâu hơn. Dưới bề mặt. Cấu trúc.</p>
+
+<p class="thought"><em>Thiên Cơ không phải sông. Thiên Cơ là... lưới. Lưới vô hình, nối mọi thứ. Mỗi người một nút, mỗi niềm tin một sợi. Và sợi rung khi niềm tin thay đổi.</em></p>
+
+<p class="thought"><em>Mình từng thấy nhánh sáng, nhánh tối, dòng chảy. Đó là cách Thiên Diễn Đồng dịch Thiên Cơ cho mình. Nhưng thật ra, Thiên Cơ không chảy. Nó rung. Như mạng nhện. Và mình đang ngồi giữa mạng.</em></p>
+
+<p>Hắn mở mắt. Thở gấp.</p>
+
+<p>— Thấy gì?</p>
+
+<p>— Lưới. Thiên Cơ là lưới.</p>
+
+<p>Lão gật đầu.</p>
+
+<p>— Tốt. Nhanh hơn lão tưởng. Lão mất ba năm mới thấy lưới. Ngươi mất ba canh giờ.</p>
+
+<p class="thought"><em>Ba canh giờ? Mình ngồi ba canh giờ? Tưởng mới mười phút.</em></p>
+
+<p>— Tại sao thần nhanh hơn?</p>
+
+<p>— Vì ngươi không sợ nó. Lão sợ. Sợ nhìn sai, sợ phạm thượng. Nên mất lâu. Ngươi không sợ gì hết. Nên nhìn nhanh.</p>
+
+<p class="thought"><em>Lại lý do đó. Không sợ = nhanh. Sợ = chậm.</em></p>
+
+<p class="thought"><em>Mình không sợ vì mình không tin. Và không tin, ở đây, lại là lợi thế.</em></p>
+
+<p class="thought"><em>Buồn cười. Tên lừa đảo học nhìn Thiên Cơ nhanh hơn Quốc Sư thật, vì gã không coi Thiên Cơ ra gì.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Lão dạy tiếp. Không phải nhìn nữa. Mà nghe.</p>
+
+<p>— Mỗi nút trên lưới có tiếng. Tiếng của niềm tin. Ngươi nghe được cảm xúc qua Thiên Diễn Đồng. Bây giờ, nghe niềm tin qua Thiên Cơ. Khác nhau.</p>
+
+<p>— Khác thế nào?</p>
+
+<p>— Cảm xúc là sóng nhỏ, nhanh, thay đổi liên tục. Niềm tin là sóng lớn, chậm, bền. Cảm xúc nói "gã đang sợ." Niềm tin nói "gã tin mình sẽ chết."</p>
+
+<p class="thought"><em>Cảm xúc = sóng ngắn. Niềm tin = sóng dài. Thiên Diễn Đồng đọc sóng ngắn. Thiên Cơ là sóng dài.</em></p>
+
+<p class="thought"><em>Nếu mình đọc được cả hai...</em></p>
+
+<p>— Lão, nếu thần đọc được cả cảm xúc lẫn niềm tin cùng lúc, thần sẽ biết gì?</p>
+
+<p>Lão nhìn hắn.</p>
+
+<p>— Mọi thứ. Ngươi sẽ biết người đó đang cảm thấy gì, tin gì, sẽ làm gì, và tại sao. Không cần hỏi. Không cần đoán.</p>
+
+<p class="thought"><em>Mọi thứ.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình dùng đọc vị để đoán bảy mươi phần trăm. Thiên Diễn Đồng đẩy lên chín mươi. Và bây giờ, nếu thêm Thiên Cơ...</em></p>
+
+<p>— Nhưng có giá. Luôn có giá.</p>
+
+<p>Lão nói. Giọng trầm hơn.</p>
+
+<p>— Nhìn Thiên Cơ là nhìn vận mệnh. Và vận mệnh không thích bị nhìn. Ngươi nhìn nó, nó cũng nhìn ngươi.</p>
+
+<p class="thought"><em>Thiên Cơ nhìn lại. Mình đã cảm nhận điều này. Áp lực vô hình mỗi khi nhìn lên trời. "Thiên Cơ đang chú ý."</em></p>
+
+<p>— Mười sáu Quốc Sư trước lão, mỗi người nhìn Thiên Cơ, Thiên Cơ nhìn lại, và dần dần, Thiên Cơ ăn mòn họ. Không phải giết. Ăn mòn. Biến họ thành một phần của dòng chảy. Quên mình là người. Chỉ còn là mắt.</p>
+
+<p>Dừng.</p>
+
+<p>— Lão may mắn. Lão tự dừng. Rời đi. Ẩn cư. Trước khi mất hết.</p>
+
+<p class="thought"><em>Quốc Sư cũ bị Thiên Cơ ăn mòn. Biến thành một phần của nó. Mất nhân tính.</em></p>
+
+<p class="thought"><em>Và mình, kẻ uốn Thiên Cơ, liệu có bị ăn mòn nhanh hơn?</em></p>
+
+<p>— Ngươi đặc biệt.</p>
+
+<p>Lão nói, như đọc ý hắn.</p>
+
+<p>— Ngươi không bị Thiên Cơ kéo vào. Ngươi kéo Thiên Cơ về phía mình. Ngược. Và điều đó, lão chưa thấy bao giờ.</p>
+
+<p>Dừng.</p>
+
+<p>— Thiên Cơ không ghét ngươi. Cũng không thương. Nó... tò mò. Ngươi là thứ nó chưa từng gặp. Và nó đang thử xem ngươi bền đến đâu.</p>
+
+<p class="thought"><em>Thiên Cơ đang thử mình. Không phải thử kiểu thi. Thử kiểu trẻ con bẻ đồ chơi xem lúc nào gãy.</em></p>
+
+<p class="thought"><em>Và mình, là đồ chơi.</em></p>
+
+<p>Hắn nhìn lão. Già. Mệt. Khí vận trong suốt, gần như không còn ranh giới giữa người và trời.</p>
+
+<p>— Lão, thần hỏi thật. Thần có sống sót không?</p>
+
+<p>Lão nhìn hắn. Lâu.</p>
+
+<p>— Lão không biết. Nhưng ngươi là Quốc Sư đầu tiên hỏi câu đó.</p>
+
+<p>Dừng.</p>
+
+<p>— Mười sáu người trước, không ai hỏi. Vì họ không biết sợ. Ngươi biết. Và biết sợ, đôi khi, là thứ giữ ngươi sống.</p>
+
+<p class="thought"><em>Biết sợ giữ mình sống. Lục Thanh Dao cũng nói vậy: "Quốc Sư biết sợ, nghĩa là chưa điên."</em></p>
+
+<p class="thought"><em>Hai người, một già một trẻ, cùng nói một điều.</em></p>
+
+<p class="thought"><em>Sợ là tốt. Sợ là bình thường. Sợ là nhân tính.</em></p>
+
+<p class="thought"><em>Và nhân tính, là thứ duy nhất giữ mình không trở thành quái vật.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Túp lều.</p>
+
+<p>Trước khi ngủ, Diệp Trúc Khanh nói:</p>
+
+<p>— Sáng mai ta phải về kinh thành. Khí Thi không chờ.</p>
+
+<p>Hắn gật.</p>
+
+<p>— Ta cũng phải về. Phúc An chưa có tin.</p>
+
+<p class="thought"><em>Phúc An. Đã hơn hai tuần. Trấn Thanh Hà ba ngày đường, đi về sáu ngày. Hai tuần thừa sức khứ hồi. Nhưng không tin tức.</em></p>
+
+<p class="thought"><em>Hoặc gã gặp khó khăn. Hoặc A Ly không dễ tìm. Hoặc...</em></p>
+
+<p class="thought"><em>Kẻ áo đen đến trước.</em></p>
+
+<p>Hắn nằm xuống. Nhắm mắt. Thử nhìn Thiên Cơ kiểu mới. Lưới.</p>
+
+<p>Và thấy. Mờ, nhưng thấy. Lưới rung. Nút sáng ở kinh thành. Nút sáng ở phủ mình. Nút mờ ở trấn Thanh Hà, xa, nhỏ.</p>
+
+<p class="thought"><em>Nút ở Thanh Hà. A Ly? Hay Phúc An?</em></p>
+
+<p class="thought"><em>Còn sáng. Nghĩa là còn sống.</em></p>
+
+<p class="thought"><em>Nhưng rung. Rung mạnh. Nghĩa là đang gặp chuyện.</em></p>
+
+<p>Hắn mở mắt. Nhìn trần lều.</p>
+
+<p class="thought"><em>Phải về. Sáng mai. Phải về và tìm cách giúp Phúc An. Giúp A Ly.</em></p>
+
+<p class="thought"><em>Và giúp kinh thành. Khí Thi. Vua bệnh. Vương Bách Nhẫn. Bắc Nguyên.</em></p>
+
+<p class="thought"><em>Tất cả cùng lúc. Và mình chỉ có một mình.</em></p>
+
+<p class="thought"><em>Không. Không phải một mình. Có Diệp Trúc Khanh. Có Lục Thanh Dao. Có Tiểu Phúc. Có lão Quốc Sư.</em></p>
+
+<p class="thought"><em>Và có Thiên Cơ. Thiên Cơ đang thử mình, nhưng cũng đang nghe mình.</em></p>
+
+<p class="thought"><em>Vậy thì, lần này, mình sẽ không ném đá.</em></p>
+
+<p class="thought"><em>Mình sẽ nói. Nhưng nói đúng. Lần đầu tiên, không phải lừa. Mà nói vì tin.</em></p>
+
+<p class="thought"><em>Dù chỉ tin một chút.</em></p>
+
+<p>Hắn nhắm mắt. Ngủ. Không ngon bằng tối qua. Nhưng đủ.</p>
+
+<p>Và sáng mai, hắn sẽ về kinh thành. Về bàn cờ. Về sân khấu.</p>
+
+<p>Nhưng lần này, với đôi mắt khác.</p>
+
+<p>Đôi mắt đã nhìn thấy lưới.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-24.html">&larr; CHƯƠNG 24</a>
+      <a href="chapter-26.html">CHƯƠNG 26 &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.487 TỪ</div>
+
+  </div>
+</body>
+</html>

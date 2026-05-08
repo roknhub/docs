@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 27 — Kẻ Nghe Được | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-26.html">&larr; CHƯƠNG 26</a>
+      <span class="chapter-indicator">27/30</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 27</div>
+      <h1>Kẻ Nghe Được</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hai ngày sau, Vương Bách Nhẫn ra tay.</p>
+
+<p>Không phải ra tay kiểu triều đình. Không đàn hặc. Không tấu chương. Tinh tế hơn.</p>
+
+<p>Hắn đang ngồi trong phòng, giờ Dậu, thì Tiểu Phúc chạy vào:</p>
+
+<p>— Quốc Sư! Có người gửi thư! Dán trên cổng phủ!</p>
+
+<p>Thư. Không phong bì. Một mảnh giấy, dán bằng hồ, chữ viết to, kiểu chữ để ai cũng đọc được:</p>
+
+<p>"Quốc Sư phán: Thiên Tử không sống quá ba năm."</p>
+
+<p>Hắn nhìn giấy. Tay lạnh.</p>
+
+<p class="thought"><em>Trần Phú. Gã đã nghe. Và gã đã báo.</em></p>
+
+<p class="thought"><em>Nhưng thông minh hơn mình nghĩ. Không phải Vương Bách Nhẫn tự tố. Dán giấy ở cổng phủ, kiểu nặc danh. Ai cũng có thể dán. Không truy được nguồn.</em></p>
+
+<p class="thought"><em>Và chữ viết to, kiểu để thị vệ đọc, để người đi đường đọc. Tin sẽ lan.</em></p>
+
+<p>— Tiểu Phúc, xé ngay. Đốt.</p>
+
+<p>— Dạ!</p>
+
+<p>Tiểu Phúc xé, đốt. Nhưng hắn biết: muộn rồi. Thị vệ canh cổng đã thấy. Người đi đường có thể đã thấy. Và Vương Bách Nhẫn sẽ không chỉ dán một lần.</p>
+
+<p class="thought"><em>Gã đang rải tin. Từ từ. Kiểu giỏi. Không phải tố cáo công khai. Rải từng giọt. Để tin ngấm. Để nghi ngờ mọc rễ.</em></p>
+
+<p class="thought"><em>"Quốc Sư phán vua không sống quá ba năm." Nếu dân nghe, hoảng. Nếu vua nghe, giận. Nếu triều đình nghe, loạn.</em></p>
+
+<p class="thought"><em>Và mình không thể phủ nhận. Vì mình đã nói. Dù chỉ gợi ý. Dù chỉ trước một người.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Canh hai.</p>
+
+<p>Hắn đang nằm trên giường, mắt mở, nghĩ cách đối phó, thì tiếng bước chân.</p>
+
+<p>Nhẹ. Rất nhẹ. Không phải thị vệ. Không phải Tiểu Phúc.</p>
+
+<p>Thiên Diễn Đồng tự bật. Đọc: sát ý. Lạnh. Tập trung. Kiểu cảm xúc của kẻ đến để giết.</p>
+
+<p>Hắn lăn khỏi giường. Bản năng. Đúng lúc một bóng đen lao qua cửa sổ, tay cầm thứ gì đó sáng lóe.</p>
+
+<p>Dao. Ngắn. Mỏng. Kiểu dao ám sát.</p>
+
+<p>Bóng đen đâm xuống giường. Chỗ hắn vừa nằm. Đệm rách. Nếu hắn chậm một giây, dao xuyên ngực.</p>
+
+<p>Hắn lăn tiếp. Va vào tường. Đau. Nhưng sống.</p>
+
+<p>— Ai!</p>
+
+<p>Tiếng hắn vang trong phòng tối. Bóng đen quay lại. Nhanh. Lao tới.</p>
+
+<p class="thought"><em>Sát thủ. Chuyên nghiệp. Nhanh. Mình không có vũ khí. Không có pháp lực. Chết.</em></p>
+
+<p>Tiếng kiếm.</p>
+
+<p>Không phải từ sát thủ. Từ cửa phòng. Ánh thép lóe trong bóng tối. Và bóng đen dừng lại. Vì một lưỡi kiếm đã chặn ngang đường bay con dao.</p>
+
+<p>Diệp Trúc Khanh.</p>
+
+<p>Nàng đứng ở cửa. Kiếm trần. Mắt sáng trong bóng tối. Áo trắng, tóc xổ, kiểu vừa nhảy từ mái nhà xuống.</p>
+
+<p>— Chậm.</p>
+
+<p>Một chữ. Nói với sát thủ.</p>
+
+<p>Sát thủ quay kiếm. Nhanh. Nhưng Diệp Trúc Khanh nhanh hơn. Kiếm vung. Sáng. Gọn. Một nhát.</p>
+
+<p>Sát thủ ngã. Dao rơi. Tay ôm vai, máu. Không chết. Nàng chém cánh tay, không chém cổ.</p>
+
+<p class="thought"><em>Nàng muốn bắt sống.</em></p>
+
+<p>— Đừng giết!</p>
+
+<p>Hắn nói. Thừa. Nàng đã không giết.</p>
+
+<p>Diệp Trúc Khanh đạp lên ngực sát thủ. Mũi kiếm kề cổ.</p>
+
+<p>— Ai sai?</p>
+
+<p>Sát thủ không nói. Mặt trẻ. Áo đen. Kiểu sát thủ chuyên nghiệp, được huấn luyện không khai.</p>
+
+<p>Hắn bước tới. Thiên Diễn Đồng mở hết cỡ. Đọc.</p>
+
+<p>Sợ. Đau. Quyết tâm. Và sâu hơn: trung thành. Kiểu trung thành tuyệt đối, không phải vì tiền, vì lệnh. Kiểu trung thành của tín đồ.</p>
+
+<p class="thought"><em>Trung thành kiểu tín đồ. Gã sát thủ tin vào ai đó đến mức sẵn sàng chết.</em></p>
+
+<p class="thought"><em>Không phải Vương Bách Nhẫn. Vương dùng tiền, dùng quyền, không tạo ra tín đồ kiểu này.</em></p>
+
+<p class="thought"><em>Ai khác?</em></p>
+
+<p>Hắn nhìn sát thủ kỹ hơn. Thiên Diễn Đồng đẩy sâu. Và bắt được, mờ, ở tầng cuối cùng:</p>
+
+<p>Giống. Kiểu trung thành giống Tiểu Phúc tin hắn. Tuyệt đối. Không nghi ngờ.</p>
+
+<p>Nhưng hướng về ai đó khác. Ai đó mà sát thủ gọi là... "Chủ nhân."</p>
+
+<p class="thought"><em>"Chủ nhân." Không phải "đại nhân." Không phải "bệ hạ." "Chủ nhân." Kiểu xưng hô của nô lệ, hoặc tín đồ cuồng.</em></p>
+
+<p class="thought"><em>Phe nào dùng tín đồ cuồng làm sát thủ?</em></p>
+
+<p class="thought"><em>Kẻ áo đen săn A Ly. Cũng áo đen. Cũng chuyên nghiệp.</em></p>
+
+<p class="thought"><em>Cùng tổ chức?</em></p>
+
+<p>— Gã không khai đâu.</p>
+
+<p>Diệp Trúc Khanh nói. Bình thản.</p>
+
+<p>— Ta biết kiểu này. Tông môn tà đạo. Nuôi sát thủ bằng niềm tin. Họ chết cũng không khai.</p>
+
+<p class="thought"><em>Tông môn tà đạo. Nuôi sát thủ bằng niềm tin.</em></p>
+
+<p class="thought"><em>Niềm tin. Lại niềm tin. Mọi thứ ở thế giới này đều quay về niềm tin.</em></p>
+
+<p>Tiếng chân chạy. Thị vệ đến. Muộn. Tiếng hét, tiếng kiếm rút.</p>
+
+<p>Sát thủ trên sàn, mắt nhìn hắn. Không thù. Không sợ. Nhìn kiểu... đánh giá. Rồi cắn. Cắn lưỡi.</p>
+
+<p>Máu trào.</p>
+
+<p>Diệp Trúc Khanh chửi. Ngắn. Gọn.</p>
+
+<p>— Chết rồi. Cắn lưỡi tự sát.</p>
+
+<p class="thought"><em>Chết. Không khai.</em></p>
+
+<p class="thought"><em>Ai đó sai sát thủ giết mình. Không phải Vương Bách Nhẫn, vì gã dùng chiêu rải tin, không dùng dao. Không phải Thiên Ngoại Các, vì họ "xem cờ, không can thiệp." Không phải triều đình.</em></p>
+
+<p class="thought"><em>Phe khác. Phe mà Thiên Ngoại Các gọi là "người khác." Phe dùng Khí Thi. Phe săn A Ly. Và giờ, phe sai sát thủ giết Quốc Sư.</em></p>
+
+<p class="thought"><em>Tất cả liên quan. Khí Thi ở Trường Xuân Cung. Kẻ áo đen ở Thanh Hà. Sát thủ ở phủ mình. Cùng một tổ chức.</em></p>
+
+<p class="thought"><em>Và tổ chức đó, muốn mình chết.</em></p>
+
+<p>Hắn nhìn xác sát thủ. Máu trên sàn. Diệp Trúc Khanh đứng cạnh, kiếm vẫn trần, mắt quét bóng tối bên ngoài.</p>
+
+<p>— Có thể còn.</p>
+
+<p>— Ta biết.</p>
+
+<p>Nàng nhìn hắn.</p>
+
+<p>— Ngươi không có pháp lực. Ngươi cần người bảo vệ.</p>
+
+<p class="thought"><em>Nàng đúng. Mình yếu. Mình không đánh được ai. Mình chỉ có miệng.</em></p>
+
+<p>— Ta ở lại đêm nay. Sáng mai tính.</p>
+
+<p>Nàng ngồi xuống bậc cửa. Kiếm đặt ngang đùi. Canh.</p>
+
+<p>Hắn ngồi trong phòng. Giường rách. Máu trên sàn. Tim vẫn đập nhanh.</p>
+
+<p class="thought"><em>Suýt chết. Lần thứ hai kể từ khi xuyên không. Lần đầu trên pháp trường. Lần này trên giường ngủ.</em></p>
+
+<p class="thought"><em>Và lần này, nếu không có Diệp Trúc Khanh, mình chết thật.</em></p>
+
+<p class="thought"><em>Nàng theo mình? Hay theo lệnh lão Quốc Sư?</em></p>
+
+<p class="thought"><em>Không quan trọng. Nàng cứu mình. Và mình nợ nàng.</em></p>
+
+<p>— Diệp cô nương.</p>
+
+<p>— Gì?</p>
+
+<p>— Cảm ơn.</p>
+
+<p>Im lặng. Rồi:</p>
+
+<p>— Đừng cảm ơn. Trả ơn bằng cách sống. Ta cần ngươi sống để tìm kẻ điều khiển Khí Thi.</p>
+
+<p class="thought"><em>Thẳng. Thực dụng. Kiểu Diệp Trúc Khanh.</em></p>
+
+<p class="thought"><em>Nhưng Thiên Diễn Đồng đọc: không chỉ thực dụng. Có lo. Nhẹ. Kiểu lo của người bắt đầu quen ai đó và không muốn người đó chết.</em></p>
+
+<p>Hắn mỉm cười. Nhẹ. Mệt.</p>
+
+<p class="thought"><em>Hai nữ nhân. Lục Thanh Dao cứu mình bằng chính trị. Diệp Trúc Khanh cứu mình bằng kiếm.</em></p>
+
+<p class="thought"><em>Và mình, tên bịp, được cứu bằng cả hai.</em></p>
+
+<p>Đêm dài. Gió lạnh. Diệp Trúc Khanh canh ở cửa, kiếm trên đùi, mắt sáng trong bóng tối.</p>
+
+<p>Và Tạ Cảnh Minh, ngồi trong phòng có xác sát thủ, nghĩ:</p>
+
+<p class="thought"><em>Tin rải rồi. Sát thủ đến rồi. Bão đã bắt đầu.</em></p>
+
+<p class="thought"><em>Và mình, giữa bão, chỉ có một thứ.</em></p>
+
+<p class="thought"><em>Lời nói.</em></p>
+
+<p class="thought"><em>Lời nói đã tạo ra bão này. Và lời nói sẽ phải dẹp bão.</em></p>
+
+<p class="thought"><em>Nhưng lần này, mình sẽ không bịa.</em></p>
+
+<p class="thought"><em>Lần này, mình sẽ nói thật.</em></p>
+
+<p class="thought"><em>Vì lời thật, ở thế giới này, mạnh hơn lời bịa.</em></p>
+
+<p class="thought"><em>Mình đã mất hai kiếp để hiểu điều đó.</em></p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-26.html">&larr; CHƯƠNG 26</a>
+      <span class="disabled">CHƯƠNG 28 &rarr;</span>
+    </nav>
+
+    <div class="word-count">1.277 TỪ</div>
+
+  </div>
+</body>
+</html>
