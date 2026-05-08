@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --mint-border: #309875;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--white);
+      font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* === MASTHEAD === */
+    .masthead {
+      text-align: center;
+      padding: 64px 24px 48px;
+    }
+
+    .masthead-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(48px, 10vw, 107px);
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: 1.07px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .masthead-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      letter-spacing: 1.9px;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 24px;
+    }
+
+    .masthead-logline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 32px;
+      font-style: italic;
+    }
+
+    /* === TAGS === */
+    .tags {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--mint-border);
+      color: var(--mint);
+    }
+
+    .tag--purple {
+      border-color: var(--ultraviolet);
+      color: #a78bfa;
+    }
+
+    /* === STATS BAR === */
+    .stats-bar {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 32px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: 32px;
+      color: var(--mint);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      margin-top: 4px;
+    }
+
+    .progress-bar-wrap {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .progress-bar-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--surface);
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--mint);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    /* === STORYSTREAM TIMELINE === */
+    .section-header {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      letter-spacing: 1.9px;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 24px;
+      padding-left: 32px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 48px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--purple-rule);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 20px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--mint);
+      border: 2px solid var(--canvas);
+    }
+
+    .timeline-item--locked::before {
+      background: var(--surface);
+      border-color: var(--secondary);
+    }
+
+    .chapter-card {
+      display: block;
+      background: var(--canvas);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 24px 28px;
+      text-decoration: none;
+      color: var(--white);
+      transition: border-color 0.15s ease;
+    }
+
+    .chapter-card:hover {
+      border-color: var(--mint);
+    }
+
+    .chapter-card:hover .chapter-title {
+      color: var(--link-hover);
+    }
+
+    .chapter-card--accent {
+      background: var(--mint);
+      border-color: var(--mint);
+    }
+
+    .chapter-card--accent .chapter-number,
+    .chapter-card--accent .chapter-title,
+    .chapter-card--accent .chapter-summary,
+    .chapter-card--accent .chapter-meta {
+      color: #000000;
+    }
+
+    .chapter-card--accent:hover .chapter-title {
+      color: var(--ultraviolet);
+    }
+
+    .chapter-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 6px;
+    }
+
+    .chapter-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      transition: color 0.15s ease;
+    }
+
+    .chapter-summary {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--secondary);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    /* === FOOTER === */
+    .footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 48px;
+    }
+
+    .footer-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 16px; }
+      .masthead { padding: 40px 16px 32px; }
+      .stats-bar { flex-direction: column; gap: 16px; padding: 16px 20px; }
+      .stat-value { font-size: 24px; }
+      .timeline { padding-left: 24px; }
+      .chapter-card { padding: 16px 20px; }
+      .chapter-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <h1 class="masthead-title">Ma Tôn<br>Mở Công Ty</h1>
+      <p class="masthead-subtitle">Arc 1 — Ma Tôn Đi Làm</p>
+      <p class="masthead-logline">
+        "Tu tiên giới chưa từng biến mất. Chỉ đổi tên thành giới tư bản."
+      </p>
+      <div class="tags">
+        <span class="tag">Corporate Dark Fantasy</span>
+        <span class="tag">Thương Chiến</span>
+        <span class="tag tag--purple">Dark Psychology</span>
+        <span class="tag">Empire Building</span>
+        <span class="tag tag--purple">Anti Hero</span>
+      </div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-value" id="stat-chapters">1</div>
+        <div class="stat-label">Chương</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-words">2.790</div>
+        <div class="stat-label">Từ</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label">Tiến Độ — <span id="stat-percent">3%</span></div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progress-fill" style="width: 3%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHẦN I -->
+    <h2 class="section-header">Phần I — Thức Tỉnh</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <a href="chapter-01.html" class="chapter-card chapter-card--accent">
+          <div class="chapter-number">Chương 01</div>
+          <div class="chapter-title">Người Chết Sống Lại</div>
+          <div class="chapter-summary">Ma Tôn trọng sinh, xé thư từ chức, nghiên cứu thế giới hiện đại, quyết định bắt đầu.</div>
+          <div class="chapter-meta">2.790 từ</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p class="footer-text">Ma Tôn Mở Công Ty — Corporate Dark Fantasy</p>
+    </footer>
+  </div>
+</body>
+</html>

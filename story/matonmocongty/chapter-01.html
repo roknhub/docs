@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 01: Người Chết Sống Lại — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .letter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 16px 24px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin: 16px 0;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .prose .list-item {
+      color: var(--muted);
+      padding-left: 1em;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="index.html">&larr; Mục lục</a>
+    <span class="nav-center">Chương 1 / 30</span>
+    <a href="chapter-02.html" class="nav-disabled">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 01</div>
+    <h1 class="chapter-title">Người Chết<br>Sống Lại</h1>
+    <div class="chapter-meta">Phần I — Thức Tỉnh &middot; 2.790 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Máu.</p>
+
+    <p>Hắn nhớ rõ mùi máu. Không phải máu thường — là máu của tu sĩ, loại máu đã ngấm linh lực ngàn năm, nồng nặc mùi sắt và gỗ mục. Máu của chính hắn, chảy ra từ bảy vết thương trí mạng, nhuộm đỏ bậc thềm Huyền Minh Đại Điện.</p>
+
+    <p class="short">Rồi ánh sáng.</p>
+
+    <p>Không phải ánh sáng cứu rỗi. Là ánh sáng của ngàn thanh phi kiếm xuyên qua màn đêm, mỗi thanh mang theo sát ý của một kẻ từng gọi hắn là "đồng minh". Hay "sư huynh". Hay "chủ nhân".</p>
+
+    <p>Hắn nhớ khuôn mặt cuối cùng hắn thấy trước khi chết. Không phải kẻ thù. Là đệ tử ruột — Tống Hạo Nhiên, đứa hắn đã cứu từ xác chết, nuôi dạy hai trăm năm, truyền thụ mọi tuyệt học. Tống Hạo Nhiên cầm kiếm xuyên qua ngực hắn, mặt không một biểu cảm, miệng nói:</p>
+
+    <p>"Sư phụ, con xin lỗi. Nhưng thiên hạ cần sư phụ chết."</p>
+
+    <p>Huyền Minh Ma Tôn chết trên đỉnh Cửu U Sơn, trong vòng vây của mười hai đại tông phái, dưới cơn mưa máu do chính linh mạch đại lục vỡ tung. Chết mà mắt mở trừng, không phải vì đau — mà vì ngàn năm sống, đến phút cuối mới hiểu được một điều.</p>
+
+    <p class="short">Không ai trung thành.</p>
+
+    <p class="short">Không ai cả.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tiếng chuông reo.</p>
+
+    <p>Không phải chuông cảnh báo tông môn. Không phải chuông triệu tập đệ tử. Là một âm thanh chói tai, nhỏ bé, đều đặn — kêu reng reng reng như con dế kim loại phát điên.</p>
+
+    <p class="short">Hắn mở mắt.</p>
+
+    <p class="short">Trần nhà.</p>
+
+    <p>Trần nhà thấp, vàng ố, có vết ẩm lan ra từ góc như một bàn tay khô héo. Quạt trần quay chậm, kêu cọt kẹt theo từng vòng. Ánh sáng le lói lọt qua rèm cửa mỏng, thứ rèm rẻ tiền đã bạc màu đến mức gần như trong suốt.</p>
+
+    <p class="short">Tiếng chuông vẫn reo.</p>
+
+    <p>Hắn nằm im. Mắt mở, không chớp. Cơ thể hắn cứng đờ — không phải vì thương tích kiếp trước, mà vì cơ thể này yếu đến mức chỉ hành động nằm im cũng khiến nó mỏi.</p>
+
+    <p class="short">Ba giây.</p>
+    <p class="short">Năm giây.</p>
+    <p class="short">Mười giây.</p>
+
+    <p class="short">Hắn thở.</p>
+
+    <p>Hơi thở đầu tiên kéo dài như thể phổi đã quên cách hoạt động. Không khí tràn vào, nặng mùi ẩm mốc và mì gói. Không một chút linh khí. Không một chút. Hắn cố vận chuyển — một phản xạ ngàn năm — và không có gì xảy ra. Không có đan điền. Không có kinh mạch. Không có linh lực.</p>
+
+    <p class="short">Chỉ có thịt. Xương. Và một trái tim đang đập quá nhanh trong lồng ngực gầy gò.</p>
+
+    <p class="short">Hắn giơ tay lên.</p>
+
+    <p>Bàn tay nhỏ, trắng, yếu ớt. Ngón tay thon nhưng không có vết chai — loại bàn tay chưa từng cầm kiếm, chưa từng vẽ phù trận, chưa từng siết cổ ai. Hắn xoay bàn tay, nhìn lòng bàn tay, nhìn mu bàn tay. Rồi nắm lại.</p>
+
+    <p class="short">Yếu.</p>
+
+    <p class="short">Yếu đến mức khôi hài.</p>
+
+    <p>Tiếng chuông tắt. Rồi lại reo. Hắn nghiêng đầu, nhìn thấy vật phát ra âm thanh — một khối chữ nhật nhỏ, sáng rực, nằm trên mặt bàn cạnh giường. Trên màn hình, dòng chữ nhấp nháy:</p>
+
+    <p class="short"><span class="bold-text">BÁO THỨC — 7:00</span></p>
+
+    <p class="short">Hắn nhìn nó. Không chạm. Không hiểu.</p>
+
+    <p class="short">Rồi ký ức ập đến.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Không phải ký ức của hắn — là ký ức của thân xác này.</p>
+
+    <p>Chúng tràn vào như nước lũ qua kẽ đá, lộn xộn, mờ nhạt, đứt đoạn. Không rõ ràng như ký ức ngàn năm tu luyện, mà mơ hồ như nhìn qua lớp kính bám bụi.</p>
+
+    <p>Lục Trường An. Hai mươi bảy tuổi. Nam. Nhân viên phòng Kinh doanh, Vạn Lý Group. Vào công ty ba năm. Lương tháng không đủ trả tiền thuê nhà và lãi ngân hàng. Nợ — con số hiện lên trong ký ức như một vết sẹo — năm trăm triệu. Vay mua căn hộ qua môi giới, bị lừa ký hợp đồng bất lợi, căn hộ không bao giờ được bàn giao, tiền không đòi được, nợ vẫn tăng.</p>
+
+    <p class="short">Hắn ngồi dậy.</p>
+
+    <p>Căn phòng nhỏ hơn nhà xác của Huyền Minh Tông. Hai mươi lăm mét vuông, nếu ký ức thân xác gốc không sai. Giường đơn kê sát tường. Bàn làm việc bằng gỗ ép, trên để laptop cũ và hai cốc mì tôm chưa rửa. Tủ quần áo nhựa, loại mua ở chợ đêm. Bếp gas mini nằm cạnh bồn rửa, trên có nồi cơm điện bám cháy. Nhà vệ sinh liền phòng, cửa kính mờ.</p>
+
+    <p class="short">Tầng sáu. Không thang máy.</p>
+
+    <p>Hắn đứng lên. Chân run — cơ thể này thiếu ngủ, thiếu ăn, thiếu tập luyện. Hắn bước đến gương — tấm gương nhỏ treo trên tường, mép dưới bị sứt.</p>
+
+    <p class="short">Khuôn mặt trong gương nhìn lại hắn.</p>
+
+    <p>Bình thường. Không xấu, không đẹp. Kiểu mặt lẫn vào đám đông mà không ai nhớ. Da tái vì thiếu nắng, mắt có quầng thâm, tóc hơi dài chưa cắt. Hai mươi bảy tuổi nhưng trông già hơn — loại già vì mệt, không phải già vì tuổi.</p>
+
+    <p class="short">Hắn nhìn đôi mắt mình trong gương.</p>
+
+    <p class="short">Và bất giác, hắn cười.</p>
+
+    <p>Không phải nụ cười vui. Là nụ cười của kẻ đã chết, giờ đang đứng trước gương nhìn gương mặt người lạ. Nụ cười kéo dài đúng một giây, rồi tắt. Mặt hắn trở lại bình thường — bình thường đến mức đáng sợ.</p>
+
+    <p>Ngàn năm tu luyện ma đạo cho hắn một khả năng: kiểm soát mọi biểu cảm trên mặt. Vui, buồn, giận, sợ — tất cả chỉ là công cụ. Hắn có thể khóc mà không buồn, cười mà không vui, giận mà mặt không đổi. Thứ đó không biến mất theo linh lực. Nó khắc trong xương.</p>
+
+    <p>Hắn quay lại bàn, nhìn khối sáng trên mặt bàn. Điện thoại. Ký ức thân xác gốc cho hắn biết từ đó — dù hắn không hiểu nó hoạt động thế nào.</p>
+
+    <p class="short">Hắn cầm lên. Màn hình sáng.</p>
+
+    <p class="short"><span class="bold-text">12 cuộc gọi nhỡ — Số lạ</span><br><span class="bold-text">3 tin nhắn</span></p>
+
+    <p>Hắn mở tin nhắn. Ngón tay lóng ngóng trên màn hình cảm ứng — cảm giác kỳ lạ, như dùng phù khí mà không có linh lực điều khiển.</p>
+
+    <p>Tin nhắn đầu tiên, từ số không lưu tên:</p>
+
+    <div class="message">"Lục Trường An, tiền tháng này đến hạn rồi. Không trả thì biết hậu quả."</div>
+
+    <p>Tin nhắn thứ hai, cùng số:</p>
+
+    <div class="message">"Đừng tưởng tắt máy là xong. Tao biết chỗ mày ở."</div>
+
+    <p>Tin nhắn thứ ba, từ số khác, lưu tên "Công ty":</p>
+
+    <div class="message">"Nhắc lần cuối: nộp báo cáo tháng trước 9h sáng thứ 2. Không có thì tự hiểu."</div>
+
+    <p class="short">Hắn đặt điện thoại xuống.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Rồi hắn nhìn sang bàn làm việc. Dưới laptop cũ, một tờ giấy A4 nằm úp. Hắn lật lên.</p>
+
+    <p class="short">Thư từ chức.</p>
+
+    <p>Viết tay, nét chữ run — loại run của người đã hết hy vọng, không phải của người sợ hãi. Nội dung ngắn gọn, lịch sự đến mức thảm hại:</p>
+
+    <div class="letter">
+      "Kính gửi Ban Giám đốc Vạn Lý Group,<br><br>
+      Tôi xin được nghỉ việc kể từ ngày... Lý do: cá nhân.<br><br>
+      Trân trọng,<br>
+      Lục Trường An"
+    </div>
+
+    <p>Ngày tháng bỏ trống. Dấu hiệu của người đã viết xong nhưng chưa đủ can đảm gửi đi. Hoặc chưa biết gửi đi rồi thì sao. Về đâu. Làm gì. Sống bằng gì.</p>
+
+    <p class="short">Hắn cầm lá thư lên, đọc lại một lần.</p>
+
+    <p>Ký ức thân xác gốc lờ mờ cho hắn thấy: Lục Trường An — Lục Trường An thật — đã viết lá thư này lúc hai giờ sáng, sau khi nhận cuộc gọi đòi nợ thứ sáu trong ngày. Không khóc. Không giận. Chỉ ngồi đó, viết, rồi đặt xuống bàn, rồi leo lên giường nằm.</p>
+
+    <p class="short">Rồi không dậy nữa.</p>
+
+    <p class="short">Cho đến bây giờ.</p>
+
+    <p>Hắn nhìn lá thư trong tay. Ngón cái chạm vào chữ "Lục Trường An" ở cuối — nét chữ nhỏ, yếu ớt, như thể chính người viết cũng không muốn tồn tại.</p>
+
+    <p class="short">Hắn xé lá thư.</p>
+
+    <p>Hai mảnh. Bốn mảnh. Tám mảnh. Mười sáu. Cho đến khi chỉ còn những mẩu giấy nhỏ như vụn tuyết rơi xuống sàn nhà ẩm mốc.</p>
+
+    <p class="short">Hắn đứng giữa căn phòng, nhìn xuống những mẩu giấy.</p>
+
+    <p class="thought">Huyền Minh Ma Tôn đã chết.</p>
+
+    <p>Hắn nắm chặt tay. Không còn linh lực, nhưng thói quen ngàn năm vẫn đó — khi quyết định điều gì, tay phải nắm, lưng thẳng, mắt nhìn về phía trước.</p>
+
+    <p class="thought">Nhưng ta chưa bao giờ biết cách đầu hàng.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn dành cả buổi sáng trong căn phòng.</p>
+
+    <p>Không phải vì lười. Mà vì hắn cần hiểu. Ngàn năm tu luyện dạy hắn một điều: trước khi hành động, phải biết mình đang ở đâu.</p>
+
+    <p>Hắn kiểm tra thân thể. Không có tu vi, nhưng cơ thể vẫn hoạt động — tim, phổi, thận, gan. Sức khỏe tệ: gầy, thiếu máu, thiếu ngủ mãn tính, có dấu hiệu đau dạ dày. Thân xác này bị chủ cũ bỏ bê nghiêm trọng.</p>
+
+    <p>Hắn kiểm tra căn phòng. Tủ quần áo: bốn bộ sơ mi rẻ tiền, hai quần tây sờn gối. Tủ lạnh: chai nước, hộp sữa hết hạn, túi bánh mì khô. Ví: ba mươi bảy nghìn đồng và một thẻ ngân hàng. Laptop: cũ, chạy chậm, nhưng kết nối được internet.</p>
+
+    <p class="short">Internet.</p>
+
+    <p>Hắn ngồi trước laptop, nhìn màn hình sáng. Ký ức thân xác gốc cho hắn biết cách dùng cơ bản — gõ phím, click chuột, mở trình duyệt. Nhưng hắn không hiểu nguyên lý. Không hiểu sao bấm vào đây thì hiện ra thứ kia. Không hiểu sao nói chuyện với người ở đầu bên kia thế giới mà không cần truyền âm trận.</p>
+
+    <p class="short">Hắn không cần hiểu.</p>
+
+    <p>Huyền Minh Ma Tôn sống ngàn năm, thấy vô số pháp bảo kỳ lạ. Có thứ hắn hiểu, có thứ không — nhưng hắn luôn biết cách dùng. Hiểu nguyên lý là việc của thợ rèn. Dùng được là việc của ma tôn.</p>
+
+    <p class="short">Hắn mở internet, bắt đầu đọc.</p>
+
+    <p>Tin tức. Kinh tế. Thương mại. Chứng khoán. Hắn đọc chậm — không phải vì không hiểu nội dung, mà vì phải làm quen với từ vựng mới. "GDP", "thị phần", "doanh thu", "IPO". Mỗi từ hắn đọc, hắn tự dịch sang ngôn ngữ hắn biết.</p>
+
+    <p class="list-item">Doanh thu — thu nhập linh thạch của tông môn.</p>
+    <p class="list-item">Thị phần — lãnh thổ.</p>
+    <p class="list-item">M&amp;A — thôn phệ.</p>
+    <p class="list-item">CEO — tông chủ.</p>
+    <p class="list-item">Nhân viên — đệ tử.</p>
+
+    <p class="short">Càng đọc, hắn càng tĩnh.</p>
+
+    <p class="short">Không phải tĩnh vì bình yên. Tĩnh vì nhận ra.</p>
+
+    <p>Cấu trúc quyền lực ở đây — thế giới này — không khác tu tiên giới. Có kẻ mạnh, kẻ yếu. Có tông môn lớn thống trị, tiểu môn phái cúi đầu. Có liên minh, có phản bội, có chiến tranh ngầm. Chỉ khác ở vũ khí: kiếm thay bằng hợp đồng, pháp thuật thay bằng luật pháp, linh lực thay bằng tiền.</p>
+
+    <p class="short">Hắn đọc suốt năm tiếng.</p>
+
+    <p>Đến trưa, hắn đóng laptop. Đứng dậy, bước ra ban công — cái ban công nhỏ vừa đủ đứng một người, nhìn ra dãy nhà xám xịt và đường phố đông đúc phía dưới.</p>
+
+    <p>Xe cộ chạy. Người đi bộ vội vã. Tiếng còi, tiếng máy, tiếng nhạc từ quán ăn tầng dưới. Một thế giới hỗn loạn, ồn ào, đầy ắp — và không một chút linh khí.</p>
+
+    <p class="short">Nhưng hắn cảm nhận được thứ khác.</p>
+
+    <p class="short">Dục vọng.</p>
+
+    <p>Không phải dùng linh thức. Là bản năng — thứ bản năng được mài giũa qua ngàn năm cai trị Huyền Minh Tông, qua ngàn năm nhìn con người giết nhau vì tham, sân, si. Ma Tâm Quan — không phải pháp thuật, là trực giác thuần túy. Khi đã nhìn đủ nhiều, con người trở nên trong suốt.</p>
+
+    <p>Người đàn ông dưới kia, bước nhanh, vai cong, mắt dán vào điện thoại — sợ hãi. Sợ trễ giờ, sợ mất việc, sợ không đủ tiền.</p>
+
+    <p>Cô gái ngồi trong quán trà sữa, cười với điện thoại nhưng mắt không cười — cô đơn. Loại cô đơn giấu sau nụ cười.</p>
+
+    <p>Hai người đàn ông mặc vest đứng trước cổng tòa nhà đối diện, bắt tay nhau, miệng cười — nhưng tay nắm hơi quá chặt, mắt nhìn nhau hơi quá thẳng. Không tin nhau. Đang đo xem ai cần ai hơn.</p>
+
+    <p class="short">Hắn nhìn, và hiểu.</p>
+
+    <p>Thế giới này đầy ắp con người. Mỗi người đều mang theo dục vọng, nỗi sợ, tham vọng nhỏ bé. Không ai biết tu luyện, không ai có linh lực — nhưng cuộc chiến sinh tồn thì y hệt. Mạnh hiếp yếu. Khôn lừa dại. Kẻ ở trên đè kẻ ở dưới.</p>
+
+    <p class="short">Gió thổi qua ban công, lạnh.</p>
+
+    <p class="short">Hắn hít một hơi dài.</p>
+
+    <p class="thought">Ngàn năm trước, ta đứng trên đỉnh Cửu U Sơn, nhìn xuống vạn dân tu tiên giới.</p>
+
+    <p class="thought">Bây giờ, ta đứng trên ban công tầng sáu, nhìn xuống một con phố.</p>
+
+    <p class="thought">Khác nhau ở khoảng cách. Giống nhau ở bản chất.</p>
+
+    <p>Hắn quay vào phòng. Ngồi xuống bàn. Nhìn tờ giấy trắng — loại giấy rẻ tiền mua ở cửa hàng văn phòng phẩm.</p>
+
+    <p class="short">Hắn cầm bút lên.</p>
+
+    <p class="short">Và bắt đầu viết.</p>
+
+    <p class="short">Không phải thư từ chức. Là danh sách.</p>
+
+    <p class="short">Dòng đầu tiên: <span class="bold-text">"Nợ — 500 triệu. Hạn trả: không rõ. Chủ nợ: ngân hàng + cá nhân."</span></p>
+
+    <p class="short">Dòng thứ hai: <span class="bold-text">"Vạn Lý Group — công ty hiện tại. Vị trí: nhân viên thấp nhất. Không ai quan tâm ta sống hay chết."</span></p>
+
+    <p class="short">Dòng thứ ba: <span class="bold-text">"Thân thể — yếu. Không tu vi. Không pháp bảo. Không đồng minh."</span></p>
+
+    <p>Hắn nhìn ba dòng. Ngàn năm trước, hắn từng đứng trước tình cảnh tệ hơn — bị truy sát, linh lực cạn kiệt, một mình trong hoang mạc Huyết Hải. Hắn đã sống sót. Đã xây lại tông môn từ đống tro tàn. Đã leo lên đỉnh bằng trí tuệ và tàn nhẫn.</p>
+
+    <p>So với lần đó, bây giờ — nợ vài trăm triệu tiền giấy, một công ty nhỏ, một thân xác yếu — chẳng là gì.</p>
+
+    <p>Hắn viết dòng thứ tư:</p>
+
+    <p class="short"><span class="bold-text">"Ta có: ngàn năm kinh nghiệm. Ma Tâm Quan. Và không gì để mất."</span></p>
+
+    <p class="short">Hắn đặt bút xuống.</p>
+
+    <p>Nhìn ra cửa sổ. Trời đã về chiều, nắng xiên qua rèm cửa mỏng, vẽ một vệt sáng dài trên sàn nhà. Những mẩu giấy — thư từ chức bị xé — vẫn nằm rải rác trên sàn, như tàn tích của một cuộc đời đã kết thúc.</p>
+
+    <p class="short">Hắn không nhặt chúng lên.</p>
+
+    <p class="short">Cuộc đời đó không phải của hắn.</p>
+
+    <p>Điện thoại rung. Tin nhắn từ chủ nợ, lại đe dọa. Hắn đọc lướt, rồi tắt màn hình.</p>
+
+    <p>Ngàn năm trước, kẻ nào dám dọa Huyền Minh Ma Tôn thì sáng hôm sau đã thành xác không toàn thây.</p>
+
+    <p class="short">Nhưng đây không phải ngàn năm trước.</p>
+
+    <p class="short">Và hắn không còn là Ma Tôn.</p>
+
+    <p>Hắn là Lục Trường An. Hai mươi bảy tuổi. Nợ nần. Không bạn bè. Không gia đình. Không tương lai.</p>
+
+    <p class="short">Nhưng hắn biết một điều mà không ai ở thế giới này biết.</p>
+
+    <p class="short">Hắn biết cách cai trị.</p>
+
+    <p class="short">Hắn biết cách đọc người.</p>
+
+    <p>Và hắn biết — ở bất kỳ thế giới nào, bất kỳ thời đại nào — kẻ hiểu con người hơn sẽ luôn đứng trên đỉnh.</p>
+
+    <p class="short">Hắn cầm lại tờ giấy, gấp đôi, cất vào ngăn kéo.</p>
+
+    <p>Rồi đi vào nhà vệ sinh, mở vòi nước, rửa mặt. Nước lạnh chảy qua da — cảm giác thật. Không phải ảo giác. Không phải mộng cảnh. Là thật.</p>
+
+    <p class="short">Hắn sống. Lại.</p>
+
+    <p>Trong gương, đôi mắt nhìn lại hắn đã khác. Vẫn gương mặt bình thường đó, vẫn quầng thâm, vẫn tóc dài chưa cắt. Nhưng mắt — mắt không còn là mắt của Lục Trường An cũ. Sâu. Tĩnh. Lạnh.</p>
+
+    <p class="short">Như mắt của kẻ đã nhìn thấy quá nhiều người chết.</p>
+
+    <p class="short">Hắn lau mặt, bước ra.</p>
+
+    <p class="short">Tối nay, hắn sẽ ăn gói mì cuối cùng trong tủ.</p>
+
+    <p class="short">Sáng mai, hắn sẽ đến Vạn Lý Group.</p>
+
+    <p class="short">Không phải để nộp thư từ chức.</p>
+
+    <p class="short">Mà để bắt đầu.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; Mục lục</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>2.790 từ &middot; Chương 01 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>
