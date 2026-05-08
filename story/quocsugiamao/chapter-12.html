@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 12 — Quốc Sư Thật Sự | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-11.html">&larr; CHƯƠNG 11</a>
+      <span class="chapter-indicator">12/30</span>
+      <a href="chapter-13.html">CHƯƠNG 13 &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 12</div>
+      <h1>Quốc Sư Thật Sự</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Ba ngày sau vụ ám sát, Tạ Cảnh Minh nhận tin mình sắp được phong Quốc Sư chính thức.</p>
+
+<p>Không phải từ vua. Từ Phúc An.</p>
+
+<p>— Quốc Sư! Nghe nói bệ hạ sẽ ban chiếu phong Quốc Sư chính thức! Lễ lớn! Trước toàn triều!</p>
+
+<p>Hắn đang ngồi trong phòng mới ở nội cung. Phòng nhỏ hơn Minh Nguyệt Đường, nhưng gần phòng ngự của vua chỉ hai hành lang. Tường dày, cửa nặng, lính canh ngoài cửa. Lồng đẹp hơn, nhưng vẫn là lồng.</p>
+
+<p class="thought"><em>Phong chính thức? Trước toàn triều?</em></p>
+
+<p class="thought"><em>Đến giờ, mình vẫn chỉ là "Quốc Sư" theo nghĩa mọi người gọi vậy. Chưa có chiếu chỉ. Chưa có lễ. Chưa có ấn tín.</em></p>
+
+<p class="thought"><em>Và bây giờ vua muốn làm chính thức.</em></p>
+
+<p class="thought"><em>Tại sao? Vì tiên tri đúng vụ ám sát. Vua sợ, vua cần, nên vua muốn xích chặt hơn. Phong chính thức = mình không thể từ chối, không thể rời đi, không thể giả vờ chỉ là khách.</em></p>
+
+<p class="thought"><em>Xiềng vàng, nâng cấp thành vương miện.</em></p>
+
+<p>— Phúc An. Lễ bao giờ?</p>
+
+<p>— Dạ, nghe nói ba ngày nữa. Bộ Lễ đang chuẩn bị.</p>
+
+<p class="thought"><em>Ba ngày. Ba ngày để chuẩn bị cho lễ phong mà mình không biết gì.</em></p>
+
+<p class="thought"><em>Lễ phong Quốc Sư có gì? Nghi thức gì? Phải đọc kinh không? Phải tuyên thệ không? Phải trổ tài gì không?</em></p>
+
+<p class="thought"><em>Mình không biết. Và không có ai để hỏi mà không lộ.</em></p>
+
+<p>Hắn vuốt cằm. Nghĩ.</p>
+
+<p class="thought"><em>Một cách. Duy nhất một cách.</em></p>
+
+<p>— Phúc An.</p>
+
+<p>— Dạ?</p>
+
+<p>— Tìm cho ta tất cả sách ghi chép về lễ phong Quốc Sư các đời trước. Ta cần xem lại nghi thức. Lâu quá, chi tiết nhỏ ta quên.</p>
+
+<p class="thought"><em>"Lâu quá, chi tiết nhỏ ta quên." Câu hoàn hảo. Quốc Sư nào cũng chỉ được phong một lần, quên chi tiết là bình thường. Và xem lại tài liệu trước lễ lớn, ai cũng hiểu.</em></p>
+
+<p>Phúc An gật đầu, chạy đi. Mắt sáng. Gã không nghi ngờ gì. Quốc Sư muốn xem lại sách, đương nhiên là để chuẩn bị chu đáo.</p>
+
+<p class="thought"><em>Tốt. Bước một xong.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hai ngày. Tạ Cảnh Minh đọc ngấu nghiến.</p>
+
+<p>Ba cuốn sách mỏng, viết trên giấy cũ, mực phai. Ghi chép lễ phong Quốc Sư từ bốn đời trước. Không chi tiết lắm, nhưng đủ để hắn nắm khung.</p>
+
+<p class="thought"><em>Lễ phong Quốc Sư gồm ba phần.</em></p>
+
+<p class="thought"><em>Một: Tuyên chiếu. Vua đọc chiếu phong trước triều đình. Phần này mình chỉ cần quỳ nghe. Dễ.</em></p>
+
+<p class="thought"><em>Hai: Nhận ấn. Vua trao ấn tín Quốc Sư. Mình nhận, nâng hai tay, cúi đầu. Cũng dễ.</em></p>
+
+<p class="thought"><em>Ba: Khai thiên. Phần khó. Quốc Sư mới phải đứng trước triều đình, hướng về phía trời, "khai thiên vấn đạo" là mở lời hỏi Thiên Cơ trước quần thần. Đời trước, Quốc Sư thường đọc một đoạn sấm ký hoặc thiên cơ tổng luận. Dài. Trang trọng. Phải thuộc.</em></p>
+
+<p class="thought"><em>Phải thuộc.</em></p>
+
+<p class="thought"><em>Mình không có gì để thuộc. Mình không biết sấm ký nào. Mình không biết thiên cơ tổng luận là cái gì.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p>Hắn nhìn lại sách. Đọc kỹ phần khai thiên. Bốn Quốc Sư trước, mỗi người đọc một đoạn khác nhau. Không có bài chuẩn. Không có khuôn mẫu. Mỗi Quốc Sư tự chọn.</p>
+
+<p class="thought"><em>Tự chọn. Nghĩa là mình có thể nói bất kỳ cái gì, miễn sao nghe đủ sâu, đủ bí ẩn, đủ vang.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình từng viết bài diễn thuyết cho ba tên giáo chủ đa cấp. Kiểu bài mà người nghe vỗ tay nhưng về nhà nghĩ lại không hiểu mình vỗ tay vì cái gì.</em></p>
+
+<p class="thought"><em>Cùng một kỹ năng. Khác sân khấu.</em></p>
+
+<p>Hắn lấy giấy. Bút. Bắt đầu viết.</p>
+
+<p>Viết rồi xóa. Xóa rồi viết. Đến tối ngày thứ hai, hắn có một đoạn. Ngắn. Mười hai câu. Mỗi câu bảy chữ. Kiểu thơ sấm cổ mà hắn đọc trong sách.</p>
+
+<p>Đọc lại. Gật đầu.</p>
+
+<p class="thought"><em>Nghe hay. Nghe sâu. Nghe như Quốc Sư thật.</em></p>
+
+<p class="thought"><em>Vì mình viết nó giống y kiểu bài đa cấp: mỗi câu nghe có nghĩa, nhưng tổng thể không nói gì cụ thể. Ai nghe cũng tự gán ý nghĩa riêng.</em></p>
+
+<p class="thought"><em>Hoàn hảo.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ngày lễ phong. Giờ Thìn.</p>
+
+<p>Đại điện Quang Minh, nơi tổ chức triều hội lớn. Tạ Cảnh Minh chưa từng vào đây.</p>
+
+<p>Rộng. Cao. Cột gỗ sơn đỏ, chạm rồng vàng, mỗi cột to bằng hai người ôm. Sàn đá trắng, sạch đến mức phản chiếu bóng người. Trần cao, ánh sáng lọt qua cửa sổ hẹp, chiếu thành vệt sáng dài trên sàn.</p>
+
+<p>Và người. Đông. Đại thần hai bên, xếp hàng, áo triều phục đủ màu. Mũ cao, đai ngọc, mặt nghiêm. Hắn đếm nhanh: hơn năm mươi. Toàn bộ triều đình có mặt.</p>
+
+<p class="thought"><em>Năm mươi đại thần. Mỗi người một phe, một mưu, một ý. Và tất cả đang nhìn mình.</em></p>
+
+<p>Hắn đứng ở cuối điện, chờ. Áo lễ mới, trắng tinh, viền vàng, thêu sấm vân. Tóc búi cao, cài trâm ngọc. Phúc An và Tiểu Phúc đã chuẩn bị từ sáng, tỉ mỉ đến từng nếp áo.</p>
+
+<p class="thought"><em>Nhìn mình trong gương sáng nay, mình gần như không nhận ra. Cao nhân. Tiên phong đạo cốt. Trông như Quốc Sư thật.</em></p>
+
+<p class="thought"><em>Vì bây giờ, mình sắp thành Quốc Sư thật.</em></p>
+
+<p>Tiếng trống. Ba hồi. Nặng. Vang khắp điện.</p>
+
+<p>Hoàng đế bước ra từ hậu điện. Long bào chỉnh tề. Mặt vẫn gầy, mắt vẫn trũng, nhưng hôm nay cố gắng uy nghiêm. Lên ngai. Ngồi.</p>
+
+<p>Và ở phía bên phải ngai vàng, Tạ Cảnh Minh nhìn thấy người hắn đã không gặp kể từ buổi uống trà ở Thanh Phong Các.</p>
+
+<p>Lục Thanh Dao.</p>
+
+<p>Nàng đứng ở vị trí Nhiếp Chính Vương, bên phải vua, cao hơn tất cả đại thần. Áo tím sẫm, thêu phượng bạc, tóc búi cao. Mặt bình thản. Kiểu bình thản mà hắn biết rõ: không phải không có cảm xúc, mà là cảm xúc bị nén dưới mười lớp tường thành.</p>
+
+<p>Thiên Diễn Đồng mở nhẹ. Xa, nhưng hắn vẫn cảm nhận được: tò mò, đánh giá, và thứ gì đó khác, thứ mà hắn không chắc mình đọc đúng.</p>
+
+<p class="thought"><em>Lục Thanh Dao. Nàng đang nhìn mình.</em></p>
+
+<p class="thought"><em>Bốn chương không gặp. Cầu mưa, Tiểu Phúc, A Ly, ám sát. Nàng đã biết hết chưa? Chắc chắn biết. Nàng biết mọi thứ xảy ra trong cung.</em></p>
+
+<p class="thought"><em>Và hôm nay, nàng đứng đó, im lặng, cho mình được phong.</em></p>
+
+<p class="thought"><em>Nàng ủng hộ? Hay đang chờ?</em></p>
+
+<p>Tiếng chuông. Lễ bắt đầu.</p>
+
+<p>Quan Thượng thư bộ Lễ bước ra. Hoàng đại nhân. Gã mà hắn từng từ chối gặp ở chương sáu. Mặt tròn, râu thưa, giọng sang sảng.</p>
+
+<p>— Phụng thiên thừa vận, hoàng đế chiếu viết...</p>
+
+<p>Chiếu dài. Hắn quỳ nghe. Không hiểu hết, chữ Hán cổ nhiều, nhưng nắm ý chính: Quốc Sư có công cầu mưa cứu hạn, tiên tri cứu giá, đức cao vọng trọng, nay chính thức phong vị Quốc Sư Đại Ly, ban ấn tín, ban phủ, ban lộc.</p>
+
+<p class="thought"><em>Ban phủ. Quốc Sư Phủ. Mình sẽ có phủ riêng.</em></p>
+
+<p class="thought"><em>Chương mười ba trong bản kế hoạch: Quốc Sư Phủ đầy gián điệp. Thú vị.</em></p>
+
+<p>Chiếu đọc xong. Vua đứng dậy.</p>
+
+<p>— Quốc Sư, lên đây.</p>
+
+<p>Hắn đứng. Bước lên bậc thang trước ngai vàng. Mỗi bước, áo trắng tung nhẹ. Im lặng. Cả điện im lặng. Chỉ có tiếng bước chân hắn trên đá.</p>
+
+<p class="thought"><em>Bước lên. Từng bước. Kiếp trước, mình từng bước lên sân khấu trước hàng nghìn người. Kiếp này, sân khấu là đại điện. Khán giả là triều đình. Và vai diễn là Quốc Sư.</em></p>
+
+<p class="thought"><em>Cùng một trò. Chỉ khác mức độ.</em></p>
+
+<p>Vua cầm một hộp gỗ. Mở. Bên trong, một con dấu. Vuông. Ngọc trắng. Khắc bốn chữ mà hắn đọc được: "Quốc Sư Chi Ấn."</p>
+
+<p>Vua trao.</p>
+
+<p>Hắn nhận. Hai tay nâng. Cúi đầu.</p>
+
+<p>Nặng. Con dấu nhỏ mà nặng. Không phải nặng vì ngọc. Nặng vì ý nghĩa. Vì từ giây này, hắn không còn là "gã bị gọi là Quốc Sư." Hắn là Quốc Sư. Chính thức. Có ấn tín. Có chiếu chỉ. Có danh phận.</p>
+
+<p class="thought"><em>Nặng.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình chạy trốn trách nhiệm cả đời. Kiếp này, trách nhiệm tự chạy đến tìm mình, quỳ xuống đặt vào tay mình, rồi khóa lại.</em></p>
+
+<p>— Quốc Sư.</p>
+
+<p>Vua nói. Giọng lớn, cho cả điện nghe.</p>
+
+<p>— Khanh là trụ cột quốc vận. Từ nay, Thiên Cơ nước Đại Ly, do khanh dẫn dắt.</p>
+
+<p class="thought"><em>"Do khanh dẫn dắt." Vua vừa công khai giao cho mình trách nhiệm dẫn dắt Thiên Cơ cả nước.</em></p>
+
+<p class="thought"><em>Mình. Tên lừa đảo. Dẫn dắt Thiên Cơ.</em></p>
+
+<p>— Thần, lĩnh mệnh.</p>
+
+<p>Hắn nói. Giọng trầm. Vang. Kiểu giọng mà hắn đã luyện cả đời kiếp trước: giọng mà người nghe tin ngay, không cần nghĩ.</p>
+
+<p>Quay người. Đối diện triều đình.</p>
+
+<p>Năm mươi đại thần nhìn hắn. Mắt đủ loại. Sùng bái, nghi ngờ, sợ hãi, tính toán, thù ghét.</p>
+
+<p>Và ở hàng đầu, bên trái, Thái Sư Vương Bách Nhẫn. Già, gầy, mắt sắc. Mặt không biểu cảm. Nhưng Thiên Diễn Đồng đọc được: giận. Giận lạnh. Kiểu giận của kẻ thua nhưng chưa chấp nhận.</p>
+
+<p class="thought"><em>Vương Bách Nhẫn. Gã không vui. Gã phản đối nhưng bị ép. Vì sau vụ ám sát, ai phản đối Quốc Sư = phản đối kẻ cứu vua = đáng nghi.</em></p>
+
+<p class="thought"><em>Gã đang nuốt giận. Nhưng gã sẽ nhớ.</em></p>
+
+<p>Hắn không nhìn Vương Bách Nhẫn lâu. Quay sang phải. Lục Thanh Dao.</p>
+
+<p>Nàng nhìn hắn. Mắt sắc. Không sùng bái, không sợ, không giận. Nhìn kiểu... đánh giá. Kiểu nhìn mà nàng dành cho quân cờ vừa được thăng cấp trên bàn.</p>
+
+<p>Và khóe miệng nàng, nhẹ, gần như không thấy, hơi cong lên.</p>
+
+<p class="thought"><em>Nàng cười. Nàng cười.</em></p>
+
+<p class="thought"><em>Mình vừa được phong Quốc Sư, và Lục Thanh Dao cười.</em></p>
+
+<p class="thought"><em>Nàng vui vì mình? Hay vì ván cờ vừa diễn ra đúng nước nàng muốn?</em></p>
+
+<p>Phần ba. Khai thiên.</p>
+
+<p>Hắn quay về phía cửa điện. Cửa mở, ánh sáng tràn vào. Trời xanh. Nắng. Gió nhẹ.</p>
+
+<p>Đây là phần hắn phải nói. Mười hai câu. Đã thuộc. Đã luyện.</p>
+
+<p>Hắn hít sâu. Bước tới một bước. Giơ tay phải, ngón trỏ và giữa chụm, đưa lên trời. Tư thế mà hắn tự nghĩ ra, trông giống cao nhân sờ khí vận.</p>
+
+<p>Im lặng. Cả điện nín thở.</p>
+
+<p>Và hắn mở miệng. Giọng trầm, chậm, mỗi chữ rơi như đá:</p>
+
+<p>— Thiên Cơ vô ngôn, thế nhân tự độ.</p>
+
+<p class="thought"><em>Thiên Cơ không nói, con người tự tìm đường.</em></p>
+
+<p>— Quốc vận tại dân, dân tâm tại tín.</p>
+
+<p class="thought"><em>Vận nước ở lòng dân, lòng dân ở niềm tin.</em></p>
+
+<p>— Tín giả thành chân, nghi giả thành hư.</p>
+
+<p class="thought"><em>Tin thì thành thật, nghi thì thành không.</em></p>
+
+<p>— Cổ nhân vấn thiên, thiên bất đáp ngữ.</p>
+
+<p class="thought"><em>Người xưa hỏi trời, trời không đáp lời.</em></p>
+
+<p>— Kim nhân vấn thiên, thiên dĩ nhân đáp.</p>
+
+<p class="thought"><em>Người nay hỏi trời, trời dùng người đáp.</em></p>
+
+<p>— Quốc Sư phi thần, diệc phi tiên tri.</p>
+
+<p class="thought"><em>Quốc Sư không phải thần, cũng không phải tiên tri.</em></p>
+
+<p>— Quốc Sư giả, thiên hạ chi nhĩ mục.</p>
+
+<p class="thought"><em>Quốc Sư là tai mắt của thiên hạ.</em></p>
+
+<p>— Quan kỳ sở bất kiến, thính kỳ sở bất văn.</p>
+
+<p class="thought"><em>Nhìn thứ người không thấy, nghe thứ người không nghe.</em></p>
+
+<p>— Ngôn xuất tất hữu nhân, hành chỉ tất hữu quả.</p>
+
+<p class="thought"><em>Nói ra ắt có nguyên nhân, làm gì ắt có hậu quả.</em></p>
+
+<p>— Dĩ thân vi chúc, chiếu phá huyền minh.</p>
+
+<p class="thought"><em>Lấy thân làm nến, soi sáng bóng tối.</em></p>
+
+<p>— Thiên Cơ bất khả khi, diệc bất khả cự.</p>
+
+<p class="thought"><em>Thiên Cơ không thể lừa, cũng không thể cưỡng.</em></p>
+
+<p>— Duy hữu thành tâm, phương đắc kỳ chân.</p>
+
+<p class="thought"><em>Chỉ có thành tâm, mới được sự thật.</em></p>
+
+<p>Dứt. Im lặng.</p>
+
+<p>Rồi tiếng gì đó. Không phải vỗ tay. Triều đình không vỗ tay. Mà là hít vào. Đồng loạt. Năm mươi người hít vào cùng lúc, tạo thành âm thanh nhẹ, như gió lùa qua khe cửa.</p>
+
+<p>Tạ Cảnh Minh đứng im. Tay vẫn giơ. Mắt nhìn trời.</p>
+
+<p class="thought"><em>Mười hai câu. Mỗi câu bảy chữ. Kiểu sấm ký.</em></p>
+
+<p class="thought"><em>Nội dung? Chẳng nói gì cụ thể. "Quốc Sư là tai mắt thiên hạ" thì ai cũng biết. "Tin thì thành thật" thì mình đang sống bằng nguyên tắc đó. "Lấy thân làm nến" nghe hay nhưng mơ hồ.</em></p>
+
+<p class="thought"><em>Nhưng đám đông không nghe nội dung. Đám đông nghe giọng. Nghe nhịp. Nghe cảm giác. Và mười hai câu bảy chữ, đọc bằng giọng trầm, giữa đại điện, trước năm mươi đại thần, dưới trời xanh, với tay giơ lên trời...</em></p>
+
+<p class="thought"><em>Hoàn hảo. Kinh điển. Đúng kiểu trình diễn mà kiếp trước mình gọi là "đỉnh cao nghệ thuật bán hàng."</em></p>
+
+<p>Vua gật đầu. Chậm. Mắt sáng.</p>
+
+<p>Hoàng đại nhân, quan bộ Lễ, quỳ xuống:</p>
+
+<p>— Quốc Sư khai thiên, lời vàng ý ngọc!</p>
+
+<p>Rồi đại thần khác quỳ. Rồi tiếp. Lần lượt. Không phải tất cả. Vương Bách Nhẫn đứng im. Vài người phe gã cũng đứng. Nhưng phần lớn quỳ.</p>
+
+<p>Tạ Cảnh Minh hạ tay. Quay lại. Mặt bình thản.</p>
+
+<p>Bên trong, tim đập nhanh. Nhưng không phải vì sợ.</p>
+
+<p>Vì lần đầu tiên, hắn cảm nhận thứ gì đó khác.</p>
+
+<p>Thiên Diễn Đồng bùng mở, tự động, không kiểm soát. Và hắn thấy: từ mỗi người quỳ, mỗi người tin, sợi khí vận bay lên, mỏng, nhẹ, nhưng rõ ràng, hội tụ về phía hắn. Không phải vài sợi. Hàng chục. Từ khắp điện. Đổ vào hắn như suối đổ về sông.</p>
+
+<p>Khí vận quanh hắn sáng lên. Rõ ràng. Dày đặc. Đến mức hắn gần như nhìn thấy bằng mắt thường: một lớp ánh sáng mờ, bao quanh, ấm, nặng.</p>
+
+<p class="thought"><em>Niềm tin. Toàn bộ triều đình vừa đổ niềm tin vào mình. Không phải niềm tin dân gian kiểu "thần nhân." Niềm tin chính thức. Niềm tin có chiếu chỉ, có ấn tín, có nghi lễ.</em></p>
+
+<p class="thought"><em>Nặng hơn. Chính thống hơn. Và Thiên Cơ ghi nhận nó khác.</em></p>
+
+<p>Hắn nhìn lên trời qua cửa điện. Và lần đầu tiên, giữa ban ngày, hắn thấy dòng chảy Thiên Cơ. Mờ, nhưng có. Một nhánh lớn, sáng, chảy thẳng về phía hắn. Không phải nhánh nhỏ như trước. Nhánh lớn. Như sông.</p>
+
+<p class="thought"><em>Thiên Cơ đang chảy về phía mình. Không phải lén lút. Công khai. Mạnh. Như dòng sông tìm thấy lòng sông mới.</em></p>
+
+<p class="thought"><em>Và mình vừa trở thành lòng sông đó.</em></p>
+
+<p>Hắn nuốt nước bọt. Quay lại. Cúi đầu trước vua.</p>
+
+<p>Lễ xong.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Buổi tối. Phòng mới trong nội cung.</p>
+
+<p>Phúc An và Tiểu Phúc bày tiệc nhỏ mừng. Trà ngon, bánh, hoa quả. Tiểu Phúc hào hứng đến mức suýt đánh rơi ấm trà hai lần.</p>
+
+<p>— Quốc Sư chính thức rồi! Quốc Sư chính thức rồi!</p>
+
+<p>Gã lặp đi lặp lại, mắt sáng, như đang nói về ngày hội lớn nhất đời.</p>
+
+<p>Tạ Cảnh Minh ngồi uống trà. Mỉm cười. Mệt.</p>
+
+<p class="thought"><em>Chính thức. Ấn tín trong hộp. Chiếu chỉ treo tường. Quốc Sư Phủ đang được chuẩn bị.</em></p>
+
+<p class="thought"><em>Mình chính thức trở thành thứ mà mình giả vờ là.</em></p>
+
+<p class="thought"><em>Và phần kỳ lạ nhất: mình không thấy vui. Không thấy sợ. Thấy... mệt. Kiểu mệt của diễn viên diễn quá lâu, đến mức không nhớ mình là ai ngoài vai diễn.</em></p>
+
+<p>Tiếng gõ cửa. Nhẹ. Không phải kiểu gõ của Phúc An hay Tiểu Phúc.</p>
+
+<p>— Ai?</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Giọng nữ. Lạnh. Quen.</p>
+
+<p>Hắn đặt chén trà xuống. Tim nhảy một nhịp.</p>
+
+<p>— Mời vào.</p>
+
+<p>Cửa mở. Lục Thanh Dao bước vào.</p>
+
+<p>Không có thị vệ. Không có tùy tùng. Một mình. Áo tím sẫm buổi lễ đã đổi thành áo xanh nhạt, giản dị hơn, tóc xổ một bên. Trông khác. Trông... mềm hơn. Nhưng mắt vẫn sắc.</p>
+
+<p>Phúc An và Tiểu Phúc quỳ sụp.</p>
+
+<p>— Bái kiến Vương gia!</p>
+
+<p>— Lui ra.</p>
+
+<p>Hai chữ. Họ lui. Cửa đóng.</p>
+
+<p>Hai người. Một phòng.</p>
+
+<p>Lục Thanh Dao nhìn quanh. Phòng nhỏ, bàn trà, nến, hộp ngọc đựng ấn tín.</p>
+
+<p>Rồi nhìn hắn.</p>
+
+<p>— Quốc Sư.</p>
+
+<p>— Vương gia.</p>
+
+<p>Im lặng. Hắn chỉ ghế. Nàng ngồi.</p>
+
+<p>Hắn rót trà. Nàng nhận. Không uống.</p>
+
+<p>— Bài khai thiên hôm nay, hay.</p>
+
+<p>Hắn gật đầu.</p>
+
+<p>— Vương gia khen.</p>
+
+<p>— Ta không khen. Ta nhận xét. Mười hai câu, không câu nào sai, cũng không câu nào đúng. Nghe xong ai cũng gật đầu nhưng không ai nói được ngươi vừa nói gì cụ thể.</p>
+
+<p>Dừng. Mắt nàng sáng.</p>
+
+<p>— Giống y lời một kẻ bán hàng bậc thầy.</p>
+
+<p class="thought"><em>Nàng nhìn ra.</em></p>
+
+<p class="thought"><em>Đương nhiên nàng nhìn ra. Nàng là Lục Thanh Dao. Năm mươi đại thần bị lừa, nàng không.</em></p>
+
+<p>Hắn không phủ nhận. Không thừa nhận. Uống trà.</p>
+
+<p>— Vương gia đến đây chỉ để nhận xét bài khai thiên của thần?</p>
+
+<p>— Không.</p>
+
+<p>Nàng đặt chén xuống. Nhìn thẳng hắn.</p>
+
+<p>— Ta đến để nói cho ngươi biết: từ hôm nay, ngươi không còn chỉ là quân cờ trên bàn của ta.</p>
+
+<p>Hắn nhướn mày.</p>
+
+<p>— Ngươi vừa trở thành bàn cờ.</p>
+
+<p>Im lặng.</p>
+
+<p class="thought"><em>Bàn cờ?</em></p>
+
+<p>— Trước đây, ngươi là quân cờ. Ta giữ ngươi, dùng ngươi, đặt ngươi vào vị trí có lợi. Nhưng bây giờ, ngươi là Quốc Sư. Chính thức. Có ấn. Có phủ. Có quyền. Và quan trọng nhất, có niềm tin của thiên hạ.</p>
+
+<p>Nàng nghiêng đầu. Nhẹ.</p>
+
+<p>— Ngươi không còn là quân cờ vì quân cờ bị đặt. Nhưng ngươi, từ hôm nay, mọi phe đều muốn chơi trên ngươi. Ngươi là mặt bàn. Ai kiểm soát được ngươi, người đó thắng.</p>
+
+<p class="thought"><em>Bàn cờ. Mình là bàn cờ. Không phải quân. Là mặt bàn mà tất cả phe phái muốn đặt quân lên.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình sẽ gọi đây là "trở thành nền tảng truyền thông." Ai kiểm soát truyền thông, người đó kiểm soát câu chuyện.</em></p>
+
+<p class="thought"><em>Và ở Đại Ly, Quốc Sư chính là truyền thông.</em></p>
+
+<p>— Vương gia nhắc nhở thần, thần ghi nhận.</p>
+
+<p>— Không phải nhắc nhở.</p>
+
+<p>Nàng đứng dậy. Bước đến bên cửa sổ. Nhìn ra ngoài. Trăng lên. Ánh trăng chiếu lên mặt nàng, sắc cạnh, lạnh.</p>
+
+<p>— Ta nói để ngươi hiểu: từ nay, ta không thể bảo vệ ngươi kiểu cũ nữa.</p>
+
+<p>Hắn nhìn nàng. Chờ.</p>
+
+<p>— Trước đây, ngươi chỉ là "gã Quốc Sư kỳ lạ." Ta giữ ngươi vì có lợi, các phe khác chưa coi ngươi là mối đe dọa. Nhưng bây giờ...</p>
+
+<p>Nàng quay lại. Mắt nghiêm.</p>
+
+<p>— Bây giờ ngươi là Quốc Sư thật sự. Có quyền, có ấn, có lòng dân. Vương Bách Nhẫn sẽ không chịu ngồi yên. Phe quân sự sẽ muốn dùng ngươi. Phe ngoại giao sẽ muốn ngươi phán về Bắc Nguyên. Và có những kẻ...</p>
+
+<p>Nàng dừng. Giọng nhẹ hơn.</p>
+
+<p>— ...mà ngươi chưa biết đến, cũng sẽ bắt đầu chú ý.</p>
+
+<p class="thought"><em>Kẻ mà mình chưa biết đến. Thiên Ngoại Các? Gã áo xám ngày cầu mưa?</em></p>
+
+<p>— Vương gia lo cho thần?</p>
+
+<p>Câu hỏi ra miệng trước khi hắn kịp nghĩ. Thiên Diễn Đồng đọc: thứ gì đó rung, nhẹ, sau tường thành cảm xúc của nàng.</p>
+
+<p>Lục Thanh Dao nhìn hắn. Lâu.</p>
+
+<p>— Ta lo cho ván cờ.</p>
+
+<p>Rồi nàng bước ra cửa. Dừng. Không quay lại.</p>
+
+<p>— Quốc Sư. Lời khai thiên của ngươi có một câu ta thích.</p>
+
+<p>— Câu nào?</p>
+
+<p>— "Lấy thân làm nến, soi sáng bóng tối."</p>
+
+<p>Dừng.</p>
+
+<p>— Nến cháy sáng. Nhưng nến cũng tự cháy mình.</p>
+
+<p>Rồi nàng đi. Cửa đóng. Bước chân xa dần.</p>
+
+<p>Tạ Cảnh Minh ngồi một mình. Nhìn chén trà nàng để lại. Đầy. Không uống.</p>
+
+<p class="thought"><em>Nến tự cháy mình.</em></p>
+
+<p class="thought"><em>Nàng đang cảnh báo? Hay đang nói về chính nàng?</em></p>
+
+<p class="thought"><em>Hay cả hai?</em></p>
+
+<p>Hắn nhìn hộp ngọc trên bàn. Mở. Con dấu ngọc trắng nằm bên trong, bốn chữ "Quốc Sư Chi Ấn" sáng dưới ánh nến.</p>
+
+<p>Nặng. Vẫn nặng. Sẽ luôn nặng.</p>
+
+<p>Hắn nhắm mắt.</p>
+
+<p class="thought"><em>Kiếp trước, mình chạy trốn cả đời. Chạy khỏi trách nhiệm, chạy khỏi hậu quả, chạy khỏi mọi thứ đòi hỏi mình phải thật.</em></p>
+
+<p class="thought"><em>Kiếp này, mình không chạy được nữa.</em></p>
+
+<p class="thought"><em>Vì hôm nay, mình đã chính thức trở thành Quốc Sư nước Đại Ly.</em></p>
+
+<p class="thought"><em>Bằng một lễ phong. Bằng mười hai câu sấm bịa. Bằng ấn ngọc và chiếu vàng.</em></p>
+
+<p class="thought"><em>Và bằng niềm tin của cả một triều đình, cả một kinh thành, cả một quốc gia.</em></p>
+
+<p class="thought"><em>Mình là Quốc Sư.</em></p>
+
+<p class="thought"><em>Quốc Sư giả.</em></p>
+
+<p class="thought"><em>Nhưng từ hôm nay, không ai trên đời còn phân biệt được giả hay thật.</em></p>
+
+<p class="thought"><em>Kể cả mình.</em></p>
+
+<p>Gió thổi. Nến lay. Bóng hắn trên tường lung linh, lúc lớn lúc nhỏ, như hai người cùng ngồi một chỗ.</p>
+
+<p>Một tên lừa đảo.</p>
+
+<p>Và một vị Quốc Sư.</p>
+
+<p>Cùng một người.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-11.html">&larr; CHƯƠNG 11</a>
+      <a href="chapter-13.html">CHƯƠNG 13 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.599 TỪ</div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 11 — Một Câu Tiên Tri | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">11/30</span>
+      <a href="chapter-12.html">CHƯƠNG 12 &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 11</div>
+      <h1>Một Câu Tiên Tri</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Tin đồn về Thiên Mệnh chưa kịp lắng thì hoàng đế triệu kiến.</p>
+
+<p>Tạ Cảnh Minh nhận chiếu chỉ lúc giờ Mão, mắt còn chưa tỉnh hẳn. Phúc An đứng ngoài cửa, mặt trắng, giọng run:</p>
+
+<p>— Quốc Sư, nội thị truyền lệnh, bệ hạ triệu kiến ngay.</p>
+
+<p class="thought"><em>"Ngay." Không phải "khi nào tiện." Là "ngay."</em></p>
+
+<p class="thought"><em>Chuyện gì?</em></p>
+
+<p>Hắn rửa mặt. Vuốt phẳng áo. Tay chắp sau lưng, bước ra cửa, mặt bình thản kiểu cao nhân vừa xuất định.</p>
+
+<p>Bên trong, bụng quặn.</p>
+
+<p class="thought"><em>Triệu kiến đột ngột, sáng sớm, gấp. Ba khả năng: một, vua nghe chuyện Thiên Mệnh và muốn hỏi. Hai, có chuyện lớn xảy ra trong đêm. Ba, có ai đó tố mình.</em></p>
+
+<p class="thought"><em>Nếu ba, thì hôm nay khó sống.</em></p>
+
+<p>Hắn đi nhanh qua hành lang, thị vệ dẫn đường. Không đi về phía đại điện. Rẽ trái, vào khu nội cung.</p>
+
+<p class="thought"><em>Không phải triều hội công khai. Gặp riêng.</em></p>
+
+<p class="thought"><em>Bớt nguy hiểm. Nhưng cũng bớt nhân chứng.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hoàng đế ngồi sau bàn ngự, áo long bào chỉnh tề nhưng mắt trũng sâu. Đã gầy hơn lần gặp trước. Mấy tuần không gặp, hắn thấy rõ: khí đen quanh vua dày hơn. Không phải dày kiểu bao phủ. Dày kiểu ngấm. Như mực thấm vào giấy, không rửa được.</p>
+
+<p class="thought"><em>Khí đen ngấm sâu. Vua bệnh, hay quốc vận đang suy?</em></p>
+
+<p>Chỉ có một nội thị già đứng hầu. Phòng vắng. Quá vắng cho một lần triệu kiến.</p>
+
+<p>Tạ Cảnh Minh quỳ.</p>
+
+<p>— Thần bái kiến bệ hạ.</p>
+
+<p>— Đứng lên. Ngồi.</p>
+
+<p>Giọng vua mệt. Không phải mệt kiểu thiếu ngủ như lần đầu gặp. Mệt kiểu người gánh nặng quá lâu, xương bắt đầu kêu.</p>
+
+<p>Hắn ngồi. Mắt quét phòng. Thói quen.</p>
+
+<p class="thought"><em>Nội thị già, đứng xa, mắt không nhìn ta. Nhìn cửa. Canh gác? Hay sợ?</em></p>
+
+<p class="thought"><em>Bàn ngự: trà nguội, tấu chương chồng cao, mực khô trên nghiên. Vua không phê tấu tối qua.</em></p>
+
+<p class="thought"><em>Cửa sổ đóng kín. Giữa mùa hè. Sợ gió, hay sợ mũi tên?</em></p>
+
+<p>— Quốc Sư.</p>
+
+<p>Vua lên tiếng. Mắt nhìn thẳng hắn.</p>
+
+<p>— Trẫm nghe nói, hôm qua khanh ra phố, chỉ ra Thiên Mệnh.</p>
+
+<p class="thought"><em>À. Khả năng một.</em></p>
+
+<p>— Bệ hạ, chuyện đó...</p>
+
+<p>— Cả kinh thành đang đồn. Con bé ăn mày được Quốc Sư phán sẽ thay đổi thiên hạ.</p>
+
+<p>Giọng vua bình thản. Quá bình thản. Kiểu bình thản của người đang cố giấu thứ gì bên dưới.</p>
+
+<p class="thought"><em>Vua không quan tâm con bé ăn mày. Vua quan tâm: "Quốc Sư có thể chỉ ra Thiên Mệnh." Nghĩa là Quốc Sư nhìn thấy vận mệnh. Nghĩa là Quốc Sư biết vận mệnh CỦA VUA.</em></p>
+
+<p class="thought"><em>Và vua đang sợ vận mệnh mình.</em></p>
+
+<p>Tạ Cảnh Minh khép mắt ba phần. Tư thế thiền định. Câu giờ.</p>
+
+<p>— Bệ hạ, Thiên Mệnh không phải thứ thần chỉ ra. Thiên Cơ tự hiện. Thần chỉ nhìn thấy, và nói.</p>
+
+<p>— Vậy khanh nhìn thấy gì ở con bé đó?</p>
+
+<p class="thought"><em>Câu hỏi bẫy. Nếu ta nói rõ, vua sẽ hỏi tiếp: "Vậy khanh nhìn thấy gì ở trẫm?" Và mình sẽ phải trả lời về khí đen quanh vua. Không được.</em></p>
+
+<p>— Khoảng trống.</p>
+
+<p>Hắn nói chậm. Chọn từng chữ.</p>
+
+<p>— Đứa trẻ đó, quanh người nó, Thiên Cơ trống rỗng. Như trang giấy chưa viết. Thần chưa từng thấy ai như vậy.</p>
+
+<p>Vua im lặng. Lâu.</p>
+
+<p>— Trống rỗng... nghĩa là chưa có vận mệnh?</p>
+
+<p>— Hoặc chưa được viết. Hoặc đã bị xóa.</p>
+
+<p class="thought"><em>Câu cuối là đoán bừa. Nhưng nghe hay.</em></p>
+
+<p>Vua gật đầu. Chậm. Mắt nhìn xuống bàn.</p>
+
+<p>— Khanh...</p>
+
+<p>Vua ngập ngừng. Hiếm khi vua ngập ngừng.</p>
+
+<p>— Khanh có thể nhìn thấy... ai sắp hại trẫm không?</p>
+
+<p class="thought"><em>Đây rồi. Câu hỏi thật.</em></p>
+
+<p class="thought"><em>Vua không triệu kiến vì Thiên Mệnh. Thiên Mệnh chỉ là cái cớ. Câu hỏi thật là: "Có ai đang muốn giết ta không?"</em></p>
+
+<p class="thought"><em>Và nhìn cách vua hỏi, cửa sổ đóng kín, nội thị canh cửa, tấu chương không phê, trà nguội, mắt trũng...</em></p>
+
+<p class="thought"><em>Vua lại sợ. Sợ hơn lần trước.</em></p>
+
+<p>Tạ Cảnh Minh nhìn vua. Thiên Diễn Đồng mở nhẹ. Cảm nhận: sợ hãi, bất an, nghi ngờ. Sợ hãi sâu, kiểu sợ đã bám rễ. Và thêm thứ gì đó mới, thứ mà lần gặp trước không có.</p>
+
+<p class="thought"><em>Vua đã nhận được tin gì đó. Hoặc nghe được gì đó. Hoặc ai đó nói gì đó khiến vua tin rằng mình sắp bị ám sát.</em></p>
+
+<p class="thought"><em>Ai? Vương Bách Nhẫn? Nội gián? Lục Thanh Dao?</em></p>
+
+<p class="thought"><em>Không đủ thông tin. Nhưng mình phải trả lời.</em></p>
+
+<p>Hắn vuốt cằm. Chậm. Kiểu suy tư.</p>
+
+<p class="thought"><em>Phân tích. Hoàng cung Đại Ly, hoàng đế yếu, Nhiếp Chính Vương nắm quyền, Thái Sư phe đối lập, Bắc Nguyên đe dọa biên giới. Bao nhiêu người có lý do muốn vua chết? Ít nhất năm, sáu phe.</em></p>
+
+<p class="thought"><em>Và an ninh hoàng cung...</em></p>
+
+<p>Hắn nhớ đường đi sáng nay. Thị vệ dẫn đường, đi qua hành lang nội cung. Hắn đã thấy: hai vị trí canh gác, chỉ có một người. Cổng phía tây, lính gác ngáp, mắt lơ đãng. Bức tường phía nam, thấp hơn các bức khác, dây leo phủ kín.</p>
+
+<p class="thought"><em>An ninh lỏng. Rất lỏng. Sau cầu mưa, dân tin Quốc Sư bảo vệ quốc vận, nên cung cấm lơ là. Hoặc có ai đó cố ý cho lơ là.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình từng tư vấn bảo mật cho một tay buôn lậu. Nhìn sơ hệ thống an ninh là biết lỗ hổng ở đâu. Và hoàng cung này, lỗ hổng nhiều.</em></p>
+
+<p class="thought"><em>Nói thẳng? Nói bóng gió?</em></p>
+
+<p class="thought"><em>Nói bóng gió. Kiểu Quốc Sư.</em></p>
+
+<p>— Bệ hạ.</p>
+
+<p>Hắn mở mắt. Nhìn thẳng vua.</p>
+
+<p>— Thần không nhìn thấy ai cụ thể. Nhưng gần đây, có kẻ lạ lọt vào cung.</p>
+
+<p>Vua giật mình. Tay nắm chặt thành ghế.</p>
+
+<p>— Kẻ lạ? Ở đâu?</p>
+
+<p>— Thần cảm nhận được khí lạ. Không phải khí của người trong cung. Từ phía tây. Mới. Chưa quá hai, ba ngày.</p>
+
+<p class="thought"><em>Tường phía tây thấp, dây leo phủ. Nếu ai đó muốn trèo vào, đó là chỗ. Và canh gác phía tây lỏng nhất.</em></p>
+
+<p class="thought"><em>Mình không nhìn thấy "khí lạ" gì cả. Mình nhìn thấy lỗ hổng an ninh. Và đoán.</em></p>
+
+<p class="thought"><em>Xác suất có kẻ đã lọt vào? Nếu vua đang sợ ám sát, nghĩa là có lý do. Và nếu có phe nào đó muốn ra tay, thời điểm này hợp lý: sau cầu mưa, triều đình lơ là, mọi người đang bận bàn tán Thiên Mệnh.</em></p>
+
+<p class="thought"><em>Đoán. Chỉ là đoán. Nhưng đoán có cơ sở.</em></p>
+
+<p>Vua đứng dậy. Mặt trắng.</p>
+
+<p>— Phía tây? Khanh chắc chắn?</p>
+
+<p>— Thiên Cơ không chắc chắn, bệ hạ. Nhưng nếu thần phải chọn, thần sẽ tăng canh gác tường phía tây. Và kiểm tra lại danh sách người ra vào cung ba ngày gần đây.</p>
+
+<p>Vua quay sang nội thị già.</p>
+
+<p>— Gọi Tổng quản Cấm vệ đến đây. Ngay.</p>
+
+<p>Nội thị cúi đầu, chạy ra.</p>
+
+<p>Vua nhìn lại hắn. Mắt phức tạp. Biết ơn, nhưng sợ. Sợ nhiều hơn biết ơn.</p>
+
+<p>— Quốc Sư, khanh... khanh thật sự nhìn thấy?</p>
+
+<p>— Thần nhìn thấy thứ Thiên Cơ cho thần nhìn. Không hơn. Không kém.</p>
+
+<p class="thought"><em>Câu trả lời hoàn hảo. Không nói có, không nói không. Để vua tự hiểu.</em></p>
+
+<p>Hắn cúi đầu, xin lui.</p>
+
+<p>Suốt đường về Minh Nguyệt Đường, hắn nghĩ.</p>
+
+<p class="thought"><em>Mình vừa nói "có kẻ lạ lọt vào cung." Dựa trên quan sát an ninh. Không phải tiên tri.</em></p>
+
+<p class="thought"><em>Nhưng nếu vua tăng canh, tìm thấy lỗ hổng, bắt được ai đó, thì "Quốc Sư tiên tri" lại đúng.</em></p>
+
+<p class="thought"><em>Còn nếu không có ai, thì "Quốc Sư cảnh báo, nên không ai dám đến." Cũng đúng.</em></p>
+
+<p class="thought"><em>Kiểu nào cũng thắng.</em></p>
+
+<p>Hắn mỉm cười. Nhẹ. Quen thuộc. Đây là trò cũ của kiếp trước: đoán hai chiều, kết quả nào cũng có thể giải thích.</p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Nếu thật sự có thích khách thì sao?</em></p>
+
+<p>Nụ cười tắt.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Canh hai.</p>
+
+<p>Tạ Cảnh Minh đang ngồi dưới cây tùng, nhắm mắt, thử tập trung Thiên Diễn Đồng nhìn dòng chảy Thiên Cơ, thì tiếng chiêng vang.</p>
+
+<p>Không phải chiêng báo giờ. Chiêng báo động.</p>
+
+<p>Ba tiếng. Dồn dập. Rồi tiếng hò hét, xa, từ phía nội cung.</p>
+
+<p>Hắn mở mắt. Đứng dậy.</p>
+
+<p class="thought"><em>Chiêng báo động? Trong hoàng cung?</em></p>
+
+<p>Phúc An chạy ra, mặt tái mét.</p>
+
+<p>— Quốc Sư! Có chuyện! Phía nội cung!</p>
+
+<p>Tiểu Phúc chạy theo sau, mắt hoảng.</p>
+
+<p>— Có tiếng kiếm! Phía cung vua!</p>
+
+<p>Tạ Cảnh Minh đứng giữa sân Minh Nguyệt Đường. Tim đập nhanh. Tay nắm chặt.</p>
+
+<p class="thought"><em>Nội cung. Tiếng kiếm. Phía cung vua.</em></p>
+
+<p class="thought"><em>Thích khách.</em></p>
+
+<p class="thought"><em>Thật sự có thích khách.</em></p>
+
+<p class="thought"><em>Mình đoán bừa. Mình chỉ đọc vị an ninh lỏng rồi suy luận. Mình không biết có ai cụ thể. Mình chỉ...</em></p>
+
+<p class="thought"><em>Mà khoan.</em></p>
+
+<p class="thought"><em>Mình nói "phía tây." Chiêng báo động từ phía... nội cung. Nội cung nằm phía đông bắc.</em></p>
+
+<p class="thought"><em>Nghĩa là gì? Thích khách không vào từ phía tây? Hay vào từ tây nhưng đã di chuyển sang nội cung?</em></p>
+
+<p class="thought"><em>Không quan trọng. Quan trọng là: có thích khách thật, và sáng nay mình vừa nói "có kẻ lạ lọt vào cung."</em></p>
+
+<p class="thought"><em>Trùng hợp.</em></p>
+
+<p class="thought"><em>Hay không phải trùng hợp.</em></p>
+
+<p>Hắn đứng im. Không chạy đi. Không thể chạy đi. Quốc Sư không chạy. Quốc Sư đứng tại chỗ, mặt bình thản, chờ tin.</p>
+
+<p>Nhưng bên trong, đầu hắn quay cuồng.</p>
+
+<p class="thought"><em>Nếu vua chết...</em></p>
+
+<p class="thought"><em>Nếu vua chết, Lục Thanh Dao lên nắm toàn quyền. Mình có thể sống. Nhưng cũng có thể chết, vì không ai biết nàng thật sự muốn gì với mình.</em></p>
+
+<p class="thought"><em>Nếu vua sống...</em></p>
+
+<p class="thought"><em>Vua sẽ nhớ: sáng nay Quốc Sư nói có kẻ lạ. Tối nay thích khách đến. Quốc Sư tiên tri đúng.</em></p>
+
+<p class="thought"><em>Lần nữa.</em></p>
+
+<p class="thought"><em>Lại thêm một lần mình đúng mà không hề muốn đúng.</em></p>
+
+<p>Tiếng chiêng tắt. Tiếng hò hét xa dần. Rồi im.</p>
+
+<p>Im lặng kéo dài. Nửa canh giờ. Có thể lâu hơn. Hắn đứng giữa sân, Phúc An và Tiểu Phúc co cụm ở hiên, thị vệ canh Minh Nguyệt Đường tay nắm chặt chuôi kiếm.</p>
+
+<p>Rồi bước chân. Nhanh. Từ hướng nội cung.</p>
+
+<p>Một nội thị chạy đến, hổn hển, mồ hôi đầm đìa.</p>
+
+<p>— Quốc Sư! Bệ hạ triệu kiến! Ngay!</p>
+
+<p class="thought"><em>Triệu kiến. Nghĩa là vua còn sống.</em></p>
+
+<p>— Bệ hạ có sao không?</p>
+
+<p>— Bệ hạ bình an! Thích khách đã bị hạ! Nhưng bệ hạ muốn gặp Quốc Sư ngay!</p>
+
+<p>Hắn gật đầu. Bước theo nội thị. Mặt bình thản. Bước đều.</p>
+
+<p class="thought"><em>Mặt bình thản. Bước đều. Không nhanh không chậm. Quốc Sư đã biết trước, nên không cần vội. Quốc Sư đã cảnh báo, nên không cần sợ.</em></p>
+
+<p class="thought"><em>Diễn. Tiếp tục diễn.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Phòng ngự. Đèn sáng trưng. Khác hẳn buổi sáng.</p>
+
+<p>Hoàng đế ngồi trên ghế, áo long bào xộc xệch, tóc xổ một bên. Bên cạnh, hai thái y quỳ. Tổng quản Cấm vệ đứng góc phòng, mặt xám ngoét.</p>
+
+<p>Và trên sàn, trước mặt vua, một xác người.</p>
+
+<p>Nam. Áo đen. Mặt trẻ, chưa quá hai mươi lăm. Cổ bị chém, máu đã đông, loang trên sàn đá. Bên cạnh xác, một thanh đoản đao, lưỡi mỏng, bôi thứ gì đó sẫm màu.</p>
+
+<p class="thought"><em>Đao tẩm độc. Chuyên nghiệp.</em></p>
+
+<p>Tạ Cảnh Minh bước vào. Mắt quét xác. Quét phòng. Quét vua.</p>
+
+<p>Vua nhìn hắn. Mắt đỏ. Không phải đỏ vì khóc. Đỏ vì sợ chuyển thành giận, giận chuyển thành hoảng loạn, rồi lại quay về sợ.</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Giọng vua run.</p>
+
+<p>— Khanh nói đúng. Có kẻ lọt vào cung.</p>
+
+<p>Im lặng. Mọi người trong phòng nhìn hắn.</p>
+
+<p class="thought"><em>Đúng. Mình nói đúng. Sáng nay mình nói, tối nay nó xảy ra.</em></p>
+
+<p class="thought"><em>Mình chỉ đoán. Đọc vị an ninh lỏng. Suy luận logic.</em></p>
+
+<p class="thought"><em>Nhưng mọi người trong phòng này không biết điều đó. Họ chỉ biết: Quốc Sư nói sáng, thích khách đến tối.</em></p>
+
+<p class="thought"><em>Tiên tri.</em></p>
+
+<p>Hắn bước đến gần xác. Chậm. Cúi xuống. Thiên Diễn Đồng mở.</p>
+
+<p>Quanh xác, khí tán loạn, tối, đục. Khí của người chết, hắn đã thấy ở Trường Xuân Cung. Nhưng lần này, có thêm thứ gì đó. Mỏng. Nhẹ. Một sợi khí lạ, không thuộc về người chết, bám trên lưỡi đao, trên áo đen.</p>
+
+<p class="thought"><em>Sợi khí lạ. Không phải của gã này. Của ai đó khác. Ai đó đã chạm vào gã, hoặc giao đao cho gã.</em></p>
+
+<p class="thought"><em>Gã này không hành động một mình.</em></p>
+
+<p>Hắn đứng lên. Quay sang vua. Mặt nghiêm.</p>
+
+<p>— Bệ hạ, kẻ này không phải kẻ duy nhất.</p>
+
+<p>Vua giật mình.</p>
+
+<p>— Còn nữa?</p>
+
+<p>— Kẻ này là dao. Nhưng tay cầm dao vẫn ở ngoài.</p>
+
+<p class="thought"><em>Câu này đúng bất kể thế nào. Thích khách luôn có người chủ mưu. Ai cũng biết. Nhưng khi Quốc Sư nói, nó nghe như tiên tri.</em></p>
+
+<p>Vua quay sang Tổng quản Cấm vệ. Giọng lạnh, lần đầu tiên hắn nghe vua nói lạnh:</p>
+
+<p>— Tìm. Lục hết. Mọi ngóc ngách trong cung. Trẫm muốn biết gã vào bằng đường nào, ai đã giúp, và còn bao nhiêu kẻ như gã.</p>
+
+<p>Tổng quản quỳ sụp.</p>
+
+<p>— Thần xin tuân lệnh!</p>
+
+<p>Vua quay lại nhìn hắn. Im lặng. Rất lâu.</p>
+
+<p>Rồi vua nói, giọng nhẹ đến mức gần như thì thầm:</p>
+
+<p>— Quốc Sư. Sáng nay khanh nói, tối nay nó xảy ra. Khanh... khanh thật sự nhìn thấy trước?</p>
+
+<p class="thought"><em>Câu hỏi. Lại câu hỏi này. Và mình phải trả lời.</em></p>
+
+<p class="thought"><em>Nói "có" thì vua sẽ hỏi không bao giờ dứt. "Khanh có thấy trẫm chết không?" "Khanh có thấy ai phản không?" Mỗi ngày một câu, mỗi câu một bẫy.</em></p>
+
+<p class="thought"><em>Nói "không" thì mất hết. Mười chương xây dựng, sụp trong một câu.</em></p>
+
+<p class="thought"><em>Nói mơ hồ.</em></p>
+
+<p>— Bệ hạ.</p>
+
+<p>Hắn chắp tay. Mắt nhìn xuống. Giọng trầm.</p>
+
+<p>— Thiên Cơ cho thần nhìn, nhưng không cho thần chọn. Sáng nay, thần cảm nhận khí lạ, thần nói. Nhưng thần không biết nó sẽ xảy ra hôm nay hay ngày mai hay tháng sau.</p>
+
+<p>Dừng.</p>
+
+<p>— Thần không phải thần tiên. Thần chỉ nhìn được xa hơn người thường một chút. Đôi khi đúng. Đôi khi sai. Nhưng hôm nay, Thiên Cơ đã cho thần đúng.</p>
+
+<p class="thought"><em>Hoàn hảo. Không nhận là tiên tri tuyệt đối, nhưng cũng không phủ nhận. Để lại khoảng đệm cho những lần sai. Và lần này, vì đúng, nên tất cả những gì mình nói đều có trọng lượng gấp mười.</em></p>
+
+<p>Vua nhìn hắn. Lâu. Rồi gật đầu. Chậm.</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Giọng vua khác. Không còn run. Nhưng cũng không bình thản. Một giọng mới, giọng của người vừa nhận ra mình đang ngồi cạnh con thú mà mình không biết là thuần hay hoang.</p>
+
+<p>— Từ nay, khanh ở lại nội cung. Đừng về Minh Nguyệt Đường nữa. Trẫm muốn khanh ở gần. Luôn luôn.</p>
+
+<p class="thought"><em>Ở gần. Luôn luôn.</em></p>
+
+<p class="thought"><em>Không phải tin tưởng. Là sợ. Vua sợ mình, nên muốn nhốt mình trong tầm mắt. Kiểu nuôi chó giữ nhà: không dám thả, không dám giết, chỉ dám xích gần.</em></p>
+
+<p>— Thần tuân chỉ.</p>
+
+<p>Hắn cúi đầu.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Về đến Minh Nguyệt Đường, đã gần canh tư.</p>
+
+<p>Phúc An chờ ở cửa. Tiểu Phúc ngủ gật ở hiên, mảnh khăn mẹ nắm trong tay.</p>
+
+<p>— Quốc Sư, bệ hạ có sao không?</p>
+
+<p>— Bình an. Thích khách đã bị hạ.</p>
+
+<p>Phúc An thở phào. Rồi mắt sáng lên. Kiểu sáng quen thuộc.</p>
+
+<p>— Quốc Sư... sáng nay Quốc Sư vào cung gặp bệ hạ, Tiểu nhân nghe nói Quốc Sư cảnh báo có kẻ lạ. Và tối nay thích khách thật sự đến. Quốc Sư tiên tri...</p>
+
+<p>— Phúc An.</p>
+
+<p>Hắn cắt ngang. Giọng lạnh hơn bình thường.</p>
+
+<p>— Ta mệt. Để ta nghỉ.</p>
+
+<p>Phúc An cúi đầu, lui ra. Nhưng hắn thấy: ánh mắt Phúc An sáng hơn bao giờ hết. Sùng bái. Tuyệt đối. Kiểu sùng bái mà không lời phủ nhận nào lay chuyển được.</p>
+
+<p class="thought"><em>Phúc An sẽ kể. Sáng mai, Xuân Nhi sẽ biết. Rồi thái giám khác. Rồi cung nữ. Rồi lính gác. Rồi cả cung.</em></p>
+
+<p class="thought"><em>"Quốc Sư tiên tri vụ ám sát vua."</em></p>
+
+<p class="thought"><em>Và mình không thể ngăn.</em></p>
+
+<p>Hắn vào phòng. Đóng cửa. Ngồi xuống giường.</p>
+
+<p>Một mình.</p>
+
+<p class="thought"><em>Phân tích. Bình tĩnh. Phân tích.</em></p>
+
+<p class="thought"><em>Sáng nay mình nói "có kẻ lạ lọt vào cung." Tối nay thích khách thật sự đến.</em></p>
+
+<p class="thought"><em>Đây là lần thứ mấy? Sấm. Lý đại nhân chết. Mưa. Khăn Tiểu Phúc. Thiên Mệnh. Và bây giờ: ám sát.</em></p>
+
+<p class="thought"><em>Mỗi lần, mình đều có lý do logic. Sấm là trùng hợp. Lý đại nhân là bệnh cũ. Mưa là khí tượng. Khăn là hành vi. Thiên Mệnh là... chưa biết. Ám sát là đọc vị an ninh.</em></p>
+
+<p class="thought"><em>Nhưng "lý do logic" của mình, không ai biết. Không ai thấy mình quan sát lỗ hổng an ninh. Không ai biết mình tính xác suất. Họ chỉ thấy: Quốc Sư nói, rồi xảy ra.</em></p>
+
+<p class="thought"><em>Và sau đủ lần "nói rồi xảy ra", không ai còn hỏi tại sao. Họ chỉ tin.</em></p>
+
+<p>Hắn nhìn bàn tay. Run nhẹ.</p>
+
+<p class="thought"><em>Mình không tiên tri. Mình suy luận. Nhưng suy luận đúng đủ lần thì thành tiên tri trong mắt thiên hạ.</em></p>
+
+<p class="thought"><em>Và Thiên Cơ...</em></p>
+
+<p class="thought"><em>Thiên Cơ có đẩy thích khách đến đúng hôm nay không? Vì mình nói? Vì vua tin? Vì lính gác tăng cường phía tây nên thích khách phải vào sớm hơn dự kiến, từ hướng khác?</em></p>
+
+<p class="thought"><em>Hay thích khách đã lên kế hoạch từ trước, và mình chỉ tình cờ đoán trúng ngày?</em></p>
+
+<p class="thought"><em>Không biết. Không cách nào biết. Và đó là phần đáng sợ nhất.</em></p>
+
+<p class="thought"><em>Mình không biết mình đang đoán giỏi, hay đang thật sự ảnh hưởng Thiên Cơ.</em></p>
+
+<p>Hắn nằm xuống. Nhắm mắt. Không ngủ được.</p>
+
+<p class="thought"><em>Vua sẽ chuyển mình vào nội cung. Gần vua. Luôn luôn. Nghĩa là mình bị giám sát chặt hơn. Nhưng cũng nghĩa là mình quan trọng hơn. Vua cần mình đến mức muốn mình ở cạnh mỗi ngày.</em></p>
+
+<p class="thought"><em>Sợ và cần. Hai thứ đó trộn lại, thành xiềng.</em></p>
+
+<p class="thought"><em>Vua đang xích mình. Nhưng xích bằng vàng.</em></p>
+
+<p>Hắn trở mình.</p>
+
+<p class="thought"><em>Và thích khách... gã thích khách trẻ, áo đen, đao tẩm độc. Chuyên nghiệp. Không phải loại tự phát. Có tổ chức. Có người đứng sau.</em></p>
+
+<p class="thought"><em>Sợi khí lạ trên áo gã, trên đao. Không phải của gã. Của ai?</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn? Gã áo xám ngày cầu mưa? Thiên Ngoại Các?</em></p>
+
+<p class="thought"><em>Hay ai đó mình chưa biết?</em></p>
+
+<p>Hắn mở mắt. Nhìn trần nhà.</p>
+
+<p class="thought"><em>Sáng mai, tin sẽ lan. Ra khỏi cung. Ra kinh thành. Ra các tỉnh.</em></p>
+
+<p class="thought"><em>"Quốc Sư tiên tri vụ ám sát."</em></p>
+
+<p class="thought"><em>"Quốc Sư cứu vua."</em></p>
+
+<p class="thought"><em>"Quốc Sư nhìn thấy mọi thứ."</em></p>
+
+<p class="thought"><em>Và mỗi người tin, là thêm một sợi dây. Thêm một giọt vào dòng chảy. Thêm một chút trọng lượng lên vai mình.</em></p>
+
+<p class="thought"><em>Mình đang trở thành thứ mà mình giả vờ là.</em></p>
+
+<p class="thought"><em>Không phải vì mình muốn. Mà vì mỗi lần mình đoán đúng, khoảng cách giữa "giả" và "thật" mỏng đi một chút.</em></p>
+
+<p class="thought"><em>Và mình sợ rằng, đến một lúc nào đó, khoảng cách đó sẽ biến mất.</em></p>
+
+<p>Gió đêm thổi qua khe cửa. Lạnh. Mùa hè mà lạnh.</p>
+
+<p>Ở đâu đó trong nội cung, Tổng quản Cấm vệ đang lục soát. Ở đâu đó trong hoàng cung, vua ngồi một mình, mắt mở, không ngủ, nghĩ về kẻ vừa cứu mình bằng một câu nói. Ở đâu đó ngoài kinh thành, tin đồn đã bắt đầu lan.</p>
+
+<p>Và ở Minh Nguyệt Đường, tên lừa đảo nằm trên giường, nhắm mắt, tự hỏi cùng một câu hỏi mà hắn đã hỏi nhiều lần nhưng mỗi lần câu trả lời lại khác:</p>
+
+<p class="thought"><em>Mình đoán giỏi, hay Thiên Cơ đang mượn miệng mình?</em></p>
+
+<p>Không có câu trả lời.</p>
+
+<p>Chỉ có gió. Và bóng tối. Và tiếng bước chân tuần tra vang vọng xa xa, nhiều hơn mọi đêm.</p>
+
+<p>Vì từ đêm nay, hoàng cung Đại Ly không còn ngủ yên nữa.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-10.html">&larr; CHƯƠNG 10</a>
+      <a href="chapter-12.html">CHƯƠNG 12 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.412 TỪ</div>
+
+  </div>
+</body>
+</html>

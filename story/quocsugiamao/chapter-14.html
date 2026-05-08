@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 14 — Thiên Hạ Đồn Đại | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-13.html">&larr; CHƯƠNG 13</a>
+      <span class="chapter-indicator">14/30</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 14</div>
+      <h1>Thiên Hạ Đồn Đại</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hai tuần sau lễ phong, Tạ Cảnh Minh phát hiện mình đã trở thành truyền thuyết.</p>
+
+<p>Không phải truyền thuyết kiểu sách sử. Truyền thuyết kiểu dân gian. Kiểu truyền miệng. Kiểu mỗi người kể thêm một chi tiết, và chi tiết đó, qua mười người, trở thành sự thật.</p>
+
+<p>Tiểu Phúc mang tin về mỗi ngày. Gã được phép ra chợ mua đồ cho phủ, và mỗi lần về, mắt sáng rỡ, giọng hào hứng:</p>
+
+<p>— Quốc Sư! Ngoài chợ người ta kể, hôm Quốc Sư cầu mưa, trời nổi sấm bảy tiếng! Bảy tiếng! Và mỗi tiếng sấm, một con rồng hiện trên mây!</p>
+
+<p class="thought"><em>Một tiếng sấm. Không có rồng. Nhưng bây giờ là bảy tiếng và bảy con rồng.</em></p>
+
+<p>— Quốc Sư! Có người kể, hôm Quốc Sư chỉ ra Thiên Mệnh, con bé ăn mày đó bay lên trời rồi biến mất!</p>
+
+<p class="thought"><em>Con bé chạy vào đám đông. Không bay. Không biến mất. Nhưng bây giờ thì có.</em></p>
+
+<p>— Quốc Sư! Lại có người nói, Quốc Sư bước đi không chạm đất! Có hào quang! Và chim sẻ đậu lên vai Quốc Sư mà không sợ!</p>
+
+<p>Tạ Cảnh Minh ngồi nghe. Uống trà. Mặt bình thản.</p>
+
+<p>Bên trong, lạnh sống lưng.</p>
+
+<p class="thought"><em>Kiếp trước, mình biết hiệu ứng này. Gọi là "phóng đại truyền miệng." Mỗi lần kể, người kể thêm chi tiết để câu chuyện hay hơn, kịch tính hơn, đáng nhớ hơn. Sau mười lần kể, câu chuyện gốc và câu chuyện hiện tại không còn liên quan.</em></p>
+
+<p class="thought"><em>Nhưng ở thế giới này, truyền miệng không chỉ là truyền miệng. Nó tạo niềm tin. Và niềm tin tạo Thiên Cơ.</em></p>
+
+<p class="thought"><em>Nghĩa là: bảy con rồng, con bé bay lên trời, hào quang, chim sẻ đậu vai, tất cả đều KHÔNG CÓ THẬT. Nhưng nếu đủ người tin, Thiên Cơ sẽ ghi nhận. Và lần sau, khi mình cầu mưa, có thể trời thật sự nổi bảy tiếng sấm.</em></p>
+
+<p class="thought"><em>Vì đó là thứ mọi người kỳ vọng.</em></p>
+
+<p class="thought"><em>Niềm tin tạo kỳ vọng. Kỳ vọng uốn Thiên Cơ. Thiên Cơ tạo hiện thực. Hiện thực xác nhận niềm tin.</em></p>
+
+<p class="thought"><em>Vòng lặp.</em></p>
+
+<p class="thought"><em>Và mình đang ở trung tâm vòng lặp đó.</em></p>
+
+<p>Hắn đặt chén trà xuống. Nhìn ra sân.</p>
+
+<p class="thought"><em>Nhưng vòng lặp có mặt trái. Nếu niềm tin sai, kỳ vọng sai, và Thiên Cơ tạo ra thứ không nên tạo.</em></p>
+
+<p class="thought"><em>Ví dụ: "Bắc Nguyên sẽ rút quân trong vòng một tháng."</em></p>
+
+<p class="thought"><em>Tin giả. Mình bịa để đánh dấu kênh Vạn Lý. Đã lan ra chợ. Đã lan ra kinh thành. Bây giờ chắc đang lan ra ngoại tỉnh.</em></p>
+
+<p class="thought"><em>Và nếu Bắc Nguyên không rút...</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Buổi chiều. Hắn vào cung diện kiến theo lệ.</p>
+
+<p>Hoàng đế ngồi trên ngai, mắt trũng hơn tuần trước. Khí đen quanh vua dày hơn. Tạ Cảnh Minh thấy rõ: lớp khí đen không còn bao quanh mà đang ngấm vào trong, như rễ cây bám vào đất.</p>
+
+<p class="thought"><em>Vua bệnh. Thật sự bệnh. Không phải chỉ mệt hay sợ. Bệnh.</em></p>
+
+<p>— Quốc Sư.</p>
+
+<p>Vua lên tiếng. Giọng bình thản, nhưng Thiên Diễn Đồng đọc: lo âu, mệt mỏi, và thứ gì đó mới. Hy vọng. Mỏng, nhưng có.</p>
+
+<p>— Trẫm nghe ngoài kinh thành đồn rằng khanh phán Bắc Nguyên sẽ rút quân. Đúng không?</p>
+
+<p class="thought"><em>Đây rồi. Tin giả quay lại.</em></p>
+
+<p class="thought"><em>Mình bịa. Hoàn toàn bịa. Để đánh dấu kênh gián điệp. Không nghĩ nó sẽ đến tai vua.</em></p>
+
+<p class="thought"><em>Nhưng đương nhiên nó đến tai vua. Vua có tai mắt khắp nơi. Và tin "Quốc Sư phán Bắc Nguyên rút" quá lớn để bỏ qua.</em></p>
+
+<p>Hắn khép mắt ba phần. Câu giờ.</p>
+
+<p class="thought"><em>Hai lựa chọn. Một: phủ nhận. "Thần không nói vậy." An toàn, nhưng mất uy tín. Nếu tin đã lan rộng, phủ nhận nghĩa là hoặc mình nói dối, hoặc dân nói dối. Cả hai đều xấu.</em></p>
+
+<p class="thought"><em>Hai: không phủ nhận, không xác nhận. Kiểu Quốc Sư.</em></p>
+
+<p>— Bệ hạ, Thiên Cơ phía bắc có chuyển động. Thần cảm nhận được. Nhưng "rút quân" hay "tiến quân," Thiên Cơ không nói rõ. Dân gian nghe một nửa, tự thêm nửa còn lại.</p>
+
+<p>Vua nhìn hắn. Lâu.</p>
+
+<p>— Vậy khanh nhìn thấy gì cụ thể?</p>
+
+<p class="thought"><em>Không thấy gì. Mình bịa. Nhưng không thể nói "không thấy gì."</em></p>
+
+<p class="thought"><em>Nghĩ. Phân tích. Bắc Nguyên tập trung quân biên ải, Lục Thanh Dao đã nói ở chương bảy. Tình hình thật: họ đang chuẩn bị, chưa rõ tấn công hay thử áp lực. Mình không có thông tin quân sự, nhưng có thể đoán hợp lý.</em></p>
+
+<p class="thought"><em>Đoán. Lại đoán. Kiểu Quốc Sư.</em></p>
+
+<p>— Thần nhìn thấy hai luồng khí. Một luồng tiến, một luồng lui. Đang giằng co. Nghĩa là phía bắc chưa quyết định.</p>
+
+<p>Dừng. Nhìn vua.</p>
+
+<p>— Bệ hạ, nếu Đại Ly tỏ ra mạnh, luồng lui sẽ thắng. Nếu Đại Ly tỏ ra yếu, luồng tiến sẽ thắng.</p>
+
+<p class="thought"><em>Câu này đúng với mọi cuộc chiến trong lịch sử. Không phải tiên tri. Là lý thuyết trò chơi cơ bản. Nhưng khi Quốc Sư nói, nó nghe như thiên cơ.</em></p>
+
+<p>Vua gật đầu. Chậm. Mắt sáng hơn một chút.</p>
+
+<p>— Tỏ ra mạnh... Vậy khanh đề nghị gì?</p>
+
+<p class="thought"><em>Vua đang hỏi ý kiến quân sự của một tên lừa đảo. Về chiến tranh. Với quốc gia láng giềng.</em></p>
+
+<p class="thought"><em>Đây là lúc mình nên nói "thần không rành quân sự." Nhưng nếu nói vậy, vua sẽ hỏi "vậy khanh rành gì?" Và câu trả lời thật "rành lừa đảo" thì không nên nói.</em></p>
+
+<p>— Thần không rành binh pháp. Nhưng Thiên Cơ cho thần thấy: dân tâm là quốc vận. Nếu dân tin Đại Ly mạnh, Đại Ly sẽ mạnh. Nếu dân sợ, Đại Ly sẽ yếu.</p>
+
+<p>Dừng.</p>
+
+<p>— Bệ hạ nên cho dân thấy triều đình vững. Lễ hội, tế trời, ban thưởng. Không phải giấu Bắc Nguyên, mà khiến dân tin rằng dù Bắc Nguyên có đến, Đại Ly cũng không sợ.</p>
+
+<p class="thought"><em>Kiếp trước gọi đây là "quản lý truyền thông trong khủng hoảng." Không giải quyết vấn đề thật, mà giải quyết nhận thức về vấn đề. Kiểu trò mà tập đoàn nào cũng dùng.</em></p>
+
+<p>Vua nhìn hắn. Rồi quay sang nội thị:</p>
+
+<p>— Gọi Thượng thư bộ Lễ đến. Trẫm muốn bàn việc tế trời.</p>
+
+<p>Tạ Cảnh Minh cúi đầu. Lui ra.</p>
+
+<p>Suốt đường về phủ, hắn nghĩ.</p>
+
+<p class="thought"><em>Mình vừa đề xuất chiến lược quốc phòng cho hoàng đế. Dựa trên lý thuyết truyền thông kiếp trước.</em></p>
+
+<p class="thought"><em>Và vua nghe. Vua nghe và sẽ làm.</em></p>
+
+<p class="thought"><em>Nếu đúng, mình cứu nước. Nếu sai, mình hại nước.</em></p>
+
+<p class="thought"><em>Và mình không biết đúng hay sai. Vì mình không phải Quốc Sư thật. Mình không nhìn thấy Thiên Cơ phía bắc. Mình chỉ đoán.</em></p>
+
+<p class="thought"><em>Nhưng đoán, ở thế giới này, đôi khi cũng đủ.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối. Quốc Sư Phủ.</p>
+
+<p>Tạ Cảnh Minh ngồi trong phòng đông. Tắt đèn. Thiên Diễn Đồng mở.</p>
+
+<p>Kẻ lạ ngoài tường lại đến. Đêm thứ ba liên tiếp. Cùng vị trí. Cùng kiểu đứng. Cùng cảm xúc: tò mò, lạnh, đánh giá.</p>
+
+<p>Nhưng hôm nay có khác.</p>
+
+<p>Hắn tập trung hơn. Đẩy Thiên Diễn Đồng mạnh hơn, cố đọc sâu hơn bề mặt cảm xúc.</p>
+
+<p>Và bắt được thêm một lớp.</p>
+
+<p>Dưới tò mò, dưới lạnh lùng, có thứ gì đó khác. Không phải cảm xúc cá nhân. Giống như... nhiệm vụ. Kiểu cảm xúc của người đang thực hiện công việc, không phải hành động theo ý mình. Kỷ luật. Chấp hành.</p>
+
+<p class="thought"><em>Gã không tự đến. Gã được sai đến. Có tổ chức. Có cấp trên.</em></p>
+
+<p class="thought"><em>Và gã đang đánh giá mình. Không phải kiểu gián điệp thu thập tin. Kiểu... thẩm định. Xem mình có đủ tiêu chuẩn gì đó không.</em></p>
+
+<p class="thought"><em>Tiêu chuẩn gì?</em></p>
+
+<p>Hắn không biết. Nhưng hôm nay, hắn quyết định khác.</p>
+
+<p>Thay vì ngồi im, hắn đứng dậy. Mở cửa phòng đông. Bước ra sân.</p>
+
+<p>Đêm. Trăng lưỡi liềm. Gió nhẹ.</p>
+
+<p>Hắn đi về phía tường đông. Chậm. Không giấu. Bước chân rõ ràng trên sỏi.</p>
+
+<p>Đến gần tường. Dừng. Nhìn lên.</p>
+
+<p>Tường cao quá đầu. Không thấy ai. Nhưng Thiên Diễn Đồng vẫn cảm nhận: kẻ đó ở ngay bên kia. Đứng im. Không chạy. Không sợ.</p>
+
+<p class="thought"><em>Gã biết mình ra đây. Và gã không chạy. Nghĩa là gã không sợ bị phát hiện. Hoặc gã muốn mình biết gã ở đó.</em></p>
+
+<p class="thought"><em>Thử thách? Hay mời gọi?</em></p>
+
+<p>Hắn nói. Giọng nhẹ, vừa đủ vọng qua tường:</p>
+
+<p>— Ta biết ngươi ở đó.</p>
+
+<p>Im lặng.</p>
+
+<p>— Ngươi đến ba đêm rồi. Nếu muốn nói chuyện, cổng chính mở ban ngày.</p>
+
+<p>Im lặng. Lâu hơn.</p>
+
+<p>Rồi giọng. Từ bên kia tường. Trầm. Nhẹ. Không già, không trẻ. Trung tính.</p>
+
+<p>— Quốc Sư nhìn thấy mọi thứ. Đúng như lời đồn.</p>
+
+<p>Rồi bước chân. Nhẹ. Xa dần. Mất.</p>
+
+<p>Tạ Cảnh Minh đứng im. Nhìn tường. Tim đập nhanh.</p>
+
+<p class="thought"><em>Gã nói. Gã trả lời.</em></p>
+
+<p class="thought"><em>"Quốc Sư nhìn thấy mọi thứ." Câu đó là gì? Khen? Xác nhận? Hay thử?</em></p>
+
+<p class="thought"><em>Và giọng gã... không sợ. Không kính. Ngang hàng. Kiểu nói của người coi mình là đồng cấp, không phải cấp dưới.</em></p>
+
+<p class="thought"><em>Ai? Thiên Ngoại Các? Gã áo xám ngày cầu mưa? Hay ai khác?</em></p>
+
+<p>Hắn quay vào phòng. Ngồi xuống. Tay run nhẹ. Không phải vì sợ.</p>
+
+<p>Vì lần đầu tiên kể từ khi xuyên không, có ai đó nói chuyện với hắn bằng giọng không sợ, không cần, không lừa. Chỉ đơn giản... nhận xét. Như người ngoài nhìn vào.</p>
+
+<p class="thought"><em>Và điều đó, lạ thay, khiến mình cảm thấy... được nhìn thấy.</em></p>
+
+<p class="thought"><em>Không phải nhìn thấy kiểu dân quỳ. Kiểu vua sợ. Kiểu Lục Thanh Dao đánh giá.</em></p>
+
+<p class="thought"><em>Mà nhìn thấy kiểu... hiểu. Hoặc đang cố hiểu.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau. Phúc An chạy vào, hổn hển.</p>
+
+<p>— Quốc Sư! Có chuyện lớn!</p>
+
+<p>— Gì?</p>
+
+<p>— Ngoài kinh thành, dân xây miếu thờ Quốc Sư! Lớn! Có tượng! Có bàn thờ!</p>
+
+<p>Hắn dừng chén trà giữa chừng.</p>
+
+<p>— Miếu thờ?</p>
+
+<p>— Dạ! Ở phía nam kinh thành, gần cổng thương nhân. Dân tự xây. Tự góp tiền. Nói là thờ Quốc Sư để giữ quốc vận.</p>
+
+<p class="thought"><em>Miếu thờ. Tượng. Bàn thờ.</em></p>
+
+<p class="thought"><em>Mình còn sống mà đã có miếu thờ.</em></p>
+
+<p class="thought"><em>Kiếp trước, người ta lập miếu thờ cho người chết. Hoặc cho thần. Mình chưa chết. Và không phải thần.</em></p>
+
+<p class="thought"><em>Nhưng dân tin mình là thần.</em></p>
+
+<p>Hắn đặt chén xuống. Đứng dậy.</p>
+
+<p>— Tiểu Phúc, chuẩn bị. Ta ra ngoài.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Miếu nhỏ. Nằm ở góc phố, gần cổng phía nam. Gỗ mới, sơn đỏ, mái ngói cong. Bên trong, một bức tượng gỗ.</p>
+
+<p>Tạ Cảnh Minh đứng trước miếu, nhìn tượng.</p>
+
+<p>Tượng cao bằng nửa người thật. Gỗ chạm thô, nhưng rõ ý: đạo sĩ áo trắng, tay giơ lên trời, mắt nhìn xa. Trông oai phong. Trông thánh thiện. Trông không giống mình.</p>
+
+<p class="thought"><em>Mình không oai phong. Mình gầy. Mình lo lắng cả ngày. Mình có bọng mắt.</em></p>
+
+<p class="thought"><em>Nhưng tượng thì không. Tượng là thứ dân muốn thấy, không phải thứ mình thật sự là.</em></p>
+
+<p>Trước miếu, bàn thờ nhỏ, nhang cháy, hoa quả. Có người đang quỳ. Một bà già, một cô bán hàng, một gã nông dân. Quỳ, chắp tay, miệng lẩm bẩm.</p>
+
+<p>Hắn đứng xa, mũ trùm, áo thường, không để ai nhận ra. Tiểu Phúc đứng cạnh, mắt tròn.</p>
+
+<p class="thought"><em>Họ đang cầu mình. Cầu mình ban phước. Cầu mình che chở.</em></p>
+
+<p class="thought"><em>Mình. Tên lừa đảo.</em></p>
+
+<p>Thiên Diễn Đồng mở. Và hắn thấy.</p>
+
+<p>Từ mỗi người quỳ, sợi khí vận bay lên, mỏng, nhẹ, hội tụ vào tượng gỗ. Tượng gỗ phát sáng mờ. Không phải sáng mắt thường thấy. Sáng kiểu Thiên Cơ. Như tượng đang hút niềm tin.</p>
+
+<p>Và từ tượng, sợi khí vận chảy đi. Không chảy lên trời. Chảy về phía phủ. Về phía hắn.</p>
+
+<p class="thought"><em>Tượng gỗ. Miếu thờ. Đang hoạt động như... ăng-ten.</em></p>
+
+<p class="thought"><em>Thu niềm tin từ dân, chuyển về mình.</em></p>
+
+<p class="thought"><em>Kiếp trước gọi đây là "phân phối nội dung." Một điểm trung chuyển. Dân không cần gặp mình trực tiếp, chỉ cần đến miếu, cầu, và niềm tin tự chảy về.</em></p>
+
+<p class="thought"><em>Và nếu miếu này không phải miếu duy nhất...</em></p>
+
+<p>Hắn quay sang Tiểu Phúc.</p>
+
+<p>— Tiểu Phúc. Hỏi dùm ta, ngoài miếu này, còn miếu nào khác không?</p>
+
+<p>Tiểu Phúc chạy đi hỏi. Về. Mắt sáng.</p>
+
+<p>— Quốc Sư! Nghe nói có ba miếu nữa! Một ở phía bắc, một ở ngoại thành, một ở làng Thanh Hà cách kinh thành hai ngày đường!</p>
+
+<p class="thought"><em>Bốn miếu. Ít nhất bốn. Chưa đếm những cái mình không biết.</em></p>
+
+<p class="thought"><em>Bốn điểm thu niềm tin, chảy về mình, hai mươi bốn giờ, không cần mình làm gì.</em></p>
+
+<p class="thought"><em>Khí vận quanh mình sẽ mạnh lên. Liên tục. Tự động.</em></p>
+
+<p>Hắn nhìn lại miếu. Nhìn tượng gỗ. Nhìn ba người quỳ.</p>
+
+<p class="thought"><em>Mình đang được thần thánh hóa. Không phải bởi vua. Không phải bởi triều đình. Bởi dân.</em></p>
+
+<p class="thought"><em>Và mình không thể ngăn. Vì ngăn miếu = phủ nhận niềm tin dân = mất niềm tin = mất Thiên Cơ = mất tất cả.</em></p>
+
+<p class="thought"><em>Nhưng không ngăn = niềm tin tiếp tục phóng đại = truyền thuyết tiếp tục sai = kỳ vọng tiếp tục tăng = và lần tiếp theo mình sai, cả tòa thần thoại đổ sụp.</em></p>
+
+<p class="thought"><em>Vòng lặp.</em></p>
+
+<p class="thought"><em>Mình ở trung tâm vòng lặp, và vòng lặp đang quay nhanh hơn.</em></p>
+
+<p>Hắn quay người. Bước đi.</p>
+
+<p>Tiểu Phúc chạy theo.</p>
+
+<p>— Quốc Sư, mình không phá miếu hả?</p>
+
+<p>— Không.</p>
+
+<p>— Tại sao?</p>
+
+<p>Hắn dừng. Nhìn Tiểu Phúc. Gã mười bốn tuổi, mắt to, hỏi thật lòng.</p>
+
+<p class="thought"><em>Tại sao? Vì mình cần niềm tin đó. Vì phá miếu sẽ mất dân. Vì mình đang đứng trên niềm tin, và phá miếu thờ là rút ghế dưới chân mình.</em></p>
+
+<p class="thought"><em>Nhưng không thể nói vậy với nhóc.</em></p>
+
+<p>— Vì dân cần tin vào thứ gì đó, Tiểu Phúc. Và ta thà họ tin vào Quốc Sư, còn hơn tin vào những thứ tệ hơn.</p>
+
+<p>Tiểu Phúc gật đầu. Mắt sáng. Tin.</p>
+
+<p class="thought"><em>Lại lừa. Lại nói hay. Lại khiến người ta tin bằng câu nửa đúng nửa sai.</em></p>
+
+<p class="thought"><em>Nhưng câu đó... có thật sự sai không?</em></p>
+
+<p class="thought"><em>Dân cần tin vào thứ gì đó. Đó là sự thật. Và nếu thứ đó là mình, ít nhất mình biết mình đang làm gì.</em></p>
+
+<p class="thought"><em>Ít nhất... mình nghĩ mình biết.</em></p>
+
+<p>Hắn đi về phủ. Nắng chiều đổ dài. Bóng hắn kéo trên đường, dài, mỏng, kiểu bóng của người đang gánh thứ gì đó nặng hơn mình.</p>
+
+<p>Và ở đâu đó trên bầu trời, Thiên Cơ chảy. Nhánh lớn, sáng, đổ về phía hắn. Từ bốn miếu thờ. Từ hàng nghìn người tin. Từ truyền thuyết, tin đồn, phóng đại, sùng bái.</p>
+
+<p>Tất cả chảy về một người.</p>
+
+<p>Một tên lừa đảo mặc áo trắng, đi giữa nắng chiều, tự hỏi liệu có lúc nào mình thật sự trở thành thứ mà mọi người tin không.</p>
+
+<p>Và sợ câu trả lời là có.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-13.html">&larr; CHƯƠNG 13</a>
+      <span class="disabled">CHƯƠNG 15 &rarr;</span>
+    </nav>
+
+    <div class="word-count">2.555 TỪ</div>
+
+  </div>
+</body>
+</html>

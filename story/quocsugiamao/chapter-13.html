@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 13 — Quốc Sư Phủ | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-12.html">&larr; CHƯƠNG 12</a>
+      <span class="chapter-indicator">13/30</span>
+      <a href="chapter-14.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 13</div>
+      <h1>Quốc Sư Phủ</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Quốc Sư Phủ nằm ở phía đông kinh thành, cách hoàng cung nửa khắc đi ngựa. Ba lớp tường, hai sân rộng, mười sáu phòng, một vườn nhỏ có hồ cá. Trước đây là phủ của một vị tướng về hưu, bỏ trống hai năm, giờ được sửa sang lại cho Quốc Sư mới.</p>
+
+<p>Tạ Cảnh Minh đứng giữa sân chính, nhìn quanh. Nắng chiều. Gió nhẹ. Mái ngói mới, cột sơn lại, sạch sẽ.</p>
+
+<p class="thought"><em>Phủ riêng. Lần đầu tiên mình có nhà riêng ở thế giới này.</em></p>
+
+<p class="thought"><em>Kiếp trước, lần cuối cùng mình có nhà riêng là căn hộ thuê ở quận 7, trước khi bị truy nã.</em></p>
+
+<p class="thought"><em>Kiếp này, nhà rộng hơn. Đẹp hơn. Và nguy hiểm hơn gấp trăm lần.</em></p>
+
+<p>Hắn đã ở nội cung năm ngày sau lễ phong, gần vua, gần ngai, gần xiềng. Rồi vua cho phép chuyển ra Quốc Sư Phủ. Không phải vì tin. Vì Lục Thanh Dao tấu: "Quốc Sư cần có phủ riêng để tiếp khách, xử lý việc Thiên Cơ, không thể ở mãi trong nội cung."</p>
+
+<p>Vua đồng ý. Nhưng thêm điều kiện: mỗi ngày phải vào cung diện kiến ít nhất một lần. Và thị vệ triều đình sẽ canh Quốc Sư Phủ ngày đêm.</p>
+
+<p class="thought"><em>Xích vàng dài hơn. Nhưng vẫn là xích.</em></p>
+
+<p>Phúc An đi bên cạnh, mắt sáng rỡ, nhìn quanh phủ như trẻ con nhìn đồ chơi mới.</p>
+
+<p>— Quốc Sư! Phủ đẹp quá! Phòng nhiều quá! Sân rộng quá!</p>
+
+<p>Tiểu Phúc chạy trước, khám phá từng góc, tiếng chân nhỏ vang trên sàn đá.</p>
+
+<p>Và ngoài Phúc An, Tiểu Phúc, Xuân Nhi, còn mười bốn người khác.</p>
+
+<p>Bốn thị vệ canh cổng. Hai đầu bếp. Hai người quét dọn. Một người giữ ngựa. Một quản gia. Và bốn người hầu mới, do bộ Lễ "cung cấp."</p>
+
+<p class="thought"><em>Mười bốn người. Cộng ba người cũ của mình. Mười bảy.</em></p>
+
+<p class="thought"><em>Và trong mười bảy, mình tin đúng ba: Phúc An, Tiểu Phúc, Xuân Nhi. Mười bốn còn lại, ít nhất một nửa là gián điệp.</em></p>
+
+<p>Hắn không đoán. Hắn biết. Vì kiếp trước, hắn từng cài người vào tổ chức của đối thủ. Cách làm y hệt: cung cấp "nhân sự" miễn phí, chọn người trung thành với mình, đặt vào vị trí gần mục tiêu.</p>
+
+<p class="thought"><em>Câu hỏi không phải "có gián điệp không." Câu hỏi là "của ai."</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm đầu tiên ở Quốc Sư Phủ. Tạ Cảnh Minh ngồi trong phòng chính, đóng cửa, một mình.</p>
+
+<p>Bật Thiên Diễn Đồng. Nhẹ. Không cần nhìn Thiên Cơ. Chỉ cần đọc người.</p>
+
+<p>Hắn nhắm mắt, tập trung. Nhớ lại từng khuôn mặt gặp hôm nay.</p>
+
+<p class="thought"><em>Quản gia. Trần Phú. Năm mươi tuổi, tóc bạc, lưng thẳng, tay chai. Không phải quản gia chuyên nghiệp. Tay chai kiểu người cầm kiếm. Lính cũ? Mắt quét phòng khi vào, quét kiểu đánh giá địa hình, không phải quét kiểu dọn dẹp.</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng đọc: bình tĩnh, quan sát, kiểm soát. Không sợ. Không sùng bái. Trung lập. Kiểu trung lập của người nhận lệnh.</em></p>
+
+<p class="thought"><em>Của ai? Không biết. Nhưng gã không phải quản gia thật.</em></p>
+
+<p class="thought"><em>Bốn người hầu mới. Ba nam một nữ. Do bộ Lễ cung cấp. Bộ Lễ là của Hoàng đại nhân, Thượng thư bộ Lễ, gã muốn gặp mình từ chương sáu mà mình từ chối.</em></p>
+
+<p class="thought"><em>Vậy bốn người này là tai mắt của Hoàng đại nhân?</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng đọc bốn người hầu: ba người bình thường, sợ sệt, cung kính. Một gã, tên Vạn Lý, mắt láo liên, Thiên Diễn Đồng bắt được: tò mò, ghi nhớ, phân tích. Kiểu người được dặn "nghe và kể lại."</em></p>
+
+<p class="thought"><em>Vạn Lý. Gián điệp của bộ Lễ. Gần như chắc chắn.</em></p>
+
+<p class="thought"><em>Hai đầu bếp. Già, mập, trông hiền. Thiên Diễn Đồng: một người bình thường thật, một người lo lắng kiểu đang giấu gì đó. Tên Bùi. Gã nấu ăn nhưng mắt hay liếc về phía phòng chính.</em></p>
+
+<p class="thought"><em>Bùi. Có thể là gián điệp. Của ai? Chưa biết.</em></p>
+
+<p class="thought"><em>Bốn thị vệ canh cổng. Lính triều đình. Thiên Diễn Đồng: trung thành kiểu lính, không có tâm lý gián điệp. Nhưng báo cáo lên cấp trên là chắc. Vua? Lục Thanh Dao? Cả hai?</em></p>
+
+<p class="thought"><em>Người giữ ngựa. Bình thường. Hai người quét dọn. Bình thường.</em></p>
+
+<p>Hắn mở mắt. Lấy giấy bút. Viết:</p>
+
+<p>Gián điệp xác định: Vạn Lý (bộ Lễ / Hoàng đại nhân).</p>
+<p>Nghi vấn: Trần Phú (quản gia, lính cũ, của ai?), Bùi (đầu bếp, lo lắng).</p>
+<p>Báo cáo theo nhiệm vụ: bốn thị vệ (vua / Lục Thanh Dao).</p>
+<p>Sạch: Phúc An, Tiểu Phúc, Xuân Nhi, ba người còn lại.</p>
+
+<p class="thought"><em>Ít nhất ba tai mắt. Của ít nhất hai phe. Và mình chưa biết hết.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn chắc chắn cũng cài người. Nhưng ai? Gã khôn hơn Hoàng đại nhân, sẽ không cài kiểu lộ liễu.</em></p>
+
+<p class="thought"><em>Và Lục Thanh Dao? Nàng nói "theo dõi mỗi ngày." Bốn thị vệ có thể là của nàng. Hoặc nàng có kênh riêng mà mình chưa thấy.</em></p>
+
+<p>Hắn xé tờ giấy. Đốt trên nến. Nhìn tro rơi.</p>
+
+<p class="thought"><em>Kiếp trước, mình từng quản lý mạng lưới "đại lý" cho tổ chức đa cấp. Biết ai trung thành, ai phản, ai đang đặt cược hai bên. Kỹ năng đó, bây giờ, dùng để quản lý phủ Quốc Sư.</em></p>
+
+<p class="thought"><em>Bước một: không đuổi ai. Gián điệp mà mình biết, tốt hơn gián điệp mà mình không biết. Giữ họ lại, cho họ nghe thứ mình muốn họ nghe.</em></p>
+
+<p class="thought"><em>Bước hai: tung tin giả. Mỗi gián điệp cho nghe một tin khác. Khi tin đó lọt ra ngoài, mình biết nó đến từ ai.</em></p>
+
+<p class="thought"><em>Kiếp trước gọi đây là "đánh dấu nước." Mỗi bản tài liệu có một chi tiết khác, gửi cho mỗi người một bản. Khi bị rò rỉ, nhìn chi tiết là biết ai lộ.</em></p>
+
+<p class="thought"><em>Cùng nguyên tắc. Khác thời đại.</em></p>
+
+<p>Hắn mỉm cười. Lần đầu tiên kể từ lễ phong, nụ cười thật.</p>
+
+<p class="thought"><em>Trò này, mình giỏi.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Ba ngày sau. Tạ Cảnh Minh bắt đầu.</p>
+
+<p>Buổi sáng, hắn gọi Vạn Lý vào phòng. Sai rót trà. Rồi "vô tình" nói với Phúc An, đủ to để Vạn Lý nghe:</p>
+
+<p>— Phúc An, chuẩn bị. Ngày mai ta sẽ vào cung tấu với bệ hạ về chuyện Bắc Nguyên. Ta nhìn thấy Thiên Cơ phía bắc có biến, quân Bắc Nguyên sẽ rút trong vòng một tháng.</p>
+
+<p>Phúc An gật đầu. Không hỏi. Gã tin mọi thứ Quốc Sư nói.</p>
+
+<p>Vạn Lý rót trà, mặt không đổi. Nhưng Thiên Diễn Đồng bắt: rung nhẹ, ghi nhận, háo hức.</p>
+
+<p class="thought"><em>Tin một: "Bắc Nguyên sẽ rút trong vòng một tháng." Bịa. Hoàn toàn bịa. Mình không biết gì về Bắc Nguyên. Nhưng Vạn Lý không biết mình bịa.</em></p>
+
+<p>Buổi trưa, hắn đi ngang bếp. Bùi đang nấu. Hắn dừng, nhìn Bùi, rồi "buột miệng" với Tiểu Phúc đi theo:</p>
+
+<p>— Tiểu Phúc, nhắc ta, chiều nay phải viết thư cho Hoàng đại nhân. Gã muốn gặp ta từ lâu, giờ ta là Quốc Sư chính thức, không thể từ chối mãi. Ta sẽ hẹn gã đến phủ ba ngày nữa.</p>
+
+<p>Tiểu Phúc gật đầu.</p>
+
+<p>Bùi cúi xuống nồi, khuấy. Nhưng Thiên Diễn Đồng đọc: lo lắng, tính toán.</p>
+
+<p class="thought"><em>Tin hai: "Quốc Sư sẽ gặp Hoàng đại nhân ba ngày nữa." Cũng bịa. Mình chưa định gặp ai. Nhưng nếu Bùi là gián điệp, gã sẽ báo. Và ai nhận tin, sẽ phản ứng.</em></p>
+
+<p>Buổi tối, hắn mời quản gia Trần Phú vào phòng. Hỏi chuyện phủ, hỏi chi tiêu, hỏi nhân sự. Bình thường. Rồi cuối buổi, "bất chợt" nói:</p>
+
+<p>— Trần Phú, ta cần một phòng riêng ở phía đông phủ. Khóa lại. Không ai vào. Ta sẽ dùng để thiền định và giao tiếp Thiên Cơ. Từ giờ Hợi đến giờ Sửu, mỗi đêm.</p>
+
+<p>Trần Phú gật đầu. Mắt không đổi. Nhưng Thiên Diễn Đồng bắt: ghi nhận, phân tích chiến thuật. Kiểu ghi nhận của lính báo cáo.</p>
+
+<p class="thought"><em>Tin ba: "Quốc Sư mỗi đêm thiền định ở phòng đông, giờ Hợi đến giờ Sửu." Nửa thật nửa bịa. Mình sẽ vào phòng đó thật, nhưng không thiền. Chỉ ngồi. Và xem ai đến rình.</em></p>
+
+<p class="thought"><em>Ba tin. Ba người. Ba kênh.</em></p>
+
+<p class="thought"><em>Giờ chờ.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Năm ngày. Kết quả.</p>
+
+<p>Tin một, "Bắc Nguyên rút quân," lọt ra ngoài nhanh nhất. Hai ngày sau, Phúc An kể: "Ngoài chợ có người bàn tán Quốc Sư phán Bắc Nguyên sẽ rút."</p>
+
+<p class="thought"><em>Nhanh. Từ Vạn Lý, qua bộ Lễ, ra dân. Hoàng đại nhân không giữ tin. Gã muốn dùng tin của mình để tăng uy tín cho bộ Lễ. "Chúng tôi biết trước vì gần Quốc Sư."</em></p>
+
+<p class="thought"><em>Hoàng đại nhân: không phải kẻ thù. Là kẻ muốn ăn theo. Dùng danh tiếng mình để tăng giá trị bản thân. Kiếp trước gọi loại này là "ký sinh truyền thông." Không nguy hiểm. Nhưng phải kiểm soát.</em></p>
+
+<p>Tin hai, "gặp Hoàng đại nhân ba ngày nữa," không lọt ra ngoài. Nhưng đêm thứ ba, Tạ Cảnh Minh nhận thấy Trần Phú đứng ngoài phòng bếp nói chuyện nhỏ với Bùi. Lâu. Kiểu nói chuyện không phải giữa quản gia và đầu bếp.</p>
+
+<p class="thought"><em>Trần Phú và Bùi biết nhau. Hoặc cùng phe.</em></p>
+
+<p class="thought"><em>Bùi nghe tin "gặp Hoàng đại nhân" nhưng tin không lọt ra ngoài. Nghĩa là Bùi không báo cho Hoàng đại nhân. Gã báo cho người khác. Cho Trần Phú? Hay qua Trần Phú cho ai đó?</em></p>
+
+<p class="thought"><em>Trần Phú, lính cũ, tay chai cầm kiếm. Bùi, đầu bếp lo lắng. Cùng phe.</em></p>
+
+<p class="thought"><em>Phe nào? Không phải bộ Lễ. Không phải vua, vì thị vệ là kênh riêng rồi. Không phải Lục Thanh Dao, nàng có cách riêng.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn.</em></p>
+
+<p>Hắn vuốt cằm.</p>
+
+<p class="thought"><em>Thái Sư. Phe đối lập. Thua trong lễ phong nhưng chưa bỏ cuộc. Cài quản gia và đầu bếp vào Quốc Sư Phủ. Thâm. Gã chọn đúng hai vị trí quan trọng nhất: quản gia kiểm soát thông tin, đầu bếp kiểm soát thức ăn.</em></p>
+
+<p class="thought"><em>Kiểm soát thức ăn.</em></p>
+
+<p>Hắn dừng.</p>
+
+<p class="thought"><em>Đầu bếp. Kiểm soát thức ăn.</em></p>
+
+<p class="thought"><em>Nếu Vương Bách Nhẫn muốn hại mình, đầu bếp là cách dễ nhất.</em></p>
+
+<p class="thought"><em>Bình tĩnh. Phân tích. Gã chưa hại mình vì chưa có lý do đủ mạnh. Giết Quốc Sư mới phong, rủi ro quá cao. Nhưng nếu tình hình thay đổi...</em></p>
+
+<p class="thought"><em>Phải đề phòng. Nhưng không đuổi. Đuổi Bùi = Vương Bách Nhẫn biết mình biết. Giữ Bùi = mình kiểm soát kênh thông tin của gã.</em></p>
+
+<p class="thought"><em>Nhưng từ giờ, Tiểu Phúc sẽ nếm thức ăn trước. Không, không được. Không thể cho nhóc mười bốn tuổi nếm độc.</em></p>
+
+<p class="thought"><em>Phúc An. Phúc An tin mình tuyệt đối. Và Phúc An từng ở hoàng cung mấy chục năm, biết phân biệt thức ăn có vấn đề.</em></p>
+
+<p class="thought"><em>Nói với Phúc An: "Ta nhìn thấy khí lạ quanh bếp. Từ nay, mỗi bữa ăn, ngươi kiểm tra trước." Phúc An sẽ hiểu. Gã sẽ làm.</em></p>
+
+<p>Tin ba, "thiền định phòng đông mỗi đêm," có kết quả thú vị nhất. Đêm thứ tư, hắn ngồi trong phòng đông, tắt đèn, Thiên Diễn Đồng mở, lắng nghe.</p>
+
+<p>Và cảm nhận.</p>
+
+<p>Có người đứng ngoài tường phía đông. Không phải thị vệ. Thị vệ đi tuần theo lộ trình, bước chân đều, nặng. Người này đứng im. Nhẹ. Kiểu đứng của kẻ quan sát.</p>
+
+<p>Thiên Diễn Đồng đọc: tò mò, lạnh lùng, đánh giá. Kiểu cảm xúc hắn từng bắt được ở đâu đó.</p>
+
+<p class="thought"><em>Đã gặp cảm xúc này. Ở đâu?</em></p>
+
+<p class="thought"><em>Ngày cầu mưa. Gã áo xám ở rìa đám đông. Tò mò, lạnh, đánh giá, như xem mẫu vật.</em></p>
+
+<p class="thought"><em>Giống. Rất giống.</em></p>
+
+<p class="thought"><em>Cùng một người? Hay cùng một kiểu người?</em></p>
+
+<p>Hắn không mở cửa. Không ra ngoài. Ngồi im. Lắng nghe.</p>
+
+<p>Người đó đứng nửa canh giờ. Rồi đi. Bước chân nhẹ, gần như không nghe.</p>
+
+<p>Hắn mở mắt. Tim đập nhanh.</p>
+
+<p class="thought"><em>Có ai đó đang quan sát mình. Không phải gián điệp kiểu Vạn Lý hay Bùi. Không phải tai mắt triều đình. Thứ khác. Lạnh hơn. Chuyên nghiệp hơn.</em></p>
+
+<p class="thought"><em>Lục Thanh Dao nói: "Có những kẻ ngươi chưa biết đến cũng sẽ bắt đầu chú ý."</em></p>
+
+<p class="thought"><em>Đây rồi. Họ bắt đầu chú ý.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau. Tạ Cảnh Minh ngồi uống trà ở sân chính. Mặt bình thản. Bên trong, đầu quay.</p>
+
+<p class="thought"><em>Tổng kết: Quốc Sư Phủ có ít nhất ba mạng lưới giám sát.</em></p>
+
+<p class="thought"><em>Một: Hoàng đại nhân, qua Vạn Lý. Mục đích: ăn theo danh tiếng. Mức độ nguy hiểm: thấp.</em></p>
+
+<p class="thought"><em>Hai: Vương Bách Nhẫn, qua Trần Phú và Bùi. Mục đích: thu thập thông tin, có thể phá hoại. Mức độ nguy hiểm: trung bình đến cao.</em></p>
+
+<p class="thought"><em>Ba: Kẻ lạ bên ngoài tường. Mục đích: không rõ. Mức độ nguy hiểm: không xác định. Có thể liên quan đến gã áo xám ngày cầu mưa.</em></p>
+
+<p class="thought"><em>Và bốn: thị vệ triều đình, báo cáo cho vua hoặc Lục Thanh Dao. Mục đích: giám sát. Mức độ nguy hiểm: tùy.</em></p>
+
+<p class="thought"><em>Bốn tầng giám sát. Và mình ngồi ở giữa.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình sẽ hoảng. Nhưng kiếp này...</em></p>
+
+<p>Hắn uống trà. Chậm.</p>
+
+<p class="thought"><em>Kiếp này, mình có thứ kiếp trước không có: Thiên Diễn Đồng. Đọc cảm xúc, đọc ý đồ, đọc kiểu người. Không cần nghe họ nói gì. Chỉ cần cảm nhận.</em></p>
+
+<p class="thought"><em>Và mình có thứ thứ hai: kinh nghiệm lừa đảo. Biết khi nào nên nói, nói gì, nói với ai. Biết cách tung tin giả, đánh dấu kênh, kiểm soát luồng thông tin.</em></p>
+
+<p class="thought"><em>Gián điệp mà mình biết, là gián điệp của mình.</em></p>
+
+<p class="thought"><em>Vạn Lý sẽ nghe thứ mình muốn Hoàng đại nhân nghe. Bùi và Trần Phú sẽ nghe thứ mình muốn Vương Bách Nhẫn nghe. Thị vệ sẽ thấy thứ mình muốn vua thấy.</em></p>
+
+<p class="thought"><em>Và kẻ lạ ngoài tường...</em></p>
+
+<p class="thought"><em>Kẻ đó, mình chưa biết cách chơi. Nhưng mình biết gã đang ở đó. Và biết, đôi khi, đã là nửa chiến thắng.</em></p>
+
+<p>Hắn đặt chén trà xuống. Nhìn quanh sân. Nắng sáng. Hoa nở. Phủ đẹp. Yên tĩnh.</p>
+
+<p>Và đầy tai mắt.</p>
+
+<p class="thought"><em>Quốc Sư Phủ. Nhà của mình. Và cũng là sân khấu lớn nhất mình từng đứng.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình diễn trên sân khấu cho khán giả vỗ tay. Kiếp này, mình diễn cho gián điệp xem, và lời diễn trở thành tin tức, tin tức trở thành chính trị, chính trị trở thành vận mệnh.</em></p>
+
+<p class="thought"><em>Mình không còn chỉ lừa một người. Mình đang lừa cả một hệ thống.</em></p>
+
+<p class="thought"><em>Và hệ thống đang lừa lại mình.</em></p>
+
+<p>Hắn mỉm cười. Cười thật. Kiểu cười của kẻ nhận ra mình đang chơi trò lớn nhất đời, và thay vì sợ, lại thấy hào hứng.</p>
+
+<p class="thought"><em>Nguy hiểm. Hào hứng này nguy hiểm. Vì nó giống y kiếp trước: mỗi khi trò lừa lớn hơn, mình không chạy mà lao vào.</em></p>
+
+<p class="thought"><em>Và kiếp trước, mình chết vì điều đó.</em></p>
+
+<p>Nụ cười tắt. Nhẹ. Nhưng không mất hẳn.</p>
+
+<p>Vì ở sâu bên trong, Tạ Cảnh Minh biết: hắn sinh ra để chơi trò này. Kiếp trước, kiếp này, đều vậy.</p>
+
+<p>Chỉ khác một điều.</p>
+
+<p>Kiếp này, trò chơi có thật.</p>
+
+<p>Và thua, không phải đi tù.</p>
+
+<p>Thua là chết.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-12.html">&larr; CHƯƠNG 12</a>
+      <a href="chapter-14.html">CHƯƠNG 14 &rarr;</a>
+    </nav>
+
+    <div class="word-count">2.615 TỪ</div>
+
+  </div>
+</body>
+</html>
