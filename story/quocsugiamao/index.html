@@ -4,48 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quốc Sư Giả Mạo — Tập 1: Pháp Trường</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #0a0a0f;
-      color: #c8b89a;
-      font-family: 'Noto Serif', 'Georgia', serif;
+      background: #131313;
+      color: #ffffff;
+      font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .container {
-      max-width: 720px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 60px 24px 100px;
+      padding: 64px 24px 80px;
     }
 
-    /* Header */
-    .header {
+    /* ── Hero ── */
+    .hero {
       text-align: center;
-      margin-bottom: 64px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid #2a2520;
+      margin-bottom: 48px;
     }
 
-    .header h1 {
-      font-size: 2.4rem;
-      color: #e8d5b5;
-      letter-spacing: 0.15em;
-      margin-bottom: 12px;
+    .hero-title {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 80px;
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 13px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #3cffd0;
+      margin-bottom: 32px;
     }
 
-    .header .subtitle {
-      font-size: 1.1rem;
-      color: #8a7d6b;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    .header .tags {
+    /* ── Tags ── */
+    .tags {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -53,150 +60,225 @@
       margin-bottom: 28px;
     }
 
-    .header .tag {
-      font-size: 0.75rem;
-      color: #6a5d4e;
-      border: 1px solid #2a2520;
-      padding: 4px 12px;
-      border-radius: 2px;
-      letter-spacing: 0.05em;
+    .tag {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #3cffd0;
+      border: 1px solid #3cffd0;
+      padding: 5px 14px;
+      border-radius: 20px;
+      line-height: 1.2;
     }
 
-    .header .stats {
-      font-size: 0.85rem;
-      color: #5a5045;
+    /* ── Logline ── */
+    .logline {
+      text-align: center;
+      font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      color: #949494;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      padding: 0 16px;
     }
 
-    .header .stats span {
-      margin: 0 12px;
+    /* ── Stats ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #949494;
+      margin-bottom: 12px;
     }
 
-    .header .progress-bar {
-      width: 200px;
-      height: 3px;
-      background: #1a1815;
-      margin: 16px auto 0;
-      border-radius: 2px;
+    .stats-divider {
+      color: #949494;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar {
+      max-width: 280px;
+      height: 4px;
+      background: #2d2d2d;
+      margin: 0 auto 56px;
+      border-radius: 20px;
       overflow: hidden;
     }
 
-    .header .progress-fill {
+    .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #8a6d3b, #c8a55a);
-      border-radius: 2px;
-      transition: width 0.5s;
+      width: 6.7%;
+      background: #3cffd0;
+      border-radius: 20px;
+      transition: width 0.6s ease;
     }
 
-    /* Phần */
-    .part {
-      margin-bottom: 48px;
-    }
-
+    /* ── Part title ── */
     .part-title {
-      font-size: 0.8rem;
-      color: #5a5045;
-      letter-spacing: 0.2em;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #1a1815;
+      letter-spacing: 1.8px;
+      color: #3cffd0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #3cffd0;
+      margin-bottom: 24px;
     }
 
-    /* Chương */
-    .chapter-link {
-      display: block;
+    /* ── Chapter cards ── */
+    .chapter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chapter-card {
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      padding: 20px 24px;
-      margin-bottom: 2px;
-      border-radius: 4px;
-      transition: all 0.2s;
+      background: #2d2d2d;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 24px 28px;
+      transition: border-color 0.18s ease;
       position: relative;
     }
 
-    .chapter-link:hover {
-      background: #12110e;
+    .chapter-card:hover {
+      border-color: #3cffd0;
     }
 
-    .chapter-link .chapter-number {
-      font-size: 0.75rem;
-      color: #5a5045;
-      letter-spacing: 0.1em;
-      margin-bottom: 6px;
+    .chapter-card-body {
+      flex: 1;
+      min-width: 0;
     }
 
-    .chapter-link .chapter-title {
-      font-size: 1.15rem;
-      color: #d4c4a8;
+    .chapter-number {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #5200ff;
       margin-bottom: 8px;
+    }
+
+    .chapter-title {
+      font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      transition: color 0.18s ease;
+    }
+
+    .chapter-card:hover .chapter-title {
+      color: #3860be;
+    }
+
+    .chapter-summary {
+      font-family: 'Space Grotesk', Helvetica, Arial, sans-serif;
+      font-size: 14px;
       font-weight: 400;
-    }
-
-    .chapter-link:hover .chapter-title {
-      color: #e8d5b5;
-    }
-
-    .chapter-link .chapter-summary {
-      font-size: 0.85rem;
-      color: #6a5d4e;
+      color: #949494;
       line-height: 1.6;
-      font-style: italic;
+      margin-bottom: 10px;
     }
 
-    .chapter-link .chapter-meta {
-      font-size: 0.7rem;
-      color: #3a3530;
-      margin-top: 8px;
+    .chapter-wordcount {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #949494;
     }
 
-    .chapter-link .arrow {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #3a3530;
-      font-size: 1.2rem;
-      transition: all 0.2s;
+    .chapter-arrow {
+      flex-shrink: 0;
+      margin-left: 20px;
+      font-size: 20px;
+      color: #949494;
+      transition: color 0.18s ease, transform 0.18s ease;
     }
 
-    .chapter-link:hover .arrow {
-      color: #8a7d6b;
-      transform: translateY(-50%) translateX(4px);
+    .chapter-card:hover .chapter-arrow {
+      color: #3cffd0;
+      transform: translateX(4px);
     }
 
-    /* Footer */
+    /* ── Footer ── */
     .footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
-      padding-top: 48px;
-      border-top: 1px solid #1a1815;
-      color: #3a3530;
-      font-size: 0.8rem;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #949494;
     }
 
-    /* Logline */
-    .logline {
-      text-align: center;
-      font-style: italic;
-      color: #6a5d4e;
-      line-height: 1.8;
-      margin-bottom: 48px;
-      padding: 0 20px;
-      font-size: 0.95rem;
-    }
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 16px 60px;
+      }
 
-    .logline::before, .logline::after {
-      content: '—';
-      display: block;
-      color: #2a2520;
-      margin: 12px 0;
+      .hero-title {
+        font-size: 54px;
+        letter-spacing: 1px;
+      }
+
+      .hero-subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      .logline {
+        font-size: 15px;
+        padding: 0;
+      }
+
+      .chapter-card {
+        padding: 20px;
+      }
+
+      .chapter-title {
+        font-size: 18px;
+      }
+
+      .chapter-summary {
+        font-size: 13px;
+      }
+
+      .chapter-arrow {
+        margin-left: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <div class="header">
-      <h1>Quốc Sư Giả Mạo</h1>
-      <div class="subtitle">Tập 1 — Pháp Trường</div>
+    <div class="hero">
+      <h1 class="hero-title">QUỐC SƯ GIẢ MẠO</h1>
+      <div class="hero-subtitle">Tập 1 — Pháp Trường</div>
+
       <div class="tags">
         <span class="tag">Tu tiên</span>
         <span class="tag">Đấu trí</span>
@@ -204,36 +286,47 @@
         <span class="tag">Hài đen</span>
         <span class="tag">Fake it till you make it</span>
       </div>
+
+      <p class="logline">Một tên lừa đảo hiện đại xuyên vào thân xác Quốc Sư giả sắp bị xử tử, buộc phải bluff để sống sót trong thế giới mà niềm tin tập thể có thể thay đổi hiện thực — và dần nhận ra hắn không chỉ đang lừa, mà đang vô thức thao túng vận mệnh.</p>
+
       <div class="stats">
-        <span>1 / 30 chương</span>
-        <span>·</span>
-        <span>3.741 từ</span>
+        <span>2 / 30 chương</span>
+        <span class="stats-divider">·</span>
+        <span>7.837 từ</span>
+        <span class="stats-divider">·</span>
+        <span>6.7%</span>
       </div>
+
       <div class="progress-bar">
-        <div class="progress-fill" style="width: 3.3%"></div>
+        <div class="progress-fill"></div>
       </div>
     </div>
 
-    <div class="logline">
-      Một tên lừa đảo hiện đại xuyên vào thân xác Quốc Sư giả sắp bị xử tử, buộc phải bluff để sống sót trong thế giới mà niềm tin tập thể có thể thay đổi hiện thực — và dần nhận ra hắn không chỉ đang lừa, mà đang vô thức thao túng vận mệnh.
-    </div>
+    <div class="part-title">Phần I · Sinh Tồn</div>
 
-    <!-- Chỉ hiển thị phần có chương đã viết xong -->
+    <div class="chapter-list">
 
-    <div class="part">
-      <div class="part-title">Phần I · Sinh Tồn</div>
+      <a class="chapter-card" href="chapter-01.html">
+        <div class="chapter-card-body">
+          <div class="chapter-number">Chương 01</div>
+          <div class="chapter-title">Quốc Sư Bị Xử Trảm</div>
+          <div class="chapter-summary">Xuyên không ngay lúc hành hình. Bluff tiếng sấm cứu mạng. Lục Thanh Dao gặp lần đầu.</div>
+          <div class="chapter-wordcount">3.741 từ</div>
+        </div>
+        <span class="chapter-arrow">→</span>
+      </a>
 
-      <a class="chapter-link" href="chapter-01.html">
-        <div class="chapter-number">Chương 01</div>
-        <div class="chapter-title">Quốc Sư Bị Xử Trảm</div>
-        <div class="chapter-summary">Xuyên không ngay lúc hành hình. Bluff tiếng sấm cứu mạng. Lục Thanh Dao gặp lần đầu.</div>
-        <div class="chapter-meta">3.741 từ</div>
-        <span class="arrow">→</span>
+      <a class="chapter-card" href="chapter-02.html">
+        <div class="chapter-card-body">
+          <div class="chapter-number">Chương 02</div>
+          <div class="chapter-title">Trường Xuân Cung</div>
+          <div class="chapter-summary">Phá án cung nữ chết bằng cold reading. Phát hiện bí mật Trường Xuân Cung.</div>
+          <div class="chapter-wordcount">4.096 từ</div>
+        </div>
+        <span class="chapter-arrow">→</span>
       </a>
 
     </div>
-
-    <!-- Các phần sau sẽ xuất hiện khi có chương hoàn thành -->
 
     <div class="footer">
       Quốc Sư Giả Mạo · đang viết
