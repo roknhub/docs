@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 05 — Quốc Sư Hay Yêu Đạo | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">05/30</span>
+      <span class="disabled" style="font-family: 'Space Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 1.8px; padding: 8px 16px; border: 1px solid #333; border-radius: 24px; display: inline-block; color: #444;">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 05</div>
+      <h1>Quốc Sư Hay Yêu Đạo</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Đại điện triều đình Đại Ly rộng như sân bóng, nhưng sáng hôm đó, chật đến nghẹt thở.</p>
+
+<p>Tạ Cảnh Minh đứng giữa đại điện, một mình. Hai hàng quan đại thần ngồi hai bên, trái văn, phải võ, mỗi bên ba bốn chục người. Phía trên, hoàng đế ngồi sau rèm lụa, lần này không run. Đêm qua vua ngủ được, nhờ hắn. Nhưng điều đó không giúp gì cho tình huống hiện tại.</p>
+
+<p>Vì đứng đối diện hắn, một ông già mặc triều phục đỏ, đai vàng, mặt như đá tạc. Hàm bạnh, mắt trũng, lông mày trắng rậm rạp. Khí thế uy nghiêm, kiểu uy nghiêm của kẻ đã ngồi ở vị trí này từ trước khi vua hiện tại lên ngôi.</p>
+
+<p>Thái Sư Vương Bách Nhẫn. Người đứng đầu phe bảo thủ. Kẻ muốn hắn chết.</p>
+
+<p>— Lão thần xin hỏi — Vương Bách Nhẫn nói, giọng chậm nhưng nặng như búa — Quốc Sư Tạ Cảnh Minh, tiền nhiệm Tạ Cảnh Minh bị tội mạo nhận thiên mệnh, xử trảm. Nay đột nhiên được ân xá, ban chức Quốc Sư, ở tại Minh Nguyệt Đường. Lão thần muốn hỏi: bệ hạ dựa vào đâu?</p>
+
+<p>Không hỏi hắn. Hỏi vua. Đây là đòn chính trị, đặt vua vào thế phải giải thích.</p>
+
+<p>Hoàng đế không trả lời ngay. Tay vua siết thành ghế, quen thuộc rồi.</p>
+
+<p>— Quốc Sư đã chứng minh thiên cơ tại pháp trường. Trời giáng sấm —</p>
+
+<p>— Sấm? — Vương Bách Nhẫn cắt ngang, giọng khinh bỉ vừa đủ để không bị gọi là khi quân. — Sấm trời là chuyện thường. Mùa hè nào mà không sấm? Dựa vào một tiếng sấm mà phong Quốc Sư — lão thần e rằng thiên hạ cười cho.</p>
+
+<p>Xì xào hai bên. Phe Vương Bách Nhẫn gật đầu. Phe trung lập nhìn nhau. Phe ủng hộ vua im lặng, không ai dám nói ngược lại Thái Sư.</p>
+
+<p class="thought"><em>Ông già này chơi đẹp. Không tấn công mình, tấn công quyết định của vua. Khiến vua phải bảo vệ mình, và nếu vua bảo vệ không nổi, cả hai cùng mất uy.</em></p>
+
+<p class="thought"><em>Đòn quyền lực kinh điển. Kiếp trước, mấy ông sếp tập đoàn cũng chơi kiểu này: không đánh nhân viên, đánh quyết định của giám đốc nhân sự đã tuyển nhân viên đó.</em></p>
+
+<p>Tạ Cảnh Minh đứng giữa đại điện, mặt bình thản. Nhưng bên trong, não hắn đang chạy tốc độ cao nhất.</p>
+
+<p class="thought"><em>Tình huống: mình bị ép chứng minh bản lĩnh trước triều đình. Nếu không chứng minh được, mất chức, có thể mất mạng. Vua bảo vệ mình nhưng không đủ mạnh để đơn phương chống Thái Sư.</em></p>
+
+<p class="thought"><em>Lựa chọn:</em></p>
+
+<p class="thought"><em>Một — nói mơ hồ, dùng "thiên cơ bất khả lộ" để né. Vấn đề: đã dùng rồi, lần này không đủ. Triều đình cần bằng chứng cụ thể.</em></p>
+
+<p class="thought"><em>Hai — chơi lớn. Dùng đọc vị + Thiên Diễn Đồng đọc từng đại thần. Chỉ ra thứ mà không ai nghĩ mình biết. Tạo sốc.</em></p>
+
+<p class="thought"><em>Rủi ro lớn: nếu sai, chết. Nếu đúng, sống. Và hơn nữa, không ai dám đụng vào mình nữa.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình gọi đây là "đặt cược tất cả". Khi ván bài yếu, hoặc bỏ, hoặc chơi tất cả. Không có chọn giữa.</em></p>
+
+<p>Hắn bước lên một bước. Chắp tay sau lưng.</p>
+
+<p>— Thái Sư muốn thần chứng minh.</p>
+
+<p>Không phải câu hỏi. Câu khẳng định.</p>
+
+<p>Vương Bách Nhẫn nheo mắt.</p>
+
+<p>— Nếu Quốc Sư thật sự thấu thiên cơ — xin chứng minh cho lão thần và triều đình thấy. Ngay bây giờ.</p>
+
+<p class="thought"><em>Chơi tất cả.</em></p>
+
+<p>Tạ Cảnh Minh hít sâu. Rồi bật Thiên Diễn Đồng.</p>
+
+<p>Không phải "bật" theo kiểu bấm nút. Hắn vẫn chưa biết cách kiểm soát nó. Nhưng từ sau đêm bên xác thái giám, hắn nhận ra: khi hắn tập trung nhìn một người, thật sự tập trung, không phải nhìn bề mặt mà nhìn <em>vào</em>, thứ gì đó trong đầu hắn sẽ... mở.</p>
+
+<p>Hắn nhìn Vương Bách Nhẫn.</p>
+
+<p>Và Thiên Diễn Đồng phản ứng.</p>
+
+<p>Sợ hãi, không. Ông già này không sợ. Ông ta tức giận. Tức vì quyền lực bị đe dọa. Tức vì vua dùng "Quốc Sư" để lấn thêm quyền mà lẽ ra thuộc phe ông ta. Và sâu hơn nữa, khinh bỉ. Ông ta khinh hắn từ xương ra.</p>
+
+<p class="thought"><em>Không dùng được. Ông ta quá cứng. Tấn công trực diện sẽ bật lại.</em></p>
+
+<p>Hắn chuyển ánh mắt. Nhìn dãy đại thần bên trái, phe văn. Quét. Chậm. Từng người.</p>
+
+<p>Người thứ nhất — lo lắng, nhưng loại lo lắng của kẻ bàng quan: không phải việc của mình, nhưng sợ bị vạ lây.</p>
+
+<p>Người thứ hai — buồn ngủ. Không quan tâm. Ngồi cho có.</p>
+
+<p>Người thứ ba — sợ. Sợ thật sự. Nhưng không phải sợ hắn. Sợ... bị lộ gì đó. Tay gã siết chặt tay áo dưới bàn. Hơi thở nông. Mắt liếc sang Vương Bách Nhẫn, tìm tín hiệu.</p>
+
+<p class="thought"><em>Gã này có bí mật. Liên quan Vương Bách Nhẫn? Gã sợ bị lộ trong lúc hỗn loạn.</em></p>
+
+<p>Người thứ tư — tự tin. Quá tự tin. Kiểu tự tin của kẻ đã biết kết quả. Gã ngồi thẳng, miệng hơi mỉm cười. Mắt nhìn hắn, không phải nhìn nguy hiểm, mà nhìn <em>thí nghiệm</em>.</p>
+
+<p class="thought"><em>Gã này biết trước buổi triều hội hôm nay sẽ diễn ra thế nào. Gã là người đạo diễn.</em></p>
+
+<p>Người thứ năm —</p>
+
+<p>Tạ Cảnh Minh dừng lại. Thiên Diễn Đồng nhấp nháy mạnh.</p>
+
+<p>Người thứ năm — một đại thần trung niên, khoảng năm mươi. Mặc triều phục xanh, đai bạc. Ngồi ở hàng thứ ba, không nổi bật. Nhưng Thiên Diễn Đồng cho hắn thấy điều mà đọc vị kiếp trước cũng cho thấy:</p>
+
+<p>Gã bệnh.</p>
+
+<p>Không phải bệnh nhẹ. Nặng. Da hơi vàng, gan? Mắt trũng hơn những người xung quanh. Móng tay, hắn nhìn kỹ, hơi xanh ở gốc. Gã ngồi hơi nghiêng sang phải, đau bụng trái? Và hơi thở nông, ngắn. Gã che giấu giỏi, nhưng cơ thể không biết nói dối.</p>
+
+<p>Thiên Diễn Đồng bổ sung: mệt mỏi sâu. Chấp nhận. Kiểu chấp nhận của người đã biết mình sắp chết.</p>
+
+<p class="thought"><em>Gã biết mình bệnh nặng. Và đang giấu.</em></p>
+
+<p class="thought"><em>Tại sao giấu? Vì trong triều đình, bệnh = yếu = bị thay thế. Gã giấu bệnh để giữ ghế.</em></p>
+
+<p class="thought"><em>Và mình vừa tìm thấy quân cờ.</em></p>
+
+<p>Tạ Cảnh Minh quay lại nhìn Vương Bách Nhẫn. Rồi mỉm cười.</p>
+
+<p>Nụ cười rất nhẹ. Kiểu cười mà hắn gọi là "cười biết rồi", dùng khi khách hàng hỏi "thầy có thấy gì không" trong buổi bói. Nụ cười khiến người đối diện nghĩ: "hắn thấy hết."</p>
+
+<p>— Thái Sư muốn thần chứng minh — hắn nói, giọng nhẹ — Được. Thần sẽ chứng minh. Không phải bằng sấm. Bằng... sự thật.</p>
+
+<p>Hắn quay lại. Nhìn dãy đại thần.</p>
+
+<p>— Trong triều đường này — hắn nói, giọng vang — có người đang giấu bệnh.</p>
+
+<p>Im lặng. Loại im lặng đặc quánh.</p>
+
+<p>— Có người đang giấu tâm phản.</p>
+
+<p>Xì xào nhỏ.</p>
+
+<p>— Và có người — hắn dừng lại, mắt quét chậm rãi qua từng khuôn mặt — đã biết trước buổi triều hội hôm nay sẽ diễn ra. Vì chính người đó sắp đặt nó.</p>
+
+<p>Im lặng chết.</p>
+
+<p>Gã đại thần thứ tư, kẻ tự tin, mặt thoáng cứng. Chỉ một thoáng. Nhưng Tạ Cảnh Minh bắt được.</p>
+
+<p class="thought"><em>Dính.</em></p>
+
+<p>— Thần không nói tên. — Hắn khép mắt ba phần, kiểu "ta đang nhìn thiên cơ". — Thiên cơ bất khả lộ. Nhưng thiên cơ... có thể cảnh báo.</p>
+
+<p>Hắn dừng lại. Để im lặng kéo dài, bốn giây, năm giây. Mỗi giây, mỗi đại thần tự hỏi: "hắn đang nói mình?"</p>
+
+<p>Rồi hắn quay sang người thứ năm, đại thần bệnh.</p>
+
+<p>Hắn nhìn gã. Lâu. Không nói gì. Chỉ nhìn.</p>
+
+<p>Gã đại thần tái mặt. Không phải vì biết hắn đang đọc, mà vì một Quốc Sư nhìn mình quá lâu, trong bối cảnh vừa nói "có người giấu bệnh", thì... đáng sợ.</p>
+
+<p>— Lý đại nhân — Tạ Cảnh Minh nói, giọng rất nhẹ, rất buồn.</p>
+
+<p>Gã giật mình. Cả triều nhìn sang.</p>
+
+<p>— Người này... — hắn dừng. Lắc đầu nhẹ. Như đang cố ngăn chính mình nói. — Không. Thần không nên nói.</p>
+
+<p class="thought"><em>Dừng lại kịch tính. Kiếp trước mình dùng cái này trên buổi phát trực tiếp: nói nửa chừng, dừng lại, lắc đầu, khán giả sẽ điên lên đòi nghe tiếp.</em></p>
+
+<p>Hiệu quả tương tự. Cả triều đình nín thở.</p>
+
+<p>— Quốc Sư! — Vương Bách Nhẫn gắt — Nói hay không nói?</p>
+
+<p>— Thái Sư bắt thần nói — hắn mở mắt, nhìn thẳng Vương Bách Nhẫn — thì thần nói.</p>
+
+<p>Hắn quay lại nhìn Lý đại nhân. Ánh mắt buồn, kiểu buồn mà hắn đã luyện qua hàng trăm buổi "tư vấn tâm linh".</p>
+
+<p>— Lý đại nhân... không qua được mùa thu.</p>
+
+<p>Cả triều đình đứng hình.</p>
+
+<p>Lý đại nhân mặt trắng bệch. Tay run. Miệng mở nhưng không phát ra tiếng.</p>
+
+<p class="thought"><em>Gã biết mình bệnh nặng. Lời mình chạm đúng nỗi sợ sâu nhất của gã. Gã không ngạc nhiên vì lời tiên tri, gã ngạc nhiên vì ai đó BIẾT.</em></p>
+
+<p>Xì xào bùng lên khắp đại điện. Không ai biết Lý đại nhân bệnh, gã giấu quá giỏi. Nhưng phản ứng của gã, mặt trắng, tay run, không phản bác, đã xác nhận lời hắn tốt hơn bất kỳ bằng chứng nào.</p>
+
+<p>Vương Bách Nhẫn nhìn Lý đại nhân. Rồi nhìn hắn. Lông mày nhíu lại.</p>
+
+<p class="thought"><em>Ông ta đang cân nhắc. Mình đoán đúng hay bịa? Nếu đúng, mình nguy hiểm. Nếu bịa, mình giỏi. Cả hai đều không phải tin tốt cho ông ta.</em></p>
+
+<p>Tạ Cảnh Minh không chờ phản ứng. Hắn tiếp tục, phải dồn ép, không cho đối phương thời gian suy nghĩ.</p>
+
+<p>— Thần còn thấy nữa. — Hắn quét mắt qua dãy đại thần, dừng ở gã thứ ba — kẻ đang sợ. — Có đại thần trong triều đang có... liên hệ ngoài biên giới.</p>
+
+<p>Gã thứ ba giật nảy. Mạnh. Rõ. Cả triều nhìn thấy.</p>
+
+<p class="thought"><em>Mình không biết gã liên hệ gì, với ai. Nhưng Thiên Diễn Đồng cho mình biết gã sợ bị lộ. Và câu "liên hệ ngoài biên giới" đủ mơ hồ để gã tự áp vào hoàn cảnh mình.</em></p>
+
+<p class="thought"><em>Đọc vị kiếp trước: nói mơ hồ, để nạn nhân tự điền chi tiết.</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng kiếp này: đọc cảm xúc, xác nhận hướng đi.</em></p>
+
+<p class="thought"><em>Kết hợp hai thứ, đáng sợ gấp đôi.</em></p>
+
+<p>Đại điện loạn nhẹ. Nhiều đại thần nhìn nhau, nghi ngờ, sợ hãi. "Quốc Sư nhìn thấy hết", ý nghĩ đó lan như dịch bệnh.</p>
+
+<p>Vương Bách Nhẫn đứng dậy. Mặt đỏ, nhưng không phải vì sợ. Vì giận.</p>
+
+<p>— Đủ rồi! — Ông ta quát. — Mấy lời mơ hồ ai cũng nói được! Nào là "không qua mùa thu", nào là "liên hệ ngoài biên giới" — nói chung chung như vậy ai chẳng trúng?</p>
+
+<p class="thought"><em>Ông ta đúng. Từ góc nhìn logic, ông ta hoàn toàn đúng. Mình đang dùng hiệu ứng chung chung, nói chung để trúng riêng. Bài cơ bản nhất của đọc vị.</em></p>
+
+<p class="thought"><em>Nhưng vấn đề: triều đình không phải hội đồng khoa học. Triều đình là đám đông. Và đám đông tin vào phản ứng, không tin vào logic.</em></p>
+
+<p class="thought"><em>Lý đại nhân run, đám đông tin mình đúng. Gã thứ ba giật mình, đám đông tin mình đúng. Không cần bằng chứng. Chỉ cần phản ứng.</em></p>
+
+<p>Tạ Cảnh Minh nhìn Vương Bách Nhẫn. Không nói. Chỉ nhìn.</p>
+
+<p>Rồi Thiên Diễn Đồng mở.</p>
+
+<p>Không phải đọc cảm xúc mờ nhạt. Lần này, rõ ràng hơn bao giờ hết, có lẽ vì cả triều đình đang tập trung cảm xúc cùng lúc, và Thiên Diễn Đồng hút hết.</p>
+
+<p>Hắn nhìn Vương Bách Nhẫn, và thấy: giận, khinh, và... sợ. Sợ rất sâu, bị chôn dưới nhiều lớp tức giận. Ông ta sợ không phải hắn. Sợ... mất kiểm soát. Sợ thứ gì đó đang thay đổi trong triều đình mà ông ta không kiểm soát được.</p>
+
+<p class="thought"><em>Ông ta không phải kẻ xấu. Ông ta là kẻ cũ. Thời đại thay đổi, ông ta không theo kịp, nên muốn giữ nguyên. Và mình, đại diện cho sự thay đổi.</em></p>
+
+<p class="thought"><em>Thú vị. Nhưng không dùng được ngay.</em></p>
+
+<p>Hắn chuyển ánh mắt, và gặp.</p>
+
+<p>Lục Thanh Dao.</p>
+
+<p>Nàng ngồi ở vị trí riêng, không trái, không phải. Phía sau rèm mỏng, hơi tách khỏi triều đình. Nhiếp Chính Vương không ngồi cùng hàng với đại thần, nàng ở trên họ.</p>
+
+<p>Và nàng đang nhìn hắn.</p>
+
+<p>Không phải nhìn nghi ngờ như lần đầu. Không phải nhìn đánh giá như lần gặp riêng. Lần này, nàng nhìn hắn như nhìn một con cờ vừa đi nước bất ngờ. Môi hơi cong, nửa cười nửa không.</p>
+
+<p>Thiên Diễn Đồng chạm vào nàng, và lần này, hắn đọc được nhiều hơn lần trước. Không phải tường thành trống rỗng. Mà là:</p>
+
+<p>Thú vị. Ngạc nhiên, nhẹ thôi. Và... đánh giá lại. Nàng đang đánh giá lại hắn. Nâng mức từ "con cờ" lên... thứ gì đó khác.</p>
+
+<p class="thought"><em>Nàng bắt đầu coi mình không chỉ là đồ chơi.</em></p>
+
+<p class="thought"><em>Tốt hay xấu?</em></p>
+
+<p class="thought"><em>Chưa biết.</em></p>
+
+<p>Hắn quay lại. Nhìn hoàng đế, vua vẫn sau rèm, nhưng bàn tay không còn siết thành ghế. Ngược lại, thả lỏng. Hơi thở đều hơn.</p>
+
+<p class="thought"><em>Vua nhẹ nhõm. Vì mình đang thắng. Và nếu mình thắng, quyết định của vua được chứng minh là đúng.</em></p>
+
+<p>Tạ Cảnh Minh cúi đầu nhẹ về phía ngai vàng.</p>
+
+<p>— Bệ hạ. Thần đã nói những gì Thiên Cơ cho thần thấy. Còn tin hay không — thần không ép.</p>
+
+<p>Câu kết hoàn hảo. Khiêm tốn vừa đủ. Đặt quyền quyết định vào tay vua, cho vua cơ hội thể hiện quyền lực.</p>
+
+<p>Hoàng đế đứng dậy.</p>
+
+<p>— Quốc Sư đã nói. Triều đình đã nghe. — Giọng vua vang hơn mọi khi — hơi run, nhưng rõ ràng. — Ai còn nghi ngờ — tự suy xét.</p>
+
+<p>Vương Bách Nhẫn mím môi. Nhưng không nói thêm. Ông ta biết, trận này thua. Không phải thua vì hắn đúng. Thua vì đám đông đã tin.</p>
+
+<p>Triều hội giải tán.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Năm ngày sau, Lý đại nhân chết.</p>
+
+<p>Tin đến lúc Tạ Cảnh Minh đang uống trà sáng ở Minh Nguyệt Đường. Thái giám dẫn đường, gã đã trở thành "nguồn tin" không chính thức của hắn, hớt hải chạy đến.</p>
+
+<p>— Quốc Sư! Lý đại nhân... chết đêm qua!</p>
+
+<p>Tạ Cảnh Minh đặt chén trà xuống. Chậm.</p>
+
+<p>— Chết vì gì?</p>
+
+<p>— Bệnh cũ tái phát. Thổ huyết trong đêm. Ngự y nói... bệnh đã nặng từ lâu, giấu không ai biết.</p>
+
+<p class="thought"><em>Bệnh cũ tái phát. Đúng như mình đoán, gã bệnh nặng, giấu giỏi. Mình đọc được dấu hiệu sức khỏe, nói "không qua mùa thu".</em></p>
+
+<p class="thought"><em>Và gã chết thật.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p>Hắn nhìn chén trà. Mặt nước phẳng lặng, phản chiếu khuôn mặt gầy của hắn.</p>
+
+<p class="thought"><em>"Không qua mùa thu." Mình nói câu đó năm ngày trước. Mùa thu còn xa. Nhưng gã chết ngay.</em></p>
+
+<p class="thought"><em>Bệnh cũ tái phát, có thể. Gã đã bệnh nặng. Áp lực từ việc bị lộ trước triều đình có thể đẩy nhanh.</em></p>
+
+<p class="thought"><em>Hoặc...</em></p>
+
+<p class="thought"><em>Ai đó giết gã. Vì sau khi mình nói "không qua mùa thu", Lý đại nhân trở thành bằng chứng. Nếu gã sống, lời mình chỉ là lời đoán. Nếu gã chết, lời mình là tiên tri.</em></p>
+
+<p class="thought"><em>Ai được lợi từ việc Lý đại nhân chết? Ai muốn lời mình thành tiên tri?</em></p>
+
+<p class="thought"><em>Hoàng đế — có thể. Lời tiên tri đúng = Quốc Sư thật = quyết định của vua được chứng minh.</em></p>
+
+<p class="thought"><em>Lục Thanh Dao — có thể. Một Quốc Sư có "sức mạnh thật" phức tạp hơn một tên bịp. Nhưng cũng hữu dụng hơn.</em></p>
+
+<p class="thought"><em>Hoặc... Thiên Cơ.</em></p>
+
+<p class="thought"><em>Nếu niềm tin tạo ra hiện thực, và cả triều đình vừa chứng kiến mình phán "không qua mùa thu", thì niềm tin của hàng chục đại thần + hàng trăm thái giám cung nữ nghe tin + hàng nghìn dân chúng sẽ nghe đồn... có đủ mạnh để đẩy Thiên Cơ giết một người?</em></p>
+
+<p class="thought"><em>Mình vừa giết Lý đại nhân?</em></p>
+
+<p class="thought"><em>Bằng một câu nói?</em></p>
+
+<p>Tay hắn run. Nhẹ. Hắn nắm chặt chén trà, nóng bỏng nhưng không thả.</p>
+
+<p class="thought"><em>Không. Đừng nghĩ vậy. Gã bệnh. Gã sẽ chết dù mình có nói hay không. Mình chỉ... nói đúng thời điểm.</em></p>
+
+<p class="thought"><em>... Phải không?</em></p>
+
+<p>Hắn không trả lời được câu hỏi đó. Và hắn biết, sẽ không bao giờ trả lời được. Vì ở thế giới này, ranh giới giữa "đoán đúng", "bị lợi dụng", và "tạo ra hiện thực", mờ hơn sương khói.</p>
+
+<p>Tin Lý đại nhân chết lan khắp kinh thành trong một ngày.</p>
+
+<p>"Quốc Sư phán — đại thần chết."</p>
+
+<p>Sáu chữ. Đơn giản. Kinh hoàng. Và hiệu quả hơn bất kỳ chiêu thao túng nào mà hắn từng dùng kiếp trước.</p>
+
+<p>Chiều hôm đó, không ai ở Minh Nguyệt Đường dám nhìn thẳng mặt hắn.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối.</p>
+
+<p>Tạ Cảnh Minh ngồi trong phòng, nến sáng. Không uống trà, không ăn. Chỉ ngồi.</p>
+
+<p>Và nghe tiếng gõ cửa. Nhẹ. Quen.</p>
+
+<p>Hắn không cần Thiên Diễn Đồng để biết ai.</p>
+
+<p>— Vào.</p>
+
+<p>Lục Thanh Dao bước vào.</p>
+
+<p>Lần thứ hai nàng đến phòng hắn. Lần đầu, hắn trong phòng giam, nàng đến thử. Lần này, hắn trong Minh Nguyệt Đường, nàng đến...</p>
+
+<p class="thought"><em>Đến vì gì?</em></p>
+
+<p>Nàng đứng trước mặt hắn. Không ngồi. Mắt nhìn xuống, nhưng không phải đánh giá như lần trước. Lần này, nàng nhìn hắn như... nhìn thứ gì đó lần đầu thấy rõ.</p>
+
+<p>Im lặng.</p>
+
+<p>Năm giây. Mười giây.</p>
+
+<p>Rồi nàng nói.</p>
+
+<p>— Quốc Sư... thú vị đấy.</p>
+
+<p>Giọng nhẹ. Ba chữ. Nhưng khác hẳn cách nàng nói "Quốc Sư" lần đầu. Lần đầu, mỉa mai. Lần này, thận trọng.</p>
+
+<p>Tạ Cảnh Minh nhìn nàng. Thiên Diễn Đồng mở, và lần này, hắn đọc được rõ hơn: nàng đang cân nhắc. Không phải cân nhắc giết hay giữ. Mà cân nhắc... tiếp cận.</p>
+
+<p class="thought"><em>Nàng muốn gì đó ở mình. Không phải quyền lực, nàng đã có. Thông tin? Liên minh? Hay...</em></p>
+
+<p>Nàng quay người. Bước ra.</p>
+
+<p>Dừng ở cửa.</p>
+
+<p>— Lý đại nhân — nàng nói, không quay lại — chết vì bệnh.</p>
+
+<p>Không phải câu hỏi. Câu khẳng định. Nàng đang nói cho hắn biết: "ta biết gã chết vì bệnh, không phải vì lời ngươi."</p>
+
+<p>Rồi nàng thêm, rất nhẹ:</p>
+
+<p>— Nhưng thiên hạ không cần biết điều đó.</p>
+
+<p>Cửa đóng. Nàng đi.</p>
+
+<p>Tạ Cảnh Minh ngồi lại. Một mình.</p>
+
+<p class="thought"><em>Nàng biết. Nàng biết lời mình chỉ là đoán. Nàng biết Lý đại nhân chết vì bệnh.</em></p>
+
+<p class="thought"><em>Nhưng nàng không lật tẩy mình.</em></p>
+
+<p class="thought"><em>Vì cái chết đó có lợi cho nàng. Một Quốc Sư "đoán trúng cái chết" = vũ khí chính trị. Và Nhiếp Chính Vương cần vũ khí.</em></p>
+
+<p class="thought"><em>Nàng không tin mình. Nhưng nàng bảo vệ huyền thoại của mình.</em></p>
+
+<p class="thought"><em>Vì huyền thoại đó có giá.</em></p>
+
+<p>Hắn nhìn ra cửa sổ. Đêm. Trăng khuyết.</p>
+
+<p>Và hắn cảm thấy, rất rõ, ánh mắt Lục Thanh Dao khi nàng nói "thú vị đấy".</p>
+
+<p>Không phải ánh mắt khinh. Không phải ánh mắt nghi ngờ.</p>
+
+<p>Ánh mắt của kẻ vừa tìm thấy đối thủ ngang tầm.</p>
+
+<p>Nguy hiểm hơn đao phủ.</p>
+
+<p>Và hấp dẫn hơn bất kỳ ai hắn từng gặp.</p>
+
+<p class="thought"><em>Đm. Đừng nghĩ vậy.</em></p>
+
+<p>Hắn tự tát nhẹ vào má. Rồi nằm xuống.</p>
+
+<p>Ngủ không được.</p>
+
+<p>Vì mỗi khi nhắm mắt, hắn thấy khuôn mặt Lý đại nhân, trắng bệch, tay run, khi hắn nói "không qua mùa thu".</p>
+
+<p>Và hắn không biết: mình đã đoán đúng, hay đã giết ông ta.</p>
+
+<p>Câu hỏi đó theo hắn vào đêm. Không có câu trả lời.</p>
+
+<p>Nhưng ở đâu đó trong kinh thành, tin đồn đã lan.</p>
+
+<p>"Quốc Sư phán — người chết."</p>
+
+<p>"Quốc Sư nhìn thấy hết."</p>
+
+<p>"Đừng bao giờ — đừng bao giờ — nói dối trước mặt Quốc Sư."</p>
+
+<p>Và Thiên Cơ, nếu nó thật sự tồn tại, ghi nhận thêm một lần: niềm tin tập thể vừa dày thêm. Quanh Tạ Cảnh Minh, thứ gì đó đang thay đổi.</p>
+
+<p>Hắn chỉ chưa biết, đó là lời chúc phúc hay lời nguyền.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-04.html">&larr; CHƯƠNG 04</a>
+      <span class="disabled" style="font-family: 'Space Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 1.8px; padding: 10px 20px; border: 1px solid #333; border-radius: 24px; display: inline-block; color: #444;">CHƯƠNG 06 &rarr;</span>
+    </nav>
+
+    <div class="word-count">3.520 TỪ</div>
+
+  </div>
+</body>
+</html>

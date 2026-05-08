@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 03: Quyết Định — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .letter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 16px 24px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin: 16px 0;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .prose .list-item {
+      color: var(--muted);
+      padding-left: 1em;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-02.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 3 / 30</span>
+    <a href="chapter-04.html" class="nav-disabled">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 03</div>
+    <h1 class="chapter-title">Quyết Định</h1>
+    <div class="chapter-meta">Phần I — Thức Tỉnh &middot; 3.397 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Điện thoại reo lúc sáu giờ sáng.</p>
+
+    <p>Hắn đã thức từ năm giờ. Ngàn năm tu luyện, hắn chỉ cần ngủ hai canh giờ — nhưng thân xác phàm này kéo hắn chìm vào giấc ngủ như bùn, nặng nề, không mộng. Hắn ghét cảm giác đó. Mất kiểm soát, dù chỉ là trong giấc ngủ, luôn khiến hắn khó chịu.</p>
+
+    <p class="short">Hắn nhìn màn hình. Số lạ. Không phải số từng nhắn tin đe dọa — khác.</p>
+
+    <p class="short">Hắn nhấc máy.</p>
+
+    <p>— Lục Trường An phải không?</p>
+
+    <p>Giọng đàn ông, trung niên, khàn. Ma Tâm Quan không cần nhìn mặt — giọng nói đủ rồi. Nhịp thở qua điện thoại hơi nhanh, giọng cố ép thấp để tạo uy, nhưng có một chút run ở đuôi câu. Kẻ này đang diễn. Diễn vai nguy hiểm, nhưng bản thân không nguy hiểm.</p>
+
+    <p class="short">— Tôi nghe.</p>
+
+    <p>— Nghe đây. Mày nợ tiền anh Bảo. Tháng này quá hạn rồi. Anh Bảo kiên nhẫn lắm rồi, mày hiểu không? Tao cho mày ba ngày. Ba ngày không có tiền — tao đến nhà mày.</p>
+
+    <p class="short">Hắn im lặng.</p>
+
+    <p class="short">Không phải sợ. Đang nghe.</p>
+
+    <p>Giọng kẻ kia tiếp tục, nhanh hơn — dấu hiệu mất kiên nhẫn vì không nhận được phản ứng:</p>
+
+    <p>— Mày câm à? Nghe tao nói không?</p>
+
+    <p class="short">— Tôi nghe rõ.</p>
+
+    <p class="short">— Vậy mày tính sao?</p>
+
+    <p class="short">Hắn hít một hơi chậm.</p>
+
+    <p class="thought">Kẻ này là tay sai cấp thấp. Gọi lúc sáu giờ sáng — nghĩa là hắn có nhiều số phải gọi trong ngày, Lục Trường An chỉ là một trong mười, hai mươi con nợ. Giọng đe dọa nhưng không nói cụ thể sẽ làm gì — nghĩa là không có quyền quyết định, chỉ đang thi hành lệnh. "Anh Bảo" là kẻ chủ chốt, nhưng kẻ đang gọi không phải.</p>
+
+    <p class="thought">Và quan trọng nhất: hắn nói "ba ngày". Tức là đã hết hạn chót từ lâu nhưng vẫn gia hạn. Kẻ cho vay thật sự nguy hiểm không gia hạn — chúng hành động. Gia hạn nghĩa là chúng cũng đang cần tiền, đang hy vọng con nợ trả, không muốn leo thang vì leo thang tốn thời gian và rủi ro.</p>
+
+    <p class="thought">Ma tu cấp thấp. Dọa miệng là chính.</p>
+
+    <p>Hắn nói, giọng bình thản:</p>
+
+    <p>— Anh gọi tôi lúc sáu giờ sáng. Nghĩa là anh có danh sách dài. Tôi đoán tôi không phải người nợ nhiều nhất. Anh Bảo của anh đang cần thu hồi gấp, đúng không? Có lẽ anh Bảo cũng đang nợ ai đó.</p>
+
+    <p class="short">Im lặng bên kia.</p>
+
+    <p class="short">Dài.</p>
+
+    <p>— Mày... mày nói cái gì?</p>
+
+    <p>Giọng run rõ hơn. Không phải giận — là bất ngờ. Kẻ đòi nợ quen với sợ hãi, quen với van xin, quen với tắt máy. Không quen với ai phân tích ngược.</p>
+
+    <p class="short">Hắn tiếp:</p>
+
+    <p>— Tôi sẽ trả. Nhưng không phải trong ba ngày. Tôi cần thời gian. Anh báo lại anh Bảo: nếu ép quá, tôi sẽ không trả được — và lúc đó, anh Bảo mất cả gốc lẫn lời. Nếu cho tôi thời gian, anh Bảo sẽ nhận đủ. Anh nghĩ anh Bảo muốn cái nào?</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">Rồi:</p>
+
+    <p>— Mày... mày liều thật đấy.</p>
+
+    <p>— Tôi không liều. Tôi đang nói sự thật. Anh tự biết cái nào có lợi hơn.</p>
+
+    <p>Tiếng thở bên kia nặng hơn. Rồi tắt máy. Không chửi, không đe dọa thêm. Chỉ tắt.</p>
+
+    <p class="short">Hắn đặt điện thoại xuống.</p>
+
+    <p class="short">Nhìn trần nhà.</p>
+
+    <p class="thought">Kiếp trước, loại kẻ này ta chỉ cần liếc một cái là quỳ. Kiếp này, phải nói hai phút. Phiền phức.</p>
+
+    <p>Nhưng hiệu quả. Kẻ đòi nợ sẽ báo lại, "anh Bảo" sẽ cân nhắc, và Lục Trường An sẽ có thêm thời gian. Không phải vì hắn thuyết phục — mà vì hắn nói đúng. Trong bất kỳ cuộc đàm phán nào, kẻ nói đúng sự thật mà đối phương đang cố giấu — kẻ đó nắm quyền.</p>
+
+    <p class="thought">Đàm phán kiếp trước hay kiếp này đều giống nhau. Chỉ cần biết đối phương sợ gì.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn cần tiền.</p>
+
+    <p>Mười hai nghìn trong ví. Không đủ ăn một ngày. Thẻ ngân hàng — ký ức thân xác gốc cho biết còn mấy trăm nghìn trong tài khoản, nhưng bị khóa vì nợ quá hạn. Lương Vạn Lý Group — nếu còn đi làm — sẽ vào cuối tháng. Hai tuần nữa.</p>
+
+    <p class="short">Hai tuần.</p>
+
+    <p class="short">Hắn mở tủ lạnh. Chai nước, túi bánh mì khô. Hết.</p>
+
+    <p class="thought">Ngàn năm trước, ta từng nhịn ăn ba tháng trong Huyết Hải khi bị truy sát. Nhưng lúc đó ta có linh lực nuôi cơ thể. Giờ — không có. Thân xác phàm này sẽ chết đói trong vài ngày.</p>
+
+    <p>Hắn lấy túi bánh mì khô, ăn. Cứng, nhạt, vỡ vụn trong miệng. Uống nước lã theo.</p>
+
+    <p class="short">Xong bữa sáng.</p>
+
+    <p>Hắn thay quần áo — sơ mi trắng sạch nhất trong bốn cái, quần tây ít sờn nhất. Nhìn gương. Vẫn bình thường, vẫn quầng thâm, vẫn gầy. Nhưng lưng thẳng hơn hôm trước — hắn đang ép thân xác này theo thói quen của mình.</p>
+
+    <p class="short">Ra khỏi nhà. Đi bộ.</p>
+
+    <p class="short">Đích đến hôm nay: thư viện công cộng.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Thư viện quận nằm trên một con phố yên tĩnh, cách căn hộ bốn mươi phút đi bộ. Tòa nhà cũ, ba tầng, tường sơn vàng bạc phếch. Biển hiệu "Thư viện" bằng đồng đã xỉn màu. Cửa kính tự động — hỏng, phải đẩy tay.</p>
+
+    <p class="short">Hắn bước vào.</p>
+
+    <p>Mát. Yên tĩnh. Mùi sách cũ — thứ mùi gần giống mùi trúc giản trong thư khố Huyền Minh Tông, nhưng ít cổ kính hơn, nhiều bụi hơn.</p>
+
+    <p>Vài người ngồi rải rác: sinh viên ôn thi, một ông già đọc báo, một bà mẹ trẻ cho con ngồi xem sách tranh. Thủ thư là phụ nữ trung niên, tóc búi gọn, đeo kính lão, đang đánh máy gì đó trên máy tính cũ.</p>
+
+    <p class="short">Hắn đi thẳng đến kệ sách kinh tế.</p>
+
+    <p>Luật doanh nghiệp. Quản trị. Tiếp thị. Tài chính. Kế toán cơ bản. Thuế. Hợp đồng thương mại. Luật lao động.</p>
+
+    <p class="short">Hắn lấy bảy cuốn, chồng lên bàn, ngồi xuống.</p>
+
+    <p class="short">Và đọc.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Ngàn năm tu luyện không cho hắn trí nhớ siêu phàm theo nghĩa phép thuật. Nhưng nó cho hắn thứ tốt hơn: kỷ luật đọc.</p>
+
+    <p>Ở Huyền Minh Tông, hắn từng nghiên cứu mười ngàn quyển trúc giản về trận pháp, đan dược, nhân tâm thuật trong vòng năm mươi năm. Mỗi quyển hắn đọc ba lần: lần một lướt toàn cảnh, lần hai ghi nhận trọng tâm, lần ba liên kết với những gì đã biết. Phương pháp đó không thay đổi dù vật liệu đọc là trúc giản hay sách giấy.</p>
+
+    <p class="short">Cuốn đầu tiên: Luật doanh nghiệp.</p>
+
+    <p>Hắn đọc xong trong hai tiếng. Không phải vì sách mỏng — vì hắn đọc nhanh và biết bỏ qua phần nào. Luật pháp hiện đại, ở cốt lõi, không khác luật tông môn: quy định ai được làm gì, ai không, phạt ai nếu vi phạm, và — quan trọng nhất — kẽ hở nằm ở đâu.</p>
+
+    <p class="thought">Thiên đạo thời này cũng có lỗ hổng. Như bất kỳ thiên đạo nào.</p>
+
+    <p class="short">Cuốn thứ hai: Quản trị doanh nghiệp.</p>
+
+    <p>Hắn đọc, và bắt đầu mỉm cười.</p>
+
+    <p>Không phải vì hay. Mà vì quen. Những nguyên tắc quản trị — xây dựng đội ngũ, phân quyền, kiểm soát dòng tiền, xử lý xung đột nội bộ — hắn đã áp dụng ngàn năm rồi. Chỉ là ngôn ngữ khác. Chỉ tiêu hiệu suất là chỉ tiêu tu luyện. Xây dựng đội nhóm là luyện đội chiến đấu. Đánh giá hiệu suất là đánh giá đệ tử.</p>
+
+    <p class="thought">Sách này... ta viết được. Và viết hay hơn.</p>
+
+    <p class="short">Cuốn thứ ba: Hợp đồng thương mại.</p>
+
+    <p>Đây mới là thứ hắn cần. Hợp đồng — bảo bối pháp lý. Ở thế giới này, một bản hợp đồng có sức mạnh ngang một lời thề huyết mạch kiếp trước. Ký xong thì bị ràng buộc, vi phạm thì bị phạt, và — nếu biết viết — có thể gài bẫy tinh vi hơn bất kỳ trận pháp nào.</p>
+
+    <p>Hắn đọc từng điều khoản mẫu, phân tích cách chúng hoạt động. Tìm quy luật: chỗ nào mơ hồ thì chỗ đó có thể diễn giải theo hai nghĩa. Chỗ nào "quy định sau" thì chỗ đó là khoảng trống. Chỗ nào viết nhiều chữ nhất thì chỗ đó đang cố giấu thứ gì đó.</p>
+
+    <p class="thought">Kiếp trước, Diệp... Diệp Thanh Phong — mưu sĩ giỏi nhất Huyền Minh Tông — từng nói: "Lời thề càng dài, kẻ thề càng gian." Hợp đồng cũng vậy.</p>
+
+    <p>Hắn đọc tiếp. Cuốn thứ tư, thứ năm. Giữa chừng đứng dậy uống nước ở vòi — miễn phí. Rửa mặt. Rồi quay lại đọc.</p>
+
+    <p class="short">Trưa. Bụng đói. Hắn không có tiền ăn trưa.</p>
+
+    <p class="short">Hắn tiếp tục đọc.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Bốn giờ chiều. Hắn đóng cuốn sách cuối cùng.</p>
+
+    <p>Bảy cuốn trong một ngày. Không phải ghi nhớ từng chữ — nhưng hiểu cấu trúc. Hiểu hệ thống. Hiểu thế giới kinh doanh vận hành theo quy luật nào, ai nắm quyền, ai bị kiểm soát, và tiền chảy từ đâu đến đâu.</p>
+
+    <p class="short">Hắn ngồi lại, nhắm mắt.</p>
+
+    <p>Trong đầu hắn, một bản đồ đang hình thành. Không phải bản đồ tu tiên giới với núi sông và linh mạch — là bản đồ quyền lực thời hiện đại.</p>
+
+    <p class="thought">Ở dưới cùng: người lao động. Bán thời gian, bán sức, bán tuổi trẻ. Tương đương phàm nhân — không tu vi, không quyền lực, chỉ có sức.</p>
+
+    <p class="thought">Trên một tầng: doanh nghiệp nhỏ. Chủ quán, tiệm tạp hóa, người làm tự do. Tương đương tán tu — tu luyện một mình, không tông môn, sống chết tự lo.</p>
+
+    <p class="thought">Trên nữa: công ty vừa. Vạn Lý Group nằm ở đây. Tương đương tiểu tông phái — có đệ tử, có lãnh thổ, nhưng không đủ mạnh để tự bảo vệ trước kẻ lớn hơn.</p>
+
+    <p class="thought">Trên nữa: tập đoàn lớn. Tương đương đại tông phái.</p>
+
+    <p class="thought">Trên nữa: tài phiệt, quỹ đầu tư. Tương đương cổ tộc — lão quái vật đã tồn tại hàng trăm năm.</p>
+
+    <p class="thought">Trên cùng: đại gia công nghệ, kẻ thao túng quốc gia. Tương đương... thượng cổ thế lực. Những tồn tại mà ngay cả thiên đạo cũng không chạm được.</p>
+
+    <p class="short">Hắn mở mắt.</p>
+
+    <p class="thought">Mọi thứ ta biết đều áp dụng được. Chỉ cần dịch ngôn ngữ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn rời thư viện lúc năm giờ.</p>
+
+    <p>Không đi về nhà. Rẽ phải, đi ba trăm mét, đến chi nhánh ngân hàng — nơi mà ký ức thân xác gốc cho biết đã vay tiền.</p>
+
+    <p>Tòa nhà kính sáng bóng, điều hòa mát lạnh, nhân viên mặc đồng phục xanh đậm. Ghế ngồi chờ bằng da. Nước uống miễn phí trên quầy. Mọi thứ được thiết kế để tạo cảm giác an toàn, đáng tin, chuyên nghiệp.</p>
+
+    <p class="thought">Huyễn thuật. Cấp thấp, nhưng hiệu quả.</p>
+
+    <p>Hắn lấy số thứ tự, ngồi chờ. Quan sát.</p>
+
+    <p>Nhân viên ngân hàng: hai mươi lăm tuổi, nữ, cười chuyên nghiệp — loại cười được tập huấn, không tự nhiên. Mắt mệt, nhưng giấu sau lớp trang điểm. Tay gõ phím nhanh, miệng chào khách đều đặn như máy. Cô ta không ghét khách — cô ta ghét công việc. Nhưng cần tiền, nên ở lại.</p>
+
+    <p class="thought">Đệ tử bất mãn. Ở tông môn nào cũng có.</p>
+
+    <p class="short">Đến lượt.</p>
+
+    <p>— Chào anh, em có thể giúp gì ạ?</p>
+
+    <p>— Tôi muốn hỏi về khoản vay cá nhân. Tên Lục Trường An.</p>
+
+    <p>Cô nhân viên gõ tên, nhìn màn hình. Nụ cười chuyên nghiệp hơi chùng — dấu hiệu nhỏ, nhưng hắn nhận ra. Cô ta vừa thấy số nợ, và số đó không đẹp.</p>
+
+    <p>— Dạ, anh có khoản vay cá nhân... năm trăm triệu, lãi suất... — cô ta nhìn kỹ hơn — ...mười tám phần trăm một năm. Hiện quá hạn bốn tháng. Có phí phạt cộng dồn.</p>
+
+    <p>— Tôi muốn xem lại hợp đồng gốc. Được không?</p>
+
+    <p>Cô nhân viên hơi ngạc nhiên — con nợ quá hạn thường đến năn nỉ giãn nợ, không ai đòi xem hợp đồng.</p>
+
+    <p class="short">— Dạ, anh chờ em tra.</p>
+
+    <p class="short">Năm phút sau, cô ta mang ra bản sao hợp đồng vay.</p>
+
+    <p class="short">Hắn đọc.</p>
+
+    <p>Ngàn năm đọc trúc giản phức tạp hơn bất kỳ hợp đồng nào. Năm phút là đủ.</p>
+
+    <p class="short">Và hắn thấy.</p>
+
+    <div class="letter">
+      Điều khoản 7.3: "Bên vay đồng ý rằng trong trường hợp bất động sản không được bàn giao đúng hạn, khoản vay vẫn có hiệu lực và bên vay chịu toàn bộ trách nhiệm trả nợ."
+    </div>
+
+    <div class="letter">
+      Điều khoản 9.1: "Phí phạt trả chậm: 0.05% mỗi ngày trên dư nợ gốc."
+    </div>
+
+    <div class="letter">
+      Điều khoản 12.2: "Mọi tranh chấp được giải quyết tại tòa án do bên cho vay lựa chọn."
+    </div>
+
+    <p class="short">Hắn đặt hợp đồng xuống.</p>
+
+    <p class="thought">Lục Trường An cũ — Lục Trường An thật — đã ký hợp đồng này mà không đọc. Hoặc đọc mà không hiểu. Bị môi giới lừa mua căn hộ không tồn tại, tiền chảy vào túi kẻ trung gian, nhưng hợp đồng ngân hàng ràng buộc người vay — không ràng buộc người bán.</p>
+
+    <p class="thought">Bản hợp đồng này gài từ đầu. Điều khoản 7.3 chính là cái bẫy: dù căn hộ không bàn giao, người vay vẫn phải trả. Kẻ viết hợp đồng này biết chuyện gì sẽ xảy ra.</p>
+
+    <p class="short">Hắn nhìn cô nhân viên.</p>
+
+    <p class="short">— Hợp đồng này do ai soạn?</p>
+
+    <p>— Dạ, đó là hợp đồng mẫu của ngân hàng ạ. Nhưng khoản vay này qua kênh đối tác môi giới, nên có thể có điều khoản bổ sung...</p>
+
+    <p class="short">— Kênh đối tác nào?</p>
+
+    <p class="short">Cô ta do dự. Thông tin này không nên nói cho khách.</p>
+
+    <p>Hắn nhìn thẳng vào mắt cô. Không đe dọa. Không nài nỉ. Chỉ nhìn — bình tĩnh, rõ ràng — như thể hắn đã biết câu trả lời và đang cho cô cơ hội nói trước.</p>
+
+    <p>Ma Tâm Quan ở dạng tinh tế nhất không phải đọc người — mà là khiến người tự đọc chính mình. Khi ai đó bị nhìn thẳng mà không chớp, bộ não họ tự hỏi: "Người này biết gì?" Và câu hỏi đó thường dẫn đến câu trả lời.</p>
+
+    <p class="short">Cô nhân viên nuốt nước bọt.</p>
+
+    <p>— Dạ, em... em chỉ biết là qua công ty môi giới Phú An. Nhưng chi nhánh đó đã đóng cửa rồi ạ.</p>
+
+    <p class="thought">Phú An. Đóng cửa. Nghĩa là lừa xong rồi biến.</p>
+
+    <p class="short">— Cảm ơn.</p>
+
+    <p class="short">Hắn gấp bản sao, đứng dậy.</p>
+
+    <p>— Dạ, anh ơi, anh có muốn trao đổi về phương án tái cơ cấu nợ...?</p>
+
+    <p class="short">— Chưa. Tôi sẽ quay lại.</p>
+
+    <p>Hắn bước ra khỏi ngân hàng. Nắng chiều xiên qua mặt kính, ấm, nhưng hắn không để ý.</p>
+
+    <p class="thought">Ngân hàng không phải kẻ thù. Chỉ là công cụ — bị kẻ khác lợi dụng, giống như linh khí bị ma tu dùng để giết người. Linh khí vô tội. Ngân hàng cũng vô tội. Kẻ có tội là bọn Phú An — những "ma tu cấp thấp" chuyên lừa phàm nhân.</p>
+
+    <p class="thought">Nhưng ta không đến đây để trả thù bọn Phú An. Chúng đã biến mất. Trả thù kẻ đã chạy là lãng phí thời gian.</p>
+
+    <p class="thought">Ta đến đây để hiểu.</p>
+
+    <p class="thought">Và ta đã hiểu.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Hắn đi bộ về nhà, mang theo bản sao hợp đồng trong túi áo.</p>
+
+    <p>Trời tối dần. Đèn đường bật. Thành phố chuyển từ nóng sang mát, từ ồn sang vừa đủ.</p>
+
+    <p>Hắn ghé qua một cửa hàng tiện lợi. Nhìn giá: ổ bánh mì nhỏ nhất — mười nghìn. Hắn còn mười hai nghìn. Mua. Còn hai nghìn.</p>
+
+    <p>Ăn bánh mì trên đường về. Nhai chậm. Cơ thể này cần thức ăn — hắn có thể chịu đựng, nhưng không thể hoạt động hiệu quả nếu đói.</p>
+
+    <p class="thought">Tiền. Mọi thứ ở thế giới này đều quay về tiền. Linh thạch thời hiện đại.</p>
+
+    <p class="thought">Lục Trường An cũ không có tiền vì không có giá trị. Lương thấp, năng lực thấp, không ai cần.</p>
+
+    <p class="thought">Ta cũng không có tiền. Nhưng ta có giá trị. Chỉ là chưa ai biết.</p>
+
+    <p class="thought">Vấn đề: làm sao biến giá trị thành tiền, nhanh nhất có thể?</p>
+
+    <p>Hắn về đến căn hộ. Leo sáu tầng — chân vẫn đau, nhưng ít hơn hôm qua. Thân xác đang thích nghi.</p>
+
+    <p class="short">Vào phòng. Bật đèn. Ngồi xuống bàn.</p>
+
+    <p class="short">Mở máy tính.</p>
+
+    <p>Hắn không lên mạng ngay. Ngồi im, nhắm mắt, sắp xếp suy nghĩ.</p>
+
+    <p class="thought">Tình hình hiện tại:</p>
+
+    <p class="thought">Một — nợ 500 triệu, đang bị đòi. Đã mua thêm thời gian bằng cuộc gọi sáng nay, nhưng không lâu.</p>
+
+    <p class="thought">Hai — Vạn Lý Group. Hắn vẫn là nhân viên. Chưa bị đuổi. Hạn chót báo cáo đã qua nhưng chưa có thông báo gì — nghĩa là hoặc công ty không quan tâm, hoặc đang chờ hắn tự đến.</p>
+
+    <p class="thought">Ba — tiền: còn hai nghìn. Lương cuối tháng, nếu còn đi làm. Đói là vấn đề trước mắt.</p>
+
+    <p class="thought">Bốn — giá trị: ngàn năm kinh nghiệm quản trị, đàm phán, đọc người. Không ai biết. Chưa ai thấy.</p>
+
+    <p class="thought">Năm — chiến lược:</p>
+
+    <p class="short">Hắn mở mắt.</p>
+
+    <p class="thought">Bước một — giữ công việc ở Vạn Lý Group. Cần lương để sống, cần vị trí để bắt đầu.</p>
+
+    <p class="thought">Bước hai — đi làm. Quan sát. Lập bản đồ quyền lực nội bộ.</p>
+
+    <p class="thought">Bước ba — tìm cơ hội. Trong bất kỳ tông môn nào đang mục ruỗng, luôn có kẽ nứt. Kẻ biết nhìn sẽ tìm thấy.</p>
+
+    <p>Hắn gật đầu với chính mình. Kế hoạch đơn giản — nhưng đơn giản mới tốt. Phức tạp là cho kẻ muốn khoe. Hiệu quả là cho kẻ muốn thắng.</p>
+
+    <p>Hắn mở máy tính, vào trang web Vạn Lý Group.</p>
+
+    <p>Đọc lại thông tin công ty: lĩnh vực, quy mô, ban lãnh đạo, dự án gần đây. Đọc tên CEO — Trần Quốc Huy. Nhìn ảnh: bụng bia, tóc nhuộm, cười ha hả trong ảnh sự kiện. Đọc tên VP — Phạm Đức Minh. Ảnh khác hẳn: gầy, mắt sắc, sơ mi trắng, nhìn thẳng ống kính.</p>
+
+    <p class="thought">Hai kẻ này ghét nhau. Nhìn ảnh cũng biết.</p>
+
+    <p>Hắn mở phần mềm soạn thảo, bắt đầu viết hồ sơ. Không phải viết mới — chỉnh sửa hồ sơ cũ của Lục Trường An, cập nhật cho đúng. Không phải để xin việc mới — để chuẩn bị sẵn. Trong trường hợp Vạn Lý Group đuổi hắn, hắn cần phương án dự phòng.</p>
+
+    <p class="short">Nhưng hắn không nghĩ mình sẽ bị đuổi.</p>
+
+    <p class="thought">Tông môn đang mục ruỗng không đuổi người. Chúng đang thiếu — thiếu nhân tài, thiếu năng lực, thiếu mọi thứ. Kẻ yếu như Lục Trường An cũ bị coi thường, nhưng cũng không đáng để đuổi. Đuổi cũng mất công tuyển mới.</p>
+
+    <p class="thought">Ta sẽ đến đó. Không phải với tư cách nhân viên cũ.</p>
+
+    <p class="thought">Mà với tư cách người mới.</p>
+
+    <p class="short">Hắn lưu hồ sơ, đóng máy tính.</p>
+
+    <p>Đứng dậy, đi vào nhà vệ sinh. Mở vòi nước, rửa mặt. Ngẩng lên nhìn gương.</p>
+
+    <p>Khuôn mặt bình thường. Vẫn gầy, vẫn quầng thâm, vẫn tóc chưa cắt. Nhưng trong mắt — thứ ánh sáng đó không phải của Lục Trường An.</p>
+
+    <p class="thought">Kiếp trước, ta đứng trên đỉnh bằng linh lực và pháp thuật.</p>
+
+    <p class="short">Nước nhỏ giọt từ cằm, rơi xuống bồn rửa.</p>
+
+    <p class="thought">Kiếp này, chỉ cần trí tuệ là đủ.</p>
+
+    <p class="short">Hắn lau mặt, tắt đèn nhà vệ sinh.</p>
+
+    <p>Quay lại phòng, nằm xuống giường. Tối, im lặng. Bên ngoài, thành phố vẫn chạy, đèn vẫn sáng, người vẫn đi.</p>
+
+    <p class="short">Ngày kia, hắn sẽ đến Vạn Lý Group.</p>
+
+    <p class="short">Không phải với tư cách kẻ thua cuộc sắp bị đuổi.</p>
+
+    <p class="short">Mà với tư cách Ma Tôn bước vào tông môn đầu tiên.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-02.html">&larr; Chương trước</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.397 từ &middot; Chương 03 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

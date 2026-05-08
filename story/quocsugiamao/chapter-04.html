@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 04 — Đêm Có Tiếng Khóc | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">04/30</span>
+      <a href="chapter-05.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 04</div>
+      <h1>Đêm Có Tiếng Khóc</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Tiếng khóc bắt đầu vào canh tư.</p>
+
+<p>Tạ Cảnh Minh đang nửa ngủ nửa tỉnh trên giường mới, giường êm quá, cơ thể chưa quen. Âm thanh đó lọt qua cửa sổ Minh Nguyệt Đường. Không phải tiếng khóc bình thường. Không có nước mắt trong tiếng khóc này. Chỉ có hơi thở đứt quãng, nặng nề, như ai đó đang cố gắng khóc nhưng đã quên cách.</p>
+
+<p>Hắn mở mắt.</p>
+
+<p class="thought"><em>Mấy giờ rồi? Tối. Rất tối. Nến đã tắt, ai đó tắt nến trong phòng hắn khi hắn ngủ. Thái giám? Hay bóng người trong vườn?</em></p>
+
+<p>Tiếng khóc lại vang, lần này rõ hơn. Từ phía tây. Hướng Trường Xuân Cung.</p>
+
+<p>Tạ Cảnh Minh ngồi dậy. Bản năng nói: nằm xuống, kéo chăn, giả điếc. Đây là hoàng cung, đêm khuya, có người khóc, không phải việc của hắn.</p>
+
+<p>Nhưng bản năng khác, bản năng của kẻ lừa đảo, kẻ luôn cần biết nhiều hơn người khác, nói: đi xem.</p>
+
+<p class="thought"><em>Nếu tiếng khóc liên quan Trường Xuân Cung, liên quan vụ cung nữ chết, thì đây là thông tin. Và thông tin là vũ khí duy nhất mình có.</em></p>
+
+<p>Hắn khoác áo ngoài, xỏ giày vải. Mở cửa, nhẹ.</p>
+
+<p>Hành lang vắng. Thị vệ mà hoàng đế ban cho hắn đáng lẽ phải đứng ngoài cửa, nhưng gã đang ngồi dựa vào cột, ngủ gật. Đầu ngả sang một bên, mũi phát ra tiếng phì phì đều đặn.</p>
+
+<p class="thought"><em>Chuyên nghiệp thật. Kiếp trước bảo vệ karaoke còn tỉnh hơn.</em></p>
+
+<p>Hắn lướt qua thị vệ không gây tiếng động. Kỹ năng này không phải từ Quốc Sư, mà từ kiếp trước, những đêm phải trốn khỏi khách sạn khi con nợ tìm đến.</p>
+
+<p>Đêm hoàng cung.</p>
+
+<p>Lần thứ hai hắn đi trong bóng tối nơi đây, nhưng lần này khác. Lần trước hắn bị dẫn đi, có đuốc, có người. Lần này hắn đi một mình. Và hoàng cung ban đêm khi không có ai... khác hẳn.</p>
+
+<p>Tĩnh lặng không phải vì yên bình. Tĩnh lặng vì mọi thứ đang nín thở.</p>
+
+<p>Mái ngói trên đầu hắn đen kịt, xếp chồng như vảy rồng. Tường gạch hai bên hành lang hẹp, cao, đổ bóng xuống nền đá ướt sương. Đèn dầu treo cách quãng, nhưng vài ngọn đã tắt, để lại những đoạn hành lang chìm trong bóng đen hoàn toàn.</p>
+
+<p>Hắn đi về phía tiếng khóc. Chậm. Tai dỏng lên.</p>
+
+<p class="thought"><em>Phía tây. Qua cổng tròn. Gần Trường Xuân Cung, nhưng không phải trong cung. Hành lang phía ngoài.</em></p>
+
+<p>Tiếng khóc dừng.</p>
+
+<p>Đột ngột. Như bị cắt bằng dao. Một giây trước còn nghe rõ, giây sau, im bặt.</p>
+
+<p>Tạ Cảnh Minh dừng bước. Tim đập nhanh hơn.</p>
+
+<p class="thought"><em>Im lặng đột ngột sau tiếng khóc. Hai khả năng: người khóc tự dừng, hoặc...</em></p>
+
+<p class="thought"><em>Bị bắt dừng.</em></p>
+
+<p>Hắn đứng giữa hành lang, nín thở. Nghe. Gió thổi nhẹ, mang theo mùi hoa đêm và mùi ẩm mốc từ Trường Xuân Cung. Tiếng lá xào xạc.</p>
+
+<p>Rồi tiếng gì đó rơi. Nặng. Ầm. Như một bao gạo rơi xuống sàn đá.</p>
+
+<p class="thought"><em>Không phải bao gạo.</em></p>
+
+<p>Hắn chạy. Không nghĩ, chạy. Vòng qua góc hành lang, qua cổng tròn, đến khoảng sân nhỏ trước tường ngoài Trường Xuân Cung.</p>
+
+<p>Và thấy.</p>
+
+<p>Một thái giám nằm sấp trên sàn đá. Mặt úp xuống, tay buông hai bên, chân co lại một bên. Tư thế ngã, không phải tư thế được đặt xuống như Tiểu Hoàn.</p>
+
+<p class="thought"><em>Ngã. Hoặc bị xô. Hoặc tự ngã vì...</em></p>
+
+<p>Tạ Cảnh Minh quỳ xuống. Hai tay run nhẹ, hắn ghìm lại. Từ từ lật người thái giám.</p>
+
+<p>Mặt.</p>
+
+<p>Hắn suýt bật ngửa.</p>
+
+<p>Mặt thái giám méo. Không phải méo vì bị đánh. Méo vì sợ. Mắt trợn trừng, trắng dã, đồng tử co lại nhỏ xíu, ngược hẳn với Tiểu Hoàn, cô ta đồng tử dãn, nhưng gã này đồng tử co. Miệng mở rộng, không phải kiểu la hét, mà kiểu... đang hít vào một hơi cuối cùng và không bao giờ thở ra.</p>
+
+<p class="thought"><em>Chết vì kinh hoàng. Biểu cảm này, đây là kinh hoàng tột cùng. Không phải đau, không phải bất ngờ. Kinh hoàng thuần túy.</em></p>
+
+<p class="thought"><em>Gã nhìn thấy cái gì?</em></p>
+
+<p>Hắn kiểm tra — tay, cổ, ngực, bụng. Không vết thương. Không bầm. Không cào xước. Quần áo nguyên vẹn. Giống Tiểu Hoàn, chết không vết thương.</p>
+
+<p>Nhưng khác Tiểu Hoàn ở biểu cảm. Tiểu Hoàn kinh hoàng nhưng tĩnh, như đang nhìn thứ gì đó khổng lồ. Gã này kinh hoàng tột cùng, méo mó, như thứ đó đang ngay trước mặt.</p>
+
+<p class="thought"><em>Gã này thấy nó gần hơn. Rõ hơn.</em></p>
+
+<p class="thought"><em>"Nó" là gì?</em></p>
+
+<p>Và Thiên Diễn Đồng phản ứng.</p>
+
+<p>Không phải cái lạnh mờ nhạt như lần trước ở Trường Xuân Cung. Lần này mạnh. Rõ. Như có ai đó vặn âm lượng từ 2 lên 8.</p>
+
+<p>Hắn nhìn thấy.</p>
+
+<p>Khí đen.</p>
+
+<p>Không phải sợi khói mờ mờ như lần nhìn quanh bóng mình trong chậu nước. Đây là đám mây đặc, quánh, đen tuyền, bao quanh xác thái giám. Cuộn chậm, uốn lượn, bám sát cơ thể như tấm chăn sống. Và ở trung tâm, ngay trên ngực xác, khí đen xoáy vào một điểm, như lỗ thoát nước đang hút.</p>
+
+<p class="thought"><em>Đm.</em></p>
+
+<p>Tạ Cảnh Minh lùi lại hai bước. Tim đập loạn. Tay run thật sự, không giả.</p>
+
+<p class="thought"><em>Mình đang thấy cái gì? Đây không phải đọc vị. Không phải đọc ngôn ngữ cơ thể. Đây là...</em></p>
+
+<p class="thought"><em>Mình đang nhìn thấy thứ gì đó quanh xác chết. Thứ mà mắt thường không thấy.</em></p>
+
+<p class="thought"><em>Khí đen. Oán khí? Tử khí? Hay cái gì đó thuộc về Thiên Cơ?</em></p>
+
+<p>Hắn chớp mắt. Khí đen vẫn ở đó, không biến mất như lần trước. Lần này nó ở lại. Rõ ràng. Thực.</p>
+
+<p class="thought"><em>Lần trước ở chậu nước, mờ, thoáng qua. Lần trước với Lục Thanh Dao, vàng, rực, rồi mất. Lần ở Trường Xuân Cung, lạnh trên ngón tay, không nhìn thấy. Lần gặp hoàng đế, cảm nhận cảm xúc, không có hình ảnh.</em></p>
+
+<p class="thought"><em>Nhưng lần này, nhìn thấy. Rõ. Đậm. Và không mất đi.</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng đang... tiến hóa?</em></p>
+
+<p class="thought"><em>Hay mình đang phát điên?</em></p>
+
+<p>Tiếng bước chân phía sau. Hắn quay lại, hai lính canh tuần tra chạy đến, đuốc sáng rực. Ánh đuốc chiếu lên mặt hắn, gầy, xương, và lúc này chắc trông kinh khiếp lắm vì hắn đang quỳ cạnh xác chết giữa đêm.</p>
+
+<p>— Quốc... Quốc Sư?!</p>
+
+<p>Lính canh đứng khựng. Nhìn hắn. Nhìn xác. Nhìn lại hắn.</p>
+
+<p class="thought"><em>Đúng lúc. Mình phải chuyển từ "kẻ bị bắt gặp cạnh xác chết" sang "Quốc Sư đang điều tra". Nhanh.</em></p>
+
+<p>Hắn đứng dậy. Chậm. Uy nghiêm, kiểu uy nghiêm mà hắn tự tạo bằng cách thẳng lưng, chắp tay, khép mắt ba phần.</p>
+
+<p>— Oán khí chưa tan.</p>
+
+<p>Ba chữ. Giọng trầm. Mặt bình thản.</p>
+
+<p class="thought"><em>Lần trước nói "khí uất" là bịa. Lần này nói "oán khí", mình vẫn đang bịa. Nhưng...</em></p>
+
+<p>Hắn liếc lại xác thái giám. Khí đen vẫn xoáy quanh, lính canh rõ ràng không thấy. Chỉ mình hắn thấy.</p>
+
+<p class="thought"><em>Nhưng có thứ gì đó thật sự ở đây. Mình nhìn thấy. Và mình gọi nó là "oán khí" vì mình không biết gọi nó là gì khác.</em></p>
+
+<p class="thought"><em>Vậy lần này... mình đang bịa, hay đang nói thật?</em></p>
+
+<p>Lính canh quỳ xuống.</p>
+
+<p>— Quốc Sư! Có người chết! Nô tài... nô tài sẽ báo ngay —</p>
+
+<p>— Báo đi. — Hắn gật đầu. — Và... đừng cho ai vào đây cho đến khi ta nói được.</p>
+
+<p>Uy quyền. Hắn đang dùng uy quyền, thứ mà hai ngày trước hắn không có. Hai ngày trước hắn là tử tù. Bây giờ lính canh nghe lệnh hắn.</p>
+
+<p class="thought"><em>Quyền lực leo thang nhanh thật. Nhanh đến mức đáng sợ.</em></p>
+
+<p>Lính canh chạy đi. Hắn đứng một mình với xác chết.</p>
+
+<p>Nhìn xuống.</p>
+
+<p>Khí đen dày hơn, hay hắn tưởng tượng? Hắn giơ tay, chầm chậm, ngón trỏ và ngón giữa chụm, kiểu "sờ khí vận" mà hắn đã dùng ở Trường Xuân Cung.</p>
+
+<p>Lần trước, đóng kịch.</p>
+
+<p>Lần này, hắn thật sự muốn biết.</p>
+
+<p>Ngón tay đưa ngang qua vùng khí đen trên ngực xác chết.</p>
+
+<p>Lạnh.</p>
+
+<p>Nhưng không phải lạnh như lần trước, lạnh se se, mơ hồ. Lần này lạnh cắt. Như nhúng tay vào nước đá. Hắn rụt tay lại, phản xạ.</p>
+
+<p>Và cùng lúc, hình ảnh chớp qua đầu.</p>
+
+<p>Không phải ký ức của hắn. Cũng không phải ký ức thân xác gốc.</p>
+
+<p>Một hành lang tối. Tiếng bước chân. Ai đó đang chạy, hoảng loạn. Phía trước, ánh đèn vàng từ một cánh cửa hé. Điện thờ. Trong điện thờ, bóng người. Nhiều bóng người. Đang làm gì đó quanh một bàn thờ. Nến. Hương. Và thứ gì đó trên bàn thờ, đen, nhỏ, rung rung, phát ra ánh sáng lạ.</p>
+
+<p>Rồi một bóng quay lại. Nhìn thẳng. Mắt không phải mắt người bình thường. Trắng. Hoàn toàn trắng. Không có đồng tử.</p>
+
+<p>Hình ảnh đứt.</p>
+
+<p>Tạ Cảnh Minh bật ngồi dậy, hắn không biết lúc nào mình ngã quỳ. Hai tay chống xuống đá, thở hổn hển. Mồ hôi lạnh chảy dọc thái dương.</p>
+
+<p class="thought"><em>Cái gì vừa xảy ra?</em></p>
+
+<p class="thought"><em>Mình vừa... nhìn thấy ký ức của người chết?</em></p>
+
+<p class="thought"><em>Không. Không thể. Đây là thế giới tu tiên nhưng mình không phải tu sĩ. Mình không có pháp lực. Mình chỉ có Thiên Diễn Đồng, và Thiên Diễn Đồng đọc cảm xúc, không phải ký ức.</em></p>
+
+<p class="thought"><em>Nhưng nếu "cảm xúc" cuối cùng của người chết mạnh đến mức... in dấu lên khí vận?</em></p>
+
+<p class="thought"><em>Nếu nỗi sợ hãi cuối đời mãnh liệt đến mức nó trở thành... hình ảnh?</em></p>
+
+<p class="thought"><em>Thì thứ mình vừa thấy, là nỗi sợ cuối cùng của gã thái giám. Thứ gã thấy trước khi chết.</em></p>
+
+<p class="thought"><em>Điện thờ. Bóng người mắt trắng. Thứ gì đó trên bàn thờ.</em></p>
+
+<p class="thought"><em>Gã chạy ra khỏi Trường Xuân Cung. Gã thấy thứ gì đó không nên thấy. Và gã chết vì kinh hoàng.</em></p>
+
+<p>Hắn ngồi thẳng lại. Hít thở. Kiểm soát.</p>
+
+<p class="thought"><em>Được rồi. Bình tĩnh. Tổng kết.</em></p>
+
+<p class="thought"><em>Một: gã thái giám chết giống Tiểu Hoàn, không vết thương. Nhưng biểu cảm sợ hãi cấp tính hơn. Gã thấy thứ gì đó ở cự ly gần.</em></p>
+
+<p class="thought"><em>Hai: mình nhìn thấy khí đen quanh xác, rõ ràng, đặc, không mất đi. Thiên Diễn Đồng đang mạnh lên.</em></p>
+
+<p class="thought"><em>Ba: khi chạm vào vùng khí đen, mình thấy hình ảnh, có thể là ký ức/cảm xúc cuối cùng của người chết. Điện thờ Trường Xuân Cung, bóng người mắt trắng, vật thể lạ trên bàn thờ.</em></p>
+
+<p class="thought"><em>Bốn: có người đang làm gì đó trong điện thờ ban đêm. Không phải 1, nhiều người. Và họ có liên quan đến cái chết.</em></p>
+
+<p class="thought"><em>Năm: mình bắt đầu có khả năng thật. Không chỉ đọc vị, không chỉ đọc cảm xúc. Mình đang... nhìn thấy thứ mà người khác không thấy.</em></p>
+
+<p class="thought"><em>Sáu: mình đang sợ.</em></p>
+
+<p class="thought"><em>Thật sự sợ.</em></p>
+
+<p class="thought"><em>Không phải sợ xác chết. Sợ chính mình.</em></p>
+
+<p>Tiếng bước chân, nhiều, vội vã. Lính canh quay lại, kèm theo viên quan nội giám quen thuộc và vài thái giám. Đuốc sáng cả khoảng sân.</p>
+
+<p>Tạ Cảnh Minh đã đứng sẵn, lưng thẳng, tay chắp sau lưng, mặt bình thản. Không còn dấu vết của kẻ vừa run rẩy trên sàn đá.</p>
+
+<p class="thought"><em>Vở diễn phải tiếp tục. Dù bên trong mình đang loạn.</em></p>
+
+<p>— Quốc Sư!</p>
+
+<p>Viên quan nội giám nhìn xác, nhìn hắn, mặt trắng hơn lần trước.</p>
+
+<p>— Lại... lại chết? Giống hôm qua?</p>
+
+<p>— Không giống.</p>
+
+<p>Mọi người nhìn hắn. Chờ.</p>
+
+<p>— Tiểu Hoàn chết vì bí mật tìm đến nàng. — Hắn nói chậm, mắt nhìn xa. — Nhưng gã này... gã đi tìm bí mật. Và bí mật giết gã.</p>
+
+<p>Bịa? Hay không?</p>
+
+<p>Hắn không biết nữa.</p>
+
+<p>Viên quan nội giám nuốt nước bọt. Hắn nhận ra, ông ta sợ, nhưng sợ kiểu khác hôm qua. Hôm qua sợ bị quy trách nhiệm. Hôm nay... sợ thật.</p>
+
+<p class="thought"><em>Ông ta bắt đầu tin rằng Trường Xuân Cung có thứ gì đó nguy hiểm thật sự. Không chỉ mình bịp, mà thật sự có.</em></p>
+
+<p>— Quốc Sư... chúng thần phải làm gì?</p>
+
+<p>Lần đầu tiên viên quan hỏi ý kiến hắn không phải vì nghi lễ, mà vì thật sự không biết phải làm gì.</p>
+
+<p>Tạ Cảnh Minh nhìn viên quan. Nhìn lính canh. Nhìn xác thái giám dưới chân.</p>
+
+<p>Và hắn đưa ra quyết định, không phải quyết định của tên lừa đảo. Mà quyết định của kẻ vừa nhìn thấy thứ gì đó trong bóng tối và muốn hiểu nó.</p>
+
+<p>— Phong tỏa Trường Xuân Cung. Không ai được vào. Không ai.</p>
+
+<p>— Nhưng... Quốc Sư —</p>
+
+<p>— Không ai. — Hắn nhấn mạnh. — Cho đến khi ta nói khác.</p>
+
+<p>Im lặng. Rồi viên quan cúi đầu.</p>
+
+<p>— Tuân lệnh.</p>
+
+<p class="thought"><em>Mình vừa ra lệnh phong tỏa một khu vực trong hoàng cung. Mình, tên lừa đảo từ kiếp trước, vừa ra lệnh cho quan và lính.</em></p>
+
+<p class="thought"><em>Và họ nghe.</em></p>
+
+<p class="thought"><em>Quyền lực thật. Không phải đánh lừa. Thật sự.</em></p>
+
+<p>Hắn quay lưng, bước đi. Về Minh Nguyệt Đường.</p>
+
+<p>Dọc đường, hắn không ngoái lại. Nhưng Thiên Diễn Đồng, thứ mà hắn không gọi nó đến nhưng nó cứ tự đến, cho hắn cảm nhận: ở phía sau, viên quan nội giám đang nhìn theo hắn.</p>
+
+<p>Không phải kính sợ.</p>
+
+<p>Thù hận.</p>
+
+<p class="thought"><em>À. Mình vừa chặn đường ông ta vào Trường Xuân Cung. Nếu ông ta có liên quan đến bí mật trong điện thờ, mình vừa khóa cửa trước mũi ông ta.</em></p>
+
+<p class="thought"><em>Và ông ta ghét mình vì điều đó.</em></p>
+
+<p class="thought"><em>Tốt. Kẻ ghét mình sẽ hành động. Và kẻ hành động sẽ lộ.</em></p>
+
+<p class="thought"><em>Nhưng kẻ ghét mình cũng sẽ tìm cách giết mình.</em></p>
+
+<p>Hắn về đến Minh Nguyệt Đường. Thị vệ vẫn ngủ gật.</p>
+
+<p class="thought"><em>Bảo vệ đỉnh cao.</em></p>
+
+<p>Hắn vào phòng, đóng cửa, ngồi xuống giường.</p>
+
+<p>Và run.</p>
+
+<p>Run thật sự. Lần thứ hai kể từ khi xuyên không, lần đầu là sau pháp trường. Lần này không phải vì suýt chết.</p>
+
+<p>Mà vì hắn đang thay đổi.</p>
+
+<p class="thought"><em>Mình nhìn thấy khí đen. Mình cảm nhận cảm xúc người chết. Mình có khả năng mà kiếp trước mình sẽ gọi là "nhảm nhí". Mình đang... trở thành thứ mà mình giả vờ là.</em></p>
+
+<p class="thought"><em>Mình giả làm Quốc Sư.</em></p>
+
+<p class="thought"><em>Và thế giới đang biến mình thành Quốc Sư thật.</em></p>
+
+<p class="thought"><em>Đây là thao túng? Hay vận mệnh?</em></p>
+
+<p class="thought"><em>Hay ở thế giới này, hai thứ đó là một?</em></p>
+
+<p>Hắn nhìn hai bàn tay. Bàn tay gầy, dài, xương xẩu, bàn tay Quốc Sư. Ngón tay trỏ và ngón giữa vẫn hơi tê, nơi hắn chạm vào vùng khí đen.</p>
+
+<p class="thought"><em>Mình đang thấy cái gì vậy? Cái này không có trong giáo trình đọc vị...</em></p>
+
+<p>Câu hỏi đó giống y hệt câu hỏi ở cuối chương trước. Nhưng lần này, nó nặng hơn. Vì lần này, hắn đã thấy hình ảnh. Đã thấy đôi mắt trắng.</p>
+
+<p>Và hắn biết, đây mới chỉ là bắt đầu.</p>
+
+<p>Ngoài cửa sổ, bầu trời bắt đầu hửng sáng. Và Tạ Cảnh Minh, ngồi trên giường êm trong phòng thượng khách của hoàng cung, mặc áo lụa, uống trà ngon, chưa bao giờ cảm thấy cô đơn hơn.</p>
+
+<p>Vì lần đầu tiên kể từ khi xuyên không, hắn không biết mình đang diễn hay đang sống.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-03.html">&larr; CHƯƠNG 03</a>
+      <a href="chapter-05.html">CHƯƠNG 05 &rarr;</a>
+    </nav>
+
+    <div class="word-count">2.661 TỪ</div>
+
+  </div>
+</body>
+</html>

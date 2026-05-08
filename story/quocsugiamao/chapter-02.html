@@ -13,15 +13,10 @@
     body {
       background: #131313;
       color: #e9e9e9;
-      font-family: 'Space Grotesk', 'DM Sans', Helvetica, Arial, sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    }
-
-    ::selection {
-      background: #5200ff;
-      color: #ffffff;
     }
 
     .container {
@@ -35,61 +30,63 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 48px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #2d2d2d;
-      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 11px;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
       text-transform: uppercase;
+      font-size: 11px;
       letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
     }
 
     .nav a {
       color: #949494;
-      text-decoration: none;
-      transition: color 0.18s ease;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
     }
 
     .nav a:hover {
       color: #3cffd0;
+      border-color: #3cffd0;
     }
 
     .nav .chapter-indicator {
       color: #949494;
-    }
-
-    .nav .disabled {
-      color: #2d2d2d;
-      pointer-events: none;
-      cursor: default;
+      border: none;
+      padding: 0;
     }
 
     /* ── Chapter Header ── */
     .chapter-header {
       text-align: center;
-      margin-bottom: 56px;
+      margin-bottom: 64px;
     }
 
-    .chapter-header .chapter-number {
-      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
       font-size: 12px;
       color: #5200ff;
       letter-spacing: 1.8px;
-      text-transform: uppercase;
       margin-bottom: 16px;
     }
 
     .chapter-header h1 {
-      font-family: 'Bebas Neue', Impact, Helvetica, sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
       font-size: 48px;
       color: #ffffff;
       font-weight: 400;
       letter-spacing: 2px;
-      line-height: 0.95;
+      line-height: 1.0;
       margin-bottom: 24px;
     }
 
-    .chapter-header .divider {
+    .chapter-divider {
       width: 40px;
       height: 2px;
       background: #3cffd0;
@@ -98,28 +95,29 @@
 
     /* ── Content ── */
     .content {
-      font-family: 'Space Grotesk', 'DM Sans', Helvetica, Arial, sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 17px;
-      line-height: 2.0;
+      font-weight: 400;
       color: #e9e9e9;
+      line-height: 2.0;
     }
 
     .content p {
-      margin-bottom: 1.2em;
+      margin-bottom: 1.4em;
       text-align: justify;
     }
 
-    .content .thought {
+    .content p.thought {
       color: rgba(60, 255, 208, 0.55);
       font-style: italic;
     }
 
-    .content .thought em {
-      color: rgba(60, 255, 208, 0.55);
-      font-style: italic;
+    .content p.thought em {
+      color: inherit;
     }
 
     .content em {
+      color: rgba(60, 255, 208, 0.55);
       font-style: italic;
     }
 
@@ -128,7 +126,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       margin: 2.4em 0;
     }
 
@@ -145,26 +143,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 64px;
-      padding-top: 32px;
-      border-top: 1px solid #2d2d2d;
-    }
-
-    .bottom-nav a,
-    .bottom-nav span {
-      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      padding: 10px 20px;
-      border: 1px solid #2d2d2d;
-      border-radius: 24px;
-      text-decoration: none;
-      transition: all 0.18s ease;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
       color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
     }
 
     .bottom-nav a:hover {
@@ -172,32 +166,30 @@
       border-color: #3cffd0;
     }
 
-    .bottom-nav .disabled {
-      color: #2d2d2d;
-      border-color: #1e1e1e;
-      pointer-events: none;
-      cursor: default;
-    }
-
     /* ── Word Count ── */
     .word-count {
       text-align: center;
       margin-top: 32px;
-      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 10px;
-      color: #949494;
+      font-family: 'Space Mono', monospace;
       text-transform: uppercase;
+      font-size: 10px;
       letter-spacing: 1.5px;
+      color: #949494;
     }
 
     /* ── Responsive ── */
-    @media (max-width: 767px) {
+    @media (max-width: 600px) {
       .container {
-        padding: 40px 20px 80px;
+        padding: 40px 18px 80px;
       }
 
       .chapter-header h1 {
         font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
       }
 
       .content {
@@ -205,11 +197,24 @@
         line-height: 1.9;
       }
 
-      .bottom-nav a,
-      .bottom-nav span {
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
         font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
         padding: 8px 14px;
-        letter-spacing: 1.1px;
       }
     }
 
@@ -218,9 +223,14 @@
         font-size: 30px;
       }
 
-      .nav {
-        font-size: 10px;
-        letter-spacing: 1.2px;
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
       }
     }
   </style>
@@ -234,33 +244,33 @@
       <a href="chapter-03.html">CHƯƠNG SAU &rarr;</a>
     </nav>
 
-    <header class="chapter-header">
-      <div class="chapter-number">CHƯƠNG 02</div>
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 02</div>
       <h1>Trường Xuân Cung</h1>
-      <div class="divider"></div>
-    </header>
+      <div class="chapter-divider"></div>
+    </div>
 
-    <article class="content">
+    <div class="content">
 
 <p>Có người chết trong cung.</p>
 
-<p>Tạ Cảnh Minh biết điều này trước khi bất kỳ ai nói với hắn — vì thái giám đến dẫn hắn đi lúc trời chưa sáng hẳn, và gã thái giám đó run.</p>
+<p>Tạ Cảnh Minh biết điều này trước khi bất kỳ ai nói với hắn, vì thái giám đến dẫn hắn đi lúc trời chưa sáng hẳn, và gã thái giám đó run.</p>
 
 <p>Không phải run vì lạnh. Sáng sớm kinh thành có se se, nhưng không đến mức khiến một người trưởng thành run đến nỗi chìa khóa lách cách khi mở cửa phòng giam. Gã run vì sợ. Mắt quầng, môi khô, cổ tay co giật nhẹ mỗi khi nghe tiếng bước chân phía sau.</p>
 
-<p class="thought"><em>Cold reading cơ bản: nhịp thở nông, con ngươi giãn, vai co — sợ hãi cấp tính. Gã này vừa thấy thứ gì đó không nên thấy.</em></p>
+<p class="thought"><em>Đọc vị cơ bản: nhịp thở nông, con ngươi giãn, vai co, sợ hãi cấp tính. Gã này vừa thấy thứ gì đó không nên thấy.</em></p>
 
-<p>Tạ Cảnh Minh bước ra khỏi phòng, chắp tay sau lưng. Hắn đã tập tư thế này suốt đêm qua — "pose thiền sư", phiên bản đi bộ. Lưng thẳng, bước chậm, mắt nhìn về phía trước nhưng không tập trung vào đâu cả. Tạo cảm giác "ta đang nhìn thứ các ngươi không thấy".</p>
+<p>Tạ Cảnh Minh bước ra khỏi phòng, chắp tay sau lưng. Hắn đã tập tư thế này suốt đêm qua, "thế thiền sư", phiên bản đi bộ. Lưng thẳng, bước chậm, mắt nhìn về phía trước nhưng không tập trung vào đâu cả. Tạo cảm giác "ta đang nhìn thứ các ngươi không thấy".</p>
 
 <p>— Quốc Sư, xin theo nô tài.</p>
 
-<p>Giọng thái giám nhỏ. Hắn cúi rất thấp — thấp hơn mức cần thiết. Hôm qua lính canh dẫn hắn đi còn xô đẩy. Hôm nay thái giám dẫn đi mà không dám nhìn thẳng mặt.</p>
+<p>Giọng thái giám nhỏ. Hắn cúi rất thấp, thấp hơn mức cần thiết. Hôm qua lính canh dẫn hắn đi còn xô đẩy. Hôm nay thái giám dẫn đi mà không dám nhìn thẳng mặt.</p>
 
 <p class="thought"><em>Tin đồn về tiếng sấm đã lan trong cung rồi. Nhanh thật. Mới có một đêm.</em></p>
 
 <p>— Đi đâu?</p>
 
-<p>Hắn hỏi, giọng nhẹ. Không phải vì quan tâm — mà vì Quốc Sư không nên trông như kẻ bị dẫn đi. Quốc Sư phải trông như kẻ tự chọn nơi đến.</p>
+<p>Hắn hỏi, giọng nhẹ. Không phải vì quan tâm, mà vì Quốc Sư không nên trông như kẻ bị dẫn đi. Quốc Sư phải trông như kẻ tự chọn nơi đến.</p>
 
 <p>— Trường Xuân Cung. — Thái giám nuốt nước bọt. — Có... có chuyện.</p>
 
@@ -272,23 +282,23 @@
 
 <p class="thought"><em>Có người chết. Chắc chắn.</em></p>
 
-<p>Tạ Cảnh Minh không hỏi thêm. Hắn gật đầu chậm rãi — kiểu gật mà hắn gọi là "gật biết rồi", dùng mỗi khi khách hàng cũ kể chuyện buồn trong buổi "tư vấn tâm lý". Gật vừa đủ để người ta nghĩ mình đã hiểu, mà không cần nói gì.</p>
+<p>Tạ Cảnh Minh không hỏi thêm. Hắn gật đầu chậm rãi, kiểu gật mà hắn gọi là "gật biết rồi", dùng mỗi khi khách hàng cũ kể chuyện buồn trong buổi "tư vấn tâm lý". Gật vừa đủ để người ta nghĩ mình đã hiểu, mà không cần nói gì.</p>
 
-<p>Hai người đi dọc hành lang cung điện. Trời hửng sáng, ánh mặt trời loang qua mái ngói đỏ, chiếu những vệt vàng dài trên nền đá. Hoàng cung lúc bình minh đẹp một cách lạnh lẽo — mọi thứ đều hoàn hảo, đều cân đối, và đều không có hơi người.</p>
+<p>Hai người đi dọc hành lang cung điện. Trời hửng sáng, ánh mặt trời loang qua mái ngói đỏ, chiếu những vệt vàng dài trên nền đá. Hoàng cung lúc bình minh đẹp một cách lạnh lẽo, mọi thứ đều hoàn hảo, đều cân đối, và đều không có hơi người.</p>
 
-<p>Tạ Cảnh Minh vừa đi vừa lén quan sát. Ký ức thân xác gốc nhả ra từng mảnh: hành lang này dẫn đến khu hậu cung phía tây. Trường Xuân Cung là một cung điện cũ — từng là nơi ở của hoàng hậu tiên đế, bỏ không từ khi bà qua đời. Hoàng đế hiện tại không cho ai ở, nhưng vẫn giữ người canh.</p>
+<p>Tạ Cảnh Minh vừa đi vừa lén quan sát. Ký ức thân xác gốc nhả ra từng mảnh: hành lang này dẫn đến khu hậu cung phía tây. Trường Xuân Cung là một cung điện cũ, từng là nơi ở của hoàng hậu tiên đế, bỏ không từ khi bà qua đời. Hoàng đế hiện tại không cho ai ở, nhưng vẫn giữ người canh.</p>
 
 <p class="thought"><em>Cung bỏ hoang trong hoàng cung. Cổ điển. Kiểu "cung ma" trong phim kiếm hiệp.</em></p>
 
-<p>Họ rẽ qua một cổng tròn. Không khí thay đổi — từ lạnh lẽo sang ẩm mốc. Tường vẫn còn vẽ hoa sen, nhưng sơn đã bong tróc, những cánh hoa nứt nẻ trông như mặt cười méo mó.</p>
+<p>Họ rẽ qua một cổng tròn. Không khí thay đổi, từ lạnh lẽo sang ẩm mốc. Tường vẫn còn vẽ hoa sen, nhưng sơn đã bong tróc, những cánh hoa nứt nẻ trông như mặt cười méo mó.</p>
 
 <p>Trường Xuân Cung.</p>
 
-<p>Cung điện không lớn — nhỏ hơn hắn tưởng. Một sân chính vuông vắn, hai dãy phòng hai bên, và một điện thờ phía cuối. Cây cối mọc lan, cỏ dại chen qua kẽ đá. Có mùi gì đó — không phải mùi thối, mà mùi ngọt nặng, như hoa héo ngâm trong nước quá lâu.</p>
+<p>Cung điện không lớn, nhỏ hơn hắn tưởng. Một sân chính vuông vắn, hai dãy phòng hai bên, và một điện thờ phía cuối. Cây cối mọc lan, cỏ dại chen qua kẽ đá. Có mùi gì đó, không phải mùi thối, mà mùi ngọt nặng, như hoa héo ngâm trong nước quá lâu.</p>
 
 <p>Và có người.</p>
 
-<p>Giữa sân, một nhóm thái giám và cung nữ đứng quanh thứ gì đó. Vài lính canh chặn hai bên. Một viên quan mặc áo xanh — dường như là quan nội giám — đang đi đi lại lại, mặt trắng bệch.</p>
+<p>Giữa sân, một nhóm thái giám và cung nữ đứng quanh thứ gì đó. Vài lính canh chặn hai bên. Một viên quan mặc áo xanh, dường như là quan nội giám, đang đi đi lại lại, mặt trắng bệch.</p>
 
 <p>Khi thấy Tạ Cảnh Minh bước vào, tất cả quay lại. Im lặng.</p>
 
@@ -296,13 +306,13 @@
 
 <p class="thought"><em>Tuyệt. Mình đến hiện trường phá án mà chưa biết vụ án là gì.</em></p>
 
-<p>Hắn bước đến. Đám đông tự động rẽ ra — không ai cần ra lệnh, họ cứ thế lùi lại, như nước rẽ trước mũi thuyền.</p>
+<p>Hắn bước đến. Đám đông tự động rẽ ra, không ai cần ra lệnh, họ cứ thế lùi lại, như nước rẽ trước mũi thuyền.</p>
 
 <p>Và hắn thấy.</p>
 
 <p>Một cung nữ nằm giữa sân.</p>
 
-<p>Trẻ. Có lẽ mười tám, mười chín. Mặc áo xanh nhạt — đồng phục cung nữ hạng thấp. Nằm ngửa, tay trải sang hai bên, chân duỗi thẳng. Mắt mở — trừng trừng nhìn lên trời, đồng tử dãn hết cỡ.</p>
+<p>Trẻ. Có lẽ mười tám, mười chín. Mặc áo xanh nhạt, đồng phục cung nữ hạng thấp. Nằm ngửa, tay trải sang hai bên, chân duỗi thẳng. Mắt mở, trừng trừng nhìn lên trời, đồng tử dãn hết cỡ.</p>
 
 <p>Chết.</p>
 
@@ -310,23 +320,23 @@
 
 <p class="thought"><em>Đây là xác chết đầu tiên mình nhìn thấy gần như vậy. Kiếp trước mình chỉ lừa người sống. Kiếp này...</em></p>
 
-<p>Hắn nuốt nước bọt, nhưng mặt giữ bình thản. Bước đến gần hơn. Mắt quét — bản năng quan sát từ nghề cũ. Không phải bản năng thám tử, mà bản năng của kẻ lừa đảo: tìm chi tiết bất thường, thứ không khớp, thứ mọi người bỏ qua.</p>
+<p>Hắn nuốt nước bọt, nhưng mặt giữ bình thản. Bước đến gần hơn. Mắt quét, bản năng quan sát từ nghề cũ. Không phải bản năng thám tử, mà bản năng của kẻ lừa đảo: tìm chi tiết bất thường, thứ không khớp, thứ mọi người bỏ qua.</p>
 
-<p class="thought"><em>Tư thế nằm quá ngay ngắn. Người chết đột ngột không nằm thế này — sẽ co quắp, hoặc ngã sấp, hoặc lệch. Nhưng cô ta nằm như được ai đặt xuống. Tay trải, chân thẳng. Như nghi lễ.</em></p>
+<p class="thought"><em>Tư thế nằm quá ngay ngắn. Người chết đột ngột không nằm thế này, sẽ co quắp, hoặc ngã sấp, hoặc lệch. Nhưng cô ta nằm như được ai đặt xuống. Tay trải, chân thẳng. Như nghi lễ.</em></p>
 
-<p class="thought"><em>Mặt không có biểu cảm đau đớn — chỉ có kinh hoàng. Mắt mở to, miệng hé. Chết vì sợ? Hay bị gì đó khiến mắt dãn ra như thế?</em></p>
+<p class="thought"><em>Mặt không có biểu cảm đau đớn, chỉ có kinh hoàng. Mắt mở to, miệng hé. Chết vì sợ? Hay bị gì đó khiến mắt dãn ra như thế?</em></p>
 
-<p class="thought"><em>Trên cổ, trên tay — không có vết thương. Không bầm. Không cào xước. Không có dấu hiệu vật lộn.</em></p>
+<p class="thought"><em>Trên cổ, trên tay, không có vết thương. Không bầm. Không cào xước. Không có dấu hiệu vật lộn.</em></p>
 
-<p class="thought"><em>Áo — sạch. Không rách, không bẩn. Móng tay — nguyên vẹn. Cô ta không chống cự.</em></p>
+<p class="thought"><em>Áo, sạch. Không rách, không bẩn. Móng tay, nguyên vẹn. Cô ta không chống cự.</em></p>
 
-<p class="thought"><em>Quanh miệng — hơi ẩm. Nhưng không phải nôn. Giống nước bọt. Có thể co giật trước khi chết?</em></p>
+<p class="thought"><em>Quanh miệng, hơi ẩm. Nhưng không phải nôn. Giống nước bọt. Có thể co giật trước khi chết?</em></p>
 
-<p>Hắn lùi lại một bước. Nhìn rộng hơn — xung quanh xác chết. Đá sân phẳng, không có vết máu. Không có vũ khí. Không có dấu kéo lê.</p>
+<p>Hắn lùi lại một bước. Nhìn rộng hơn, xung quanh xác chết. Đá sân phẳng, không có vết máu. Không có vũ khí. Không có dấu kéo lê.</p>
 
-<p class="thought"><em>Cô ta chết ở đây, hoặc được mang đến đây sau khi chết. Nhưng nếu mang đến — ai? Và tại sao đặt giữa sân như thế này?</em></p>
+<p class="thought"><em>Cô ta chết ở đây, hoặc được mang đến đây sau khi chết. Nhưng nếu mang đến, ai? Và tại sao đặt giữa sân như thế này?</em></p>
 
-<p class="thought"><em>Nếu chết tại chỗ — chết vì gì? Không có vết thương ngoài. Đầu độc? Nhưng không có dấu hiệu nôn mửa mạnh. Bệnh? Nhưng tư thế nằm quá ngay ngắn cho người chết đột ngột.</em></p>
+<p class="thought"><em>Nếu chết tại chỗ, chết vì gì? Không có vết thương ngoài. Đầu độc? Nhưng không có dấu hiệu nôn mửa mạnh. Bệnh? Nhưng tư thế nằm quá ngay ngắn cho người chết đột ngột.</em></p>
 
 <p>Viên quan nội giám lên tiếng, giọng khàn:</p>
 
@@ -338,23 +348,23 @@
 
 <p class="thought"><em>Cung nữ hạng thấp, làm ở phòng giặt đồ, chết ở cung bỏ hoang giữa đêm. Không vết thương. Không lý do.</em></p>
 
-<p class="thought"><em>Đây là murder mystery. Và mình được mời đến đóng vai thám tử.</em></p>
+<p class="thought"><em>Đây là án mạng bí ẩn. Và mình được mời đến đóng vai thám tử.</em></p>
 
 <p class="thought"><em>Vấn đề: mình không phải thám tử. Mình là tên bịp. Mình không biết phá án. Mình thậm chí không biết pháp y thời cổ đại hoạt động thế nào.</em></p>
 
 <p class="thought"><em>Nhưng mình biết đọc người sống.</em></p>
 
-<p>Tạ Cảnh Minh quay lại nhìn đám đông. Không phải nhìn xác — nhìn người. Thái giám, cung nữ, lính canh, viên quan. Hắn quét từng khuôn mặt.</p>
+<p>Tạ Cảnh Minh quay lại nhìn đám đông. Không phải nhìn xác, nhìn người. Thái giám, cung nữ, lính canh, viên quan. Hắn quét từng khuôn mặt.</p>
 
 <p class="thought"><em>Phần lớn: sợ. Bình thường. Ai cũng sợ khi có xác chết.</em></p>
 
-<p class="thought"><em>Lính canh: căng thẳng, nhưng không sợ xác — sợ bị quy trách nhiệm. Mắt liếc sang viên quan, tìm tín hiệu.</em></p>
+<p class="thought"><em>Lính canh: căng thẳng, nhưng không sợ xác, sợ bị quy trách nhiệm. Mắt liếc sang viên quan, tìm tín hiệu.</em></p>
 
 <p class="thought"><em>Cung nữ: sợ thật sự. Vài người khóc. Một người run. Sợ vì bạn mình chết? Hay sợ vì... biết gì đó?</em></p>
 
-<p class="thought"><em>Viên quan nội giám: lo lắng nhất. Nhưng không phải lo vì xác chết. Lo vì "ai sẽ chịu trách nhiệm". Mắt hắn cứ liếc về phía cổng — đang đợi ai? Hay sợ ai đến?</em></p>
+<p class="thought"><em>Viên quan nội giám: lo lắng nhất. Nhưng không phải lo vì xác chết. Lo vì "ai sẽ chịu trách nhiệm". Mắt hắn cứ liếc về phía cổng, đang đợi ai? Hay sợ ai đến?</em></p>
 
-<p>Rồi hắn thấy — thái giám dẫn đường. Gã đứng phía sau, tách khỏi nhóm. Hai tay nắm chặt trước bụng. Và mắt gã — không nhìn xác chết.</p>
+<p>Rồi hắn thấy, thái giám dẫn đường. Gã đứng phía sau, tách khỏi nhóm. Hai tay nắm chặt trước bụng. Và mắt gã, không nhìn xác chết.</p>
 
 <p>Mắt gã nhìn điện thờ phía cuối sân.</p>
 
@@ -364,9 +374,9 @@
 
 <p class="thought"><em>Vì gã biết xác không phải vấn đề. Vấn đề nằm ở chỗ khác.</em></p>
 
-<p>Tạ Cảnh Minh khép mắt ba phần — tín hiệu "ta đang nhìn thiên cơ" mà thực ra là "ta đang nghĩ nhanh hết mức".</p>
+<p>Tạ Cảnh Minh khép mắt ba phần, tín hiệu "ta đang nhìn thiên cơ" mà thực ra là "ta đang nghĩ nhanh hết mức".</p>
 
-<p class="thought"><em>OK. Mình không biết ai giết cung nữ. Mình không biết chết vì gì. Mình không có khả năng phá án.</em></p>
+<p class="thought"><em>Được rồi. Mình không biết ai giết cung nữ. Mình không biết chết vì gì. Mình không có khả năng phá án.</em></p>
 
 <p class="thought"><em>Nhưng mình có thể làm gì?</em></p>
 
@@ -374,11 +384,11 @@
 
 <p class="thought"><em>Hai: phán một câu mơ hồ đủ đáng sợ để mọi người tự suy luận.</em></p>
 
-<p class="thought"><em>Ba: để chính những kẻ có tội tự lộ — vì kẻ có tội luôn là kẻ phản ứng mạnh nhất với lời "tiên tri".</em></p>
+<p class="thought"><em>Ba: để chính những kẻ có tội tự lộ, vì kẻ có tội luôn là kẻ phản ứng mạnh nhất với lời "tiên tri".</em></p>
 
-<p class="thought"><em>Đây không phải phá án. Đây là psych profiling kết hợp bluff. Và cái này — mình biết.</em></p>
+<p class="thought"><em>Đây không phải phá án. Đây là phân tích tâm lý kết hợp đánh lừa. Và cái này, mình biết.</em></p>
 
-<p>Hắn mở mắt. Bước đến bên xác cung nữ một lần nữa. Lần này hắn không nhìn xác — hắn giả vờ nhìn xác. Tay phải giơ lên, ngón trỏ và ngón giữa chụm lại, đưa chầm chậm qua người cô gái — kiểu "sờ khí vận" mà hắn từng thấy mấy ông thầy phong thủy làm trên YouTube.</p>
+<p>Hắn mở mắt. Bước đến bên xác cung nữ một lần nữa. Lần này hắn không nhìn xác, hắn giả vờ nhìn xác. Tay phải giơ lên, ngón trỏ và ngón giữa chụm lại, đưa chầm chậm qua người cô gái, kiểu "sờ khí vận" mà hắn từng thấy mấy ông thầy phong thủy trên mạng.</p>
 
 <p class="thought"><em>Đóng kịch thôi. Nhưng phải đóng cho ra.</em></p>
 
@@ -392,29 +402,29 @@
 
 <p>Viên quan nội giám tái hơn. Lính canh siết chặt cán thương.</p>
 
-<p>Và thái giám dẫn đường — gã giật mình. Nhẹ thôi. Nhưng Tạ Cảnh Minh bắt được.</p>
+<p>Và thái giám dẫn đường, gã giật mình. Nhẹ thôi. Nhưng Tạ Cảnh Minh bắt được.</p>
 
 <p class="thought"><em>Dính rồi.</em></p>
 
-<p class="thought"><em>Gã biết "thứ gì đó" mà ta đang nói. Gã không sợ lời ta — gã sợ vì lời ta chạm đúng thứ gã đang giấu.</em></p>
+<p class="thought"><em>Gã biết "thứ gì đó" mà ta đang nói. Gã không sợ lời ta, gã sợ vì lời ta chạm đúng thứ gã đang giấu.</em></p>
 
-<p>Hắn đứng dậy. Quay lại nhìn đám đông — nhưng ánh mắt dừng lại ở thái giám đúng nửa giây. Nửa giây đó đủ để gã run thêm một cái.</p>
+<p>Hắn đứng dậy. Quay lại nhìn đám đông, nhưng ánh mắt dừng lại ở thái giám đúng nửa giây. Nửa giây đó đủ để gã run thêm một cái.</p>
 
 <p>— Trường Xuân Cung — Tạ Cảnh Minh nói, giọng chậm như đọc kinh — đã lâu không có người. Nhưng có thứ khác.</p>
 
 <p>— Thứ... thứ gì? — Viên quan hỏi, giọng khô.</p>
 
-<p>Tạ Cảnh Minh không trả lời. Hắn quay người, bước về phía điện thờ cuối sân — nơi mà thái giám nhìn.</p>
+<p>Tạ Cảnh Minh không trả lời. Hắn quay người, bước về phía điện thờ cuối sân, nơi mà thái giám nhìn.</p>
 
 <p class="thought"><em>Mình không biết điện thờ có gì. Nhưng gã kia biết. Và nếu mình đi đúng hướng, phản ứng của gã sẽ cho mình thêm manh mối.</em></p>
 
 <p>Tiếng bước chân hắn vang trên đá. Đám đông đứng yên, không ai dám theo. Chỉ có viên quan nội giám và thái giám dẫn đường miễn cưỡng bước theo phía sau.</p>
 
-<p>Điện thờ nhỏ. Cửa gỗ đóng, khóa bằng ổ đồng cũ. Bụi phủ dày — nhưng Tạ Cảnh Minh để ý: trên mặt đất trước cửa, bụi bị quét loang. Có dấu chân.</p>
+<p>Điện thờ nhỏ. Cửa gỗ đóng, khóa bằng ổ đồng cũ. Bụi phủ dày, nhưng Tạ Cảnh Minh để ý: trên mặt đất trước cửa, bụi bị quét loang. Có dấu chân.</p>
 
 <p class="thought"><em>Gần đây có người mở cửa này. Không phải hàng tuần, hàng tháng. Gần đây. Có thể đêm qua.</em></p>
 
-<p>Hắn nhìn ổ khóa. Đồng cũ, xỉn màu — nhưng lỗ khóa sáng bóng. Có người dùng thường xuyên.</p>
+<p>Hắn nhìn ổ khóa. Đồng cũ, xỉn màu, nhưng lỗ khóa sáng bóng. Có người dùng thường xuyên.</p>
 
 <p class="thought"><em>Cung bỏ hoang mà có người ra vào đều đặn. Thú vị.</em></p>
 
@@ -428,7 +438,7 @@
 
 <p>— Ai có?</p>
 
-<p>Im lặng. Gã không trả lời. Nhưng mắt gã — lại liếc sang viên quan nội giám.</p>
+<p>Im lặng. Gã không trả lời. Nhưng mắt gã, lại liếc sang viên quan nội giám.</p>
 
 <p>Viên quan nuốt nước bọt.</p>
 
@@ -438,35 +448,35 @@
 
 <p>Viên quan nhìn xuống. Nhìn thấy dấu chân. Mặt ông ta chuyển từ trắng sang xám.</p>
 
-<p>Tạ Cảnh Minh không ép thêm. Hắn biết — ép quá sẽ khiến họ phòng thủ. Dừng đúng lúc, để câu hỏi treo lơ lửng, mới đáng sợ nhất.</p>
+<p>Tạ Cảnh Minh không ép thêm. Hắn biết, ép quá sẽ khiến họ phòng thủ. Dừng đúng lúc, để câu hỏi treo lơ lửng, mới đáng sợ nhất.</p>
 
-<p class="thought"><em>Nguyên tắc bán hàng số một: đừng bao giờ close deal ngay. Để khách hàng tự thuyết phục bản thân.</em></p>
+<p class="thought"><em>Nguyên tắc bán hàng số một: đừng bao giờ chốt hạ ngay. Để khách hàng tự thuyết phục bản thân.</em></p>
 
 <p>Hắn chắp tay sau lưng, quay lại nhìn toàn cảnh Trường Xuân Cung. Sân vuông. Xác cung nữ giữa sân. Điện thờ khóa nhưng có người ra vào. Thái giám biết điều gì đó. Viên quan đang che giấu.</p>
 
 <p class="thought"><em>Mình không cần giải vụ án. Mình chỉ cần khiến mọi người tin mình ĐANG giải vụ án.</em></p>
 
-<p class="thought"><em>Và để làm điều đó — mình cần tạo ra một narrative.</em></p>
+<p class="thought"><em>Và để làm điều đó, mình cần tạo ra một mạch kể.</em></p>
 
 <p>Hắn hít sâu. Rồi — nói.</p>
 
 <p>— Trường Xuân Cung có bí mật.</p>
 
-<p>Câu nói vang trong sân. Đơn giản. Mơ hồ. Và chính vì mơ hồ — nên đáng sợ.</p>
+<p>Câu nói vang trong sân. Đơn giản. Mơ hồ. Và chính vì mơ hồ, nên đáng sợ.</p>
 
-<p>Mọi người tự điền vào chỗ trống. Lính canh nghĩ đến ma quỷ. Cung nữ nghĩ đến lời nguyền. Viên quan nghĩ đến thứ gì đó cụ thể hơn — thứ mà ông ta biết nhưng không nói.</p>
+<p>Mọi người tự điền vào chỗ trống. Lính canh nghĩ đến ma quỷ. Cung nữ nghĩ đến lời nguyền. Viên quan nghĩ đến thứ gì đó cụ thể hơn, thứ mà ông ta biết nhưng không nói.</p>
 
-<p>Và thái giám — gã nuốt nước bọt. Rõ ràng. Ực.</p>
+<p>Và thái giám, gã nuốt nước bọt. Rõ ràng. Ực.</p>
 
 <p class="thought"><em>Mình không biết bí mật là gì. Nhưng mình biết nó tồn tại. Vì mọi phản ứng quanh mình đều hét lên: "có thứ gì đó bị giấu ở đây."</em></p>
 
-<p>Tạ Cảnh Minh tiếp tục, giọng nhẹ hơn — kiểu giọng mà hắn dùng khi "nhập vai thầy bói" trên livestream:</p>
+<p>Tạ Cảnh Minh tiếp tục, giọng nhẹ hơn, kiểu giọng mà hắn dùng khi "nhập vai thầy bói" trên phát trực tiếp:</p>
 
 <p>— Cung nữ Tiểu Hoàn... nàng không vào đây vì tò mò. Nàng vào vì biết thứ gì đó. Và thứ đó... đã giết nàng.</p>
 
-<p>Bịa. Hoàn toàn bịa. Hắn không biết Tiểu Hoàn vào đây vì gì. Nhưng câu nói này tạo ra narrative: "cô ta biết bí mật → bí mật giết cô ta." Đám đông sẽ tự xây dựng câu chuyện xung quanh narrative đó.</p>
+<p>Bịa. Hoàn toàn bịa. Hắn không biết Tiểu Hoàn vào đây vì gì. Nhưng câu nói này tạo ra mạch kể: "cô ta biết bí mật → bí mật giết cô ta." Đám đông sẽ tự xây dựng câu chuyện xung quanh mạch kể đó.</p>
 
-<p>Và kẻ thật sự biết bí mật — sẽ sợ hãi.</p>
+<p>Và kẻ thật sự biết bí mật, sẽ sợ hãi.</p>
 
 <p>Đúng như dự đoán, viên quan nội giám nói nhanh:</p>
 
@@ -482,11 +492,11 @@
 
 <p>Hắn quay người, bước ra khỏi Trường Xuân Cung. Lưng thẳng, bước đều, mắt nhìn thẳng.</p>
 
-<p>Phía sau, hắn nghe thấy viên quan thở ra — run rẩy. Thái giám đứng im như tượng. Lính canh nhìn nhau.</p>
+<p>Phía sau, hắn nghe thấy viên quan thở ra, run rẩy. Thái giám đứng im như tượng. Lính canh nhìn nhau.</p>
 
 <p class="thought"><em>Mình vừa đến hiện trường án mạng, không phá được án, nhưng khiến tất cả mọi người tin rằng mình đã hiểu hết.</em></p>
 
-<p class="thought"><em>Kiếp trước gọi cái này là gì nhỉ? À — "authority bias". Khi một người có vị trí cao nói "tôi hiểu rồi", không ai dám hỏi "hiểu cái gì?".</em></p>
+<p class="thought"><em>Kiếp trước gọi cái này là gì nhỉ? À, "thiên kiến quyền lực". Khi một người có vị trí cao nói "tôi hiểu rồi", không ai dám hỏi "hiểu cái gì?".</em></p>
 
 <p>Hắn đi dọc hành lang quay về phòng giam. Thái giám dẫn đường theo sau, im lặng.</p>
 
@@ -494,29 +504,27 @@
 
 <p class="thought"><em>Tổng kết.</em></p>
 
-<p class="thought"><em>Một: cung nữ Tiểu Hoàn chết không rõ nguyên nhân ở cung bỏ hoang. Tư thế nằm ngay ngắn — ai đó sắp xếp xác, hoặc cô ta tự nằm xuống trước khi chết. Không có vết thương.</em></p>
+<p class="thought"><em>Một: cung nữ Tiểu Hoàn chết không rõ nguyên nhân ở cung bỏ hoang. Tư thế nằm ngay ngắn, ai đó sắp xếp xác, hoặc cô ta tự nằm xuống trước khi chết. Không có vết thương.</em></p>
 
-<p class="thought"><em>Hai: Trường Xuân Cung có bí mật. Điện thờ bị khóa nhưng có người ra vào. Chìa khóa do Nội giám ty giữ — nghĩa là viên quan nội giám hoặc cấp trên biết.</em></p>
+<p class="thought"><em>Hai: Trường Xuân Cung có bí mật. Điện thờ bị khóa nhưng có người ra vào. Chìa khóa do Nội giám ty giữ, nghĩa là viên quan nội giám hoặc cấp trên biết.</em></p>
 
-<p class="thought"><em>Ba: thái giám dẫn đường biết điều gì đó liên quan điện thờ. Gã sợ không phải vì xác chết — mà vì bí mật có thể bị lộ.</em></p>
+<p class="thought"><em>Ba: thái giám dẫn đường biết điều gì đó liên quan điện thờ. Gã sợ không phải vì xác chết, mà vì bí mật có thể bị lộ.</em></p>
 
 <p class="thought"><em>Bốn: mình không biết bí mật là gì. Nhưng mình biết ai đang giấu nó.</em></p>
 
-<p class="thought"><em>Năm: hoàng đế sai mình đến xem. Nghĩa là hoàng đế cũng nghi ngờ — hoặc sợ. Vua sợ thứ gì đó trong cung của mình.</em></p>
+<p class="thought"><em>Năm: hoàng đế sai mình đến xem. Nghĩa là hoàng đế cũng nghi ngờ, hoặc sợ. Vua sợ thứ gì đó trong cung của mình.</em></p>
 
-<p class="thought"><em>Sáu: mình vừa phán "Trường Xuân Cung có bí mật" trước mặt mười mấy người. Câu này sẽ lan. Và khi nó lan — kẻ giữ bí mật sẽ phải hành động. Hoặc giấu kỹ hơn. Hoặc... diệt khẩu.</em></p>
+<p class="thought"><em>Sáu: mình vừa phán "Trường Xuân Cung có bí mật" trước mặt mười mấy người. Câu này sẽ lan. Và khi nó lan, kẻ giữ bí mật sẽ phải hành động. Hoặc giấu kỹ hơn. Hoặc... diệt khẩu.</em></p>
 
 <p class="thought"><em>Hmm. Diệt khẩu. Mình vừa tự biến mình thành mục tiêu?</em></p>
 
 <p class="thought"><em>Kệ. Mình đã là mục tiêu từ lúc đứng trên pháp trường rồi.</em></p>
 
-<div class="scene-break"><span></span><span></span><span></span></div>
-
 <p>Hắn về đến phòng. Cửa đóng. Một mình.</p>
 
-<p>Ngồi xuống giường, hắn bắt đầu vẽ lên bàn bằng ngón tay — thói quen kiếp trước khi brainstorm. Không có giấy, không có bút. Nhưng não hắn đang chạy hết công suất.</p>
+<p>Ngồi xuống giường, hắn bắt đầu vẽ lên bàn bằng ngón tay, thói quen kiếp trước khi động não. Không có giấy, không có bút. Nhưng não hắn đang chạy hết công suất.</p>
 
-<p class="thought"><em>Mình cần thông tin. Về Trường Xuân Cung. Về cung nữ Tiểu Hoàn. Về điện thờ bị khóa. Nhưng mình không thể hỏi trực tiếp — Quốc Sư biết hết, không cần hỏi.</em></p>
+<p class="thought"><em>Mình cần thông tin. Về Trường Xuân Cung. Về cung nữ Tiểu Hoàn. Về điện thờ bị khóa. Nhưng mình không thể hỏi trực tiếp, Quốc Sư biết hết, không cần hỏi.</em></p>
 
 <p class="thought"><em>Vậy phải để người khác tự mang thông tin đến cho mình.</em></p>
 
@@ -524,21 +532,21 @@
 
 <p class="thought"><em>Mình vừa gieo một câu: "Trường Xuân Cung có bí mật." Câu này sẽ làm ít nhất 3 việc:</em></p>
 
-<p class="thought"><em>Một — kẻ có tội sẽ hoảng. Hoảng thì sẽ hành động bất thường. Hành động bất thường thì sẽ lộ.</em></p>
+<p class="thought"><em>Một, kẻ có tội sẽ hoảng. Hoảng thì sẽ hành động bất thường. Hành động bất thường thì sẽ lộ.</em></p>
 
-<p class="thought"><em>Hai — kẻ tò mò sẽ tìm hiểu. Cung nữ, thái giám — ai đó sẽ bắt đầu đào bới. Và thông tin sẽ trôi đến tai mình theo đường dân gian.</em></p>
+<p class="thought"><em>Hai, kẻ tò mò sẽ tìm hiểu. Cung nữ, thái giám, ai đó sẽ bắt đầu đào bới. Và thông tin sẽ trôi đến tai mình theo đường dân gian.</em></p>
 
-<p class="thought"><em>Ba — hoàng đế sẽ hỏi mình. Và khi hoàng đế hỏi — mình có cơ hội "phán" thêm, mua thêm thời gian.</em></p>
+<p class="thought"><em>Ba, hoàng đế sẽ hỏi mình. Và khi hoàng đế hỏi, mình có cơ hội "phán" thêm, mua thêm thời gian.</em></p>
 
-<p class="thought"><em>Đây giống hệt PR crisis management. Khi chưa biết sự thật — kiểm soát narrative trước. Sự thật sẽ tự bò ra sau.</em></p>
+<p class="thought"><em>Đây giống hệt truyền thông xử lý khủng hoảng. Khi chưa biết sự thật, kiểm soát mạch kể trước. Sự thật sẽ tự bò ra sau.</em></p>
 
-<p>Hắn ngả lưng xuống giường. Mắt nhìn trần nhà — gỗ cũ, xám, có vết mối.</p>
+<p>Hắn ngả lưng xuống giường. Mắt nhìn trần nhà, gỗ cũ, xám, có vết mối.</p>
 
 <p class="thought"><em>Nhưng có một thứ mình không giải thích được.</em></p>
 
-<p>Hắn nhớ lại khoảnh khắc đứng bên xác cung nữ. Khi hắn giơ tay "sờ khí vận" — hắn đang đóng kịch. Hoàn toàn đóng kịch.</p>
+<p>Hắn nhớ lại khoảnh khắc đứng bên xác cung nữ. Khi hắn giơ tay "sờ khí vận", hắn đang đóng kịch. Hoàn toàn đóng kịch.</p>
 
-<p>Nhưng trong một thoáng — chỉ một thoáng — hắn cảm thấy thứ gì đó.</p>
+<p>Nhưng trong một thoáng, chỉ một thoáng, hắn cảm thấy thứ gì đó.</p>
 
 <p>Lạnh.</p>
 
@@ -548,13 +556,13 @@
 
 <p class="thought"><em>Kiếp trước mình không có siêu năng lực. Mình chỉ biết đọc ngôn ngữ cơ thể. Mình không phải ngoại cảm.</em></p>
 
-<p class="thought"><em>Nhưng sợi khói hôm qua — vàng quanh Lục Thanh Dao, đen quanh mình... Và hôm nay — cái lạnh khi chạm gần xác chết...</em></p>
+<p class="thought"><em>Nhưng sợi khói hôm qua, vàng quanh Lục Thanh Dao, đen quanh mình... Và hôm nay, cái lạnh khi chạm gần xác chết...</em></p>
 
 <p class="thought"><em>Nếu ở thế giới này, những thứ đó là thật?</em></p>
 
 <p class="thought"><em>Nếu "khí uất" mà mình bịa ra... thật sự tồn tại?</em></p>
 
-<p>Hắn nhắm mắt. Thử lại. Giơ tay lên, ngón trỏ và ngón giữa chụm — giống như lúc nãy.</p>
+<p>Hắn nhắm mắt. Thử lại. Giơ tay lên, ngón trỏ và ngón giữa chụm, giống như lúc nãy.</p>
 
 <p>Không có gì. Chỉ có không khí.</p>
 
@@ -562,7 +570,7 @@
 
 <p>Hắn hạ tay xuống, cười nhạt.</p>
 
-<p class="thought"><em>Kệ đi. Ưu tiên bây giờ: sống. Và để sống — phải giữ vai Quốc Sư. Để giữ vai — phải giải được, hoặc giả vờ giải được, vụ cung nữ chết.</em></p>
+<p class="thought"><em>Kệ đi. Ưu tiên bây giờ: sống. Và để sống, phải giữ vai Quốc Sư. Để giữ vai, phải giải được, hoặc giả vờ giải được, vụ cung nữ chết.</em></p>
 
 <p class="thought"><em>Bước tiếp theo: chờ phản ứng. Lời mình đã gieo rồi. Giờ chỉ cần xem ai nở hoa.</em></p>
 
@@ -572,7 +580,7 @@
 
 <p>— Vào.</p>
 
-<p>Cửa mở. Thái giám dẫn đường — gã lúc nãy — bước vào. Nhưng lần này, gã không cúi thấp như trước. Gã đứng thẳng hơn. Và trong mắt gã — không chỉ có sợ. Còn có thứ khác.</p>
+<p>Cửa mở. Thái giám dẫn đường, gã lúc nãy, bước vào. Nhưng lần này, gã không cúi thấp như trước. Gã đứng thẳng hơn. Và trong mắt gã, không chỉ có sợ. Còn có thứ khác.</p>
 
 <p>Quyết tâm.</p>
 
@@ -582,7 +590,7 @@
 
 <p>Tạ Cảnh Minh không nói. Hắn chỉ nhìn. Chờ.</p>
 
-<p class="thought"><em>Rule số một khi có người muốn tâm sự: im lặng. Đừng giục. Đừng hỏi. Im lặng tạo khoảng trống — và con người ghét khoảng trống. Họ sẽ tự lấp đầy.</em></p>
+<p class="thought"><em>Nguyên tắc số một khi có người muốn tâm sự: im lặng. Đừng giục. Đừng hỏi. Im lặng tạo khoảng trống, và con người ghét khoảng trống. Họ sẽ tự lấp đầy.</em></p>
 
 <p>Thái giám nuốt nước bọt. Một lần. Hai lần. Rồi —</p>
 
@@ -592,15 +600,15 @@
 
 <p>— Nô tài không biết. Nhưng... — gã nhìn quanh, như sợ tường có tai — nhưng mỗi đêm không trăng, có ánh đèn trong điện thờ. Nô tài từng thấy. Và nô tài... không dám nói với ai.</p>
 
-<p class="thought"><em>Bingo.</em></p>
+<p class="thought"><em>Trúng rồi.</em></p>
 
-<p class="thought"><em>Gã không phải kẻ có tội. Gã là nhân chứng — một nhân chứng sợ hãi đã im lặng quá lâu, và bây giờ nghĩ rằng "Quốc Sư" có thể bảo vệ gã.</em></p>
+<p class="thought"><em>Gã không phải kẻ có tội. Gã là nhân chứng, một nhân chứng sợ hãi đã im lặng quá lâu, và bây giờ nghĩ rằng "Quốc Sư" có thể bảo vệ gã.</em></p>
 
 <p class="thought"><em>Gã đến với mình vì... tin mình.</em></p>
 
-<p>Tạ Cảnh Minh giữ mặt bình thản. Nhưng bên trong — một thứ gì đó nhói.</p>
+<p>Tạ Cảnh Minh giữ mặt bình thản. Nhưng bên trong, một thứ gì đó nhói.</p>
 
-<p class="thought"><em>Lại một người tin mình. Mình chưa làm gì cả. Mình chỉ nói mấy câu mơ hồ. Và gã đây — đặt cả mạng vào tay mình.</em></p>
+<p class="thought"><em>Lại một người tin mình. Mình chưa làm gì cả. Mình chỉ nói mấy câu mơ hồ. Và gã đây, đặt cả mạng vào tay mình.</em></p>
 
 <p class="thought"><em>Mình đang lừa gã.</em></p>
 
@@ -626,9 +634,9 @@
 
 <p class="thought"><em>Cung nữ Tiểu Hoàn chết ở đó. Có thể cô ta phát hiện bí mật. Có thể cô ta liên quan.</em></p>
 
-<p class="thought"><em>Viên quan nội giám giữ chìa khóa — ông ta biết, hoặc ít nhất nghi ngờ.</em></p>
+<p class="thought"><em>Viên quan nội giám giữ chìa khóa, ông ta biết, hoặc ít nhất nghi ngờ.</em></p>
 
-<p class="thought"><em>Và giờ mình có một người cung cấp tin — thái giám dẫn đường.</em></p>
+<p class="thought"><em>Và giờ mình có một người cung cấp tin, thái giám dẫn đường.</em></p>
 
 <p class="thought"><em>Tốt. Rất tốt.</em></p>
 
@@ -638,19 +646,19 @@
 
 <p class="thought"><em>Mình đang chơi trò gì vậy? Kiếp trước mình bán thực phẩm chức năng. Kiếp này mình phá án giết người trong hoàng cung.</em></p>
 
-<p class="thought"><em>Upgrade thật sự.</em></p>
+<p class="thought"><em>Nâng cấp thật sự.</em></p>
 
-<p>Ngoài cửa sổ, ánh sáng ban ngày đã đầy đặn. Kinh thành thức dậy. Đâu đó trong hoàng cung, tin tức về cung nữ chết ở Trường Xuân Cung đang lan — cùng với lời phán của Quốc Sư.</p>
+<p>Ngoài cửa sổ, ánh sáng ban ngày đã đầy đặn. Kinh thành thức dậy. Đâu đó trong hoàng cung, tin tức về cung nữ chết ở Trường Xuân Cung đang lan, cùng với lời phán của Quốc Sư.</p>
 
 <p>"Trường Xuân Cung có bí mật."</p>
 
 <p>"Kẻ giết người... vẫn còn trong cung."</p>
 
-<p>Câu thứ hai — Tạ Cảnh Minh chưa nói. Nhưng hắn biết — đám đông sẽ tự tạo ra nó. Vì khi một Quốc Sư nói "có bí mật", dân gian sẽ tự thêm: "và Quốc Sư đã biết kẻ giết người là ai."</p>
+<p>Câu thứ hai, Tạ Cảnh Minh chưa nói. Nhưng hắn biết, đám đông sẽ tự tạo ra nó. Vì khi một Quốc Sư nói "có bí mật", dân gian sẽ tự thêm: "và Quốc Sư đã biết kẻ giết người là ai."</p>
 
 <p>Hắn chưa biết.</p>
 
-<p>Nhưng kẻ giết người — nếu có — giờ tin rằng hắn biết.</p>
+<p>Nhưng kẻ giết người, nếu có, giờ tin rằng hắn biết.</p>
 
 <p>Và đó mới là điều nguy hiểm nhất.</p>
 
@@ -662,16 +670,16 @@
 
 <p class="thought"><em>Ở thế giới này, ranh giới giữa nói dối và nói thật... mỏng hơn mình tưởng.</em></p>
 
-<p>Và trong cái lạnh mong manh còn vương trên đầu ngón tay — cái lạnh mà hắn cảm được khi đưa ngang qua xác cung nữ — hắn không chắc đó chỉ là tưởng tượng nữa.</p>
+<p>Và trong cái lạnh mong manh còn vương trên đầu ngón tay, cái lạnh mà hắn cảm được khi đưa ngang qua xác cung nữ, hắn không chắc đó chỉ là tưởng tượng nữa.</p>
 
-    </article>
-
-    <div class="bottom-nav">
-      <a href="chapter-01.html">&larr; CHƯƠNG 01</a>
-      <a href="chapter-03.html">CHƯƠNG 03 &rarr;</a>
     </div>
 
-    <div class="word-count">4.096 từ</div>
+    <nav class="bottom-nav">
+      <a href="chapter-01.html">&larr; CHƯƠNG 01</a>
+      <a href="chapter-03.html">CHƯƠNG 03 &rarr;</a>
+    </nav>
+
+    <div class="word-count">4.026 TỪ</div>
 
   </div>
 </body>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 02: Thế Giới Mới — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .letter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 16px 24px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin: 16px 0;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .prose .list-item {
+      color: var(--muted);
+      padding-left: 1em;
+      margin-bottom: 0.3em;
+      text-align: left;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-01.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 2 / 30</span>
+    <a href="chapter-03.html">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 02</div>
+    <h1 class="chapter-title">Thế Giới<br>Mới</h1>
+    <div class="chapter-meta">Phần I — Thức Tỉnh &middot; 3.521 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Cầu thang tối.</p>
+
+    <p>Sáu tầng, không thang máy, mỗi bậc kêu cọt kẹt dưới chân như đang phàn nàn về cân nặng của người đi. Lục Trường An bước xuống chậm rãi — không phải vì cẩn thận, mà vì hai chân hắn run. Thân xác này yếu đến mức đi cầu thang cũng thở dốc.</p>
+
+    <p class="short">Hắn dừng ở tầng ba, tựa vào tường.</p>
+
+    <p class="thought">Ngàn năm trước, ta từng bay xuyên chín tầng trời trong một hơi thở. Giờ đi có sáu tầng cầu thang mà phải nghỉ giữa chừng.</p>
+
+    <p class="short">Hắn hít một hơi, tiếp tục.</p>
+
+    <p class="short">Tầng hai. Tầng một. Cửa chính.</p>
+
+    <p class="short">Ánh sáng ập vào mắt.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Không phải ánh sáng của pháp trận hay kiếm khí. Là nắng — nắng buổi sáng bình thường, chói lóa vì hắn đã ngồi trong phòng tối cả ngày hôm qua. Hắn nheo mắt, đứng ở bậc thềm, để ánh sáng chạm vào da.</p>
+
+    <p class="short">Ấm.</p>
+
+    <p>Cảm giác đơn giản đến mức kỳ lạ. Ngàn năm tu luyện, hắn đã quen với linh khí, với hàn băng trong mạch, với sát ý trong gió. Nắng — chỉ là nắng, không mang theo năng lượng gì — nhưng lại khiến thân xác này dễ chịu. Cơ thể phàm nhân có những nhu cầu phàm nhân.</p>
+
+    <p class="short">Hắn bước ra đường.</p>
+
+    <p>Con hẻm nhỏ trước tòa nhà bẩn thỉu, hai bên là tường gạch xám, dây điện chằng chịt trên đầu. Một bà già ngồi bán rau ở góc, bên cạnh là thùng rác đầy ắp. Mùi rác trộn với mùi cơm nấu, mùi xăng xe, mùi nước cống — một thứ mùi hỗn tạp mà hắn chưa từng ngửi trong bất cứ chiến trường tu tiên nào.</p>
+
+    <p class="short">Bà bán rau ngẩng lên nhìn hắn.</p>
+
+    <p class="short">Hắn nhìn lại.</p>
+
+    <p>Ma Tâm Quan hoạt động như một phản xạ — không cần kích hoạt, không cần vận công. Sau ngàn năm, nó đã trở thành bản năng, giống như thở.</p>
+
+    <p>Bà này: bảy mươi, có lẽ hơn. Lưng còng nhưng mắt còn tinh. Tay trái hay xoa đầu gối — đau khớp mãn tính. Ngồi đây từ bốn, năm giờ sáng. Rau ít, bày trên tấm bạt rách. Không có sạp cố định — nghĩa là không có vốn. Bán rau để sống qua ngày, không phải để kinh doanh.</p>
+
+    <p class="short">Nhưng mắt bà không buồn. Không sợ.</p>
+
+    <p>Hắn nhìn kỹ hơn. Ánh mắt đó — hắn đã thấy nhiều lần. Ở những đệ tử xuất thân thấp kém trong tông môn, những kẻ đã chạm đáy nên không còn gì để mất. Loại mắt đó không chứa hy vọng, nhưng cũng không chứa tuyệt vọng. Chỉ có sự chấp nhận tĩnh lặng.</p>
+
+    <p class="thought">Bà này mạnh hơn Lục Trường An cũ.</p>
+
+    <p>Bà bán rau ngoác miệng cười, lộ hàm răng thiếu mấy chiếc:</p>
+
+    <p>— Mua rau không cháu?</p>
+
+    <p>— Không. Cảm ơn bà.</p>
+
+    <p>Hắn gật đầu, bước đi. Ba mươi bảy nghìn đồng trong ví — hắn không có đủ tiền để mua cả một bó rau.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Đường phố buổi sáng.</p>
+
+    <p>Lần đầu tiên kể từ khi trọng sinh, hắn thực sự đi giữa dòng người. Không phải nhìn từ ban công tầng sáu. Là ở giữa — trong lòng nó, bị cuốn đi bởi nhịp chảy của hàng nghìn con người.</p>
+
+    <p>Xe máy chạy ào ào, xe buýt ì ạch, còi xe inh ỏi. Người đi bộ chen nhau trên vỉa hè hẹp, ai cũng nhìn xuống điện thoại, ai cũng bước nhanh, ai cũng có vẻ đang trễ cái gì đó.</p>
+
+    <p class="short">Hắn đi chậm.</p>
+
+    <p>Không phải vì thân xác yếu — dù nó đúng là yếu. Mà vì hắn đang quan sát. Ngàn năm tu luyện dạy hắn: thế giới nào cũng có quy luật, và quy luật luôn hiện ra cho người biết nhìn.</p>
+
+    <p>Một thanh niên mặc đồng phục giao hàng chạy xe qua, tay cầm điện thoại, miệng chửi thầm. Mắt đỏ — thức khuya, hoặc khóc. Áo ướt mồ hôi dù trời chưa nóng. Hắn đang chạy đơn hàng thứ mấy? Thứ năm? Thứ sáu? Cơ thể nói lên tất cả: gánh nặng tài chính, không có lựa chọn, đang ép mình đến giới hạn.</p>
+
+    <p class="thought">Kiếp trước, loại người này sẽ là nô lệ khoáng mỏ trong tông môn. Kiếp này, hắn tự nguyện làm nô lệ cho ứng dụng giao hàng. Khác nhau ở xiềng xích: một loại bằng sắt, một loại bằng thuật toán.</p>
+
+    <p>Hai cô gái trẻ đi ngang, cười nói, tự chụp ảnh. Quần áo đẹp, tóc nhuộm, móng tay sơn. Nhưng một trong hai có đôi giày mòn gót — mua giày rẻ, quần áo đắt. Ưu tiên bề ngoài hơn thoải mái. Cần người khác nhìn thấy cô, cần được chú ý. Dục vọng đơn giản: được công nhận.</p>
+
+    <p class="thought">Kiếp trước, loại đệ tử này ta chỉ cần khen vài câu là dùng được cả đời.</p>
+
+    <p>Hắn không khinh bỉ. Không thương hại. Chỉ quan sát. Ma Tâm Quan không phán xét — nó chỉ nhìn, và cho hắn thấy sự thật. Con người ở đâu cũng giống nhau: bị dục vọng dẫn lối, bị nỗi sợ giữ chân. Ngàn năm trước cũng vậy. Ngàn năm sau chắc vẫn vậy.</p>
+
+    <p>Hắn rẽ vào một con phố lớn hơn. Hai bên là cửa hàng, quán ăn, văn phòng. Biển hiệu đủ màu, loa phát nhạc, mùi cà phê trộn với khói xe. Ồn ào đến mức chóng mặt — nhưng hắn đã từng đứng giữa chiến trường vạn người, tiếng hét, tiếng kiếm, tiếng nổ của pháp bảo. So với cái đó, tiếng ồn đường phố chỉ là tiếng muỗi vo.</p>
+
+    <p class="short">Hắn dừng trước một quán cơm nhỏ.</p>
+
+    <p>Bụng đói. Gói mì tối qua không đủ. Thân xác này cần ăn — cần thật nhiều, để bù cho những tháng ngày bị bỏ đói.</p>
+
+    <p>Hắn nhìn bảng giá. Cơm bình dân: hai mươi lăm nghìn. Hắn có ba mươi bảy nghìn.</p>
+
+    <p class="short">Vào.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Quán nhỏ, sáu bàn, bốn bàn có người. Quạt trần quay, tivi treo tường đang phát tin tức. Chủ quán là một người đàn ông trung niên, bụng bia, tóc mỏng, đứng sau quầy gắp thức ăn cho khách.</p>
+
+    <p class="short">Hắn ngồi xuống bàn góc, gọi phần cơm rẻ nhất.</p>
+
+    <p class="short">Rồi quan sát.</p>
+
+    <p>Bàn bên phải: hai nhân viên văn phòng ăn nhanh, mắt dán vào điện thoại, không nói chuyện với nhau. Đồng nghiệp nhưng không phải bạn. Ăn cùng vì tiện, không phải vì muốn.</p>
+
+    <p>Bàn đối diện: một người đàn ông lớn tuổi ăn một mình, chậm rãi, nhìn ra cửa. Mắt xa xăm. Nhẫn cưới trên tay nhưng ăn một mình — vợ đi vắng, hoặc vợ đã không còn. Cách ông ta đặt đũa, cách ông ta nhai — cô đơn không phải thứ nói ra, mà hiện ra trong từng cử chỉ nhỏ.</p>
+
+    <p>Bàn trong cùng: chủ quán đang nói chuyện với một cô gái trẻ — nhân viên, theo tạp dề cô mặc. Giọng chủ quán ngày càng cao:</p>
+
+    <p>— Mày nghỉ một ngày không xin phép, tao trừ lương.</p>
+
+    <p>Cô gái cúi đầu:</p>
+
+    <p>— Dạ, em... em bị ốm. Em có nhắn tin cho anh mà.</p>
+
+    <p>— Nhắn tin? Tao không thấy. Mày nói dối tao à?</p>
+
+    <p>Cô gái im. Tay siết chặt vạt tạp dề. Không phải sợ — là nhẫn nhịn. Loại nhẫn nhịn của người biết mình không có lựa chọn.</p>
+
+    <p class="short">Hắn nhìn chủ quán.</p>
+
+    <p>Ma Tâm Quan đọc: kẻ này không giận thật. Giọng to nhưng mắt không nóng. Hắn đang diễn — diễn vai kẻ có quyền để duy trì trật tự. Kiểu boss nhỏ thích thể hiện quyền lực trước nhân viên, đặc biệt khi có khách ngồi quanh. Nếu không có ai nhìn, có lẽ hắn sẽ chỉ gắt vài câu rồi thôi.</p>
+
+    <p class="short">Nhưng cô gái kia...</p>
+
+    <p>Hắn nhìn kỹ hơn. Cô không sợ chủ quán. Ánh mắt cúi xuống nhưng hàm siết — nhẫn nhịn có chủ đích. Và tay cô — tay trái giấu sau lưng — đang cầm điện thoại. Ngón tay di chuyển trên màn hình.</p>
+
+    <p class="thought">Cô ta đang ghi âm.</p>
+
+    <p class="short">Hắn bất giác ngẩng lên. Nhìn lại cô gái lần nữa.</p>
+
+    <p>Không phải nhân viên yếu thế. Là kẻ đang chuẩn bị phản đòn. Có thể cô đang tìm bằng chứng để kiện, hoặc để đăng lên mạng, hoặc để dùng khi nào cần. Cô biết chủ quán trừ lương là sai luật. Cô đang chờ.</p>
+
+    <p class="thought">Thú vị.</p>
+
+    <p>Chủ quán nghĩ mình mạnh vì có tiền, có quyền thuê và đuổi. Nhưng cô nhân viên kia nắm trong tay một thứ mạnh hơn ở thế giới này: thông tin. Một đoạn ghi âm, một bài đăng gây bão — trong thế giới này, đó là pháp bảo.</p>
+
+    <p class="thought">Kiếp trước, ta gọi đó là mật trận. Ai nắm bí mật, người đó nắm quyền.</p>
+
+    <p class="short">Cơm đến. Hắn ăn.</p>
+
+    <p>Cơm bình dân, không ngon, không dở. Nhưng cơ thể này phản ứng mãnh liệt — dạ dày co thắt, nước bọt trào ra, như một con thú đói lâu ngày lần đầu được ăn. Hắn ép bản thân ăn chậm. Kiểm soát thân xác là bài học đầu tiên của ma đạo — ngay cả bài học nhỏ nhất cũng không được bỏ qua.</p>
+
+    <p class="short">Hắn ăn hết sạch. Đứng dậy, trả tiền.</p>
+
+    <p class="short">Còn mười hai nghìn.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ra khỏi quán, hắn đi dọc phố chính.</p>
+
+    <p>Thành phố ban ngày nhộn nhịp hơn ban đêm gấp bội. Hắn quan sát mọi thứ — không bỏ sót chi tiết nào. Cách người ta xếp hàng mua cà phê. Cách tài xế taxi tranh khách ở ngã tư. Cách nhân viên văn phòng đi thành nhóm, cách sếp đi một mình phía trước.</p>
+
+    <p class="short">Quyền lực.</p>
+
+    <p>Ở đâu cũng có quyền lực. Nó không nằm ở tu vi, không nằm ở linh lực. Nó nằm ở cách người ta bước đi, cách người ta nhìn nhau, cách người ta để tay. Kẻ có quyền bước rộng, lưng thẳng, mắt nhìn thẳng. Kẻ không có quyền bước hẹp, vai cong, mắt nhìn xuống.</p>
+
+    <p class="thought">Giống hệt. Giống hệt tu tiên giới.</p>
+
+    <p>Hắn đi qua một ngân hàng — tòa nhà kính sáng bóng, bảo vệ mặc đồng phục đứng trước cửa. Qua một trung tâm thương mại — biển hiệu quốc tế, người ra vào mặc đẹp, túi xách đắt tiền. Qua một công trường xây dựng — công nhân mặc áo phản quang, mồ hôi nhễ nhại, hàng rào che bụi.</p>
+
+    <p class="short">Ba tầng lớp. Ba thế giới. Trên cùng một con phố.</p>
+
+    <p class="thought">Ngân hàng là thánh địa tài chính. Trung tâm thương mại là chợ phiên của giới tu sĩ thượng tầng. Công trường là khoáng mỏ. Cùng tồn tại, nhưng người ở tầng trên không bao giờ nhìn xuống.</p>
+
+    <p>Hắn dừng lại ở một công viên nhỏ ven đường. Ghế đá, cây bóng mát, một bể nước phun đã hỏng. Ngồi xuống. Chân đau — thân xác này quá yếu, đi bộ hai tiếng đã tới hạn.</p>
+
+    <p class="short">Hắn ngồi yên, nhìn dòng người đi qua.</p>
+
+    <p class="short">Và lần đầu tiên, hắn cảm thấy một thứ lạ.</p>
+
+    <p>Không phải hứng thú. Không phải khinh bỉ. Là một dạng tò mò — loại tò mò hắn tưởng đã chết từ lâu.</p>
+
+    <p>Thế giới tu tiên, hắn đã hiểu hết. Mỗi tông môn, mỗi tu sĩ, mỗi âm mưu — hắn có thể dự đoán chính xác vì đã sống quá lâu. Không có gì bất ngờ. Không có gì mới. Đó là lý do hắn trở nên lạnh — không phải vì tàn nhẫn bẩm sinh, mà vì khi đã thấy hết rồi, cảm xúc tự tắt.</p>
+
+    <p class="short">Nhưng thế giới này...</p>
+
+    <p>Cô nhân viên quán cơm ghi âm lén chủ quán. Anh tay giao hàng chạy đơn bốn giờ sáng. Hai kẻ mặc vest bắt tay nhau mà mắt không tin nhau. Bà già bán rau mắt không buồn không sợ.</p>
+
+    <p>Con người ở đây yếu hơn tu sĩ gấp ngàn lần. Không có linh lực bảo vệ, không có pháp bảo hỗ trợ. Nhưng họ vẫn chiến đấu. Bằng mưu mẹo, bằng nhẫn nhịn, bằng sự liều lĩnh nhỏ bé.</p>
+
+    <p class="thought">Yếu. Nhưng không hèn.</p>
+
+    <p>Hắn ngẩng lên nhìn trời. Trời xanh, mây trắng, bình thường đến mức nhàm chán. Không có rồng bay, không có kiếm quang, không có lôi kiếp giáng xuống. Chỉ là bầu trời.</p>
+
+    <p>Nhưng bên dưới bầu trời đó, hàng triệu cuộc chiến đang diễn ra. Không ai thấy, không ai đếm, nhưng mỗi người trên con phố này đều đang chiến đấu vì thứ gì đó. Tiền. Tình. Quyền. Sự tồn tại.</p>
+
+    <p class="thought">Thú vị.</p>
+
+    <p>Hắn tự nói với mình, và nhận ra — lần đầu tiên sau rất lâu — hắn thực sự nghĩ vậy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn đi tiếp.</p>
+
+    <p>Chiều dần, nắng xiên. Hắn đã đi qua bốn con phố, hai công viên, một khu chợ. Chân đau nhức nhưng hắn không dừng — ngàn năm tu luyện cho hắn ngưỡng chịu đau vượt xa thân xác phàm. Cơ thể này đau, nhưng tâm trí hắn không mệt.</p>
+
+    <p>Hắn rẽ vào một con phố lớn — loại phố có tòa nhà cao, biển quảng cáo điện tử, cửa hàng quốc tế. Khu trung tâm. Đất đắt, người sang, không khí khác hẳn con hẻm tối tầng sáu của hắn.</p>
+
+    <p class="short">Và hắn nhìn thấy nó.</p>
+
+    <p>Một tấm bảng quảng cáo khổng lồ, treo trên mặt tiền tòa nhà hai mươi tầng. Đèn sáng rực, chiếm trọn tầm nhìn.</p>
+
+    <p class="short">Trên bảng quảng cáo: một khuôn mặt.</p>
+
+    <p>Trẻ. Đẹp trai theo kiểu sạch sẽ, sáng sủa — không phải đẹp kiểu diễn viên, mà đẹp kiểu người ta tin ngay khi nhìn. Nụ cười tự nhiên, ánh mắt thông minh, toát ra năng lượng tích cực. Mặc áo sơ mi trắng, tay cầm máy tính bảng, đứng trước nền là dòng code chạy.</p>
+
+    <p class="short">Dòng chữ bên dưới:</p>
+
+    <p class="short"><span class="bold-text">BẠCH DẠ, CEO NOVA TECH</span><br><span class="bold-text">"CÔNG NGHỆ LÀ CON ĐƯỜNG NGẮN NHẤT ĐẾN TƯƠNG LAI."</span></p>
+
+    <p class="short">Hắn đứng lại.</p>
+
+    <p>Không phải vì tấm bảng quảng cáo đẹp. Mà vì khuôn mặt đó.</p>
+
+    <p>Ma Tâm Quan — dù chỉ nhìn qua ảnh, dù ảnh đã được chỉnh sửa, dù chỉ là hình in trên bảng quảng cáo — vẫn cho hắn một tín hiệu.</p>
+
+    <p class="thought">Khuôn mặt này... không giả.</p>
+
+    <p>Nụ cười đó thật. Ánh mắt đó thật. Không phải kiểu diễn cho camera, kiểu mà hắn đã thấy trên mặt hàng ngàn kẻ dối trá kiếp trước. Kẻ này — Bạch Dạ, CEO gì đó — thực sự tin vào điều hắn nói trên bảng quảng cáo.</p>
+
+    <p class="short">Hiếm.</p>
+
+    <p class="short">Cực kỳ hiếm.</p>
+
+    <p>Ngàn năm sống, hắn đếm được trên một bàn tay số người nhìn mà hắn không tìm thấy sự giả dối. Và hầu hết bọn họ đều chết trẻ — vì ở tu tiên giới, tin vào điều gì đó là cách nhanh nhất để bị giết.</p>
+
+    <p class="short">Hắn nhìn bảng quảng cáo thêm vài giây. Ghi nhận khuôn mặt, ghi nhận cái tên. Rồi quay đi.</p>
+
+    <p class="thought">Kẻ này... có lẽ sẽ gặp lại.</p>
+
+    <p>Hắn không biết tại sao mình nghĩ vậy. Trực giác — Ma Tâm Quan ở dạng thuần túy nhất. Không logic, không phân tích. Chỉ là một cảm giác sâu trong xương: kẻ kia không phải người thường.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Trời tối.</p>
+
+    <p>Hắn đã đi quá xa, chân đau đến mức phải ngồi ở bến xe buýt nghỉ hai lần trên đường về. Mười hai nghìn đồng không đủ đi xe buýt — hắn không biết, cho đến khi nhìn bảng giá và nhận ra mình thiếu ba nghìn.</p>
+
+    <p class="short">Đi bộ về. Một tiếng rưỡi.</p>
+
+    <p>Khi hắn leo lên tầng sáu, trời đã tối hẳn. Căn hộ tối đen — hắn bật đèn, ánh đèn vàng yếu ớt chiếu lên những mẩu giấy vẫn nằm rải rác trên sàn. Thư từ chức bị xé.</p>
+
+    <p class="short">Hắn không nhặt. Bước qua.</p>
+
+    <p class="short">Đi thẳng ra ban công.</p>
+
+    <p>Thành phố đêm trải ra trước mắt. Không như ban ngày — ban ngày là hỗn loạn, là tiếng ồn, là mùi và người. Ban đêm, thành phố trở thành một thứ khác hoàn toàn.</p>
+
+    <p class="short">Ánh đèn.</p>
+
+    <p>Hàng triệu ánh đèn. Đèn đường, đèn nhà, đèn quảng cáo, đèn xe. Mỗi ánh đèn là một con người, một cuộc sống, một dục vọng đang cháy. Từ tầng sáu nhìn xuống, chúng trông như sao — sao ở dưới đất, sáng yếu ớt, nhấp nháy theo nhịp sống của một thế giới không bao giờ ngủ.</p>
+
+    <p class="short">Gió đêm thổi qua, mang theo hơi lạnh và mùi khói.</p>
+
+    <p class="short">Hắn đứng im lặng rất lâu.</p>
+
+    <p>Trong đầu hắn, những mảnh ghép đang xếp lại. Tất cả những gì hắn thấy hôm nay — bà bán rau, anh tay giao hàng, cô nhân viên ghi âm, chủ quán quát tháo, hai kẻ mặc vest bắt tay nhau, ngân hàng, trung tâm thương mại, công trường xây dựng, tấm bảng quảng cáo của kẻ tên Bạch Dạ.</p>
+
+    <p>Mỗi mảnh ghép là một phần của bức tranh. Và bức tranh đó, giờ đây, đã hoàn chỉnh trong tâm trí hắn.</p>
+
+    <p class="short">Thế giới này có tông môn, gọi là công ty.</p>
+    <p class="short">Có tông chủ, gọi là CEO.</p>
+    <p class="short">Có đệ tử, gọi là nhân viên.</p>
+    <p class="short">Có thánh địa, gọi là ngân hàng, quỹ đầu tư.</p>
+    <p class="short">Có pháp bảo, gọi là hợp đồng, bằng chứng, thông tin.</p>
+    <p class="short">Có thiên đạo, gọi là luật pháp.</p>
+    <p class="short">Có ma tu, gọi là kẻ chơi bẩn.</p>
+    <p class="short">Có chính đạo, gọi là... kẻ chơi bẩn nhưng biết che đậy.</p>
+
+    <p class="short">Hắn khẽ mỉm cười.</p>
+
+    <p class="thought">Cuối cùng thì — chính đạo và ma đạo ở đâu cũng giống nhau. Chỉ khác ở cái mặt nạ.</p>
+
+    <p>Gió mạnh hơn. Áo sơ mi mỏng phần phật. Hắn không lạnh — hoặc không để ý lạnh. Tâm trí hắn đang ở nơi khác. Đang nhìn thành phố, nhưng thấy chiến trường.</p>
+
+    <p class="short">Một chiến trường không có kiếm quang và pháp thuật.</p>
+
+    <p class="short">Một chiến trường chiến đấu bằng tiền, bằng quyền, bằng thông tin, bằng lòng tin và sự phản bội.</p>
+
+    <p class="thought">Ngàn năm trước, ta đã chinh phục tu tiên giới. Mất bảy trăm năm. Bảy trăm năm mưu lược, phản bội, giết chóc, và xây dựng. Cuối cùng đứng trên đỉnh Cửu U Sơn, nhìn xuống thiên hạ quỳ dưới chân.</p>
+
+    <p class="thought">Rồi bị phản bội. Và chết.</p>
+
+    <p class="short">Hắn nắm chặt tay trên lan can.</p>
+
+    <p class="thought">Thế giới này nhỏ hơn. Yếu hơn. Nhưng bản chất không khác.</p>
+
+    <p class="thought">Và ta, ta vẫn là ta.</p>
+
+    <p class="thought">Không còn linh lực. Không còn pháp bảo. Không còn tông môn. Nhưng thứ quan trọng nhất vẫn còn nguyên: ngàn năm nhìn con người giết nhau vì dục vọng.</p>
+
+    <p class="thought">Ma Tâm Quan.</p>
+
+    <p class="thought">Thứ đó không cần linh lực. Chỉ cần mắt nhìn, tai nghe, và một bộ não đã thấy quá nhiều.</p>
+
+    <p class="short">Hắn buông tay khỏi lan can, quay vào phòng.</p>
+
+    <p>Ngồi xuống bàn. Mở máy tính — thao tác đã quen hơn hôm qua. Mở trình duyệt, gõ tìm kiếm.</p>
+
+    <p class="short"><span class="bold-text">"Cách mở công ty."</span></p>
+    <p class="short"><span class="bold-text">"Luật doanh nghiệp."</span></p>
+    <p class="short"><span class="bold-text">"Cách viết kế hoạch kinh doanh."</span></p>
+    <p class="short"><span class="bold-text">"Khởi nghiệp là gì."</span></p>
+
+    <p>Hắn đọc. Đọc nhanh, đọc chính xác, ghi nhớ mọi thứ. Ngàn năm tu luyện cho hắn trí nhớ gần như tuyệt đối — không phải siêu phàm, chỉ là kết quả của kỷ luật: khi đã quen với việc ghi nhớ hàng ngàn bài pháp quyết, mấy trang web kinh doanh chẳng là gì.</p>
+
+    <p class="short">Hai tiếng trôi qua. Ba tiếng. Bốn.</p>
+
+    <p>Đêm khuya. Thành phố ngoài kia đã bớt sáng — nhiều ngôi sao dưới đất đã tắt, chỉ còn những ngôi không bao giờ tắt: đèn đường, cửa hàng mở suốt đêm, quảng cáo điện tử.</p>
+
+    <p class="short">Hắn đóng máy tính. Đứng dậy. Bước ra ban công lần nữa.</p>
+
+    <p class="short">Nhìn xuống.</p>
+
+    <p>Thành phố vẫn ở đó. Vẫn rộng lớn, vẫn hỗn loạn, vẫn đầy ắp con người với dục vọng nhỏ bé và cuộc chiến vô hình.</p>
+
+    <p class="short">Hắn hít một hơi dài.</p>
+
+    <p class="short">Rồi thở ra, chậm, đều, như cách hắn từng thở trước khi bước vào đại chiến.</p>
+
+    <p class="thought">Tu tiên giới chưa từng biến mất.</p>
+
+    <p class="short">Gió đêm mang theo mùi mưa sắp đến.</p>
+
+    <p class="thought">Chỉ đổi tên thành giới tư bản.</p>
+
+    <p class="short">Hắn quay vào phòng. Tắt đèn. Nằm xuống giường.</p>
+
+    <p class="short">Ngày mai, hắn sẽ đến Vạn Lý Group.</p>
+
+    <p class="short">Lần này, không phải để đi làm.</p>
+
+    <p class="short">Mà để bắt đầu hiểu tông môn đầu tiên hắn sẽ chinh phục.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-01.html">&larr; Chương trước</a>
+    <a href="chapter-03.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.521 từ &middot; Chương 02 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>
