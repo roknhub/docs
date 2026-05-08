@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quốc Sư Giả Mạo — Tập 1: Pháp Trường</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0f;
+      color: #c8b89a;
+      font-family: 'Noto Serif', 'Georgia', serif;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #2a2520;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      color: #e8d5b5;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .header .subtitle {
+      font-size: 1.1rem;
+      color: #8a7d6b;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .header .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .header .tag {
+      font-size: 0.75rem;
+      color: #6a5d4e;
+      border: 1px solid #2a2520;
+      padding: 4px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .header .stats {
+      font-size: 0.85rem;
+      color: #5a5045;
+    }
+
+    .header .stats span {
+      margin: 0 12px;
+    }
+
+    .header .progress-bar {
+      width: 200px;
+      height: 3px;
+      background: #1a1815;
+      margin: 16px auto 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .header .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #8a6d3b, #c8a55a);
+      border-radius: 2px;
+      transition: width 0.5s;
+    }
+
+    /* Phần */
+    .part {
+      margin-bottom: 48px;
+    }
+
+    .part-title {
+      font-size: 0.8rem;
+      color: #5a5045;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1a1815;
+    }
+
+    /* Chương */
+    .chapter-link {
+      display: block;
+      text-decoration: none;
+      padding: 20px 24px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .chapter-link:hover {
+      background: #12110e;
+    }
+
+    .chapter-link .chapter-number {
+      font-size: 0.75rem;
+      color: #5a5045;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .chapter-link .chapter-title {
+      font-size: 1.15rem;
+      color: #d4c4a8;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .chapter-link:hover .chapter-title {
+      color: #e8d5b5;
+    }
+
+    .chapter-link .chapter-summary {
+      font-size: 0.85rem;
+      color: #6a5d4e;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .chapter-link .chapter-meta {
+      font-size: 0.7rem;
+      color: #3a3530;
+      margin-top: 8px;
+    }
+
+    .chapter-link .arrow {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #3a3530;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+
+    .chapter-link:hover .arrow {
+      color: #8a7d6b;
+      transform: translateY(-50%) translateX(4px);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding-top: 48px;
+      border-top: 1px solid #1a1815;
+      color: #3a3530;
+      font-size: 0.8rem;
+    }
+
+    /* Logline */
+    .logline {
+      text-align: center;
+      font-style: italic;
+      color: #6a5d4e;
+      line-height: 1.8;
+      margin-bottom: 48px;
+      padding: 0 20px;
+      font-size: 0.95rem;
+    }
+
+    .logline::before, .logline::after {
+      content: '—';
+      display: block;
+      color: #2a2520;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>Quốc Sư Giả Mạo</h1>
+      <div class="subtitle">Tập 1 — Pháp Trường</div>
+      <div class="tags">
+        <span class="tag">Tu tiên</span>
+        <span class="tag">Đấu trí</span>
+        <span class="tag">Chính trị</span>
+        <span class="tag">Hài đen</span>
+        <span class="tag">Fake it till you make it</span>
+      </div>
+      <div class="stats">
+        <span>1 / 30 chương</span>
+        <span>·</span>
+        <span>3.741 từ</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 3.3%"></div>
+      </div>
+    </div>
+
+    <div class="logline">
+      Một tên lừa đảo hiện đại xuyên vào thân xác Quốc Sư giả sắp bị xử tử, buộc phải bluff để sống sót trong thế giới mà niềm tin tập thể có thể thay đổi hiện thực — và dần nhận ra hắn không chỉ đang lừa, mà đang vô thức thao túng vận mệnh.
+    </div>
+
+    <!-- Chỉ hiển thị phần có chương đã viết xong -->
+
+    <div class="part">
+      <div class="part-title">Phần I · Sinh Tồn</div>
+
+      <a class="chapter-link" href="chapter-01.html">
+        <div class="chapter-number">Chương 01</div>
+        <div class="chapter-title">Quốc Sư Bị Xử Trảm</div>
+        <div class="chapter-summary">Xuyên không ngay lúc hành hình. Bluff tiếng sấm cứu mạng. Lục Thanh Dao gặp lần đầu.</div>
+        <div class="chapter-meta">3.741 từ</div>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+
+    <!-- Các phần sau sẽ xuất hiện khi có chương hoàn thành -->
+
+    <div class="footer">
+      Quốc Sư Giả Mạo · đang viết
+    </div>
+
+  </div>
+</body>
+</html>
