@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 08: Ma Tâm Quan — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-07.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 8 / 30</span>
+    <a href="chapter-09.html">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 08</div>
+    <h1 class="chapter-title">Ma Tâm Quan</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 3.015 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>Sau vụ Vương Gia, phòng Kinh doanh nhìn hắn khác.</p>
+
+    <p>Không phải thay đổi lớn. Không ai vỗ vai chúc mừng, không ai mang hoa tặng. Chỉ là những thay đổi nhỏ, loại thay đổi mà người bình thường không để ý, nhưng hắn thấy hết.</p>
+
+    <p>Tiểu Lý chào hắn buổi sáng, không phải gật đầu nhanh như trước, mà dừng lại, nhìn, rồi mới gật. Kiểu gật của người đang đánh giá lại ai đó.</p>
+
+    <p>Hạnh ở bàn đối diện liếc hắn khi hắn đi ngang, lần đầu tiên kể từ khi hắn quay lại. Trước đó, cô ta nhìn hắn như nhìn xuyên, bây giờ nhìn thấy.</p>
+
+    <p>Hai thuộc hạ Ngô Hải ở góc trái thì thầm nhiều hơn. Trước đó thì thầm về chuyện khác, bây giờ thì thầm về hắn. Hắn biết vì hướng mắt của chúng đã đổi: trước liếc Ngô Hải, giờ liếc hắn rồi liếc Ngô Hải. Tam giác quyền lực nhỏ bé trong phòng đang xê dịch.</p>
+
+    <p class="thought">Ở bất kỳ tông môn nào, khi một đệ tử vô danh bất ngờ lập công, phản ứng luôn chia ba. Kẻ tò mò muốn kết bạn. Kẻ ghen tị muốn tìm lỗi. Và kẻ cầm quyền muốn biết: nên dùng hay nên diệt.</p>
+
+    <p class="short">Ngô Hải thuộc loại thứ ba.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Tư, tuần thứ ba. Họp phòng.</p>
+
+    <p>Ngô Hải đứng trước bảng trắng, cây bút mực đỏ trong tay. Phòng Kinh doanh đầy đủ, mười bảy người, kể cả hắn.</p>
+
+    <p>— Kết quả tháng. Chỉ tiêu: mười hai hợp đồng mới. Thực tế: tám. Thiếu bốn.</p>
+
+    <p>Ngô Hải viết số "8/12" lên bảng, gạch chân bằng mực đỏ. Nhìn quanh phòng. Mắt nheo, dừng ở từng người, đủ lâu để họ cúi đầu.</p>
+
+    <p class="short">Hắn không cúi. Ngồi ghế cuối, lưng thẳng, mắt mở. Quan sát.</p>
+
+    <p class="thought">Không phải quan sát Ngô Hải. Quan sát tất cả.</p>
+
+    <p>Ngô Hải bắt đầu gọi tên từng nhân viên, hỏi tiến độ. Đây là lúc Ma Tâm Quan hoạt động rõ nhất, không phải khi đọc một người, mà khi đọc cả phòng cùng lúc.</p>
+
+    <p>Người đầu tiên: Trần Văn Hùng, ba mươi hai tuổi, bàn dãy hai. Khi được gọi tên, vai hắn so lên nửa phân, tay phải rời bàn đặt lên đùi, ngón cái ấn vào vải quần. Nhịp thở nhanh hơn, hơi thở nông, từ ngực chứ không phải từ bụng.</p>
+
+    <p class="thought">Đang giấu. Chỉ tiêu không đạt, và hắn sắp nói dối.</p>
+
+    <p>— Dạ, em đang theo hai khách, tuần sau có kết quả.</p>
+
+    <p class="thought">"Đang theo" là nói dối. Nếu thật sự đang theo, hắn sẽ nói tên khách, nói giai đoạn nào. "Tuần sau có kết quả" là câu trì hoãn. Mắt nhìn thẳng Ngô Hải khi nói, quá thẳng, cố tạo vẻ trung thực. Người trung thực không cần cố.</p>
+
+    <p>Người thứ hai: Nguyễn Thị Hạnh, bàn đối diện hắn. Khi được gọi, cô không so vai. Không thay đổi nhịp thở. Giọng đều, báo cáo gọn: hai hợp đồng đã ký, một đang đàm phán.</p>
+
+    <p class="thought">Không giấu gì. Số liệu thật. Nhưng tay trái nắm chặt dưới bàn, người khác không thấy. Không phải vì nói dối, vì căng thẳng. Cô ta sợ bị hỏi thêm, sợ bị chú ý. Kiểu sợ của người đã từng bị phạt vì nổi bật.</p>
+
+    <p>Người thứ ba: một trong hai thuộc hạ Ngô Hải, người gầy mặt dài. Khi báo cáo, hắn nhìn Ngô Hải, không nhìn cả phòng. Giọng tự tin, hơi to. Nhưng ngón tay trỏ gõ lên bàn, nhịp không đều.</p>
+
+    <p class="thought">Nói giỏi, số liệu đẹp, nhưng gõ ngón tay không đều nghĩa là đang nhớ kịch bản. Số liệu có thể thật, nhưng cách trình bày đã được duyệt trước bởi Ngô Hải. Thuộc hạ và chủ đã đồng bộ kịch bản trước cuộc họp.</p>
+
+    <p>Hắn ngồi im, nghe hết lượt. Mười bảy người. Mười bảy cách nói dối, nói thật, nói nửa vời. Mỗi cơ thể là một cuốn sách mở, chỉ cần biết đọc.</p>
+
+    <p class="thought">Ma Tâm Quan không phải phép thuật. Không cần linh lực. Không cần đan điền. Chỉ cần mắt, tai, và ngàn năm kinh nghiệm.</p>
+
+    <p class="thought">Nhịp thở nhanh khi căng thẳng. Vai so khi phòng thủ. Đồng tử giãn khi sợ hoặc phấn khích. Tay siết khi kìm nén. Mắt liếc khi tìm đồng minh hoặc lối thoát. Giọng cao hơn nửa cung khi nói dối. Gõ ngón tay khi nhớ kịch bản.</p>
+
+    <p class="thought">Mỗi dấu hiệu một mình thì vô nghĩa. Nhưng khi đọc cả chục dấu hiệu cùng lúc trên cùng một khuôn mặt, trong cùng một bối cảnh, sự thật hiện ra rõ như ban ngày.</p>
+
+    <p>Tiểu Lý, khi được gọi: lưng hơi nghiêng về phía trước, tay mở sổ tay, giọng nhanh, hơi vấp. Hồi hộp nhưng không giấu. Kẻ tử tế thường không biết giấu. Số liệu thật, nhưng thiếu, và Tiểu Lý biết thiếu, nên giọng nhỏ dần về cuối câu.</p>
+
+    <p>Hạnh: báo cáo gọn, chính xác, giọng đều. Nhưng khi Ngô Hải hỏi thêm "Khách hàng mới có triển vọng không?", mắt cô chớp nhanh hai lần liên tiếp trước khi trả lời. Hai lần chớp: đang tìm câu trả lời an toàn, không phải câu trả lời thật.</p>
+
+    <p class="thought">Mỗi người một kiểu. Nhưng tất cả đều có chung một phản xạ: khi bị Ngô Hải nhìn thẳng, ai cũng thay đổi. Ngồi thẳng hơn, nói nhanh hơn, hoặc nói chậm hơn. Đó là dấu hiệu của sợ. Không phải sợ Ngô Hải. Sợ hậu quả. Sợ bị ghi nhận là "có vấn đề."</p>
+
+    <p class="thought">Quyền lực nhỏ nhất cũng tạo ra sợ hãi. Đó là bài học đầu tiên của bất kỳ ai cai trị.</p>
+
+    <p class="short">Đến lượt hắn.</p>
+
+    <p>— Lục Trường An. Tháng này có gì?</p>
+
+    <p>Ngô Hải hỏi, giọng nhẹ. Nhưng cây bút đỏ trong tay xoay nhanh hơn. Đang chờ. Hắn đã ký được Vương Gia, nhưng Ngô Hải cần tìm cách giảm nhẹ thành tích đó.</p>
+
+    <p>— Hợp đồng Vương Gia Mart. Đã ký. Đang triển khai.</p>
+
+    <p class="short">— Một hợp đồng. Còn gì nữa?</p>
+
+    <p class="short">— Chưa.</p>
+
+    <p>Im lặng. Ngô Hải gật đầu, kiểu gật đầu "thấy chưa, chỉ có một."</p>
+
+    <p>— Một hợp đồng. Tốt. Nhưng chỉ tiêu cá nhân là hai. Cậu còn thiếu một.</p>
+
+    <p>Không nhắc rằng Vương Gia là khách hàng ba lần từ chối. Không nhắc rằng không ai trong phòng dám nhận. Chỉ nhắc: thiếu một.</p>
+
+    <p class="thought">Thủ thuật cũ. Giảm nhẹ thành tích của kẻ dưới để giữ khoảng cách. Ở Huyền Minh Tông, mỗi lần đệ tử lập công, trưởng lão nào đó luôn nói: "Tốt, nhưng còn xa mới đủ." Không phải vì thật. Vì nếu khen, đệ tử sẽ nghĩ mình ngang hàng.</p>
+
+    <p class="short">Hắn không phản bác. Gật đầu.</p>
+
+    <p class="short">— Tôi sẽ cố.</p>
+
+    <p>Ba chữ. Đủ để Ngô Hải hài lòng. Không đủ để phòng quên chuyện Vương Gia.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="thought">Ngàn năm trước.</p>
+
+    <p class="thought">Đại điện Huyền Minh Tông. Ngọn nến lớn cháy ở bốn góc, ánh lửa xanh lét, loại lửa nuôi bằng u hồn hỏa, không tắt, không nhạt. Một ngàn hai trăm đệ tử quỳ dưới bậc thềm, đầu cúi, không dám nhìn lên.</p>
+
+    <p class="thought">Hắn ngồi trên ngai, nhìn xuống.</p>
+
+    <p class="thought">Một ngàn hai trăm khuôn mặt. Một ngàn hai trăm dục vọng. Hắn đọc được hết. Không phải vì hắn tài giỏi. Vì hắn đã sống đủ lâu.</p>
+
+    <p class="thought">Hàng đầu, bên trái: Tống Hạo Nhiên, đệ tử ruột, quỳ ngay ngắn nhất, đầu cúi thấp nhất. Trung thành tuyệt đối. Hắn tin thế. Hai trăm năm sư đồ, hắn tin thế.</p>
+
+    <p class="thought">Hắn sai.</p>
+
+    <p class="thought">Bên phải: Diệp Thanh Phong, mưu sĩ, quỳ nhưng lưng hơi thẳng hơn người khác hai phân. Không phải bất kính. Là bản tính. Kẻ giỏi mưu không bao giờ cúi thật thấp, vì cúi thấp là mất góc nhìn.</p>
+
+    <p class="thought">Hàng giữa: ba trăm đệ tử cốt cán. Trong đó, bảy kẻ đang nghĩ đến phản bội. Hắn biết. Nhìn cách chúng nuốt nước bọt khi hắn đứng dậy, nhìn cách mắt chúng liếc sang nhau khi hắn quay lưng. Bảy kẻ. Hắn ghi nhận, không hành động. Chưa cần.</p>
+
+    <p class="thought">Ngàn năm sau, hắn mới hiểu: bảy kẻ đó không nguy hiểm. Kẻ nguy hiểm nhất là Tống Hạo Nhiên, kẻ quỳ thấp nhất, kẻ không bao giờ để lộ dục vọng.</p>
+
+    <p class="thought">Ma Tâm Quan đọc được bảy kẻ phản. Nhưng không đọc được kẻ thứ tám, kẻ giấu giỏi nhất.</p>
+
+    <p class="thought">Đó là bài học đắt nhất trong ngàn năm: Ma Tâm Quan không toàn năng. Nó đọc được dục vọng lộ ra. Nhưng dục vọng giấu kỹ nhất, dục vọng của kẻ tin rằng mình đang làm điều đúng khi phản bội, thì vô hình.</p>
+
+    <p class="short">Hắn mở mắt.</p>
+
+    <p>Phòng Kinh doanh, tầng mười hai. Đèn huỳnh quang. Tiếng bàn phím. Mùi cà phê hòa tan.</p>
+
+    <p class="short">Không phải đại điện. Không phải ngàn đệ tử.</p>
+
+    <p class="short">Mười bảy người. Và hắn đọc được mười sáu.</p>
+
+    <p class="thought">Người thứ mười bảy, kẻ mà ta không chắc đọc đúng, chưa xuất hiện. Nhưng ở bất kỳ tông môn nào, kẻ đó luôn tồn tại. Kẻ giấu giỏi nhất. Kẻ mà khi lộ mặt, sẽ là bất ngờ lớn nhất.</p>
+
+    <p class="thought">Lần này, ta sẽ không để bất ngờ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Sáu, chiều. Tiểu Lý ghé bàn hắn.</p>
+
+    <p>— Anh Lục, em hỏi chút được không?</p>
+
+    <p class="short">— Hỏi.</p>
+
+    <p>Tiểu Lý kéo ghế, ngồi cạnh, giọng nhỏ. Nhìn nhanh về phía Ngô Hải, đang họp trong phòng kính, không nghe thấy.</p>
+
+    <p>— Em đang theo một khách, chuỗi nhà thuốc Minh Đức, sáu chi nhánh. Em đã gặp ba lần rồi, trình bày đủ kiểu, mà ông chủ cứ bảo "để xem." Em không biết vướng ở đâu.</p>
+
+    <p>Ma Tâm Quan không cần gặp ông chủ nhà thuốc để đoán. Chỉ cần nghe Tiểu Lý kể.</p>
+
+    <p class="short">— Ông ta nói "để xem" mấy lần?</p>
+
+    <p class="short">— Ba lần.</p>
+
+    <p class="short">— Ba lần đều sau khi em trình bày giải pháp?</p>
+
+    <p class="short">— Dạ, đúng.</p>
+
+    <p class="short">— Ông ta có hỏi câu nào không? Hay chỉ nghe?</p>
+
+    <p class="short">Tiểu Lý nghĩ.</p>
+
+    <p>— Ông ta... hỏi ít. Hỏi giá, hỏi thời gian triển khai. Nhưng kiểu hỏi cho có.</p>
+
+    <p class="thought">"Hỏi cho có" nghĩa là ông ta không quan tâm câu trả lời. Nghĩa là vấn đề không nằm ở sản phẩm hay giá. Nằm ở chỗ khác.</p>
+
+    <p class="short">— Ông ta bao nhiêu tuổi?</p>
+
+    <p class="short">— Năm mươi mấy.</p>
+
+    <p class="short">— Tự mở hay thừa kế?</p>
+
+    <p class="short">— Tự mở. Từ một tiệm nhỏ.</p>
+
+    <p class="short">— Khi em trình bày, ông ta nhìn đâu?</p>
+
+    <p class="short">Tiểu Lý ngạc nhiên vì câu hỏi.</p>
+
+    <p class="short">— Ông ta... nhìn em. Nhìn màn hình. Bình thường.</p>
+
+    <p class="short">— Có nhìn điện thoại không?</p>
+
+    <p class="short">— Có. Vài lần.</p>
+
+    <p class="short">— Nhìn điện thoại khi em nói phần nào?</p>
+
+    <p class="short">Im lặng. Tiểu Lý nghĩ.</p>
+
+    <p class="short">— Khi em nói về... chi phí triển khai.</p>
+
+    <p class="thought">Nhìn điện thoại khi nghe chi phí. Không phải vì không quan tâm chi phí. Vì đã quyết định chi phí không phải vấn đề, chỉ là đang tìm lý do để từ chối. "Để xem" là từ chối lịch sự. Ông ta không muốn mua. Nhưng cũng không muốn nói thẳng vì sợ mất mối quan hệ. Kiểu người tự xây, trọng mặt mũi, không muốn ai mất mặt.</p>
+
+    <p class="short">— Vấn đề không phải sản phẩm. Ông ta không tin em.</p>
+
+    <p class="short">Tiểu Lý chớp mắt.</p>
+
+    <p class="short">— Không tin em?</p>
+
+    <p>— Không phải không tin tính cách em. Không tin em đủ hiểu ngành của ông ta. Em bán giải pháp cho chuỗi nhà thuốc, nhưng em biết gì về ngành dược phẩm bán lẻ?</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">— Em... biết cơ bản.</p>
+
+    <p>— Ông ta biết em biết cơ bản. Và ông ta không mua từ người biết cơ bản. Ông ta muốn người hiểu sâu. Người mà khi nói chuyện, ông ta cảm thấy đang nói với đồng nghiệp, không phải nhân viên bán hàng.</p>
+
+    <p>Tiểu Lý nhìn hắn. Lâu. Kiểu nhìn của người vừa bị chỉ ra điểm mù mà mình không thấy.</p>
+
+    <p class="short">— Vậy em phải làm gì?</p>
+
+    <p>— Đọc. Tìm mọi thứ về ngành dược phẩm bán lẻ. Quy định mới, thách thức, xu hướng. Khi gặp ông ta lần sau, đừng trình bày. Hỏi ông ta về ngành. Hỏi thật, không phải hỏi để bán. Khi ông ta thấy em hiểu, ông ta sẽ tự nói ra vấn đề. Và lúc đó, em mới đưa giải pháp.</p>
+
+    <p>Tiểu Lý gật đầu. Chậm. Rồi nhanh hơn.</p>
+
+    <p class="short">— Anh Lục, cảm ơn anh. Thật sự.</p>
+
+    <p class="short">— Không có gì.</p>
+
+    <p>Tiểu Lý đứng dậy, quay về bàn. Hắn nhìn theo.</p>
+
+    <p class="thought">Nợ ân thứ nhất. Tiểu Lý sẽ nhớ. Không phải vì hắn nợ ta một ly trà. Vì ta cho hắn thứ có giá trị hơn: cách nhìn mới. Kẻ nào cho người khác cách nhìn mới, kẻ đó sở hữu một phần tâm trí họ. Đó là cách xây đồng minh.</p>
+
+    <p class="thought">Không phải bằng tiền. Không phải bằng quyền lực. Bằng tri thức.</p>
+
+    <p class="thought">Ở Huyền Minh Tông, ta thu phục đệ tử đầu tiên không phải bằng sức mạnh. Mà bằng việc dạy hắn một chiêu mà không ai dạy. Từ đó, hắn theo ta đến chết.</p>
+
+    <p class="thought">Kiếp này cũng vậy. Chỉ thay kiếm thuật bằng kinh doanh.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tuần thứ ba trôi qua.</p>
+
+    <p>Tiểu Lý gặp lại chủ nhà thuốc Minh Đức. Không trình bày. Hỏi. Ông chủ nói hai tiếng, Tiểu Lý nghe hai tiếng. Cuối buổi, ông chủ hỏi: "Thế giải pháp bên cậu có cái gì phù hợp không?"</p>
+
+    <p class="short">Ký hợp đồng tuần sau.</p>
+
+    <p>Tiểu Lý mang kết quả về, mặt sáng rỡ, ghé bàn hắn, nói nhỏ:</p>
+
+    <p>— Anh Lục, ông ấy ký rồi. Em không tin. Chỉ hỏi thôi mà ông ấy tự muốn mua.</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p class="short">— Tốt.</p>
+
+    <p>Không nói thêm. Không giải thích lý thuyết. Kẻ giỏi dạy không giải thích, để học trò tự rút ra bài học.</p>
+
+    <p>Tiểu Lý quay về bàn. Nhưng từ đó, mỗi sáng đều ghé chào hắn, không phải chào xã giao, chào kiểu học trò gặp thầy. Mỗi chiều có vấn đề đều ghé hỏi. Không phải hỏi kiểu nhờ vả. Hỏi kiểu đệ tử hỏi sư phụ, nhẹ nhàng, tôn trọng, và tin rằng câu trả lời sẽ đúng.</p>
+
+    <p>Hạnh thấy. Không nói gì, nhưng một hôm, khi hắn đi ngang bàn, cô đặt một cốc trà trên bàn hắn. Không nhìn lên, không nói. Chỉ đặt rồi tiếp tục gõ phím.</p>
+
+    <p class="thought">Nợ ân không chỉ tích lũy trực tiếp. Khi người A thấy người B tôn trọng kẻ C, người A bắt đầu đánh giá lại kẻ C. Hiệu ứng dây chuyền. Ở tông môn, ta gọi đó là "uy danh lan." Không cần ta tự quảng bá. Chỉ cần một người nói đúng lúc, đúng chỗ.</p>
+
+    <p class="thought">Nợ ân đang tích lũy. Từng chút. Từng người.</p>
+
+    <p class="short">Và Ngô Hải thấy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn thấy. Nhưng không làm gì được.</p>
+
+    <p>Ngô Hải thử cô lập hắn. Thứ Ba: giao hắn đi kiểm tra kho hàng ở ngoại ô, việc của phòng vận hành, không phải phòng Kinh doanh. Mục đích: giữ hắn xa văn phòng cả ngày. Thứ Tư: xếp họp nhóm lúc hai giờ, đúng lúc hắn đang gặp khách mới. Không báo trước. Thứ Năm: "lỡ" không thêm hắn vào nhóm tin nhắn chung mới của phòng, nơi chia sẻ thông tin khách hàng và danh sách tiềm năng.</p>
+
+    <p class="short">Thủ thuật cô lập cổ điển. Cắt nguồn thông tin, cắt sự hiện diện, cắt mối liên kết.</p>
+
+    <p>Nhưng không hiệu quả. Vì hắn không cần nhóm tin nhắn. Không cần lịch họp. Không cần Ngô Hải mời. Hắn có Tiểu Lý, tự nguyện chia sẻ mọi thông tin. Có Hạnh, bắt đầu gật đầu khi hắn đi ngang thay vì nhìn xuyên. Có một hai người khác trong phòng, chưa nói chuyện trực tiếp, nhưng đã ngừng coi hắn là kẻ vô hình.</p>
+
+    <p class="thought">Ngô Hải cô lập ta khỏi hệ thống chính thức. Nhưng ta đang xây hệ thống không chính thức. Mạng lưới nhỏ, im lặng, hiệu quả. Giống cách Huyền Minh Tông xây mạng lưới gián điệp trong các tông phái chính đạo: không cần nhiều, chỉ cần đúng người, đúng chỗ.</p>
+
+    <p class="short">Thứ Sáu cuối tuần thứ ba. Sáu giờ chiều. Phòng vắng.</p>
+
+    <p>Hắn ngồi một mình trong phòng họp nhỏ cuối hành lang. Phòng không ai dùng, đèn tắt, chỉ ánh sáng từ cửa sổ rọi vào. Nhắm mắt.</p>
+
+    <p class="short">Không phải ngủ. Đang sắp xếp.</p>
+
+    <p>Trong đầu hắn, mười bảy khuôn mặt hiện ra. Mỗi khuôn mặt kèm theo một danh sách: sợ gì, muốn gì, giấu gì, dùng được không.</p>
+
+    <p class="short">Hắn phân loại.</p>
+
+    <p class="thought">Có thể dùng: Tiểu Lý (đã vào mạng lưới), Hạnh (chưa, nhưng có tiềm năng, cần thời gian).</p>
+
+    <p class="thought">Trung lập: bảy người. Chưa nghiêng phe nào. Cần thêm thời gian quan sát.</p>
+
+    <p class="thought">Phe Ngô Hải: hai thuộc hạ cốt lõi. Trung thành kiểu bầy đàn, không đáng lo.</p>
+
+    <p class="thought">Ngô Hải: đang suy yếu. Không tìm được cách ép ta. Sẽ leo thang. Cần chuẩn bị.</p>
+
+    <p class="thought">Và phía trên Ngô Hải: CEO, VP, cuộc chiến ngầm. Mọi chuyện trong phòng Kinh doanh đều là sóng nhỏ so với cơn bão ở tầng mười lăm.</p>
+
+    <p>Hắn mở mắt. Phòng họp trống. Im lặng. Chỉ tiếng điều hòa chạy đều và ánh đèn đường bắt đầu lọt qua cửa sổ.</p>
+
+    <p class="short">Ma Tâm Quan không phải pháp thuật.</p>
+
+    <p class="short">Hắn đứng dậy. Xếp ghế vào bàn.</p>
+
+    <p class="short">Là kết quả của ngàn năm nhìn con người giết nhau vì dục vọng.</p>
+
+    <p class="short">Bước ra cửa. Tắt đèn.</p>
+
+    <p class="short">Khi đã thấy đủ nhiều, mọi khuôn mặt đều trở nên trong suốt.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-07.html">&larr; Chương trước</a>
+    <a href="chapter-09.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.015 từ &middot; Chương 08 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 10: Phòng Họp — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-09.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 10 / 30</span>
+    <a href="chapter-11.html" class="nav-disabled">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 10</div>
+    <h1 class="chapter-title">Phòng Họp</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 2.435 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>Họp review quý không giống họp toàn công ty.</p>
+
+    <p>Họp toàn công ty là sân khấu: CEO diễn, nhân viên ngồi nghe, ai cũng biết không có gì thật. Họp review quý là chiến trường: có số liệu, có trách nhiệm, có kẻ thắng và kẻ thua. Và hôm nay, cả CEO lẫn VP đều ngồi ở bàn chính.</p>
+
+    <p>Phòng họp tầng mười lăm. Mười bốn người: ban giám đốc, trưởng phòng ban, và vài nhân viên được chỉ định tham dự. Hắn là một trong số đó. Ngô Hải mang hắn đi, không phải vì muốn, vì cần người trình bày số liệu phòng Kinh doanh trong khi Ngô Hải nói phần chiến lược.</p>
+
+    <p class="thought">Kẻ mang ta vào phòng họp với ban giám đốc. Không biết rằng đó là sai lầm lớn nhất của hắn.</p>
+
+    <p>Hắn ngồi cuối bàn, sát tường, vị trí quen thuộc. Sổ tay mở, bút sẵn sàng, mặt bình thường. Vô hại. Vô hình. Đúng như hắn muốn.</p>
+
+    <p>CEO Trần Quốc Huy ngồi đầu bàn, com-lê xám, cà vạt đỏ hôm nay. Cười, vỗ tay lên bàn kiểu quen thuộc.</p>
+
+    <p>— Nào, mọi người, review quý. Bắt đầu thôi. Ai trước?</p>
+
+    <p>VP Phạm Đức Minh ngồi bên trái, sơ mi trắng, tay đan trước bụng, mắt lướt qua từng người trong phòng. Dừng ở hắn nửa giây. Rồi lướt tiếp.</p>
+
+    <p class="thought">VP thấy ta. Lần đầu nhìn kỹ. Đang đánh giá.</p>
+
+    <p>Trưởng phòng Tài chính trình bày trước. Số liệu, biểu đồ, giọng đều. CEO gật đầu, VP hỏi hai câu sắc, trưởng phòng Tài chính trả lời vòng vo. VP không hỏi thêm, nhưng ghi gì đó vào sổ. Trưởng phòng Tài chính liếc sổ VP, nuốt nước bọt.</p>
+
+    <p>Trưởng phòng Kế hoạch trình bày. Phụ nữ trung niên, mặt sắc, người mà hắn đã thấy ở canteen, phe VP. Giọng rõ, số liệu chính xác, nhưng khi nói đến "dự án đang triển khai," mắt liếc VP nửa giây. Xin phép. VP gật nhẹ, gần như không thấy. Cô ta tiếp tục. Phối hợp ngầm, nhuần nhuyễn, kiểu chỉ có ở phe cánh đã làm việc cùng nhau lâu.</p>
+
+    <p>Trưởng phòng Nhân sự, Lâm Tuệ. Hắn chưa gặp lại cô ta kể từ buổi phỏng vấn. Lâm Tuệ trình bày ngắn, gọn, không thừa một câu. Tuyển được bảy nhân viên mới trong quý, hai vị trí quản lý vẫn trống. Khi CEO hỏi "Vị trí quản lý trống lâu thế?", Lâm Tuệ trả lời bình tĩnh: "Thị trường nhân sự cạnh tranh, Trần tổng. Chúng tôi đang chọn kỹ." Câu trả lời chuẩn bị sẵn, nhưng mắt Lâm Tuệ liếc hắn nhanh khi nói "chọn kỹ." Nhận ra hắn. Nhớ.</p>
+
+    <p class="thought">Lâm Tuệ. Cô ta cũng không thuộc phe nào. Giống Tô Vãn. Giống Trương Phong. Ở Vạn Lý, những kẻ giỏi thường đứng một mình.</p>
+
+    <p>Mỗi người mười phút. Hắn nghe, ghi nhận. Không phải nghe nội dung, nghe cách nói. Ai tự tin, ai lúng túng, ai đang che giấu. Và quan trọng hơn: ai nhìn CEO, ai nhìn VP, khi nào.</p>
+
+    <p class="thought">Phòng họp là phiên bản thu nhỏ của toàn bộ Vạn Lý. Mười bốn người, mười bốn góc nhìn, mười bốn tính toán. Và ở giữa, hai cực quyền lực đang kéo mọi thứ về phía mình.</p>
+
+    <p>Đến lượt phòng Kinh doanh.</p>
+
+    <p class="short">Ngô Hải đứng dậy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Ngô Hải trình bày như mọi khi: giọng to, tự tin, dùng nhiều từ tích cực. "Phòng Kinh doanh đã nỗ lực vượt bậc." "Kết quả có nhiều điểm sáng." "Đội ngũ đang trên đà phát triển."</p>
+
+    <p>Nhưng số liệu kể câu chuyện khác. Chỉ tiêu mười hai hợp đồng, thực tế tám. Doanh thu giảm bảy phần trăm so với quý trước. Chỉ có hai điểm sáng: hợp đồng Vương Gia Mart và hợp đồng chuỗi nhà thuốc Minh Đức.</p>
+
+    <p>Và Ngô Hải trình bày hai điểm sáng đó như thành tích chung.</p>
+
+    <p>— Phòng đã tập trung nguồn lực vào khách hàng chiến lược. Hợp đồng Vương Gia Mart là kết quả của chiến lược tiếp cận mới mà phòng triển khai từ đầu quý.</p>
+
+    <p class="thought">"Chiến lược tiếp cận mới mà phòng triển khai." Không nhắc tên ta. Không nhắc ai ký. Chỉ "phòng." Giảm nhẹ cá nhân, phóng đại tập thể mà thực tế là một người.</p>
+
+    <p>Hắn ngồi im. Không phản ứng. Không nhíu mày, không lắc đầu. Mặt phẳng.</p>
+
+    <p class="short">Chưa phải lúc.</p>
+
+    <p class="short">CEO gật đầu, kiểu gật hài lòng.</p>
+
+    <p>— Tốt, tốt. Vương Gia Mart là khách lớn. Ai phụ trách hợp đồng đó?</p>
+
+    <p>Câu hỏi của CEO không nhắm vào ai cụ thể. Nhưng cả phòng biết.</p>
+
+    <p class="short">Ngô Hải do dự nửa giây. Nửa giây quá dài trong phòng họp.</p>
+
+    <p>— Dạ, nhân viên Lục Trường An trực tiếp triển khai, dưới sự chỉ đạo của phòng.</p>
+
+    <p class="thought">"Dưới sự chỉ đạo của phòng." Nửa thật, nửa giả. Hắn phải nhắc tên ta vì CEO hỏi. Nhưng nhét thêm "chỉ đạo" để giữ công.</p>
+
+    <p class="short">CEO nhìn quanh bàn.</p>
+
+    <p class="short">— Lục Trường An là ai?</p>
+
+    <p class="short">Hắn ngẩng lên. Không vội. Không đứng dậy.</p>
+
+    <p class="short">— Tôi, thưa Trần tổng.</p>
+
+    <p>CEO nhìn hắn. Lần đầu tiên CEO nhìn thẳng vào hắn, trực tiếp, không qua hồ sơ hay lời kể. Mắt CEO quét: gầy, trẻ, sơ mi trắng bạc màu, ngồi cuối bàn. Không ấn tượng.</p>
+
+    <p>— Vương Gia Mart từ chối mình ba lần mà cậu ký được. Hay đấy. Cậu làm thế nào?</p>
+
+    <p>Mọi ánh mắt trong phòng hướng về hắn. Mười ba cặp mắt. Ngô Hải ở đầu bàn, đang đứng, tay cầm bút trình bày, mắt nhìn hắn, cố giữ bình tĩnh.</p>
+
+    <p>Hắn trả lời. Không đứng dậy. Không nâng giọng. Ngắn.</p>
+
+    <p>— Ông Vương Gia từ chối ba lần vì không thích cách bị bán hàng. Tôi đến, không bán. Chỉ hỏi ông ấy đang gặp vấn đề gì. Khi ông ấy thấy tôi hiểu ngành của ông ấy, ông ấy tự muốn hợp tác.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Không phải im lặng vì chán. Im lặng vì bất ngờ. Nhân viên ngồi cuối bàn, gầy gò, sơ mi bạc, vừa trả lời CEO bằng ba câu ngắn gọn hơn bất kỳ bài trình bày mười phút nào trong buổi sáng.</p>
+
+    <p class="short">CEO cười ha hả.</p>
+
+    <p>— Hay! Đơn giản mà hay. Mà nè, ông Vương Gia khó tính lắm, ba người trước không ai ký được. Cậu là người thứ tư à?</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">— Giỏi. Phòng Kinh doanh cần nhiều người như cậu.</p>
+
+    <p>Câu khen của CEO nhẹ nhàng, kiểu khen xã giao. Nhưng trong phòng họp, khi CEO khen một nhân viên cấp thấp trước mặt tất cả trưởng phòng, lời khen đó có trọng lượng. Mọi người ghi nhận. Không phải ghi trên giấy, ghi trong đầu.</p>
+
+    <p>VP không cười. Nhưng mắt nhìn hắn thêm hai giây. Dài. Sắc. Kiểu nhìn khác CEO hoàn toàn. CEO nhìn thấy nhân viên giỏi. VP nhìn thấy thứ khác.</p>
+
+    <p class="thought">VP đang đánh giá ta. Không phải năng lực bán hàng. Hắn đang đánh giá ta có dùng được không.</p>
+
+    <p>Ngô Hải vẫn đứng ở đầu bàn, cây bút trình bày trong tay, mặt bình thường. Nhưng ngón tay siết bút chặt hơn. Và khi CEO quay lại nhìn Ngô Hải, Ngô Hải mỉm cười, gật đầu, kiểu gật "phải, nhân viên tôi giỏi."</p>
+
+    <p class="thought">Nhận công khi ta thắng. Đổ lỗi khi ta thua. Kẻ quản lý cấp thấp nào cũng thế.</p>
+
+    <p>Hắn không nói thêm. Cúi đầu nhìn sổ tay, như thể đã xong phần mình. Khiêm tốn. Vô hại.</p>
+
+    <p>Nhưng mọi người trong phòng đã ghi nhận: Lục Trường An. Người ký Vương Gia. Không phải Ngô Hải.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ngô Hải.</p>
+
+    <p>Hắn trở về ghế sau phần trình bày, ngồi xuống, đặt bút trên bàn. Mặt bình tĩnh. Ai nhìn cũng thấy bình tĩnh.</p>
+
+    <p class="short">Nhưng bên trong, thứ gì đó đang siết.</p>
+
+    <p class="short">Không phải giận. Là sợ.</p>
+
+    <p>Lục Trường An ngồi cuối bàn, cúi đầu nhìn sổ, như thể vừa rồi không có gì xảy ra. Nhưng CEO đã hỏi tên hắn. CEO đã cười. VP đã nhìn.</p>
+
+    <p>Ba năm Ngô Hải làm quản lý, CEO chưa bao giờ hỏi tên nhân viên dưới quyền hắn trong cuộc họp review quý. Chưa bao giờ. Luôn luôn là "phòng Kinh doanh," "đội của anh Hải," "bên cậu." Hôm nay là lần đầu. Và người được gọi tên là kẻ hắn muốn đuổi.</p>
+
+    <p>Ngô Hải liếc sang Lục Trường An. Mặt thằng đó phẳng. Không vui, không buồn, không đắc ý. Kiểu mặt của người không quan tâm vừa thắng hay thua.</p>
+
+    <p class="short">Đó mới là thứ đáng sợ nhất.</p>
+
+    <p>Ngô Hải quen với nhân viên khoe khoang khi thắng. Quen với nhân viên sợ hãi khi thua. Quen với nhân viên nịnh bợ, quen với nhân viên bất mãn. Hắn biết cách đối phó với tất cả. Ba năm quản lý, hắn đã thuần hóa mọi kiểu người.</p>
+
+    <p>Nhưng thằng này không khoe, không sợ, không nịnh, không bất mãn. Nó chỉ ngồi đó. Mặt phẳng. Như đang chờ.</p>
+
+    <p class="short">Chờ gì?</p>
+
+    <p>Ngô Hải nghĩ đến cách Lục Trường An trả lời CEO. Ba câu. Không run, không lắp, không khoe. Trả lời xong thì cúi đầu, như thể việc được CEO khen là chuyện bình thường.</p>
+
+    <p class="thought">Ai mà được CEO khen lần đầu mà không vui? Ai mà không cười? Không cảm ơn? Không tỏ ra phấn khích?</p>
+
+    <p class="short">Không ai. Trừ thằng này.</p>
+
+    <p>Ngô Hải cảm thấy một thứ hắn chưa từng cảm thấy trong ba năm ngồi ghế quản lý.</p>
+
+    <p>Không phải bị đe dọa. Là bị nhìn xuyên. Như thể Lục Trường An nhìn hắn và thấy tất cả, mọi thủ thuật nhỏ, mọi cách cô lập, mọi lần giảm nhẹ thành tích. Thấy hết. Và không quan tâm.</p>
+
+    <p class="short">Đó mới đáng sợ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Cuộc họp kết thúc lúc mười một giờ. Mọi người đứng dậy, tiếng ghế kéo, tiếng nói chuyện nhỏ.</p>
+
+    <p>Hắn đứng dậy cuối cùng, như thường lệ. Thu sổ tay, bỏ vào cặp. Bước ra cửa.</p>
+
+    <p>Hành lang tầng mười lăm. Mọi người đang đi về phía thang máy. Ngô Hải đi trước, nhanh, không quay đầu. CEO đã vào phòng riêng.</p>
+
+    <p class="short">Hắn đi chậm. Không vội.</p>
+
+    <p class="short">— Cậu Lục.</p>
+
+    <p>Giọng phía sau. Thấp, rõ, bình tĩnh. Hắn quay lại.</p>
+
+    <p>VP Phạm Đức Minh đứng cạnh cửa phòng họp, tay cầm cặp tài liệu, mắt nhìn hắn. Không cười, không lạnh. Trung tính. Kiểu trung tính có chủ đích.</p>
+
+    <p class="short">— Phạm phó tổng.</p>
+
+    <p class="short">— Trình bày gọn trong họp. Tôi thích kiểu nói thẳng.</p>
+
+    <p class="short">Hắn im. Đợi.</p>
+
+    <p>VP bước lại gần, khoảng cách hai bước chân. Đủ gần để nói nhỏ, đủ xa để ai nhìn vào cũng chỉ thấy hai người nói chuyện bình thường.</p>
+
+    <p class="short">— Cậu vào Vạn Lý bao lâu rồi?</p>
+
+    <p class="short">— Hơn hai năm. Nhưng mới bắt đầu làm thật được một tháng.</p>
+
+    <p>VP nhìn hắn. Mắt nheo nhẹ. Câu trả lời không bình thường. "Mới bắt đầu làm thật" nghĩa là thừa nhận trước đó không làm gì. Thẳng thắn đến mức táo bạo.</p>
+
+    <p class="short">— Cậu giỏi đấy. Vương Gia là khách khó.</p>
+
+    <p class="short">— Cảm ơn Phạm phó tổng.</p>
+
+    <p class="short">— Nhưng ở đây, giỏi thôi chưa đủ.</p>
+
+    <p>Câu nói treo trong không khí. Không phải cảnh báo. Không phải lời khuyên. Là lời mời. Mỏng, kín, kiểu lời mời mà chỉ người hiểu mới nhận ra.</p>
+
+    <p class="thought">"Giỏi thôi chưa đủ." Nghĩa là: cậu cần phe. Cậu cần ai đó bảo vệ. Và ta đang đứng đây.</p>
+
+    <p class="short">Ma Tâm Quan đọc nhanh.</p>
+
+    <p class="thought">Mắt VP nhìn thẳng, không liếc ngang. Tự tin. Tay cầm cặp thả lỏng, không siết. Không cần gì từ ta, đang cho ta cơ hội. Giọng thấp nhưng không nhỏ, muốn ta nghe rõ nhưng không muốn ai khác nghe. Kiểm soát tuyệt đối.</p>
+
+    <p class="thought">Kẻ này không tìm đồng minh. Hắn tìm quân cờ. Nhưng quân cờ biết mình là quân cờ thì không phải quân cờ.</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p class="short">— Tôi hiểu, Phạm phó tổng.</p>
+
+    <p>Ba chữ. Không từ chối, không đồng ý. Mở, để VP tự diễn giải theo cách hắn muốn.</p>
+
+    <p>VP nhìn hắn thêm một giây. Rồi gật nhẹ, quay đi, bước vào phòng mình.</p>
+
+    <p>Hắn đứng lại trong hành lang. Một mình. Nắng chiều lọt qua cửa kính cuối hành lang, kéo dài bóng hắn trên sàn đá bóng.</p>
+
+    <p class="thought">CEO đã biết tên ta. VP đã tiếp cận ta. Ngô Hải đang sợ ta.</p>
+
+    <p class="thought">Ba thay đổi trong một buổi sáng. Trong tông môn, một buổi sáng như thế gọi là "ngày chuyển vận."</p>
+
+    <p class="short">Hắn bước vào thang máy. Một mình.</p>
+
+    <p>Cửa đóng. Gương phản chiếu khuôn mặt hắn, vẫn gầy, vẫn quầng thâm, vẫn sơ mi trắng bạc.</p>
+
+    <p class="thought">CEO đã biết tên ta. VP đã tiếp cận ta. Ngô Hải đang sợ ta.</p>
+
+    <p class="thought">Ba thay đổi trong một buổi sáng. Trong tông môn, một buổi sáng như thế gọi là "ngày chuyển vận."</p>
+
+    <p class="thought">VP mời ngầm. Hắn muốn ta chọn phe. Nhưng ta không chọn phe. Ta dùng phe.</p>
+
+    <p class="thought">CEO khen ta trước mặt mọi người. Từ bây giờ, Ngô Hải không thể ép ta mà không bị CEO để ý.</p>
+
+    <p class="short">Và Ngô Hải...</p>
+
+    <p>Trong gương, góc miệng hắn nhếch. Nhẹ. Rất nhẹ.</p>
+
+    <p class="short">Lần đầu tiên kể từ khi trọng sinh.</p>
+
+    <p>Nụ cười kéo dài đúng hai giây. Rồi tắt. Mặt trở lại bình thường, bình thường đến mức đáng sợ. Kỹ năng ngàn năm: tắt cảm xúc nhanh hơn tắt đèn.</p>
+
+    <p>Cửa thang máy mở ở tầng mười hai. Hắn bước ra. Về bàn. Ngồi xuống. Mở máy tính.</p>
+
+    <p>Phòng Kinh doanh yên tĩnh hơn bình thường. Tiểu Lý liếc hắn, mắt sáng, muốn hỏi nhưng không dám. Hạnh gõ phím, nhưng nhịp gõ chậm hơn bình thường, đang nghe ngóng. Hai thuộc hạ Ngô Hải ngồi im, không thì thầm.</p>
+
+    <p>Ngô Hải ở bàn mình, gõ bút, nhanh hơn mọi khi. Mắt nhìn màn hình nhưng không di chuyển. Đang nghĩ. Đang tính.</p>
+
+    <p class="short">Hắn nhập liệu, mặt phẳng. Như mọi ngày.</p>
+
+    <p>Nhưng cả phòng biết: có thứ gì đó đã thay đổi. Và thứ đó không thể thay đổi ngược lại.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-09.html">&larr; Chương trước</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>2.435 từ &middot; Chương 10 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

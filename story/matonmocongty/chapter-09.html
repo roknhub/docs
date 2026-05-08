@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 09: Con Cờ Đầu Tiên — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-08.html">&larr; Chương trước</a>
+    <span class="nav-center">Chương 9 / 30</span>
+    <a href="chapter-10.html">Chương sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 09</div>
+    <h1 class="chapter-title">Con Cờ Đầu Tiên</h1>
+    <div class="chapter-meta">Phần II — Thử Lửa &middot; 2.838 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Tiểu Lý mời hắn uống bia.</p>
+
+    <p>Không phải bia sang. Bia lon, quán vỉa hè, nhựa ghế thấp, đèn vàng, mùi than nướng trộn với khói xe. Sáu giờ rưỡi chiều thứ Sáu, phố đã đông, tiếng cốc chạm nhau, tiếng cười, tiếng gọi "thêm đá." Cuộc sống bình thường của một thành phố bình thường.</p>
+
+    <p class="short">Hắn đến không phải vì thích bia. Vì Tiểu Lý biết nhiều chuyện.</p>
+
+    <p>— Cảm ơn anh Lục, hợp đồng Minh Đức ký rồi. Em mời anh.</p>
+
+    <p>Tiểu Lý rót bia, mặt tươi, kiểu tươi của người vừa có tháng lương thưởng đầu tiên ra hồn. Hắn nhấp một ngụm, đắng, lạnh. Thân xác này chưa quen rượu bia, đầu hơi ong ong ngay lập tức.</p>
+
+    <p class="short">— Không có gì.</p>
+
+    <p>— Anh biết không, từ ngày anh chỉ cho em cách đó, em nhìn khách hàng khác hẳn. Trước em cứ lo trình bày cho hay, giờ em lo nghe cho kỹ. Khác nhiều.</p>
+
+    <p>Hắn gật đầu. Uống thêm một ngụm. Đợi.</p>
+
+    <p class="thought">Tiểu Lý mời ta ra đây không chỉ vì cảm ơn. Hắn muốn nói chuyện. Kẻ trẻ tuổi, vừa được ai đó giúp, luôn muốn chia sẻ thêm. Muốn chứng tỏ mình cũng biết thứ gì đó có giá trị.</p>
+
+    <p class="short">Đúng. Hai lon bia sau, Tiểu Lý bắt đầu nói.</p>
+
+    <p>— Anh Lục, anh biết anh Trương Phong bên phòng Công nghệ thông tin không?</p>
+
+    <p class="short">— Biết tên. Chưa gặp.</p>
+
+    <p>— Anh Phong giỏi lắm. Trưởng phòng, ba mươi hai tuổi, tự học hết, không bằng đại học nhưng kỹ năng thì cả công ty không ai bằng. Hệ thống nội bộ, máy chủ, bảo mật, ông ấy quản lý hết.</p>
+
+    <p>Hắn nghe. Không hỏi. Để Tiểu Lý tự kể.</p>
+
+    <p>— Nhưng dạo này anh Phong bực lắm. Ngân sách phòng Công nghệ thông tin bị cắt hai quý liền. Anh Phong đề xuất nâng cấp hệ thống, bị từ chối. Đề xuất mua thiết bị mới, bị từ chối. Mà tiền thì chảy sang đâu anh biết không?</p>
+
+    <p class="short">— Đâu?</p>
+
+    <p>— Sang phòng Kinh doanh. Ngô Hải xin ngân sách tiếp khách, ngân sách sự kiện, ngân sách đào tạo. Mỗi quý mỗi xin, mỗi lần được duyệt. Còn phòng Công nghệ thông tin thì hệ thống cũ, máy chậm, anh Phong phải vá víu kiểu chắp vá.</p>
+
+    <p class="thought">Xung đột ngân sách. Cổ điển. Ở Huyền Minh Tông, các đường chủ tranh linh thạch cho luyện đan hay luyện khí, đánh nhau suốt. Kẻ nào được tông chủ ưu ái thì có linh thạch. Kẻ không thì ấm ức.</p>
+
+    <p class="thought">Ngô Hải được CEO ưu ái. Trương Phong không được. Ngô Hải lấy ngân sách. Trương Phong mất.</p>
+
+    <p class="thought">Kẻ bất mãn vì mất ngân sách là kẻ dễ thu phục nhất. Không cần cho nhiều. Chỉ cần cho hy vọng.</p>
+
+    <p class="short">— Anh Phong có nói gì không?</p>
+
+    <p>— Có. Nhưng nói với ai? Lên CEO thì CEO gạt đi. Lên VP thì sợ bị quy là chọn phe. Anh Phong ấm ức mà không biết làm gì. Dạo này hay đi một mình, ít nói chuyện với ai.</p>
+
+    <p>Hắn gật đầu. Uống bia. Im lặng.</p>
+
+    <p class="thought">Trương Phong. Trưởng phòng Công nghệ thông tin. Giỏi, bất mãn, bị cắt ngân sách, không có đồng minh. Kẻ này có giá trị. Nắm hệ thống nội bộ nghĩa là nắm thông tin. Và thông tin là vũ khí.</p>
+
+    <p class="thought">Nhưng không vội. Thu phục kẻ bất mãn cần chính xác. Nhanh quá thì hắn nghi. Chậm quá thì hắn tìm đồng minh khác. Phải đúng lúc, đúng cách, đúng câu.</p>
+
+    <p>— Tiểu Lý.</p>
+
+    <p class="short">— Dạ?</p>
+
+    <p class="short">— Anh Phong thường đi ăn trưa ở đâu?</p>
+
+    <p>— Canteen. Nhưng ăn nhanh, ngồi một mình, xong là lên phòng ngay. Ít khi nói chuyện với ai.</p>
+
+    <p class="short">— Ăn lúc mấy giờ?</p>
+
+    <p class="short">— Mười hai giờ đúng. Đúng giờ lắm, kiểu người kỷ luật.</p>
+
+    <p>Hắn gật đầu. Uống bia, nhìn quán vỉa hè quanh mình.</p>
+
+    <p>Ba bàn bên cạnh: nhân viên văn phòng, cởi cà vạt, xắn tay áo, cười nói. Giải tỏa sau một tuần. Mỗi bàn một kiểu: bàn bên phải đang nói xấu sếp, giọng nhỏ nhưng cười to. Bàn bên trái bốn người đàn ông uống thật, mặt đỏ, mắt lờ đờ, kiểu uống quên. Bàn sau lưng, một đôi nam nữ ngồi sát, chia nhau đĩa mực nướng, nói chuyện bằng mắt nhiều hơn bằng miệng.</p>
+
+    <p class="thought">Thế giới này bình dị hơn tu tiên giới. Kẻ phàm không đánh nhau bằng pháp thuật. Đánh nhau bằng công việc, bằng tiền, bằng áp lực. Rồi tối thứ Sáu, ngồi vỉa hè, uống bia, giả vờ quên.</p>
+
+    <p class="thought">Ta cũng đang ngồi đây. Nhưng không quên. Ma Tôn không bao giờ quên.</p>
+
+    <p class="short">— Anh Lục, sao anh hay ngồi một mình lúc tan làm? Không buồn à?</p>
+
+    <p class="short">— Quen rồi.</p>
+
+    <p class="short">— Anh ít nói nhỉ. Nhưng mỗi lần nói là trúng.</p>
+
+    <p class="short">— Nói nhiều thì sai nhiều.</p>
+
+    <p>Tiểu Lý cười, rót thêm bia. Rồi giọng thấp hơn, kiểu người sắp nói chuyện nghiêm túc.</p>
+
+    <p>— Anh Lục, em kể anh nghe chuyện bên phòng Công nghệ thông tin. Anh biết anh Trương Phong không?</p>
+
+    <p>Hắn không hỏi thêm sau khi Tiểu Lý kể xong.</p>
+
+    <p>Tiểu Lý nhìn hắn, mắt hơi tò mò, nhưng không hỏi tại sao. Đã bắt đầu quen: anh Lục hỏi gì thì có lý do, và lý do đó thường rõ về sau.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Hai. Mười một giờ năm mươi lăm.</p>
+
+    <p>Hắn đứng ở hành lang tầng chín, trước cửa phòng Công nghệ thông tin. Không vào. Đứng cạnh bình nước, rót nước, uống chậm. Chờ.</p>
+
+    <p class="short">Mười hai giờ đúng. Cửa phòng mở.</p>
+
+    <p class="short">Trương Phong bước ra.</p>
+
+    <p>Ba mươi hai tuổi, nhưng trông già hơn vì quầng thâm. Gầy, cao, vai hơi gù, kiểu gù của người ngồi trước màn hình quá nhiều năm. Tóc hơi dài, không vuốt, không gel, để tự nhiên. Áo thun đen, quần kaki, dép lê trong văn phòng. Không cà vạt, không sơ mi. Kẻ không quan tâm vẻ ngoài vì đang bận quan tâm thứ khác.</p>
+
+    <p>Mắt sáng, nhanh. Kiểu mắt của người quen xử lý nhiều thông tin cùng lúc. Nhìn hắn một giây khi đi ngang, không dừng, không chào. Không quen, không cần chào.</p>
+
+    <p class="thought">Thông minh. Kỷ luật. Tự tin vào năng lực bản thân. Nhưng cô lập. Vai gù, bước chân nhanh, mắt nhìn thẳng không liếc ngang: kẻ đi một mình quá lâu, đã thôi kỳ vọng vào đồng nghiệp.</p>
+
+    <p>Hắn không nói gì. Để Trương Phong đi vào thang máy.</p>
+
+    <p class="thought">Chưa phải lúc. Quan sát trước. Nói sau.</p>
+
+    <p class="thought">Ngàn năm trước, khi muốn thu phục ai, ta theo dõi kẻ đó ít nhất ba ngày. Xem hắn ăn gì, đi đâu, nói chuyện với ai, và quan trọng nhất: khi một mình, mặt hắn ra sao. Khi không diễn, con người mới lộ bản chất.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Ba. Mười một giờ năm mươi. Hắn lại đứng ở hành lang tầng chín.</p>
+
+    <p class="short">Mười hai giờ. Trương Phong ra. Lần này, hắn bước vào thang máy cùng lúc.</p>
+
+    <p class="short">Hai người. Thang máy xuống tầng ba.</p>
+
+    <p>Im lặng. Trương Phong nhìn điện thoại. Hắn nhìn thẳng phía trước.</p>
+
+    <p class="short">Không nói gì.</p>
+
+    <p>Cửa mở. Cả hai đi canteen. Trương Phong lấy khay, ngồi góc quen thuộc, một mình. Hắn ngồi bàn khác, cách ba bàn.</p>
+
+    <p class="short">Quan sát.</p>
+
+    <p class="thought">Ăn nhanh. Không nhìn điện thoại khi ăn, khác mọi người. Tập trung vào thức ăn, ăn xong thì mới nhìn. Kỷ luật cả trong chuyện ăn. Kiểu người này, khi làm việc thì chỉ làm việc, khi ăn thì chỉ ăn. Không pha trộn.</p>
+
+    <p class="thought">Sau khi ăn, uống nước, lau miệng, đứng dậy ngay. Không ngồi thêm. Không ngắm nghía. Tiết kiệm thời gian. Kẻ này coi thời gian như linh thạch: hữu hạn, không nên phí.</p>
+
+    <p class="thought">Khi đứng dậy, mắt lướt qua phòng. Nhanh. Dừng nửa giây ở bàn phe CEO, rồi quay đi. Không phải tò mò. Là bực. Kiểu bực đã trở thành phản xạ.</p>
+
+    <p class="short">Đủ thông tin.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Tư. Mười một giờ năm mươi. Thang máy.</p>
+
+    <p class="short">Lần này, hắn nói.</p>
+
+    <p class="short">Cửa đóng. Hai người. Thang đi xuống.</p>
+
+    <p>— Hệ thống quản lý nội bộ Vạn Lý chạy trên nền tảng nào?</p>
+
+    <p>Trương Phong quay đầu. Nhìn hắn. Mắt hơi nheo, kiểu nheo khi bất ngờ.</p>
+
+    <p class="short">— Cậu là ai?</p>
+
+    <p class="short">— Lục Trường An. Phòng Kinh doanh.</p>
+
+    <p class="short">— Phòng Kinh doanh hỏi chuyện hệ thống làm gì?</p>
+
+    <p>— Vì hệ thống chậm. Bảng tính nội bộ tải mất ba giây mỗi lần chuyển ô. Máy ở bàn tôi cũ, nhưng máy đồng nghiệp cũng không nhanh hơn bao nhiêu. Vấn đề không phải phần cứng. Là hệ thống.</p>
+
+    <p>Trương Phong nhìn hắn. Lâu hơn. Mắt thay đổi, từ bất ngờ sang quan tâm.</p>
+
+    <p class="short">— Cậu biết phân biệt lỗi phần cứng và lỗi hệ thống?</p>
+
+    <p class="short">— Không chuyên sâu. Nhưng khi mười bảy máy đều chậm ở cùng một thao tác, thì không phải lỗi máy.</p>
+
+    <p class="short">Im lặng. Thang máy dừng ở tầng ba. Cửa mở.</p>
+
+    <p>Trương Phong không bước ra ngay. Nhìn hắn.</p>
+
+    <p>— Đúng. Hệ thống cũ. Tôi đã đề xuất nâng cấp từ đầu năm. Bị từ chối. Ngân sách không đủ.</p>
+
+    <p class="short">— Ngân sách không đủ hay ngân sách đi chỗ khác?</p>
+
+    <p>Câu hỏi treo trong không khí, giữa tiếng bíp báo cửa thang máy sắp đóng. Trương Phong nhìn hắn. Mắt sắc. Kẻ thông minh nhận ra ngay hàm ý.</p>
+
+    <p>Hắn bước ra khỏi thang máy. Không nói thêm. Không giải thích. Không mời ăn trưa. Chỉ bước ra, đi về phía canteen.</p>
+
+    <p class="thought">Một câu. Đủ rồi. "Ngân sách đi chỗ khác" là điều Trương Phong biết nhưng chưa ai nói thẳng. Khi ai đó nói thẳng điều ta nghĩ mà không dám nói, ta bắt đầu muốn nói chuyện với người đó.</p>
+
+    <p class="thought">Đêm nay Trương Phong sẽ nghĩ về câu đó. Và sáng mai, hắn sẽ tìm ta.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Thứ Năm. Chín giờ sáng.</p>
+
+    <p>Hắn đang nhập liệu thì có người đứng cạnh bàn. Không phải Tiểu Lý. Không phải Ngô Hải.</p>
+
+    <p class="short">Trương Phong.</p>
+
+    <p>Áo thun đen, tay cầm cốc cà phê, mắt nhìn thẳng, không vòng vo.</p>
+
+    <p class="short">— Lục Trường An.</p>
+
+    <p class="short">— Trương Phong.</p>
+
+    <p class="short">— Hôm qua cậu hỏi ngân sách đi đâu. Cậu biết gì?</p>
+
+    <p>Thẳng. Không chào hỏi, không xã giao. Kẻ kỹ thuật nói chuyện kiểu kỹ thuật: đi thẳng vào vấn đề.</p>
+
+    <p class="thought">Đúng lịch. Sớm hơn ta dự đoán nửa ngày. Kẻ này nóng hơn ta tưởng.</p>
+
+    <p>Hắn nhìn quanh. Phòng Kinh doanh, chín giờ sáng, đông người. Ngô Hải ngồi ở bàn, đang gọi điện, chưa để ý.</p>
+
+    <p class="short">— Ở đây không tiện. Canteen, mười hai giờ?</p>
+
+    <p class="short">Trương Phong gật, quay đi.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Canteen. Mười hai giờ. Góc cuối, bàn sát tường, vị trí không ai ngồi.</p>
+
+    <p>Trương Phong đặt khay xuống, ngồi đối diện. Ăn vài miếng, rồi đặt đũa.</p>
+
+    <p class="short">— Nói đi.</p>
+
+    <p>— Tôi không biết nhiều. Nhưng tôi biết phòng Kinh doanh quý nào cũng xin thêm ngân sách tiếp khách, sự kiện, đào tạo. Được duyệt hết. Cùng lúc, phòng Công nghệ thông tin bị cắt. Ai duyệt, cậu biết rõ hơn tôi.</p>
+
+    <p>Trương Phong siết đũa. Mắt tối.</p>
+
+    <p>— CEO duyệt. Ngô Hải xin, CEO gật. Cứ thế. Tôi đề xuất nâng cấp bảo mật, CEO bảo "chưa cần thiết." Tôi đề xuất thay máy chủ, CEO bảo "sang năm." Nhưng Ngô Hải xin tiền liên hoan cuối quý thì duyệt trong ngày.</p>
+
+    <p class="thought">Bực. Rất bực. Nhưng không phải bực mới. Là bực tích lũy. Kiểu bực của kẻ giỏi mà bị bỏ qua, ngày qua ngày, tháng qua tháng.</p>
+
+    <p>Hắn ăn. Chậm. Để Trương Phong nói.</p>
+
+    <p>— Tôi biết ngân sách đi đâu. Nhưng biết thì sao? Tôi chỉ là trưởng phòng Công nghệ thông tin. Không có tiếng nói trong cuộc họp ban giám đốc. Không thuộc phe nào. Không ai nghe.</p>
+
+    <p class="short">— Nếu có cách lấy lại ngân sách?</p>
+
+    <p>Trương Phong nhìn hắn. Dừng ăn.</p>
+
+    <p class="short">— Cách nào?</p>
+
+    <p class="short">Hắn đặt đũa xuống. Nhìn thẳng.</p>
+
+    <p>— Hệ thống cũ không chỉ chậm. Nó là rủi ro. Nếu hệ thống sập, dữ liệu khách hàng mất, hợp đồng mất, lịch sử giao dịch mất. Công ty thiệt hại bao nhiêu?</p>
+
+    <p>Trương Phong im lặng. Đang tính.</p>
+
+    <p class="short">— Nếu mất toàn bộ... hàng tỷ.</p>
+
+    <p>— Vậy đề xuất nâng cấp không phải "xin tiền." Là "phòng rủi ro." Không phải nói với CEO: "tôi cần ngân sách." Mà nói: "nếu không nâng cấp, công ty mất tất cả. Và khi đó, ai chịu trách nhiệm?"</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Trương Phong nhìn hắn. Lâu. Kiểu nhìn của kẻ vừa thấy con đường mới trên bản đồ cũ.</p>
+
+    <p class="short">— Cậu... biến đề xuất kỹ thuật thành đề xuất rủi ro.</p>
+
+    <p>— Tôi biến ngôn ngữ kỹ thuật thành ngôn ngữ sợ hãi. CEO không hiểu công nghệ. Nhưng hiểu sợ. Ai cũng hiểu sợ.</p>
+
+    <p>Trương Phong ngồi lại, lưng tựa ghế. Lần đầu trong buổi trưa, vai hắn không gù.</p>
+
+    <p class="short">— Cậu giỏi thật đấy.</p>
+
+    <p class="short">— Tôi chỉ nhìn vấn đề từ góc khác.</p>
+
+    <p>— Không. Cậu nhìn thấy thứ tôi không thấy. Tôi giỏi kỹ thuật, nhưng khi nói chuyện với ban giám đốc, tôi nói kiểu kỹ thuật. Họ không hiểu. Và khi không hiểu thì từ chối.</p>
+
+    <p class="short">Hắn gật đầu.</p>
+
+    <p class="short">— Nếu cậu cần, tôi giúp cậu soạn lại đề xuất. Bằng ngôn ngữ mà CEO phải nghe.</p>
+
+    <p>Trương Phong nhìn hắn. Cân nhắc. Mắt vẫn sắc, nhưng không còn phòng thủ. Kẻ kỹ thuật đánh giá người khác bằng năng lực, và hắn vừa chứng minh năng lực.</p>
+
+    <p class="short">Trương Phong nghiêng đầu.</p>
+
+    <p class="short">— Cậu được gì?</p>
+
+    <p>Câu hỏi đúng. Kẻ thông minh luôn hỏi câu này. Không ai giúp miễn phí, và Trương Phong biết điều đó.</p>
+
+    <p>— Tôi được hệ thống nhanh hơn. Bảng tính tải ba giây thay vì nửa giây, tôi mất thời gian mỗi ngày. Nếu hệ thống nâng cấp, phòng Kinh doanh cũng hưởng lợi.</p>
+
+    <p>Nửa sự thật. Đủ thật để tin, đủ giấu để an toàn.</p>
+
+    <p>Trương Phong nhìn hắn thêm hai giây. Đang cân nhắc. Kẻ kỹ thuật đánh giá bằng logic, không phải cảm xúc. Câu trả lời của hắn có logic. Nên:</p>
+
+    <p class="short">— Được. Tôi gửi bản đề xuất cũ cho cậu. Cậu viết lại.</p>
+
+    <p class="short">— Thỏa thuận.</p>
+
+    <p>Trương Phong đứng dậy, cầm khay, nhìn hắn lần cuối.</p>
+
+    <p class="short">— Lục Trường An. Phòng Kinh doanh à?</p>
+
+    <p class="short">— Vâng.</p>
+
+    <p class="short">— Lạ nhỉ. Phòng Kinh doanh toàn người chỉ biết bán. Cậu thì biết nghĩ.</p>
+
+    <p class="short">Rồi đi.</p>
+
+    <p>Hắn ngồi lại, ăn nốt bát cơm. Mắt nhìn theo Trương Phong bước ra khỏi canteen, lưng thẳng hơn lúc bước vào.</p>
+
+    <p class="thought">Nợ ân thứ hai. Trương Phong sẽ gửi đề xuất cũ. Ta sẽ viết lại bằng ngôn ngữ mà CEO không thể từ chối. Khi đề xuất được duyệt, Trương Phong sẽ biết nhờ ai. Và từ đó, mạng lưới có thêm một mắt xích.</p>
+
+    <p class="thought">Nhưng Trương Phong không chỉ là nợ ân. Kẻ quản lý hệ thống nội bộ là kẻ nắm dữ liệu. Dữ liệu khách hàng, dữ liệu tài chính, dữ liệu giao dịch. Khi ta cần thông tin, Trương Phong là kẻ có chìa khóa.</p>
+
+    <p class="thought">Kiếp trước, nhân tài đầu tiên ta thu phục không phải kiếm khách, mà là quản thư. Kẻ nắm thư khố tông môn, kẻ biết mọi bí mật ghi trên trúc giản. Nguyên tắc không đổi: thu phục kẻ nắm thông tin trước, kẻ nắm quyền sau.</p>
+
+    <p class="short">Hắn đặt đũa xuống.</p>
+
+    <p class="short">Đứng dậy.</p>
+
+    <p>Hai người. Tiểu Lý, đệ tử kiểu trung thành bẩm sinh. Trương Phong, đồng minh kiểu chiến lược. Hai kiểu khác nhau, cả hai đều cần.</p>
+
+    <p class="thought">Mạng lưới đang hình thành. Chậm, im lặng, nhưng chắc.</p>
+
+    <p>Hắn bước ra khỏi canteen, lên thang bộ về tầng mười hai. Bước chân đều. Trong đầu, bản đồ quyền lực thêm một nét mới.</p>
+
+    <p>Tối hôm đó, về nhà, hắn lấy tờ giấy sơ đồ từ ngăn kéo. Thêm một ô mới ở bên phải: "Trương Phong, trưởng phòng CNTT. Giỏi, bất mãn, bị cắt ngân sách. Nắm hệ thống và dữ liệu. Đã vào mạng lưới."</p>
+
+    <p class="short">Gấp lại. Cất đi.</p>
+
+    <p class="short">Nằm xuống. Nhắm mắt.</p>
+
+    <p class="short"><em>Thu phục nhân tài không khó.</em></p>
+
+    <p>Bên ngoài, tiếng xe cộ xa xa, tiếng mưa bắt đầu rơi nhẹ trên mái tôn.</p>
+
+    <p class="thought">Khó là biết khi nào nên thu, khi nào nên giết.</p>
+
+    <p class="short">Hắn tắt đèn. Ngủ.</p>
+
+    <p class="short">Ngủ ngon hơn mọi đêm kể từ khi trọng sinh.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-08.html">&larr; Chương trước</a>
+    <a href="chapter-10.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>2.838 từ &middot; Chương 09 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

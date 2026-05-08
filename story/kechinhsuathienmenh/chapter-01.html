@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chương 1: Chữ Trên Đầu Người — Kẻ Chỉnh Sửa Thiên Mệnh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #f0e6d6;
+    --body: #c8b89a;
+    --muted: #8a7d6b;
+    --muted-soft: #5a4a3a;
+    --hairline: #2a2230;
+    --hairline-soft: #1e1a28;
+    --canvas: #0a0a0f;
+    --surface-soft: #0f0f18;
+    --surface-card: #12121c;
+    --on-primary: #ffffff;
+    --destiny-border: #3a2a1a;
+    --destiny-blood: #6a1a1a;
+
+    --font-display: 'Inter', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+    --font-body: 'Noto Serif', Georgia, serif;
+
+    --sp-xs: 4px;
+    --sp-sm: 8px;
+    --sp-md: 12px;
+    --sp-base: 16px;
+    --sp-lg: 24px;
+    --sp-xl: 32px;
+    --sp-xxl: 48px;
+    --sp-section: 64px;
+
+    --rounded-sm: 8px;
+    --rounded-md: 14px;
+    --rounded-lg: 20px;
+    --rounded-full: 9999px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--canvas);
+    color: var(--body);
+    font-family: var(--font-body);
+    line-height: 2;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: var(--sp-xxl) var(--sp-lg);
+  }
+
+  /* Nav — adapted from Airbnb top-nav */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-md) 0;
+    margin-bottom: var(--sp-xl);
+    border-bottom: 1px solid var(--hairline-soft);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted-soft);
+  }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: var(--sp-sm) var(--sp-md);
+    border-radius: var(--rounded-sm);
+    transition: all 0.2s ease;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    background: var(--surface-soft);
+  }
+
+  nav .current {
+    font-weight: 500;
+    color: var(--body);
+  }
+
+  nav .disabled {
+    color: var(--hairline);
+    pointer-events: none;
+  }
+
+  /* Chapter title */
+  h1 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.44px;
+    color: var(--ink);
+    margin-bottom: var(--sp-xxl);
+    text-align: center;
+  }
+
+  /* Prose */
+  p {
+    text-align: justify;
+    margin-bottom: 1.2em;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 2;
+  }
+
+  /* Thoughts / internal monologue */
+  p.thought {
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  em {
+    color: var(--muted);
+  }
+
+  /* Scene break — Airbnb-style generous spacing */
+  p.scene-break {
+    text-align: center;
+    color: var(--muted-soft);
+    margin: var(--sp-xxl) 0;
+    letter-spacing: 8px;
+    font-size: 16px;
+  }
+
+  /* Destiny blocks — adapted from Airbnb property-card */
+  .destiny {
+    background: var(--surface-card);
+    border: 1px solid var(--hairline);
+    border-left: 3px solid var(--destiny-border);
+    border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+    padding: var(--sp-base) var(--sp-lg);
+    margin: var(--sp-lg) 0;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .destiny.blood {
+    border-left-color: var(--primary);
+    background: linear-gradient(90deg, rgba(255, 56, 92, 0.03), var(--surface-card) 40%);
+  }
+
+  .destiny strong {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    font-style: normal;
+    letter-spacing: 0.5px;
+  }
+
+  .destiny em {
+    color: var(--muted);
+    display: block;
+    font-size: 15px;
+  }
+
+  .destiny.blood em {
+    color: var(--body);
+  }
+
+  /* Bottom nav */
+  nav.bottom {
+    margin-top: var(--sp-xxl);
+    padding-top: var(--sp-md);
+    border-top: 1px solid var(--hairline-soft);
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  /* Word count */
+  .word-count {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted-soft);
+    margin-top: var(--sp-xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 744px) {
+    .container { padding: var(--sp-xl) var(--sp-base); }
+    h1 { font-size: 20px; }
+    p { font-size: 15px; line-height: 1.9; }
+    nav { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <a href="index.html">&larr; Mục lục</a>
+  <span class="current">Chương 1 / 15</span>
+  <span class="disabled">Chương sau &rarr;</span>
+</nav>
+
+<h1>Chương 1: Chữ Trên Đầu Người</h1>
+
+<p>Cuốn sách cuối cùng trên giá kệ phía đông luôn bị xếp sai chỗ.</p>
+
+<p>Tạ Trầm Chu lặng lẽ rút nó ra, phủi bụi, đặt lại đúng vị trí. <em>Vân Hải Bút Ký</em>, bản sao chép tay, giấy đã ngả vàng. Không ai trong Thanh Vân Tông đọc cuốn này, kể cả người chép nó. Nhưng nó thuộc về giá kệ phía đông, hàng thứ ba, vị trí thứ mười bảy. Không phải giá kệ phía nam.</p>
+
+<p>Hắn biết rõ vị trí của từng cuốn sách trong thư khố. Ba nghìn bảy trăm hai mươi bốn cuốn, không thiếu, không thừa.</p>
+
+<p>Ánh sáng đầu tiên của buổi sớm rọi qua song cửa, kẻ một đường vàng mỏng trên sàn gỗ. Bụi bay lơ lửng trong luồng sáng ấy. Tạ Trầm Chu đứng giữa thư khố, nghe tiếng chim hót bên ngoài, và thấy yên lòng.</p>
+
+<p>Đây là thế giới của hắn. Tĩnh lặng, ngăn nắp, có trật tự. Sách không nói dối, không phán xét, không hỏi tại sao một ngoại môn đệ tử mười chín tuổi vẫn còn Luyện Khí tầng ba.</p>
+
+<p>Tiếng chuông sáng vang lên từ đại điện. Ba hồi, chín tiếng, đều đặn như mọi ngày. Trầm Chu khép cửa thư khố, bước ra ngoài.</p>
+
+<p>Không khí mùa xuân trên núi Thanh Vân mát lạnh, pha lẫn mùi sương và hoa dại. Con đường đá dẫn từ thư khố xuống sân luyện ngoại môn đã quen thuộc đến mức hắn có thể đi nhắm mắt mà không vấp. Bảy trăm bốn mươi hai bước. Hắn từng đếm.</p>
+
+<p>Sân luyện ngoại môn nằm ở lưng chừng núi, thấp hơn nội môn ba tầng bậc đá. Phía trên, mây phủ trắng, thỉnh thoảng ánh kiếm loé lên rồi tắt. Đó là thế giới của những thiên tài. Phía dưới này, hai mươi mấy đệ tử ngoại môn xếp hàng dưới nắng, chờ nhận khẩu phần linh thạch hàng tháng.</p>
+
+<p>Trầm Chu đứng ở cuối hàng. Luôn là cuối hàng.</p>
+
+<p>— Tạ Trầm Chu, hai viên.</p>
+
+<p>Người phát linh thạch là sư huynh Trần Phong, Trúc Cơ tầng hai, phụ trách hậu cần ngoại môn. Hắn ta ném hai viên linh thạch vào tay Trầm Chu mà không nhìn, như ném xương cho chó.</p>
+
+<p>Hai viên. Đệ tử ngoại môn bình thường được ba viên. Trúc Cơ trở lên được năm. Trầm Chu chỉ được hai vì tu vi thấp nhất tông, tiêu hao linh khí ít nhất, nên phần cũng ít nhất.</p>
+
+<p>Hợp lý. Không ai bất công với hắn. Chỉ là hắn không đáng được nhiều hơn.</p>
+
+<p>Trầm Chu cất linh thạch, quay người định đi.</p>
+
+<p>— Ê, Tạ Trầm Chu.</p>
+
+<p>Sư huynh Lưu Kiệt, Luyện Khí tầng bảy, đi ngang. Gã dừng lại, nhìn Trầm Chu từ trên xuống.</p>
+
+<p>— Ba năm rồi vẫn tầng ba hả? Hay bỏ tu luyện đi, xuống núi bán sách cho rồi.</p>
+
+<p>Vài tiếng cười rộ lên. Không ác ý thật sự, chỉ là thói quen. Trầm Chu là đề tài dễ nhất để đùa, vì hắn không bao giờ phản ứng.</p>
+
+<p>Trầm Chu gật đầu, nhẹ nhàng:</p>
+
+<p>— Sư huynh nói có lý.</p>
+
+<p>Lưu Kiệt ngớ người. Gã không quen việc Trầm Chu trả lời. Thường thì hắn chỉ im lặng bỏ đi. Lưu Kiệt "hừ" một tiếng rồi quay đi, không biết nói gì tiếp.</p>
+
+<p>Trầm Chu bước về phía thư khố. Hắn không giận. Hắn đã nghe những câu như vậy ba năm rồi, lúc đầu còn khó chịu, giờ thì như nghe gió thổi. Gió không đáng để giận.</p>
+
+<p>Hắn đi qua con dốc phía bắc, nơi rêu bám trên đá ướt và tiếng suối chảy róc rách ở đâu đó bên dưới. Thanh Vân Tông có hơn ba trăm đệ tử, nhưng hắn hiếm khi gặp ai trên con đường này. Mọi người đều bận tu luyện, ganh đua, phấn đấu vào nội môn. Không ai có thời gian đi tản bộ trên đường ra thư khố.</p>
+
+<p>Điều đó hợp ý hắn.</p>
+
+<p>Thư khố nằm riêng biệt ở sườn đông, một ngôi nhà gỗ hai tầng cũ kỹ, mái phủ rêu xanh. Tầng dưới chứa sách phổ thông, bí lục tu luyện cấp thấp, ghi chép lịch sử tông phái. Tầng trên chứa sách cổ, bị khóa, chỉ trưởng lão mới được vào. Trầm Chu có chìa khóa tầng trên vì công việc, nhưng hắn hiếm khi lên đó. Sách cổ đa phần viết bằng thứ cổ ngữ mà hắn chỉ đọc hiểu phân nửa.</p>
+
+<p>Hắn mở cửa, bước vào. Mùi giấy cũ và gỗ trầm quen thuộc ùa đến. Hắn hít sâu, thấy vai mình hạ xuống.</p>
+
+<p>Buổi sáng trôi qua trong yên lặng. Hắn kiểm kê lại mấy cuốn sách mượn quá hạn, chép lại danh mục cho đệ tử Trúc Cơ đang nghiên cứu trận pháp, và pha một ấm trà bạc hà loãng. Trà không ngon, nhưng nước nóng giúp tay hắn bớt lạnh.</p>
+
+<p>Đến gần trưa, hắn nghe tiếng chuông triệu tập ngoại môn. Lại phải ra ngoài.</p>
+
+<p class="scene-break">&middot; &middot; &middot;</p>
+
+<p>Trưởng lão Lâm Phượng Nghi đến kiểm tra ngoại môn.</p>
+
+<p>Trưởng lão Lâm là người duy nhất trong Thanh Vân Tông mà Trầm Chu thật sự kính trọng. Ông già, tóc đã bạc quá nửa, tu vi chỉ Kim Đan sơ kỳ, thấp nhất trong các trưởng lão. Nhưng ông kiểm tra ngoại môn tận tâm hơn bất kỳ ai, nhớ tên từng đệ tử, hỏi han tu luyện, sửa tư thế luyện công.</p>
+
+<p>Trầm Chu đứng trong hàng, chờ đến lượt.</p>
+
+<p>Trưởng lão Lâm đi từ đầu hàng xuống, dừng lại ở từng người. Ông kiểm tra kinh mạch, chỉnh tư thế, thỉnh thoảng gật đầu hoặc nhíu mày. Đến trước mặt Trầm Chu, ông dừng lại lâu hơn.</p>
+
+<p>— Trầm Chu, kinh mạch ổn định, nhưng linh lực vẫn mỏng. Con có luyện đều không?</p>
+
+<p>— Dạ, đệ tử luyện mỗi ngày.</p>
+
+<p>— Hmm.</p>
+
+<p>Trưởng lão Lâm nhìn hắn. Ánh mắt ông không phán xét, không thương hại, chỉ là nhìn. Rồi ông gật đầu.</p>
+
+<p>— Linh căn hạ phẩm không có nghĩa là không tu được. Chỉ chậm hơn thôi. Con cứ kiên nhẫn.</p>
+
+<p>— Dạ.</p>
+
+<p>Trưởng lão Lâm vỗ vai hắn, bước sang người tiếp theo.</p>
+
+<p>Tay ông vừa rời vai hắn thì nó xuất hiện.</p>
+
+<p>Trầm Chu không hiểu cái gì đang xảy ra. Đầu hắn nhói lên một cơn đau ngắn, sắc như kim châm, xuyên qua thái dương rồi biến mất. Và khi cơn đau qua đi, hắn nhìn thấy.</p>
+
+<p>Phía trên đầu Trưởng lão Lâm Phượng Nghi, lơ lửng trong không trung, là những dòng chữ.</p>
+
+<p>Không phải chữ viết trên giấy, không phải chữ khắc trên đá. Chúng trôi nổi, mờ ảo, như được viết bằng mực loãng lên mặt nước. Màu đen nhạt, gần như trong suốt, nhưng rõ ràng đến từng nét. Chúng không chuyển động theo đầu ông, mà giữ nguyên vị trí, cách đỉnh đầu ông khoảng ba tấc, như thể được khắc vào một mặt phẳng vô hình.</p>
+
+<p>Trầm Chu đọc. Không phải hắn muốn, mà vì hắn không thể KHÔNG đọc. Mắt hắn bị kéo vào dòng chữ, từng ký tự một, rõ ràng như đọc sách trong thư khố.</p>
+
+<div class="destiny">
+<strong>【Lâm Phượng Nghi, Bạch Mệnh】</strong><br>
+<em>Sáu mươi tuổi bệnh.</em><br>
+<em>Bảy mươi hai tuổi mất trong giấc ngủ.</em>
+</div>
+
+<p>Trầm Chu đứng sững.</p>
+
+<p>Thế giới xung quanh hắn im lặng. Hay có lẽ không im, nhưng hắn không nghe thấy gì. Tiếng gió, tiếng đệ tử xì xào, tiếng Trưởng lão Lâm nói chuyện với người tiếp theo, tất cả biến mất. Chỉ còn dòng chữ. Và hắn.</p>
+
+<p>Hắn chớp mắt. Chữ vẫn còn đó. Hắn dụi mắt. Vẫn còn. Hắn nhìn sang đệ tử bên cạnh, không thấy gì. Nhìn lại Trưởng lão Lâm, chữ vẫn lơ lửng phía trên đầu ông, nhạt như sương nhưng rõ như dao khắc.</p>
+
+<p class="thought">Bảy mươi hai tuổi mất trong giấc ngủ.</p>
+
+<p>Trưởng lão Lâm năm nay năm mươi tám.</p>
+
+<p>Trầm Chu nuốt nước bọt. Miệng hắn khô khốc. Hắn nhìn quanh, không ai trong hàng có biểu hiện gì bất thường. Không ai nhìn lên đầu Trưởng lão Lâm. Không ai thấy chữ.</p>
+
+<p>Chỉ có hắn.</p>
+
+<p>— Trầm Chu?</p>
+
+<p>Trưởng lão Lâm đã đi xa mấy người nhưng quay lại, nhìn hắn. Hắn đang đứng chết trân giữa sân.</p>
+
+<p>— Con có sao không? Mặt trắng bệch.</p>
+
+<p>— Dạ... đệ tử không sao. Hơi chóng mặt.</p>
+
+<p>Trưởng lão Lâm nhíu mày, nhưng không hỏi thêm. Ông quay lại tiếp tục kiểm tra.</p>
+
+<p>Trầm Chu cúi đầu, bước ra khỏi hàng. Chân hắn hơi run. Hắn đi nhanh về phía thư khố, không dám nhìn bất kỳ ai. Trên đường đi hắn bất giác liếc sang mấy đệ tử đứng gần, nhưng không thấy dòng chữ nào. Chỉ có Trưởng lão Lâm. Chỉ mình ông. Tại sao?</p>
+
+<p>Hắn đi nhanh hơn. Gần như chạy.</p>
+
+<p>Hắn đẩy cửa thư khố, bước vào, đóng sầm lại. Dựa lưng vào cánh cửa gỗ, thở.</p>
+
+<p>Một. Hai. Ba.</p>
+
+<p>Hơi thở chậm lại. Tim vẫn đập nhanh.</p>
+
+<p>Hắn nhắm mắt, cố nhớ lại. Dòng chữ. Tên. "Bạch Mệnh." Sáu mươi tuổi bệnh. Bảy mươi hai tuổi mất trong giấc ngủ. Rõ ràng, cụ thể, có thời gian, có sự kiện.</p>
+
+<p>Như một bản án.</p>
+
+<p>Không. Như một bản kế hoạch.</p>
+
+<p>Hắn mở mắt, nhìn bàn tay mình. Bình thường. Không có gì khác biệt. Hắn vẫn là Tạ Trầm Chu, Luyện Khí tầng ba, ngoại môn đệ tử quản thư khố. Có thể hắn hoa mắt. Có thể do luyện công thiếu linh lực. Có thể do thức khuya đọc sách quá nhiều.</p>
+
+<p>Hắn tự nhủ như vậy, ngồi xuống bàn, rót nước uống. Nước lạnh chạy qua cổ họng, hắn bình tĩnh lại.</p>
+
+<p class="thought">Hoa mắt. Chắc chắn là hoa mắt.</p>
+
+<p>Nhưng hắn nhớ rất rõ. Từng nét chữ, từng con số. <em>Sáu mươi tuổi bệnh. Bảy mươi hai tuổi mất trong giấc ngủ.</em> Không phải kiểu ảo giác mơ hồ, nhòe nhoẹt. Rõ ràng, chính xác, có cấu trúc. Như ai đó viết sẵn lên giấy rồi dán lên đầu ông.</p>
+
+<p>Mà hắn chỉ thấy trên Trưởng lão Lâm. Những đệ tử khác đứng ngay cạnh, hắn không thấy gì. Tại sao? Vì ông là Kim Đan mà họ chỉ là Luyện Khí? Hay vì ông chạm vào vai hắn?</p>
+
+<p>Trầm Chu xoa hai bàn tay vào nhau. Bình thường. Không có gì đặc biệt. Mười ngón tay quen cầm sách, không quen cầm kiếm, cũng không nên cầm vào thứ gì đó không thuộc về thế giới bình thường.</p>
+
+<p class="thought">Quên đi.</p>
+
+<p>Buổi chiều hắn ở trong thư khố, sắp xếp sách, lau kệ, kiểm kê bản sao chép mới. Công việc quen thuộc giúp hắn quên đi buổi trưa. Hắn chép lại ba trang bí lục <em>Thanh Phong Kiếm Quyết</em> cho đệ tử mượn, nét chữ đều đặn, không run. Tay hắn di chuyển giữa các giá sách, đầu hắn trống rỗng. Đây mới là cuộc sống của hắn. Tĩnh lặng, trật tự, không có dòng chữ nào lơ lửng trên đầu ai.</p>
+
+<p>Lúc xế chiều, một ngoại môn đệ tử đến trả sách. Trầm Chu ngẩng lên, bất giác nhìn thẳng vào mặt gã.</p>
+
+<p>Không có gì. Không có dòng chữ nào.</p>
+
+<p>Hắn thở ra, nhẹ cả người. Gã đệ tử nhìn hắn lạ, nhưng không hỏi.</p>
+
+<p class="scene-break">&middot; &middot; &middot;</p>
+
+<p>Chạng vạng.</p>
+
+<p>Trầm Chu bước ra ngoài thư khố để đổ nước rửa bút. Con đường nhỏ phía sau thư khố dẫn ra giếng đá, ít người qua lại, hắn thích chỗ này vì yên tĩnh.</p>
+
+<p>Hắn đang rót nước xuống rãnh đá thì nghe tiếng bước chân. Một đệ tử ngoại môn đi ngang, tay cầm đèn lồng, đầu cúi, vẻ mệt mỏi. Hắn không nhận ra ai, trời đã nhá nhem.</p>
+
+<p>Rồi đầu hắn nhói lên. Cùng cơn đau ấy, ngắn, sắc, như kim xuyên thái dương.</p>
+
+<p>Và dòng chữ lại xuất hiện.</p>
+
+<p>Phía trên đầu người đệ tử kia, rõ ràng hơn lần trước, dù ánh sáng đã yếu. Không phải màu đen nhạt nữa. Lần này, chữ có màu đỏ thẫm, đậm như máu khô.</p>
+
+<div class="destiny blood">
+<strong>【Trần Mạc, Huyết Mệnh】</strong><br>
+<em>Hai mươi ba tuổi mất trong nội loạn tông môn.</em><br>
+<em>Trước khi chết sẽ giết hai đồng môn.</em>
+</div>
+
+<p>Trầm Chu đánh rơi bình nước.</p>
+
+<p>Gốm vỡ trên đá, nước bắn lên chân. Hắn không thấy ướt. Mắt hắn dán chặt vào dòng chữ đỏ thẫm trên đầu Trần Mạc.</p>
+
+<p class="thought">Nội loạn tông môn. Giết hai đồng môn.</p>
+
+<p>Trần Mạc nghe tiếng vỡ, quay lại.</p>
+
+<p>— Ai đấy?</p>
+
+<p>Trầm Chu hít một hơi sâu.</p>
+
+<p>— Ta... ta đánh rơi bình nước. Không có gì.</p>
+
+<p>Trần Mạc nhìn hắn một lát, gật đầu, tiếp tục bước đi. Ánh đèn lồng lắc lư theo nhịp chân, và dòng chữ đỏ thẫm trên đầu gã dần mờ đi trong bóng tối, như ngọn lửa sắp tắt.</p>
+
+<p>Trầm Chu đứng cạnh đống gốm vỡ. Nước ngấm vào giày. Gió đêm núi thổi qua, lạnh buốt.</p>
+
+<p>Hắn nhìn theo bóng Trần Mạc biến mất ở cuối đường. Ánh đèn lồng nhỏ dần, nhỏ dần, rồi mất hút sau khúc cua. Nhưng dòng chữ đỏ thẫm trên đầu gã vẫn in rõ trong đầu hắn, từng nét không sai.</p>
+
+<p><em>Huyết Mệnh.</em> Khác với <em>Bạch Mệnh</em> của Trưởng lão Lâm. Màu khác. Nội dung khác. Nếu <em>Bạch Mệnh</em> là cuộc đời bình lặng, thì <em>Huyết Mệnh</em> là lời nguyền.</p>
+
+<p class="thought">Giết hai đồng môn.</p>
+
+<p>Trần Mạc. Hắn cố nhớ. Ngoại môn đệ tử, Luyện Khí tầng năm, ít nói, không gây chuyện. Hắn từng thấy Trần Mạc trong thư khố mấy lần, mượn sách về dược liệu, trả đúng hạn, chữ viết gọn gàng. Không có gì đặc biệt. Một kẻ bình thường đến mức vô hình, giống hắn.</p>
+
+<p>Nhưng dòng chữ đó nói gã sẽ giết người. Và sẽ chết trong nội loạn.</p>
+
+<p>Trầm Chu cúi xuống nhặt một mảnh gốm. Cạnh sắc cứa vào ngón tay, máu rỉ ra. Hắn nhìn giọt máu, đỏ thẫm dưới ánh trăng. Cùng màu với dòng chữ trên đầu Trần Mạc.</p>
+
+<p>Hắn buông mảnh gốm, quay lại thư khố. Không dọn. Hắn đóng cửa, cài then, ngồi xuống bàn, hai tay úp mặt.</p>
+
+<p class="thought">Không phải hoa mắt.</p>
+
+<p>Lần đầu có thể là hoa mắt. Lần hai thì không. Hai người khác nhau, nội dung khác nhau, chi tiết cụ thể. Đây không phải ảo giác.</p>
+
+<p>Hắn đang nhìn thấy thứ gì đó trên đầu mọi người. Thứ gì đó ghi lại tương lai của họ. Tên, cấp bậc, sự kiện, thời điểm. Như một cuốn sổ. Như một bản kế hoạch đã được viết sẵn.</p>
+
+<p class="thought">Ai viết?</p>
+
+<p>Câu hỏi đó thoáng qua đầu hắn rồi biến mất, chưa kịp bám rễ. Lúc này hắn không đủ bình tĩnh để nghĩ xa. Hắn chỉ biết một điều: sáng nay hắn còn là một ngoại môn đệ tử bình thường, quản lý thư khố, đếm sách, sống qua ngày.</p>
+
+<p>Giờ thì hắn nhìn thấy cái gì đó mà không ai nhìn thấy.</p>
+
+<p>Và hắn không biết điều đó có nghĩa là gì.</p>
+
+<p>Hắn ngồi lại bàn rất lâu, không thắp đèn. Bóng tối dày đặc trong thư khố, chỉ có ánh trăng lọt qua song cửa, rơi lên sàn thành một ô vuông nhỏ. Ba nghìn bảy trăm hai mươi bốn cuốn sách đứng im trong bóng tối. Hắn từng thấy an toàn giữa chúng. Giờ thì hắn tự hỏi liệu trong đống sách đó, có cuốn nào giải thích được thứ hắn vừa nhìn thấy không.</p>
+
+<p>Có lẽ có. Có lẽ không. Nhưng hắn chưa muốn tìm.</p>
+
+<p>Trầm Chu dời sang giường, nằm xuống. Chiếc giường gỗ cứng, quen thuộc. Hắn kéo chăn mỏng lên ngực nhưng không nhắm mắt.</p>
+
+<p class="thought">Bạch Mệnh. Huyết Mệnh.</p>
+
+<p>Hai cái tên, hai màu sắc. Trắng nhạt và đỏ thẫm. Nếu đây là một hệ thống phân loại, thì phải có nhiều hơn hai cấp. Còn cấp nào khác? Và phân loại theo tiêu chí gì?</p>
+
+<p>Đầu hắn bắt đầu vận hành theo thói quen cũ. Sắp xếp, phân loại, tìm quy luật. Ba năm quản thư khố, hắn quen với việc đặt mọi thứ vào đúng vị trí. Nhưng thứ này không phải sách. Thứ này là số phận con người.</p>
+
+<p><em>Bảy mươi hai tuổi mất trong giấc ngủ.</em> Dòng chữ trên đầu Trưởng lão Lâm hiền lành, an nhiên, như một lời hứa nhẹ nhàng. Ông sẽ sống thêm mười bốn năm nữa, rồi ra đi trong giấc ngủ. Không đau. Không sợ. Bạch Mệnh. Đời bình thường.</p>
+
+<p><em>Giết hai đồng môn.</em> Dòng chữ trên đầu Trần Mạc đỏ thẫm, nặng nề, như một bản án đã ký. Gã sẽ giết người. Và chết. Huyết Mệnh. Đời đẫm máu.</p>
+
+<p>Hai thế giới. Một bình yên, một đẫm máu. Nhưng cả hai đều được viết sẵn, rõ ràng, chính xác, như thể người viết chúng không hề do dự.</p>
+
+<p>Và cả hai đều đã VIẾT XONG. Quá khứ thì của hắn. Tương lai thì của chữ.</p>
+
+<p>Trầm Chu tự hỏi: trên đầu hắn có dòng chữ nào không?</p>
+
+<p>Hắn giơ tay lên trước mặt, nhìn chằm chằm vào khoảng không phía trên đầu mình. Không có gì. Tất nhiên là không có gì. Hắn không nhìn thấy chữ trên đầu mình. Mà nếu có, hắn cũng không muốn biết.</p>
+
+<p>Hắn hạ tay xuống.</p>
+
+<p>Giấc ngủ không đến. Trong bóng tối, dòng chữ đỏ thẫm cứ hiện lên rồi tắt, hiện lên rồi tắt, lặp đi lặp lại sau mí mắt hắn.</p>
+
+<p class="thought">Hai mươi ba tuổi mất trong nội loạn tông môn.</p>
+
+<p>Trần Mạc năm nay hai mươi mốt.</p>
+
+<p>Còn hai năm.</p>
+
+<p>Trầm Chu trở mình, úp mặt vào gối. Gối cứng, lạnh. Hắn nghĩ đến Trần Mạc, gã đệ tử hiền lành mượn sách dược liệu. Hai năm nữa gã sẽ giết hai đồng môn. Ai? Tại sao? Nội loạn tông môn nghĩa là gì?</p>
+
+<p>Hắn không biết. Dòng chữ không giải thích. Nó chỉ ghi kết quả, không ghi nguyên nhân. Như một cuốn sổ chỉ có phần kết thúc mà thiếu mất phần giữa.</p>
+
+<p class="thought">Ngủ đi. Sáng mai vẫn phải kiểm kê sách.</p>
+
+<p>Trầm Chu nhắm mắt. Lần này hắn không cố quên. Hắn chỉ cố ngừng nghĩ.</p>
+
+<p>Mãi lâu sau, khi trăng đã chếch qua khỏi ô cửa và ô vuông sáng trên sàn co lại thành một vệt mỏng, hắn mới chìm vào giấc ngủ. Giấc ngủ nông, đầy những dòng chữ trôi nổi, và tiếng gốm vỡ trên đá.</p>
+
+<nav class="bottom">
+  <a href="index.html">&larr; Mục lục</a>
+  <span class="current">Chương 1 / 15</span>
+  <span class="disabled">Chương sau &rarr;</span>
+</nav>
+
+<p class="word-count">~ 3.200 từ</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương 01 — Tỉnh Dậy Ở Thanh Vân Tông</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Serif', Georgia, serif;
+            background-color: #0a0a0f;
+            color: #c8c8c8;
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        /* Navigation */
+        .nav {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #0a0a0f;
+            border-bottom: 1px solid #1e1e2a;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            font-size: 14px;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .nav a:hover { color: #ff385c; }
+
+        .nav__center {
+            color: #6a6a6a;
+            font-size: 13px;
+        }
+
+        .nav__disabled {
+            color: #3a3a3a;
+            cursor: default;
+        }
+
+        /* Chapter content */
+        .chapter {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .chapter__header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #1e1e2a;
+        }
+
+        .chapter__number {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.32px;
+            text-transform: uppercase;
+            color: #ff385c;
+            margin-bottom: 12px;
+        }
+
+        .chapter__title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #f0f0f0;
+        }
+
+        /* Prose */
+        .chapter__body p {
+            text-align: justify;
+            margin-bottom: 1em;
+            color: #b8b8b8;
+        }
+
+        .chapter__body p.thought {
+            color: #8a7d6b;
+            font-style: italic;
+        }
+
+        .chapter__body p.scene-break {
+            text-align: center;
+            color: #3a3a4a;
+            margin: 2em 0;
+            letter-spacing: 0.5em;
+            font-style: normal;
+        }
+
+        .chapter__body p.dialogue {
+            text-indent: 0;
+            color: #e0e0e0;
+        }
+
+        /* Footer nav */
+        .chapter__footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #1e1e2a;
+        }
+
+        .chapter__wordcount {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 13px;
+            color: #5a5a5a;
+            margin-bottom: 24px;
+        }
+
+        .chapter__nav-bottom {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .chapter__nav-bottom a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+
+        .chapter__nav-bottom a:hover {
+            border-color: #ff385c;
+        }
+
+        .chapter__nav-bottom .disabled {
+            color: #3a3a3a;
+            border-color: #1e1e2a;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 16px; }
+            .chapter { padding: 32px 16px 64px; }
+            .chapter__title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">&larr; Mục lục</a>
+        <span class="nav__center">Chương 1 / 10</span>
+        <span class="nav__disabled">Chương sau &rarr;</span>
+    </nav>
+
+    <article class="chapter">
+        <header class="chapter__header">
+            <div class="chapter__number">Chương 01</div>
+            <h1 class="chapter__title">Tỉnh Dậy Ở Thanh Vân Tông</h1>
+        </header>
+
+        <div class="chapter__body">
+            <p>Cái đầu tiên Lâm Nhàn cảm nhận được là mùi thuốc bắc.</p>
+
+            <p>Không phải loại thuốc bắc đóng gói bán trong hiệu thuốc gần công ty, mà là thứ mùi nồng gắt, đắng nghét, như thể ai đó nhét cả một bụi cây vào nồi rồi đun sôi ba ngày ba đêm. Mùi ấy xộc thẳng vào mũi, len lỏi vào cổ họng, khiến hắn muốn ho nhưng không ho nổi.</p>
+
+            <p>Toàn thân đau nhức. Không phải kiểu đau sau khi tăng ca. Đây là thứ đau từ trong xương, như thể ai đó vừa tháo rời từng khớp rồi lắp lại.</p>
+
+            <p>Hắn cố mở mắt.</p>
+
+            <p>Ánh sáng ùa vào, mờ nhạt, vàng vọt. Trần nhà bằng gỗ, thấp, có mạng nhện ở góc. Một ngọn đèn dầu leo lét trên bàn.</p>
+
+            <p class="thought">Đây... không phải phòng trọ của tôi.</p>
+
+            <p class="dialogue">— Lâm huynh! Huynh tỉnh rồi!</p>
+
+            <p>Một khuôn mặt xông vào tầm nhìn. Tròn, da ngăm, mắt to, đang ướt nhẹp nước mắt. Gã thanh niên này mặc bộ đồ vải xám bạc màu, tay cầm bát gì đó bốc khói.</p>
+
+            <p class="thought">Ai đây?</p>
+
+            <p class="dialogue">— Ba ngày rồi đó huynh! Ba ngày! Ta tưởng huynh chết rồi!</p>
+
+            <p>Gã thanh niên đặt bát thuốc xuống, tay run run nắm lấy cổ tay Lâm Nhàn. Miệng liến thoắng, mắt đỏ hoe.</p>
+
+            <p class="dialogue">— Huynh đột nhiên ngất giữa sân, ta cõng huynh về, nấu thuốc, đổ thuốc, thay khăn, ba ngày liền đấy! Huynh mà chết thì ai nấu cơm cho ta ăn?</p>
+
+            <p>Câu cuối cùng khiến Lâm Nhàn muốn cười. Nhưng miệng hắn khô khốc, và não bộ thì đang xử lý quá nhiều thông tin cùng lúc.</p>
+
+            <p>Bởi vì ký ức ùa về.</p>
+
+            <p>Không phải ký ức của hắn. Hay đúng hơn, không chỉ ký ức của hắn.</p>
+
+            <p>Lâm Nhàn, hai mươi hai tuổi, nhân viên văn phòng, đang trên đường về nhà sau ca tăng ca thì... mất ý thức. Đó là ký ức cuối cùng của "hắn."</p>
+
+            <p>Nhưng bây giờ, trong đầu hắn còn có một bộ ký ức khác.</p>
+
+            <p>Cũng tên Lâm Nhàn. Mười tám tuổi. Ngoại môn đệ tử Thanh Vân Tông, tu vi Luyện Khí tầng ba. Cha mẹ mất sớm, được tông môn thu nhận từ nhỏ, tư chất tầm thường, linh căn hạ phẩm. Sống lay lắt ở ngoại môn, ngày ngày tu luyện cơ bản và làm tạp dịch.</p>
+
+            <p>Ba ngày trước, Lâm Nhàn "gốc" đang quét lá ở hậu sơn thì bất ngờ ngất xỉu.</p>
+
+            <p>Và bây giờ, "hắn" tỉnh dậy.</p>
+
+            <p class="thought">Xuyên không.</p>
+
+            <p>Hai chữ ấy nổ ra trong đầu Lâm Nhàn như tiếng sét. Hắn đã đọc đủ loại tiểu thuyết để nhận ra tình huống này. Xuyên không, nhập hồn, chiếm thân, gọi gì cũng được. Kết quả là: một nhân viên văn phòng hai mươi hai tuổi giờ đang nằm trong thân xác của một tu sĩ mười tám tuổi ở thế giới tu tiên.</p>
+
+            <p>Thế giới tu tiên.</p>
+
+            <p class="thought">Thế giới thật sự có người bay, có kiếm quang, có yêu ma quỷ quái.</p>
+
+            <p>Lâm Nhàn nuốt nước bọt. Tim đập thình thịch.</p>
+
+            <p class="dialogue">— Huynh sao vậy? Sắc mặt huynh xấu lắm! Uống thuốc đi!</p>
+
+            <p>Gã thanh niên ấn bát thuốc vào tay Lâm Nhàn. Lục Cẩu, ký ức cho hắn biết tên gã là vậy.</p>
+
+            <p>Hắn nhìn bát thuốc đen ngòm, mùi khiến dạ dày muốn nổi loạn. Nhưng hắn vẫn nâng lên uống. Một phần vì cổ họng quá khô. Một phần vì trong tình huống này, hắn không có quyền kén chọn.</p>
+
+            <p>Đắng. Đắng đến mức mắt hắn trợn tròn.</p>
+
+            <p class="dialogue">— Thuốc gì đây?</p>
+
+            <p>Lục Cẩu gãi đầu.</p>
+
+            <p class="dialogue">— Ta không biết. Thấy mấy sư huynh nói cây này trị bách bệnh nên ta hái về nấu. Huynh uống khỏe lại là được.</p>
+
+            <p class="thought">Cái gã này... nấu thuốc mà không biết thuốc gì?</p>
+
+            <p>Lâm Nhàn nhìn Lục Cẩu. Ký ức cho hắn biết: đây là bạn cùng phòng, cùng là ngoại môn đệ tử, quen nhau từ nhỏ. Lục Cẩu tham ăn, nhiều chuyện, tu vi cao hơn hắn một chút, Luyện Khí tầng năm, nhưng cũng thuộc hàng tầm thường trong tông môn.</p>
+
+            <p class="dialogue">— Ta... ổn rồi.</p>
+
+            <p>Giọng Lâm Nhàn khàn khàn. Hắn cố ngồi dậy, nhưng toàn thân mềm nhũn.</p>
+
+            <p class="dialogue">— Ổn cái gì mà ổn!</p>
+
+            <p>Lục Cẩu đẩy hắn nằm xuống.</p>
+
+            <p class="dialogue">— Huynh ngất ba ngày, cả khu ngoại môn ai cũng biết. May mà không ai quan tâm mấy, chứ để trưởng lão biết thì phiền lắm.</p>
+
+            <p class="dialogue">— Trưởng lão?</p>
+
+            <p class="dialogue">— Ừ. Trưởng lão Thanh Huyền đang kiểm tra ngoại môn tuần này. Nghe nói có đợt tuyển chọn gì đó. Nếu huynh bị đánh giá "sức khỏe yếu" thì có khi bị đuổi khỏi tông môn luôn.</p>
+
+            <p>Lâm Nhàn im lặng.</p>
+
+            <p class="thought">Bị đuổi khỏi tông môn.</p>
+
+            <p>Hắn nhìn quanh căn phòng. Nhỏ, chật, tường đất, sàn gỗ cũ kỹ. Trên vách treo hai thanh kiếm gỗ dùng để luyện tập, cùn mòn, sứt mẻ. Góc phòng có hai chiếc giường tầng đơn giản, một bàn gỗ, một chậu rửa mặt.</p>
+
+            <p>Đây là phòng ở của ngoại môn đệ tử.</p>
+
+            <p>Qua ô cửa sổ nhỏ, hắn nhìn thấy. Và suýt quên thở.</p>
+
+            <p>Núi.</p>
+
+            <p>Không phải núi bình thường. Những ngọn núi cao vút, đỉnh chọc mây, sương trắng quấn quanh lưng chừng. Trên sườn một ngọn núi xa xa, hắn thoáng thấy những tòa điện các nằm cheo leo, mái ngói cong vút, ánh sáng lạ lùng phát ra từ bên trong. Thỉnh thoảng, một vệt sáng lướt qua bầu trời, nhanh đến mức hắn không chắc mình nhìn rõ. Như thể có ai đó đang... bay.</p>
+
+            <p class="thought">Đúng là thế giới tu tiên thật.</p>
+
+            <p class="dialogue">— Lâm huynh?</p>
+
+            <p>Lục Cẩu nhìn hắn, vẻ lo lắng.</p>
+
+            <p class="dialogue">— Huynh nhìn gì thế? Bộ chưa thấy Thanh Vân Sơn bao giờ à?</p>
+
+            <p>Lâm Nhàn quay lại, khẽ lắc đầu.</p>
+
+            <p class="dialogue">— Chỉ là... cảm thấy hơi khác.</p>
+
+            <p class="dialogue">— Khác?</p>
+
+            <p>Lục Cẩu nghiêng đầu.</p>
+
+            <p class="dialogue">— Huynh nói kỳ lắm. Chúng ta ở đây từ nhỏ mà.</p>
+
+            <p>Lâm Nhàn không đáp. Hắn đang cố sắp xếp lại mọi thứ trong đầu.</p>
+
+            <p>Thanh Vân Tông. Một trong những tông môn thuộc hàng trung lưu trong tu tiên giới. Tọa lạc trên dãy Thanh Vân Sơn, có bảy đỉnh núi chính, mỗi đỉnh thuộc một đường phong. Tông chủ hiện tại là Vân Thiên, tu vi Hóa Thần, cảnh giới thứ năm trong bảy cảnh giới tu luyện.</p>
+
+            <p>Bảy cảnh giới: Luyện Khí, Trúc Cơ, Kim Đan, Nguyên Anh, Hóa Thần, Động Hư, Đại Thừa.</p>
+
+            <p>Cả hai phiên bản Lâm Nhàn đều ở Luyện Khí tầng ba. Tầng thấp nhất. Yếu nhất.</p>
+
+            <p>Trong tông môn này, ngoại môn đệ tử là đáy xã hội. Ở trên là nội môn đệ tử, những thiên tài thật sự, có linh căn tốt, được trưởng lão trực tiếp dạy dỗ. Cao hơn nữa là chân truyền đệ tử, trưởng lão, và tông chủ.</p>
+
+            <p>Còn hắn?</p>
+
+            <p>Ngoại môn. Luyện Khí. Linh căn hạ phẩm.</p>
+
+            <p class="thought">Kiểu này... sống được bao lâu?</p>
+
+            <p>Trong tiểu thuyết, nhân vật chính xuyên không thường sẽ có hệ thống, có thiên phú, có lão gia gia trong nhẫn. Lâm Nhàn lục tung ký ức. Không có gì. Không có tiếng "ding" nào vang lên. Không có bảng trạng thái nào hiện ra trước mắt. Không có giọng nói bí ẩn nào trong đầu.</p>
+
+            <p>Chỉ có hắn. Một nhân viên văn phòng bình thường, trong thân xác một tu sĩ yếu nhất tông môn.</p>
+
+            <p class="dialogue">— Lục Cẩu.</p>
+
+            <p class="dialogue">— Hả?</p>
+
+            <p class="dialogue">— Ở đây... có nguy hiểm không?</p>
+
+            <p>Lục Cẩu nhìn hắn kỳ lạ.</p>
+
+            <p class="dialogue">— Huynh bị ngớ à? Nguy hiểm thì nguy hiểm chứ sao. Mỗi năm ngoại môn đều có người chết. Luyện công tẩu hỏa, đi hái dược liệu gặp yêu thú, hoặc bị nội môn sư huynh "lỡ tay" khi luyện tập. Nhưng mà, ở đâu chả nguy hiểm? Ít nhất ở tông môn còn có cơm ăn.</p>
+
+            <p class="thought">Mỗi năm đều có người chết.</p>
+
+            <p>Lâm Nhàn nắm chặt chăn.</p>
+
+            <p class="dialogue">— Lục Cẩu, ta hỏi thật. Ngoại môn đệ tử... có cách nào sống yên ổn không?</p>
+
+            <p class="dialogue">— Yên ổn?</p>
+
+            <p>Lục Cẩu cười khổ.</p>
+
+            <p class="dialogue">— Huynh à, ngoại môn đệ tử muốn yên ổn thì chỉ có hai cách. Một là tu luyện đột phá lên Trúc Cơ, được thăng nội môn. Hai là... làm tạp dịch đến già rồi chết.</p>
+
+            <p>Im lặng.</p>
+
+            <p>Gió thổi qua cửa sổ, mang theo mùi cỏ cây lạ lẫm và hơi sương lạnh. Trên bầu trời, một vệt sáng khác lướt qua. Lần này Lâm Nhàn nhìn rõ hơn. Đó là một người, đứng trên thanh kiếm, bay qua khoảng trời giữa hai đỉnh núi.</p>
+
+            <p class="thought">Ngự kiếm phi hành.</p>
+
+            <p>Đẹp. Và xa vời.</p>
+
+            <p>Với tu vi Luyện Khí tầng ba, hắn còn lâu mới bay được. Nếu có thể.</p>
+
+            <p class="dialogue">— Huynh uống thuốc xong thì nghỉ đi.</p>
+
+            <p>Lục Cẩu đứng dậy, vươn vai.</p>
+
+            <p class="dialogue">— Sáng mai phải dậy sớm quét lá ở hậu sơn. Mấy ngày huynh ngất, ta quét một mình mệt muốn chết.</p>
+
+            <p class="dialogue">— Ừ.</p>
+
+            <p class="dialogue">— À, mà này.</p>
+
+            <p>Lục Cẩu dừng ở cửa, quay lại nhìn hắn.</p>
+
+            <p class="dialogue">— Huynh... có thấy huynh hơi khác không?</p>
+
+            <p>Lâm Nhàn giật mình.</p>
+
+            <p class="dialogue">— Khác... kiểu gì?</p>
+
+            <p class="dialogue">— Ta không biết nữa.</p>
+
+            <p>Lục Cẩu gãi đầu, vẻ khó giải thích.</p>
+
+            <p class="dialogue">— Trước đây huynh ít nói, nhưng kiểu nhút nhát. Bây giờ huynh ít nói, nhưng kiểu... bình tĩnh. Mà mắt huynh cũng khác. Nhìn cái gì cũng kỹ lắm, như thể lần đầu thấy.</p>
+
+            <p class="thought">Vì đúng là lần đầu thấy thật.</p>
+
+            <p class="dialogue">— Có lẽ vì ngất lâu quá.</p>
+
+            <p class="dialogue">— Chắc vậy.</p>
+
+            <p>Lục Cẩu gật gù, không hỏi thêm.</p>
+
+            <p class="dialogue">— Ngủ đi.</p>
+
+            <p>Lục Cẩu tắt ngọn đèn, leo lên giường trên. Chỉ vài phút sau, tiếng ngáy đều đặn vang lên.</p>
+
+            <p>Lâm Nhàn nằm trong bóng tối, mắt mở trừng.</p>
+
+            <p class="thought">Tôi xuyên không thật rồi.</p>
+
+            <p class="thought">Không có hệ thống. Không có thiên phú. Không có kim ngón tay.</p>
+
+            <p class="thought">Chỉ có thân xác yếu ớt của một ngoại môn đệ tử, trong thế giới mà mỗi năm đều có người chết.</p>
+
+            <p>Hắn hít một hơi thật sâu, rồi thở ra chậm rãi.</p>
+
+            <p class="thought">Được rồi. Bình tĩnh. Bình tĩnh.</p>
+
+            <p class="thought">Kiếp trước tôi sống sót qua ba năm ở công ty có sếp psycho, deadline mỗi tuần, và đồng nghiệp đâm sau lưng. Thế giới tu tiên cũng chỉ là... một cái công ty khác thôi. Có boss, có đồng nghiệp, có KPI. Chỉ là KPI ở đây là tu luyện, và bị sa thải ở đây có nghĩa là chết.</p>
+
+            <p class="thought">...Được rồi, nghe cũng không ổn lắm.</p>
+
+            <p>Hắn trở mình, nhìn ra cửa sổ.</p>
+
+            <p>Trăng tròn. Ánh trăng rọi xuống Thanh Vân Sơn, phủ một lớp bạc lên những đỉnh núi mờ sương. Trong ánh trăng, tông môn yên tĩnh đến lạ. Không tiếng xe, không còi, không đèn neon. Chỉ có gió, trùng, và tiếng thở đều đặn của Lục Cẩu.</p>
+
+            <p class="thought">Đẹp thật.</p>
+
+            <p>Lâm Nhàn thấy mình bất giác bước xuống giường, đi ra trước cửa phòng.</p>
+
+            <p>Ánh trăng trùm lên người hắn. Không khí lạnh, trong vắt, mỗi hơi thở đều cảm nhận được vị ngọt nhẹ. Linh khí, ký ức cho hắn biết. Thứ năng lượng đặc trưng của thế giới tu tiên.</p>
+
+            <p>Hắn đứng đó, nhìn lên bầu trời đầy sao.</p>
+
+            <p>Trong đầu, một suy nghĩ chậm rãi hình thành:</p>
+
+            <p class="thought">Dù sao... tôi cũng đã ở đây rồi. Không thể quay lại. Vậy thì... sống đi. Sống cho yên ổn. Đừng gây chuyện, đừng nổi bật, đừng chọc ai. Cứ là ngoại môn đệ tử bình thường nhất, sống đến già, rồi tính sau.</p>
+
+            <p>Hắn khẽ gật đầu, như tự xác nhận với bản thân.</p>
+
+            <p>Rồi hắn đứng im, mặt hướng về phía trăng, mắt lim dim.</p>
+
+            <p>Không phải thiền định. Không phải ngộ đạo. Chỉ là hắn không biết phải làm gì khác, nên đứng đó.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Cách đó mười bước chân, Lục Cẩu trở mình, mở mắt.</p>
+
+            <p>Hắn thấy giường dưới trống.</p>
+
+            <p>Hoảng hồn, Lục Cẩu vùng dậy, nhìn ra cửa. Và đứng sững.</p>
+
+            <p>Lâm Nhàn đứng trước hiên, ánh trăng phủ đầy người, tư thế thẳng, mắt lim dim, gương mặt tĩnh lặng đến khó hiểu. Gió thổi nhẹ, tóc và vạt áo bay theo, nhưng hắn không nhúc nhích.</p>
+
+            <p>Lục Cẩu nín thở.</p>
+
+            <p>Hắn không biết vì sao, nhưng cảnh tượng ấy khiến một gã tham ăn, nhiều chuyện, sợ ma như hắn bỗng không dám lên tiếng.</p>
+
+            <p class="thought">Lâm huynh... hắn khác rồi.</p>
+
+            <p>Trước đây, Lâm Nhàn là gã nhút nhát nhất ngoại môn. Sợ sư huynh, sợ trưởng lão, sợ cả bóng tối. Nhưng người đang đứng kia, đứng một mình trong đêm, đối diện cả ngọn Thanh Vân Sơn mà không chút run sợ, đó không phải gã Lâm Nhàn mà Lục Cẩu quen biết.</p>
+
+            <p>Ba ngày ngất xỉu. Tỉnh dậy, ánh mắt sâu thẳm, ít nói, bình tĩnh lạ thường.</p>
+
+            <p>Và bây giờ, đứng dưới trăng một mình, như thể đang... suy tư điều gì đó rất xa, rất lớn.</p>
+
+            <p>Lục Cẩu nuốt nước bọt, nhẹ nhàng nằm xuống, kéo chăn lên tận cằm.</p>
+
+            <p>Hắn thì thầm, giọng nhỏ đến mức chỉ mình mình nghe:</p>
+
+            <p class="dialogue">— Lâm huynh... hắn khác rồi.</p>
+
+            <p>Bên ngoài, Lâm Nhàn vẫn đứng im.</p>
+
+            <p>Nội tâm hắn:</p>
+
+            <p class="thought">...Sao tôi không ngủ lại được nhỉ? Chắc tại bát thuốc kia có caffeine.</p>
+        </div>
+
+        <footer class="chapter__footer">
+            <div class="chapter__wordcount">~2,360 từ</div>
+            <div class="chapter__nav-bottom">
+                <span class="disabled">&larr; Chương trước</span>
+                <a href="index.html">Mục lục</a>
+                <span class="disabled">Chương sau &rarr;</span>
+            </div>
+        </footer>
+    </article>
+</body>
+</html>

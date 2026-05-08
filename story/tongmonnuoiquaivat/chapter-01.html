@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương 1: Người Trồng Rau Ở Ẩn Sơn — Tông Môn Nuôi Quái Vật</title>
+    <style>
+        :root {
+            --primary: #ff385c;
+            --primary-active: #e00b41;
+            --ink: #e8e8e8;
+            --body: #c0c0c0;
+            --muted: #8a8a8a;
+            --muted-soft: #666666;
+            --hairline: #2a2a2a;
+            --hairline-soft: #1e1e1e;
+            --canvas: #0a0a0f;
+            --surface-soft: #111118;
+            --surface-card: #141420;
+            --on-primary: #ffffff;
+            --thought: #7a7a8a;
+            --rounded-sm: 8px;
+            --rounded-md: 14px;
+            --rounded-full: 9999px;
+            --font-ui: 'Circular', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+            --font-reading: 'Noto Serif', 'Georgia', 'Times New Roman', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--canvas);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Sticky nav */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--canvas);
+            border-bottom: 1px solid var(--hairline);
+            z-index: 10;
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 56px;
+        }
+
+        nav a {
+            font-family: var(--font-ui);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: var(--rounded-full);
+            transition: background 0.2s;
+        }
+
+        nav a:hover { background: var(--surface-soft); }
+
+        .nav-center {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .nav-disabled {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted-soft);
+            padding: 8px 16px;
+        }
+
+        /* Chapter header */
+        .chapter-header {
+            padding: 48px 0 40px;
+            text-align: center;
+        }
+
+        .chapter-badge {
+            display: inline-block;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--on-primary);
+            background: var(--primary);
+            padding: 4px 12px;
+            border-radius: var(--rounded-full);
+            margin-bottom: 16px;
+            letter-spacing: 0.32px;
+            text-transform: uppercase;
+        }
+
+        .chapter-header h1 {
+            font-family: var(--font-ui);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.43;
+        }
+
+        /* Reading area */
+        .reading-area { padding-bottom: 64px; }
+
+        .reading-area p {
+            font-family: var(--font-reading);
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--body);
+            line-height: 1.9;
+            margin-bottom: 1.2em;
+            text-align: justify;
+        }
+
+        .reading-area p.thought {
+            color: var(--thought);
+            font-style: italic;
+        }
+
+        .reading-area p.scene-break {
+            text-align: center;
+            color: var(--muted-soft);
+            margin: 2.4em 0;
+            font-size: 18px;
+            letter-spacing: 12px;
+            font-family: var(--font-ui);
+        }
+
+        /* Chapter footer */
+        .chapter-footer {
+            border-top: 1px solid var(--hairline);
+            padding: 32px 0;
+        }
+
+        .chapter-nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .chapter-nav-bottom a {
+            font-family: var(--font-ui);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--on-primary);
+            background: var(--primary);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: var(--rounded-sm);
+            transition: background 0.2s;
+        }
+
+        .chapter-nav-bottom a:hover { background: var(--primary-active); }
+
+        .chapter-nav-bottom a.secondary {
+            color: var(--ink);
+            background: transparent;
+            border: 1px solid var(--muted-soft);
+        }
+
+        .chapter-nav-bottom a.secondary:hover {
+            background: var(--surface-soft);
+            border-color: var(--ink);
+        }
+
+        .chapter-nav-bottom .disabled-btn {
+            font-family: var(--font-ui);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted-soft);
+            padding: 10px 20px;
+            border: 1px solid var(--hairline);
+            border-radius: var(--rounded-sm);
+        }
+
+        .word-count {
+            text-align: center;
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--muted-soft);
+        }
+
+        @media (max-width: 744px) {
+            .container { padding: 0 16px; }
+            nav { padding: 0 16px; }
+            .chapter-header { padding: 32px 0 24px; }
+            .chapter-header h1 { font-size: 22px; }
+            .reading-area p { font-size: 16px; line-height: 1.8; }
+            .chapter-nav-bottom { flex-direction: column; gap: 12px; }
+            .chapter-nav-bottom a,
+            .chapter-nav-bottom .disabled-btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html">← Mục lục</a>
+            <span class="nav-center">1 / 120</span>
+            <span class="nav-disabled">Chương sau →</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="chapter-header">
+            <span class="chapter-badge">Chương 01</span>
+            <h1>Người Trồng Rau Ở Ẩn Sơn</h1>
+        </div>
+
+        <div class="reading-area">
+            <p>Cây rau cải trên luống thứ ba héo mất hai cây.</p>
+
+            <p>Tạ Trường An ngồi xổm trước luống rau, ngón tay xới nhẹ lớp đất ẩm, lật gốc cây lên xem. Rễ mục. Có lẽ tưới nhiều nước quá. Hắn thở nhẹ, nhổ hai gốc héo ra, đặt sang bên, rồi xới lại đất cho tơi.</p>
+
+            <p>Bên cạnh, ấm trà đã nguội từ bao giờ.</p>
+
+            <p>Sáng sớm mùa xuân trên Ẩn Sơn yên tĩnh đến mức nghe được tiếng sương rơi từ đầu lá. Ngọn núi không cao, không hiểm, chẳng có linh mạch đáng kể, cũng chẳng có dược liệu quý. Cái tên "Ẩn Sơn" nghe đã thấy buồn, như thể ngọn núi này tự biết mình chẳng đáng để ai nhớ.</p>
+
+            <p>Tạ Trường An sống một mình ở đây đã ba năm.</p>
+
+            <p>Ba năm, hắn trồng rau, nấu cháo, đọc sách cũ, thỉnh thoảng xuống thị trấn mua muối và vài thứ lặt vặt. Tu sĩ trong vùng biết có một gã Kim Đan sống trên Ẩn Sơn, nhưng không ai buồn để ý. Kim Đan ở cái thời đại này chỉ đủ để tự bảo vệ mình trước vài con yêu thú cấp thấp, không đủ để bất kỳ tông môn nào liếc mắt nhìn.</p>
+
+            <p>Phế vật, người ta gọi hắn thế khi nhắc đến, dù ít khi nhắc.</p>
+
+            <p>Hắn cũng không phản bác.</p>
+
+            <p>Xới xong đất, Tạ Trường An đứng dậy, phủi tay vào vạt áo. Chiếc trường bào xám cũ sờn ở vai, vá một miếng ở gấu. Tóc búi bằng trâm gỗ, vài sợi xổ ra bay theo gió sớm. Khuôn mặt bình thường, không đẹp không xấu, loại mặt lẫn vào đám đông thì ba bước là quên.</p>
+
+            <p>Nhưng mắt hắn sáng.</p>
+
+            <p>Không phải loại sáng hào quang của tu sĩ bậc cao. Mà là loại sáng trầm, như ngọn đèn đặt sâu trong phòng kín, ai nhìn kỹ mới thấy.</p>
+
+            <p>Hắn rót trà nguội ra uống. Nhạt.</p>
+
+            <p class="thought">Hôm nay phải xuống thị trấn mua muối.</p>
+
+            <p class="scene-break">· · ·</p>
+
+            <p>Thị trấn Vân Khê nằm dưới chân Ẩn Sơn, cách nửa canh giờ đi bộ. Không lớn, chỉ đủ một con phố chính, hai quán trà, một tiệm tạp hóa, và một chợ nhỏ họp buổi sáng. Dân ở đây phần lớn là phàm nhân, thỉnh thoảng có vài tu sĩ Luyện Khí đi ngang.</p>
+
+            <p>Tạ Trường An bước vào tiệm tạp hóa, mua một túi muối, hai cây nến, một cuộn dây gai.</p>
+
+            <p>— Tạ tiên sinh, lại mua muối à?</p>
+
+            <p>Lão chủ tiệm họ Trần, sáu mươi tuổi, phàm nhân, nhưng nhiệt tình đến mức mỗi lần Tạ Trường An vào đều phải nghe ít nhất ba chuyện phiếm.</p>
+
+            <p>— Ừ.</p>
+
+            <p>— Nghe nói Thanh Vân Tông năm nay tuyển đệ tử đông lắm. Thiên tài khắp nơi kéo đến.</p>
+
+            <p>Tạ Trường An đếm tiền, đặt lên quầy.</p>
+
+            <p>— Có một đứa nhỏ mới mười lăm tuổi, kiếm ý đã tới tầng hai. Mười lăm tuổi! Cả Thanh Vân Tông trăm năm mới ra một đứa như vậy.</p>
+
+            <p>— Vậy à.</p>
+
+            <p>— Tiên sinh ở trên núi một mình hoài, buồn không? Hay xuống đây mở quán trà, nói chuyện cho vui.</p>
+
+            <p>Tạ Trường An cầm túi muối, gật đầu chào.</p>
+
+            <p>— Cám ơn lão Trần. Để khi khác.</p>
+
+            <p>Hắn bước ra.</p>
+
+            <p>Lão Trần nhìn theo, lắc đầu. Ba năm nay gã tu sĩ này vẫn vậy: mua muối, gật đầu, đi về. Chẳng bao giờ nói quá ba câu.</p>
+
+            <p class="scene-break">· · ·</p>
+
+            <p>Phố chính của thị trấn Vân Khê lúc sáng sớm đã khá đông. Mấy bà bán rau ngồi xổm bên đường, quạt ruồi. Một đám trẻ con chạy đuổi nhau, la hét. Hai tu sĩ Luyện Khí đi ngang, áo trắng phất phơ, ngẩng cao đầu, mặt đầy tự mãn.</p>
+
+            <p>Tạ Trường An len qua đám đông, bước chậm rãi.</p>
+
+            <p>Hắn nghe lỏm được vài câu chuyện phiếm.</p>
+
+            <p>— Nghe nói Vạn Kiếm Cốc vừa trục xuất một đệ tử vì tội trộm linh thạch...</p>
+
+            <p>— Đại hội Kiếm Đạo năm nay tổ chức ở Thanh Vân Tông, ai mà có vé vào xem thì phát tài...</p>
+
+            <p>— Ma khí ở phía đông gần đây dày lên, có người nói thấy yêu thú cấp bốn...</p>
+
+            <p>Hắn không phản ứng. Mua xong đồ, hắn quay về.</p>
+
+            <p>Con đường từ thị trấn lên Ẩn Sơn men theo sườn núi, hai bên là rừng thưa. Nắng xuân xuyên qua tán lá, đốm sáng nhảy nhót trên mặt đất. Gió nhẹ, mang theo mùi hoa dại.</p>
+
+            <p>Tạ Trường An bước đều, túi muối khoác trên vai. Hắn thỉnh thoảng nhìn ngang nhìn dọc, kiểu người đi dạo hơn là tu sĩ. Nếu ai đó đi theo hắn lên núi, họ sẽ thấy: một gã trung niên lôi thôi, đi chậm, không có vẻ gì là tu sĩ cả.</p>
+
+            <p>Rồi hắn dừng lại.</p>
+
+            <p>Bên vệ đường, dưới gốc cây ngô đồng khô, có một đống rách rưới. Phải nhìn kỹ mới nhận ra đó là người.</p>
+
+            <p>Một đứa trẻ.</p>
+
+            <p>Nó nằm co quắp, đầu gối ép vào ngực, hai tay ôm bụng. Quần áo rách nát, chân không giày, bàn chân nứt nẻ đen bẩn. Gầy đến mức xương sườn in qua lớp vải mỏng. Tóc dài bết bẩn che mất nửa mặt.</p>
+
+            <p>Tạ Trường An đứng cách ba bước, nhìn.</p>
+
+            <p>Đứa trẻ không động đậy. Có thể đã ngất. Có thể sắp chết.</p>
+
+            <p>Hắn bước tới gần hơn. Ngồi xuống.</p>
+
+            <p>Khi nhìn rõ khuôn mặt đứa trẻ, hắn khẽ nhíu mày.</p>
+
+            <p>Nó chỉ còn một mắt.</p>
+
+            <p>Mắt trái là một hốc sâu hoắm, sẹo kéo từ thái dương xuống gò má, xù xì, xấu xí. Vết thương đã lành từ lâu nhưng lành vội vàng, không ai chữa trị, để lại lớp da nhăn nhúm. Ai đó đã móc mắt nó ra, thô bạo, như móc con ốc ra khỏi vỏ.</p>
+
+            <p>Mắt phải hé mở. Đục, mờ, nhưng vẫn còn nhìn được. Con ngươi dõi theo bóng người lạ vừa ngồi xuống bên cạnh, đầy cảnh giác.</p>
+
+            <p>Nó không cầu xin. Không khóc. Cũng không nói.</p>
+
+            <p>Chỉ nhìn.</p>
+
+            <p>Cái nhìn của con thú bị dồn vào góc, biết mình sắp chết nhưng vẫn không chịu nhắm mắt.</p>
+
+            <p>Tạ Trường An ngồi yên một lúc.</p>
+
+            <p>Rồi hắn làm một việc kỳ lạ.</p>
+
+            <p>Hắn nhìn thẳng vào đứa trẻ. Không phải nhìn bình thường. Mắt hắn biến đổi, sâu hơn, tối hơn, như thể đang nhìn xuyên qua lớp xương thịt, xuyên qua lớp bẩn thỉu và đói khát, xuyên qua tất cả những gì đập vào mắt người thường.</p>
+
+            <p>Hắn nhìn vào cái mà không ai nhìn thấy.</p>
+
+            <p>Và hắn thấy.</p>
+
+            <p>Bên trong thân thể gầy gò sắp chết đói ấy, có một thứ gì đó đang ngủ. Mong manh, nhỏ bé, nhưng sáng. Sáng đến mức Tạ Trường An phải chớp mắt.</p>
+
+            <p>Mầm kiếm.</p>
+
+            <p>Không phải loại mầm kiếm bình thường mà tu sĩ nào luyện kiếm cũng có. Đây là loại mầm kiếm hắn mấy chục năm qua chỉ gặp đúng hai lần. Lần đầu là ở một vị Kiếm Tôn nổi danh thiên hạ. Lần thứ hai là bây giờ, ở đứa ăn mày sắp chết đói bên vệ đường.</p>
+
+            <p>Hắn đã rất lâu rồi, không gặp một mầm kiếm sáng đến vậy.</p>
+
+            <p>Tạ Trường An thu ánh mắt kỳ lạ lại. Mọi thứ trở về bình thường. Trước mặt hắn vẫn chỉ là đứa trẻ gầy gò, một mắt, bẩn thỉu, sắp chết.</p>
+
+            <p>Hắn mở túi hành lý, lấy ra một cái bánh bao.</p>
+
+            <p>Bánh bao hấp sáng nay, hắn mua ở chợ thị trấn, định mang về ăn trưa. Còn ấm. Hắn đặt trước mặt đứa trẻ.</p>
+
+            <p>Một mắt còn lại của nó nhìn cái bánh. Rồi nhìn hắn. Rồi nhìn lại cái bánh.</p>
+
+            <p>Cảnh giác. Nghi ngờ. Nhưng cái bụng đói hơn cái đầu cảnh giác.</p>
+
+            <p>Đứa trẻ chồm tới, giật cái bánh, nhét vào miệng. Cắn điên cuồng. Nghẹn. Ho. Lại cắn. Nước mắt chảy ra từ mắt phải, không phải vì xúc động, mà vì nghẹn.</p>
+
+            <p>Tạ Trường An không nói gì. Hắn ngồi yên, đợi nó ăn xong.</p>
+
+            <p>Đứa trẻ ăn hết cái bánh trong chưa đầy mười hơi thở. Rồi nó ngồi thở dốc, ngực phập phồng, nhìn hắn.</p>
+
+            <p>Vẫn cảnh giác. Nhưng đã bớt thù địch.</p>
+
+            <p>— Ngươi tên gì?</p>
+
+            <p>Im lặng.</p>
+
+            <p>— Gia đình ngươi đâu?</p>
+
+            <p>Im lặng.</p>
+
+            <p>Tạ Trường An gật đầu, không ép. Hắn nhìn vết sẹo trên hốc mắt trái của đứa trẻ. Cách vết sẹo lành, không có dấu hiệu dược liệu hay tu sĩ chữa trị. Ai đó đã làm chuyện này và bỏ mặc nó tự lành.</p>
+
+            <p>Hắn nhìn bàn tay đứa trẻ. Gầy, nhỏ, chai sạn. Nhưng ngón tay dài, đốt ngón thẳng. Đó là đôi tay có thể cầm kiếm.</p>
+
+            <p>Hắn hỏi, giọng bình thản, như hỏi thời tiết:</p>
+
+            <p>— Ngươi muốn học kiếm không?</p>
+
+            <p>Đứa trẻ ngẩng đầu.</p>
+
+            <p>Một mắt còn lại, mắt phải, đột nhiên sáng lên. Không phải loại sáng của hy vọng, mà là loại sáng của bản năng bị đánh thức. Như ngọn lửa bị vùi trong tro, chỉ cần một cơn gió là bùng.</p>
+
+            <p>Nó không trả lời bằng lời.</p>
+
+            <p>Nó gật đầu.</p>
+
+            <p class="scene-break">· · ·</p>
+
+            <p>Tạ Trường An cõng đứa trẻ lên Ẩn Sơn.</p>
+
+            <p>Nó nhẹ đến mức hắn suýt tưởng mình cõng một bó củi. Xương sườn ép vào lưng hắn, nhọn và cứng. Hơi thở nó yếu ớt, phả vào gáy hắn, ấm nhưng mỏng.</p>
+
+            <p>Đứa trẻ ban đầu cứng đờ, không dám động. Nó quen bị đánh, quen bị xua đuổi, quen với việc bất cứ bàn tay nào chạm vào mình đều mang theo đau đớn. Một người lạ cõng nó trên lưng, nó không biết phải phản ứng thế nào.</p>
+
+            <p>Nhưng bước chân của gã tu sĩ này rất đều. Lưng hắn ấm. Và hắn không nói gì, không hỏi gì, cứ bước đều đều, như thể cõng một đứa trẻ ăn mày bẩn thỉu lên núi là chuyện bình thường nhất thế gian.</p>
+
+            <p>Dần dần, đứa trẻ buông lỏng. Đầu nó ngả vào vai hắn. Mắt phải nhắm lại.</p>
+
+            <p>Nó ngủ.</p>
+
+            <p>Tạ Trường An bước chậm lại một chút, sợ đánh thức.</p>
+
+            <p>Con đường lên Ẩn Sơn chiều ấy yên tĩnh. Nắng xiên qua tán lá, chim hót lác đác. Gã tu sĩ cõng đứa trẻ đi giữa rừng thưa, bóng hai người in trên mặt đất, một lớn một nhỏ, lắc lư theo nhịp bước.</p>
+
+            <p>Khi gần tới đỉnh, đứa trẻ giật mình tỉnh, vặn người muốn tuột xuống. Tạ Trường An đặt nó xuống.</p>
+
+            <p>Nó đứng trước căn nhà gỗ nhỏ, nhìn quanh.</p>
+
+            <p>Một mảnh vườn rau. Một giếng nước. Một bàn đá dưới gốc cây. Vài con gà chạy loanh quanh. Và một căn nhà gỗ hai phòng, mái lợp tranh, vách hở gió.</p>
+
+            <p>Đứa trẻ nhìn tất cả những thứ đó bằng con mắt duy nhất. Không biểu cảm. Nhưng bàn tay nó không nắm chặt nữa.</p>
+
+            <p>Tạ Trường An bước vào bếp, nhóm lửa, nấu cháo.</p>
+
+            <p>Cháo trắng. Không có gì, ngoài gạo và nước. Nhưng hắn nấu chậm, khuấy đều, để cháo sánh lại. Cho thêm một nhúm muối nhỏ.</p>
+
+            <p>Hắn múc một bát đầy, đặt trên bàn.</p>
+
+            <p>— Ăn đi.</p>
+
+            <p>Đứa trẻ ngồi xuống ghế. Hai chân không chạm đất. Nó nhìn bát cháo bốc khói, rồi nhìn hắn. Mắt vẫn cảnh giác.</p>
+
+            <p>Tạ Trường An không giải thích. Hắn tự múc cho mình một bát, ngồi đối diện, ăn.</p>
+
+            <p>Đứa trẻ nhìn hắn ăn. Rồi cúi xuống, bưng bát cháo lên.</p>
+
+            <p>Nó húp một ngụm.</p>
+
+            <p>Nóng. Mặn vừa. Sánh.</p>
+
+            <p>Nó húp thêm ngụm nữa. Rồi nữa. Đôi tay ôm chặt bát cháo, như sợ ai giật mất. Nước mắt lại chảy, lần này từ từ, không phải vì nghẹn.</p>
+
+            <p>Tạ Trường An giả vờ không thấy. Hắn ăn cháo của mình, nhìn ra mảnh vườn.</p>
+
+            <p class="thought">Luống cải thứ ba cần trồng lại.</p>
+
+            <p>Đứa trẻ ăn xong, đặt bát xuống. Ngón tay vẫn bám vào mép bát, chưa chịu buông.</p>
+
+            <p>— Ngươi tên gì?</p>
+
+            <p>Im lặng kéo dài. Tạ Trường An không vội.</p>
+
+            <p>Rồi đứa trẻ mở miệng. Giọng khàn, rè, như dao cùn cọ vào đá. Có lẽ nó đã rất lâu không nói.</p>
+
+            <p>— Diệp... Hàn.</p>
+
+            <p>Hai chữ, nhẹ như gió thoảng, nhưng Tạ Trường An nghe rõ.</p>
+
+            <p>— Diệp Hàn.</p>
+
+            <p>Hắn lặp lại cái tên, bình thản, như đang đọc tên một loại rau trong vườn.</p>
+
+            <p>— Ngủ đi. Phòng bên trong có giường. Chăn trên kệ.</p>
+
+            <p>Diệp Hàn ngồi yên, không động. Nó nhìn Tạ Trường An, rồi nhìn cái bàn, rồi nhìn bếp lửa, rồi nhìn ra mảnh vườn rau ngoài cửa. Như đang cố ghi nhớ tất cả, phòng khi tỉnh dậy thì mọi thứ đã biến mất.</p>
+
+            <p>Tạ Trường An rửa bát. Quét bếp. Bổ củi. Hắn làm những việc bình thường nhất, chậm rãi nhất, tạo ra thứ âm thanh đều đặn, nhàm chán, an toàn.</p>
+
+            <p>Diệp Hàn ngồi im suốt một canh giờ. Rồi nó đứng dậy, lê bước vào phòng trong. Nằm xuống giường. Kéo chăn.</p>
+
+            <p>Lần đầu tiên trong đời, nó nằm trên giường.</p>
+
+            <p>Lần đầu tiên, nó có chăn.</p>
+
+            <p>Nó không ngủ ngay. Mắt phải mở to, nhìn lên trần nhà gỗ. Tai nghe tiếng Tạ Trường An bổ củi đều đều bên ngoài.</p>
+
+            <p>Rồi mắt nó nhắm lại.</p>
+
+            <p class="scene-break">· · ·</p>
+
+            <p>Bên ngoài, Tạ Trường An dừng bổ củi.</p>
+
+            <p>Hắn đứng giữa sân, ngửa mặt nhìn trời. Chiều muộn, nắng đã tắt, mây hồng viền rìa núi. Gió mang mùi đất ẩm và lá mục.</p>
+
+            <p>Hắn đứng yên rất lâu.</p>
+
+            <p>Trong đầu hắn, hình ảnh mầm kiếm trong thân thể đứa trẻ vẫn còn rõ mồn. Sáng. Chói. Mãnh liệt đến mức phi lý. Ẩn trong cái xác gầy gò sắp chết đói kia là một thanh kiếm chưa từng tồn tại trên đời.</p>
+
+            <p>Thiên hạ đang kéo nhau tới Thanh Vân Tông xem "thiên tài kiếm đạo trăm năm có một", mà không biết rằng bên vệ đường, một đứa ăn mày một mắt đang mang trong mình mầm kiếm mà thiên tài kia cả đời cũng không chạm tới.</p>
+
+            <p>Tạ Trường An cười nhẹ. Nụ cười thoáng qua, nhạt, không ai nhìn thấy.</p>
+
+            <p>Hắn quay vào bếp, đặt thêm củi vào lò. Nấu thêm một nồi cháo nhỏ, để sẵn cho khi đứa trẻ tỉnh dậy.</p>
+
+            <p>Rồi hắn ra sân, ngồi xuống bàn đá, rót trà. Trà cũng nguội, nhưng hắn không quan tâm.</p>
+
+            <p>Xa xa, dưới chân núi, thị trấn Vân Khê lên đèn. Ánh sáng le lói, nhỏ bé. Xa hơn nữa là bóng dáng thành trì, tông phái, kinh đô, là thiên hạ rộng lớn đang quay cuồng với chuyện thiên tài, tranh đoạt, kiếm đạo, vận mệnh.</p>
+
+            <p>Tạ Trường An ngồi trên đỉnh núi nhỏ bé này, uống trà nguội, nhìn tất cả.</p>
+
+            <p>Không vội.</p>
+
+            <p class="thought">Mầm đã gieo. Chỉ cần tưới nước, chờ thời.</p>
+
+            <p>Hắn nhấp một ngụm trà, đặt chén xuống, đứng dậy đi xem luống rau.</p>
+
+            <p>Cải thứ ba cần trồng lại thật.</p>
+        </div>
+
+        <div class="chapter-footer">
+            <div class="chapter-nav-bottom">
+                <a href="index.html" class="secondary">← Mục lục</a>
+                <span class="disabled-btn">Chương sau →</span>
+            </div>
+            <p class="word-count">~2.600 từ</p>
+        </div>
+    </div>
+</body>
+</html>

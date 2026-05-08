@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tông Môn Nuôi Quái Vật</title>
+    <style>
+        :root {
+            --primary: #ff385c;
+            --primary-active: #e00b41;
+            --primary-soft: rgba(255,56,92,0.15);
+            --ink: #e8e8e8;
+            --body: #c0c0c0;
+            --muted: #8a8a8a;
+            --muted-soft: #666666;
+            --hairline: #2a2a2a;
+            --hairline-soft: #1e1e1e;
+            --canvas: #0a0a0f;
+            --surface-soft: #111118;
+            --surface-card: #141420;
+            --on-primary: #ffffff;
+            --rounded-sm: 8px;
+            --rounded-md: 14px;
+            --rounded-full: 9999px;
+            --shadow: rgba(0,0,0,0.3) 0 0 0 1px, rgba(0,0,0,0.2) 0 2px 6px 0, rgba(0,0,0,0.3) 0 4px 8px 0;
+            --font-ui: 'Circular', -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--canvas);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.43;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tag {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            background: var(--surface-soft);
+            border: 1px solid var(--hairline);
+            padding: 4px 12px;
+            border-radius: var(--rounded-full);
+        }
+
+        .logline {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--body);
+            line-height: 1.43;
+            max-width: 480px;
+            margin: 0 auto 32px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 16px;
+        }
+
+        .stat { text-align: center; }
+
+        .stat-number {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1.18;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted-soft);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.32px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--hairline);
+            border-radius: var(--rounded-full);
+            margin-bottom: 48px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: var(--rounded-full);
+            transition: width 0.4s ease;
+        }
+
+        .part-section { margin-bottom: 32px; }
+
+        .part-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.32px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .chapter-card {
+            display: block;
+            text-decoration: none;
+            color: var(--ink);
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            border-radius: var(--rounded-md);
+            border: 1px solid var(--hairline);
+            background: var(--surface-card);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .chapter-card:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+            background: var(--surface-soft);
+        }
+
+        .chapter-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+
+        .chapter-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--on-primary);
+            background: var(--primary);
+            padding: 2px 8px;
+            border-radius: var(--rounded-full);
+            white-space: nowrap;
+        }
+
+        .chapter-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.25;
+        }
+
+        .chapter-meta {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--muted);
+            line-height: 1.43;
+            margin-left: 52px;
+        }
+
+        .chapter-words {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted-soft);
+            margin-left: 52px;
+            margin-top: 2px;
+        }
+
+        .footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid var(--hairline);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--muted-soft);
+            line-height: 1.23;
+        }
+
+        @media (max-width: 744px) {
+            .container { padding: 32px 16px 64px; }
+            .header h1 { font-size: 22px; }
+            .stats-row { gap: 24px; }
+            .stat-number { font-size: 20px; }
+            .chapter-meta { margin-left: 0; margin-top: 8px; }
+            .chapter-words { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tông Môn Nuôi Quái Vật</h1>
+            <p class="tagline">"Thiên hạ sợ thiên tài. Hắn lại chuyên tạo ra thiên tài."</p>
+            <div class="tags">
+                <span class="tag">Huyền huyễn</span>
+                <span class="tag">Tiên hiệp</span>
+                <span class="tag">Dark strategist</span>
+                <span class="tag">Tông môn</span>
+                <span class="tag">Mastermind</span>
+            </div>
+            <p class="logline">Tạ Trường An, phế vật nuôi quái vật. Mọi bá chủ thiên hạ đều gọi hắn một tiếng: "Tiên sinh."</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Chương</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2.612</div>
+                <div class="stat-label">Từ</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0.8%</div>
+                <div class="stat-label">Tiến độ</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 0.8%"></div>
+        </div>
+
+        <div class="part-section">
+            <div class="part-title">Phần I — Nhặt Quái Vật</div>
+
+            <a href="chapter-01.html" class="chapter-card">
+                <div class="chapter-card-header">
+                    <span class="chapter-num">01</span>
+                    <span class="chapter-title">Người Trồng Rau Ở Ẩn Sơn</span>
+                </div>
+                <div class="chapter-meta">Main cứu Diệp Hàn, nhận đệ tử đầu tiên</div>
+                <div class="chapter-words">~2.600 từ</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Tông Môn Nuôi Quái Vật · 120 chương · ~540.000 từ</p>
+        </div>
+    </div>
+</body>
+</html>
