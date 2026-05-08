@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 03 — Người Không Dám Ngủ | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', 'DM Sans', Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+      background: #5200ff;
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #2d2d2d;
+      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+    }
+
+    .nav a {
+      color: #949494;
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+    }
+
+    .nav .disabled {
+      color: #2d2d2d;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .chapter-header .chapter-number {
+      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', Impact, Helvetica, sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+
+    .chapter-header .divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', 'DM Sans', Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 2.0;
+      color: #e9e9e9;
+    }
+
+    .content p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+    }
+
+    .content .thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content .thought em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content em {
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #2d2d2d;
+    }
+
+    .bottom-nav a,
+    .bottom-nav span {
+      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 10px 20px;
+      border: 1px solid #2d2d2d;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .bottom-nav a {
+      color: #949494;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #2d2d2d;
+      border-color: #1e1e1e;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 10px;
+      color: #949494;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 767px) {
+      .container {
+        padding: 40px 20px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .bottom-nav a,
+      .bottom-nav span {
+        font-size: 10px;
+        padding: 8px 14px;
+        letter-spacing: 1.1px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .nav {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="index.html">&larr; MỤC LỤC</a>
+      <span class="chapter-indicator">03/30</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <header class="chapter-header">
+      <div class="chapter-number">CHƯƠNG 03</div>
+      <h1>Người Không Dám Ngủ</h1>
+      <div class="divider"></div>
+    </header>
+
+    <article class="content">
+
+<p>Tiếng bước chân dừng trước cửa lúc canh ba.</p>
+
+<p>Tạ Cảnh Minh chưa ngủ. Không phải vì không buồn — hắn kiệt sức, hai mắt cay xè, toàn thân đau nhừ sau một ngày bị kéo từ pháp trường vào cung rồi sang Trường Xuân Cung. Nhưng mỗi lần nhắm mắt, hắn lại thấy khuôn mặt cung nữ Tiểu Hoàn — đồng tử dãn hết cỡ, miệng hé, mắt nhìn lên trời như đang thấy thứ gì đó khủng khiếp ở phía trên.</p>
+
+<p>Và cái lạnh trên ngón tay — vẫn chưa hết hẳn.</p>
+
+<p>Nên khi có tiếng bước chân ngoài cửa, hắn tỉnh ngay.</p>
+
+<p>Không phải thái giám dẫn đường lúc sáng. Bước chân này nặng hơn — lính canh, nhiều người. Và vội. Loại vội vã có mệnh lệnh, không phải vội vã có nguy hiểm.</p>
+
+<p class="thought"><em>Triệu kiến giữa đêm. Ai đây?</em></p>
+
+<p>Cửa mở. Ánh đuốc hắt vào.</p>
+
+<p>Một thái giám già — mặc áo bào tím sẫm, thêu phượng bạc ở cổ tay — đứng giữa ngưỡng cửa. Không cúi. Khác với gã thái giám dẫn đường lúc sáng, ông ta đứng thẳng, mắt nhìn main không run.</p>
+
+<p class="thought"><em>Thái giám cấp cao. Áo tím, thêu phượng — hầu cận trực tiếp của hoàng đế. Mắt không sợ, nghĩa là gã này quen nhìn Quốc Sư, hoặc ít nhất quen với quyền lực.</em></p>
+
+<p>— Bệ hạ triệu kiến Quốc Sư. — Giọng ông ta bằng, không có cảm xúc. — Ngay bây giờ.</p>
+
+<p>Tạ Cảnh Minh đứng dậy, sửa áo. Chắp tay sau lưng.</p>
+
+<p>— Dẫn đường.</p>
+
+<p>Không hỏi tại sao. Không hỏi chuyện gì. Quốc Sư được triệu kiến thì đi — hỏi nhiều là lộ.</p>
+
+<p class="thought"><em>Nhưng giữa đêm? Hoàng đế gọi giữa đêm thì hoặc có biến lớn, hoặc...</em></p>
+
+<p class="thought"><em>Hoặc không ngủ được.</em></p>
+
+<p>Hắn nhớ lại: bàn tay run trên thành ghế rồng. Hốc mắt sâu. Quầng đen. Kẻ ngồi trên ngai vàng kia đã nhiều đêm không ngủ.</p>
+
+<p class="thought"><em>Nếu đúng vậy — đây không phải triệu kiến chính trị. Đây là triệu kiến... tâm sự.</em></p>
+
+<p>Hành lang hoàng cung ban đêm khác hẳn ban ngày. Ban ngày lạnh lẽo mà sáng. Ban đêm — tối và nặng. Đèn dầu treo thưa, mỗi cái cách nhau mười bước, tạo ra những vùng sáng tròn xen kẽ bóng đen. Tường gạch đỏ trở thành đen. Mái ngói thành vực. Và mỗi bước chân đều có tiếng vọng — của chính mình, và của thứ gì đó ở phía xa mà hắn không muốn nghĩ đến.</p>
+
+<p>Họ đi qua ba cổng, rẽ hai lần. Đến trước một cánh cửa — nhỏ hơn hắn tưởng. Không phải đại điện. Không phải ngai vàng. Một phòng nhỏ phía sau hậu cung.</p>
+
+<p class="thought"><em>Phòng riêng. Vua không gặp mình ở chỗ chính thức — mà ở chỗ riêng tư. Thú vị.</em></p>
+
+<p>Thái giám già dừng lại.</p>
+
+<p>— Quốc Sư vào một mình. Bệ hạ không muốn người khác trong phòng.</p>
+
+<p class="thought"><em>Một mình? Vua gặp mình một mình? Không lính canh, không thái giám?</em></p>
+
+<p class="thought"><em>Hoặc vua tin mình. Hoặc vua tuyệt vọng.</em></p>
+
+<p class="thought"><em>Hoặc cả hai.</em></p>
+
+<p>Hắn gật đầu. Bước vào.</p>
+
+<p>Cửa đóng sau lưng.</p>
+
+<p>Phòng nhỏ. Đèn dầu vàng nhạt, chỉ có hai ngọn — đặt ở hai góc, chiếu bóng lung linh lên tường. Một bàn trà thấp, hai chiếc nệm ngồi. Bình trà trên bàn — nguội, nước trà đã đổi màu. Bên cạnh là một chồng tấu chương, giấy vàng, mực đen.</p>
+
+<p>Và ở góc phòng — hoàng đế.</p>
+
+<p>Ngồi trên nệm, lưng tựa vào tường, đầu hơi nghiêng. Mắt mở nhưng không nhìn đâu cả. Tay đặt trên đùi, ngón tay gõ nhẹ — đều, đều, đều — như đếm nhịp.</p>
+
+<p class="thought"><em>Đập nhịp tự trấn an. Hành vi tự kích thích cảm giác — self-soothing behavior. Trẻ con hay ôm gấu bông. Người lớn hay gõ ngón tay. Cả hai đều vì một lý do: sợ.</em></p>
+
+<p>Lần đầu tiên Tạ Cảnh Minh nhìn rõ mặt hoàng đế.</p>
+
+<p>Trẻ hơn hắn tưởng. Ba mươi lăm, có thể ít hơn. Nhưng trông già — kiểu già của người không ngủ đủ giấc suốt nhiều tháng. Da xám, môi khô, gò má hõm. Mắt — từng sáng, từng sắc — giờ lờ đờ như nến sắp tắt. Thân hình gầy, vai hẹp, nửa chìm trong bộ thường phục rộng thùng thình.</p>
+
+<p>Đây không phải rồng ngự trên ngai. Đây là một con người đang mòn dần.</p>
+
+<p>Và — Thiên Diễn Đồng phản ứng.</p>
+
+<p>Không chủ ý. Tạ Cảnh Minh không gọi nó, không biết cách gọi nó. Nhưng khi hắn nhìn hoàng đế — thứ gì đó trong đầu hắn... mở ra.</p>
+
+<p>Hắn không nhìn thấy sợi khói lần này. Không có màu sắc. Nhưng hắn <em>cảm</em> — rõ ràng, sắc nét — như thể có ai đó viết chữ lên không khí trước mặt hắn.</p>
+
+<p>Sợ. Cô đơn. Kiệt sức. Không tin ai. Sợ chết. Sợ ngủ vì ngủ thì không canh được. Sợ tỉnh vì tỉnh thì phải đối mặt. Bị kẹt giữa hai nỗi sợ, không lối thoát.</p>
+
+<p>Như nghe được dòng ý thức của người khác. Nhưng không phải nghe bằng tai — mà bằng thứ gì đó ở sâu hơn.</p>
+
+<p class="thought"><em>Đm. Mình vừa... đọc cảm xúc thật sự? Không phải cold reading — không cần phân tích vi biểu cảm, không cần nhìn ngôn ngữ cơ thể. Mình chỉ... biết.</em></p>
+
+<p class="thought"><em>Thiên Diễn Đồng?</em></p>
+
+<p>Hắn chớp mắt. Cảm giác mất đi — như kênh TV bị nhiễu rồi tắt. Chỉ còn hoàng đế ngồi trước mặt, một người đàn ông mệt mỏi trong căn phòng vàng nhạt.</p>
+
+<p>Hoàng đế nhìn lên. Thấy hắn. Không ngạc nhiên — đã biết hắn đến.</p>
+
+<p>— Quốc Sư.</p>
+
+<p>Giọng khàn. Giọng của người không nói chuyện với ai nhiều ngày, hoặc nói quá nhiều nhưng không nói điều muốn nói.</p>
+
+<p>— Bệ hạ.</p>
+
+<p>Tạ Cảnh Minh cúi đầu nhẹ — vừa đủ lễ, không quá thấp. Rồi ngồi xuống nệm đối diện, tự nhiên như được mời. Thực ra không ai mời. Nhưng Quốc Sư ngồi khi cần ngồi — đó là đặc quyền.</p>
+
+<p>Im lặng.</p>
+
+<p>Hoàng đế nhìn hắn. Hắn nhìn lại. Không ai nói.</p>
+
+<p class="thought"><em>Rule số hai của tâm lý trị liệu: khi khách hàng không nói, đừng nói. Khoảng trống im lặng tạo áp lực nội tâm — người ta sẽ tự lấp đầy bằng thứ họ muốn nói nhất.</em></p>
+
+<p>Mười giây. Hai mươi giây. Ba mươi giây.</p>
+
+<p>Hoàng đế cúi xuống. Giọng nhỏ — nhỏ đến mức nếu có gió, sẽ bị nuốt chửng.</p>
+
+<p>— Trẫm... không ngủ được.</p>
+
+<p>Bốn chữ. Nhưng không phải lời phàn nàn. Đây là lời thú nhận. Vua không thú nhận với quần thần, không thú nhận với phi tần, không thú nhận với thái giám. Vua thú nhận với kẻ mà vua nghĩ... biết mọi thứ.</p>
+
+<p class="thought"><em>Bệ hạ, thần chỉ biết bluff thôi ạ.</em></p>
+
+<p>Nhưng Tạ Cảnh Minh không nói câu đó. Hắn nói:</p>
+
+<p>— Thần biết.</p>
+
+<p>Hai chữ. Nhẹ. Nhưng khiến hoàng đế ngẩng lên — mắt lần đầu có tia sáng.</p>
+
+<p>— Ngươi... biết?</p>
+
+<p>— Thiên cơ đã cho thần thấy. — Hắn nói chậm, chọn từng chữ. — Bệ hạ nhiều đêm không chợp mắt. Không phải vì lo triều chính. Không phải vì quốc sự.</p>
+
+<p>Hắn dừng. Để hoàng đế tự chờ.</p>
+
+<p>— Bệ hạ sợ.</p>
+
+<p>Hai chữ. Chạm đúng vào vết thương.</p>
+
+<p>Hoàng đế run. Nhẹ thôi — vai rung, tay siết vạt áo. Nhưng hắn không phủ nhận.</p>
+
+<p>— Sợ... — giọng vua rất nhỏ — sợ ngủ. Ngủ thì... không biết chuyện gì xảy ra. Có kẻ muốn giết Trẫm. Trẫm biết. Nhưng Trẫm không biết là ai.</p>
+
+<p class="thought"><em>Sợ bị ám sát. Đúng như mình đoán từ pháp trường.</em></p>
+
+<p class="thought"><em>Nhưng nghe giọng này — không phải hoang tưởng. Vua thật sự tin có người muốn giết mình. Và có thể đúng — triều đình kiểu này, ám sát là chuyện cơm bữa.</em></p>
+
+<p>Tạ Cảnh Minh nhìn hoàng đế. Nhìn bàn tay đang siết vạt áo. Nhìn hốc mắt trũng sâu. Nhìn gánh nặng trên đôi vai gầy.</p>
+
+<p>Và hắn quyết định.</p>
+
+<p class="thought"><em>Mình không phải bác sĩ. Không phải Quốc Sư. Không phải nhà tiên tri. Nhưng mình biết một thứ: cách khiến người ta cảm thấy an toàn.</em></p>
+
+<p class="thought"><em>Kiếp trước, đây là chiêu bán hàng — tạo "safe space" để khách hàng mở lòng rồi bán cho họ khóa học ba triệu. Nhưng bây giờ...</em></p>
+
+<p class="thought"><em>Kệ. Kỹ năng không thay đổi vì mục đích thay đổi.</em></p>
+
+<p>Hắn hạ giọng. Trầm hơn. Chậm hơn. Đúng nhịp mà hắn đã luyện qua hàng trăm buổi "thiền hướng dẫn" trên YouTube — thứ giọng mà người nghe sẽ vô thức đồng bộ nhịp thở theo.</p>
+
+<p>— Bệ hạ. Thần hỏi thật — bệ hạ có biết vì sao thần không chết hôm qua?</p>
+
+<p>Hoàng đế lắc đầu.</p>
+
+<p>— Vì Thiên Cơ chưa cho thần chết. — Hắn nói, giọng nhẹ. — Và nếu Thiên Cơ giữ thần sống... thì Thiên Cơ cũng giữ bệ hạ sống.</p>
+
+<p>Bịa. Hoàn toàn bịa. Hắn không biết Thiên Cơ là gì, hoạt động thế nào, có thật hay không.</p>
+
+<p>Nhưng hoàng đế muốn nghe điều này. Một kẻ sợ chết — thứ hắn cần không phải sự thật. Thứ hắn cần là lý do để thôi sợ.</p>
+
+<p>— Thiên Cơ giữ Trẫm...?</p>
+
+<p>— Bệ hạ còn trên ngai — hắn nói — nghĩa là Thiên Cơ chưa xong việc với bệ hạ. Kẻ nào muốn hại bệ hạ — Thiên Cơ sẽ không cho phép.</p>
+
+<p class="thought"><em>Đây là bài cũ: "vũ trụ có kế hoạch cho bạn." Mình từng bán câu này cho mấy cô độc thân ba mươi tám tuổi. Bây giờ mình bán nó cho... hoàng đế.</em></p>
+
+<p class="thought"><em>Đời thật kỳ lạ.</em></p>
+
+<p>Nhưng hoàng đế — mắt vua sáng lên. Lần đầu tiên kể từ khi Tạ Cảnh Minh nhìn thấy ông ta, đôi mắt kia có thứ gì đó ngoài sợ hãi.</p>
+
+<p>Hy vọng.</p>
+
+<p>Mong manh. Nhỏ xíu. Như ngọn nến leo lét trong gió.</p>
+
+<p>Và hắn cảm thấy — lại cảm thấy — Thiên Diễn Đồng nhấp nháy. Sợ hãi trong hoàng đế lùi lại một chút. Chỉ một chút. Nhường chỗ cho thứ gì đó ấm hơn.</p>
+
+<p class="thought"><em>Mình vừa... thay đổi cảm xúc của ông ta? Bằng mấy câu nói?</em></p>
+
+<p class="thought"><em>Không. Mình không thay đổi cảm xúc. Mình chỉ... cho ông ta thứ ông ta cần nghe. Đây là manipulation, không phải phép thuật.</em></p>
+
+<p class="thought"><em>... Phải không?</em></p>
+
+<p>Hắn gạt suy nghĩ, tiếp tục. Giọng vẫn trầm, vẫn chậm.</p>
+
+<p>— Bệ hạ. Thần sẽ ở trong cung. Nếu có biến — thần sẽ biết trước. Đó là việc của thần.</p>
+
+<p>— Ngươi sẽ biết... trước?</p>
+
+<p>— Thiên cơ bất khả lộ. — Hắn dùng câu thần chú quen thuộc, rồi thêm một câu mới. — Nhưng Thiên Cơ có thể <em>cảnh báo</em>.</p>
+
+<p>Câu này hắn nói mà không biết có đúng không. Nhưng nó hoạt động — hoàng đế thở ra. Dài. Sâu. Kiểu thở ra của người vừa đặt gánh nặng xuống.</p>
+
+<p>— Quốc Sư...</p>
+
+<p>— Bệ hạ nên ngủ. — Hắn cắt lời nhẹ nhàng. — Thân rồng yếu thì quốc vận yếu theo. Bệ hạ muốn bảo vệ Đại Ly — trước hết phải bảo vệ giấc ngủ.</p>
+
+<p class="thought"><em>Reframe. Bài cơ bản. Đừng nói "anh yếu đuối" — nói "anh cần mạnh hơn vì người khác cần anh." Khách hàng nào cũng thích nghe mình quan trọng.</em></p>
+
+<p>Hoàng đế nhìn hắn — lâu, kỹ. Rồi gật đầu.</p>
+
+<p>— Nếu Quốc Sư bảo Trẫm ngủ... thì Trẫm sẽ thử.</p>
+
+<p class="thought"><em>Ông ta nghe lời mình. Hoàng đế nghe lời một tên lừa đảo.</em></p>
+
+<p class="thought"><em>Mà... nếu nhìn từ góc khác — ông ta nghe lời Quốc Sư. Và Quốc Sư... là mình.</em></p>
+
+<p class="thought"><em>Ranh giới giữa lừa và thật lại mờ thêm một chút.</em></p>
+
+<p>Tạ Cảnh Minh đứng dậy. Cúi đầu.</p>
+
+<p>— Thần sẽ ở ngoài. Nếu Thiên Cơ cảnh báo — thần sẽ đánh thức bệ hạ.</p>
+
+<p>Hắn nói câu này bằng giọng chắc nịch. Như lời hứa. Như lời thề.</p>
+
+<p>Thực ra — hắn chỉ định ngồi ngoài cửa phòng vua, chờ. Vì hắn chẳng có gì khác để làm. Và nếu vua ngủ được — hắn an toàn thêm một ngày.</p>
+
+<p>Hoàng đế nằm xuống. Chậm. Cẩn thận. Như thể cái nệm là bẫy.</p>
+
+<p>Rồi — nhắm mắt.</p>
+
+<p>Tạ Cảnh Minh bước ra. Ngồi xuống ngoài cửa phòng, lưng tựa vào tường hành lang. Thái giám già đứng cách mười bước, không nói gì, chỉ nhìn.</p>
+
+<p>Im lặng.</p>
+
+<p>Đêm hoàng cung tĩnh đến mức hắn nghe được tiếng dế ngoài vườn, tiếng gió qua mái ngói, và — rất xa, rất nhỏ — tiếng thở của hoàng đế bên trong phòng.</p>
+
+<p>Dần dần, nhịp thở đều ra. Chậm lại. Sâu xuống.</p>
+
+<p>Ngủ.</p>
+
+<p>Hoàng đế ngủ.</p>
+
+<p>Tạ Cảnh Minh ngồi ngoài cửa, đầu ngả vào tường, nhìn trần hành lang.</p>
+
+<p class="thought"><em>Vua ngủ. Nhờ mấy câu nói của mình.</em></p>
+
+<p class="thought"><em>Mình vừa làm gì? Thao túng? Trị liệu? Hay... quan tâm?</em></p>
+
+<p class="thought"><em>Không. Đừng nghĩ vậy. Mình thao túng. Rõ ràng. Mình nói đúng cái ông ta muốn nghe để ông ta tin mình, giữ mình, không chém mình.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Nhưng khuôn mặt đó. Khi ông ta thở ra — kiểu thở của người lần đầu được ai đó nói "tôi sẽ ở đây" — khuôn mặt đó...</em></p>
+
+<p class="thought"><em>Hắn là hoàng đế. Nhưng cũng là người. Và người thì cần ngủ.</em></p>
+
+<p class="thought"><em>Kệ. Mình thao túng. Nhưng kết quả tốt thì... kệ.</em></p>
+
+<p>Hắn nhắm mắt. Không ngủ — chỉ nghỉ. Và chờ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng đến.</p>
+
+<p>Thái giám già mở cửa phòng vua — hoàng đế vẫn ngủ. Gã nhìn Tạ Cảnh Minh, mắt kinh ngạc.</p>
+
+<p>— Bệ hạ... ngủ được?</p>
+
+<p>— Ừ.</p>
+
+<p>— Bệ hạ đã gần mười ngày không...</p>
+
+<p>Gã dừng lại. Nhìn main. Ánh mắt thay đổi — từ kinh ngạc sang kính sợ.</p>
+
+<p class="thought"><em>Mười ngày không ngủ. Gần mười ngày. Và mình khiến ông ta ngủ bằng mấy câu nói.</em></p>
+
+<p class="thought"><em>Trong mắt thái giám già, mình vừa làm phép thuật.</em></p>
+
+<p class="thought"><em>Trong mắt mình, mình vừa dùng kỹ thuật NLP cơ bản.</em></p>
+
+<p class="thought"><em>Nhưng kết quả — giống nhau.</em></p>
+
+<p>Một giờ sau, hoàng đế tỉnh. Mắt — vẫn thâm quầng, nhưng sáng hơn. Vai — vẫn hẹp, nhưng thẳng hơn.</p>
+
+<p>Thánh chỉ ban xuống trước giờ ngọ.</p>
+
+<p>"Quốc Sư Tạ Cảnh Minh, trung thành phụng sự, thấu hiểu thiên cơ. Nay lệnh chuyển Quốc Sư từ khu giam sang phòng khách Minh Nguyệt Đường, hầu cận bên bệ hạ, ban cho y phục và thị vệ riêng."</p>
+
+<p>Từ tù nhân sang khách quý. Trong một đêm.</p>
+
+<p>Tạ Cảnh Minh đứng giữa Minh Nguyệt Đường — phòng mới của hắn. Rộng gấp năm phòng giam. Có giường gỗ thật, có bàn trà, có kệ sách, có chậu rửa mặt bằng đồng bóng loáng. Ngoài cửa sổ — vườn cây, có tiếng chim.</p>
+
+<p>Và không có song sắt.</p>
+
+<p class="thought"><em>Từ tử tù sang therapist hoàng gia. Upgrade nhanh phết.</em></p>
+
+<p>Hắn ngồi xuống giường mới — êm. Mềm. Kiểu êm mà hắn chưa cảm nhận kể từ khi xuyên sang thế giới này.</p>
+
+<p class="thought"><em>Vậy là: hoàng đế tin mình. Hoặc ít nhất — cần mình. Vua cần người canh giấc ngủ. Và Quốc Sư — là người duy nhất ông ta dám nhờ.</em></p>
+
+<p class="thought"><em>Điều này cho mình: an toàn tạm thời. Chỗ ở. Quyền lực mềm. Và — quyền tiếp cận hoàng đế.</em></p>
+
+<p class="thought"><em>Nhưng cũng cho mình: trách nhiệm. Nếu vua ngủ ngon nhờ mình, và một đêm mình không ở đó, vua sẽ hỏi tại sao. Mình đang tự buộc mình vào ông ta.</em></p>
+
+<p class="thought"><em>Giống hệt kiếp trước. Khách hàng đầu tiên mua gói VIP thì dễ. Giữ họ mua tiếp mỗi tháng mới khó. Và bỏ họ — còn khó hơn.</em></p>
+
+<p>Hắn đứng dậy, nhìn ra cửa sổ. Vườn cây xanh mướt, nắng chiều vàng nhạt, chim hót líu lo.</p>
+
+<p>Đẹp.</p>
+
+<p>Nhưng ở góc vườn — có bóng người. Đứng yên. Nhìn lên phía cửa sổ phòng hắn.</p>
+
+<p>Tạ Cảnh Minh nheo mắt. Bóng người mặc áo tối — không phải thị vệ, không phải thái giám. Đứng quá yên. Kiểu đứng yên của kẻ đang làm nhiệm vụ.</p>
+
+<p class="thought"><em>Ai đó đang theo dõi mình.</em></p>
+
+<p class="thought"><em>Lục Thanh Dao? "Bản vương sẽ theo dõi ngươi. Từng ngày." — nàng nói thật à?</em></p>
+
+<p class="thought"><em>Hay... người khác?</em></p>
+
+<p>Bóng người nhận ra hắn đang nhìn — lùi vào bóng cây. Biến mất.</p>
+
+<p>Tạ Cảnh Minh đứng lặng bên cửa sổ. Nắng chiều hắt lên mặt hắn, ấm.</p>
+
+<p>Nhưng trong lòng — lạnh.</p>
+
+<p class="thought"><em>Mình được upgrade phòng. Được vua tin. Được ở trong cung.</em></p>
+
+<p class="thought"><em>Nhưng mình cũng bị nhốt. Bằng lòng tin thay vì song sắt. Bằng trách nhiệm thay vì xiềng xích.</em></p>
+
+<p class="thought"><em>Và bây giờ — bị theo dõi.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình gọi đây là "golden cage" — lồng vàng. Khách hàng VIP được đối xử như vua. Nhưng thực ra — họ không thể rời đi.</em></p>
+
+<p class="thought"><em>Bây giờ mình là khách hàng VIP. Của chính mình.</em></p>
+
+<p>Hắn ngồi xuống bàn trà, rót một chén. Trà nóng. Thơm. Hắn uống một ngụm — ngon. Ngon thật.</p>
+
+<p>Lần đầu tiên kể từ khi xuyên không, hắn uống thứ gì đó ấm.</p>
+
+<p>Và hắn tự hỏi — rất nhỏ, rất sâu, ở nơi mà hắn không muốn thừa nhận — liệu có phải tất cả đều là thao túng? Hay ở đâu đó trong mớ bluff, có thứ gì đó... thật?</p>
+
+<p>Hắn không trả lời.</p>
+
+<p>Ngoài cửa sổ, bóng người đã biến mất. Nhưng hắn biết — ai đó đang đếm từng bước đi của hắn.</p>
+
+<p>Cuộc chơi mới bắt đầu.</p>
+
+    </article>
+
+    <div class="bottom-nav">
+      <a href="chapter-02.html">&larr; CHƯƠNG 02</a>
+      <span class="disabled">CHƯƠNG 04 &rarr;</span>
+    </div>
+
+    <div class="word-count">3.061 từ</div>
+
+  </div>
+</body>
+</html>
