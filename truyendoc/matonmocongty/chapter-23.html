@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 23: Ván Cờ Mới — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-22.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 23 / 30</span>
+    <a href="chapter-24.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 23</div>
+    <h1 class="chapter-title">Ván Cờ Mới</h1>
+    <div class="chapter-meta">Phần IV — Đấu Pháp &middot; 4.521 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p>Hắn thức trước khi trời sáng.</p>
+
+    <p>Không phải kiểu thức giật mình. Kiểu thức của kẻ nằm im cả đêm, mắt nhắm mà đầu không ngừng. Bóng tối trong phòng vẫn đặc, nhưng đã có vệt xám ở mép cửa sổ. Bốn giờ, có thể năm giờ. Không quan trọng.</p>
+
+    <p class="short">Quan trọng là hắn đã tìm được.</p>
+
+    <p>Đêm qua, sau khi tắt đèn, hắn nằm nhìn trần nhà và nghĩ. Nghĩ về Lão Từ. Về bốn công ty, bốn con rối, bốn đường ống rút tiền. Về Quỹ Vĩnh An. Về ánh mắt một giây trên hành lang tầng mười lăm.</p>
+
+    <p>Và nghĩ về câu hỏi duy nhất quan trọng: nếu lật Trần Quốc Huy, thì sao?</p>
+
+    <p>Câu trả lời rất rõ, rõ đến mức hắn tự hỏi sao không nghĩ ra sớm hơn. Lật CEO, Lão Từ đặt CEO mới. VP lên? VP cũng chỉ là con rối tiếp theo. Ai lên ghế đó cũng chỉ là kẻ chuyển tiền cho Lão Từ. Cổ phần ba mươi lăm phần trăm không biến mất vì CEO bị đổi. Hệ thống vẫn nguyên. Mạng nhện vẫn đó. Chỉ thay một con ruồi bằng con ruồi khác.</p>
+
+    <p class="thought"><em>Lật CEO là trò chơi trẻ con. Phải lật bàn cờ.</em></p>
+
+    <p class="short">Hắn ngồi dậy. Bật đèn bàn. Lấy tờ giấy trắng.</p>
+
+    <p>Hàn Kiêu ngủ ở góc phòng, cuộn trong chăn mỏng, tiếng thở đều. Hắn không đánh thức.</p>
+
+    <p>Viết. Chữ nhỏ, nhanh, kiểu viết của kẻ đang đuổi theo một ý tưởng sợ nó chạy mất.</p>
+
+    <p class="thought"><em>Mục tiêu cũ: lật CEO, nắm quyền Vạn Lý.</em></p>
+
+    <p class="thought"><em>Mục tiêu mới: lật CEO VÀ ép Lão Từ rút khỏi Vạn Lý.</em></p>
+
+    <p class="thought"><em>Cách nào?</em></p>
+
+    <p class="short">Hắn dừng bút. Nghĩ.</p>
+
+    <p class="thought"><em>Lão Từ sở hữu cổ phần qua Vĩnh An. Hợp pháp. Không thể ép bán bằng luật thông thường. Nhưng nếu phơi bày dòng tiền Vạn Lý → Phú Thịnh → Vĩnh An, thì sao? Lão Từ không trực tiếp ký duyệt. CEO ký. Trưởng phòng Tài chính ký. Lão Từ chỉ là đích đến cuối cùng. Về mặt pháp lý, Lão Từ có thể phủi tay: "Tôi là cổ đông, tôi nhận cổ tức, chuyện chuyển tiền là việc nội bộ công ty."</em></p>
+
+    <p class="thought"><em>Nhưng...</em></p>
+
+    <p class="short">Hắn viết tiếp.</p>
+
+    <p class="thought"><em>Lão Từ không sợ luật. Lão Từ sợ ánh sáng. Bốn mươi năm ông ta hoạt động trong bóng tối. Không xuất hiện trên báo. Không lộ mặt. Ảnh duy nhất là bức chụp năm hai nghìn không tám, góc phải, không nhìn vào ống kính. Kẻ sống trong bóng tối thì vũ khí mạnh nhất chống lại hắn là... đèn.</em></p>
+
+    <p class="thought"><em>Phơi bày không phải để kiện. Phơi bày để Lão Từ biết rằng nếu không rút, mọi thứ sẽ ra ánh sáng. Báo chí. Cơ quan thuế. Đối tác. Ba công ty còn lại. Nếu một mắt xích bị lộ, toàn bộ mạng nhện rung. Lão Từ sẽ phải chọn: mất Vạn Lý, hoặc mất tất cả.</em></p>
+
+    <p class="short">Hắn gạch chân dòng cuối.</p>
+
+    <p class="thought"><em>Ép Lão Từ chọn: bán cổ phần Vạn Lý, rút sạch, cắt đứt. Hoặc bị phơi bày toàn bộ hệ thống. Lão Từ là doanh nhân, không phải chiến binh. Doanh nhân tính toán lời lỗ. Mất một công ty tốt hơn mất cả bốn.</em></p>
+
+    <p>Hắn nhìn tờ giấy. Đơn giản. Hai bước.</p>
+
+    <p class="short">Bước một: lật CEO, nắm quyền Vạn Lý.</p>
+
+    <p>Bước hai: dùng quyền đó để mở két, lấy bằng chứng gốc, ép Lão Từ rút.</p>
+
+    <p class="thought"><em>Nhưng thứ tự quan trọng. Phải lật CEO trước. Khi CEO còn ngồi ghế, Lão Từ vẫn kiểm soát thông tin. CEO sẽ xóa dấu vết, chuyển tiền, phi tang. Phải đoạt quyền trước, rồi mới mở két.</em></p>
+
+    <p class="thought"><em>Và phải nhanh. Lão Từ đã nhìn thấy ta. Đồng hồ đang chạy.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Bảy giờ sáng. Hàn Kiêu thức dậy, thấy sếp ngồi ở bàn, trước mặt là ba tờ giấy viết kín.</p>
+
+    <p class="short">— Sếp thức cả đêm à?</p>
+
+    <p class="short">— Ngủ rồi. Dậy sớm.</p>
+
+    <p>Hàn Kiêu nhìn mặt sếp. Quầng mắt thâm, nhưng ánh mắt sáng. Kiểu sáng khác với mọi ngày. Kiểu sáng của kẻ vừa tìm ra đường.</p>
+
+    <p class="short">— Kiêu. Ngồi xuống.</p>
+
+    <p>Hàn Kiêu ngồi. Lưng thẳng, mắt chờ. Ba tháng theo sếp, hắn đã học được: khi sếp bảo ngồi bằng giọng đó, là có việc lớn.</p>
+
+    <p>— Tôi cần cậu làm một việc. Bên ngoài công ty. Không liên quan đến bán hàng.</p>
+
+    <p class="short">— Sếp nói.</p>
+
+    <p>— Từ Đại Phú. Sáu mươi tám tuổi. Tên khác: Lão Từ. Cậu tìm tất cả những gì có thể tìm được về người này. Công ty, bất động sản, đối tác, kẻ thù. Đặc biệt là kẻ thù.</p>
+
+    <p class="short">Hàn Kiêu nhíu mày.</p>
+
+    <p class="short">— Kẻ thù?</p>
+
+    <p>— Những người từng bị Lão Từ hại. Hoàng Minh Trí, phá sản năm hai nghìn mười hai, là một. Còn ai nữa? Những người đó ở đâu bây giờ? Họ có bằng chứng không? Họ có muốn trả thù không?</p>
+
+    <p class="thought"><em>Kẻ bị phá sản thường giữ hận. Hận là năng lượng. Nếu biết dùng, hận trở thành vũ khí.</em></p>
+
+    <p class="short">Hàn Kiêu gãi đầu.</p>
+
+    <p>— Sếp, em quen mấy anh em bên bất động sản cũ. Giới đó hay nghe chuyện ngầm. Để em hỏi.</p>
+
+    <p>— Không hỏi thẳng. Đừng nhắc tên Lão Từ với bất kỳ ai. Hỏi vòng. Hỏi về Quỹ Vĩnh An. Hỏi về những vụ phá sản doanh nhân trong mười năm qua mà có bàn tay vô hình. Để người ta tự kể.</p>
+
+    <p>Hàn Kiêu gật chậm. Mắt hắn bắt đầu sáng, kiểu sáng của kẻ săn mồi vừa được chỉ hướng.</p>
+
+    <p>— Hiểu rồi. Giống hồi em bán nhà, muốn biết khách có tiền thật không, không hỏi "anh có bao nhiêu tiền," hỏi "anh đang ở khu nào, nhà bao nhiêu phòng." Để người ta tự lộ.</p>
+
+    <p class="thought"><em>Hắn hiểu nhanh. Bản năng đọc người, dù thô, nhưng có. Kiểu bản năng được mài giũa trên đường phố, không phải trường lớp. Đôi khi thứ đó đáng giá hơn.</em></p>
+
+    <p>— Đúng. Và một điều nữa. Đây là việc nguy hiểm, Kiêu. Lão Từ không phải loại người mà cậu từng gặp. Nếu bị phát hiện đang điều tra, cậu sẽ gặp rắc rối lớn hơn ba tay đòi nợ trong hẻm.</p>
+
+    <p>Hàn Kiêu cười. Nụ cười rộng, khoe hàm răng không đều, sẹo trên sống mũi nhăn lại.</p>
+
+    <p>— Sếp, em từng nợ xã hội đen hai trăm triệu. Bị đánh mỗi hai tuần. Ngủ ở gầm cầu. Sếp cứu em, cho em việc, cho em chỗ ở. Sếp bảo em đi điều tra ông trùm cũng được, bảo em vào hang cọp cũng được. Sếp bảo em nhảy...</p>
+
+    <p class="short">— Tôi biết. Tầng mấy cũng nhảy. Đã nghe rồi.</p>
+
+    <p class="short">Hàn Kiêu cười to hơn. Hắn nghiêm lại.</p>
+
+    <p class="short">— Em không đùa. Em nói thật.</p>
+
+    <p>Hắn nhìn Hàn Kiêu. Ba mươi hai tuổi, cao gầy, mặt xương, tóc vuốt keo dù không có dịp nào cần vuốt. Sẹo trên mũi. Mắt sáng, kiểu sáng của kẻ liều mạng nhưng không ngu. Trung thành bẩm sinh, kiểu trung thành cũ, kiểu mà ngàn năm trước hắn từng thấy ở những đệ tử đầu tiên theo hắn lên núi.</p>
+
+    <p class="thought"><em>Kiểu trung thành không mua được bằng tiền. Chỉ mua được bằng nghĩa.</em></p>
+
+    <p class="short">— Hai tuần, Kiêu. Hai tuần phải có kết quả.</p>
+
+    <p class="short">— Rõ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Chín giờ sáng. Vạn Lý Group. Tầng mười hai.</p>
+
+    <p>Hắn đến sớm hơn mọi ngày. Phòng Kinh doanh vẫn vắng, chỉ có Hà ngồi góc, đang duyệt chứng từ, và Quang pha trà. Hắn gật đầu chào, vào phòng họp B, đóng cửa.</p>
+
+    <p class="short">Nhắn Trương Phong. Ngắn: "Trưa nay nhà ăn. Góc cũ."</p>
+
+    <p class="short">Trương Phong trả lời ngay: "Được."</p>
+
+    <p class="short">Rồi nhắn Tô Vãn. Cũng ngắn: "Chiều nay. Hương Mộc. Ba giờ."</p>
+
+    <p class="short">Tô Vãn: "Có chuyện gì?"</p>
+
+    <p class="short">"Kế hoạch mới."</p>
+
+    <p class="short">Im. Mười giây. Rồi: "Tôi sẽ đến."</p>
+
+    <p>Hắn cất điện thoại. Mở sổ tay, viết lại bản kế hoạch sạch hơn bản viết lúc bốn giờ sáng. Lần này có cấu trúc. Có bước. Có người phụ trách. Có rủi ro.</p>
+
+    <p class="thought"><em>Bước một: VP triệu tập họp Hội đồng Quản trị bất thường. Cần bốn trên bảy phiếu.</em></p>
+
+    <p class="thought"><em>Hiện có: Khương, Sơn (phe VP) = 2. Cần thêm 2. Mục tiêu: Mai và Bảo (trung lập). Bảo do ta kéo. Mai do VP lo.</em></p>
+
+    <p class="thought"><em>Nội dung họp: bất tín nhiệm CEO. Bằng chứng: giao dịch Phú Thịnh + dự án X + Đại Phong. Tổng chín tỷ rút ruột.</em></p>
+
+    <p class="thought"><em>Bước hai: khi CEO bị bất tín nhiệm, ta nắm quyền tạm qua VP (đã thỏa thuận, ghế giám đốc chiến lược kinh doanh). Ngay khi nắm quyền, tiếp cận hệ thống tài chính gốc, lấy bằng chứng cấp cao hơn: dòng tiền Phú Thịnh → Vĩnh An. Bằng chứng mà Trương Phong có bây giờ là từ hệ thống, chưa có chứng từ gốc. Cần chứng từ gốc từ phòng Tài chính.</em></p>
+
+    <p class="thought"><em>Bước ba: gặp Lão Từ. Trực tiếp. Đưa bằng chứng. Đề nghị: bán cổ phần Vĩnh An trong Vạn Lý, giá thị trường, rút hoàn toàn. Đổi lại: không phơi bày. Không báo cơ quan chức năng. Không gửi báo chí.</em></p>
+
+    <p class="thought"><em>Bước bốn: nếu Lão Từ từ chối... phơi bày. Tất cả. Không chỉ Vạn Lý. Cả bốn công ty.</em></p>
+
+    <p>Hắn nhìn bốn bước. Gọn. Nhưng mỗi bước đều có mười cách sai.</p>
+
+    <p class="thought"><em>VP có thể phản. Mai có thể không bỏ phiếu. Lão Từ có thể ra tay trước. Trương Phong có thể bị phát hiện. Và ta... ta có thể đánh giá sai.</em></p>
+
+    <p class="thought"><em>Nhưng kế hoạch hoàn hảo không tồn tại. Chỉ có kế hoạch đủ tốt để bắt đầu, rồi chỉnh khi chạy.</em></p>
+
+    <p class="thought"><em>Ngàn năm trước cũng vậy. Kế hoạch đánh Thông Thiên Giáo, ta soạn ba tháng. Thực tế diễn ra, không có bước nào đúng nguyên gốc. Nhưng ta vẫn thắng. Vì ta thay đổi nhanh hơn đối thủ.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Trưa. Nhà ăn tầng ba.</p>
+
+    <p>Trương Phong ngồi góc quen, khay cơm trước mặt, kính lệch, tóc rối. Kiểu kỹ sư không ngủ đủ giấc nhưng quá quen nên không thấy mệt nữa.</p>
+
+    <p class="short">Hắn ngồi đối diện. Cơm, canh, rau. Ăn bình thường, nói nhỏ.</p>
+
+    <p>— Trương Phong. Dữ liệu Phú Thịnh, Vĩnh An, dự án X. Tất cả. Cậu có bao nhiêu?</p>
+
+    <p class="short">Trương Phong đặt đũa.</p>
+
+    <p>— Đủ để chứng minh dòng tiền bất thường. Nhật ký chuyển khoản từ hệ thống nội bộ, lịch sử phê duyệt, tên tài khoản đích. Nhưng đều là dữ liệu hệ thống, không phải chứng từ gốc. Nếu họ xóa nhật ký, mình mất.</p>
+
+    <p class="short">— Vậy cần sao lưu.</p>
+
+    <p>— Tôi đã sao lưu một phần. Nhưng nếu muốn đầy đủ, cần thêm thời gian. Phải kéo từ nhiều bảng, đối chiếu. Và phải làm kín, không để nhật ký truy cập của tôi bị ai đó kiểm tra.</p>
+
+    <p class="short">— Bao lâu?</p>
+
+    <p class="short">— Hai tuần. Nếu nhanh, mười ngày.</p>
+
+    <p class="short">— Mười ngày.</p>
+
+    <p class="short">Trương Phong gật.</p>
+
+    <p class="short">— Được. Nhưng...</p>
+
+    <p>Hắn dừng, nhìn quanh. Nhà ăn đông, ồn. Không ai để ý hai người ngồi góc nói chuyện nhỏ.</p>
+
+    <p>— Lục Trường An, tôi cần biết tôi đang làm gì. Cậu bảo tôi đào dữ liệu, tôi đào. Bảo đưa vào báo cáo bảo trì, tôi đưa. Nhưng bây giờ cậu bảo sao lưu toàn bộ dòng tiền Vạn Lý hai năm qua? Đây không phải bảo trì hệ thống nữa. Đây là chuẩn bị cho... cái gì?</p>
+
+    <p>Hắn nhìn Trương Phong. Mắt kỹ sư bình tĩnh, không hoảng, nhưng hỏi thật. Muốn biết mình đang bước vào chỗ nào.</p>
+
+    <p class="thought"><em>Trương Phong không phải Hàn Kiêu. Không theo bằng nghĩa. Theo bằng lý. Muốn hắn đi tiếp, phải cho hắn đủ thông tin để tự quyết.</em></p>
+
+    <p>— CEO đang rút ruột công ty. Chín tỷ trong hai năm, qua Phú Thịnh và dự án X. Tiền không dừng ở CEO. Chảy lên Quỹ Vĩnh An, thuộc người sở hữu ba mươi lăm phần trăm Vạn Lý. Lão Từ.</p>
+
+    <p class="short">Trương Phong không nói gì. Mắt hơi nheo. Đang xử lý.</p>
+
+    <p>— Tôi sẽ phơi bày trước Hội đồng Quản trị. CEO sẽ mất ghế. Và sau đó, tôi sẽ dùng bằng chứng để ép Lão Từ rút.</p>
+
+    <p class="short">Im lặng. Năm giây. Mười giây.</p>
+
+    <p class="short">— Cậu định đánh cả CEO lẫn cổ đông lớn nhất?</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p class="short">Trương Phong nhìn xuống khay cơm. Rồi nhìn lên.</p>
+
+    <p class="short">— Nếu thất bại?</p>
+
+    <p>— Cậu sẽ bị sa thải. Tôi cũng vậy. Có thể tệ hơn. Lão Từ không phải loại tha kẻ chống.</p>
+
+    <p>Hắn nói thẳng. Không tô vẽ, không giảm nhẹ. Trương Phong xứng đáng được biết sự thật.</p>
+
+    <p>Trương Phong im. Gõ ngón tay lên bàn, chậm, đều, kiểu gõ khi viết mã gặp lỗi phức tạp.</p>
+
+    <p class="short">— Cậu biết tại sao tôi theo cậu không?</p>
+
+    <p class="short">Hắn lắc đầu.</p>
+
+    <p>— Không phải vì cậu giỏi. Giỏi thì nhiều người giỏi. Vì cậu là người đầu tiên ở công ty này hỏi tôi "Ngân sách không đủ hay ngân sách đi chỗ khác?" Câu đó cho tôi biết cậu nhìn thấy thứ mà tôi nhìn thấy nhưng không dám nói. Công ty này thối. Ai cũng biết, không ai dám làm gì.</p>
+
+    <p class="short">Trương Phong đẩy kính lên.</p>
+
+    <p>— Mười ngày. Tôi sẽ có đủ. Sao lưu ba bản. Một mã hóa trên máy chủ dự phòng, một ổ cứng rời giấu ở nhà, một gửi hòm thư mã hóa bên ngoài. Nếu họ xóa hệ thống, vẫn còn.</p>
+
+    <p class="thought"><em>Ba bản. Cẩn thận. Kỹ sư tốt luôn có phương án dự phòng.</em></p>
+
+    <p class="short">— Cảm ơn, Trương Phong.</p>
+
+    <p>— Đừng cảm ơn. Cậu thắng thì công ty sống. Cậu thua thì tôi cũng chẳng muốn ở lại chỗ này.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Ba giờ chiều. Quán cà phê Hương Mộc.</p>
+
+    <p>Hẻm nhỏ đối diện cổng sau Vạn Lý. Trần gỗ, quạt trần quay chậm, không điều hòa. Hai cốc cà phê đen, một nhiều đá, một ít đá. Hắn ngồi góc trong, lưng tựa tường, thói quen cũ, kiểu ngồi của kẻ không bao giờ để ai ở phía sau.</p>
+
+    <p>Tô Vãn đến đúng giờ. Cặp da, áo sơ mi trắng, tóc buộc gọn. Mặt bình tĩnh, nhưng mắt hỏi.</p>
+
+    <p class="short">— Kế hoạch mới.</p>
+
+    <p class="short">Cô ngồi xuống. Không vội hỏi. Chờ.</p>
+
+    <p>Hắn nói. Nói hết. Bốn bước. Từ lật CEO đến ép Lão Từ bán cổ phần. Không giấu, không giảm nhẹ. Mười phút. Tô Vãn nghe, không ngắt, không gật. Chỉ nghe.</p>
+
+    <p>Khi hắn dừng, im lặng kéo dài. Quạt trần quay. Tiếng xe máy ngoài hẻm. Tiếng ai đó gọi cà phê mang đi.</p>
+
+    <p class="short">Tô Vãn đặt cốc xuống. Chậm.</p>
+
+    <p class="short">— Anh muốn đánh cả CEO lẫn người đứng sau CEO.</p>
+
+    <p class="short">Không phải câu hỏi. Câu khẳng định.</p>
+
+    <p class="short">— Đúng.</p>
+
+    <p>— Anh có biết mình đang là ai không? Phó phòng Kinh doanh, ba tháng tuổi. Đối thủ anh muốn đánh là cổ đông lớn nhất, bốn mươi năm thương trường, phá sản kẻ chống đối mà không để dấu vết.</p>
+
+    <p class="short">— Tôi biết.</p>
+
+    <p class="short">— Và anh vẫn muốn làm.</p>
+
+    <p>— Tôi không muốn. Tôi phải. Nếu chỉ lật CEO, ai lên thay cũng là con rối tiếp theo. Lão Từ vẫn nắm cổ phần, vẫn rút tiền, vẫn giết công ty. Lật CEO mà không lật Lão Từ, chỉ là thay cũi cho gà.</p>
+
+    <p>Tô Vãn nhìn hắn. Lâu. Kiểu nhìn đánh giá, kiểu mà cô vẫn nhìn từ lần đầu gặp. Nhưng lần này, trong mắt cô có thêm thứ gì đó. Không phải sợ. Không hẳn lo. Gần hơn với... tính toán.</p>
+
+    <p>— Giả sử anh đúng. Giả sử lật CEO thành công. Giả sử anh lấy được bằng chứng gốc. Giả sử anh gặp Lão Từ, đưa bằng chứng, đề nghị rút. Lão Từ sẽ làm gì?</p>
+
+    <p>— Hai khả năng. Một: ông ta tính toán, thấy mất Vạn Lý tốt hơn mất cả bốn, bán cổ phần, rút. Hai: ông ta phản đòn. Dùng luật sư, dùng quan hệ, dùng tiền, nghiền nát tôi giống như nghiền Hoàng Minh Trí.</p>
+
+    <p class="short">— Và anh nghĩ khả năng nào lớn hơn?</p>
+
+    <p>— Tùy cách tôi trình bày. Nếu Lão Từ tin rằng chiến đấu tốn kém hơn rút lui, ông ta sẽ rút. Doanh nhân tính lời lỗ, không tính tự ái.</p>
+
+    <p class="short">— Anh tự tin vậy à?</p>
+
+    <p class="short">— Không. Tôi không tự tin. Nhưng tôi không có lựa chọn khác.</p>
+
+    <p>Tô Vãn hít thở sâu. Nhìn ra cửa. Ánh nắng chiều hắt qua khe cửa, vệt sáng ngang mặt bàn.</p>
+
+    <p>— Công ty cũ của tôi. Sếp cũ rút tiền qua công ty sân sau, giống hệt mô hình Phú Thịnh. Tôi phát hiện, tôi báo cáo, tôi bị đẩy ra. Mất việc, mất uy tín, mất hai năm. Tôi đã từng ở vị trí người phơi bày rồi, anh Lục. Kết quả là tôi ngồi ở đây, quản lý cấp trung, dưới tầm, chờ đợi.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>— Lần đó cô thất bại vì đánh một mình. Và vì cô phơi bày sớm, khi chưa có đủ bằng chứng, chưa có đồng minh, chưa kiểm soát được ai sẽ xử lý thông tin. Lần này khác.</p>
+
+    <p class="short">— Khác ở đâu?</p>
+
+    <p class="short">— Ở chỗ lần này cô không đánh một mình.</p>
+
+    <p>Tô Vãn nhìn hắn. Hắn nhìn lại. Không cười, không thuyết phục, không hứa hẹn. Chỉ nhìn.</p>
+
+    <p class="thought"><em>Cô ấy đang quyết định. Không phải quyết định tin hay không. Cô ấy đã tin từ lâu. Đang quyết định có dám đặt cược lần nữa không. Lần trước cô thua, vết thương chưa lành. Đặt cược lần nữa đồng nghĩa chấp nhận rằng vết thương có thể sâu hơn.</em></p>
+
+    <p class="thought"><em>Nhưng cô sẽ đặt. Vì cô không phải kiểu người chịu thua. Kiểu người đó không tồn tại ở phòng Kế hoạch Vạn Lý. Kiểu người đó chỉ tạm trú.</em></p>
+
+    <p class="short">Tô Vãn uống một ngụm cà phê. Đặt cốc xuống. Mở sổ tay.</p>
+
+    <p>— Được rồi. Nếu anh cần tôi, thì đây là những gì tôi cần từ anh. Một: thời gian biểu cụ thể. Khi nào lật CEO, khi nào gặp Lão Từ. Tôi không làm việc với "khi nào có cơ hội." Hai: quyền tiếp cận dữ liệu mà Trương Phong có. Tôi cần đối chiếu với số liệu phòng Kế hoạch. Ba: nếu tôi vào cuộc, tôi không phải quân cờ. Tôi là người đồng hành.</p>
+
+    <p class="thought"><em>Điều kiện. Cô ta luôn có điều kiện. Không bao giờ cho không. Không bao giờ theo mù. Đó là lý do tôi cần cô.</em></p>
+
+    <p>— Thời gian biểu: ba tuần. Tuần một đến tuần hai, gom phiếu Hội đồng Quản trị, Trương Phong hoàn thành sao lưu, Hàn Kiêu tìm thêm bằng chứng bên ngoài. Tuần ba, họp Hội đồng bất thường. Sau đó, tùy tình hình, gặp Lão Từ.</p>
+
+    <p class="short">— Ba tuần. Nhanh.</p>
+
+    <p>— Lão Từ đã nhìn thấy tôi. Chậm hơn ba tuần, có thể ông ta ra tay trước.</p>
+
+    <p>Tô Vãn viết. Nhanh, gọn, kiểu viết tốc ký mà cô quen từ thời tập đoàn lớn.</p>
+
+    <p>— Về dữ liệu, tôi sẽ nói Trương Phong. Và về điều kiện thứ ba...</p>
+
+    <p class="short">Hắn dừng. Nhìn cô.</p>
+
+    <p>— Tôi không dùng quân cờ, Tô Vãn. Tôi dùng người. Khác nhau.</p>
+
+    <p class="short">— Khác ở đâu?</p>
+
+    <p>— Quân cờ không cần biết tại sao nó đi nước đó. Người cần biết. Và tôi vừa nói cho cô biết tất cả.</p>
+
+    <p>Tô Vãn không đáp. Nhưng khóe miệng hơi nhích. Không phải cười. Gần như cười.</p>
+
+    <p class="short">— Còn VP? Anh có nói cho ông ta không?</p>
+
+    <p>— VP biết phần của VP. Lật CEO. Đó là tất cả những gì VP cần biết. Phần Lão Từ, VP không biết. Và không cần biết.</p>
+
+    <p class="short">— Vì sao?</p>
+
+    <p>— Vì VP là đồng minh tạm thời. Sau khi CEO ngã, VP sẽ muốn ngồi ghế đó. Và khi VP ngồi ghế đó, VP sẽ không muốn ai mạnh hơn mình trong công ty. Kể cả tôi.</p>
+
+    <p class="short">— Anh đang nói anh sẽ dùng VP, rồi...</p>
+
+    <p>— Tôi đang nói tôi biết VP sẽ dùng tôi, rồi bỏ. Nên tôi chuẩn bị trước.</p>
+
+    <p>Tô Vãn nhìn hắn lâu hơn mọi lần. Rồi khẽ lắc đầu.</p>
+
+    <p>— Anh Lục, đôi lúc nói chuyện với anh, tôi không biết mình đang ngồi với đồng minh hay với kẻ nguy hiểm nhất phòng.</p>
+
+    <p class="short">— Cả hai.</p>
+
+    <p>Lần này Tô Vãn cười thật. Nhẹ, ngắn, nhưng thật. Tiếng cười hiếm hoi của người không dễ cười.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tối. Căn hộ tầng sáu.</p>
+
+    <p>Hắn ngồi ở bàn. Trước mặt, tờ giấy sơ đồ cũ, đã gấp mở nhiều lần, nếp giấy sờn. Ở giữa: "Vạn Lý Group." Xung quanh: tên, mũi tên, ghi chú. Một mạng lưới nhỏ, bốn tháng xây dựng.</p>
+
+    <p class="short">Bốn cái tên ở góc.</p>
+
+    <p>Tô Vãn. Phòng Kế hoạch, tầng mười hai. Ba mươi tuổi, trí tuệ cực cao, bị phản bội một lần, không cho phép lần hai. Đọc số liệu như đọc tiểu thuyết. Mắt lạnh, đầu sắc, lòng chưa nguội. Cô không đi theo hắn vì nghĩa. Cô đi theo vì hắn là cơ hội duy nhất để cô chứng minh cô đúng. Và điều đó, lạ thay, đáng tin hơn lòng trung thành.</p>
+
+    <p>Trương Phong. Phòng Công nghệ Thông tin, tầng chín. Ba mươi hai tuổi, kỹ sư giỏi nhất Vạn Lý, sáu năm không thăng. Nắm toàn bộ hệ thống, mọi dòng dữ liệu chạy qua tay hắn. Theo hắn vì lý trí: thấy công ty thối, muốn ai đó đủ gan để xử. Không hứa trung thành, nhưng đã chọn phe.</p>
+
+    <p>Hàn Kiêu. Bên ngoài. Ba mươi hai tuổi, cựu xã hội đen, cựu bán bất động sản, hiện tại phá sản. Theo hắn vì nghĩa, kiểu nghĩa cũ, kiểu "cứu mạng phải đền." Không giỏi phân tích, nhưng giỏi nói, giỏi nghe, giỏi đọc mặt người. Chó chiến trung thành, đưa vào bầy nào cũng cắn.</p>
+
+    <p>Và còn một người nữa. Không viết trên giấy, nhưng hắn biết.</p>
+
+    <p>Tiểu Lý. Phó phụ trách phòng Kinh doanh. Hai mươi bốn tuổi, trung thành bẩm sinh, không vì nghĩa hay lý, mà vì bản tính. Kiểu người sinh ra đã biết đi theo ai. Hắn không giao Tiểu Lý việc lớn. Tiểu Lý là nền tảng, là kẻ giữ phòng khi hắn ra trận.</p>
+
+    <p class="thought"><em>Bốn người. Có khi năm, nếu tính Tiểu Linh, nhưng cô bé còn non.</em></p>
+
+    <p class="thought"><em>Bốn người. Để đánh một CEO và một ảo chủ.</em></p>
+
+    <p class="short">Hắn nhắm mắt.</p>
+
+    <p class="thought"><em>Ngàn năm trước.</em></p>
+
+    <p class="thought"><em>Đỉnh Huyền Minh, mùa đông, tuyết phủ. Ta hai mươi ba tuổi, chưa phải Ma Tôn, chỉ là kẻ tu luyện cô độc trên núi. Bị chính đạo truy đuổi vì dùng tà công. Chạy đến chân Cửu U Sơn, kiệt sức, không còn đường lui.</em></p>
+
+    <p class="thought"><em>Bốn người tìm đến ta.</em></p>
+
+    <p class="thought"><em>Tống Hạo Nhiên, mười tám tuổi, mắt sáng, kiếm nhanh nhất. Sau này phản.</em></p>
+
+    <p class="thought"><em>Mạc Thanh Nhàn, hai mươi tuổi, thích cười, giỏi thuốc. Chết ở trận Huyền Dương.</em></p>
+
+    <p class="thought"><em>Chu Linh Vân, mười sáu tuổi, ít nói, giỏi trận pháp. Mất tích sau đại chiến.</em></p>
+
+    <p class="thought"><em>Và Vạn Lý Hầu, hai mươi lăm tuổi. Kẻ duy nhất không có tài năng đặc biệt. Nhưng trung thành. Trung thành đến nỗi khi mọi người chạy, hắn đứng lại. Khi mọi người phản, hắn giữ cửa. Chết cuối cùng, chết sau ta, chết vì muốn mang xác ta ra khỏi vòng vây.</em></p>
+
+    <p class="thought"><em>Bốn đệ tử. Bốn hạt giống đầu tiên của Huyền Minh Tông.</em></p>
+
+    <p class="thought"><em>Ngàn năm trước, ta xây một tông môn từ bốn người. Từ bốn kẻ không ai coi ra gì. Và tông môn đó trở thành lực lượng lớn nhất ma đạo trong ngàn năm.</em></p>
+
+    <p>Hắn mở mắt. Nhìn tờ giấy. Bốn cái tên.</p>
+
+    <p class="thought"><em>Kiếp này, lại bốn người.</em></p>
+
+    <p class="thought"><em>Khác nhau. Hoàn toàn khác nhau. Không có linh lực, không có kiếm, không có pháp thuật. Chỉ có số liệu, dữ liệu, lòng trung thành, và sự gan dạ.</em></p>
+
+    <p class="thought"><em>Nhưng cốt lõi giống nhau. Bốn kẻ mà thế giới không coi ra gì. Bốn kẻ bị đẩy sang bên lề: một người bị cướp công, một kỹ sư bị bỏ quên, một tay bán hàng phá sản, một nhân viên trung thành mà không ai thưởng.</em></p>
+
+    <p class="thought"><em>Bốn hạt giống.</em></p>
+
+    <p>Hắn đặt bút xuống. Nhìn ra cửa sổ.</p>
+
+    <p>Thành phố đêm. Đèn sáng, xe chạy, hàng triệu người sống cuộc đời của họ. Không ai biết ở tầng sáu, một kẻ đang nhìn bốn cái tên trên giấy và nghĩ về một tông môn ngàn năm trước.</p>
+
+    <p class="thought"><em>Lần trước, ta xây Huyền Minh Tông. Mất ba mươi năm từ bốn đệ tử thành ngàn người. Và rồi nó sụp. Không phải vì kẻ thù mạnh. Vì đệ tử phản.</em></p>
+
+    <p class="thought"><em>Kiếp này... sẽ khác.</em></p>
+
+    <p class="thought"><em>Phải khác.</em></p>
+
+    <p class="thought"><em>Vì kiếp này ta biết rồi. Tông môn không sụp vì kẻ thù. Sụp vì tông chủ quên nhìn đệ tử như người.</em></p>
+
+    <p>Hắn nhìn tờ giấy lần nữa. Bốn cái tên.</p>
+
+    <p class="thought"><em>Không phải quân cờ. Là hạt giống.</em></p>
+
+    <p class="thought"><em>Tưới nước đúng cách, hạt giống thành cây. Cây thành rừng. Rừng thì gió không quật nổi.</em></p>
+
+    <p>Hắn gấp tờ giấy. Cất vào ngăn kéo. Tắt đèn.</p>
+
+    <p>Nằm xuống. Lần này, mắt nhắm ngay. Không phải vì hết lo. Vì đã biết phải lo gì, lo theo thứ tự nào, và ai sẽ lo cùng.</p>
+
+    <p class="thought"><em>Ba tuần.</em></p>
+
+    <p class="thought"><em>Ba tuần để thay bàn cờ.</em></p>
+
+    <p>Giấc ngủ đến nhanh, nhẹ, kiểu ngủ của kẻ đã có kế hoạch.</p>
+
+    <p>Bên ngoài, gió đêm thổi qua thành phố. Đâu đó ở tầng dưới, Hàn Kiêu nói chuyện điện thoại nhỏ với ai đó, giọng quen thuộc, giọng bán hàng, giọng hỏi vòng vòng mà không bao giờ hỏi thẳng. Đã bắt đầu rồi.</p>
+
+    <p>Và ở tầng chín Vạn Lý, Trương Phong ngồi trước màn hình, ánh sáng xanh lạnh chiếu lên gương mặt, ngón tay gõ đều. Sao lưu. Từng dòng, từng bảng, từng con số.</p>
+
+    <p>Và ở căn hộ nhỏ phía nam thành phố, Tô Vãn ngồi trên giường, sổ tay mở, đọc lại ghi chú chiều nay. Rồi lật về trang đầu tiên, trang cô viết ngày đầu vào Vạn Lý: "Lần này, không để ai cướp công."</p>
+
+    <p class="short">Cô gạch bỏ dòng đó. Viết dòng mới, bên dưới.</p>
+
+    <p class="short">"Lần này, không đánh một mình."</p>
+
+    <p class="short">Gấp sổ. Tắt đèn.</p>
+
+    <p class="short">Ba tuần. Đồng hồ bắt đầu chạy.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-22.html">&larr; Chương trước</a>
+    <a href="chapter-24.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>4.521 từ &middot; Chương 23 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

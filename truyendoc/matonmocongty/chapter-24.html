@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 24: Bạch Dạ — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-23.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 24 / 30</span>
+    <a href="chapter-25.html">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 24</div>
+    <h1 class="chapter-title">Bạch Dạ</h1>
+    <div class="chapter-meta">Phần IV — Đấu Pháp &middot; 4.139 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Tô Vãn gọi vào sáng thứ Bảy.</p>
+
+    <p>— Hội nghị "Kết nối Doanh nghiệp" ở khách sạn Hoàng Thành, chiều nay. Anh Lục nên đi.</p>
+
+    <p>Hắn đang ngồi ở bàn, soạn bản phân công tuần tới cho phòng Kinh doanh. Hàn Kiêu đã ra ngoài từ sớm, theo một manh mối về Quỹ Vĩnh An.</p>
+
+    <p class="short">— Tại sao?</p>
+
+    <p>— Đỗ Quốc Bảo sẽ có mặt. Thành viên Hội đồng Quản trị trung lập, người mà VP giao anh kéo. Ngoài ra, nếu anh muốn tách Vạn Lý khỏi Lão Từ, anh cần quan hệ bên ngoài. Không ai đánh trận mà chỉ có quân bên trong thành.</p>
+
+    <p class="thought"><em>Cô ta đúng. Luôn đúng. Kiểu đúng của kẻ đã tính trước mười bước.</em></p>
+
+    <p class="short">— Mấy giờ?</p>
+
+    <p>— Hai giờ. Tôi đăng ký hai vé rồi. Anh mặc gì cũng được, nhưng đừng mặc áo sơ mi nhăn.</p>
+
+    <p class="short">Hắn nhìn xuống chiếc áo mình đang mặc. Nhăn.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Một giờ rưỡi chiều. Khách sạn Hoàng Thành.</p>
+
+    <p>Tòa nhà mười hai tầng, mặt kính, sảnh rộng, trần cao, đèn chùm. Kiểu khách sạn mà mỗi mét vuông đều nói "tiền." Bảng chỉ dẫn lớn trong sảnh: "Hội nghị Kết nối Doanh nghiệp lần thứ 9. Tầng 3, Đại sảnh Hoàng Long." Logo nhà tài trợ: ba ngân hàng, hai quỹ đầu tư, một hãng ô tô.</p>
+
+    <p>Hắn mặc sơ mi trắng, quần tây đen, giày da duy nhất hắn có. Tô Vãn đứng cạnh, cặp da, áo vest xám, tóc buộc cao hơn bình thường. Cô trông khác khi không ở trong công ty. Sắc hơn. Kiểu sắc của thanh kiếm vừa được rút khỏi vỏ.</p>
+
+    <p class="short">— Bao nhiêu người?</p>
+
+    <p>— Ba trăm. Chủ yếu giám đốc, quản lý cấp cao, vài nhà đầu tư. Và diễn giả chính.</p>
+
+    <p class="short">— Ai?</p>
+
+    <p class="short">— Bạch Dạ. Tổng giám đốc Nova Tech.</p>
+
+    <p class="thought"><em>Bạch Dạ.</em></p>
+
+    <p>Cái tên đó. Hắn nhớ. Bảng quảng cáo lớn ở phố trung tâm, ngày thứ hai sau khi trọng sinh. Khuôn mặt trẻ, ánh mắt sáng, nụ cười tự tin nhưng không kiêu. Dòng chữ bên dưới: "Giải pháp công nghệ cho tương lai." Và cảm giác lúc đó, lạ, khó gọi tên: "Kẻ này không phải người thường."</p>
+
+    <p class="thought"><em>Bốn tháng rồi. Cuối cùng cũng gặp.</em></p>
+
+    <p class="short">— Bạch Dạ nổi tiếng thế nào?</p>
+
+    <p class="short">Tô Vãn liếc hắn, ngạc nhiên nhẹ.</p>
+
+    <p>— Anh không biết? Hai mươi chín tuổi. Tự xây Nova Tech từ phòng trọ, năm năm doanh thu gần nghìn tỷ. Gọi vốn ba vòng, định giá bốn nghìn tỷ. Báo chí gọi là "thần đồng công nghệ." Diễn thuyết khắp nơi, được giới trẻ theo như thần tượng.</p>
+
+    <p class="short">— Và cô đánh giá thế nào?</p>
+
+    <p class="short">Tô Vãn im vài giây.</p>
+
+    <p>— Giỏi thật. Không phải loại giỏi được báo chí thổi lên. Giỏi thật. Số liệu Nova Tech sạch, tăng trưởng thật, không đốt vốn kiểu gọi vốn rồi đốt. Hiếm.</p>
+
+    <p class="thought"><em>Giỏi thật. Từ miệng Tô Vãn, hai chữ đó nặng hơn mọi bài báo.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p>Đại sảnh tầng ba. Ba trăm ghế xếp cong theo hình vòng cung, hướng về sân khấu. Đèn dịu, màn hình lớn, hệ thống âm thanh tốt. Hắn và Tô Vãn ngồi hàng giữa, không quá gần, không quá xa. Vị trí quan sát.</p>
+
+    <p>Hai diễn giả đầu bắt đầu. Một giám đốc ngân hàng nói về "xu hướng đầu tư," một chuyên gia kinh tế nói về "thị trường khu vực." Hắn nghe bằng nửa tai. Nghe đủ để biết: kiến thức hàn lâm, không có gì mới, kiểu nói để được mời nói, không phải nói vì có gì đáng nói.</p>
+
+    <p class="short">Rồi đến phần thứ ba.</p>
+
+    <p>Người dẫn chương trình giới thiệu: "Chúng ta chào đón diễn giả đặc biệt, một trong những doanh nhân trẻ thành công nhất trong lĩnh vực công nghệ. Tổng giám đốc Nova Tech, anh Bạch Dạ."</p>
+
+    <p>Vỗ tay. Nhiều. Kiểu vỗ tay có năng lượng, không phải vỗ tay lịch sự.</p>
+
+    <p class="short">Bạch Dạ bước lên sân khấu.</p>
+
+    <p>Hai mươi chín tuổi. Cao, không quá cao, nhưng bước đi tạo cảm giác cao hơn thực tế. Đẹp trai theo kiểu sạch sẽ, sáng sủa, không bóng bẩy. Tóc ngắn, gọn. Áo sơ mi xanh nhạt, không vest, không cà vạt, tay áo xắn lên, kiểu "tôi không cần quần áo nói thay." Mắt thông minh, sáng, kiểu sáng từ bên trong chứ không phải do đèn sân khấu. Và nụ cười. Nụ cười chân thành, tự nhiên, không có vết giả.</p>
+
+    <p class="short">Ma Tâm Quan mở.</p>
+
+    <p class="thought"><em>Lưng thẳng, tự nhiên, không cố ý. Bước chân đều, không nhanh không chậm. Tay buông thoải mái, không nắm, không gõ. Nhịp thở đều, hơi sâu hơn bình thường, kiểu thở của kẻ đang phấn khích nhẹ nhưng kiểm soát được. Mắt: quét khán phòng một lượt trước khi nói, không phải tìm kiếm ai, mà ghi nhận tất cả. Kiểu mắt quen nhìn đám đông.</em></p>
+
+    <p class="thought"><em>Cơ mặt: không căng, không giả. Nụ cười dùng cơ gò má và cơ quanh mắt, cười Duchenne, cười thật. Kẻ này không diễn. Kẻ này thích đứng đây.</em></p>
+
+    <p class="thought"><em>Thú vị.</em></p>
+
+    <p class="short">Bạch Dạ nói.</p>
+
+    <p>Không có bài thuyết trình. Không có slide. Đứng giữa sân khấu, tay không, nói.</p>
+
+    <p>— Năm ngoái, tôi sa thải người quản lý giỏi nhất công ty tôi.</p>
+
+    <p class="short">Im lặng. Cả phòng chờ.</p>
+
+    <p>— Không phải vì anh ấy kém. Vì anh ấy quá giỏi. Giỏi đến mức mười hai người trong đội chỉ biết nghe anh ấy, không biết nghĩ. Khi anh ấy nghỉ phép hai tuần, cả đội tê liệt. Tôi nhận ra: tôi không xây đội. Tôi xây sự phụ thuộc.</p>
+
+    <p class="thought"><em>Mở đầu bằng sai lầm của bản thân. Khiêm tốn, nhưng không yếu. Dùng câu chuyện cá nhân để kéo người nghe vào. Kỹ thuật kể chuyện tốt. Nhưng không chỉ là kỹ thuật. Hắn thật sự tin vào điều mình nói.</em></p>
+
+    <p>Bạch Dạ tiếp tục. Mười lăm phút. Nói về "xây dựng hệ thống thay vì anh hùng." Về "giá trị bền vững thay vì tăng trưởng bằng mọi giá." Về "công nghệ phải phục vụ con người, không phải ngược lại."</p>
+
+    <p>Hắn nghe. Không phải nghe nội dung. Nghe cách nói, cách ngừng, cách nhìn. Ma Tâm Quan đọc mọi cử chỉ, mọi nhịp thở, mọi phản xạ vi biểu cảm.</p>
+
+    <p class="thought"><em>Kết luận: kẻ này tin vào những gì hắn nói. Không phải diễn. Không phải nói vì được mời. Tin thật. Sống thật. Xây Nova Tech theo đúng triết lý đó.</em></p>
+
+    <p class="thought"><em>Ngàn năm trước, ta gọi loại này là "chân tu." Kẻ tu luyện bằng niềm tin, không phải bằng thủ đoạn. Chính đạo chân tu. Loại nguy hiểm nhất. Vì không thể mua, không thể dọa, không thể lung lạc. Muốn thắng kẻ chân tu, phải mạnh hơn, hoặc phải đợi hắn tự phạm sai lầm.</em></p>
+
+    <p class="thought"><em>Hiếm. Rất hiếm.</em></p>
+
+    <p>Bạch Dạ kết thúc. Vỗ tay. Lần này dài hơn lần đầu, nhiều người đứng dậy.</p>
+
+    <p class="short">Tô Vãn nhìn hắn.</p>
+
+    <p class="short">— Ấn tượng không?</p>
+
+    <p class="short">— Nguy hiểm.</p>
+
+    <p class="short">Tô Vãn nhíu mày.</p>
+
+    <p class="short">— Người tốt mà anh gọi nguy hiểm?</p>
+
+    <p>— Người tốt luôn nguy hiểm nhất. Vì không thể đoán bằng lợi ích.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Giờ giải lao. Khu tiệc đứng ngoài đại sảnh.</p>
+
+    <p>Bàn dài, khay đồ ăn nhỏ, nước uống. Ba trăm người tản ra, tụm năm tụm ba, trao danh thiếp, bắt tay. Tiếng cười, tiếng nói, tiếng ly chạm.</p>
+
+    <p class="short">Tô Vãn kéo hắn đến nhóm phía đông.</p>
+
+    <p>— Đỗ Quốc Bảo, góc kia, áo vest nâu, đang nói chuyện với hai người.</p>
+
+    <p>Hắn nhìn. Đỗ Quốc Bảo: năm mươi lăm tuổi, mập, mặt tròn, cười nhiều, kiểu cười doanh nhân quen giao thiệp. Mắt tinh, tay nắm chắc. Doanh nhân chuỗi bán lẻ, thành viên Hội đồng Quản trị Vạn Lý, trung lập.</p>
+
+    <p class="short">— Để lúc khác. Hôm nay quan sát, chưa tiếp cận.</p>
+
+    <p class="short">Tô Vãn gật. Hiểu.</p>
+
+    <p>Hắn lấy một ly nước, đứng ở góc, lưng tựa cột, quan sát. Thói quen. Luôn quan sát trước khi hành động.</p>
+
+    <p class="short">Rồi, ở phía bên kia khu tiệc, Bạch Dạ đi ra.</p>
+
+    <p>Vây quanh hắn là ít nhất mười người: doanh nhân, nhà đầu tư, phóng viên. Tất cả muốn nói chuyện, tất cả muốn bắt tay, tất cả muốn một phút chú ý từ "thần đồng công nghệ." Bạch Dạ xử lý từng người: vài câu, nụ cười, bắt tay, vỗ vai. Nhanh nhưng không qua loa, ấm nhưng không quá thân. Kiểu giao tiếp của kẻ đã làm việc này nghìn lần mà vẫn chưa chán.</p>
+
+    <p class="short">Ma Tâm Quan mở, đọc từ xa.</p>
+
+    <p class="thought"><em>Kẻ này giao tiếp giỏi, nhưng không phải giỏi kiểu Hàn Kiêu, giỏi bán hàng. Giỏi kiểu khác. Kiểu quan tâm thật. Mỗi người hắn nói chuyện, hắn nhìn vào mắt, hắn nghe, hắn nhớ. Không phải kỹ thuật. Bản năng. Kẻ này đọc người không phải bằng Ma Tâm Quan. Bằng sự đồng cảm. Thiên bẩm.</em></p>
+
+    <p class="thought"><em>Ngàn năm trước, Linh Nhãn phái có một kỹ thuật tương tự. Gọi là "Thiên Nhĩ Tâm." Nghe lòng người bằng sự đồng cảm thay vì trực giác ma đạo. Hai con đường khác nhau, đích đến giống nhau: đều đọc được kẻ đối diện muốn gì, sợ gì, giấu gì.</em></p>
+
+    <p class="thought"><em>Nhưng Thiên Nhĩ Tâm có nhược điểm: kẻ đồng cảm dễ bị cảm xúc chi phối. Ma Tâm Quan không có nhược điểm đó. Ta đọc mà không cảm. Đó là sự khác biệt giữa chính đạo và ma đạo.</em></p>
+
+    <p class="short">Đang nghĩ, thì hắn nhận ra Bạch Dạ đang nhìn hắn.</p>
+
+    <p>Không phải liếc. Nhìn. Qua vai người đang nói chuyện, qua đám đông, qua khoảng cách mười lăm mét, Bạch Dạ nhìn thẳng vào hắn. Nửa giây. Rồi quay lại nói chuyện với người đối diện, tự nhiên, như chưa có gì xảy ra.</p>
+
+    <p class="thought"><em>Hắn nhận ra ta. Không phải nhận ra khuôn mặt. Nhận ra sự khác biệt. Trong ba trăm người, ta là người duy nhất đứng một mình ở góc, không cố bắt chuyện, không cố gây ấn tượng. Và Bạch Dạ, với bản năng đọc người của hắn, đã thấy: "Kẻ kia không giống những người khác."</em></p>
+
+    <p class="thought"><em>Giống cách ta nhận ra hắn trên bảng quảng cáo bốn tháng trước.</em></p>
+
+    <p>Năm phút sau, Bạch Dạ thoát khỏi đám đông. Tự nhiên, không khiến ai tổn thương, kiểu "xin lỗi, tôi lấy thêm nước" rồi bước đi. Nhưng không đi đến bàn nước. Đi đến chỗ hắn.</p>
+
+    <p>— Xin lỗi, anh có phải đã ở Hội nghị Tân Phát tháng trước không? Tôi thấy quen quen.</p>
+
+    <p>Câu mở đầu. Bình thường. Nhưng hắn biết: Bạch Dạ không thấy "quen quen." Bạch Dạ muốn bắt chuyện và cần một lý do.</p>
+
+    <p class="short">— Không. Tôi chưa từng dự hội nghị nào.</p>
+
+    <p>— Vậy đây là lần đầu? Mong anh thấy thú vị. Bạch Dạ.</p>
+
+    <p>Bạch Dạ đưa tay. Bắt tay. Tay ấm, nắm vừa phải, không quá chặt, không quá lỏng. Kiểu bắt tay của kẻ không cần chứng minh gì qua bàn tay.</p>
+
+    <p class="short">— Lục Trường An. Vạn Lý Group.</p>
+
+    <p>— Vạn Lý Group. Công ty tư vấn lớn. Anh phụ trách mảng nào?</p>
+
+    <p class="short">— Kinh doanh.</p>
+
+    <p class="short">— Quản lý?</p>
+
+    <p class="short">— Phó phòng.</p>
+
+    <p class="short">Bạch Dạ mỉm cười. Nhẹ.</p>
+
+    <p>— Phó phòng mà đi hội nghị giám đốc. Thú vị.</p>
+
+    <p class="short">— Được mời. Và tò mò.</p>
+
+    <p class="short">— Tò mò về gì?</p>
+
+    <p class="short">— Về người.</p>
+
+    <p class="short">Ma Tâm Quan đọc Bạch Dạ ở khoảng cách một mét.</p>
+
+    <p class="thought"><em>Gần hơn, rõ hơn. Ánh mắt: không né, không tấn công, nhìn thẳng, nhưng mềm. Kiểu nhìn muốn hiểu, không muốn kiểm soát. Nhịp thở ổn định. Không căng. Kẻ này thoải mái với bất kỳ ai, bất kỳ đâu. Không phải vì tự tin giả. Vì hắn thật sự không sợ ai.</em></p>
+
+    <p class="thought"><em>Nhưng...</em></p>
+
+    <p class="thought"><em>Có thứ gì đó trong mắt hắn. Ở lớp sâu hơn. Sau nụ cười, sau sự ấm áp, sau vẻ chân thành. Một tia lạnh. Rất nhỏ, rất nhanh, chỉ lóe lên khi hắn nhìn ta lần đầu rồi biến mất ngay. Tia lạnh của kẻ đánh giá. Kẻ tính toán. Kẻ biết phân biệt giữa "người thú vị" và "mối đe dọa."</em></p>
+
+    <p class="thought"><em>Kẻ này không đơn giản như nụ cười.</em></p>
+
+    <p>— Về người à? Vậy anh đánh giá bài nói của tôi thế nào?</p>
+
+    <p class="short">— Tốt. Nhưng không phải vì nội dung.</p>
+
+    <p class="short">— Mà vì?</p>
+
+    <p>— Vì anh tin vào điều mình nói. Ít người làm được vậy.</p>
+
+    <p>Bạch Dạ nhìn hắn. Lâu hơn một tích tắc. Nụ cười vẫn ở đó, nhưng mắt đã thay đổi. Sâu hơn. Chú ý hơn.</p>
+
+    <p>— Anh Lục, câu đó nhiều người nói. Nhưng cách anh nói khác. Anh nói như đang xác nhận một thứ anh đã biết, chứ không phải khen.</p>
+
+    <p class="thought"><em>Nhanh. Hắn đọc ta nhanh. Nghe một câu mà biết giọng điệu không phải khen xã giao.</em></p>
+
+    <p class="short">— Tôi ít khen. Khi tôi nói "tốt," đó là sự thật.</p>
+
+    <p class="short">— Và khi anh không nói gì?</p>
+
+    <p class="short">— Thì không tốt.</p>
+
+    <p>Bạch Dạ cười. Tiếng cười ngắn, sáng, kiểu cười của kẻ vừa gặp thứ bất ngờ.</p>
+
+    <p>— Anh thẳng tính. Hiếm trong giới doanh nghiệp.</p>
+
+    <p class="short">— Tôi không thuộc giới nào.</p>
+
+    <p>Im lặng ngắn. Xung quanh, đám đông vẫn ồn, ly va chạm, người cười. Nhưng giữa hai người, không gian riêng, kiểu không gian chỉ hai kẻ hiểu nhau mới tạo ra.</p>
+
+    <p class="short">Bạch Dạ nghiêng đầu.</p>
+
+    <p>— Anh Lục, tôi nói chuyện với rất nhiều người. Mỗi ngày, mỗi tuần. Doanh nhân, nhà đầu tư, nhà báo, chính trị gia. Tất cả đều muốn một thứ từ tôi: hoặc tiền, hoặc ảnh hưởng, hoặc sự chú ý. Anh không muốn thứ nào trong ba cái đó.</p>
+
+    <p class="short">— Sao anh biết?</p>
+
+    <p>— Vì anh đứng ở góc mười phút trước khi tôi đến. Không ai đứng ở góc mười phút nếu muốn gây ấn tượng.</p>
+
+    <p class="thought"><em>Hắn quan sát ta từ lúc nào? Không chỉ nửa giây qua vai. Hắn để ý ta từ trước. Mười phút. Hắn biết ta đứng bao lâu.</em></p>
+
+    <p>— Đúng. Tôi không muốn gì từ anh. Nhưng tôi tò mò.</p>
+
+    <p class="short">— Tò mò gì?</p>
+
+    <p>— Tò mò xem kẻ mà ba trăm người trong phòng này ngưỡng mộ... là loại người gì thật.</p>
+
+    <p class="short">Bạch Dạ không đáp ngay. Nhìn hắn. Rồi nói, giọng nhẹ hơn.</p>
+
+    <p class="short">— Và anh thấy gì?</p>
+
+    <p class="short">— Anh muốn tôi nói thật?</p>
+
+    <p class="short">— Tôi luôn muốn nghe thật.</p>
+
+    <p>— Tôi thấy một kẻ giỏi thật sự, tin vào điều mình làm, và biết cách khiến người khác tin theo. Nhưng tôi cũng thấy, phía sau nụ cười, một kẻ tính toán không kém ai trong phòng này. Anh chỉ tính toán theo cách khác.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Bạch Dạ nhìn hắn. Không cười. Lần đầu tiên trong cuộc trò chuyện, nụ cười biến mất.</p>
+
+    <p>Rồi nụ cười quay lại. Khác. Không phải nụ cười cho khán giả. Nụ cười cho kẻ đồng hạng.</p>
+
+    <p>— Anh Lục, lâu rồi không ai nói với tôi câu thật đến vậy.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="thought"><em>Bạch Dạ.</em></p>
+
+    <p>Hắn đứng cạnh cột, ly nước trong tay, nhìn Lục Trường An đi cùng người phụ nữ tóc ngắn về phía bàn đồ ăn.</p>
+
+    <p>Xung quanh, đám đông vẫn vây. Có ai đó hỏi về vòng gọi vốn tiếp theo. Có ai đó muốn chụp ảnh chung. Hắn trả lời tự động, nụ cười tự động, bắt tay tự động. Nhưng đầu ở chỗ khác.</p>
+
+    <p class="thought"><em>Lục Trường An. Vạn Lý Group. Phó phòng Kinh doanh.</em></p>
+
+    <p class="thought"><em>Phó phòng.</em></p>
+
+    <p>Hắn nhẩm lại. Phó phòng mà nói chuyện như tổng giám đốc. Phó phòng mà ánh mắt không né bất kỳ ai. Phó phòng mà khi nhìn vào mắt hắn, Bạch Dạ không thấy ngưỡng mộ, không thấy sợ, không thấy ham muốn. Thấy gì?</p>
+
+    <p class="thought"><em>Thấy sự đánh giá. Bình tĩnh. Lạnh. Kiểu một kẻ đang cân xem con mồi có xứng đáng hay không.</em></p>
+
+    <p class="thought"><em>Hoặc... kiểu một kẻ gặp đồng loại và chưa biết nên bắt tay hay rút kiếm.</em></p>
+
+    <p>Bạch Dạ hai mươi chín tuổi. Năm năm xây Nova Tech từ con số không. Gặp đủ loại người: nhà đầu tư muốn ăn tươi nuốt sống, đối tác phản bội, nhân viên bỏ đi, đối thủ chơi bẩn. Hắn không ngây thơ. Nụ cười ấm, lòng ấm, nhưng mắt lạnh khi cần. Hắn biết phân biệt.</p>
+
+    <p>Và hắn biết: Lục Trường An không phải phó phòng bình thường.</p>
+
+    <p class="thought"><em>Cách người đó đứng. Lưng thẳng, không cố, như sinh ra để thẳng. Tay buông hai bên, không khoanh, không cho vào túi, không cầm điện thoại. Kiểu đứng của kẻ không cần giữ thứ gì để thấy an toàn. Mắt quét phòng một lượt khi vào, ghi nhận, rồi chọn góc quan sát. Không phải nhút nhát. Chiến thuật.</em></p>
+
+    <p class="thought"><em>Và cách người đó nói. Ngắn. Không thừa một từ. Mỗi câu đều có mục đích. Không hỏi để lấp đầy khoảng lặng. Hỏi vì muốn biết. Và khi trả lời, không vòng vo, không phòng vệ. Đập thẳng.</em></p>
+
+    <p class="thought"><em>"Tôi thấy, phía sau nụ cười, một kẻ tính toán không kém ai trong phòng này."</em></p>
+
+    <p class="thought"><em>Lần đầu tiên trong ba năm, có ai nói thẳng vào mặt hắn câu đó.</em></p>
+
+    <p>Bạch Dạ không tức. Không thấy bị xúc phạm. Thấy... thích. Kiểu thích khi gặp một trận cờ xứng đáng. Kiểu thích khi biết rằng phía bên kia bàn, kẻ kia cũng mạnh bằng mình. Hoặc hơn.</p>
+
+    <p class="thought"><em>Tôi nói chuyện với rất nhiều người. Tất cả đều muốn một thứ từ tôi. Người này không muốn gì. Nhưng không phải vì khiêm tốn. Vì hắn nghĩ hắn không cần.</em></p>
+
+    <p class="thought"><em>Kiểu tự tin đó... không phải của phó phòng. Của ai đó lớn hơn nhiều. Đang giấu mình.</em></p>
+
+    <p>Một trợ lý chạy đến, thì thầm gì đó. Bạch Dạ gật, nhưng mắt vẫn theo Lục Trường An ở phía bên kia phòng. Người phụ nữ tóc ngắn đi cùng hắn nói gì đó, hắn gật, không biểu cảm.</p>
+
+    <p class="thought"><em>Người phụ nữ kia. Trợ lý? Không. Kiểu đi ngang hàng, không kiểu đi theo sau. Đồng nghiệp. Hoặc cộng sự. Mắt sắc, lưng thẳng, kiểu phụ nữ không chấp nhận đứng sau ai. Bộ đôi thú vị.</em></p>
+
+    <p class="thought"><em>Lục Trường An. Nhớ tên này.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Hắn quay lại.</p>
+
+    <p>Lục Trường An đang lấy trà, quay lưng về phía hắn. Tô Vãn đã đi gặp nhóm khác, để hắn một mình.</p>
+
+    <p class="short">— Anh Lục.</p>
+
+    <p>Hắn quay lại. Bạch Dạ đứng đó, cách một bước, ly cà phê trong tay.</p>
+
+    <p class="short">— Tôi muốn hỏi anh một câu. Nếu anh cho phép.</p>
+
+    <p class="short">— Hỏi.</p>
+
+    <p>— Anh nói anh tò mò về "loại người" tôi là. Vậy anh thấy rồi đó. Nhưng tôi cũng tò mò. Anh là loại người gì?</p>
+
+    <p class="thought"><em>Hỏi ngược. Kiểu hỏi thẳng mà không mất lịch sự. Kẻ này không sợ câu trả lời.</em></p>
+
+    <p class="short">— Loại người xây từ đáy.</p>
+
+    <p class="short">— Xây gì?</p>
+
+    <p class="short">— Chưa biết. Đang xây.</p>
+
+    <p class="short">Bạch Dạ nhìn hắn. Lâu.</p>
+
+    <p class="short">— Anh biết tôi để ý gì ở anh không?</p>
+
+    <p class="short">— Gì?</p>
+
+    <p>— Anh là người duy nhất trong phòng này không ngạc nhiên khi thấy tôi. Ba trăm người, khi tôi bước lên sân khấu, mắt sáng lên, hoặc ngưỡng mộ, hoặc ghen tị, hoặc tò mò. Anh? Không. Anh nhìn tôi như đã biết tôi từ trước. Như nhìn một kẻ mình đã dự đoán sẽ gặp.</p>
+
+    <p class="thought"><em>Bảng quảng cáo. Bốn tháng trước. "Kẻ này không phải người thường." Hắn đúng. Ta đã dự đoán sẽ gặp. Chỉ không biết khi nào.</em></p>
+
+    <p>— Có thể tôi đã thấy anh trước. Trên bảng quảng cáo.</p>
+
+    <p class="short">Bạch Dạ cười nhẹ.</p>
+
+    <p>— Bảng quảng cáo. Bộ phận truyền thông ép tôi chụp. Tôi ghét bảng đó.</p>
+
+    <p>— Nhưng nó có tác dụng. Tôi nhớ mặt anh.</p>
+
+    <p class="short">— Và bây giờ gặp thật, có khác bảng quảng cáo không?</p>
+
+    <p>Hắn nhìn Bạch Dạ. Nhìn thật, không qua Ma Tâm Quan, không qua phân tích, không qua bộ lọc ngàn năm kinh nghiệm. Chỉ nhìn. Một người đàn ông trẻ, hai mươi chín tuổi, đứng trước mặt hắn, nụ cười thật, mắt sáng thật, hỏi một câu thật.</p>
+
+    <p>— Khác. Trên bảng quảng cáo, tôi thấy kẻ khác thường. Ở đây, tôi thấy kẻ nguy hiểm.</p>
+
+    <p class="short">Bạch Dạ không cười. Không giận. Nhìn.</p>
+
+    <p class="short">— Nguy hiểm. Có ý nghĩa tốt hay xấu?</p>
+
+    <p class="short">— Tùy anh đứng bên nào.</p>
+
+    <p>Im lặng. Dài. Xung quanh, đám đông vẫn nói cười, nhưng giữa hai người, không gian lặng, kiểu lặng trước trận chiến. Hoặc trước một tình bạn.</p>
+
+    <p class="short">Bạch Dạ rút danh thiếp từ túi áo. Đưa.</p>
+
+    <p class="short">— Lục Trường An. Tôi có cảm giác chúng ta sẽ gặp lại.</p>
+
+    <p>Hắn nhận danh thiếp. Giấy dày, thiết kế tối giản, chỉ có tên, số điện thoại, và dòng chữ nhỏ: "Nova Tech. Xây dựng tương lai."</p>
+
+    <p class="short">— Tôi không có danh thiếp.</p>
+
+    <p class="short">— Không sao. Tôi nhớ tên anh rồi.</p>
+
+    <p>Bạch Dạ mỉm cười, gật đầu, quay đi. Bước vào đám đông, nụ cười lại sáng, tay lại bắt, giọng lại ấm. Như chưa có gì xảy ra.</p>
+
+    <p class="short">Nhưng khi quay lưng, mắt hắn không cười nữa.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Xe về. Tô Vãn lái, hắn ngồi ghế phụ.</p>
+
+    <p class="short">Im lặng dài. Thành phố chiều, xe đông, đèn đỏ.</p>
+
+    <p class="short">Tô Vãn nói trước.</p>
+
+    <p>— Anh nói chuyện với Bạch Dạ lâu quá. Tưởng anh đi mua bán gì.</p>
+
+    <p class="short">— Nói chuyện thôi.</p>
+
+    <p class="short">— Và?</p>
+
+    <p class="short">— Kẻ đó nguy hiểm.</p>
+
+    <p class="short">Tô Vãn liếc.</p>
+
+    <p class="short">— Nguy hiểm hơn Lão Từ?</p>
+
+    <p>— Khác. Lão Từ nguy hiểm vì hắn xấu. Bạch Dạ nguy hiểm vì hắn tốt. Kẻ tốt có sức hút mà kẻ xấu không bao giờ có. Người ta theo Lão Từ vì sợ. Người ta theo Bạch Dạ vì muốn.</p>
+
+    <p class="short">— Và anh sợ loại nào hơn?</p>
+
+    <p class="short">— Loại người ta muốn theo.</p>
+
+    <p class="short">Im lặng. Đèn xanh. Xe chạy.</p>
+
+    <p>Hắn nhìn xuống danh thiếp trong tay. Giấy dày, chữ nhỏ. "Nova Tech. Xây dựng tương lai."</p>
+
+    <p class="thought"><em>Chính đạo và ma đạo. Ngàn năm trước cũng thế. Luôn có một kẻ đứng phía bên kia, nắm kiếm khác, đi đường khác, nhưng mạnh ngang mình. Luôn có một kẻ mà ta nhìn vào và thấy: "Nếu ta sinh ra khác đi, ta sẽ là hắn."</em></p>
+
+    <p class="thought"><em>Ngàn năm trước, kẻ đó tên Thiên Hư Đạo Nhân. Chưởng giáo Thái Hư Cung. Chính đạo số một. Kẻ duy nhất ta tôn trọng thật sự. Và cũng là kẻ ra lệnh bao vây Cửu U Sơn.</em></p>
+
+    <p class="thought"><em>Kiếp này, kẻ đó tên Bạch Dạ.</em></p>
+
+    <p class="thought"><em>Hai mươi chín tuổi. Tự xây đế chế từ con số không. Tin vào điều tốt đẹp, và biến niềm tin đó thành nghìn tỷ. Kẻ mà khi đứng cạnh, ta cảm thấy... thú vị.</em></p>
+
+    <p class="thought"><em>Nhưng tôn trọng không có nghĩa là không đối đầu.</em></p>
+
+    <p class="thought"><em>Và trong thương trường, cũng như tu tiên giới, chính đạo và ma đạo không bao giờ đi chung đường mãi.</em></p>
+
+    <p>Hắn cất danh thiếp vào túi áo ngực. Phía trái. Gần tim. Không phải vì tình cảm. Vì đó là chỗ hắn giữ những thứ quan trọng.</p>
+
+    <p class="thought"><em>Bạch Dạ. Nhớ tên này.</em></p>
+
+    <p class="thought"><em>Rồi sẽ gặp lại. Không phải ở hội nghị. Ở nơi khác. Nơi mà nụ cười không còn đủ.</em></p>
+
+    <p>Xe chạy qua phố trung tâm. Qua bảng quảng cáo lớn, khuôn mặt Bạch Dạ, nụ cười, dòng chữ "Giải pháp công nghệ cho tương lai."</p>
+
+    <p>Hắn nhìn bảng quảng cáo lần thứ hai trong đời. Lần đầu, bốn tháng trước, hắn là nhân viên cạnh nhà vệ sinh, nợ năm trăm triệu, chưa biết ai là ai. Lần này, hắn là kẻ đang lên kế hoạch lật CEO, ép cổ đông lớn nhất rút lui, và vừa bắt tay với đối thủ mà hắn biết sẽ đi cùng mình rất lâu.</p>
+
+    <p class="thought"><em>Bốn tháng. Từ đáy đến đây.</em></p>
+
+    <p class="thought"><em>Bao lâu nữa để đến đỉnh?</em></p>
+
+    <p>Xe rẽ vào phố nhỏ. Bảng quảng cáo khuất sau lưng.</p>
+
+    <p>Phía trước, thành phố chiều. Đèn vàng, xe cộ, hàng triệu người sống cuộc đời bình thường của họ.</p>
+
+    <p>Và hai kẻ không bình thường vừa gặp nhau lần đầu. Một kẻ xây đế chế bằng niềm tin. Một kẻ xây đế chế bằng bóng tối.</p>
+
+    <p class="short">Rồi sẽ biết con đường nào đi xa hơn.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-23.html">&larr; Chương trước</a>
+    <a href="chapter-25.html">Chương sau &rarr;</a>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>4.139 từ &middot; Chương 24 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

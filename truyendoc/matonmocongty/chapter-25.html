@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 25: Phơi Bày — Ma Tôn Mở Công Ty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas: #131313;
+      --surface: #2d2d2d;
+      --mint: #3cffd0;
+      --ultraviolet: #5200ff;
+      --purple-rule: #3d00bf;
+      --white: #ffffff;
+      --secondary: #949494;
+      --muted: #e9e9e9;
+      --link-hover: #3860be;
+      --reading-text: #d4d0c8;
+      --thought-text: #8a9a7d;
+    }
+
+    body {
+      background: var(--canvas);
+      color: var(--reading-text);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 2;
+      min-height: 100vh;
+    }
+
+    /* === NAV === */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 19, 19, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      color: var(--mint);
+      border-color: rgba(60, 255, 208, 0.3);
+    }
+
+    .nav-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .nav-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* === CHAPTER HEADER === */
+    .chapter-header {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--mint);
+      margin-bottom: 16px;
+    }
+
+    .chapter-title {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(36px, 8vw, 60px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .chapter-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--mint);
+      margin: 32px auto;
+      border-radius: 1px;
+    }
+
+    /* === PROSE === */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      font-size: 17px;
+    }
+
+    .prose p {
+      margin-bottom: 1.2em;
+      text-align: justify;
+      hyphens: none;
+    }
+
+    .prose p.short {
+      text-align: left;
+    }
+
+    .prose .thought {
+      color: var(--thought-text);
+      font-style: italic;
+    }
+
+    .prose .scene-break {
+      text-align: center;
+      color: var(--mint);
+      font-size: 24px;
+      letter-spacing: 12px;
+      margin: 2em 0;
+      opacity: 0.6;
+    }
+
+    .prose .bold-text {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .prose .message {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--purple-rule);
+      margin: 16px 0;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .prose .board-notice {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 16px 20px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 2px solid var(--mint);
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    .prose .whiteboard {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* === BOTTOM NAV === */
+    .bottom-nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bottom-nav a, .bottom-nav span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.15s ease;
+    }
+
+    .bottom-nav a {
+      color: var(--canvas);
+      background: var(--mint);
+      border: 1px solid var(--mint);
+    }
+
+    .bottom-nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: #000;
+    }
+
+    .bottom-nav .disabled {
+      color: var(--secondary);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.4;
+    }
+
+    /* === WORD COUNT === */
+    .word-count {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .word-count span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--secondary);
+    }
+
+    @media (max-width: 768px) {
+      .prose { font-size: 16px; padding: 0 16px 48px; }
+      .chapter-header { padding: 40px 16px 32px; }
+      .nav { padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <a href="chapter-24.html">&larr; Ch&#432;&#417;ng tr&#432;&#7899;c</a>
+    <span class="nav-center">Ch&#432;&#417;ng 25 / 30</span>
+    <a href="index.html" class="nav-disabled">Ch&#432;&#417;ng sau &rarr;</a>
+  </nav>
+
+  <!-- CHAPTER HEADER -->
+  <header class="chapter-header">
+    <div class="chapter-label">Chương 25</div>
+    <h1 class="chapter-title">Phơi Bày</h1>
+    <div class="chapter-meta">Phần V — Đoạt Quyền &middot; 3.619 từ</div>
+    <div class="chapter-divider"></div>
+  </header>
+
+  <!-- PROSE -->
+  <article class="prose">
+
+    <p class="short">Ba tuần.</p>
+
+    <p>Đúng ba tuần, như hắn đã nói với Tô Vãn ở quán Hương Mộc chiều hôm đó. Không sớm hơn, không muộn hơn. Đồng hồ chạy đúng tốc độ hắn cần.</p>
+
+    <p>Trương Phong hoàn thành sao lưu ngày thứ chín. Ba bản: một mã hóa trên máy chủ dự phòng, một ổ cứng rời giấu ở nhà, một gửi hòm thư mã hóa bên ngoài. Dữ liệu đầy đủ: hai năm nhật ký chuyển khoản, lịch sử phê duyệt, tên tài khoản đích, mối liên hệ Phú Thịnh và Vĩnh An. Đủ để chôn CEO mười lần.</p>
+
+    <p>Hàn Kiêu quay về sau mười hai ngày. Không tìm được Hoàng Minh Trí, người đàn ông bị Lão Từ phá sản năm hai nghìn mười hai đã chuyển về quê, không muốn nhắc lại. Nhưng Hàn Kiêu tìm được thứ khác: một kế toán cũ của công ty vận tải mà Lão Từ từng nuốt, hiện đang hành nghề tự do. Bà ta có sổ ghi chép riêng, không nằm trong hệ thống, và bà ta vẫn giận.</p>
+
+    <p>Đỗ Quốc Bảo. Main tiếp cận sau hội nghị Hoàng Thành, qua giới thiệu của Tô Vãn. Hai lần gặp. Lần đầu, uống trà, nói chuyện thị trường bán lẻ, không nhắc Vạn Lý. Lần hai, trong xe Đỗ Quốc Bảo sau bữa tối, main nói thẳng: "Ông Bảo, tiền công ty đang bị rút ra ngoài. Ông là thành viên Hội đồng, ông muốn biết không?" Đỗ Quốc Bảo im mười giây. Rồi nói: "Biết rồi. Đã nghi từ lâu. Nhưng không có bằng chứng." Main đưa tóm tắt ba trang. Đỗ Quốc Bảo đọc, mặt chuyển từ ngờ vực sang tức giận. "Họp. Tôi sẽ yêu cầu họp."</p>
+
+    <p>VP triệu tập. Đỗ Quốc Bảo yêu cầu. Hoàng Thị Mai, thành viên trung lập thứ hai, đồng ý khi Đỗ Quốc Bảo gọi điện. Bốn phiếu đồng ý họp bất thường: Khương, Sơn, Bảo, Mai. Đủ. CEO không có quyền từ chối.</p>
+
+    <p class="short">Lý do chính thức ghi trên giấy triệu tập: "Họp bất thường xem xét báo cáo tài chính quý và các vấn đề liên quan."</p>
+
+    <p>Các vấn đề liên quan. Bốn chữ vô hại che giấu quả bom chín tỷ.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Sáng thứ Tư. Tuần mười bảy.</p>
+
+    <p class="short">Vạn Lý Group. Tầng mười lăm. Phòng họp Hội đồng Quản trị.</p>
+
+    <p>Phòng lớn nhất tầng mười lăm, bàn dài hình chữ nhật, mười hai ghế bọc da, đèn ấm, rèm kéo kín. Trên tường, logo Vạn Lý, câu khẩu hiệu: "Vạn Lý Đồng Hành, Vạn Lý Thành Công." Máy chiếu, màn hình lớn, hệ thống ghi âm, bình nước và ly thủy tinh.</p>
+
+    <p class="short">Bảy ghế Hội đồng. Bảy người.</p>
+
+    <p>Trần Văn Khương, sáu mươi hai tuổi, tóc muối tiêu, mặt nghiêm, ngồi thẳng. Phe VP. Nhìn CEO với vẻ mặt người đã chờ ngày này lâu lắm.</p>
+
+    <p>Nguyễn Đình Sơn, năm mươi tám tuổi, gầy, kính cận, ghi chép liên tục. Phe VP. Không nói nhiều, nhưng mỗi câu nói đều trích dẫn điều lệ.</p>
+
+    <p>Hoàng Thị Mai, năm mươi tuổi, tóc ngắn, áo vest đen, mặt lạnh. Trung lập. Đến vì Đỗ Quốc Bảo gọi, nhưng chưa chắc sẽ bỏ phiếu thế nào.</p>
+
+    <p>Đỗ Quốc Bảo, năm mươi lăm tuổi, mập, mặt tròn, hôm nay không cười. Ngồi đối diện CEO, tay đặt trên bàn, ngón gõ nhẹ. Đã đọc tóm tắt ba trang.</p>
+
+    <p>Lê Hùng Cường, năm mươi bảy tuổi, da đen, giọng lớn. Phe CEO. Nhìn quanh phòng, mắt cảnh giác.</p>
+
+    <p>Võ Minh Châu, bốn mươi chín tuổi, phụ nữ, tóc dài, mặt trang điểm kỹ. Phe CEO. Ngồi cạnh CEO, đôi lúc nghiêng sang thì thầm.</p>
+
+    <p>Và ghế cuối. Người đại diện ủy quyền của Lão Từ. Một người đàn ông ba mươi tuổi, com-lê đen, cặp da, mặt lạnh. Không ai biết tên. Được giới thiệu là "đại diện theo ủy quyền của ông Từ Đại Phú." Ngồi im. Không ghi chép. Chỉ nghe.</p>
+
+    <p class="thought"><em>Mắt Lão Từ trong phòng này. Tai Lão Từ. Kẻ này sẽ báo lại mọi thứ. Không sao. Lão Từ biết hay không, kết quả hôm nay sẽ không đổi.</em></p>
+
+    <p>CEO ngồi đầu bàn. Trần Quốc Huy. Bụng bia, vest đen, tóc bạc nhuộm đen, cười nhưng mắt không cười. Hắn biết cuộc họp này không bình thường. Triệu tập bất thường, bốn phiếu, trong đó có hai người chưa bao giờ chủ động yêu cầu họp.</p>
+
+    <p>VP ngồi đối diện CEO. Phạm Đức Minh. Sơ mi trắng, không vest, tay áo cài. Mặt bình tĩnh, nhưng góc mắt sáng. Kiểu sáng của kẻ đã chờ lâu lắm và hôm nay sẽ ra tay.</p>
+
+    <p>Và ở dãy ghế phụ, phía sau, dành cho "nhân viên hỗ trợ kỹ thuật trình bày": Tô Vãn. Cặp da, sổ tay, máy tính. Vai trò chính thức: cung cấp dữ liệu phòng Kế hoạch nếu Hội đồng yêu cầu.</p>
+
+    <p>Hắn ngồi cạnh Tô Vãn. Vai trò chính thức: phó phòng Kinh doanh, hỗ trợ trả lời câu hỏi về doanh thu và khách hàng nếu cần.</p>
+
+    <p class="thought"><em>Kẻ viết kịch bản ngồi ghế phụ. Đúng chỗ.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Mở đầu.</p>
+
+    <p class="short">CEO khai mạc. Giọng to, cười, vỗ tay xuống bàn.</p>
+
+    <p>— Chào mừng các thành viên Hội đồng. Cuộc họp bất thường này được triệu tập theo yêu cầu của anh Bảo và chị Mai. Nội dung: xem xét báo cáo tài chính quý. Tôi xin nhường lời cho phó tổng Phạm Đức Minh trình bày.</p>
+
+    <p class="short">Giọng tự tin. Nhưng Ma Tâm Quan đọc:</p>
+
+    <p class="thought"><em>Tay phải CEO nắm bút dưới bàn, nắm chặt hơn bình thường. Mắt liếc Đỗ Quốc Bảo hai lần trong ba mươi giây. Nhịp thở nhanh hơn bình thường, nhưng giọng ổn. Hắn sợ, nhưng chưa biết sợ cái gì cụ thể. Sợ mơ hồ. Kiểu sợ của kẻ biết có gì đó sai nhưng không biết đã bị lộ bao nhiêu.</em></p>
+
+    <p class="short">VP đứng dậy. Bước đến màn hình. Bấm nút, slide hiện lên.</p>
+
+    <p class="short">Tiêu đề: "Báo cáo tài chính quý 3. Các khoản chi bất thường."</p>
+
+    <p class="thought"><em>Bắt đầu.</em></p>
+
+    <p>VP nói. Giọng đều, chậm, từng chữ rõ ràng. Kiểu nói của kẻ đã luyện bài nhiều lần.</p>
+
+    <p>— Trong quá trình rà soát tài chính quý ba, phòng Kế hoạch phát hiện một số khoản chi không phù hợp với hoạt động kinh doanh thông thường. Tôi xin trình bày chi tiết.</p>
+
+    <p>Slide tiếp. Bảng số liệu. Tên công ty: Phú Thịnh Consulting. Số tiền: bảy tỷ trong hai năm. Lý do ghi sổ: "Phí tư vấn chiến lược quý."</p>
+
+    <p>— Phú Thịnh Consulting. Công ty tư vấn, đăng ký tại quận Bảy. Cổ đông duy nhất: Trần Minh Đạt.</p>
+
+    <p class="short">VP ngừng. Nhìn CEO.</p>
+
+    <p class="short">— Trần Minh Đạt là em họ của tổng giám đốc Trần Quốc Huy.</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p>Lê Hùng Cường nhíu mày. Võ Minh Châu nhìn CEO. Đỗ Quốc Bảo không nhìn ai, nhìn xuống tài liệu trước mặt. Hoàng Thị Mai viết gì đó trong sổ.</p>
+
+    <p class="short">CEO cười. Gượng.</p>
+
+    <p>— Trần Minh Đạt đúng là em họ tôi, nhưng Phú Thịnh là công ty độc lập. Chúng tôi thuê tư vấn chiến lược, đây là chuyện bình thường.</p>
+
+    <p class="short">VP tiếp tục. Không tranh luận. Chỉ trình bày.</p>
+
+    <p>Slide tiếp. Địa chỉ đăng ký Phú Thịnh: căn hộ dân cư. Số nhân viên: hai. Không có trang mạng. Không có khách hàng nào khác ngoài Vạn Lý. Doanh thu bằng đúng số tiền Vạn Lý chuyển.</p>
+
+    <p>— Phú Thịnh không có hoạt động tư vấn thực tế. Địa chỉ là căn hộ dân cư. Hai nhân viên là người giúp việc của gia đình ông Đạt. Doanh thu toàn bộ đến từ Vạn Lý.</p>
+
+    <p class="short">CEO đỏ mặt.</p>
+
+    <p>— Đây là cáo buộc vô căn cứ. Phú Thịnh có hợp đồng tư vấn hợp lệ, có chữ ký, có con dấu.</p>
+
+    <p class="short">VP gật.</p>
+
+    <p>— Có. Hợp đồng có chữ ký tổng giám đốc và trưởng phòng Tài chính. Tôi có bản sao ở đây. Và tôi cũng có nhật ký phê duyệt chuyển tiền từ hệ thống nội bộ: mỗi tháng, hai trăm đến bốn trăm triệu, liên tục hai năm. Phê duyệt bởi tổng giám đốc.</p>
+
+    <p class="short">CEO đứng dậy. Ghế lùi, kêu trên sàn.</p>
+
+    <p>— Phạm Đức Minh, anh đang làm gì? Đây là cuộc họp xem xét tài chính, không phải phiên tòa!</p>
+
+    <p class="short">VP bình tĩnh.</p>
+
+    <p>— Tôi đang xem xét tài chính. Bảy tỷ chuyển cho công ty vỏ trong hai năm là vấn đề tài chính. Hội đồng có quyền biết.</p>
+
+    <p class="short">Trần Văn Khương, phe VP, lên tiếng lần đầu. Giọng trầm.</p>
+
+    <p class="short">— Tổng giám đốc, xin ngồi xuống. Để phó tổng trình bày hết.</p>
+
+    <p class="short">CEO nhìn Khương. Nhìn quanh phòng. Tìm đồng minh.</p>
+
+    <p class="short">Lê Hùng Cường nhìn xuống bàn. Không đáp.</p>
+
+    <p class="short">Võ Minh Châu nhìn CEO, mắt lo, nhưng không nói gì.</p>
+
+    <p class="short">Người đại diện Lão Từ ngồi im. Mặt lạnh. Không phản ứng.</p>
+
+    <p class="thought"><em>Không ai đứng lên. Phe CEO có Cường và Châu, nhưng trong phòng này, giữa bằng chứng, không ai dám mở miệng bảo vệ. Bảo vệ CEO lúc này đồng nghĩa tự nhận đồng lõa.</em></p>
+
+    <p class="short">CEO ngồi xuống. Chậm. Mặt đỏ chuyển sang trắng.</p>
+
+    <p class="short">VP tiếp tục.</p>
+
+    <p>Slide tiếp. Dự án X. Nhà thầu Đại Phong. Đội vốn ba mươi phần trăm. Tổng chi vượt dự toán gần hai tỷ.</p>
+
+    <p>— Dự án X, nhà thầu Đại Phong. Công ty thành lập mười bốn tháng trước khi trúng thầu. Không có dự án nào khác. Giám đốc là người mới, chưa từng hoạt động trong ngành. Đội vốn ba mươi phần trăm, không có giải trình hợp lệ.</p>
+
+    <p class="short">Đỗ Quốc Bảo lên tiếng. Giọng bình tĩnh, nhưng nặng.</p>
+
+    <p class="short">— Tổng giám đốc, Đại Phong có liên hệ gì với ông không?</p>
+
+    <p class="short">CEO nuốt nước bọt. Thấy rõ.</p>
+
+    <p class="short">— Không. Đại Phong trúng thầu qua quy trình bình thường.</p>
+
+    <p>— Quy trình bình thường nào cho phép một công ty mười bốn tháng tuổi trúng thầu dự án sáu tỷ? Và đội vốn ba mươi phần trăm mà không ai chịu trách nhiệm?</p>
+
+    <p>CEO không trả lời. Mắt nhìn xuống bàn, rồi nhìn lên, rồi nhìn sang Võ Minh Châu. Châu tránh mắt.</p>
+
+    <p class="thought"><em>Cô lập. Hoàn toàn cô lập. Giống cách ngàn năm trước, khi vây hãm một tông chủ, không cần đánh. Chỉ cần cắt hết mọi sợi dây nối hắn với đồng minh. Khi không ai đứng cạnh, kẻ mạnh nhất cũng chỉ là người đứng một mình.</em></p>
+
+    <p>VP trình bày thêm mười phút. Tổng cộng: bảy tỷ Phú Thịnh, gần hai tỷ dự án X qua Đại Phong. Chín tỷ. Con số nằm trên màn hình, đỏ, lớn, không cần giải thích.</p>
+
+    <p class="short">Nguyễn Đình Sơn đẩy kính lên. Giọng nhẹ nhưng sắc.</p>
+
+    <p>— Theo điều lệ công ty, điều bốn mươi hai, Hội đồng có quyền yêu cầu kiểm toán độc lập khi phát hiện bất thường tài chính. Tôi đề nghị Hội đồng biểu quyết yêu cầu kiểm toán ngay.</p>
+
+    <p>CEO đứng dậy lần nữa. Lần này không đỏ mặt. Trắng. Tay run nhẹ, nhưng giọng vẫn cố vang.</p>
+
+    <p class="short">— Ai đưa cho các người tài liệu này?!</p>
+
+    <p class="short">Im lặng.</p>
+
+    <p class="short">VP nhìn CEO. Không trả lời.</p>
+
+    <p class="short">Đỗ Quốc Bảo nhìn CEO. Không trả lời.</p>
+
+    <p class="short">Hoàng Thị Mai ngẩng lên từ sổ tay. Nhìn CEO. Không trả lời.</p>
+
+    <p class="short">Trần Văn Khương nhìn CEO. Không trả lời.</p>
+
+    <p class="thought"><em>Không ai trả lời. Vì không ai cần trả lời. Câu hỏi "ai đưa tài liệu" không quan trọng. Quan trọng là tài liệu có đúng không. Và CEO biết nó đúng. Nên hắn hỏi "ai" thay vì nói "sai."</em></p>
+
+    <p class="thought"><em>Kẻ hỏi "ai đưa" thay vì "đây là sai" đã tự nhận mình có tội.</em></p>
+
+    <p>Hắn ngồi ở ghế phụ, phía sau, cạnh Tô Vãn. Không nói một lời từ đầu đến giờ. Không cần. Hắn là kẻ viết kịch bản. Diễn viên trên sân khấu đã thuộc lời.</p>
+
+    <p class="thought"><em>VP nghĩ mình đang dẫn dắt. Đúng một nửa. VP dẫn dắt cuộc họp. Nhưng ai dẫn VP? Dữ liệu ai đưa? Qua ai? Tô Vãn soạn tóm tắt ba trang cho Đỗ Quốc Bảo, nhưng dữ liệu gốc do Trương Phong cung cấp, qua main, qua Tô Vãn, đến VP bằng "phát hiện của phòng Kế hoạch trong quá trình rà soát." VP nhận, tin, dùng. VP nghĩ mình là tướng. VP là thanh kiếm.</em></p>
+
+    <p class="thought"><em>Và thanh kiếm không cần biết ai đang cầm.</em></p>
+
+    <p>Tô Vãn ngồi cạnh, mắt nhìn thẳng về phía trước. Mặt phẳng. Tay đặt trên cặp da, ngón không nhúc nhích. Bình tĩnh tuyệt đối. Kiểu bình tĩnh của kẻ đã sống qua cảnh này một lần và lần này sẽ không để kết quả giống lần trước.</p>
+
+    <p class="short">Hắn liếc cô. Cô liếc lại. Mắt gặp nhau nửa giây. Đủ.</p>
+
+    <p class="thought"><em>Cô ổn.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Phiên họp tạm dừng.</p>
+
+    <p>Nguyễn Đình Sơn đề nghị nghỉ ba mươi phút để các thành viên "cân nhắc." Thực tế: để CEO thở, và để phe VP gom phiếu cuối cùng.</p>
+
+    <p>Biểu quyết sẽ diễn ra sau giờ nghỉ: có hay không yêu cầu kiểm toán độc lập, và có hay không bất tín nhiệm tổng giám đốc.</p>
+
+    <p>CEO bước ra khỏi phòng đầu tiên. Bước nhanh, vai thấp, mặt trắng, mắt nhìn thẳng, không nhìn ai. Võ Minh Châu chạy theo, thì thầm gì đó. CEO gạt tay.</p>
+
+    <p>Người đại diện Lão Từ bước ra sau. Chậm. Rút điện thoại. Quay mặt vào tường, nói nhỏ. Mắt lạnh.</p>
+
+    <p class="thought"><em>Gọi cho Lão Từ. Báo cáo. Lão Từ sẽ biết trong năm phút nữa.</em></p>
+
+    <p class="thought"><em>Không sao. Lão Từ biết cũng không thay đổi được gì hôm nay. Phiếu đã đủ. Bằng chứng đã trình. CEO đã tự nhận tội bằng câu "Ai đưa tài liệu?" thay vì "Tài liệu sai." Dù Lão Từ gọi điện cho từng thành viên bây giờ cũng muộn. Đỗ Quốc Bảo đã thấy con số. Mai đã ghi chép. Khương và Sơn đã chờ ngày này. Không ai quay lại được.</em></p>
+
+    <p class="thought"><em>Bàn cờ đã lật. Quân cờ đã rơi. Chỉ còn đếm.</em></p>
+
+    <p>Hắn bước ra hành lang. Đứng cạnh bình nước. Vị trí quen, vị trí hắn đứng khi Lão Từ nhìn hắn một giây hai tuần trước.</p>
+
+    <p class="short">VP đi đến. Mặt tươi, mắt sáng, bước nhanh.</p>
+
+    <p>— Lục Trường An, cậu thấy chưa? CEO xong rồi. Biểu quyết chiều nay, bốn trên bảy, chắc chắn. Tôi sẽ đề xuất HĐQT bổ nhiệm tôi làm quyền tổng giám đốc.</p>
+
+    <p class="short">Hắn gật.</p>
+
+    <p class="short">— Chúc mừng, Phạm phó tổng.</p>
+
+    <p class="short">VP vỗ vai hắn. Nụ cười rộng, kiểu cười của kẻ vừa thắng trận.</p>
+
+    <p class="short">— Cậu giúp nhiều. Tôi nhớ. Khi tôi lên, ghế giám đốc chiến lược là của cậu.</p>
+
+    <p class="thought"><em>Hứa. Như đã hứa. Nhưng lời hứa của VP có tuổi thọ ngắn hơn một mùa. Ngàn năm trước, đồng minh nào cũng hứa. Cho đến khi ghế vừa ấm.</em></p>
+
+    <p class="short">— Tôi đợi.</p>
+
+    <p>VP gật, bước đi. Đi gặp Khương và Sơn, bàn bạc biểu quyết chiều nay.</p>
+
+    <p class="short">Hắn đứng ở hành lang. Một mình. Uống nước.</p>
+
+    <p class="short">Rồi CEO xuất hiện ở cuối hành lang.</p>
+
+    <p>Trần Quốc Huy. Bước chậm hơn lúc nãy. Vai thấp hơn. Mắt đỏ, không phải khóc, mà vì huyết áp. Tay cầm điện thoại, nhưng không gọi ai. Đi về phía thang máy.</p>
+
+    <p class="short">Đi ngang hắn.</p>
+
+    <p class="short">Hai người cách nhau một mét. CEO nhìn hắn.</p>
+
+    <p>Mắt CEO: mệt, sợ, tức, lẫn lộn. Nhưng ở dưới cùng, dưới tất cả lớp cảm xúc đó, có một tia nhận ra. Tia nhận ra mờ nhạt, kiểu "tôi không biết chính xác cậu đã làm gì, nhưng tôi biết cậu có liên quan."</p>
+
+    <p class="short">Hắn nhìn lại. Mặt phẳng. Không cười, không lạnh, không thương hại.</p>
+
+    <p class="short">Gật đầu nhẹ.</p>
+
+    <p class="short">Như chào.</p>
+
+    <p class="short">Như vĩnh biệt.</p>
+
+    <p class="short">CEO đi tiếp. Bước vào thang máy. Cửa đóng.</p>
+
+    <p class="thought"><em>Trần Quốc Huy. Năm mươi hai tuổi. CEO nhờ quan hệ, không nhờ năng lực. Rút ruột công ty vì tham, vì sợ Lão Từ, vì không đủ giỏi để kiếm tiền bằng cách khác. Không phải kẻ ác. Chỉ là kẻ yếu được đặt vào chỗ cần kẻ mạnh.</em></p>
+
+    <p class="thought"><em>Ngàn năm trước, ta đã giết nhiều kẻ như vậy. Không vì hận. Vì chúng ngồi chỗ không phải của chúng.</em></p>
+
+    <p class="thought"><em>Kiếp này, không cần giết. Chỉ cần bỏ phiếu.</em></p>
+
+    <p class="short">Hắn uống hết ly nước. Đặt ly xuống. Quay vào phòng họp.</p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Chiều. Biểu quyết.</p>
+
+    <p class="short">Nguyễn Đình Sơn đọc hai nội dung biểu quyết:</p>
+
+    <p class="short">Một: yêu cầu kiểm toán độc lập toàn bộ tài chính Vạn Lý hai năm qua.</p>
+
+    <p>Hai: bất tín nhiệm tổng giám đốc Trần Quốc Huy, tạm đình chỉ chức vụ chờ kết quả kiểm toán.</p>
+
+    <p class="short">Từng phiếu.</p>
+
+    <p class="short">Trần Văn Khương: đồng ý cả hai.</p>
+
+    <p class="short">Nguyễn Đình Sơn: đồng ý cả hai.</p>
+
+    <p class="short">Đỗ Quốc Bảo: đồng ý cả hai.</p>
+
+    <p class="short">Hoàng Thị Mai: im năm giây. Rồi: đồng ý kiểm toán. Đồng ý bất tín nhiệm.</p>
+
+    <p class="thought"><em>Bốn. Đủ.</em></p>
+
+    <p class="short">Lê Hùng Cường: không đồng ý.</p>
+
+    <p class="short">Võ Minh Châu: không đồng ý.</p>
+
+    <p class="short">Người đại diện Lão Từ: giọng phẳng, không biểu cảm.</p>
+
+    <p>— Theo ủy quyền của ông Từ Đại Phú, tôi bỏ phiếu... trắng.</p>
+
+    <p class="thought"><em>Trắng. Không đồng ý, không phản đối. Lão Từ không bảo vệ CEO. Bỏ rơi. Khi con rối hết tác dụng, cắt dây.</em></p>
+
+    <p class="thought"><em>Lão Từ biết CEO xong rồi. Bảo vệ CEO lúc này chỉ tự dính bùn. Bỏ phiếu trắng là cách Lão Từ nói: "Tôi không liên quan. Ông ta tự làm tự chịu."</em></p>
+
+    <p class="thought"><em>Thông minh. Nhưng ta đã dự đoán.</em></p>
+
+    <p class="short">Kết quả: bốn đồng ý, hai không đồng ý, một trắng. Đủ đa số.</p>
+
+    <p>Nguyễn Đình Sơn đọc biên bản: "Hội đồng Quản trị công ty Vạn Lý Group quyết định: một, yêu cầu kiểm toán độc lập. Hai, tạm đình chỉ chức vụ tổng giám đốc Trần Quốc Huy, có hiệu lực ngay. Phó tổng giám đốc Phạm Đức Minh tạm quyền điều hành cho đến khi có quyết định mới."</p>
+
+    <p class="short">CEO không có mặt khi biên bản được đọc. Đã xuống sảnh từ lúc nghỉ giữa giờ. Không quay lại.</p>
+
+    <p>VP đứng dậy. Nắm tay, mắt sáng, cố kiềm nụ cười nhưng khóe miệng vẫn nhích.</p>
+
+    <p>— Cảm ơn Hội đồng. Tôi sẽ điều hành công ty có trách nhiệm trong giai đoạn chuyển tiếp.</p>
+
+    <p class="thought"><em>Cậu sẽ. Cho đến khi cậu không.</em></p>
+
+    <p class="scene-break">&middot; &middot; &middot;</p>
+
+    <p class="short">Tối. Căn hộ tầng sáu.</p>
+
+    <p class="short">Hàn Kiêu mở cửa khi hắn về. Mắt hỏi.</p>
+
+    <p class="short">— Xong chưa sếp?</p>
+
+    <p class="short">— Bước một xong.</p>
+
+    <p class="short">— CEO bay?</p>
+
+    <p class="short">— Bay.</p>
+
+    <p class="short">Hàn Kiêu huýt sáo.</p>
+
+    <p class="short">— Còn mấy bước?</p>
+
+    <p class="short">— Hai.</p>
+
+    <p class="short">Hàn Kiêu nhìn hắn. Hiểu không cần hỏi thêm. Rót nước, đưa.</p>
+
+    <p>Hắn ngồi xuống bàn. Mở điện thoại. Tin nhắn từ Tô Vãn: "VP tuyên bố quyền tổng giám đốc. Đã ký quyết định nhân sự đầu tiên: bổ nhiệm Đặng Thị Hoa làm phó tổng. Nhanh thật."</p>
+
+    <p class="thought"><em>Nhanh. VP nhanh thật. Chưa ấm ghế đã đặt người. Đặng Thị Hoa, trưởng phòng Kế hoạch, phe VP từ đầu. VP đang xây pháo đài.</em></p>
+
+    <p class="thought"><em>Nhưng pháo đài xây trên cát.</em></p>
+
+    <p>Tin nhắn tiếp từ Tô Vãn: "Trương Phong báo: hệ thống tài chính gốc vẫn nguyên. CEO chưa kịp xóa gì. Giờ VP nắm quyền, ta có thể tiếp cận chứng từ gốc phòng Tài chính."</p>
+
+    <p class="thought"><em>Bước hai. Lấy bằng chứng gốc. Chứng từ giấy, hợp đồng gốc, lệnh chuyển tiền có chữ ký. Thứ mà Lão Từ không thể phủ nhận bằng cách nói "tôi không biết."</em></p>
+
+    <p class="short">Hắn nhắn lại: "Ngày mai. Sáng sớm. Trước khi VP kịp sắp xếp phòng Tài chính."</p>
+
+    <p class="short">Tô Vãn: "Hiểu."</p>
+
+    <p class="short">Hắn đặt điện thoại xuống. Nhìn trần nhà.</p>
+
+    <p class="thought"><em>Bước một hoàn thành. CEO mất ghế. VP lên quyền. Mọi thứ đúng kế hoạch.</em></p>
+
+    <p class="thought"><em>Nhưng kế hoạch chỉ là bản đồ. Đường đi thật có ổ gà, có ngã rẽ, có kẻ phục kích.</em></p>
+
+    <p class="thought"><em>VP sẽ phản. Không phải "có thể." Sẽ. Câu hỏi chỉ là khi nào.</em></p>
+
+    <p class="thought"><em>Và Lão Từ. Phiếu trắng hôm nay không phải đầu hàng. Là chiến thuật. Bỏ con tốt, giữ thành. Lão Từ sẽ chờ xem ai lên ngôi, rồi quyết định: mua, dọa, hay phá.</em></p>
+
+    <p class="thought"><em>Nhưng ta đã có kế hoạch cho cả hai.</em></p>
+
+    <p class="short">Hắn nhắm mắt. Mười giây. Mở mắt.</p>
+
+    <p class="thought"><em>Ngày mai. Bước hai.</em></p>
+
+    <p>Bên ngoài, thành phố đêm. Đâu đó trong thành phố, một ông lão tóc bạc vừa nhận cuộc gọi từ người đại diện. Nghe xong, đặt điện thoại xuống. Mặt không đổi. Nhấp trà.</p>
+
+    <p class="short">Rồi lần đầu tiên trong mười năm, ông ta mở sổ tay. Viết một cái tên.</p>
+
+    <p class="short">Không phải Trần Quốc Huy. Không phải Phạm Đức Minh.</p>
+
+    <p>Cái tên khác. Cái tên mà người đại diện nhắc đến: "Có một phó phòng tên Lục Trường An ngồi ghế phụ suốt cuộc họp. Không nói gì. Nhưng mọi người trong phòng, kể cả VP, đều nhìn về phía anh ta ít nhất một lần."</p>
+
+    <p class="short">Lão Từ nhìn cái tên. Lục Trường An.</p>
+
+    <p class="short">Gấp sổ.</p>
+
+    <p class="short">Và bắt đầu tính toán.</p>
+
+  </article>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="chapter-24.html">&larr; Chương trước</a>
+    <span class="disabled">Chương sau &rarr;</span>
+  </div>
+
+  <!-- WORD COUNT -->
+  <div class="word-count">
+    <span>3.619 từ &middot; Chương 25 / 30 &middot; Ma Tôn Mở Công Ty</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 31 — Người Hỏi Thiên Cơ | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-30.html">&larr; CHƯƠNG 30</a>
+      <span class="chapter-indicator">31/60</span>
+      <a href="chapter-32.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 31</div>
+      <h1>Người Hỏi Thiên Cơ</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Hắn ngủ đến trưa. Lần đầu tiên kể từ khi xuyên không, ngủ không mộng.</p>
+
+<p>Tỉnh dậy, trần nhà quen thuộc. Phòng Quốc Sư Phủ. Ánh nắng xiên qua cửa sổ, vẽ vệt sáng trên sàn gỗ. Tiếng chim ở sân. Tiếng Tiểu Phúc ở hành lang, nói gì đó với Xuân Nhi.</p>
+
+<p>Bình thường. Mọi thứ bình thường.</p>
+
+<p>Nhưng khi hắn nhắm mắt, con mắt vẫn ở đó. Không phải trước mặt. Ở trong ký ức. Lớn. Trống. Nhìn.</p>
+
+<p class="thought"><em>Đêm qua có thật không?</em></p>
+
+<p class="thought"><em>Hầm dưới Trường Xuân Cung. Vật thể phát sáng. Chữ cào trên tường. Con mắt trên bầu trời.</em></p>
+
+<p class="thought"><em>Có thật. Tất cả có thật.</em></p>
+
+<p>Hắn ngồi dậy. Đầu nặng. Không phải đau. Nặng kiểu mang quá nhiều thứ trong đầu mà không biết xếp vào đâu.</p>
+
+<p>Tiểu Phúc gõ cửa.</p>
+
+<p>— Quốc Sư, trưa rồi ạ. Quốc Sư muốn dùng cơm không?</p>
+
+<p>— Mang vào.</p>
+
+<p>Gã mang cơm. Đặt bàn. Nhìn hắn lo lắng.</p>
+
+<p>— Quốc Sư đêm qua đi về khuya lắm. Tiểu nhân nghe tiếng bước chân lúc gần sáng.</p>
+
+<p>— Ta đi dạo. Không có gì.</p>
+
+<p class="thought"><em>Dạo. Mình gọi việc xuống hầm có xác 250 năm và nhìn thấy con mắt ngoài vũ trụ là "đi dạo."</em></p>
+
+<p class="thought"><em>Kiếp trước, mình gọi việc lừa mất hai tỷ của nhà đầu tư là "tái cơ cấu vốn." Giỏi đổi tên lắm.</em></p>
+
+<p>Ăn. Cơm nóng. Canh rau. Đơn giản. Ngon.</p>
+
+<p class="thought"><em>Ngon. Mỗi bữa cơm bây giờ đều ngon. Vì mỗi bữa cơm đều có thể là bữa cuối. Không phải vì sắp chết. Vì mình đang sống trong thế giới mà lời nói giết người, vua sắp chết, có tổ chức bí ẩn theo dõi, và dưới hoàng cung có thần cổ đại đang thở.</em></p>
+
+<p class="thought"><em>Cơm ngon thật.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Diệp Trúc Khanh đến. Cửa trước, không phải cửa sổ. Lần đầu.</p>
+
+<p>Tiểu Phúc mở cửa, mắt sáng rỡ:</p>
+
+<p>— Diệp cô nương! Mời vào!</p>
+
+<p>Nàng nhìn Tiểu Phúc. Gật. Bước vào.</p>
+
+<p class="thought"><em>Nàng đi cửa trước. Nghĩa là không cần giấu nữa. Nàng đã quyết định: công khai là đồng minh.</em></p>
+
+<p>Hắn ngồi ở sảnh. Nàng ngồi đối diện. Kiếm đặt ngang đùi. Quen.</p>
+
+<p>— Đêm qua, ngươi ở lại mái cung lâu hơn ta tưởng. Thấy gì?</p>
+
+<p class="thought"><em>Nàng hỏi. Đương nhiên nàng hỏi.</em></p>
+
+<p>Hắn nghĩ. Nói hay không nói?</p>
+
+<p class="thought"><em>Nàng cứu mình. Nàng canh gác. Nàng không hỏi nhiều, không đòi giải thích. Nàng chỉ chém kẻ cần chém và giữ mình sống.</em></p>
+
+<p class="thought"><em>Nàng xứng đáng biết.</em></p>
+
+<p>— Ta thấy... lưới. Toàn bộ lưới Thiên Cơ. Rộng hơn mọi lần nhìn trước.</p>
+
+<p>— Rồi?</p>
+
+<p>— Rồi ta nhìn cao hơn lưới. Và thấy thứ khác.</p>
+
+<p>Diệp Trúc Khanh chờ. Không giục. Nàng quen chờ.</p>
+
+<p>— Một con mắt. Lớn. Ở ngoài lưới. Nhìn vào.</p>
+
+<p>Im lặng.</p>
+
+<p>Nàng nhìn hắn. Lâu. Không sợ. Không nghi. Chỉ nghĩ.</p>
+
+<p>— Con mắt. Mắt của ai?</p>
+
+<p>— Không biết. Không phải mắt người. Không phải mắt thú. Giống... khoảng trống có hình mắt. Và nó nhìn ta.</p>
+
+<p>— Ngươi sợ?</p>
+
+<p>— Không. Choáng. Khác sợ.</p>
+
+<p>Nàng gật. Chậm.</p>
+
+<p>— Ta không nhìn thấy Thiên Cơ. Nhưng ta tin ngươi. Vì ngươi không phải kiểu người bịa chuyện rùng rợn để gây chú ý.</p>
+
+<p class="thought"><em>Nàng tin. Không vì niềm tin mù quáng. Vì nàng đánh giá mình là người thực tế. Và người thực tế không bịa con mắt trên trời.</em></p>
+
+<p class="thought"><em>Kiểu tin của Diệp Trúc Khanh: tin vì hiểu người, không phải tin vì sùng bái.</em></p>
+
+<p>— Vật thể dưới hầm, con mắt trên trời. Liên quan không?</p>
+
+<p>— Chưa biết. Nhưng... có thể. Vật thể là nút nối thẳng lên Thiên Cơ. Con mắt ở ngoài Thiên Cơ. Nếu nút đó là cánh cửa, thì con mắt có thể là kẻ nhìn qua cửa.</p>
+
+<p>Diệp Trúc Khanh nhíu mày.</p>
+
+<p>— Ngươi nói vậy nghĩa là... có thứ đang nhìn chúng ta. Từ bên ngoài. Luôn luôn.</p>
+
+<p>— Có thể.</p>
+
+<p>Nàng đặt tay lên chuôi kiếm. Phản xạ.</p>
+
+<p>— Thứ đó, ta chém được không?</p>
+
+<p class="thought"><em>Lại hỏi chém. Đúng kiểu nàng. Mọi vấn đề trong vũ trụ, giải pháp đầu tiên: chém.</em></p>
+
+<p>— Không. Nó ở ngoài lưới. Ngoài thế giới. Kiếm ngươi chém trong thế giới.</p>
+
+<p>Nàng im. Rồi buông tay khỏi kiếm.</p>
+
+<p>— Vậy ta làm gì được?</p>
+
+<p>— Hiểu. Trước khi hành động, phải hiểu. Và để hiểu Thiên Cơ, ta cần... thử nghiệm.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối. Hắn ngồi trong phòng. Trước mặt, một cuốn sổ trắng. Bút mực.</p>
+
+<p class="thought"><em>Kiếp trước, mình nghiên cứu thuật toán đọc vị. Ghi chép. Thử nghiệm. Đo lường. Phân tích dữ liệu.</em></p>
+
+<p class="thought"><em>Kiếp này, đối tượng nghiên cứu không phải tâm lý con người. Mà là Thiên Cơ.</em></p>
+
+<p class="thought"><em>Nhưng phương pháp giống nhau. Quan sát. Giả thuyết. Thử nghiệm. Kết luận.</em></p>
+
+<p>Hắn viết trang đầu tiên:</p>
+
+<p>"Nhật ký Thiên Cơ. Ngày thứ nhất."</p>
+
+<p>"Câu hỏi: Lời nói trở thành hiện thực theo quy luật nào?"</p>
+
+<p>"Quan sát đến nay:"<br>
+"1. Lời nói trước đám đông lớn → ảnh hưởng mạnh, chậm, mờ (cầu mưa, cổng Đoan Minh)"<br>
+"2. Lời nói trước 1 người tin tuyệt đối → ảnh hưởng yếu hơn, nhưng nhanh, chính xác (Tiểu Phúc, mảnh khăn mẹ)"<br>
+"3. A Ly → mạnh bất thường, cần nghiên cứu riêng"<br>
+"4. Vua → sợi đứt dần, niềm tin giữ sợi nhưng không chữa bệnh thật"</p>
+
+<p>"Giả thuyết: Thiên Cơ phản ứng với NIỀM TIN, không phải LỜI NÓI. Niềm tin sâu mạnh hơn niềm tin rộng."</p>
+
+<p>"Thử nghiệm đề xuất:"</p>
+
+<p>Hắn dừng bút. Nghĩ.</p>
+
+<p class="thought"><em>Thử nghiệm gì? Mình cần kiểm tra từng biến số một.</em></p>
+
+<p class="thought"><em>Biến số 1: Độ sâu niềm tin của người nghe.</em><br>
+<em>Biến số 2: Số lượng người nghe.</em><br>
+<em>Biến số 3: Mức độ cụ thể của lời nói.</em><br>
+<em>Biến số 4: Mình có TIN lời mình không.</em></p>
+
+<p class="thought"><em>Bốn biến số. Bốn thử nghiệm.</em></p>
+
+<p>Hắn viết tiếp:</p>
+
+<p>"Thử nghiệm 1: Nói lời cụ thể trước 1 người tin tuyệt đối (Tiểu Phúc). Kiểm tra tốc độ hiện thực hóa."</p>
+
+<p class="thought"><em>Bắt đầu từ cái đơn giản nhất. Kiểu mình kiếp trước thử thuật toán: bắt đầu bằng dữ liệu nhỏ, tăng dần.</em></p>
+
+<p>Gõ cửa.</p>
+
+<p>— Tiểu Phúc, vào.</p>
+
+<p>Gã vào. Mắt sáng. Sẵn sàng.</p>
+
+<p>— Tiểu Phúc, ta nói cho ngươi nghe. Sáng mai, sẽ có chim hạc bay qua phủ. Đúng giờ Mão.</p>
+
+<p>Tiểu Phúc mắt tròn.</p>
+
+<p>— Chim hạc? Ở kinh thành?</p>
+
+<p>— Đúng. Thiên Cơ cho ta thấy. Một con. Bay từ đông sang tây.</p>
+
+<p class="thought"><em>Bịa. Hoàn toàn bịa. Chim hạc hiếm ở kinh thành. Giờ Mão là sáng sớm, hạc thường bay lúc đó ở vùng hồ ngoại thành.</em></p>
+
+<p class="thought"><em>Nhưng mình chọn chi tiết có xác suất nhỏ nhưng không bằng không. Kinh thành gần hồ phía đông, đôi khi có hạc lạc đàn. Hiếm. Nhưng có thể.</em></p>
+
+<p class="thought"><em>Và mình... tin một chút. Vì mình biết Thiên Cơ nghe. Mình không chắc hạc sẽ bay. Nhưng mình tin rằng nếu Tiểu Phúc tin, xác suất tăng.</em></p>
+
+<p class="thought"><em>Mình tin vào CƠ CHẾ, không tin vào KẾT QUẢ. Liệu Thiên Cơ phân biệt được hai loại tin đó?</em></p>
+
+<p>Tiểu Phúc gật, mắt sáng:</p>
+
+<p>— Tiểu nhân sẽ dậy sớm canh!</p>
+
+<p class="thought"><em>Gã tin. Tuyệt đối. Không một giây nghi ngờ.</em></p>
+
+<p class="thought"><em>Nếu Thiên Cơ phản ứng với niềm tin, sáng mai, chim hạc sẽ bay.</em></p>
+
+<p class="thought"><em>Nếu không, nghĩa là mình sai. Và sai cũng là dữ liệu.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng. Giờ Mão.</p>
+
+<p>Tiểu Phúc chạy vào phòng, mặt đỏ bừng, thở hổn hển:</p>
+
+<p>— Quốc Sư! Có! Có chim hạc!</p>
+
+<p>Hắn đứng dậy. Ra sân. Nhìn lên.</p>
+
+<p>Một con hạc trắng. Bay ngang bầu trời phía trên phủ. Từ đông sang tây. Đúng giờ Mão. Đúng hướng. Cánh rộng, cổ dài, trắng muốt trên nền trời xanh.</p>
+
+<p>Đẹp. Và đáng sợ.</p>
+
+<p class="thought"><em>Đúng. Chính xác. Một người tin tuyệt đối, một lời cụ thể, xác suất thấp, kết quả chính xác.</em></p>
+
+<p class="thought"><em>Trùng hợp? Hay Thiên Cơ uốn hiện thực để con hạc bay đúng lúc đúng chỗ?</em></p>
+
+<p class="thought"><em>Không biết. Chưa đủ dữ liệu. Cần thêm thử nghiệm.</em></p>
+
+<p>Hắn quay vào phòng. Ghi sổ:</p>
+
+<p>"Thử nghiệm 1: THÀNH CÔNG."<br>
+"Người nghe: 1 (Tiểu Phúc, niềm tin tuyệt đối)."<br>
+"Lời: cụ thể (chim hạc, giờ Mão, hướng đông-tây)."<br>
+"Thời gian hiện thực hóa: ~8 canh giờ (tối nói, sáng xảy ra)."<br>
+"Xác suất tự nhiên: thấp (hạc hiếm ở kinh thành)."<br>
+"Mình tin không: nửa tin (tin cơ chế, không tin kết quả)."</p>
+
+<p>"Kết luận sơ bộ: Niềm tin 1 người tuyệt đối + lời cụ thể = hiện thực hóa nhanh, chính xác."</p>
+
+<p>"Câu hỏi tiếp: Nếu mình KHÔNG tin chút nào, chỉ Tiểu Phúc tin, thì sao? Niềm tin một chiều có đủ không?"</p>
+
+<p>Hắn đặt bút. Nhìn ra cửa sổ. Con hạc đã bay xa, chấm trắng nhỏ dần rồi mất.</p>
+
+<p class="thought"><em>Mình đang nghiên cứu Thiên Cơ như nghiên cứu thuật toán.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình dùng dữ liệu để lừa người. Kiếp này, mình dùng dữ liệu để hiểu vũ trụ.</em></p>
+
+<p class="thought"><em>Buồn cười. Cùng một kỹ năng. Khác mục đích.</em></p>
+
+<p class="thought"><em>Nhưng có một điều mình lo. Lão Quốc Sư nói: "Thiên Cơ không thích bị nhìn." Nhìn nó, nó nhìn lại.</em></p>
+
+<p class="thought"><em>Vậy nghiên cứu nó, nó sẽ làm gì?</em></p>
+
+<p>Hắn nhìn lưới. Nhẹ. Không nhìn sâu. Chỉ lướt qua.</p>
+
+<p>Nút mình rung. Bình thường. Nhưng ở rìa, ở chỗ sợi nối mình với Tiểu Phúc, có thứ gì đó sáng hơn. Nhẹ. Như Thiên Cơ vừa ghi nhận.</p>
+
+<p class="thought"><em>Nó ghi nhận. Thử nghiệm thành công = Thiên Cơ ghi nhận.</em></p>
+
+<p class="thought"><em>Và khi nó ghi nhận đủ nhiều lần, nó sẽ hiểu mình đang nghiên cứu nó.</em></p>
+
+<p class="thought"><em>Lúc đó, nó sẽ phản ứng thế nào?</em></p>
+
+<p>Gió sớm. Mát. Mùi hoa nhài.</p>
+
+<p>A Ly đi ngang sân, tay cầm cuốn sách, nhìn lên trời. Nhìn đúng hướng con hạc vừa bay. Rồi nhìn sang hắn. Cười nhỏ.</p>
+
+<p>— Tiên sinh gọi chim hạc đến hả?</p>
+
+<p>— Không. Thiên Cơ gọi. Ta chỉ nhờ.</p>
+
+<p>A Ly nghiêng đầu. Nghĩ. Rồi gật, kiểu chấp nhận thứ gì đó mà nàng chưa hiểu nhưng tin sẽ hiểu sau.</p>
+
+<p class="thought"><em>Con bé tin mình kiểu gia đình. Không hỏi tại sao. Chỉ hỏi khi nào.</em></p>
+
+<p class="thought"><em>Và trong lưới Thiên Cơ, nút A Ly vẫn sáng. Sáng hơn mọi nút quanh mình. Như ngọn hải đăng nhỏ giữa biển nút.</em></p>
+
+<p class="thought"><em>Con bé là chìa khóa. Chìa khóa gì, mình chưa biết. Nhưng Thiên Cơ biết. Và con mắt trên trời, cũng biết.</em></p>
+
+<p>Hắn quay vào phòng. Mở sổ. Viết:</p>
+
+<p>"Thử nghiệm 2 (chuẩn bị): Nói trước 5 người (gia nhân). Lời ít cụ thể hơn. Kiểm tra: niềm tin phân tán ảnh hưởng thế nào."</p>
+
+<p>"Thử nghiệm 3 (chuẩn bị): Nói trước A Ly. Kiểm tra: nút sáng phản ứng khác nút thường không."</p>
+
+<p>"Thử nghiệm 4 (quan trọng nhất): Nói lời mình KHÔNG TIN. Kiểm tra: Thiên Cơ phản ứng với lời hay với niềm tin."</p>
+
+<p class="thought"><em>Bốn thử nghiệm. Nếu cả bốn cho kết quả nhất quán, mình sẽ có BỘ QUY TẮC. Và bộ quy tắc, ở thế giới này, là vũ khí mạnh nhất.</em></p>
+
+<p class="thought"><em>Mạnh hơn kiếm. Mạnh hơn quân đội. Mạnh hơn cả Quốc Sư.</em></p>
+
+<p class="thought"><em>Vì kẻ hiểu quy tắc, thắng kẻ dùng quy tắc mà không hiểu.</em></p>
+
+<p>Hắn đóng sổ. Nhìn bìa trắng.</p>
+
+<p class="thought"><em>Nhật ký Thiên Cơ. Trang một.</em></p>
+
+<p class="thought"><em>Mình bắt đầu từ đây. Từ một con chim hạc.</em></p>
+
+<p class="thought"><em>Và mình sẽ đi đến đâu?</em></p>
+
+<p>Không biết. Nhưng lần đầu tiên, hắn không sợ việc không biết.</p>
+
+<p>Vì bây giờ, hắn có phương pháp.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-30.html">&larr; CHƯƠNG 30</a>
+      <a href="chapter-32.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="word-count">1.981 từ</div>
+
+  </div>
+</body>
+</html>

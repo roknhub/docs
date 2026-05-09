@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 32 — Người Thử Nghiệm | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-31.html">&larr; CHƯƠNG 31</a>
+      <span class="chapter-indicator">32/60</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 32</div>
+      <h1>Người Thử Nghiệm</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Ba ngày. Ba thử nghiệm.</p>
+
+<p>Hắn ghi chép cẩn thận. Từng chi tiết. Kiểu nhà nghiên cứu, không kiểu Quốc Sư.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Thử nghiệm 2. Ngày thứ hai.</p>
+
+<p>Buổi sáng, hắn gọi năm gia nhân vào sảnh. Không phải Tiểu Phúc, không phải Phúc An. Năm người bình thường: hai người quét sân, một gã giặt đồ, một bà nấu bếp phụ, một thị vệ canh cổng.</p>
+
+<p>— Ta nhìn thiên tượng đêm qua. Tuần này sẽ có mưa lớn.</p>
+
+<p>Năm người cúi đầu. Dạ. Không hỏi. Không nghi. Quốc Sư nói thì đúng.</p>
+
+<p class="thought"><em>Nhưng họ không tin kiểu Tiểu Phúc. Tiểu Phúc tin bằng xương. Năm người này tin bằng thói quen. "Quốc Sư nói thì nghe." Không sâu. Rộng nhưng mỏng.</em></p>
+
+<p>Ba ngày sau. Mưa. Nhưng nhỏ. Lất phất. Kiểu mưa xuân bình thường, không phải "mưa lớn."</p>
+
+<p>Hắn ghi sổ:</p>
+
+<p>"Thử nghiệm 2: MƯA CÓ, NHƯNG KHÔNG LỚN."<br>
+"Người nghe: 5 (niềm tin trung bình, không sâu)."<br>
+"Lời: cụ thể vừa ('mưa lớn tuần này')."<br>
+"Kết quả: mưa có nhưng mờ, không khớp hoàn toàn."<br>
+"So sánh TN1: Tiểu Phúc (1 người, tin sâu) → chim hạc chính xác. 5 người tin mỏng → mưa mờ."<br>
+"Kết luận: NIỀM TIN SÂU > NIỀM TIN RỘNG. Một người tin tuyệt đối mạnh hơn năm người tin thường."</p>
+
+<p class="thought"><em>Đúng giả thuyết. Thiên Cơ đo độ sâu, không đếm số lượng.</em></p>
+
+<p class="thought"><em>Nhưng... cầu mưa ở đàn tế thì sao? Lúc đó vạn người tin, và mưa to thật. Vạn người tin mỏng nhưng CÙNG LÚC, cùng hướng, có tạo hiệu ứng cộng hưởng?</em></p>
+
+<p class="thought"><em>Cần thêm dữ liệu. Nhưng không thể tổ chức cầu mưa lần nữa chỉ để thử nghiệm.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Thử nghiệm 3. Ngày thứ ba.</p>
+
+<p>Chiều. Sân sau. A Ly đang đọc sách dưới gốc hòe.</p>
+
+<p>Hắn ngồi xuống cạnh. Bình thường. Không trang trọng.</p>
+
+<p>— A Ly, ta nói ngươi nghe. Ngày mai, ngươi sẽ gặp người quen cũ.</p>
+
+<p>A Ly ngẩng lên. Mắt sáng.</p>
+
+<p>— Người quen? Con không có người quen. Chỉ có mấy đứa ăn mày ở Thanh Hà.</p>
+
+<p>— Đúng. Một trong số đó sẽ đến kinh thành. Tìm ngươi.</p>
+
+<p class="thought"><em>Bịa. Mình bịa hoàn toàn. Mình không biết có đứa nào sẽ đến.</em></p>
+
+<p class="thought"><em>Nhưng mình TIN. Không phải tin vào kết quả. Tin vào A Ly. Nút của nàng sáng. Sợi nối nàng với thế giới mạnh. Nếu có ai từ Thanh Hà nhớ nàng, sợi đó sẽ kéo họ đến.</em></p>
+
+<p class="thought"><em>Mình tin vào CƠ CHẾ. Không tin vào CHI TIẾT. Liệu thế có đủ?</em></p>
+
+<p>A Ly gật. Nhẹ. Không hỏi tại sao. Tin kiểu gia đình.</p>
+
+<p>— Dạ. Con sẽ chờ.</p>
+
+<p>Hắn nhìn lưới. Nút A Ly rung. Nhẹ. Nhưng sợi tỏa ra từ nút nàng, có một sợi kéo ra xa, về phía nam. Mờ. Nhưng có.</p>
+
+<p class="thought"><em>Sợi đó nối nàng với ai đó ở phía nam. Thanh Hà ở phía nam.</em></p>
+
+<p class="thought"><em>Thiên Cơ đã bắt đầu kéo.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Sáng hôm sau. Cổng phủ.</p>
+
+<p>Tiểu Phúc chạy vào:</p>
+
+<p>— Quốc Sư! Có đứa bé ngoài cổng, nói tìm A Ly!</p>
+
+<p>Hắn ra. Cổng phủ. Một đứa trẻ. Gầy. Rách rưới. Mặt nhem nhuốc. Mười tuổi, có thể ít hơn.</p>
+
+<p>A Ly chạy ra. Mắt mở to.</p>
+
+<p>— Tiểu Hổ?</p>
+
+<p>Đứa bé nhìn A Ly. Khóc. Ôm chầm.</p>
+
+<p>— A Ly chị! Em tìm chị! Đi mười mấy ngày!</p>
+
+<p>A Ly ôm lại. Mắt ướt. Quay nhìn hắn.</p>
+
+<p>— Tiên sinh... Tiên sinh nói đúng. Tiểu Hổ là bạn con ở Thanh Hà.</p>
+
+<p class="thought"><em>Đúng. Nhanh. Chính xác.</em></p>
+
+<p class="thought"><em>Nhưng... đứa bé đi mười mấy ngày. Nghĩa là nó lên đường TRƯỚC KHI mình nói. Thiên Cơ không tạo ra đứa bé. Đứa bé đã đi sẵn. Thiên Cơ chỉ... xếp lịch.</em></p>
+
+<p class="thought"><em>Hay là Thiên Cơ biết trước đứa bé sẽ đến, nên đặt lời vào miệng mình?</em></p>
+
+<p class="thought"><em>Cái nào gây ra cái nào? Mình nói nên nó xảy ra? Hay nó sẽ xảy ra nên mình nói?</em></p>
+
+<p class="thought"><em>Gà có trước hay trứng có trước?</em></p>
+
+<p>Hắn ghi sổ:</p>
+
+<p>"Thử nghiệm 3: THÀNH CÔNG. NHANH. CHÍNH XÁC."<br>
+"Người nghe: 1 (A Ly, nút sáng bất thường)."<br>
+"Lời: cụ thể ('gặp người quen cũ')."<br>
+"Thời gian hiện thực hóa: ~18 canh giờ."<br>
+"ĐẶC BIỆT: Sự kiện đã bắt đầu TRƯỚC lời nói (đứa bé đi 10+ ngày). Thiên Cơ có thể không TẠO sự kiện mà SẮP XẾP sự kiện có sẵn khớp với lời."</p>
+
+<p>"GIẢ THUYẾT MỚI: Thiên Cơ không tạo ra hiện thực từ hư không. Nó UỐN hiện thực có sẵn để khớp với lời nói được tin. Giống nam châm kéo mạt sắt vào đúng hình — mạt sắt đã có sẵn, nam châm chỉ xếp lại."</p>
+
+<p class="thought"><em>Nam châm. Mình là nam châm. Không phải phép thuật. Là lực hút.</em></p>
+
+<p class="thought"><em>Và A Ly... cũng là nam châm. Mạnh hơn mình? Hay khác loại?</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối. Phòng riêng. Đèn dầu.</p>
+
+<p>Hắn ngồi trước sổ. Tổng hợp.</p>
+
+<p>"BA THỬ NGHIỆM — KẾT LUẬN SƠ BỘ:"</p>
+
+<p>"Quy tắc 1: Niềm tin sâu mạnh hơn niềm tin rộng."<br>
+"(1 Tiểu Phúc = chính xác. 5 gia nhân = mờ.)"</p>
+
+<p>"Quy tắc 2: Lời cụ thể hiện thực hóa rõ hơn lời mơ hồ."<br>
+"(Chim hạc giờ Mão = chính xác. Mưa lớn tuần này = mờ.)"</p>
+
+<p>"Quy tắc 3: A Ly là ngoại lệ. Nút sáng. Hiện thực hóa nhanh, mạnh, chính xác. Cần nghiên cứu riêng."</p>
+
+<p>"Quy tắc bổ sung: Thiên Cơ UỐN hiện thực có sẵn, không TẠO từ hư không. Sự kiện phải có xác suất tự nhiên > 0 thì mới bị uốn."</p>
+
+<p class="thought"><em>Bốn quy tắc. Chưa đủ. Thiếu quy tắc quan trọng nhất: nếu MÌNH không tin thì sao?</em></p>
+
+<p class="thought"><em>Thử nghiệm 4. Khó nhất. Vì phải nói điều mình HOÀN TOÀN không tin, rồi xem Thiên Cơ có phản ứng không.</em></p>
+
+<p class="thought"><em>Vấn đề: mình không biết cách KHÔNG tin. Cả đời mình lừa, nói dối, bịa. Nhưng mỗi lần bịa ở thế giới này, sâu trong lòng, mình tin một chút. Vì mình đã thấy Thiên Cơ nghe. Và biết nó nghe, nên khi nói, mình tin nó SẼ nghe.</em></p>
+
+<p class="thought"><em>Muốn không tin, phải quên rằng Thiên Cơ tồn tại. Mình không thể quên.</em></p>
+
+<p class="thought"><em>Vậy phải dùng cách khác. Nói điều mà LÝ TRÍ mình chắc chắn là sai. Sai đến mức ngay cả Thiên Cơ cũng không uốn được.</em></p>
+
+<p class="thought"><em>Ví dụ: "Mặt trời mọc phía tây."</em></p>
+
+<p class="thought"><em>Không. Quá rõ ràng. Ai cũng biết sai. Ngay cả Tiểu Phúc cũng không tin.</em></p>
+
+<p class="thought"><em>Cần thứ mà người nghe có thể tin, nhưng mình chắc chắn không tin. Thử nghiệm sạch.</em></p>
+
+<p class="thought"><em>Để dành. Cần tình huống tự nhiên. Không ép.</em></p>
+
+<p>Hắn đóng sổ.</p>
+
+<p>Nhìn ra cửa sổ. Đêm. Sao. Gió.</p>
+
+<p class="thought"><em>Ba thử nghiệm. Ba thành công (hai rõ, một mờ). Ba quy tắc. Một giả thuyết mới.</em></p>
+
+<p class="thought"><em>Mình đang vẽ bản đồ Thiên Cơ. Từng nét. Chậm. Nhưng mỗi nét, mình hiểu thêm.</em></p>
+
+<p class="thought"><em>Và mỗi nét, Thiên Cơ cũng hiểu mình thêm.</em></p>
+
+<p class="thought"><em>Vì khi mình nghiên cứu nó, nó cũng đang nghiên cứu mình.</em></p>
+
+<p>Gõ cửa. Nhẹ.</p>
+
+<p>— Ai?</p>
+
+<p>— Quốc Sư, có thư. Từ bàn cờ.</p>
+
+<p>Tiểu Phúc. Bàn cờ. Thiên Ngoại Các.</p>
+
+<p>— Đưa đây.</p>
+
+<p>Mảnh giấy. Chữ quen. Gã áo xám.</p>
+
+<p>"Ngươi đang đo lưới. Tốt. Nhưng lưới cũng đang đo ngươi. Quốc Sư thứ 5 cũng từng đo. Ba lần. Lần thứ tư, lưới đo ngược."</p>
+
+<p class="thought"><em>Quốc Sư thứ 5. Đo lưới. Ba lần thành công. Lần thứ tư, lưới phản.</em></p>
+
+<p class="thought"><em>Mình vừa xong lần ba.</em></p>
+
+<p class="thought"><em>Lần thứ tư...</em></p>
+
+<p>Hắn đặt giấy xuống. Nhìn sổ. "Nhật ký Thiên Cơ." Ba trang.</p>
+
+<p class="thought"><em>Mình có dừng không?</em></p>
+
+<p class="thought"><em>Không. Mình không dừng. Vì dừng cũng không an toàn. Thiên Cơ đã biết mình đang đo. Dừng bây giờ, nó vẫn biết. Và kẻ biết nửa chừng nguy hiểm hơn kẻ không biết gì.</em></p>
+
+<p class="thought"><em>Tiến. Nhưng cẩn thận hơn.</em></p>
+
+<p>Hắn mở sổ. Viết thêm một dòng cuối trang ba:</p>
+
+<p>"Cảnh báo từ Thiên Ngoại Các: QS thứ 5 đo 3 lần, lần 4 bị lưới đo ngược. Cần thay đổi phương pháp. Không lặp lại kiểu đo. Mỗi lần phải KHÁC."</p>
+
+<p class="thought"><em>Mỗi lần khác. Không để Thiên Cơ nhận ra quy luật đo.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình gọi đây là "thay đổi phương pháp thu thập dữ liệu để tránh nhiễu." Kiếp này, gọi là "đừng để thần nhận ra mình đang rình."</em></p>
+
+<p class="thought"><em>Cùng một ý. Khác đối tượng.</em></p>
+
+<p>Đóng sổ. Tắt đèn.</p>
+
+<p>Nằm xuống. Nhắm mắt.</p>
+
+<p>Và trước khi ngủ, hắn cảm nhận: lưới rung nhẹ. Rất nhẹ. Không phải rung hoảng, rung niềm tin, hay rung sợ.</p>
+
+<p>Rung kiểu... ghi nhận.</p>
+
+<p class="thought"><em>Nó biết mình ghi sổ.</em></p>
+
+<p class="thought"><em>Và nó... không phản đối.</em></p>
+
+<p class="thought"><em>Chưa.</em></p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-31.html">&larr; CHƯƠNG 31</a>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="word-count">1.485 từ</div>
+
+  </div>
+</body>
+</html>

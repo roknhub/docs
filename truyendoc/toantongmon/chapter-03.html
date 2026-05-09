@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương 03 — Tin Đồn Ngoại Môn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Serif', Georgia, serif;
+            background-color: #0a0a0f;
+            color: #c8c8c8;
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        .nav {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #0a0a0f;
+            border-bottom: 1px solid #1e1e2a;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            font-size: 14px;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .nav a:hover { color: #ff385c; }
+
+        .nav__center {
+            color: #6a6a6a;
+            font-size: 13px;
+        }
+
+        .nav__disabled {
+            color: #3a3a3a;
+            cursor: default;
+        }
+
+        .chapter {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .chapter__header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #1e1e2a;
+        }
+
+        .chapter__number {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.32px;
+            text-transform: uppercase;
+            color: #ff385c;
+            margin-bottom: 12px;
+        }
+
+        .chapter__title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #f0f0f0;
+        }
+
+        .chapter__body p {
+            text-align: justify;
+            margin-bottom: 1em;
+            color: #b8b8b8;
+        }
+
+        .chapter__body p.thought {
+            color: #8a7d6b;
+            font-style: italic;
+        }
+
+        .chapter__body p.scene-break {
+            text-align: center;
+            color: #3a3a4a;
+            margin: 2em 0;
+            letter-spacing: 0.5em;
+            font-style: normal;
+        }
+
+        .chapter__body p.dialogue {
+            text-indent: 0;
+            color: #e0e0e0;
+        }
+
+        .chapter__footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #1e1e2a;
+        }
+
+        .chapter__wordcount {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 13px;
+            color: #5a5a5a;
+            margin-bottom: 24px;
+        }
+
+        .chapter__nav-bottom {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .chapter__nav-bottom a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+
+        .chapter__nav-bottom a:hover {
+            border-color: #ff385c;
+        }
+
+        .chapter__nav-bottom .disabled {
+            color: #3a3a3a;
+            border-color: #1e1e2a;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 16px; }
+            .chapter { padding: 32px 16px 64px; }
+            .chapter__title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">&larr; Mục lục</a>
+        <span class="nav__center">Chương 3 / 9</span>
+        <a href="chapter-04.html">Chương sau &rarr;</a>
+    </nav>
+
+    <article class="chapter">
+        <header class="chapter__header">
+            <div class="chapter__number">Chương 03</div>
+            <h1 class="chapter__title">Tin Đồn Ngoại Môn</h1>
+        </header>
+
+        <div class="chapter__body">
+            <p>Trần Bách không ngủ được.</p>
+
+            <p>Gã ngồi trên giường, cầm viên đan xám xịt, méo mó, xấu xí nhất thế gian, nhưng nhìn nó như nhìn bảo vật. Ánh đèn dầu hắt lên khuôn mặt gầy gò, mắt thâm quầng, nhưng đôi mắt ấy sáng rực, sáng hơn bất kỳ lúc nào trong ba năm qua.</p>
+
+            <p>Gã đã thử nghiệm dược tính. Viên đan có tác dụng, dù yếu ớt. Một viên Hồi Khí Đan hạ phẩm, loại thấp nhất, bán ngoài chợ chỉ được vài linh thạch. Bất kỳ đan sư nào luyện ra cũng sẽ xấu hổ vì chất lượng thảm hại này.</p>
+
+            <p>Nhưng Trần Bách không phải đan sư. Gã là ngoại môn đệ tử, tự học, không thầy, không lò xịn, không nguyên liệu tốt. Viên đan xấu xí này là bằng chứng rằng gã không hoang tưởng. Rằng ba năm mò mẫm không phải phí hoài.</p>
+
+            <p>Và tất cả bắt đầu từ một câu nói bên nồi canh cá.</p>
+
+            <p class="thought">"Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ."</p>
+
+            <p>Trần Bách siết chặt viên đan, mắt ướt.</p>
+
+            <p>Sáng sớm hôm sau, gã xách viên đan đi khắp khu ngoại môn.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Lâm Nhàn đang quét lá ở hậu sơn thì nghe thấy tiếng xì xào.</p>
+
+            <p>Ban đầu hắn không để ý. Ngoại môn đệ tử hay buôn chuyện, chuyện ai đánh nhau, ai bị phạt, ai nhặt được dược liệu quý, ngày nào cũng có. Nhưng hôm nay, tiếng xì xào có vẻ khác.</p>
+
+            <p>Vì mọi người đang nhìn hắn.</p>
+
+            <p>Hai sư huynh đang gánh nước ở con đường phía trước dừng lại, nhìn hắn, rồi cúi đầu thì thầm. Một sư muội đang nhổ cỏ bên lối đi ngước lên, mắt tròn xoe, rồi vội cúi xuống khi bắt gặp ánh mắt hắn.</p>
+
+            <p class="thought">Cái gì vậy?</p>
+
+            <p>Lâm Nhàn cầm chổi, thắc mắc.</p>
+
+            <p>Lục Cẩu từ phía sau chạy đến, mặt đỏ bừng, thở hổn hển.</p>
+
+            <p class="dialogue">— Lâm huynh! Xong rồi!</p>
+
+            <p class="dialogue">— Xong cái gì?</p>
+
+            <p class="dialogue">— Trần Bách! Gã ấy! Gã luyện đan thành công!</p>
+
+            <p>Lâm Nhàn chớp mắt.</p>
+
+            <p class="dialogue">— Vậy à? Tốt cho gã.</p>
+
+            <p class="dialogue">— Huynh không hiểu!</p>
+
+            <p>Lục Cẩu túm tay áo hắn, kéo ra chỗ vắng sau gốc cây, mắt đảo liên tục như sợ ai nghe.</p>
+
+            <p class="dialogue">— Trần Bách đi khoe khắp nơi. Gã nói huynh "chỉ điểm" gã. Gã nói huynh dùng chuyện nấu canh để dạy gã đạo lý luyện đan. Bây giờ cả ngoại môn đang bàn tán!</p>
+
+            <p>Lâm Nhàn đứng sững.</p>
+
+            <p class="dialogue">— Gã nói... cái gì?</p>
+
+            <p class="dialogue">— Gã nói huynh nhìn gã một cái, biết ngay gã đang mắc kẹt ở đâu, rồi cố ý nấu canh trước mặt gã để gã tự lĩnh ngộ. Nào là "nguyên liệu nào cũng có giá trị," nào là "đặt đúng chỗ đúng lúc." Gã nói huynh dùng nấu ăn để luận đan đạo, cảnh giới thâm sâu khó lường!</p>
+
+            <p class="thought">Tôi chỉ đang nấu canh vì đói.</p>
+
+            <p>Lâm Nhàn cảm thấy đầu mình ong ong.</p>
+
+            <p class="dialogue">— Lục Cẩu, ta phải đi giải thích. Đây là hiểu lầm.</p>
+
+            <p class="dialogue">— ĐỪNG!</p>
+
+            <p>Lục Cẩu hét lên, rồi vội bịt miệng mình, nhìn quanh.</p>
+
+            <p class="dialogue">— Huynh đừng có mà giải thích!</p>
+
+            <p class="dialogue">— Tại sao?</p>
+
+            <p class="dialogue">— Huynh nghĩ đi! Nếu huynh đi nói "ta chỉ nấu canh thôi, không có chỉ điểm gì," người ta sẽ tin không?</p>
+
+            <p>Lâm Nhàn suy nghĩ.</p>
+
+            <p class="dialogue">— ...Sẽ tin chứ?</p>
+
+            <p class="dialogue">— Không! Trần sư huynh luyện đan ba năm không thành, nghe huynh nói một câu là thành. Viên đan nằm ngay đó, ai cũng thấy. Huynh nói không chỉ điểm thì ai tin? Người ta sẽ nghĩ huynh khiêm tốn, hoặc tệ hơn, nghĩ huynh coi thường Trần sư huynh, không muốn nhận.</p>
+
+            <p class="thought">...Lục Cẩu phân tích có lý quá.</p>
+
+            <p>Lâm Nhàn im lặng.</p>
+
+            <p class="dialogue">— Vậy... ta phải làm gì?</p>
+
+            <p class="dialogue">— Im.</p>
+
+            <p>Lục Cẩu nói dứt khoát.</p>
+
+            <p class="dialogue">— Huynh im đi. Đừng nói gì. Đừng giải thích. Đừng phủ nhận. Chuyện này vài ngày sẽ qua. Ngoại môn suốt ngày có tin đồn mới, chẳng ai nhớ lâu.</p>
+
+            <p>Lâm Nhàn nhìn Lục Cẩu. Phải công nhận, gã tham ăn nhiều chuyện này đôi khi sáng suốt đến bất ngờ.</p>
+
+            <p class="dialogue">— Được. Ta im.</p>
+
+            <p class="dialogue">— Tốt. À mà...</p>
+
+            <p>Lục Cẩu ngần ngừ.</p>
+
+            <p class="dialogue">— Trần sư huynh đang tìm huynh. Gã muốn cảm tạ. Nếu gã đến, huynh cũng đừng nói nhiều. Nói ít thôi. Càng ít càng tốt.</p>
+
+            <p class="thought">Im lặng là vàng. Được rồi. Tôi vốn không muốn nói nhiều.</p>
+
+            <p class="dialogue">— Hiểu rồi.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Tin đồn lan nhanh hơn Lâm Nhàn tưởng.</p>
+
+            <p>Đến buổi trưa, cả nhà ăn ngoại môn đã biết. Lâm Nhàn ngồi ở góc, bưng bát cháo, cảm nhận được ánh mắt từ mọi hướng. Không phải ánh mắt ác ý, mà là tò mò, ngạc nhiên, và một chút kính nể mơ hồ.</p>
+
+            <p>Bình thường, không ai thèm nhìn hắn. Luyện Khí tầng ba, yếu nhất tông môn, tồn tại mờ nhạt nhất khu ngoại môn. Nhưng hôm nay, mọi thứ khác.</p>
+
+            <p>Hắn nghe được những mẩu chuyện rời rạc bay đến tai:</p>
+
+            <p>"...Lâm Nhàn đó, gã ở cùng phòng Lục Cẩu..."</p>
+
+            <p>"...Nghe nói gã chỉ nói một câu mà Trần sư huynh giác ngộ..."</p>
+
+            <p>"...Nấu canh mà cũng hàm chứa đan đạo, ghê thật..."</p>
+
+            <p>"...Tầng ba thôi à? Vậy sao biết luyện đan?"</p>
+
+            <p>"...Biết đâu gã ẩn giấu tu vi?"</p>
+
+            <p>Câu cuối khiến Lâm Nhàn suýt sặc cháo.</p>
+
+            <p class="thought">Ẩn giấu tu vi? Tôi ẩn cái gì? Luyện Khí tầng ba thật mà!</p>
+
+            <p>Hắn cúi đầu húp cháo, không dám nhìn ai.</p>
+
+            <p>Và đúng lúc đó, Trần Bách xuất hiện.</p>
+
+            <p>Gã đi thẳng đến bàn Lâm Nhàn, bưng theo một cái đĩa. Trên đĩa đặt một viên đan xám xịt, méo mó, cùng một chén trà.</p>
+
+            <p>Cả nhà ăn im phắc.</p>
+
+            <p>Trần Bách đặt đĩa xuống trước mặt Lâm Nhàn, rồi đứng thẳng, cúi người chín mươi độ.</p>
+
+            <p class="dialogue">— Lâm sư đệ, đa tạ sư đệ chỉ điểm. Trần Bách ghi nhớ ân tình.</p>
+
+            <p>Im lặng.</p>
+
+            <p>Cả nhà ăn im lặng.</p>
+
+            <p>Lâm Nhàn nhìn viên đan, nhìn Trần Bách, rồi nhìn Lục Cẩu đang ngồi đối diện. Lục Cẩu trợn mắt, lắc đầu điên cuồng, miệng mấp máy không ra tiếng: "Đừng. Nói. Gì."</p>
+
+            <p>Lâm Nhàn nuốt nước bọt.</p>
+
+            <p class="thought">Bình tĩnh. Nói ít. Càng ít càng tốt.</p>
+
+            <p>Hắn khẽ gật đầu.</p>
+
+            <p class="dialogue">— Ngươi tự mình lĩnh ngộ. Không liên quan đến ta.</p>
+
+            <p>Câu này hắn thật lòng. Hắn thật sự nghĩ Trần Bách tự giỏi, chứ hắn có biết luyện đan đâu mà chỉ điểm.</p>
+
+            <p>Nhưng Trần Bách nghe xong, mắt sáng bừng.</p>
+
+            <p class="dialogue">— Sư đệ quá khiêm tốn. Nếu không phải sư đệ nói câu ấy, Trần Bách có luyện thêm ba năm nữa cũng không thành.</p>
+
+            <p>Gã đẩy đĩa về phía Lâm Nhàn.</p>
+
+            <p class="dialogue">— Viên đan đầu tiên, xin dâng tặng sư đệ.</p>
+
+            <p class="thought">Gã này... cho ta viên đan?</p>
+
+            <p>Lâm Nhàn nhìn viên đan xám xịt. Xấu xí. Méo mó. Nhưng đó là viên đan thật sự, có dược tính, có giá trị.</p>
+
+            <p>Và gã đang tặng cho hắn.</p>
+
+            <p>Hắn muốn từ chối, nhưng nhớ lời Lục Cẩu: đừng nói nhiều. Từ chối cũng là nói nhiều. Hắn cầm viên đan lên, cất vào túi.</p>
+
+            <p class="dialogue">— Ừ.</p>
+
+            <p>Một chữ. Chỉ một chữ.</p>
+
+            <p>Trần Bách cúi đầu thêm lần nữa, rồi quay đi, bước chân nhẹ nhàng như vừa trút được gánh nặng ngàn cân.</p>
+
+            <p>Lâm Nhàn ngồi yên, mặt không biểu cảm.</p>
+
+            <p>Bên trong, nội tâm hắn đang sụp đổ.</p>
+
+            <p class="thought">Xong rồi. Mọi người đều nhìn. Cả nhà ăn đều thấy Trần Bách cúi đầu tặng đan cho ta. Bây giờ ai cũng nghĩ ta thật sự chỉ điểm gã.</p>
+
+            <p class="thought">Mà ta chỉ nấu canh thôi!</p>
+
+            <p>Lục Cẩu cúi đầu húp cháo, vai rung rung.</p>
+
+            <p>Lâm Nhàn liếc sang. Gã đang cố nhịn cười.</p>
+
+            <p class="thought">...Được lắm Lục Cẩu. Ghi sổ.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Chiều hôm đó, tin đồn đã biến tướng.</p>
+
+            <p>Lâm Nhàn phát hiện điều này khi đi gánh nước.</p>
+
+            <p>Hắn vác đôi thùng gỗ đi ngang giếng nước, nghe hai sư huynh nói chuyện. Họ không nhìn thấy hắn vì hắn đứng sau bụi cây.</p>
+
+            <p class="dialogue">— Ngươi nghe chưa? Lâm Nhàn, gã Luyện Khí tầng ba ấy, gã chỉ điểm Trần Bách luyện đan.</p>
+
+            <p class="dialogue">— Nghe rồi. Nhưng ta nghe là khác. Nghe nói gã không chỉ biết đan đạo. Gã nấu ăn cũng giỏi lắm, dùng rau dại cá dại nấu ra đồ ăn ngon hơn nhà ăn.</p>
+
+            <p class="dialogue">— Nấu ăn thì liên quan gì?</p>
+
+            <p class="dialogue">— Ngươi không hiểu à? Nấu ăn và luyện đan bản chất giống nhau. Đều là kết hợp nguyên liệu, kiểm soát lửa, nắm đúng thời điểm. Gã Lâm Nhàn này có thể dùng nấu ăn để ngộ ra đan đạo, chứng tỏ gã hiểu bản chất sâu xa. Không phải cảnh giới bình thường đâu.</p>
+
+            <p class="dialogue">— Chờ đã... ngươi nói gã hiểu bản chất? Nhưng gã mới Luyện Khí tầng ba!</p>
+
+            <p class="dialogue">— Chính vì vậy mới lạ chứ. Tu vi thấp mà kiến thức sâu. Hoặc là gã có sư phụ giấu, hoặc là...</p>
+
+            <p class="dialogue">— Hoặc là?</p>
+
+            <p class="dialogue">— Hoặc là tu vi gã không chỉ tầng ba.</p>
+
+            <p>Im lặng một lúc.</p>
+
+            <p class="dialogue">— Ngươi nói... gã ẩn giấu tu vi?</p>
+
+            <p class="dialogue">— Ta không nói. Nhưng nghĩ mà xem. Gã ngất ba ngày, tỉnh dậy hoàn toàn thay đổi. Biết nấu ăn, hiểu đan đạo, tính tình bình tĩnh khác thường. Trước đây gã nhát như thỏ, bây giờ nhìn trưởng lão đi ngang còn không nhúc nhích. Ngươi không thấy kỳ lạ à?</p>
+
+            <p>Lâm Nhàn đứng sau bụi cây, tay nắm chặt quang gánh.</p>
+
+            <p class="thought">Tôi bình tĩnh vì đã từng sống hai mươi hai năm ở thế giới hiện đại! Tôi biết nấu ăn vì từng nấu mì gói trong phòng trọ! Tôi không sợ trưởng lão vì tôi không biết phải sợ kiểu gì!</p>
+
+            <p class="thought">Mấy người não bổ cái gì vậy?!</p>
+
+            <p>Hắn muốn bước ra giải thích. Muốn nói: "Ta chỉ là ngoại môn đệ tử bình thường, tu vi Luyện Khí tầng ba thật, không ẩn giấu gì cả."</p>
+
+            <p>Nhưng lời Lục Cẩu vang trong đầu: <em>"Càng giải thích càng rắc rối."</em></p>
+
+            <p>Hắn hít một hơi sâu, vác thùng nước, lặng lẽ đi vòng đường khác.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Tối hôm đó, Lâm Nhàn nằm trên giường, nhìn trần nhà.</p>
+
+            <p class="dialogue">— Lục Cẩu.</p>
+
+            <p class="dialogue">— Gì?</p>
+
+            <p class="dialogue">— Tin đồn... có vẻ không dừng lại.</p>
+
+            <p>Lục Cẩu trở mình trên giường tầng trên, thò đầu xuống nhìn hắn.</p>
+
+            <p class="dialogue">— Ta biết. Hôm nay ta nghe ít nhất năm phiên bản khác nhau. Có phiên bản nói huynh là đan sư ẩn danh. Có phiên bản nói huynh giả vờ yếu để tu luyện đan đạo. Có phiên bản nói huynh... thôi, phiên bản đó quá điên, không kể.</p>
+
+            <p class="dialogue">— Kể.</p>
+
+            <p class="dialogue">— ...Có người nói huynh là lão quái vật chuyển thế.</p>
+
+            <p class="thought">Lão quái vật chuyển thế.</p>
+
+            <p class="thought">Tôi hai mươi hai tuổi. Kiếp trước là nhân viên văn phòng. Thành tích lớn nhất trong đời là hoàn thành báo cáo quý mà không bị sếp chửi.</p>
+
+            <p class="dialogue">— Lục Cẩu, ta phải làm gì?</p>
+
+            <p>Lục Cẩu gãi đầu, suy nghĩ.</p>
+
+            <p class="dialogue">— Huynh à, ta nghĩ... huynh cứ sống bình thường. Đừng giải thích, đừng phủ nhận, đừng thay đổi gì. Tin đồn ngoại môn, vài ngày là quên. Miễn là đừng có thêm chuyện gì xảy ra.</p>
+
+            <p class="dialogue">— Ừ. Đúng. Sống bình thường. Không gây chuyện.</p>
+
+            <p class="thought">Sống yên ổn. Đừng nổi bật. Đây là mục tiêu duy nhất của tôi.</p>
+
+            <p class="dialogue">— À mà này.</p>
+
+            <p>Lục Cẩu lại thò đầu xuống.</p>
+
+            <p class="dialogue">— Ngày mai nấu canh không? Ta thèm canh cá.</p>
+
+            <p class="thought">...Ưu tiên bao tử hơn sinh mạng.</p>
+
+            <p class="dialogue">— Nấu.</p>
+
+            <p class="dialogue">— Huynh tốt nhất!</p>
+
+            <p>Lục Cẩu rúc vào chăn, vui vẻ.</p>
+
+            <p>Lâm Nhàn nhắm mắt, tự nhủ: chỉ cần im lặng, mọi chuyện sẽ qua.</p>
+
+            <p>Hắn không biết rằng, cách hắn xử lý chuyện này, cái cách hắn gật đầu nhận viên đan mà không nói nhiều, cái cách hắn chỉ nói "ừ" rồi im lặng, đã khiến tin đồn càng thêm phần huyền bí.</p>
+
+            <p>Bởi vì trong suy nghĩ của mọi người, ngoại môn đệ tử bình thường bị khen oan sẽ vội vàng phủ nhận, sẽ ngượng ngùng, sẽ giải thích rối rít. Nhưng Lâm Nhàn không làm vậy. Hắn im lặng, bình thản, nhận viên đan rồi cất đi, như thể chuyện đó chẳng có gì đáng nói.</p>
+
+            <p>Phản ứng đó, trong mắt ngoại môn đệ tử, chỉ có hai cách giải thích.</p>
+
+            <p>Một: Lâm Nhàn thật sự không biết gì, chỉ vô tình.</p>
+
+            <p>Hai: Lâm Nhàn biết tất cả, nhưng không thèm thừa nhận, vì đối với hắn, việc chỉ điểm một gã ngoại môn luyện đan chẳng đáng để khoe.</p>
+
+            <p>Đa số chọn cách giải thích thứ hai.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Ba ngày sau, Lâm Nhàn nghĩ tin đồn sẽ lắng.</p>
+
+            <p>Hắn sai.</p>
+
+            <p>Trần Bách luyện thêm được hai viên đan nữa. Chất lượng vẫn thấp, nhưng gã đã ổn định được quy trình. Gã bắt đầu luyện đan cho đồng môn ngoại môn, đổi lấy linh thạch mua dược liệu. Một vòng tuần hoàn nhỏ hình thành: Trần Bách luyện đan, ngoại môn đệ tử có đan dược giá rẻ, ai cũng có lợi.</p>
+
+            <p>Và mỗi khi ai hỏi Trần Bách bí quyết, gã đều nói cùng một câu:</p>
+
+            <p class="dialogue">— Tất cả là nhờ Lâm sư đệ chỉ điểm.</p>
+
+            <p>Lâm Nhàn muốn khóc.</p>
+
+            <p class="thought">Gã ơi, ta cầu xin, đừng nhắc tên ta nữa.</p>
+
+            <p>Nhưng hắn không thể nói ra. Vì bây giờ hắn đã hiểu: mở miệng là sai. Bất cứ điều gì hắn nói đều sẽ bị diễn giải theo cách hắn không lường trước. Giải thích là kiêm nhường. Phủ nhận là khiêm tốn. Im lặng là thâm sâu.</p>
+
+            <p>Không có cách nào thắng.</p>
+
+            <p class="thought">Vậy thì... im thôi.</p>
+
+            <p>Từ đó, Lâm Nhàn nói ít hơn trước. Không phải vì hắn muốn giả cao nhân, mà vì hắn sợ mở miệng. Mỗi câu nói đều có thể trở thành "kim ngôn ngọc ngữ" trong đầu ai đó.</p>
+
+            <p>Hắn quét lá, im lặng.</p>
+
+            <p>Hắn ăn cơm, im lặng.</p>
+
+            <p>Hắn nấu canh, im lặng.</p>
+
+            <p>Hắn tu luyện, im lặng.</p>
+
+            <p>Và mỗi ngày, hắn cảm nhận được ánh mắt của đồng môn thay đổi. Từ "tò mò" sang "kính nể." Từ "kính nể" sang "kính sợ."</p>
+
+            <p>Bởi vì một người im lặng, bình thản, không tranh không đoạt, trong mắt ngoại môn đệ tử sống lay lắt, đó là dấu hiệu của kẻ không cần tranh giành.</p>
+
+            <p>Và kẻ không cần tranh giành, hoặc là không có gì, hoặc là có tất cả.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Tối ngày thứ năm, Lâm Nhàn đang ngồi trước hiên nấu canh thì Lục Cẩu chạy về, mặt tái mét.</p>
+
+            <p class="dialogue">— Lâm huynh.</p>
+
+            <p class="dialogue">— Gì?</p>
+
+            <p class="dialogue">— Tin đồn... lên đến nội môn rồi.</p>
+
+            <p>Lâm Nhàn tay cầm muôi, dừng giữa chừng.</p>
+
+            <p class="dialogue">— Cái gì?</p>
+
+            <p class="dialogue">— Nội môn. Có nội môn đệ tử nghe chuyện Trần Bách. Nghe nói gã rất tò mò, muốn xuống ngoại môn xem "ai là người chỉ điểm Trần sư huynh."</p>
+
+            <p>Tim Lâm Nhàn giật thót.</p>
+
+            <p class="dialogue">— Nội môn đệ tử? Ai?</p>
+
+            <p>Lục Cẩu nuốt nước bọt.</p>
+
+            <p class="dialogue">— Ta không biết tên. Chỉ nghe nói là đệ tử nội môn, tu vi ít nhất Trúc Cơ.</p>
+
+            <p class="thought">Trúc Cơ.</p>
+
+            <p class="thought">Cảnh giới thứ hai. Mạnh hơn Luyện Khí cả một tầng trời.</p>
+
+            <p class="thought">Nếu gã đó xuống đây, dùng linh thức thăm dò tu vi của ta...</p>
+
+            <p>Lâm Nhàn đặt muôi xuống, nhìn nồi canh đang sôi, bỗng thấy mất hết cảm giác đói.</p>
+
+            <p class="dialogue">— Lục Cẩu.</p>
+
+            <p class="dialogue">— Gì?</p>
+
+            <p class="dialogue">— Ta rất bình tĩnh.</p>
+
+            <p class="dialogue">— ...Huynh đang run.</p>
+
+            <p>Lâm Nhàn nhìn xuống tay mình. Đúng, hắn đang run.</p>
+
+            <p class="thought">Bình tĩnh. Bình tĩnh đi. Tôi chỉ là ngoại môn đệ tử bình thường, tu vi Luyện Khí tầng ba. Nội môn đệ tử xuống xem, thấy ta yếu ớt, sẽ thất vọng rồi đi thôi. Đúng không?</p>
+
+            <p class="thought">...Đúng không?</p>
+
+            <p>Hắn hít một hơi sâu, rồi múc canh ra bát.</p>
+
+            <p class="dialogue">— Ăn đi. Lo cũng không giải quyết được gì.</p>
+
+            <p>Lục Cẩu nhìn hắn, rồi nhìn bát canh.</p>
+
+            <p class="dialogue">— Huynh à... huynh biết không, lúc huynh bình tĩnh kiểu này, ta càng sợ.</p>
+
+            <p class="dialogue">— Sao?</p>
+
+            <p class="dialogue">— Vì trông huynh giống cao nhân thật.</p>
+
+            <p class="thought">...Cám ơn Lục Cẩu. Rất hữu ích.</p>
+
+            <p>Gió đêm thổi qua khu ngoại môn, lay nhẹ ngọn đèn dầu trước hiên. Từ xa, ánh sáng trên các đỉnh núi nội môn nhấp nháy, xa xăm và lạnh lẽo.</p>
+
+            <p>Lâm Nhàn húp canh, mắt nhìn về phía nội môn.</p>
+
+            <p class="thought">Đừng xuống đây. Cầu xin. Đừng xuống.</p>
+
+            <p>Trên đỉnh núi nội môn, một thanh niên đang ngồi xếp bằng luyện công bỗng mở mắt. Hắn ta vươn vai, nhìn về phía ngoại môn dưới chân núi, ánh mắt sáng lên một tia tò mò.</p>
+
+            <p class="dialogue">— Ngoại môn có người chỉ điểm đan đạo? Thú vị.</p>
+
+            <p>Hắn ta đứng dậy, phủi áo.</p>
+
+            <p class="dialogue">— Ngày mai, ta xuống xem thử.</p>
+        </div>
+
+        <footer class="chapter__footer">
+            <div class="chapter__wordcount">~2,944 từ</div>
+            <div class="chapter__nav-bottom">
+                <a href="chapter-02.html">&larr; Chương trước</a>
+                <a href="index.html">Mục lục</a>
+                <a href="chapter-04.html">Chương sau &rarr;</a>
+            </div>
+        </footer>
+    </article>
+</body>
+</html>
