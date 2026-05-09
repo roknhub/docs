@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 28 — Quốc Vận Rung Chuyển | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-27.html">&larr; CHƯƠNG 27</a>
+      <span class="chapter-indicator">28/30</span>
+      <a href="chapter-29.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 28</div>
+      <h1>Quốc Vận Rung Chuyển</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Sáng hôm sau, Diệp Trúc Khanh vẫn ngồi ở bậc cửa. Kiếm trên đùi. Mắt mở.</p>
+
+<p>— Ngươi không ngủ?</p>
+
+<p>— Ngủ rồi.</p>
+
+<p class="thought"><em>Nàng nói ngủ rồi, nhưng Thiên Diễn Đồng đọc: không. Nàng canh cả đêm.</em></p>
+
+<p>Hắn không nói thêm. Có những lời cảm ơn nói lần thứ hai chỉ làm nhẹ đi lần đầu.</p>
+
+<p>Xác sát thủ đã được thị vệ mang đi. Vết máu trên sàn khô đen. Giường rách. Phòng tanh mùi sắt.</p>
+
+<p>Tiểu Phúc mang nước rửa mặt vào. Mặt gã trắng bệch, mắt sưng.</p>
+
+<p>— Quốc Sư, đêm qua Tiểu nhân nghe tiếng động, chạy ra thì đã... đã...</p>
+
+<p>— Ta không sao. Diệp cô nương bảo vệ ta.</p>
+
+<p>Tiểu Phúc nhìn Diệp Trúc Khanh. Mắt gã sáng lên, kiểu nhìn anh hùng cứu mỹ nhân, chỉ có điều ở đây anh hùng là nữ và "mỹ nhân" là tên bịp.</p>
+
+<p class="thought"><em>Gã nhìn nàng như nhìn thần tiên. Thêm một tín đồ.</em></p>
+
+<p>— Quốc Sư, còn chuyện nữa.</p>
+
+<p>— Gì?</p>
+
+<p>— Sáng nay có thêm ba tờ giấy dán ở ngõ phía nam. Cùng nội dung. "Quốc Sư phán Thiên Tử không sống quá ba năm."</p>
+
+<p class="thought"><em>Ba tờ. Hôm qua một. Hôm nay ba. Vương Bách Nhẫn đang tăng tốc.</em></p>
+
+<p class="thought"><em>Tin đã lan bao xa?</em></p>
+
+<p>— Có ai đọc được không?</p>
+
+<p>— Dạ, người bán nước ở đầu ngõ nói đã thấy mấy người xì xào. Nhưng Tiểu nhân xé hết rồi.</p>
+
+<p class="thought"><em>Xé giấy thì dễ. Xé tin đồn thì không.</em></p>
+
+<p>— Được rồi. Để ta tính.</p>
+
+<p>Diệp Trúc Khanh đứng dậy. Xoay cổ. Khẽ nhăn mặt, vai trái cứng.</p>
+
+<p>— Ta đi trước. Có chuyện, gọi.</p>
+
+<p>Nàng biến khỏi cửa sổ. Nhẹ. Kiểu người quen di chuyển trên mái nhà hơn trên đường.</p>
+
+<p class="thought"><em>Nàng đi tìm dấu vết Khí Thi. Ta xử lý Vương Bách Nhẫn. Mỗi người một mặt trận.</em></p>
+
+<p class="thought"><em>Nhưng mặt trận của ta, chỉ có miệng.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Giờ Tỵ. Hắn vào cung. Trấn khí vận cho vua.</p>
+
+<p>Ngồi cạnh long sàng. Nhắm mắt. Để rỗng. Nhìn lưới.</p>
+
+<p>Nút vua tối hơn hôm qua. Sợi nối mỏng hơn. Đứt thêm một vài sợi phụ ở rìa.</p>
+
+<p class="thought"><em>Nhanh hơn mình nghĩ. Không phải ba năm. Có thể hai. Có thể ít hơn.</em></p>
+
+<p class="thought"><em>Và mình không thể làm gì. "Trấn khí vận" là giả dược. Vua tin mình, niềm tin đó giữ sợi chính chưa đứt. Nhưng bệnh trong người vua là thật. Niềm tin không chữa được bệnh thật.</em></p>
+
+<p class="thought"><em>Hay là có thể?</em></p>
+
+<p class="thought"><em>Nếu đủ người tin vua sẽ khỏe...</em></p>
+
+<p class="thought"><em>Không. Đừng nghĩ vậy. Mình đã thấy Quốc Sư thứ 12 xoay bảy lần rồi chết trên pháp trường. Mỗi lần xoay, niềm tin mỏng đi. Và "vua sẽ khỏe" là lời xoay lớn nhất.</em></p>
+
+<p>Hắn mở mắt. Vua đang nhìn hắn.</p>
+
+<p>— Quốc Sư. Trẫm nghe tin... có kẻ ám sát khanh đêm qua?</p>
+
+<p>— Dạ. Một sát thủ. Đã bị xử lý.</p>
+
+<p>— Ai sai?</p>
+
+<p>— Thần đang tra. Nhưng không phải phe trong triều. Bên ngoài.</p>
+
+<p>Vua gật. Yếu. Tay run nhẹ trên chăn.</p>
+
+<p>— Khanh phải cẩn thận. Trẫm... không thể mất khanh.</p>
+
+<p class="thought"><em>"Không thể mất khanh." Vua nói thật. Thiên Diễn Đồng đọc: sợ. Sợ thật. Sợ mất người duy nhất mà vua tin có thể giữ vua sống.</em></p>
+
+<p class="thought"><em>Và mình, biết vua sắp chết, ngồi đây nói "thần sẽ cẩn thận."</em></p>
+
+<p class="thought"><em>Lừa đảo. Vẫn lừa đảo. Nhưng lần này, lừa vì thương.</em></p>
+
+<p>— Thần sẽ ở đây. Bệ hạ yên tâm.</p>
+
+<p>Vua nhắm mắt. Ngủ. Hơi thở nhẹ, đều, nhưng yếu.</p>
+
+<p>Hắn ngồi thêm nửa canh giờ. Rồi đứng dậy. Ra khỏi phòng ngự.</p>
+
+<p>Và mặt đất rung.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Không phải rung nhẹ. Rung thật. Sàn đá dưới chân hắn nứt một vệt dài. Tường hoàng cung rung lắc. Ngói rơi. Tiếng vỡ.</p>
+
+<p>Hắn bám vào cột hành lang. Chân không vững. Trời đang đứng bỗng nghiêng.</p>
+
+<p class="thought"><em>Động đất. Động đất thật sự.</em></p>
+
+<p>Tiếng la từ khắp nơi trong cung. Cung nữ chạy. Thái giám hét. Thị vệ rút kiếm, rồi nhận ra kiếm không chém được đất.</p>
+
+<p>Mười giây. Hai mươi giây. Ba mươi giây.</p>
+
+<p>Mặt đất dừng.</p>
+
+<p>Im lặng. Ngắn. Rồi tiếng khóc. Tiếng gọi nhau. Tiếng ngói vỡ tiếp tục rơi từ mái.</p>
+
+<p>Hắn buông cột. Tay run. Chân run. Tim đập loạn.</p>
+
+<p class="thought"><em>Động đất. Ở kinh thành. Đúng lúc mọi thứ đang loạn.</em></p>
+
+<p class="thought"><em>Trùng hợp?</em></p>
+
+<p>Hắn nhắm mắt. Bật lưới. Và thấy.</p>
+
+<p>Thiên Cơ đang rung. Toàn bộ. Không phải rung kiểu sợi nhỏ lắc. Rung kiểu cả tấm lưới chấn động. Như ai đó vừa ném đá vào giữa mạng nhện, và mọi sợi đều rung cùng lúc.</p>
+
+<p class="thought"><em>Thiên Cơ rung chấn. Động đất và Thiên Cơ rung cùng lúc. Cái nào gây ra cái nào?</em></p>
+
+<p class="thought"><em>Hay cả hai đều là triệu chứng của cùng một thứ?</em></p>
+
+<p class="thought"><em>Quốc vận rung chuyển. Theo nghĩa đen.</em></p>
+
+<p>Nút vua rung mạnh hơn mọi nút khác. Sợi chính, sợi mà hắn lo lắng mỗi ngày, giật giật như dây đàn sắp đứt.</p>
+
+<p class="thought"><em>Nếu mặt đất rung thêm một lần nữa, sợi đó có thể đứt.</em></p>
+
+<p class="thought"><em>Và nếu nó đứt...</em></p>
+
+<p>Hắn mở mắt. Chạy vào phòng ngự.</p>
+
+<p>Vua đang ngồi dậy. Mặt trắng. Hoàng quý phi đỡ bên cạnh. Thái giám quỳ quanh.</p>
+
+<p>— Bệ hạ, xin bệ hạ nằm xuống!</p>
+
+<p>— Động đất! Thiên phạt! Trẫm...</p>
+
+<p>Vua ho. Máu. Ít hơn lần trước, nhưng có.</p>
+
+<p>Hắn bước tới. Quỳ xuống. Tay nắm tay vua. Lạnh. Xương.</p>
+
+<p>— Bệ hạ. Không phải thiên phạt. Là Thiên Cơ đang chuyển vị.</p>
+
+<p class="thought"><em>Bịa. Mình bịa. "Chuyển vị" là từ mình bịa ngay bây giờ.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p class="thought"><em>Nhưng cũng có thể đúng. Thiên Cơ đang rung thật. Và mình đã thấy.</em></p>
+
+<p>— Chuyển vị?</p>
+
+<p>— Dạ. Như nước sông đổi dòng. Rung một lúc, rồi ổn. Không phải phạt. Là chuyển.</p>
+
+<p>Vua nhìn hắn. Mắt hoảng. Thiên Diễn Đồng đọc: muốn tin. Cần tin. Đang bám vào bất kỳ thứ gì để không hoảng loạn.</p>
+
+<p>— Khanh... khanh chắc chắn?</p>
+
+<p>— Thần nhìn thấy. Thiên Cơ không tối. Nó rung, nhưng không tối.</p>
+
+<p class="thought"><em>Nửa thật nửa giả. Thiên Cơ rung thật. Nhưng "không tối" thì mình không chắc. Nó đang rung mạnh quá, mình chưa phân biệt được sáng tối.</em></p>
+
+<p>Vua nắm chặt tay hắn. Gật. Nằm xuống.</p>
+
+<p>— Quốc Sư ở đây. Trẫm... trẫm yên tâm.</p>
+
+<p class="thought"><em>Yên tâm. Vua yên tâm vì mình ở đây. Và sợi Thiên Cơ của vua, dừng giật.</em></p>
+
+<p class="thought"><em>Niềm tin của một người đối với một người. Nhỏ. Nhưng chính xác.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Một canh giờ sau, tin từ ngoài cung đổ về.</p>
+
+<p>Động đất ảnh hưởng cả kinh thành. Ba dãy nhà phía nam sập. Chợ lớn đổ mái. Tường thành phía tây nứt. Ít nhất năm người chết, hàng chục bị thương.</p>
+
+<p>Và tệ hơn: dân hoảng loạn.</p>
+
+<p>Tiểu Phúc chạy vào cung tìm hắn, mặt đẫm mồ hôi:</p>
+
+<p>— Quốc Sư! Ngoài kia loạn lắm! Dân nói "quốc vận sụp!" Mấy miếu thờ Quốc Sư bị đổ, dân khóc, nói Quốc Sư bỏ Đại Ly!</p>
+
+<p class="thought"><em>Miếu thờ đổ. Miếu thờ mình đổ.</em></p>
+
+<p class="thought"><em>Và dân nghĩ đó là điềm: Quốc Sư bỏ Đại Ly. Quốc vận hết.</em></p>
+
+<p class="thought"><em>Trùng với tin "Quốc Sư phán vua không sống quá ba năm" đang lan. Hai thứ gộp lại: miếu đổ cộng tin đồn, bằng hoảng loạn nhân đôi.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn không sắp đặt động đất. Nhưng gã đã gieo hạt đúng lúc. Và bão tưới nước cho hạt đó.</em></p>
+
+<p>— Còn gì nữa?</p>
+
+<p>— Dạ, có người hô "Quốc Sư phán vua sắp chết" ở chợ lớn. Nhiều người nghe. Rồi động đất xảy ra. Bây giờ họ tin...</p>
+
+<p class="thought"><em>Họ tin. Đương nhiên. Quốc Sư phán vua chết, rồi đất rung, miếu đổ. Bằng chứng hoàn hảo.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn không cần làm gì thêm. Trời đã làm hộ gã.</em></p>
+
+<p>— Tiểu Phúc, vua đang ngủ. Đừng đánh thức. Gọi thị vệ cung canh chặt. Ta ra ngoài.</p>
+
+<p>— Quốc Sư đi đâu?</p>
+
+<p>— Ra phố.</p>
+
+<p>Tiểu Phúc há miệng.</p>
+
+<p>— Ra phố? Bây giờ? Dân đang hoảng loạn, đang giận Quốc Sư mà!</p>
+
+<p>— Chính vì thế ta phải ra.</p>
+
+<p class="thought"><em>Nếu mình trốn trong cung, tin đồn sẽ thành sự thật. "Quốc Sư bỏ chạy." "Quốc Sư biết quốc vận sụp nên trốn." Mọi thứ sẽ vỡ.</em></p>
+
+<p class="thought"><em>Nếu mình ra, có thể bị giết. Dân hoảng loạn thì ai cũng có thể là sát thủ.</em></p>
+
+<p class="thought"><em>Nhưng nếu mình ra, và nói được đúng câu, mọi thứ có thể quay lại.</em></p>
+
+<p class="thought"><em>Lời nói tạo ra bão. Lời nói dẹp bão.</em></p>
+
+<p class="thought"><em>Nhưng lần này, không phải lời bịa.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Cổng Đoan Minh. Cổng chính hoàng cung, hướng nam.</p>
+
+<p>Hắn đứng ở bậc cấp cao nhất. Nhìn xuống.</p>
+
+<p>Trước mặt hắn, quảng trường rộng nhất kinh thành đã đầy người. Không phải đông kiểu lễ hội. Đông kiểu hoảng loạn. Người chen nhau. Tiếng khóc. Tiếng hét. Có kẻ quỳ lạy trời. Có kẻ ôm con chạy. Có kẻ đứng yên, mắt trống rỗng.</p>
+
+<p>Và khi đám đông thấy hắn, tiếng ồn dừng. Không hẳn dừng. Chuyển. Từ hỗn loạn sang tập trung. Ngàn đôi mắt nhìn lên bậc cấp.</p>
+
+<p>Nhìn hắn. Quốc Sư.</p>
+
+<p>Thiên Diễn Đồng tự bật. Không cần mở. Nó mở vì sóng cảm xúc quá mạnh.</p>
+
+<p>Đọc: sợ. Giận. Hy vọng. Tuyệt vọng. Tin. Nghi. Tất cả cùng lúc, từ ngàn người, đổ vào hắn như sóng.</p>
+
+<p class="thought"><em>Mạnh quá. Chưa bao giờ mạnh thế. Ngàn người, mỗi người một cảm xúc, đổ vào cùng lúc.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình đứng trước ngàn người trên sân khấu đa cấp. Lúc đó, mình kiểm soát được. Vì mình không quan tâm họ nghĩ gì.</em></p>
+
+<p class="thought"><em>Bây giờ, mình quan tâm. Và điều đó làm mọi thứ khó hơn gấp trăm lần.</em></p>
+
+<p>Một giọng từ đám đông:</p>
+
+<p>— Quốc Sư! Quốc Sư phán quốc vận sụp phải không!</p>
+
+<p>Giọng khác:</p>
+
+<p>— Miếu đổ rồi! Quốc Sư bỏ chúng tôi rồi!</p>
+
+<p>Giọng khác nữa, run, già:</p>
+
+<p>— Ngài ơi, đất rung, nhà sập, con tôi bị thương, xin ngài cứu...</p>
+
+<p class="thought"><em>Cứu. Họ muốn mình cứu.</em></p>
+
+<p class="thought"><em>Mình không cứu được ai. Mình không có pháp lực, không có quân đội, không có thuốc, không có gì.</em></p>
+
+<p class="thought"><em>Mình chỉ có miệng.</em></p>
+
+<p>Hắn nhắm mắt. Một giây. Hai giây.</p>
+
+<p>Nhìn lưới. Thiên Cơ vẫn rung. Nhưng nút ở kinh thành, nút nối ngàn người trước mặt hắn, đang rung theo cùng một nhịp. Cùng một sợ. Cùng một hướng.</p>
+
+<p class="thought"><em>Họ đang nhìn mình. Và Thiên Cơ đang chờ mình nói.</em></p>
+
+<p class="thought"><em>Nếu mình nói "quốc vận ổn," họ tin, Thiên Cơ ổn. Nhưng đó là bịa. Và mình đã bịa đủ rồi.</em></p>
+
+<p class="thought"><em>Nếu mình nói thật...</em></p>
+
+<p class="thought"><em>Lời thật mạnh hơn lời bịa. Mình đã mất hai kiếp để hiểu.</em></p>
+
+<p class="thought"><em>Vậy thì, lần này, nói thật.</em></p>
+
+<p>Hắn mở mắt. Nhìn đám đông. Và nói.</p>
+
+<p>Không phải giọng Quốc Sư. Không phải giọng bí ẩn, giọng sấm, giọng "thiên cơ bất khả lộ."</p>
+
+<p>Giọng người.</p>
+
+<p>— Ta không cứu được ai.</p>
+
+<p>Im lặng. Đám đông đóng băng.</p>
+
+<p>— Ta không ngăn được đất rung. Ta không dựng lại nhà đổ. Ta không chữa được người bị thương. Ta không phải thần.</p>
+
+<p class="thought"><em>Nói thật. Lần đầu tiên trước ngàn người, nói thật.</em></p>
+
+<p class="thought"><em>Và Thiên Cơ... đang nghe.</em></p>
+
+<p>Lưới rung. Nhưng khác. Không phải rung hoảng loạn. Rung kiểu... chờ. Như mạng nhện cảm nhận con nhện bước, và chờ xem nó đi hướng nào.</p>
+
+<p>Tiếng xì xào. Một người quỳ xuống. Một người khóc to hơn.</p>
+
+<p>— Nhưng ta ở đây.</p>
+
+<p>Hắn bước xuống một bậc. Gần đám đông hơn.</p>
+
+<p>— Ta không bỏ đi. Ta không trốn trong cung. Ta đứng đây, trước mặt các ngươi, và nói thật: ta sợ.</p>
+
+<p>Thiên Diễn Đồng đọc: sốc. Cả ngàn người, sốc. Quốc Sư nói "ta sợ." Quốc Sư, người phán trời, người cầu mưa, người tiên tri ám sát, nói "ta sợ."</p>
+
+<p>— Đất rung, ta cũng sợ. Nhà sập, ta cũng đau. Người bị thương, ta cũng muốn cứu mà không biết cách.</p>
+
+<p>Bước xuống thêm một bậc.</p>
+
+<p>— Nhưng ta nói cho các ngươi nghe một điều. Không phải lời sấm. Không phải thiên cơ. Lời thật.</p>
+
+<p>Dừng.</p>
+
+<p>— Quốc vận không nằm trên trời. Quốc vận nằm ở đây.</p>
+
+<p>Hắn chỉ xuống. Chỉ đám đông.</p>
+
+<p>— Ở các ngươi. Ở mỗi người đang đứng đây. Đất rung, các ngươi không bỏ chạy. Các ngươi đến đây. Các ngươi tìm nhau. Các ngươi giúp nhau đứng dậy trên đường đến đây. Ta nhìn thấy.</p>
+
+<p class="thought"><em>Mình nhìn thấy. Trên đường ra cổng, mình thấy người đỡ người. Kẻ khiêng người bị thương. Bà già dắt trẻ con. Không ai bảo. Tự làm.</em></p>
+
+<p class="thought"><em>Và đó, là thứ duy nhất mình nói được mà không dối.</em></p>
+
+<p>— Nhà sập thì dựng lại. Người bị thương thì chữa. Tường nứt thì xây. Không phải ta làm. Các ngươi làm. Ta chỉ đứng đây, nói cho các ngươi biết một điều các ngươi đã biết nhưng đang quên.</p>
+
+<p>Hắn nhìn đám đông. Ngàn đôi mắt nhìn lại.</p>
+
+<p>— Đại Ly không sụp vì đất rung. Đại Ly chỉ sụp khi các ngươi tin nó sụp.</p>
+
+<p>Im lặng.</p>
+
+<p>Và Thiên Cơ rung.</p>
+
+<p>Khác. Hoàn toàn khác. Không phải rung hoảng loạn. Rung kiểu... gom. Ngàn sợi nhỏ, từ ngàn người, đang rung cùng một nhịp. Hướng về một điểm. Hướng về hắn.</p>
+
+<p class="thought"><em>Niềm tin. Đang chảy. Không phải kiểu tín đồ quỳ lạy thần. Kiểu người tin người. Kiểu "tao nghe mày, tao đứng dậy."</em></p>
+
+<p class="thought"><em>Khác. Niềm tin này khác mọi niềm tin mình từng tạo ra. Vì lần này, mình không lừa. Mình nói thật.</em></p>
+
+<p class="thought"><em>Và Thiên Cơ, phản ứng với lời thật, mạnh hơn lời bịa.</em></p>
+
+<p>Một người trong đám đông đứng dậy. Lau mắt. Quay lại nhìn người cạnh.</p>
+
+<p>— Đi. Về dựng lại nhà.</p>
+
+<p>Một người nữa. Rồi một người nữa.</p>
+
+<p>Đám đông không giải tán. Nó chuyển hóa. Từ hoảng loạn sang hành động. Từng nhóm nhỏ tách ra, quay về phố, về nhà, về chỗ đổ nát, bắt đầu dọn.</p>
+
+<p>Hắn đứng trên bậc cấp. Nhìn. Tay run. Chân run. Nhưng mặt bình thản.</p>
+
+<p class="thought"><em>Mình vừa nói thật trước ngàn người. Và nó hoạt động.</em></p>
+
+<p class="thought"><em>Không phải vì mình giỏi. Vì lời thật, ở thế giới này, là thứ mạnh nhất.</em></p>
+
+<p class="thought"><em>Lão Quốc Sư nói đúng. Thiên Cơ không chảy cho kẻ chạy. Nó chảy cho kẻ đứng yên.</em></p>
+
+<p class="thought"><em>Và hôm nay, mình đứng yên. Lần đầu tiên.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Quốc Sư Phủ.</p>
+
+<p>Hắn vừa về đến cổng thì thấy Tiểu Phúc đứng chờ. Mặt gã khác. Không phải lo. Mừng.</p>
+
+<p>— Quốc Sư! Phúc An về rồi!</p>
+
+<p class="thought"><em>Phúc An.</em></p>
+
+<p>Hắn bước nhanh vào. Sân trong. Phúc An đang ngồi dựa tường, mặt sạm nắng, áo rách, cánh tay trái bó vải thô. Gã gầy hơn. Già hơn. Nhưng sống.</p>
+
+<p>Và bên cạnh gã, một thiếu nữ.</p>
+
+<p>Nhỏ. Gầy. Nhưng đã khác. Không còn áo rách ăn mày. Mặc áo vải thường dân, sạch, nhưng rẻ. Tóc buộc gọn. Và đôi mắt.</p>
+
+<p>Đôi mắt sáng. Sáng lạ. Sáng kiểu mình từng thấy ở chợ, ngày hắn thuận miệng nói "con bé này sẽ thay đổi thiên hạ."</p>
+
+<p>A Ly.</p>
+
+<p>— Quốc Sư!</p>
+
+<p>Phúc An cố đứng dậy. Hắn giơ tay ngăn.</p>
+
+<p>— Ngồi. Kể.</p>
+
+<p>Phúc An thở. Nặng.</p>
+
+<p>— Tiểu nhân đến trấn Thanh Hà. Tìm được cô bé. Nhưng có người đến trước. Áo đen. Ba người. Bắt cô bé. Tiểu nhân...</p>
+
+<p>Gã nhìn cánh tay bó.</p>
+
+<p>— Tiểu nhân liều. Đợi đêm, lẻn vào. Cô bé bị nhốt trong miếu cũ ngoài trấn. Tiểu nhân cắt dây, dẫn chạy. Bị chém một nhát. Nhưng chạy được.</p>
+
+<p class="thought"><em>Phúc An. Thái giám già. Không biết võ. Một mình lẻn vào cứu người bị ba sát thủ giam.</em></p>
+
+<p class="thought"><em>Vì mình bảo gã đi.</em></p>
+
+<p class="thought"><em>Vì gã tin mình.</em></p>
+
+<p>Hắn nhìn Phúc An. Nhìn cánh tay bó. Nhìn mặt sạm, mắt trũng, kiệt sức.</p>
+
+<p class="thought"><em>Gã suýt chết. Vì mình.</em></p>
+
+<p>— Phúc An, làm tốt lắm. Nghỉ đi.</p>
+
+<p>— Dạ, Tiểu nhân...</p>
+
+<p>— Nghỉ. Đó là lệnh.</p>
+
+<p>Phúc An cười. Mệt. Nhắm mắt. Ngả đầu vào tường.</p>
+
+<p>Hắn quay sang A Ly. Con bé nhìn hắn. Không quỳ. Không lạy. Nhìn thẳng.</p>
+
+<p>— Tiên sinh.</p>
+
+<p>Giọng nhỏ. Nhưng không sợ. Khác hẳn lần gặp ở chợ.</p>
+
+<p>— A Ly. Ngươi có sao không?</p>
+
+<p>— Không sao. Ông ấy cứu con.</p>
+
+<p>Nàng nhìn Phúc An. Rồi nhìn lại hắn.</p>
+
+<p>— Tiên sinh, tại sao tiên sinh bảo người đến cứu con?</p>
+
+<p class="thought"><em>Tại sao. Câu hỏi đơn giản. Câu trả lời không đơn giản.</em></p>
+
+<p class="thought"><em>Vì mình thuận miệng nói ngươi sẽ thay đổi thiên hạ, và Thiên Cơ nghe, và bây giờ có kẻ muốn giết ngươi vì điều đó, và mình cảm thấy có lỗi?</em></p>
+
+<p class="thought"><em>Hay vì mình bắt đầu tin ngươi thật sự sẽ thay đổi thiên hạ?</em></p>
+
+<p>— Vì ngươi quan trọng.</p>
+
+<p>A Ly nhìn hắn. Lâu. Rồi gật đầu. Nhẹ. Kiểu người chấp nhận một sự thật mà không cần hiểu hết.</p>
+
+<p>Hắn nhìn khí vận quanh con bé. Thiên Diễn Đồng mở nhẹ.</p>
+
+<p class="thought"><em>Không còn trống rỗng. Khí vận A Ly đã thay đổi. Mỏng, nhưng có. Như trang giấy trắng bắt đầu có chữ. Chữ mờ, chưa đọc được, nhưng có.</em></p>
+
+<p class="thought"><em>Và trong lưới Thiên Cơ, nút A Ly sáng. Nhỏ. Nhưng sáng hơn hầu hết mọi nút mình từng thấy.</em></p>
+
+<p class="thought"><em>Con bé này, thật sự, đang trở thành thứ mình đã bịa.</em></p>
+
+<p class="thought"><em>Thiên Mệnh.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm. Phòng riêng.</p>
+
+<p>Hắn ngồi một mình. Trà nguội trên bàn. Nhìn ra sân.</p>
+
+<p>Kinh thành im hơn mọi đêm. Sau động đất, người ta mệt. Nhưng không hoảng nữa. Hắn thấy ánh đèn ở các phố, tiếng búa đóng gỗ, tiếng người nói chuyện. Dựng lại. Sửa lại. Sống tiếp.</p>
+
+<p class="thought"><em>Mình nói đúng. Quốc vận nằm ở họ, không phải ở trời.</em></p>
+
+<p class="thought"><em>Và Thiên Cơ nghe. Lưới đã bớt rung. Nút kinh thành ổn dần. Sợi chính của vua chưa mạnh lên, nhưng dừng giật.</em></p>
+
+<p class="thought"><em>Nhưng sợi khác. Sợi phía bắc. Khí đen vẫn dày. Bắc Nguyên không rung vì động đất. Họ rung vì chuẩn bị.</em></p>
+
+<p class="thought"><em>Và sợi ở kinh thành, có một mảng mà mình không kiểm soát được. Mảng mà Vương Bách Nhẫn đang gieo. Tin đồn. "Quốc Sư phán vua chết." Động đất chứng minh. Dân chưa quên. Dù hôm nay mình dẹp được hoảng loạn, tin đồn vẫn ở đó, ngấm, chờ.</em></p>
+
+<p class="thought"><em>Và mình vẫn chưa có cách xử lý Vương Bách Nhẫn.</em></p>
+
+<p>Gõ cửa.</p>
+
+<p>— Ai?</p>
+
+<p>— Quốc Sư, có thư. Từ bàn cờ.</p>
+
+<p>Tiểu Phúc. "Bàn cờ" nghĩa là Trường Xuân Cung. Thiên Ngoại Các.</p>
+
+<p>— Đưa đây.</p>
+
+<p>Mảnh giấy nhỏ. Chữ gọn. Quen.</p>
+
+<p>"Ngươi đứng yên lần đầu. Tốt. Nhưng kẻ rung lưới không phải đất. Nhìn lại Trường Xuân Cung. Có thứ thức dậy."</p>
+
+<p class="thought"><em>"Có thứ thức dậy." Ở Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Khí Thi. Phủ Trịnh Hoài An. Mắt trắng. Oán khí.</em></p>
+
+<p class="thought"><em>Lão Quốc Sư nói Khí Thi là oán khí bị nuôi. Diệp Trúc Khanh đang truy. Và bây giờ, Thiên Ngoại Các nói "có thứ thức dậy."</em></p>
+
+<p class="thought"><em>Động đất không chỉ rung nhà. Nó rung cả thứ đang ngủ dưới Trường Xuân Cung.</em></p>
+
+<p>Hắn đặt giấy xuống. Nhìn trần nhà.</p>
+
+<p class="thought"><em>Bão chưa qua. Bão mới bắt đầu.</em></p>
+
+<p class="thought"><em>Vương Bách Nhẫn rải tin. Sát thủ tà đạo. Vua bệnh. Bắc Nguyên. Khí Thi thức dậy. A Ly cần bảo vệ. Phúc An bị thương.</em></p>
+
+<p class="thought"><em>Và mình, giữa tất cả, vừa nói một bài phát biểu bằng lời thật.</em></p>
+
+<p class="thought"><em>Lời thật mạnh hơn lời bịa. Hôm nay, đúng.</em></p>
+
+<p class="thought"><em>Nhưng lời thật cũng đắt hơn lời bịa. Vì khi đã nói thật, không quay lại bịa được nữa.</em></p>
+
+<p class="thought"><em>Mình vừa đặt chân lên con đường không quay lại.</em></p>
+
+<p>Gió đêm. Lạnh. Đèn lay.</p>
+
+<p>Và trong lưới Thiên Cơ, ở nút mang tên Tạ Cảnh Minh, lần đầu tiên, hắn thấy sợi nối của mình không phải sáng, không phải tối.</p>
+
+<p>Mà rung.</p>
+
+<p>Rung theo nhịp đập tim hắn. Như Thiên Cơ, lần đầu, không nhìn hắn từ trên cao.</p>
+
+<p>Mà nhìn ngang. Kiểu nhìn giữa hai kẻ đang đánh giá nhau.</p>
+
+<p class="thought"><em>Thiên Cơ không ghét mình. Cũng không thương.</em></p>
+
+<p class="thought"><em>Nó tò mò.</em></p>
+
+<p class="thought"><em>Và hôm nay, lần đầu tiên, mình cũng tò mò về nó.</em></p>
+
+<p class="thought"><em>Vậy thì, chơi tiếp.</em></p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-27.html">&larr; CHƯƠNG 27</a>
+      <a href="chapter-29.html">CHƯƠNG SAU &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.469 từ</div>
+
+  </div>
+</body>
+</html>

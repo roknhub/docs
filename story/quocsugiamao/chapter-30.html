@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 30 — Thiên Cơ Nhìn Xuống | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-29.html">&larr; CHƯƠNG 29</a>
+      <span class="chapter-indicator">30/30</span>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 30</div>
+      <h1>Thiên Cơ Nhìn Xuống</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Ngày cuối cùng trước khi xuống Trường Xuân Cung, Tạ Cảnh Minh không làm gì.</p>
+
+<p>Không vào cung. Không phán. Không gặp ai. Chỉ ngồi trong phủ, nhìn.</p>
+
+<p>Nhìn Phúc An lau ấn ngọc bằng tay lành. Cánh tay bó đã bỏ vải, còn vết sẹo dài, nhưng gã cử động được. Gã lau ấn mỗi sáng, cẩn thận như lau bảo vật. Và đối với gã, đó đúng là bảo vật.</p>
+
+<p>Nhìn Tiểu Phúc chạy qua chạy lại, mang trà, mang bánh, hỏi "Quốc Sư cần gì không" mười lần một buổi sáng. Gã không biết đêm nay hắn sẽ đi đâu. Chỉ biết hôm nay Quốc Sư im lặng, nên gã lo.</p>
+
+<p class="thought"><em>Gã lo vì mình im. Giống dân kinh thành lo khi mình im ba ngày. Im lặng của Quốc Sư cũng là một loại tiên tri.</em></p>
+
+<p class="thought"><em>Mình đã thay đổi cách thế giới này vận hành. Không phải bằng phép thuật. Bằng miệng.</em></p>
+
+<p>Nhìn A Ly ngồi ở sân sau, đọc sách. Con bé đã biết đọc. Nhanh. Sáng nay nàng đọc một cuốn sử cũ mà Phúc An tìm được. Đọc nghiêm túc, mày nhíu, ngón tay chỉ từng chữ.</p>
+
+<p class="thought"><em>Con bé ăn mày đọc sử. Bao nhiêu phần là Thiên Mệnh, bao nhiêu phần là nỗ lực?</em></p>
+
+<p class="thought"><em>Mình không biết. Và có lẽ, không ai biết. Kể cả Thiên Cơ.</em></p>
+
+<p>Nhìn Xuân Nhi quét sân. Im lặng. Cô gái trẻ ít nói nhất phủ. Nhưng mỗi khi hắn đi ngang, cô dừng chổi, cúi đầu, chờ Quốc Sư đi ngang rồi mới quét tiếp.</p>
+
+<p class="thought"><em>Nàng kính sợ mình. Không phải tin. Sợ. Kiểu sợ mà nàng dành cho thần.</em></p>
+
+<p class="thought"><em>Mình có bao nhiêu Tiểu Phúc, bao nhiêu Xuân Nhi? Bao nhiêu người tin, bao nhiêu người sợ? Và khi nào tin biến thành sợ?</em></p>
+
+<p>Trưa. Nắng. Hắn ngồi dưới mái hiên, nhìn bóng cây hòe in trên sân gạch. Bóng lay. Gió nhẹ. Yên bình.</p>
+
+<p class="thought"><em>Yên bình. Kinh thành đang yên. Vương Bách Nhẫn bị chặn. Bắc Nguyên chưa động. Vua ổn. A Ly an toàn. Động đất đã qua.</em></p>
+
+<p class="thought"><em>Nhưng dưới Trường Xuân Cung, có thứ đang thở.</em></p>
+
+<p class="thought"><em>Và đêm nay, mình sẽ đối mặt nó.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Lục Thanh Dao gửi thư.</p>
+
+<p>Không phải thị vệ mang. Một lá thư nhỏ, gấp gọn, nhét trong ống tre, đặt trên bậu cửa sổ phòng hắn. Không ai thấy ai đặt.</p>
+
+<p class="thought"><em>Nàng có cách riêng. Luôn có.</em></p>
+
+<p>Mở ra. Chữ nàng viết. Gọn. Sắc. Kiểu nàng.</p>
+
+<p>"Đêm nay cẩn thận. Bản vương không thể đi cùng. Nhưng bản vương sẽ chờ."</p>
+
+<p class="thought"><em>Nàng biết. Nàng biết mình sẽ xuống Trường Xuân Cung đêm nay. Mình không nói. Diệp Trúc Khanh không nói. Nhưng nàng biết.</em></p>
+
+<p class="thought"><em>Nàng luôn biết.</em></p>
+
+<p>Dòng cuối cùng, chữ nhỏ hơn, hơi nghiêng, kiểu viết nhanh:</p>
+
+<p>"Quay về."</p>
+
+<p>Hai chữ. Không phải "bản vương." Không ký tên. Chỉ hai chữ.</p>
+
+<p class="thought"><em>Quay về.</em></p>
+
+<p class="thought"><em>Nàng lo.</em></p>
+
+<p>Hắn gấp thư. Cất vào ngực. Không biết tại sao, nhưng cảm thấy nhẹ hơn.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Tối. Hắn gọi Tiểu Phúc vào.</p>
+
+<p>— Tiểu Phúc, đêm nay ta đi Trường Xuân Cung. Ngươi ở nhà, canh phủ, bảo vệ A Ly.</p>
+
+<p>Tiểu Phúc mắt mở to.</p>
+
+<p>— Quốc Sư đi Trường Xuân Cung? Đêm? Một mình?</p>
+
+<p>— Có Diệp cô nương đi cùng.</p>
+
+<p>— Tiểu nhân muốn đi theo!</p>
+
+<p>— Không. Ngươi ở đây. A Ly cần người canh. Ngươi là người ta tin nhất.</p>
+
+<p class="thought"><em>"Người ta tin nhất." Mình nói thật. Và Thiên Cơ ghi nhận. Sợi niềm tin giữa mình và Tiểu Phúc rung nhẹ, sáng hơn.</em></p>
+
+<p>Tiểu Phúc nuốt nước bọt. Gật.</p>
+
+<p>— Dạ. Tiểu nhân sẽ canh. Bằng mạng.</p>
+
+<p class="thought"><em>Bằng mạng. Gã nói thật. Mười lăm tuổi, sẵn sàng chết vì mình.</em></p>
+
+<p class="thought"><em>Và mình, kẻ lừa đảo hai kiếp, được một đứa trẻ thề chết vì.</em></p>
+
+<p class="thought"><em>Mình có xứng đáng không?</em></p>
+
+<p>— Đừng chết. Đó là lệnh.</p>
+
+<p>Gã cười. Mắt ướt.</p>
+
+<p>— Dạ.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Canh hai. Trường Xuân Cung.</p>
+
+<p>Diệp Trúc Khanh đã chờ ở cổng. Kiếm trần. Mắt sáng trong bóng tối.</p>
+
+<p>— Sẵn sàng chưa?</p>
+
+<p>— Chưa bao giờ sẵn sàng. Nhưng đi.</p>
+
+<p>Nàng nhếch mép. Gần cười.</p>
+
+<p>Cung cũ. Im. Lạnh hơn bình thường. Gió không vào đến đây, nhưng lạnh. Kiểu lạnh từ dưới đất tỏa lên.</p>
+
+<p>Điện thờ. Cửa mở. Tự mở, như Diệp Trúc Khanh nói. Bên trong, nến cũ đã tắt. Bàn thờ đá. Bụi. Và lỗ trên sàn. Vừa một người, bậc thang đá dẫn xuống bóng tối.</p>
+
+<p>Tiếng thở.</p>
+
+<p>Rõ hơn đêm qua. Không phải tiếng người. Tiếng... nhịp. Như tim đập. Chậm. Đều. Từ dưới sâu.</p>
+
+<p>Hắn nhắm mắt. Nhìn lưới.</p>
+
+<p>Nút Trường Xuân Cung rung mạnh. Sáng tối xen kẽ. Sợi nối từ nút này chảy thẳng lên, xuyên qua trần điện thờ, xuyên qua mái cung, lên trời. Thẳng. Không ngoằn ngoèo như mọi sợi khác. Thẳng như kẻ vạch.</p>
+
+<p class="thought"><em>Nối trực tiếp. Không qua niềm tin. Không qua người. Thứ gì ở dưới đó đã là MỘT PHẦN của Thiên Cơ.</em></p>
+
+<p>— Ta xuống trước.</p>
+
+<p>Diệp Trúc Khanh nói. Không hỏi ý kiến. Nàng đã bước xuống bậc thang đầu tiên.</p>
+
+<p>— Chờ.</p>
+
+<p>Hắn nắm vai nàng.</p>
+
+<p>— Để ta nhìn trước.</p>
+
+<p>Nhắm mắt. Dùng lưới. Nhìn xuống dưới qua sợi nối.</p>
+
+<p>Tối. Sâu. Nhưng không nguy hiểm. Không có sát ý. Không có khí đen kiểu Khí Thi. Chỉ có... cũ. Rất cũ. Và rất mệt.</p>
+
+<p class="thought"><em>Thứ ở dưới đó, không giận. Không muốn giết. Nó chỉ... mệt. Mệt kiểu ngủ 250 năm mà vẫn không nghỉ đủ.</em></p>
+
+<p>— Không nguy hiểm. Nhưng kỳ lạ. Cẩn thận.</p>
+
+<p>Nàng gật. Hai người xuống.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Bậc thang đá. Hẹp. Ẩm. Mùi đất cũ, mùi đá mốc. Đi được hai mươi bậc thì đến đáy.</p>
+
+<p>Một căn phòng. Nhỏ hơn hắn tưởng. Trần thấp, tay giơ lên chạm được. Tường đá, khắc ký hiệu. Không phải chữ Đại Ly. Không phải chữ nào hắn biết. Cổ hơn.</p>
+
+<p>Giữa phòng, trên bệ đá thấp, một vật thể.</p>
+
+<p>Viên. Tròn. Cỡ quả bưởi. Phát sáng mờ, màu trắng đục, rung nhẹ. Rung theo nhịp "thở" mà hắn đã nghe. Đây là trái tim. Trái tim của Trường Xuân Cung.</p>
+
+<p>Diệp Trúc Khanh dừng. Tay nắm chặt kiếm.</p>
+
+<p>— Cái gì đây?</p>
+
+<p>Hắn nhìn bằng lưới. Và thấy.</p>
+
+<p>Vật thể này là NÚT. Nhưng không phải nút bình thường. Nút bình thường là người, là niềm tin, là cảm xúc tập thể. Nút này là... người đã ngừng là người. Ai đó, từ rất lâu, đã trở thành một phần của Thiên Cơ. Không chết. Không sống. Chỉ tồn tại. Như nút thắt trên lưới, giữ mọi sợi quanh nó không rối.</p>
+
+<p class="thought"><em>Ai đó bị Thiên Cơ nuốt. Biến thành nút. 250 năm.</em></p>
+
+<p class="thought"><em>Lão Quốc Sư nói: "16 Quốc Sư trước, Thiên Cơ ăn mòn." Có kẻ bị ăn mòn hoàn toàn. Và kẻ đó, nằm đây.</em></p>
+
+<p>Trên tường, phía sau bệ đá, hắn thấy chữ. Không phải ký hiệu cổ. Chữ Đại Ly. Mới hơn ký hiệu trên tường. Cào bằng tay. Run. Kiểu chữ của người sắp mất ý thức.</p>
+
+<p>"Đừng đánh thức. Nó không phải ta nữa."</p>
+
+<p class="thought"><em>"Nó không phải ta nữa." Kẻ viết chữ này, biết thứ trên bệ đá từng là... mình. Từng là người. Rồi bị Thiên Cơ nuốt. Và khi viết dòng này, kẻ đó biết mình cũng sắp bị nuốt.</em></p>
+
+<p class="thought"><em>Có hai kẻ. Kẻ bị nuốt thành nút. Và kẻ viết lời cảnh báo, rồi cũng biến mất.</em></p>
+
+<p class="thought"><em>Bao nhiêu Quốc Sư đã xuống đây? Bao nhiêu đã không quay lên?</em></p>
+
+<p>Hắn lùi một bước. Tim đập nhanh.</p>
+
+<p>— Đi lên.</p>
+
+<p>— Sao?</p>
+
+<p>— Thứ này không chạm được. Chưa. Mình cần biết thêm trước khi...</p>
+
+<p>Vật thể rung. Mạnh hơn. Như cảm nhận hắn sợ.</p>
+
+<p>Và sợi nối trên trời, sợi thẳng đứng, rung theo.</p>
+
+<p class="thought"><em>Nó cảm nhận mình. Nó biết mình ở đây.</em></p>
+
+<p>Hắn quay lưng. Bước nhanh lên bậc thang. Diệp Trúc Khanh theo sau, kiếm hướng xuống, canh.</p>
+
+<p>Ra khỏi lỗ. Thở. Gió đêm lạnh nhưng dễ chịu hơn cái lạnh dưới hầm.</p>
+
+<p>— Ngươi thấy gì?</p>
+
+<p>— Thấy... ai đó đã bị Thiên Cơ nuốt. Nằm dưới đó 250 năm. Và đang thức dần.</p>
+
+<p>Diệp Trúc Khanh nhìn lỗ. Rồi nhìn hắn.</p>
+
+<p>— Chém được không?</p>
+
+<p>— Không. Nó là một phần của Thiên Cơ. Chém nó, có thể rung cả nước.</p>
+
+<p>Nàng im. Rồi:</p>
+
+<p>— Vậy làm sao?</p>
+
+<p>— Chưa biết. Nhưng phải tìm ra. Trước khi nó thức hoàn toàn.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Hắn không về phủ ngay. Bảo Diệp Trúc Khanh đi trước. Nàng nhìn hắn, do dự, rồi gật.</p>
+
+<p>— Đừng ở lâu. Chỗ này không tốt.</p>
+
+<p>— Ta biết.</p>
+
+<p>Nàng đi. Bóng trắng biến vào mái cung.</p>
+
+<p>Hắn leo lên mái Trường Xuân Cung. Ngồi. Nhìn lên.</p>
+
+<p>Bầu trời đêm. Sao. Mây mỏng. Gió nhẹ.</p>
+
+<p>Hắn nhắm mắt. Để rỗng. Không bật Thiên Diễn Đồng. Không tính toán. Không sợ. Không muốn.</p>
+
+<p>Rỗng.</p>
+
+<p>Và nhìn.</p>
+
+<p>Lưới hiện. Toàn cảnh. Lần đầu tiên hắn nhìn THẬT rộng, không chỉ kinh thành, không chỉ vài nút quen. Mà toàn bộ.</p>
+
+<p>Lưới Thiên Cơ trải rộng khắp bầu trời. Không, không phải bầu trời. Bầu trời chỉ là nền. Lưới ở trên bầu trời. Hoặc bên dưới. Hoặc xuyên qua. Hắn không biết. Chỉ biết: nó ở khắp nơi.</p>
+
+<p>Ngàn nút. Vạn sợi. Mỗi nút là một người, một niềm tin, một cảm xúc tập thể. Sợi nối chúng, rung, sáng tối, chảy. Kinh thành là cụm sáng nhất, nút dày đặc. Xa hơn, mờ hơn, nhưng vẫn có. Ngoại tỉnh. Biên giới. Bắc Nguyên, tối, khác, như lưới khác chồng lên.</p>
+
+<p>Đẹp. Đáng sợ. Đẹp vì mênh mông. Đáng sợ vì... mình chỉ là một nút trong đó.</p>
+
+<p>Hắn tìm nút mình. Ở đây. Trên mái Trường Xuân Cung. Nút nhỏ. Nhưng sáng. Và rung theo nhịp tim, như ch28. Sợi từ nút mình tỏa ra: đến Tiểu Phúc, Phúc An, A Ly, Lục Thanh Dao, Diệp Trúc Khanh, vua, dân kinh thành. Nhiều sợi. Nhiều hơn hắn nghĩ.</p>
+
+<p class="thought"><em>Mình nối với nhiều người. Và họ nối với mình. Mỗi sợi là một niềm tin. Mỗi niềm tin là một trách nhiệm.</em></p>
+
+<p class="thought"><em>Khi mình đến, mình chỉ có một sợi: sợi nối với bản thân. Sinh tồn. Bây giờ, mình có hàng trăm. Và mỗi sợi, nếu đứt, sẽ đau.</em></p>
+
+<p>Rồi hắn nhìn lên. Cao hơn. Qua lưới. Qua sợi. Qua nút.</p>
+
+<p>Và thấy.</p>
+
+<p>Trên cùng. Trên tất cả. Không phải trời. Không phải sao. Không phải mây.</p>
+
+<p>Một con mắt.</p>
+
+<p>Lớn. Lớn hơn kinh thành. Lớn hơn lưới. Nó không nằm TRÊN lưới. Nó nằm NGOÀI. Nhìn vào. Như kẻ nhìn qua cửa sổ vào căn phòng.</p>
+
+<p>Mắt không có lòng đen, lòng trắng. Không giống mắt người. Giống... khoảng trống. Khoảng trống có hình dạng mắt. Và khoảng trống đó, nhìn.</p>
+
+<p>Nhìn lưới. Nhìn nút. Nhìn sợi.</p>
+
+<p>Nhìn hắn.</p>
+
+<p class="thought"><em>Thiên Cơ.</em></p>
+
+<p class="thought"><em>Không. Không phải Thiên Cơ. Thiên Cơ là lưới. Là sợi. Là nút. Là dòng chảy.</em></p>
+
+<p class="thought"><em>Thứ này ở NGOÀI lưới. Nhìn VÀO lưới.</em></p>
+
+<p class="thought"><em>Thiên Cơ là bàn cờ. Thứ này là... kẻ nhìn bàn cờ.</em></p>
+
+<p>Hắn không thở được. Không phải sợ. Không kịp sợ. Choáng. Kiểu choáng khi nhận ra vũ trụ lớn hơn mình nghĩ. Lớn hơn RẤT NHIỀU.</p>
+
+<p>Con mắt nhìn hắn. Im. Không nói. Không phán. Không đe dọa. Chỉ nhìn.</p>
+
+<p>Và trong khoảnh khắc đó, hắn cảm nhận được thứ gì đó từ con mắt. Không phải cảm xúc. Thiên Diễn Đồng không đọc được cảm xúc từ nó. Vì nó không có cảm xúc.</p>
+
+<p>Nhưng nó có thứ khác.</p>
+
+<p>Chú ý.</p>
+
+<p>Nó đang chú ý.</p>
+
+<p>Đến hắn.</p>
+
+<p class="thought"><em>Nó nhìn mình. Từ đầu. Từ ngày đầu tiên trên pháp trường. Có thể từ trước đó. Nó nhìn mình xuyên không. Nó nhìn mình bịa. Nó nhìn mình nói thật. Nó nhìn mình quỳ. Nó nhìn mình đứng dậy.</em></p>
+
+<p class="thought"><em>Nó nhìn tất cả.</em></p>
+
+<p class="thought"><em>Và nó... không làm gì. Chỉ nhìn.</em></p>
+
+<p class="thought"><em>Tại sao?</em></p>
+
+<p>Con mắt chớp. Chậm. Rất chậm. Như kẻ gật đầu.</p>
+
+<p>Rồi nhắm.</p>
+
+<p>Biến.</p>
+
+<p>Bầu trời trở lại bình thường. Sao. Mây. Gió. Lưới Thiên Cơ vẫn rung, nhưng con mắt đã đi.</p>
+
+<p>Hắn ngồi trên mái. Run. Không phải lạnh. Run vì nhận ra.</p>
+
+<p class="thought"><em>Mình không phải kẻ chơi cờ.</em></p>
+
+<p class="thought"><em>Mình cũng không phải quân cờ.</em></p>
+
+<p class="thought"><em>Mình là thứ mà kẻ ngoài bàn cờ đang nhìn. Đang theo dõi. Đang chờ xem mình làm gì tiếp.</em></p>
+
+<p class="thought"><em>Ai? Ai ở ngoài bàn cờ? Thiên Cơ là bàn cờ. Lưới là bàn cờ. Mọi người là quân cờ. Vậy kẻ nhìn bàn cờ là... gì?</em></p>
+
+<p class="thought"><em>Mình không biết.</em></p>
+
+<p class="thought"><em>Nhưng nó biết mình.</em></p>
+
+<p>Gió. Lạnh. Sao sáng.</p>
+
+<p>Hắn ngồi trên mái Trường Xuân Cung rất lâu. Đến khi trời sắp sáng. Đến khi sao mờ. Đến khi tiếng gà đầu tiên vọng từ xa.</p>
+
+<p>Rồi hắn đứng dậy. Chậm. Đau lưng vì ngồi lâu. Đau đầu vì nhìn lưới quá lâu. Nhưng mắt sáng.</p>
+
+<p class="thought"><em>Mình bắt đầu bằng một lời dối trên pháp trường. "Quốc vận sụp trong ba năm." Bịa. Để sống.</em></p>
+
+<p class="thought"><em>Bây giờ, gần một năm sau, mình đã phán, đã lừa, đã nói thật, đã quỳ, đã đứng. Mình đã tạo ra Thiên Mệnh cho một con bé ăn mày, đã dẹp hoảng loạn bằng lời, đã bị thần thánh hóa rồi bị ghét rồi được tin lại.</em></p>
+
+<p class="thought"><em>Mình đã thay đổi. Không phải thế giới thay đổi mình. MÌNH thay đổi mình. Vì ở đây, mỗi lời nói đều có trọng lượng. Và khi lời nói có trọng lượng, kẻ nói phải xứng đáng.</em></p>
+
+<p class="thought"><em>Mình chưa xứng đáng. Nhưng mình đang cố.</em></p>
+
+<p class="thought"><em>Và có thứ ở ngoài bàn cờ, đang nhìn mình cố.</em></p>
+
+<p>Hắn nhảy xuống mái. Đi bộ qua hoàng cung trong ánh bình minh. Thị vệ quen mặt không chặn. Gã gật đầu chào. Hắn gật lại.</p>
+
+<p>Ra cổng cung. Phố sớm. Vài người bán hàng dọn quầy. Mùi cháo nóng. Mùi củi. Tiếng gánh hàng.</p>
+
+<p>Kinh thành thức dậy. Bình thường. Như mọi sáng.</p>
+
+<p>Không ai biết rằng đêm qua, Quốc Sư đã nhìn thấy thứ mà không Quốc Sư nào nhìn thấy trong 300 năm.</p>
+
+<p>Không ai biết rằng dưới Trường Xuân Cung, có kẻ đang thở.</p>
+
+<p>Không ai biết rằng trên bầu trời, có con mắt đang chờ.</p>
+
+<p>Hắn đi về phủ. Bước chân đều. Lưng thẳng. Mặt bình thản.</p>
+
+<p class="thought"><em>Mình là Tạ Cảnh Minh. Kiếp trước, tên lừa đảo. Kiếp này, Quốc Sư.</em></p>
+
+<p class="thought"><em>Giả hay thật, mình vẫn chưa biết.</em></p>
+
+<p class="thought"><em>Nhưng có một điều mình biết:</em></p>
+
+<p class="thought"><em>Mình sẽ không dừng.</em></p>
+
+<p>Cổng Quốc Sư Phủ mở. Tiểu Phúc chạy ra, mặt mừng rỡ:</p>
+
+<p>— Quốc Sư! Quốc Sư về rồi!</p>
+
+<p>A Ly đứng sau. Mắt sáng. Không nói gì. Chỉ cười.</p>
+
+<p>Và Tạ Cảnh Minh, Quốc Sư giả mạo của nước Đại Ly, bước vào nhà.</p>
+
+<p>Bầu trời phía sau hắn, sáng dần.</p>
+
+<p>Và ở đâu đó, trên cao, ngoài lưới, ngoài sợi, ngoài nút, ngoài tất cả những gì con người có thể nhìn thấy,</p>
+
+<p>Con mắt mở.</p>
+
+<p style="text-align: center; margin-top: 3em; font-family: 'Space Mono', monospace; text-transform: uppercase; font-size: 14px; letter-spacing: 3px; color: #5200ff;">— Hết Tập 1 —</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-29.html">&larr; CHƯƠNG 29</a>
+      <span class="disabled">CHƯƠNG SAU &rarr;</span>
+    </nav>
+
+    <div class="word-count">2.612 từ</div>
+
+  </div>
+</body>
+</html>

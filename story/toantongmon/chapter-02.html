@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương 02 — Cuộc Sống Ngoại Môn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Serif', Georgia, serif;
+            background-color: #0a0a0f;
+            color: #c8c8c8;
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        .nav {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            position: sticky;
+            top: 0;
+            background: #0a0a0f;
+            border-bottom: 1px solid #1e1e2a;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            font-size: 14px;
+        }
+
+        .nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .nav a:hover { color: #ff385c; }
+
+        .nav__center {
+            color: #6a6a6a;
+            font-size: 13px;
+        }
+
+        .nav__disabled {
+            color: #3a3a3a;
+            cursor: default;
+        }
+
+        .chapter {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .chapter__header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #1e1e2a;
+        }
+
+        .chapter__number {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.32px;
+            text-transform: uppercase;
+            color: #ff385c;
+            margin-bottom: 12px;
+        }
+
+        .chapter__title {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: #f0f0f0;
+        }
+
+        .chapter__body p {
+            text-align: justify;
+            margin-bottom: 1em;
+            color: #b8b8b8;
+        }
+
+        .chapter__body p.thought {
+            color: #8a7d6b;
+            font-style: italic;
+        }
+
+        .chapter__body p.scene-break {
+            text-align: center;
+            color: #3a3a4a;
+            margin: 2em 0;
+            letter-spacing: 0.5em;
+            font-style: normal;
+        }
+
+        .chapter__body p.dialogue {
+            text-indent: 0;
+            color: #e0e0e0;
+        }
+
+        .chapter__footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #1e1e2a;
+        }
+
+        .chapter__wordcount {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            font-size: 13px;
+            color: #5a5a5a;
+            margin-bottom: 24px;
+        }
+
+        .chapter__nav-bottom {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .chapter__nav-bottom a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            transition: all 0.15s;
+        }
+
+        .chapter__nav-bottom a:hover {
+            border-color: #ff385c;
+        }
+
+        .chapter__nav-bottom .disabled {
+            color: #3a3a3a;
+            border-color: #1e1e2a;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 16px; }
+            .chapter { padding: 32px 16px 64px; }
+            .chapter__title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">&larr; Mục lục</a>
+        <span class="nav__center">Chương 2 / 10</span>
+        <span class="nav__disabled">Chương sau &rarr;</span>
+    </nav>
+
+    <article class="chapter">
+        <header class="chapter__header">
+            <div class="chapter__number">Chương 02</div>
+            <h1 class="chapter__title">Cuộc Sống Ngoại Môn</h1>
+        </header>
+
+        <div class="chapter__body">
+            <p>Chổi tre quét lá phát ra thứ âm thanh khô khốc, đều đặn, lặp đi lặp lại.</p>
+
+            <p>Sạt. Sạt. Sạt.</p>
+
+            <p>Lâm Nhàn cầm chổi, mắt nhìn đống lá vàng trước mặt, đầu thì đang nghĩ chuyện khác.</p>
+
+            <p class="thought">Ngày thứ tư. Tôi đã sống ở đây được bốn ngày.</p>
+
+            <p>Hậu sơn Thanh Vân Tông rộng mênh mông, cổ thụ che kín bầu trời. Lá rụng nhiều đến mức quét xong chỗ này, quay lại chỗ kia đã đầy lá mới. Lục Cẩu quét ở phía bên kia con dốc, thỉnh thoảng vọng lại tiếng càu nhàu.</p>
+
+            <p>Đây là tạp dịch. Công việc hằng ngày của ngoại môn đệ tử.</p>
+
+            <p>Sáng sớm quét lá ở hậu sơn. Sau đó tu luyện cơ bản tại sân tập ngoại môn, chủ yếu là ngồi vận khí theo bộ công pháp nhập môn. Buổi trưa ăn cơm ở nhà ăn chung. Chiều tiếp tục tu luyện hoặc làm tạp dịch khác: gánh nước, chẻ củi, dọn dẹp. Tối ăn xong thì tự tu luyện trong phòng hoặc ngủ.</p>
+
+            <p>Mỗi ngày đều giống nhau.</p>
+
+            <p class="thought">Giống kiếp trước đi làm quá. Chỉ khác là ở đây không có máy lạnh, không có wifi, và bữa ăn thì...</p>
+
+            <p>Lâm Nhàn nhớ lại bữa cơm trưa hôm qua. Một bát cháo loãng, vài miếng rau luộc nhạt thếch, một cục đậu phụ cứng như đá. Gọi là cơm cho sang, chứ thật ra chỉ là thứ vừa đủ để không chết đói.</p>
+
+            <p>Lục Cẩu từ dưới dốc leo lên, mồ hôi nhễ nhại.</p>
+
+            <p class="dialogue">— Lâm huynh, ta đói quá.</p>
+
+            <p class="dialogue">— Mới ăn sáng.</p>
+
+            <p class="dialogue">— Gọi cái đó là ăn sáng à? Nửa bát cháo với mấy hạt gạo đếm trên đầu ngón tay. Chim ăn còn không no.</p>
+
+            <p>Lâm Nhàn không nói gì. Hắn cũng đói, nhưng bốn ngày qua hắn đã học được: phàn nàn không giải quyết được gì. Ngoại môn đệ tử ăn uống kham khổ là chuyện bình thường. Linh thạch phát hàng tháng chỉ đủ mua ít dược liệu tu luyện cơ bản, không ai dư dả mà ăn ngon.</p>
+
+            <p>Trừ khi tự xoay xở.</p>
+
+            <p class="thought">Hôm qua tôi thấy mấy cây rau dại mọc ở bờ suối phía đông. Có mấy loại trông giống rau muống, mấy loại giống hành lá. Còn có mấy con cá nhỏ bơi dưới suối...</p>
+
+            <p>Ý tưởng hình thành trong đầu, nhưng hắn chưa nói ra.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Buổi chiều, sau khi hoàn thành tạp dịch, Lâm Nhàn không về phòng ngay.</p>
+
+            <p>Hắn đi ra con suối phía đông hậu sơn. Nơi này ít người qua lại vì xa khu ngoại môn, nhưng nước trong vắt, hai bên bờ mọc đầy cỏ dại và cây bụi thấp.</p>
+
+            <p>Hắn ngồi xổm xuống, quan sát.</p>
+
+            <p class="thought">Đúng rồi. Loại rau này giống rau muống nước. Lá dài, thân rỗng, mọc ven nước. Còn cây kia... lá giống hành, nhưng mùi nồng hơn. Chắc là hành rừng.</p>
+
+            <p>Ký ức của Lâm Nhàn gốc cho hắn biết: những thứ này không có giá trị. Không phải dược liệu, không dùng tu luyện được, nên chẳng ai thèm nhìn. Ngoại môn đệ tử chỉ quan tâm đến linh dược, linh thảo, những thứ hỗ trợ tu luyện. Rau cỏ bình thường, ai ăn?</p>
+
+            <p>Nhưng Lâm Nhàn không phải Lâm Nhàn gốc.</p>
+
+            <p>Hắn nhổ một nắm rau, ngắt mấy cây hành rừng, rồi lội xuống suối bắt được vài con cá nhỏ bằng ngón tay. Không dễ, nhưng kiếp trước hắn từng đi câu cá cuối tuần với đám bạn đại học, tay chân cũng quen.</p>
+
+            <p>Quay về phòng, Lục Cẩu đang nằm dài trên giường, tay gác lên trán.</p>
+
+            <p class="dialogue">— Huynh đi đâu vậy? Ủa, cái gì đây?</p>
+
+            <p>Lục Cẩu ngồi bật dậy, mắt dán vào nắm rau và mấy con cá trong tay Lâm Nhàn.</p>
+
+            <p class="dialogue">— Cá? Rau? Huynh đi hái rau bắt cá?</p>
+
+            <p class="dialogue">— Ừ.</p>
+
+            <p class="dialogue">— Nhưng mà... mấy thứ này không phải linh thảo. Cá này cũng không phải linh ngư. Ăn được à?</p>
+
+            <p>Lâm Nhàn nhìn hắn.</p>
+
+            <p class="dialogue">— Lục Cẩu, cá là cá, rau là rau. Không cần phải "linh" mới ăn được.</p>
+
+            <p class="dialogue">— Thế à?</p>
+
+            <p>Lục Cẩu gãi đầu, vẻ hoài nghi nhưng cái bụng thì đang sôi ùng ục.</p>
+
+            <p>Lâm Nhàn không giải thích thêm. Hắn mượn cái lò nhỏ dùng để đun nước trong phòng, nhóm lửa, tìm được một cái nồi đất cũ ở góc kho tạp vật.</p>
+
+            <p>Rửa cá, bỏ ruột, rửa rau, thái nhỏ hành rừng.</p>
+
+            <p>Hắn không có gia vị gì ngoài muối. Ngoại môn đệ tử được phát muối mỗi tháng, Lục Cẩu còn dư nửa gói. Vậy là đủ.</p>
+
+            <p>Nước sôi, thả cá vào. Đợi nước trắng đục, thêm rau. Rắc muối. Cuối cùng rắc hành rừng thái nhỏ lên trên.</p>
+
+            <p>Mùi thơm bốc lên.</p>
+
+            <p>Lục Cẩu nuốt nước bọt đánh ực.</p>
+
+            <p class="dialogue">— Cái gì thơm vậy? Lâm huynh, huynh biết nấu ăn từ bao giờ?</p>
+
+            <p class="thought">Từ năm nhất đại học, vì phòng trọ có bếp mà không có tiền ăn ngoài.</p>
+
+            <p class="dialogue">— Biết chút ít.</p>
+
+            <p>Hắn múc canh ra hai bát. Nước trong nhưng ngọt vị cá, rau mềm, hành thơm nồng. Đơn giản đến mức thê thảm so với tiêu chuẩn kiếp trước. Nhưng ở ngoại môn Thanh Vân Tông, nơi bữa ăn hằng ngày chỉ có cháo loãng và đậu phụ cứng, bát canh cá rau này có lẽ đã là sơn hào hải vị.</p>
+
+            <p>Lục Cẩu húp một ngụm. Rồi đứng sững.</p>
+
+            <p class="dialogue">— Lâm huynh.</p>
+
+            <p class="dialogue">— Gì?</p>
+
+            <p class="dialogue">— Ngon.</p>
+
+            <p>Lục Cẩu nói, giọng run run, mắt đỏ hoe.</p>
+
+            <p class="dialogue">— Ngon quá. Sao... sao huynh giỏi vậy? Mấy thứ bỏ đi mà nấu ra được đồ ngon vậy?</p>
+
+            <p>Lâm Nhàn nhìn bát canh. Thật ra hắn thấy nó bình thường, chỉ là canh cá nấu muối. Nhưng nhìn Lục Cẩu ăn như thể đang ăn món ngon nhất đời, hắn cũng thấy ấm lòng một chút.</p>
+
+            <p class="dialogue">— Không có gì. Chỉ là biết cách kết hợp thôi.</p>
+
+            <p class="dialogue">— Kết hợp?</p>
+
+            <p class="dialogue">— Ừ. Cá cho vị ngọt, hành cho mùi thơm, rau cho độ tươi. Mỗi thứ riêng lẻ thì bình thường, nhưng đặt đúng chỗ, đúng lúc thì khác.</p>
+
+            <p>Lục Cẩu gật gù, không hiểu lắm nhưng không ngừng húp canh.</p>
+
+            <p class="dialogue">— Huynh à, nấu thêm được không?</p>
+
+            <p class="dialogue">— Ngày mai ta đi bắt thêm cá.</p>
+
+            <p class="dialogue">— Ta đi cùng!</p>
+
+            <p>Lần đầu tiên kể từ khi xuyên không, Lâm Nhàn thấy mình cười thật sự.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Những ngày sau đó, cuộc sống ngoại môn dần trở nên dễ thở hơn.</p>
+
+            <p>Lâm Nhàn bắt đầu áp dụng những thứ hắn biết từ kiếp trước, từng chút một.</p>
+
+            <p>Hắn sắp xếp lại phòng. Giường ngủ quay hướng cửa sổ để đón gió sáng. Kiếm gỗ treo gọn lên vách thay vì vứt bừa. Chậu rửa mặt kê gần cửa cho tiện. Bàn gỗ dọn sạch, chỉ để bộ công pháp nhập môn và bình nước.</p>
+
+            <p>Lục Cẩu bước vào phòng, ngơ ngác nhìn quanh.</p>
+
+            <p class="dialogue">— Huynh làm gì với phòng của chúng ta vậy?</p>
+
+            <p class="dialogue">— Dọn dẹp.</p>
+
+            <p class="dialogue">— Nhưng mà... tại sao? Trước giờ ở vậy cũng được mà.</p>
+
+            <p class="dialogue">— Chỗ ở gọn gàng thì đầu óc cũng gọn gàng hơn.</p>
+
+            <p>Lục Cẩu nhìn hắn, rồi nhìn căn phòng, rồi lại nhìn hắn.</p>
+
+            <p class="dialogue">— Nghe huynh nói chuyện bây giờ sâu sắc quá. Huynh có bị trúng tà không?</p>
+
+            <p class="thought">Tôi chỉ lặp lại câu mà tạp chí sức khỏe nào cũng viết thôi.</p>
+
+            <p class="dialogue">— Không. Đi ngủ đi.</p>
+
+            <p>Chuyện nấu ăn cũng thành thói quen. Mỗi chiều sau tạp dịch, Lâm Nhàn ra suối bắt cá, hái rau. Hắn khám phá thêm vài loại cây ăn được: một loại nấm mọc trên thân cổ thụ mùi vị giống nấm hương, một loại củ giống khoai lang nhưng vỏ tím đậm hơn. Không phải linh thảo, chẳng ai thèm đụng đến.</p>
+
+            <p>Hắn nướng nấm trên than, luộc củ tím bỏ vào canh, rang cá khô với muối. Mỗi bữa ăn đều đơn giản, nhưng so với cháo loãng nhà ăn thì khác biệt một trời một vực.</p>
+
+            <p>Lục Cẩu ăn mà nước mắt lưng tròng, mỗi bữa đều khen không ngớt.</p>
+
+            <p class="dialogue">— Lâm huynh, từ trước đến giờ ta không biết huynh giỏi nấu ăn vậy. Trước đây huynh có biết nấu đâu?</p>
+
+            <p class="dialogue">— Có thể do ngất ba ngày nên... nhớ ra.</p>
+
+            <p class="dialogue">— Ngất mà nhớ ra cách nấu ăn?</p>
+
+            <p class="dialogue">— Ừ.</p>
+
+            <p class="dialogue">— ...Lần tới ta cũng thử ngất xem.</p>
+
+            <p class="thought">Đừng.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Một buổi chiều, Lâm Nhàn đang ngồi trước hiên nhà nấu canh thì nghe tiếng bước chân.</p>
+
+            <p>Một thanh niên gầy gò, da xanh xao, mắt thâm quầng, tay cầm một cuốn sách cũ, đang đi ngang. Gã dừng lại, hít mũi, rồi quay sang.</p>
+
+            <p class="dialogue">— Mùi gì thế?</p>
+
+            <p>Lâm Nhàn nhìn lên. Ký ức gốc cho hắn biết: đây là Trần Bách, sư huynh ngoại môn, Luyện Khí tầng bảy. Gã này đặc biệt ở chỗ tự học luyện đan, dù ngoại môn đệ tử không được dạy. Gã kiếm được cuốn sách đan phương cơ bản từ đâu đó, rồi tự mò mẫm luyện suốt mấy năm.</p>
+
+            <p>Chưa thành công lần nào.</p>
+
+            <p class="dialogue">— Canh cá.</p>
+
+            <p class="dialogue">— Canh cá?</p>
+
+            <p>Trần Bách nhìn nồi canh, vẻ ngạc nhiên.</p>
+
+            <p class="dialogue">— Ngươi dùng cá và rau dại nấu canh?</p>
+
+            <p class="dialogue">— Ừ.</p>
+
+            <p class="dialogue">— Nhưng mấy thứ này... không phải linh vật. Không có giá trị tu luyện.</p>
+
+            <p class="dialogue">— Không cần giá trị tu luyện mới có giá trị.</p>
+
+            <p>Câu nói buột ra tự nhiên, Lâm Nhàn chẳng nghĩ gì nhiều. Hắn chỉ đang mệt, đói, và không muốn giải thích vì sao mình ăn rau dại thay vì linh thảo.</p>
+
+            <p>Trần Bách khựng lại.</p>
+
+            <p class="dialogue">— Ngươi nói gì?</p>
+
+            <p class="dialogue">— Ta nói mấy thứ này tuy không phải linh vật, nhưng vẫn có giá trị. Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ.</p>
+
+            <p>Hắn nói xong thì múc canh ra bát, không để ý gì thêm.</p>
+
+            <p>Nhưng Trần Bách đứng như trời trồng.</p>
+
+            <p>Gã nhìn nồi canh. Rồi nhìn Lâm Nhàn. Rồi lại nhìn nồi canh.</p>
+
+            <p class="thought">"Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ."</p>
+
+            <p>Câu nói ấy vang trong đầu Trần Bách như tiếng chuông.</p>
+
+            <p>Gã luyện đan đã ba năm. Thất bại không biết bao nhiêu lần. Mỗi lần thất bại, gã đều nghĩ là do nguyên liệu không đủ tốt. Linh thảo hạ phẩm, dược liệu tạp, lò đan thô sơ. Gã luôn tin rằng mình cần nguyên liệu tốt hơn, lò đan tốt hơn, công pháp tốt hơn.</p>
+
+            <p>Nhưng vừa rồi, gã tận mắt thấy Lâm Nhàn lấy cá dại, rau dại, nấm dại, chỉ dùng muối và nước, nấu ra được một nồi canh thơm phức.</p>
+
+            <p class="thought">"Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ."</p>
+
+            <p>Ý tưởng lóe lên trong đầu Trần Bách.</p>
+
+            <p class="thought">Không phải nguyên liệu của ta không đủ tốt. Mà là ta đặt chúng sai chỗ.</p>
+
+            <p class="thought">Ta luôn ép linh thảo hạ phẩm phải phát huy như linh thảo trung phẩm, nhưng chưa bao giờ nghĩ xem: linh thảo hạ phẩm mạnh ở đâu? Nên đặt vào lúc nào? Kết hợp với cái gì?</p>
+
+            <p class="thought">Nấu canh, nguyên liệu tầm thường mà đặt đúng trình tự, đúng thời điểm thì thành món ngon. Luyện đan... chẳng phải cũng vậy sao?</p>
+
+            <p>Trần Bách nuốt nước bọt, tim đập nhanh. Gã nhìn Lâm Nhàn đang ngồi ăn canh, vẻ mặt bình thản như thể câu nói vừa rồi chẳng có gì đặc biệt.</p>
+
+            <p class="thought">Gã này... gã cố ý nói vậy?</p>
+
+            <p>Không. Không thể. Lâm Nhàn chỉ là ngoại môn đệ tử Luyện Khí tầng ba, yếu nhất tông môn. Gã biết nấu ăn thì liên quan gì đến luyện đan?</p>
+
+            <p>Nhưng... câu nói đó...</p>
+
+            <p class="thought">Kệ. Thử đã.</p>
+
+            <p>Trần Bách quay người, bước nhanh về phòng. Đầu gã đầy ắp suy nghĩ.</p>
+
+            <p>Lâm Nhàn nhìn theo, hơi thắc mắc.</p>
+
+            <p class="dialogue">— Gã kia sao vậy?</p>
+
+            <p>Lục Cẩu bưng bát canh từ trong phòng bước ra, ngồi xuống cạnh hắn.</p>
+
+            <p class="dialogue">— Trần sư huynh hả? Gã suốt ngày chui trong phòng luyện đan, điên rồ lắm. Ngoại môn không ai dạy luyện đan, gã tự mò, mấy năm rồi chưa thành công lần nào.</p>
+
+            <p class="dialogue">— Vậy à.</p>
+
+            <p>Lâm Nhàn gật đầu rồi quên luôn. Hắn có chuyện quan trọng hơn phải lo.</p>
+
+            <p>Chẳng hạn, nấu thêm bát canh nữa, vì Lục Cẩu đã ăn hết phần của hắn.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Đêm hôm đó, Lâm Nhàn ngồi trên giường, xếp bằng, thử vận hành bộ công pháp nhập môn.</p>
+
+            <p>Hít vào. Dẫn khí vào đan điền. Vận hành theo kinh mạch. Thở ra.</p>
+
+            <p>Linh khí chảy trong cơ thể chậm chạp, mỏng manh, như sợi chỉ sắp đứt. Ký ức gốc cho hắn biết: đây là trình độ bình thường của Luyện Khí tầng ba. Hắn đã ở mức này suốt hai năm, không tiến thêm được.</p>
+
+            <p class="thought">Linh căn hạ phẩm. Hấp thu linh khí chậm. Tu luyện bao lâu cũng vậy.</p>
+
+            <p>Hắn thở dài.</p>
+
+            <p class="thought">Kiếp trước tôi cũng không phải dạng xuất sắc. Học trung bình, làm trung bình, sống trung bình. Xuyên không rồi cũng vẫn trung bình. Có lẽ "bình thường" là thuộc tính cố định của tôi.</p>
+
+            <p>Nhưng ít nhất, hắn còn sống.</p>
+
+            <p>Hắn nhìn ra cửa sổ. Đêm nay không trăng, nhưng sao dày đặc. Gió mang mùi cỏ cây và linh khí ngọt nhẹ.</p>
+
+            <p class="thought">Sống yên ổn. Đừng nổi bật. Ăn no, ngủ đủ, qua ngày. Mục tiêu cơ bản nhất.</p>
+
+            <p>Hắn khẽ gật đầu, rồi nằm xuống.</p>
+
+            <p>Trên giường tầng trên, Lục Cẩu đã ngáy từ lúc nào.</p>
+
+            <p class="thought">Gã này ngủ nhanh thật. Kiếp trước chắc là mèo.</p>
+
+            <p>Lâm Nhàn mỉm cười, nhắm mắt.</p>
+
+            <p class="scene-break">&middot; &middot; &middot;</p>
+
+            <p>Cùng lúc đó, phòng của Trần Bách.</p>
+
+            <p>Gã đốt lò đan nhỏ, ngọn lửa leo lét. Trước mặt gã bày la liệt dược liệu: mấy loại linh thảo hạ phẩm đã mua bằng linh thạch dành dụm, vài cọng dược thảo tạp phẩm nhặt được khi đi hái thuốc.</p>
+
+            <p>Bình thường, Trần Bách sẽ bỏ hết linh thảo vào trước, rồi thêm dược thảo tạp, rồi đốt lửa mạnh nhất có thể. Kết quả luôn là: lò đan nổ, hoặc ra một cục than đen thui.</p>
+
+            <p>Nhưng hôm nay, gã làm khác.</p>
+
+            <p class="thought">"Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ."</p>
+
+            <p>Gã nhắm mắt, nhớ lại cách Lâm Nhàn nấu canh. Cá trước, đợi nước ngọt. Rau sau, chỉ nấu vừa chín. Hành rừng cuối cùng, khi tắt lửa.</p>
+
+            <p class="thought">Trình tự. Thời điểm. Kết hợp.</p>
+
+            <p>Gã hít một hơi sâu, rồi bắt đầu.</p>
+
+            <p>Lần này, gã không vội. Bỏ dược thảo tạp vào trước, dùng lửa nhỏ, để chúng tan chậm, tiết ra phần dược tính cơ bản. Đợi mùi dược liệu tỏa ra đều, mới thêm linh thảo hạ phẩm. Lửa vặn lên vừa phải, không quá mạnh. Cuối cùng, khi cảm nhận được dược khí bắt đầu ngưng tụ, gã thêm một nhúm phấn hoa linh mộc mà trước đây gã luôn bỏ đi vì tưởng vô dụng.</p>
+
+            <p>Lò đan rung nhẹ.</p>
+
+            <p>Trần Bách nín thở.</p>
+
+            <p>Một giây. Hai giây. Mười giây.</p>
+
+            <p>Không nổ.</p>
+
+            <p>Dược khí ngưng tụ, xoáy tròn trong lò, chậm rãi, đều đặn.</p>
+
+            <p>Trần Bách không dám thở mạnh, tay run run giữ ngọn lửa ổn định.</p>
+
+            <p>Một khắc trôi qua. Hai khắc.</p>
+
+            <p>Rồi, từ trong lò, một mùi thơm nhẹ thoảng ra. Không nồng gắt như mùi dược liệu cháy mà gã đã quá quen thuộc. Mà là mùi thơm thanh, dịu, thoang thoảng.</p>
+
+            <p>Gã run rẩy mở nắp lò.</p>
+
+            <p>Bên trong, nằm im lìm giữa lớp tro mịn, là một viên đan.</p>
+
+            <p>Nhỏ. Xám xịt. Méo mó. Bề mặt lồi lõm, xấu xí đến thảm hại.</p>
+
+            <p>Nhưng đó là một viên đan.</p>
+
+            <p>Viên đan đầu tiên trong đời Trần Bách.</p>
+
+            <p>Ba năm. Ba năm mò mẫm, thất bại, bị cười nhạo, bị nói là hoang tưởng. Ba năm đốt hết linh thạch vào dược liệu rồi nổ lò. Ba năm nghe đồng môn bảo "ngoại môn đệ tử không bao giờ luyện đan được."</p>
+
+            <p>Và hôm nay, gã thành công.</p>
+
+            <p>Trần Bách cầm viên đan lên, tay run đến mức suýt rơi. Gã nhìn nó, nhìn mãi, mắt ướt nhòe.</p>
+
+            <p>Rồi gã quay đầu, nhìn về phía phòng của Lâm Nhàn cách đó mấy chục bước chân.</p>
+
+            <p class="thought">"Nguyên liệu nào cũng có giá trị, chỉ cần đặt đúng chỗ."</p>
+
+            <p class="thought">Gã ấy... gã ấy biết.</p>
+
+            <p class="thought">Gã ấy nhìn ta, biết ta đang mắc kẹt ở đâu, rồi chỉ dùng một câu nói, qua chuyện nấu ăn, để điểm hóa ta.</p>
+
+            <p>Trần Bách siết chặt viên đan, đứng lên, cúi đầu về phía phòng Lâm Nhàn.</p>
+
+            <p class="dialogue">— Đa tạ Lâm sư đệ.</p>
+
+            <p>Giọng gã nghẹn ngào, nhỏ đến mức chỉ có đêm khuya nghe thấy.</p>
+
+            <p>Bên kia, Lâm Nhàn đang ngủ say, mơ thấy mình đang ăn phở bò tái lăn ở quán đầu ngõ.</p>
+
+            <p>Hắn không biết rằng, câu nói buột miệng lúc chiều vừa tạo ra đan sư đầu tiên của ngoại môn Thanh Vân Tông trong suốt mười năm qua.</p>
+
+            <p>Và hắn cũng không biết rằng, từ đêm nay, Trần Bách sẽ kể cho tất cả mọi người nghe: Lâm Nhàn đã "chỉ điểm" gã thế nào.</p>
+        </div>
+
+        <footer class="chapter__footer">
+            <div class="chapter__wordcount">~3,007 từ</div>
+            <div class="chapter__nav-bottom">
+                <a href="chapter-01.html">&larr; Chương trước</a>
+                <a href="index.html">Mục lục</a>
+                <span class="disabled">Chương sau &rarr;</span>
+            </div>
+        </footer>
+    </article>
+</body>
+</html>

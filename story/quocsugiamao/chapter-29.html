@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 29 — Người Muốn Thành Thần | Quốc Sư Giả Mạo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #131313;
+      color: #e9e9e9;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 120px;
+    }
+
+    /* ── Top Nav ── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+    }
+
+    .nav a, .nav span {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-decoration: none;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .nav a {
+      color: #949494;
+      padding: 8px 16px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      display: inline-block;
+    }
+
+    .nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .nav .chapter-indicator {
+      color: #949494;
+      border: none;
+      padding: 0;
+    }
+
+    .nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Chapter Header ── */
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .chapter-label {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #5200ff;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+    }
+
+    .chapter-divider {
+      width: 40px;
+      height: 2px;
+      background: #3cffd0;
+      margin: 0 auto;
+    }
+
+    /* ── Content ── */
+    .content {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: #e9e9e9;
+      line-height: 2.0;
+    }
+
+    .content p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+    }
+
+    .content p.thought {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    .content p.thought em {
+      color: inherit;
+    }
+
+    .content em {
+      color: rgba(60, 255, 208, 0.55);
+      font-style: italic;
+    }
+
+    /* ── Scene Break ── */
+    .scene-break {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 2.4em 0;
+    }
+
+    .scene-break span {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5200ff;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .bottom-nav a {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #949494;
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #949494;
+      border-radius: 24px;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .bottom-nav a:hover {
+      color: #3cffd0;
+      border-color: #3cffd0;
+    }
+
+    .bottom-nav .disabled {
+      color: #444;
+      border-color: #333;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Word Count ── */
+    .word-count {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: #949494;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 18px 80px;
+      }
+
+      .chapter-header h1 {
+        font-size: 36px;
+        letter-spacing: 1px;
+      }
+
+      .chapter-label {
+        font-size: 11px;
+      }
+
+      .content {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .nav {
+        margin-bottom: 40px;
+      }
+
+      .nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 6px 12px;
+      }
+
+      .nav .chapter-indicator {
+        font-size: 10px;
+      }
+
+      .bottom-nav a {
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 8px 14px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .chapter-header h1 {
+        font-size: 30px;
+      }
+
+      .content {
+        font-size: 15px;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="nav">
+      <a href="chapter-28.html">&larr; CHƯƠNG 28</a>
+      <span class="chapter-indicator">29/30</span>
+      <a href="chapter-30.html">CHƯƠNG 30 &rarr;</a>
+    </nav>
+
+    <div class="chapter-header">
+      <div class="chapter-label">CHƯƠNG 29</div>
+      <h1>Người Muốn Thành Thần</h1>
+      <div class="chapter-divider"></div>
+    </div>
+
+    <div class="content">
+
+<p>Ba ngày sau động đất, Tạ Cảnh Minh phát hiện mình đã thành thần.</p>
+
+<p>Không phải kiểu "thần nhân" mà dân gọi từ vụ cầu mưa. Lần này khác. Lần này có tổ chức.</p>
+
+<p>Tiểu Phúc mang vào một xấp giấy. Mặt gã vừa sợ vừa ngưỡng mộ.</p>
+
+<p>— Quốc Sư, nhìn cái này.</p>
+
+<p>Giấy. In mộc bản. Hàng loạt. Trên giấy, hình vẽ một người đứng trên bậc cấp, tay chỉ xuống đám đông, hào quang vàng quanh đầu. Bên dưới, chữ lớn:</p>
+
+<p>"Quốc Sư phán: Quốc vận ở lòng dân. Trời rung đất chuyển, Quốc Sư đứng vững. Thần nhân tại thế."</p>
+
+<p class="thought"><em>Mình nói "ta không phải thần." Họ in thành "thần nhân tại thế."</em></p>
+
+<p class="thought"><em>Mình nói "quốc vận ở các ngươi." Họ vẽ mình có hào quang.</em></p>
+
+<p class="thought"><em>Mình nói thật. Và lời thật bị biến thành thần thoại mới.</em></p>
+
+<p>— Ai in?</p>
+
+<p>— Dạ, Tiểu nhân hỏi thì người ta nói phường Tây Thị in, do một hội gọi là "Quốc Sư Hội" đặt. Mấy trăm tờ, phát khắp kinh thành.</p>
+
+<p class="thought"><em>Quốc Sư Hội. Hội. Có tổ chức, có tên, có tiền in mộc bản.</em></p>
+
+<p class="thought"><em>Ai lập? Tín đồ tự phát? Hay ai đó đứng sau?</em></p>
+
+<p>— Còn gì nữa?</p>
+
+<p>Tiểu Phúc nuốt nước bọt.</p>
+
+<p>— Dạ, mấy miếu thờ Quốc Sư bị đổ, họ đã dựng lại. Lớn hơn. Có mái ngói hẳn hoi. Và thêm ba miếu mới. Tổng cộng bảy miếu trong kinh thành.</p>
+
+<p class="thought"><em>Bảy. Trước bốn, giờ bảy. Mỗi miếu là một ăng-ten thu niềm tin. Và bây giờ, niềm tin không phải kiểu "Quốc Sư phán đúng" nữa. Là kiểu "Quốc Sư là thần."</em></p>
+
+<p class="thought"><em>Khác. Hoàn toàn khác. Niềm tin rằng mình giỏi thì mình dùng được. Niềm tin rằng mình là thần thì mình chết.</em></p>
+
+<p class="thought"><em>Vì thần không được sai. Thần không được yếu. Thần không được là người.</em></p>
+
+<p class="thought"><em>Và mình, rất rõ ràng, là người.</em></p>
+
+<p>— Tiểu Phúc, tìm ra ai đứng sau Quốc Sư Hội. Nhanh.</p>
+
+<p>— Dạ.</p>
+
+<p>Gã chạy đi. Hắn nhìn xấp giấy. Nhìn hào quang vẽ quanh đầu mình.</p>
+
+<p class="thought"><em>Kiếp trước, mình từng thấy chuyện này. Các "thầy" đa cấp, các "đạo sư" mạng. Bắt đầu bằng một bài diễn thuyết hay. Rồi tín đồ tự tổ chức. Rồi hội nhóm. Rồi giáo phái.</em></p>
+
+<p class="thought"><em>Và kẻ đứng giữa, nếu không kiểm soát, bị giáo phái nuốt. Không phải giáo phái phục vụ "thầy." "Thầy" phục vụ giáo phái. Vì lúc đó, hình tượng đã lớn hơn con người.</em></p>
+
+<p class="thought"><em>Mình đang ở bước hai. Nếu không dừng, bước ba sẽ đến.</em></p>
+
+<p class="thought"><em>Và bước ba, ở thế giới này, không phải giáo phái mạng. Là tín ngưỡng có niềm tin thật, có Thiên Cơ thật, có sức mạnh thật.</em></p>
+
+<p class="thought"><em>Sức mạnh mà mình không kiểm soát được.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Giờ Tỵ. Vào cung.</p>
+
+<p>Trấn khí vận cho vua xong, hắn đi ra hành lang phía tây. Và dừng.</p>
+
+<p>Lục Thanh Dao đứng ở cuối hành lang. Áo xanh đậm hôm nay, tóc búi cao, khí chất lạnh. Kiểu "bản vương," không phải kiểu "ta" riêng tư.</p>
+
+<p>Nửa tháng. Nửa tháng hắn không thấy nàng. Và lần gặp cuối, hắn đã lỡ miệng gợi ý vua sắp chết.</p>
+
+<p class="thought"><em>Nàng giận? Nàng sợ? Nàng đến để nói gì?</em></p>
+
+<p>— Vương gia.</p>
+
+<p>— Đi với bản vương. Có chuyện cần bàn.</p>
+
+<p>Không hỏi. Lệnh. Giọng lạnh. Mắt sắc.</p>
+
+<p class="thought"><em>Đúng rồi. Giận. Hoặc hơn giận.</em></p>
+
+<p>Hắn đi theo. Thanh Phong Các. Nơi quen. Nhưng hôm nay không có trà sẵn trên bàn. Không có đèn ấm. Lạnh.</p>
+
+<p>Nàng ngồi. Hắn ngồi đối diện.</p>
+
+<p>Im lặng. Nàng nhìn hắn. Lâu.</p>
+
+<p>Rồi nàng nói:</p>
+
+<p>— Ngươi nói trước cổng Đoan Minh. Bản vương nghe rồi.</p>
+
+<p class="thought"><em>Nàng nghe. Bài phát biểu. "Ta không phải thần."</em></p>
+
+<p>— Thần nói thật.</p>
+
+<p>— Bản vương biết.</p>
+
+<p>Dừng.</p>
+
+<p>— Ngươi nói thật lần đầu tiên trước ngàn người. Và ngàn người đó, biến lời thật thành lời thần.</p>
+
+<p class="thought"><em>Nàng hiểu. Nàng hiểu chính xác.</em></p>
+
+<p>— Bây giờ ngươi có biết kinh thành đang gọi ngươi là gì không?</p>
+
+<p>— Thần nhân tại thế.</p>
+
+<p>— Sai. Họ gọi ngươi là "Quốc Sư sống." Nghĩa là thần sống giữa trần gian. Không phải biệt danh. Là tín ngưỡng. Có hội. Có miếu. Có người quỳ.</p>
+
+<p class="thought"><em>"Quốc Sư sống." Tệ hơn mình nghĩ.</em></p>
+
+<p>— Và ngươi biết chuyện gì xảy ra khi một người được gọi là thần sống?</p>
+
+<p>— Biết.</p>
+
+<p>— Nói.</p>
+
+<p>— Hoặc trở thành thần thật. Hoặc bị kéo xuống và giết.</p>
+
+<p>Nàng gật. Chậm.</p>
+
+<p>— Đúng. Và ở Đại Ly, không ai được phép là thần sống. Ngoại trừ Thiên Tử.</p>
+
+<p class="thought"><em>Ngoại trừ vua. Và mình đang được gọi bằng thứ chỉ vua mới được gọi.</em></p>
+
+<p class="thought"><em>Nếu vua nghe...</em></p>
+
+<p>— Bệ hạ biết chưa?</p>
+
+<p>— Chưa. Bản vương chặn tin. Nhưng không chặn được lâu. Vương Bách Nhẫn sẽ đưa tin này vào cung. Nhanh.</p>
+
+<p class="thought"><em>Vương Bách Nhẫn. Gã đang chơi hai chiêu cùng lúc. Rải tin "QS phán vua chết" để hạ uy tín mình. Và đồng thời, để Quốc Sư Hội nâng mình lên thành thần, để tạo xung đột với vua.</em></p>
+
+<p class="thought"><em>Hay là... Quốc Sư Hội không phải của Vương?</em></p>
+
+<p>— Vương gia, Quốc Sư Hội là của Vương Bách Nhẫn?</p>
+
+<p>Nàng nhìn hắn. Hơi nghiêng đầu. Kiểu đánh giá.</p>
+
+<p>— Không. Bản vương đã tra. Quốc Sư Hội là tự phát. Dân chợ, thợ thủ công, vài thương nhân nhỏ. Không có ai của Vương Bách Nhẫn.</p>
+
+<p class="thought"><em>Tự phát. Tệ hơn.</em></p>
+
+<p class="thought"><em>Nếu là Vương sắp đặt, mình phá được. Nhưng tự phát nghĩa là niềm tin thật. Phá niềm tin thật khó hơn phá âm mưu.</em></p>
+
+<p>— Nhưng Vương Bách Nhẫn sẽ dùng nó. Gã sẽ tâu vua: "Quốc Sư tự xưng thần, dân lập miếu thờ, tín đồ thành hội, đây là mầm phản." Vua sẽ sợ. Vua vốn đã sợ.</p>
+
+<p class="thought"><em>Đúng. Vua sợ mất quyền. Vua sợ bất kỳ ai mạnh hơn. Và "thần sống" thì mạnh hơn vua.</em></p>
+
+<p class="thought"><em>Mình vừa thoát bão động đất, lại rơi vào bão mới.</em></p>
+
+<p>— Vương gia có cách nào không?</p>
+
+<p>Nàng nhìn hắn. Và lần đầu tiên kể từ lần gặp cuối, mắt nàng mềm lại. Nhẹ. Nhanh. Rồi lạnh lại.</p>
+
+<p>— Có. Nhưng ngươi sẽ không thích.</p>
+
+<p>— Nói.</p>
+
+<p>— Để bản vương quản Quốc Sư Hội. Biến nó từ tín ngưỡng dân gian thành tổ chức chính thống, dưới sự giám sát của triều đình. Như vậy, vua không sợ. Vì nó thuộc triều đình, không phải thuộc ngươi.</p>
+
+<p class="thought"><em>Thông minh. Kiểu Lục Thanh Dao. Biến mối đe dọa thành công cụ.</em></p>
+
+<p class="thought"><em>Nhưng...</em></p>
+
+<p>— Nhưng như vậy, hình tượng thần của thần sẽ do triều đình kiểm soát. Không phải do thần.</p>
+
+<p>— Đúng. Ngươi mất quyền kiểm soát hình tượng. Nhưng ngươi sống.</p>
+
+<p class="thought"><em>Mất quyền kiểm soát hình tượng. Nghĩa là triều đình quyết định "Quốc Sư" trông như thế nào, nói gì, tin gì. Và mình, phải diễn theo.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình gọi đó là "quản lý thương hiệu bằng bên thứ ba." Nhãn hàng mất quyền tự kể câu chuyện của mình.</em></p>
+
+<p class="thought"><em>Nhưng kiếp trước, mất quyền kể câu chuyện thì mất tiền. Kiếp này, mất quyền kể câu chuyện thì mất mạng.</em></p>
+
+<p>— Vương gia đòi gì?</p>
+
+<p>Nàng hơi cười. Mỏng. Kiểu người đánh giá đúng đối thủ.</p>
+
+<p>— Ngươi hỏi đúng câu.</p>
+
+<p>Dừng.</p>
+
+<p>— Bản vương cần Quốc Sư đứng cùng bản vương. Công khai. Không phải kiểu trước đây, ngươi ở một bên, bản vương ở một bên, gặp nhau uống trà. Mà công khai. Quốc Sư ủng hộ Nhiếp Chính Vương.</p>
+
+<p class="thought"><em>Công khai liên minh. Nàng muốn mình chọn phe. Phe nàng.</em></p>
+
+<p class="thought"><em>Trước giờ mình giữ trung lập. Nói hai nghĩa cho cả hai phe hiểu. Bây giờ, nàng muốn mình nói một nghĩa. Cho nàng.</em></p>
+
+<p>— Nếu thần chọn phe Vương gia, Vương Bách Nhẫn sẽ tấn công mạnh hơn.</p>
+
+<p>— Gã đã tấn công rồi. Tin đồn, sát thủ. Ngươi không chọn phe mà gã vẫn tấn công. Ít nhất chọn phe thì có đồng minh.</p>
+
+<p class="thought"><em>Đúng. Nàng đúng. Mình đang bị tấn công từ mọi phía mà không có đồng minh chính thức nào.</em></p>
+
+<p class="thought"><em>Lục Thanh Dao bảo vệ mình bấy lâu nay, nhưng trong bóng tối. Công khai liên minh nghĩa là nàng sẽ dùng quyền lực thật để che chở. Đổi lại, mình mất tự do.</em></p>
+
+<p>Hắn nhìn nàng. Nàng nhìn lại. Hai kẻ đã quen nhìn nhau trong im lặng.</p>
+
+<p>Thiên Diễn Đồng đọc: lo. Sâu. Nàng lo cho hắn. Không chỉ chính trị. Lo kiểu người lo cho người.</p>
+
+<p class="thought"><em>Nàng lo thật. Dưới lớp "bản vương" lạnh lùng, nàng lo mình chết.</em></p>
+
+<p class="thought"><em>Và nàng đúng. Nếu không có đồng minh, mình chết thật. Sát thủ đêm đó suýt giết mình. Vương Bách Nhẫn đang siết. Và bây giờ, tín ngưỡng thần sống đang đẩy mình vào thế đối đầu với vua.</em></p>
+
+<p>— Được.</p>
+
+<p>Một chữ. Nàng hơi nhấp nhổm. Rất nhẹ. Thiên Diễn Đồng bắt được: nhẹ nhõm. Nàng sợ hắn từ chối.</p>
+
+<p>— Nhưng thần có điều kiện.</p>
+
+<p>Nàng chờ.</p>
+
+<p>— Quốc Sư Hội, triều đình quản, nhưng thần được quyền nói. Thần nói gì, hội truyền đó. Không chỉnh. Không sửa. Không thêm hào quang.</p>
+
+<p class="thought"><em>Điều kiện duy nhất: mình giữ quyền nói. Mất quyền nói = mất mọi thứ.</em></p>
+
+<p>Nàng nhíu mày. Nghĩ. Rồi gật.</p>
+
+<p>— Được. Nhưng nếu ngươi nói thứ gì gây loạn, bản vương sẽ chặn. Không cần hỏi trước.</p>
+
+<p>— Thần hiểu.</p>
+
+<p>Im lặng. Ngắn. Rồi nàng thở ra. Nhẹ. Như đặt xuống thứ gì đó nặng.</p>
+
+<p>— Ngươi nói ở cổng Đoan Minh. Bản vương đứng trên thành, nhìn xuống.</p>
+
+<p class="thought"><em>Nàng nhìn. Nàng nhìn mình nói.</em></p>
+
+<p>— "Ta không phải thần. Ta sợ." Ngươi nói vậy.</p>
+
+<p>— Thần nói thật.</p>
+
+<p>— Bản vương biết.</p>
+
+<p>Dừng. Giọng nàng nhẹ hơn. Không còn "bản vương" trong giọng, dù miệng vẫn xưng.</p>
+
+<p>— Ngươi biết tại sao dân tin ngươi hơn sau câu đó không?</p>
+
+<p>— Vì thần nói thật.</p>
+
+<p>— Sai.</p>
+
+<p>Hắn nhìn nàng.</p>
+
+<p>— Vì ngươi bước xuống bậc cấp. Hai lần. Gần đám đông hơn. Không ai bảo ngươi bước. Ngươi tự bước.</p>
+
+<p class="thought"><em>Bước xuống bậc cấp. Mình không nhớ mình tính toán điều đó. Mình bước vì... vì muốn gần họ hơn.</em></p>
+
+<p>— Kẻ nói trên cao, dân nghe. Kẻ bước xuống gần, dân tin. Khác nhau.</p>
+
+<p class="thought"><em>Nàng phân tích bài phát biểu của mình. Và nàng nhìn ra thứ mình không thấy.</em></p>
+
+<p class="thought"><em>Bước xuống. Gần dân. Đó là thứ tạo niềm tin, không phải lời nói.</em></p>
+
+<p class="thought"><em>Kiếp trước, mình biết điều này. Gần gũi tạo niềm tin. Nhưng kiếp trước, mình dùng nó để lừa. Kiếp này, mình dùng nó mà không biết mình đang dùng.</em></p>
+
+<p class="thought"><em>Vì mình không lừa. Mình thật sự muốn gần.</em></p>
+
+<p>— Vương gia nhìn kỹ thật.</p>
+
+<p>— Nghề của bản vương.</p>
+
+<p>Nhẹ. Gần cười. Không cười.</p>
+
+<p>Rồi nàng đứng dậy.</p>
+
+<p>— Sáng mai, bản vương sẽ tâu bệ hạ: Quốc Sư Hội đặt dưới sự giám sát của Nhiếp Chính Vương phủ, hoạt động theo quy chế triều đình, do Quốc Sư trực tiếp chỉ dẫn nội dung. Vương Bách Nhẫn muốn phản đối thì phải phản đối bản vương, không phải ngươi.</p>
+
+<p class="thought"><em>Nàng lấy thân chắn. Đặt mình vào giữa mình và Vương Bách Nhẫn.</em></p>
+
+<p class="thought"><em>Nàng nói "bản vương" nhưng làm kiểu "ta."</em></p>
+
+<p>— Cảm ơn Vương gia.</p>
+
+<p>— Đừng cảm ơn. Trả bằng cách đừng chết.</p>
+
+<p class="thought"><em>Lần thứ hai nghe câu "đừng chết" từ một nữ nhân trong tuần.</em></p>
+
+<p class="thought"><em>Diệp Trúc Khanh nói: "Trả ơn bằng cách sống."</em></p>
+
+<p class="thought"><em>Lục Thanh Dao nói: "Trả bằng cách đừng chết."</em></p>
+
+<p class="thought"><em>Cùng ý. Khác giọng. Kiếm nói thẳng. Vương nói lạnh.</em></p>
+
+<p class="thought"><em>Nhưng cả hai đều nói thật.</em></p>
+
+<p>Nàng đi ra cửa. Dừng.</p>
+
+<p>— A Ly. Con bé ở phủ ngươi?</p>
+
+<p class="thought"><em>Nàng biết. Đương nhiên nàng biết.</em></p>
+
+<p>— Dạ.</p>
+
+<p>— Giữ nó. Đừng để ai biết nó ở đâu. Có kẻ đang tìm nó, và kẻ đó không phải Vương Bách Nhẫn.</p>
+
+<p>— Thần biết. Phe áo đen.</p>
+
+<p>Nàng gật. Rồi nói, nhỏ:</p>
+
+<p>— Bản vương cũng đang tìm hiểu họ là ai. Chưa tìm ra.</p>
+
+<p class="thought"><em>Nàng cũng không biết. Lục Thanh Dao, người nắm mọi thông tin triều đình, cũng không biết phe áo đen là ai.</em></p>
+
+<p class="thought"><em>Tổ chức đó lớn hơn mình nghĩ.</em></p>
+
+<p>Nàng đi. Bước chân nhẹ. Cửa đóng.</p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Chiều. Quốc Sư Phủ.</p>
+
+<p>A Ly ngồi ở sân sau. Một mình. Nhìn trời.</p>
+
+<p>Hắn đi ngang. Dừng.</p>
+
+<p>Con bé ngồi tĩnh lặng. Không giống trẻ con mười hai mười ba tuổi. Ngồi kiểu người đã quen ngồi một mình. Quen im lặng. Quen chờ.</p>
+
+<p>— A Ly.</p>
+
+<p>Con bé quay lại. Mắt sáng.</p>
+
+<p>— Tiên sinh.</p>
+
+<p>Hắn ngồi xuống cạnh. Không nói. Ngồi.</p>
+
+<p>Im lặng. Gió chiều. Mùi hoa nhài từ đâu đó trong phủ.</p>
+
+<p>— Tiên sinh, con nghe ngoài phố nói Tiên sinh là thần. Có phải không?</p>
+
+<p class="thought"><em>Thẳng. Kiểu trẻ con. Không vòng vo.</em></p>
+
+<p>— Không. Ta là người.</p>
+
+<p>— Nhưng Tiên sinh nói con sẽ thay đổi thiên hạ. Lời đó có phải lời thần không?</p>
+
+<p class="thought"><em>Câu hỏi đơn giản. Trả lời không đơn giản.</em></p>
+
+<p class="thought"><em>"Lời đó có phải lời thần không?" Lúc đó, mình thuận miệng. Mình lừa. Nhưng Thiên Cơ nghe. Và lời lừa thành thật.</em></p>
+
+<p class="thought"><em>Vậy là lời thần hay lời người?</em></p>
+
+<p>— Lời đó là lời người. Nhưng... nhiều người tin, nên nó có sức mạnh.</p>
+
+<p>A Ly nhìn hắn. Lâu. Rồi nói:</p>
+
+<p>— Ở trấn Thanh Hà, dân gọi con là Thiên Nữ. Con chữa bệnh. Không phải chữa thật. Con chỉ đặt tay lên trán họ, nói "sẽ khỏe." Và có người khỏe thật.</p>
+
+<p class="thought"><em>Giả dược. Hiệu ứng giả dược. Kiếp trước, mình hiểu. Kiếp này, hiệu ứng giả dược mạnh hơn vì niềm tin ở đây có thể uốn hiện thực.</em></p>
+
+<p>— Nhưng cũng có người không khỏe. Và con sợ.</p>
+
+<p>— Sợ gì?</p>
+
+<p>— Sợ họ tin con nhiều quá. Rồi con không làm được. Rồi họ giận.</p>
+
+<p class="thought"><em>Nàng sợ điều mình sợ. Chính xác điều mình đang đối mặt. Lời tiên tri không thành, tín đồ quay lưng, thần bị kéo xuống.</em></p>
+
+<p class="thought"><em>Con bé mười hai tuổi, tự mình nhận ra điều mà mình mất hai kiếp.</em></p>
+
+<p>Hắn nhìn A Ly. Nhìn thật kỹ.</p>
+
+<p class="thought"><em>Khí vận quanh nàng mỏng, nhưng sáng. Và lưới Thiên Cơ, nút A Ly rung nhẹ. Đều. Kiểu rung của thứ đang lớn.</em></p>
+
+<p>— A Ly, nghe ta. Đừng hứa thứ ngươi không làm được. Nếu không chữa được, nói không. Người ta sẽ giận. Nhưng giận rồi quên. Còn nếu hứa rồi không làm được, họ sẽ hận. Hận không quên.</p>
+
+<p>Con bé gật. Chậm.</p>
+
+<p>— Tiên sinh cũng vậy phải không?</p>
+
+<p class="thought"><em>Mình cũng vậy. Đúng. Mình đang nói cho nàng nghe điều mình mới học.</em></p>
+
+<p>— Đúng. Ta cũng vậy.</p>
+
+<p>A Ly cười. Nhỏ. Lần đầu hắn thấy nàng cười.</p>
+
+<p>— Tiên sinh không giống thần.</p>
+
+<p>— Ta biết.</p>
+
+<p>— Tiên sinh giống... người anh.</p>
+
+<p class="thought"><em>Người anh. Con bé gọi mình là anh.</em></p>
+
+<p class="thought"><em>Không phải "Quốc Sư." Không phải "thần nhân." Không phải "Tiên sinh." Anh.</em></p>
+
+<p class="thought"><em>Và Thiên Diễn Đồng đọc: tin. Kiểu tin của A Ly không giống Tiểu Phúc. Tiểu Phúc tin kiểu tín đồ tuyệt đối. A Ly tin kiểu... gia đình. Tin vì quen. Tin vì ấm.</em></p>
+
+<p class="thought"><em>Hai kiểu niềm tin. Và kiểu nào mạnh hơn?</em></p>
+
+<p class="thought"><em>Mình không biết. Nhưng kiểu của A Ly, mình thích hơn.</em></p>
+
+<div class="scene-break"><span></span><span></span><span></span></div>
+
+<p>Đêm.</p>
+
+<p>Diệp Trúc Khanh đến. Qua cửa sổ. Như mọi lần.</p>
+
+<p>Nàng ngồi xuống. Kiếm đặt ngang. Mặt nghiêm.</p>
+
+<p>— Trường Xuân Cung có chuyện.</p>
+
+<p>Hắn ngồi thẳng.</p>
+
+<p>— Gì?</p>
+
+<p>— Ta đi thám. Đêm qua. Cổng điện thờ mở. Không ai mở, tự mở. Và bên trong, ta nghe tiếng.</p>
+
+<p>— Tiếng gì?</p>
+
+<p>— Không phải tiếng người. Tiếng... thở. Nhưng không có ai. Điện thờ trống. Chỉ có bàn thờ, nến, và cái lỗ dưới sàn.</p>
+
+<p class="thought"><em>Lỗ dưới sàn. Trong điện thờ Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Tiếng thở từ dưới sàn.</em></p>
+
+<p>— Lỗ lớn không?</p>
+
+<p>— Vừa một người chui. Sâu. Có bậc thang. Ta chưa xuống. Chờ ngươi.</p>
+
+<p class="thought"><em>Nàng chờ mình. Vì mình nhìn thấy khí đen. Nàng chém được người, nhưng không chém được khí.</em></p>
+
+<p>— Đêm mai đi.</p>
+
+<p>Nàng gật.</p>
+
+<p>— Mang A Ly đi không?</p>
+
+<p>— Không. Để con bé ở phủ. An toàn hơn.</p>
+
+<p>— Đồng ý. Nhưng cần ai đó canh. Tiểu Phúc?</p>
+
+<p>— Tiểu Phúc và Trần Phú.</p>
+
+<p>Nàng nhíu mày.</p>
+
+<p>— Trần Phú là gián điệp Vương Bách Nhẫn.</p>
+
+<p class="thought"><em>Nàng biết. Nàng cũng biết Trần Phú là gián điệp.</em></p>
+
+<p>— Đúng. Nhưng gã sẽ canh cẩn thận. Vì nếu A Ly bị hại trong lúc gã canh, mình sẽ biết gã làm.</p>
+
+<p class="thought"><em>Dùng gián điệp canh. Gã không dám để mất A Ly, vì mình sẽ nghi gã. Gã không dám hại A Ly, vì A Ly là "Thiên Mệnh," giết Thiên Mệnh thì Vương Bách Nhẫn cũng không dám chịu.</em></p>
+
+<p class="thought"><em>Gián điệp tốt nhất là gián điệp biết mình bị biết.</em></p>
+
+<p>Diệp Trúc Khanh nhìn hắn. Lâu.</p>
+
+<p>— Ngươi đúng là không đánh được ai. Nhưng cái đầu ngươi, đáng sợ thật.</p>
+
+<p class="thought"><em>Khen? Nàng khen mình?</em></p>
+
+<p>— Diệp cô nương khen à?</p>
+
+<p>— Nhận xét. Không khen.</p>
+
+<p class="thought"><em>Miệng nói nhận xét, Thiên Diễn Đồng đọc: nể. Nhẹ. Kiểu nể của kiếm khách dành cho kẻ không cầm kiếm.</em></p>
+
+<p>Nàng đứng dậy. Biến qua cửa sổ.</p>
+
+<p>Hắn ngồi lại. Nhìn bóng đêm.</p>
+
+<p class="thought"><em>Đêm mai, Trường Xuân Cung. Lỗ dưới sàn điện thờ. Tiếng thở.</em></p>
+
+<p class="thought"><em>"Có thứ thức dậy." Thiên Ngoại Các nói. Và Diệp Trúc Khanh nghe thấy.</em></p>
+
+<p class="thought"><em>Mọi tuyến đang hội tụ. Quốc Sư Hội, Lục Thanh Dao liên minh, Vương Bách Nhẫn siết, A Ly ở phủ, Bắc Nguyên phía bắc, và bây giờ, Trường Xuân Cung.</em></p>
+
+<p class="thought"><em>Tất cả đang hội tụ.</em></p>
+
+<p>Hắn nhắm mắt. Nhìn lưới. Và thấy.</p>
+
+<p>Nút Trường Xuân Cung, nút mà trước đây tối đen, lặng im, bây giờ rung. Không phải rung kiểu niềm tin. Rung kiểu... sống. Kiểu tim đập. Kiểu thứ gì đó đang thở dưới lòng đất.</p>
+
+<p>Và sợi nối từ nút đó, không chảy đi đâu. Chảy lên.</p>
+
+<p>Chảy lên trời.</p>
+
+<p class="thought"><em>Trường Xuân Cung nối thẳng lên Thiên Cơ. Không qua niềm tin. Không qua người. Nối trực tiếp.</em></p>
+
+<p class="thought"><em>Thứ gì ở dưới đó?</em></p>
+
+<p class="thought"><em>Và tại sao nó thức dậy bây giờ?</em></p>
+
+<p>Gió. Lạnh. Đèn tắt.</p>
+
+<p>Và từ hướng Trường Xuân Cung, xa, rất xa, hắn nghe. Hoặc tưởng nghe.</p>
+
+<p>Tiếng thở.</p>
+
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="chapter-28.html">&larr; CHƯƠNG 28</a>
+      <a href="chapter-30.html">CHƯƠNG 30 &rarr;</a>
+    </nav>
+
+    <div class="word-count">3.201 từ</div>
+
+  </div>
+</body>
+</html>
