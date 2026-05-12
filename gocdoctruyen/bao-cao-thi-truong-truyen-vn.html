@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo Cáo Thị Trường Truyện Việt Nam 2026 — Vision Document</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --ink-soft: #3d3530;
+    --ink-muted: #6b5f55;
+    --paper: #faf6ef;
+    --paper-warm: #f3ebdc;
+    --paper-deep: #ebe0cb;
+    --accent: #8b3a1d;
+    --accent-soft: #c25e3a;
+    --gold: #b8893f;
+    --green: #4a6b3a;
+    --line: #d4c7b0;
+    --line-soft: #e8dcc4;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(184, 137, 63, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(139, 58, 29, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .private-banner {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 0;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .private-banner span { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    padding: 80px 0 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-muted);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .hero-meta {
+    margin-top: 36px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 8px; }
+  .hero-meta span::before { content: '◆'; color: var(--gold); font-size: 8px; }
+
+  /* TOC */
+  .toc {
+    margin: 48px 0;
+    padding: 32px 36px;
+    background: var(--paper-warm);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .toc h3 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc li {
+    counter-increment: toc;
+    padding: 8px 0;
+    position: relative;
+    padding-left: 40px;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.2s;
+  }
+  .toc a:hover { border-color: var(--accent); }
+
+  /* Section base */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line-soft); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    margin-bottom: 16px;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 4.5vw, 40px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+
+  h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--ink);
+    margin: 40px 0 16px;
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 24px 0 10px;
+    letter-spacing: 0.01em;
+  }
+
+  p { margin-bottom: 16px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  em { font-family: var(--serif); font-style: italic; color: var(--ink); }
+
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .data-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .data-table th.num, .data-table td.num { text-align: right; font-family: var(--mono); }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table td strong {
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 15px;
+  }
+  .data-table tbody tr:hover { background: var(--paper-warm); }
+
+  /* Stat cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-card {
+    padding: 20px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.03em;
+  }
+
+  /* Callout boxes */
+  .callout {
+    margin: 28px 0;
+    padding: 20px 24px;
+    background: var(--paper-deep);
+    border-left: 3px solid var(--gold);
+    font-size: 15px;
+  }
+  .callout-label {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout-warn { border-left-color: var(--accent); background: rgba(139, 58, 29, 0.05); }
+  .callout-warn .callout-label { color: var(--accent); }
+  .callout-positive { border-left-color: var(--green); background: rgba(74, 107, 58, 0.05); }
+  .callout-positive .callout-label { color: var(--green); }
+
+  /* Lists */
+  ul.styled {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  ul.styled li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    color: var(--ink-soft);
+  }
+  ul.styled li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--gold);
+    font-size: 8px;
+  }
+
+  /* Country comparison */
+  .country-card {
+    margin: 32px 0;
+    padding: 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    border-top: 4px solid var(--accent);
+  }
+  .country-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .country-flag {
+    font-size: 36px;
+  }
+  .country-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .country-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .country-key-stat {
+    display: inline-block;
+    margin-left: auto;
+    padding: 4px 12px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: 2px;
+  }
+
+  /* Score box */
+  .score-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .score-item {
+    padding: 16px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    text-align: center;
+  }
+  .score-value {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .score-label {
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Verdict box */
+  .verdict {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2520 100%);
+    color: var(--paper);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .verdict::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(184, 137, 63, 0.12) 0%, transparent 60%);
+  }
+  .verdict > * { position: relative; z-index: 1; }
+  .verdict h3 {
+    color: var(--gold);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .verdict p {
+    color: rgba(250, 246, 239, 0.92);
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  /* Divider */
+  .divider {
+    text-align: center;
+    margin: 64px 0;
+    color: var(--gold);
+    font-size: 20px;
+    letter-spacing: 1em;
+  }
+
+  /* Source */
+  .sources {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--paper-warm);
+    border: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+  .sources strong {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+  footer em {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--accent);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { font-size: 15px; }
+    .container { padding: 0 20px; }
+    section { padding: 48px 0; }
+    .data-table { font-size: 13px; }
+    .data-table th, .data-table td { padding: 10px 12px; }
+    .country-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .country-key-stat { margin-left: 0; }
+    .verdict { padding: 28px 22px; }
+    .verdict p { font-size: 17px; }
+    .hero-meta { gap: 14px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="private-banner">
+  📊 <span>Báo cáo nội bộ</span> · Vision Document · <span>Tháng 5, 2026</span>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-eyebrow">Market Research Report</span>
+    <h1>Thị trường <em>truyện Việt Nam</em></h1>
+    <p class="hero-tagline">Phân tích traffic, mô hình kinh doanh, và tiềm năng dài hạn — so sánh với 5 thị trường truyện phát triển nhất thế giới.</p>
+    <div class="hero-meta">
+      <span>Tháng 5, 2026</span>
+      <span>Phiên bản 1.0</span>
+      <span>Báo cáo nội bộ — Góc Đọc Truyện</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h3>Mục lục</h3>
+    <ol>
+      <li><a href="#summary">Tóm tắt điều hành</a></li>
+      <li><a href="#platforms">Các nền tảng đọc truyện VN — Traffic & quy mô</a></li>
+      <li><a href="#market">Thị trường truyện VN — Bức tranh chung</a></li>
+      <li><a href="#monetization">Các mô hình kiếm tiền</a></li>
+      <li><a href="#ecosystem">Hệ sinh thái: Đọc + Audio + Vật phẩm offline</a></li>
+      <li><a href="#genres">Thể loại thu hút độc giả VN</a></li>
+      <li><a href="#international">So sánh với 5 nước phát triển</a></li>
+      <li><a href="#potential">Đánh giá tiềm năng thị trường</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. EXECUTIVE SUMMARY -->
+  <section id="summary">
+    <span class="section-num">01 — Executive Summary</span>
+    <h2>Tóm tắt <em>điều hành</em></h2>
+
+    <p>Thị trường truyện online tại Việt Nam đang ở một <strong>khúc rẽ quan trọng</strong>. Trên bề mặt, đây vẫn là thị trường lớn với hàng chục triệu lượt đọc mỗi tháng. Tuy nhiên, đào sâu vào dữ liệu cho thấy 3 sự thật quan trọng:</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num">~20M</div>
+        <div class="label">Visits/tháng cho platform lớn nhất (Truyenfull.vision)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">95%</div>
+        <div class="label">Truyện trên platform lớn là truyện convert từ Trung Quốc</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">$300M</div>
+        <div class="label">Quy mô thị trường audiobook VN (ước tính)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">0</div>
+        <div class="label">Platform "truyện gốc Việt" ở quy mô lớn</div>
+      </div>
+    </div>
+
+    <p><strong>Phát hiện chính:</strong></p>
+
+    <ul class="styled">
+      <li>Demand cho truyện online tại VN đã được chứng minh — không cần tạo demand mới</li>
+      <li>Cung hiện tại bị thống trị bởi truyện convert/dịch lậu (vấn đề pháp lý dài hạn)</li>
+      <li>Audiobook đang growth nhanh nhất (Voiz FM, Fonos growth 60-100%/năm)</li>
+      <li>Việt Nam thiếu hoàn toàn một mô hình "Qidian VN" hoặc "KakaoPage VN"</li>
+      <li>So với 5 nước phát triển, VN đang ở giai đoạn 2010-2013 của Trung Quốc/Hàn Quốc</li>
+    </ul>
+
+    <div class="callout callout-positive">
+      <span class="callout-label">Kết luận</span>
+      <p>Thị trường truyện gốc Việt là <strong>"blue ocean trong red ocean"</strong> — segment cụ thể (truyện gốc) chưa có player chính trong một thị trường tổng thể (truyện online) đã chứng minh demand. Cửa sổ thời cơ ước tính 18-36 tháng trước khi có competitor nghiêm túc.</p>
+    </div>
+  </section>
+
+  <!-- 2. PLATFORMS -->
+  <section id="platforms">
+    <span class="section-num">02 — Platform Landscape</span>
+    <h2>Các nền tảng đọc truyện VN — <em>Traffic & quy mô</em></h2>
+
+    <p>Dữ liệu traffic được tổng hợp từ Similarweb, Semrush, Ahrefs (tháng 1-3/2026). Lưu ý: số liệu visits bao gồm cả desktop + mobile web, không tính app traffic riêng.</p>
+
+    <h3>Top 10 platform đọc truyện tiếng Việt</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Mô hình</th>
+          <th class="num">Visits/tháng</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Truyenfull.vision</strong></td>
+          <td>Convert + dịch, free, ads</td>
+          <td class="num">~20M</td>
+          <td>Dẫn đầu thị trường</td>
+        </tr>
+        <tr>
+          <td><strong>Metruyencv.com</strong></td>
+          <td>Convert + nội bộ, free + paid</td>
+          <td class="num">5-8M (est.)</td>
+          <td>#2 thị trường</td>
+        </tr>
+        <tr>
+          <td><strong>Trumtruyen.vn</strong></td>
+          <td>Convert + dịch, free, ads</td>
+          <td class="num">~4.3M</td>
+          <td>Growing</td>
+        </tr>
+        <tr>
+          <td><strong>Wattpad VN</strong></td>
+          <td>Gốc + dịch, free + paid stories</td>
+          <td class="num">~2-3M (VN portion)</td>
+          <td>Global platform</td>
+        </tr>
+        <tr>
+          <td><strong>Sstruyen.vn</strong></td>
+          <td>Convert, free, ads</td>
+          <td class="num">~1-2M</td>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <td><strong>Bachngocsach.com.vn</strong></td>
+          <td>Convert + sáng tác, free</td>
+          <td class="num">~500K-1M</td>
+          <td>Community-driven</td>
+        </tr>
+        <tr>
+          <td><strong>Metruyenhot.vn</strong></td>
+          <td>Convert, free, ads</td>
+          <td class="num">~139K</td>
+          <td>Niche</td>
+        </tr>
+        <tr>
+          <td><strong>Truyenfull.vn</strong></td>
+          <td>Domain cũ — đã migrate</td>
+          <td class="num">~116K</td>
+          <td>Suy giảm 35%/tháng</td>
+        </tr>
+        <tr>
+          <td><strong>Vietnamthuquan.eu</strong></td>
+          <td>Tổng hợp văn học</td>
+          <td class="num">~100-200K</td>
+          <td>Niche văn học</td>
+        </tr>
+        <tr>
+          <td><strong>Góc Đọc Truyện</strong></td>
+          <td>100% gốc Việt, free, không ads</td>
+          <td class="num">Mới ra mắt</td>
+          <td>Định vị độc đáo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Audiobook platforms</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Năm thành lập</th>
+          <th class="num">Users</th>
+          <th>Đặc điểm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Voiz FM</strong></td>
+          <td>2019</td>
+          <td class="num">500K+ users, 1.5M+ downloads</td>
+          <td>Largest library — 3000+ titles, partnership với First News, Bách Việt</td>
+        </tr>
+        <tr>
+          <td><strong>Fonos</strong></td>
+          <td>2020</td>
+          <td class="num">5M+ listens (H1/2023)</td>
+          <td>66.7% revenue share market — Alphabooks, Nhã Nam, Thái Hà</td>
+        </tr>
+        <tr>
+          <td><strong>Waka (MyDio)</strong></td>
+          <td>2021</td>
+          <td class="num">N/A (private)</td>
+          <td>Backed by Waka JSC — ebook + audiobook hybrid</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <span class="callout-label">Observation quan trọng</span>
+      <p>Top platform truyện chữ (Truyenfull.vision với 20M visits) đang <strong>migrate liên tục giữa các domain</strong> (.com → .vn → .vision). Đây là dấu hiệu của áp lực pháp lý/DMCA với mô hình truyện convert không bản quyền. Khi áp lực này tăng, các platform "truyện gốc có bản quyền" sẽ hưởng lợi.</p>
+    </div>
+
+    <div class="sources">
+      <strong>Nguồn</strong>
+      Similarweb (tháng 1-3/2026), Semrush, Ahrefs, Vietnam Times, Startup Wheel, Spiderum, Vietnam Investment Review
+    </div>
+  </section>
+
+  <!-- 3. MARKET -->
+  <section id="market">
+    <span class="section-num">03 — Market Overview</span>
+    <h2>Thị trường truyện VN — <em>Bức tranh chung</em></h2>
+
+    <h3>Quy mô độc giả</h3>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="num">100M</div>
+        <div class="label">Dân số Việt Nam</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">70%</div>
+        <div class="label">Internet users</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">69M</div>
+        <div class="label">Smartphone users</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">15-20M</div>
+        <div class="label">Độc giả truyện online (ước tính)</div>
+      </div>
+    </div>
+
+    <p>Việt Nam là <strong>thị trường truyện online lớn thứ 3-4 Đông Nam Á</strong> sau Indonesia, Philippines, Thái Lan — dựa trên population và internet penetration. Tuy nhiên về <strong>willingness-to-pay</strong>, VN vẫn ở mức thấp hơn các nước phát triển.</p>
+
+    <h3>Đặc điểm thị trường VN</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Yếu tố</th>
+          <th>Đặc điểm</th>
+          <th>Hàm ý cho platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nguồn cung</strong></td>
+          <td>95% truyện convert TQ, 5% gốc/dịch</td>
+          <td>Khoảng trống lớn cho "truyện gốc Việt"</td>
+        </tr>
+        <tr>
+          <td><strong>Mobile-first</strong></td>
+          <td>80%+ độc giả đọc qua mobile</td>
+          <td>App là bắt buộc, không tùy chọn</td>
+        </tr>
+        <tr>
+          <td><strong>Willingness-to-pay</strong></td>
+          <td>Thấp — đã quen với "miễn phí + ads"</td>
+          <td>Cần đào tạo dần, không paywall sớm</td>
+        </tr>
+        <tr>
+          <td><strong>Demographics</strong></td>
+          <td>56% nữ, 44% nam; 18-34 tuổi chiếm 60%+</td>
+          <td>Ngôn tình là engine doanh thu lớn nhất</td>
+        </tr>
+        <tr>
+          <td><strong>Discovery</strong></td>
+          <td>Google Search là nguồn chính</td>
+          <td>SEO-first cực kỳ quan trọng</td>
+        </tr>
+        <tr>
+          <td><strong>Quality expectation</strong></td>
+          <td>Tăng nhanh (Gen Z khắt khe hơn)</td>
+          <td>Cơ hội cho platform chất lượng cao</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Vấn đề lớn của thị trường hiện tại</h3>
+
+    <div class="callout callout-warn">
+      <span class="callout-label">Rủi ro pháp lý dài hạn</span>
+      <p>Các platform lớn nhất Việt Nam đang vận hành trên <strong>nguồn content không bản quyền</strong> — truyện convert từ Trung Quốc không được tác giả gốc cho phép. Khi Việt Nam siết chặt Luật Sở hữu trí tuệ (đặc biệt sau RCEP và CPTPP), các platform này đối mặt rủi ro pháp lý lớn. Đây vừa là cảnh báo, vừa là cơ hội cho platform "100% bản quyền sạch".</p>
+    </div>
+
+    <h3>Cấu trúc revenue hiện tại của thị trường</h3>
+
+    <p>Dựa trên ước tính của các platform công bố và similar markets:</p>
+
+    <ul class="styled">
+      <li><strong>Ads revenue:</strong> ~70-80% doanh thu của các platform truyện chữ — phụ thuộc vào CPM Việt Nam (thấp, ~$0.5-2/1000 impressions)</li>
+      <li><strong>Subscription/Premium:</strong> ~10-15% — chủ yếu ở Wattpad VN, Metruyencv (premium chapters)</li>
+      <li><strong>Audiobook subscriptions:</strong> Voiz FM thu 199k-599k VND/gói, Fonos 99k-899k VND/gói</li>
+      <li><strong>POD (print-on-demand):</strong> Hầu như chưa được khai thác ở VN</li>
+      <li><strong>IP licensing:</strong> Mới bắt đầu — vài deal phim/drama nhưng quy mô nhỏ</li>
+    </ul>
+
+    <div class="sources">
+      <strong>Nguồn</strong>
+      PMC Research Article (2022), Vietnam Times, Hanoi Times, Publishing Research Quarterly
+    </div>
+  </section>
+
+  <!-- 4. MONETIZATION -->
+  <section id="monetization">
+    <span class="section-num">04 — Monetization Models</span>
+    <h2>Các mô hình <em>kiếm tiền</em></h2>
+
+    <p>Có 7 mô hình monetization đã được chứng minh ở thị trường truyện online toàn cầu. Mỗi mô hình có ưu/nhược điểm và phù hợp với từng giai đoạn phát triển platform.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Mô hình</th>
+          <th>Cách hoạt động</th>
+          <th>Phù hợp với</th>
+          <th class="num">Tiềm năng VN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Quảng cáo (Ads)</strong></td>
+          <td>Hiển thị banner, video ads, native ads</td>
+          <td>Platform free, volume-based</td>
+          <td class="num">⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>2. Subscription</strong></td>
+          <td>Trả phí tháng/năm để unlock all content</td>
+          <td>Platform có nhiều content cao cấp</td>
+          <td class="num">⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>3. Pay-per-chapter</strong></td>
+          <td>Mua coin để unlock từng chương</td>
+          <td>Truyện dài, fans cuồng nhiệt</td>
+          <td class="num">⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>4. Early Access</strong></td>
+          <td>Trả phí để đọc sớm 3-7 ngày</td>
+          <td>Truyện đang ra, lịch fixed</td>
+          <td class="num">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>5. Tip Jar</strong></td>
+          <td>Độc giả tip tự nguyện cho tác giả</td>
+          <td>Mô hình community-driven</td>
+          <td class="num">⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>6. Audio Licensing</strong></td>
+          <td>Bán quyền audio cho Voiz FM/Fonos</td>
+          <td>Truyện đã hoàn thành, hot</td>
+          <td class="num">⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>7. IP Licensing</strong></td>
+          <td>Bán quyền phim, drama, webtoon</td>
+          <td>Top hits với fan base lớn</td>
+          <td class="num">⭐⭐⭐⭐</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Phân tích chi tiết — Áp dụng cho thị trường VN</h3>
+
+    <h4>Mô hình "Wait for Free" của KakaoPage — Khả thi cao</h4>
+    <p>Độc giả đợi 24h sẽ được mở chương miễn phí — hoặc trả tiền để unlock ngay. Mô hình này tận dụng <strong>FOMO</strong> và <strong>thói quen đọc hàng ngày</strong>. KakaoPage Hàn Quốc thu 50% revenue từ mô hình này. Phù hợp với độc giả VN — không bắt trả tiền nhưng tạo incentive mạnh.</p>
+
+    <h4>Mô hình "Coin" của Qidian — Khả thi trung bình</h4>
+    <p>Chương cũ free, chương mới phải mua coin (2 cents/1000 chữ). Đây là engine doanh thu chính của Trung Quốc — 28.8 tỷ Nhân dân tệ ($4.4B) năm 2024. Tại VN cần 5-7 năm để educate user, không thể launch ngay.</p>
+
+    <h4>Mô hình Wattpad Paid Stories — Khả thi cao</h4>
+    <p>Tác giả chọn 1 số truyện để paywall, độc giả mua coin để unlock. Đã chứng minh tại VN — Wattpad VN là 1 trong top countries của Wattpad globally (36% e-readers là người Việt theo data cũ). Tỷ lệ chia: 50% Google + 20% platform + 50% còn lại tác giả + platform.</p>
+
+    <div class="callout callout-positive">
+      <span class="callout-label">Đề xuất lộ trình monetization cho VN</span>
+      <p><strong>Năm 1:</strong> 100% miễn phí — build traffic & content<br>
+      <strong>Năm 2 (Q1-Q2):</strong> Audio licensing (Voiz FM/Fonos) + POD pilot — không xung đột với reader<br>
+      <strong>Năm 2 (Q3-Q4):</strong> Early Access membership 19-29k/tháng cho top truyện<br>
+      <strong>Năm 3:</strong> Pay-per-chapter cho truyện đang ra + IP licensing đầu tiên<br>
+      <strong>Năm 4+:</strong> Full ecosystem — subscription, coin, webtoon, phim</p>
+    </div>
+
+    <h3>Benchmark từ thị trường quốc tế</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Revenue/year</th>
+          <th>Mô hình chính</th>
+          <th>Conversion rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Qidian (TQ)</strong></td>
+          <td>~$4.4 tỷ (ngành)</td>
+          <td>Pay-per-chapter</td>
+          <td class="num">8-12%</td>
+        </tr>
+        <tr>
+          <td><strong>KakaoPage (HQ)</strong></td>
+          <td>~₩1.2 nghìn tỷ ($900M)</td>
+          <td>Wait for free + Coin</td>
+          <td class="num">15-20%</td>
+        </tr>
+        <tr>
+          <td><strong>Webnovel.com</strong></td>
+          <td>~$200M (est.)</td>
+          <td>Pay-per-chapter + Subscription</td>
+          <td class="num">3.5-8%</td>
+        </tr>
+        <tr>
+          <td><strong>Wattpad Paid Stories</strong></td>
+          <td>CAD $10M (2022)</td>
+          <td>Pay-per-chapter selective</td>
+          <td class="num">2-3%</td>
+        </tr>
+        <tr>
+          <td><strong>Royal Road</strong></td>
+          <td>~$10M (est., ad + Patreon)</td>
+          <td>Ads + tip + Patreon</td>
+          <td class="num">5-7%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 13px; color: var(--ink-muted); font-style: italic;">Lưu ý: Conversion rate = % độc giả free chuyển thành paid user</p>
+  </section>
+
+  <!-- 5. ECOSYSTEM -->
+  <section id="ecosystem">
+    <span class="section-num">05 — Ecosystem Strategy</span>
+    <h2>Hệ sinh thái: <em>Đọc + Audio + Offline</em></h2>
+
+    <p>Đây là phần quan trọng nhất của báo cáo. Mô hình thành công nhất trong web novel hiện đại không phải "platform đọc truyện đơn thuần" mà là <strong>"IP factory"</strong> — nơi mỗi truyện hot được khai thác qua nhiều format khác nhau.</p>
+
+    <h3>Mô hình "One Story, Many Formats" — Đề xuất cho VN</h3>
+
+    <p>Mỗi truyện hot có thể được monetize qua <strong>6 format khác nhau</strong>:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Format</th>
+          <th>Target audience</th>
+          <th>Revenue model</th>
+          <th class="num">Margin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Truyện chữ (Web/App)</strong></td>
+          <td>Độc giả core, free + paid</td>
+          <td>Subscription + Pay-per-chapter</td>
+          <td class="num">High</td>
+        </tr>
+        <tr>
+          <td><strong>2. Audio (Audiobook)</strong></td>
+          <td>Người bận, lái xe, nghe trước khi ngủ</td>
+          <td>License Voiz FM/Fonos, chia 50/50</td>
+          <td class="num">High</td>
+        </tr>
+        <tr>
+          <td><strong>3. YouTube "truyện kể"</strong></td>
+          <td>Mass market, miễn phí</td>
+          <td>Ad share + brand sponsorship</td>
+          <td class="num">Medium</td>
+        </tr>
+        <tr>
+          <td><strong>4. Webtoon adaptation</strong></td>
+          <td>Gen Z, fans cuồng nhiệt</td>
+          <td>Pay-per-episode</td>
+          <td class="num">Medium</td>
+        </tr>
+        <tr>
+          <td><strong>5. POD (Bản in)</strong></td>
+          <td>Collectors, gift buyers</td>
+          <td>Bán qua Tiki/Shopee, royalty 15-20%</td>
+          <td class="num">Low-Med</td>
+        </tr>
+        <tr>
+          <td><strong>6. Merchandise & IP licensing</strong></td>
+          <td>Hardcore fans, brands</td>
+          <td>License phim/drama, merchandise</td>
+          <td class="num">Very High</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Case study: Một truyện hot tạo ra bao nhiêu doanh thu?</h3>
+
+    <p>Ví dụ một truyện đô thị/ngôn tình hot tại VN (giả định 500k lượt đọc trong 12 tháng đầu):</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Kênh doanh thu</th>
+          <th>Cơ chế</th>
+          <th class="num">Ước doanh thu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Membership Early Access</strong></td>
+          <td>5% độc giả paid × 25k/tháng × 12 tháng</td>
+          <td class="num">~75 triệu</td>
+        </tr>
+        <tr>
+          <td><strong>Audio licensing</strong></td>
+          <td>License Voiz FM, chia 50/50</td>
+          <td class="num">~100-200 triệu</td>
+        </tr>
+        <tr>
+          <td><strong>POD bán qua Tiki</strong></td>
+          <td>500-1000 cuốn × 250k × 18% royalty</td>
+          <td class="num">~25-45 triệu</td>
+        </tr>
+        <tr>
+          <td><strong>YouTube channel</strong></td>
+          <td>10M lượt xem × $0.5 CPM × share</td>
+          <td class="num">~30-50 triệu</td>
+        </tr>
+        <tr>
+          <td><strong>Webtoon adaptation (nếu hot)</strong></td>
+          <td>License webtoon studio</td>
+          <td class="num">~100-300 triệu</td>
+        </tr>
+        <tr style="background: var(--paper-warm); font-weight: 600;">
+          <td><strong>Tổng/năm cho 1 truyện hot</strong></td>
+          <td>(Không tính phim/drama)</td>
+          <td class="num"><strong>330-670 triệu</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <span class="callout-label">Hàm ý</span>
+      <p>Nếu platform có <strong>20-30 truyện hot</strong> đạt mức trên, tổng doanh thu IP/năm có thể đạt <strong>10-20 tỷ VND</strong> — vượt xa doanh thu chỉ từ membership đọc truyện. Đây là lý do tại sao mô hình "IP factory" là chiến lược đúng cho VN, không phải "platform đọc truyện đơn thuần".</p>
+    </div>
+
+    <h3>Vật phẩm offline — Vũ khí bí mật cho Gen Z VN</h3>
+
+    <p>Gen Z Việt Nam có xu hướng <strong>sưu tầm vật phẩm</strong> mạnh — thấy rõ qua thị trường K-pop merchandise, anime figures, sách đặc biệt. Đây là cơ hội lớn cho platform truyện:</p>
+
+    <ul class="styled">
+      <li><strong>Bản đặc biệt POD:</strong> Bìa cứng, illustration cao cấp, signed edition — 500k-1.5tr/cuốn</li>
+      <li><strong>Bookmark/postcard collection:</strong> Theo bộ truyện, theo nhân vật — 50-150k/set</li>
+      <li><strong>Standee/keychain nhân vật:</strong> Cho top characters — 100-300k</li>
+      <li><strong>Bộ trang phục cosplay:</strong> Cho fan hardcore — 500k-2tr</li>
+      <li><strong>Box set deluxe:</strong> Bản hoàn thành full bộ trong hộp sang trọng — 1-3 triệu</li>
+    </ul>
+
+    <p>Hợp tác với các nhà in (vd Nhã Nam, Thái Hà, Đông A) hoặc tự setup POD partnership với Tiki/Shopee. Chi phí biên thấp, margin cao, và quan trọng nhất — <strong>tạo cảm giác "sở hữu thật"</strong> mà digital content không có.</p>
+  </section>
+
+  <!-- 6. GENRES -->
+  <section id="genres">
+    <span class="section-num">06 — Genre Analysis</span>
+    <h2>Thể loại <em>thu hút độc giả</em> VN</h2>
+
+    <p>Dữ liệu từ top truyện trending trên các platform lớn (Truyenfull.vision, Metruyencv, Wattpad VN) cho thấy thị trường VN có cấu trúc thể loại khá đặc biệt — khác với cả Trung Quốc và Hàn Quốc.</p>
+
+    <h3>Top thể loại theo volume độc giả</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Thể loại</th>
+          <th class="num">% market share VN</th>
+          <th>Demographic chính</th>
+          <th>Willingness-to-pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Đô thị + Ngôn tình hiện đại</strong></td>
+          <td class="num">~30-35%</td>
+          <td>Nữ 18-35, GenZ + Millennial</td>
+          <td>Cao</td>
+        </tr>
+        <tr>
+          <td><strong>2. Tiên hiệp + Huyền huyễn</strong></td>
+          <td class="num">~25-30%</td>
+          <td>Nam 16-30, học sinh + sinh viên</td>
+          <td>Trung bình</td>
+        </tr>
+        <tr>
+          <td><strong>3. Xuyên không + Trọng sinh</strong></td>
+          <td class="num">~15-20%</td>
+          <td>Nữ 18-30</td>
+          <td>Cao</td>
+        </tr>
+        <tr>
+          <td><strong>4. Đam mỹ + Bách hợp (BL/GL)</strong></td>
+          <td class="num">~8-12%</td>
+          <td>Nữ 15-30, LGBTQ+</td>
+          <td>Rất cao (fans cuồng)</td>
+        </tr>
+        <tr>
+          <td><strong>5. Trinh thám + Kinh dị</strong></td>
+          <td class="num">~5-7%</td>
+          <td>Mixed gender, 18+</td>
+          <td>Cao</td>
+        </tr>
+        <tr>
+          <td><strong>6. Lịch sử + Kiếm hiệp</strong></td>
+          <td class="num">~3-5%</td>
+          <td>Nam 25+, niche</td>
+          <td>Trung bình</td>
+        </tr>
+        <tr>
+          <td><strong>7. Khoa huyễn + Dystopia</strong></td>
+          <td class="num">~2-3%</td>
+          <td>Mixed, 20+</td>
+          <td>Thấp-Trung bình</td>
+        </tr>
+        <tr>
+          <td><strong>8. Slice-of-life + Văn học</strong></td>
+          <td class="num">~2-3%</td>
+          <td>Mixed, 25+</td>
+          <td>Thấp</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Phân tích sâu — Top 3 thể loại</h3>
+
+    <h4>Đô thị + Ngôn tình hiện đại (#1)</h4>
+    <p>Đây là <strong>engine doanh thu lớn nhất</strong> của thị trường truyện VN. Đặc điểm:</p>
+    <ul class="styled">
+      <li>Bối cảnh đời thường, dễ relate (CEO, doanh nhân, học sinh, công sở)</li>
+      <li>Plot ngắn — thường dưới 80 chương, kết thúc nhanh</li>
+      <li>Dễ chuyển audio (Voiz FM/Fonos rất chuộng)</li>
+      <li>Dễ chuyển webtoon, drama, phim ngắn</li>
+      <li>Cốt lõi: "happy ending romance" — không phá hỏng kỳ vọng</li>
+    </ul>
+    <p><em>Ví dụ truyện hot trend VN: "Sau Chia Tay Anh Trở Thành Khách Hàng Lớn", "Bạn Trai Cũ Là Founder Kỳ Lân"</em></p>
+
+    <h4>Tiên hiệp + Huyền huyễn (#2)</h4>
+    <p>Base traffic ổn định nhưng <strong>khó monetize</strong>. Đặc điểm:</p>
+    <ul class="styled">
+      <li>Dài — thường 500-2000 chương, kéo dài nhiều năm</li>
+      <li>Độc giả trung thành nhưng quen "miễn phí"</li>
+      <li>Khó chuyển sang format khác (audio quá dài, webtoon phức tạp)</li>
+      <li>Tuy nhiên — fan base rất sâu, hardcore</li>
+      <li>Cốt lõi: "phế vật ngược tập" — đứa kém trở thành mạnh nhất</li>
+    </ul>
+
+    <h4>Đam mỹ + Bách hợp (#4 nhưng cao willingness-to-pay)</h4>
+    <p>Thể loại <strong>nhỏ về volume nhưng cực kỳ profitable</strong>:</p>
+    <ul class="styled">
+      <li>Fans hardcore, sẵn sàng trả tiền cao hơn nhiều</li>
+      <li>Cộng đồng kín, lan truyền nội bộ rất mạnh</li>
+      <li>Khan hiếm content chất lượng → premium pricing được</li>
+      <li>Là nguồn doanh thu sớm nhất nhiều platform quốc tế</li>
+      <li>Cẩn trọng: chính sách content VN có một số restriction</li>
+    </ul>
+
+    <div class="callout callout-positive">
+      <span class="callout-label">Đề xuất phân bổ content</span>
+      <p>Với 50 truyện/năm, đề xuất tỷ lệ:<br>
+      • Đô thị/ngôn tình: 30-35% (15-18 truyện)<br>
+      • Tiên hiệp/huyền huyễn: 25-30% (12-15 truyện)<br>
+      • Đam mỹ/bách hợp: 10% (4-5 truyện) — high ROI<br>
+      • Trinh thám/kinh dị: 12% (5-7 truyện)<br>
+      • Lịch sử/kiếm hiệp: 10% (4-5 truyện) — niche brand<br>
+      • Thử nghiệm: 5% (2-3 truyện)</p>
+    </div>
+
+    <h3>Trend mới đáng chú ý</h3>
+
+    <ul class="styled">
+      <li><strong>"Hệ thống" (System novel):</strong> Nhân vật chính có hệ thống game-like — trending mạnh ở TQ, đang lan sang VN</li>
+      <li><strong>"Trọng sinh + báo thù":</strong> Đặc biệt với nhân vật nữ — rất hot ở VN 2024-2025</li>
+      <li><strong>"Mafia/CEO romance":</strong> Influence từ TikTok BookTok</li>
+      <li><strong>"Murim" (võ lâm Hàn):</strong> Mới vào VN nhưng đang growth</li>
+      <li><strong>"Slice-of-life ấm áp":</strong> Trend nhẹ nhàng, anti-stress sau Covid</li>
+    </ul>
+  </section>
+
+  <!-- 7. INTERNATIONAL COMPARISON -->
+  <section id="international">
+    <span class="section-num">07 — International Benchmark</span>
+    <h2>So sánh VN với <em>5 nước phát triển</em></h2>
+
+    <p>Lựa chọn 5 nước có ngành truyện online phát triển nhất thế giới: Trung Quốc, Hàn Quốc, Nhật Bản, Mỹ, và Indonesia (để đối chiếu với một thị trường ASEAN tương đồng).</p>
+
+    <!-- China -->
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇨🇳</span>
+        <div>
+          <div class="country-name">Trung Quốc</div>
+          <div class="country-meta">Thị trường lớn nhất thế giới</div>
+        </div>
+        <span class="country-key-stat">$4.4B / năm</span>
+      </div>
+      <p><strong>Quy mô:</strong> 502 triệu độc giả (~1/3 dân số online), 20 triệu tác giả viết web fiction, 26 triệu titles, 28.8 tỷ Nhân dân tệ doanh thu 2024.</p>
+      <p><strong>Platform chính:</strong> Qidian (150M MAU, sub của China Literature Limited), Jin Jiang, Hong Xiu Tian Xiang, Zongheng, Qimao. Yuewen Group (parent của Qidian) niêm yết HK.</p>
+      <p><strong>Mô hình monetization:</strong> Pay-per-chapter là engine chính (2 cents/1000 chữ). Top author kiếm 10 triệu RMB/năm (~$1.4M). 10,000 tác giả Trung Quốc kiếm trên 1 triệu RMB/năm.</p>
+      <p><strong>IP economy:</strong> Cực mạnh — phim "Ngôi Tinh Khoảng Cách" doanh thu hàng trăm triệu, drama "Tam Sinh Tam Thế" xuất khẩu toàn cầu, webtoon adaptation định kỳ.</p>
+      <p><strong>Bài học cho VN:</strong> Cần 5-7 năm để xây mô hình Qidian. Pay-per-chapter chưa thể launch ngay tại VN nhưng là endgame. IP licensing là long-term play quan trọng nhất.</p>
+    </div>
+
+    <!-- South Korea -->
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇰🇷</span>
+        <div>
+          <div class="country-name">Hàn Quốc</div>
+          <div class="country-meta">Mô hình ARPU cao nhất thế giới</div>
+        </div>
+        <span class="country-key-stat">$900M / năm</span>
+      </div>
+      <p><strong>Quy mô:</strong> Thị trường ₩500 tỷ năm 2019, đã vượt ₩1.2 nghìn tỷ năm 2023 (gấp 2.4 lần trong 4 năm — growth nhanh nhất thế giới).</p>
+      <p><strong>Platform chính:</strong> KakaoPage (Kakao Entertainment), Naver Series + Naver Web Novel, Munpia (Naver mua 2021, định giá $268M). KakaoPage có 20 triệu subscribers cho mảng webnovel.</p>
+      <p><strong>Mô hình monetization:</strong> "Wait for Free" của KakaoPage là innovation lớn — đợi 24h free, hoặc trả tiền unlock ngay. ARPU cao nhất toàn cầu. Top 10% authors kiếm KRW 50 triệu/năm (~$37k).</p>
+      <p><strong>IP economy:</strong> "Solo Leveling" (Na Tu Mạnh Nhất) thành hit toàn cầu — webtoon, anime Netflix, doanh thu KRW 40 tỷ chỉ riêng webtoon. Drama Netflix từ web novel là norm.</p>
+      <p><strong>Bài học cho VN:</strong> "Wait for Free" là mô hình <strong>khả thi nhất để áp dụng vào VN</strong> trong 2-3 năm tới. Không bắt trả tiền nhưng tạo FOMO mạnh. ARPU/user cao hơn ad model 5-10x.</p>
+    </div>
+
+    <!-- Japan -->
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇯🇵</span>
+        <div>
+          <div class="country-name">Nhật Bản</div>
+          <div class="country-meta">Light novel + Web novel hybrid</div>
+        </div>
+        <span class="country-key-stat">$370M / năm (digital)</span>
+      </div>
+      <p><strong>Quy mô:</strong> Light novel digital sales đạt JPY 50 tỷ (~$370M) năm 2022. Tổng thị trường (cả print) lớn hơn nhiều — light novel print là ngành ~$1B.</p>
+      <p><strong>Platform chính:</strong> Shōsetsuka ni Narō (lớn nhất, free-to-read), Kakuyomu (Kadokawa), Pixiv Novel, Alphapolis. Đặc thù: web → print → anime là pipeline phổ biến.</p>
+      <p><strong>Mô hình monetization:</strong> Web novel thường <strong>miễn phí 100%</strong>, doanh thu đến từ print/anime adaptation. "Re:Zero", "Mushoku Tensei", "Overlord" đều bắt đầu từ Shōsetsuka miễn phí, sau đó được publisher mua bản quyền in light novel + anime.</p>
+      <p><strong>IP economy:</strong> Pipeline web → light novel → manga → anime → game là chuỗi value 10x. Anime industry $20B+/năm dùng nhiều IP từ web novels.</p>
+      <p><strong>Bài học cho VN:</strong> Mô hình "free reading + monetize qua adaptation" rất phù hợp với <strong>văn hóa "không trả phí trực tiếp"</strong> của VN. Đây là mô hình Góc Đọc Truyện có thể học hỏi nhiều nhất.</p>
+    </div>
+
+    <!-- USA -->
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇺🇸</span>
+        <div>
+          <div class="country-name">Hoa Kỳ</div>
+          <div class="country-meta">Thị trường English-speaking lớn nhất</div>
+        </div>
+        <span class="country-key-stat">$842M / năm</span>
+      </div>
+      <p><strong>Quy mô:</strong> Web novel market Bắc Mỹ $842M năm 2024, dự kiến $3.4B năm 2035. Wattpad có 94M users/tháng (global).</p>
+      <p><strong>Platform chính:</strong> Wattpad (94M users, sub của Naver), Royal Road (5M visits/tháng, focus fantasy), Webnovel.com (50M registered, 10M MAU, sub của China Literature), Tapas, Radish, Scribble Hub, Kindle Vella, AO3 (fanfic).</p>
+      <p><strong>Mô hình monetization:</strong> Phân mảnh — Wattpad có Paid Stories (top 1% kiếm $100k/tháng), Royal Road sống bằng Patreon (top author $5000+/tháng), Kindle Vella tip-based.</p>
+      <p><strong>IP economy:</strong> "After" của Anna Todd (Wattpad → phim hit Hollywood), "The Kissing Booth" (Wattpad → Netflix). Wattpad Studios chuyên chuyển thể.</p>
+      <p><strong>Bài học cho VN:</strong> Thị trường Mỹ <strong>quá phân mảnh</strong> — không có Qidian/KakaoPage duy nhất. Cơ hội cho platform local-dominant ở VN cao hơn nhiều so với cạnh tranh global.</p>
+    </div>
+
+    <!-- Indonesia -->
+    <div class="country-card">
+      <div class="country-header">
+        <span class="country-flag">🇮🇩</span>
+        <div>
+          <div class="country-name">Indonesia</div>
+          <div class="country-meta">ASEAN benchmark — tương đồng với VN</div>
+        </div>
+        <span class="country-key-stat">$80-120M / năm (est.)</span>
+      </div>
+      <p><strong>Quy mô:</strong> Dân số 280M (gấp ~2.7x VN), internet penetration 77%. Thị trường truyện online tăng trưởng 25%/năm. Đông Nam Á dự kiến đạt $1B năm 2027 (CAGR 20%).</p>
+      <p><strong>Platform chính:</strong> Wattpad (rất mạnh ở Indo — Top 5 country của Wattpad), GoodNovel, NovelMe, Storial.co, Cabaca, Karyakarsa.</p>
+      <p><strong>Mô hình monetization:</strong> Subscription + coin (GoodNovel, NovelMe đi đầu). Wattpad Paid Stories. Pratilipi (gốc Ấn Độ) cũng vào thị trường.</p>
+      <p><strong>IP economy:</strong> Phim từ Wattpad "Dear Nathan" (Wattpad → phim → series). Webtoon Indonesia đang bùng nổ.</p>
+      <p><strong>Bài học cho VN:</strong> Indonesia <strong>đi trước VN 2-3 năm</strong> về platform local. VN có lợi thế gọn hơn (1 ngôn ngữ, không có vấn đề đa đảo) nên có thể catch up nhanh nếu execute tốt.</p>
+    </div>
+
+    <h3>Bảng so sánh tổng hợp</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tiêu chí</th>
+          <th>🇨🇳 TQ</th>
+          <th>🇰🇷 HQ</th>
+          <th>🇯🇵 Nhật</th>
+          <th>🇺🇸 Mỹ</th>
+          <th>🇮🇩 Indo</th>
+          <th>🇻🇳 VN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Quy mô thị trường</strong></td>
+          <td class="num">$4.4B</td>
+          <td class="num">$900M</td>
+          <td class="num">$370M</td>
+          <td class="num">$842M</td>
+          <td class="num">$100M</td>
+          <td class="num">$30-50M</td>
+        </tr>
+        <tr>
+          <td><strong>Số độc giả</strong></td>
+          <td class="num">502M</td>
+          <td class="num">20M+</td>
+          <td class="num">N/A</td>
+          <td class="num">100M+</td>
+          <td class="num">30-50M</td>
+          <td class="num">15-20M</td>
+        </tr>
+        <tr>
+          <td><strong>Top platform</strong></td>
+          <td>Qidian</td>
+          <td>KakaoPage</td>
+          <td>Narō</td>
+          <td>Wattpad</td>
+          <td>Wattpad/GoodNovel</td>
+          <td>Truyenfull*</td>
+        </tr>
+        <tr>
+          <td><strong>Bản quyền</strong></td>
+          <td>100%</td>
+          <td>100%</td>
+          <td>100%</td>
+          <td>100%</td>
+          <td>~70%</td>
+          <td>~5-10%</td>
+        </tr>
+        <tr>
+          <td><strong>Mô hình chính</strong></td>
+          <td>Coin</td>
+          <td>Wait-for-free</td>
+          <td>IP licensing</td>
+          <td>Subscription</td>
+          <td>Subscription</td>
+          <td>Ads</td>
+        </tr>
+        <tr>
+          <td><strong>Top author/năm</strong></td>
+          <td class="num">$1.4M</td>
+          <td class="num">$37k</td>
+          <td class="num">High (IP)</td>
+          <td class="num">$100k/th</td>
+          <td class="num">$10-30k</td>
+          <td class="num"><$5k</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 12px; color: var(--ink-muted); font-style: italic;">*Truyenfull dùng nội dung không bản quyền — không thể coi là baseline cho thị trường lành mạnh</p>
+
+    <div class="callout callout-positive">
+      <span class="callout-label">Insight chiến lược</span>
+      <p>Việt Nam hiện đang ở <strong>giai đoạn 2010-2013 của Hàn Quốc</strong> — khi KakaoPage còn được coi là "thất bại" trước khi cất cánh. Trong 5-7 năm tới, thị trường VN có thể grow 10-15x nếu có platform "lành mạnh" như KakaoPage VN. Đây là cơ hội generational, không lặp lại trong 20 năm tới.</p>
+    </div>
+  </section>
+
+  <!-- 8. POTENTIAL -->
+  <section id="potential">
+    <span class="section-num">08 — Market Potential</span>
+    <h2>Đánh giá <em>tiềm năng thị trường</em></h2>
+
+    <h3>Tiềm năng thị trường VN 2026-2030</h3>
+
+    <div class="score-box">
+      <div class="score-item">
+        <div class="score-value">2030</div>
+        <div class="score-label">Năm dự kiến đạt $300M</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">25%</div>
+        <div class="score-label">CAGR ước tính 2026-2030</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">35-40M</div>
+        <div class="score-label">Độc giả truyện online 2030</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">18-24m</div>
+        <div class="score-label">Cửa sổ first-mover</div>
+      </div>
+    </div>
+
+    <h3>3 kịch bản tăng trưởng thị trường VN</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Kịch bản</th>
+          <th>Điều kiện</th>
+          <th class="num">Quy mô 2030</th>
+          <th>Top platform</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Conservative</strong></td>
+          <td>Truyện convert vẫn dominate, không có disruption</td>
+          <td class="num">$80-120M</td>
+          <td>Doanh thu $10-20M</td>
+        </tr>
+        <tr>
+          <td><strong>Base case</strong></td>
+          <td>1 platform "truyện gốc" emerge, audio boom tiếp tục</td>
+          <td class="num">$200-300M</td>
+          <td>Doanh thu $30-80M</td>
+        </tr>
+        <tr>
+          <td><strong>Bull case</strong></td>
+          <td>Pháp lý siết chặt, IP economy mature</td>
+          <td class="num">$400-600M</td>
+          <td>Doanh thu $80-200M</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Điểm mạnh thị trường VN</h3>
+
+    <ul class="styled">
+      <li><strong>Dân số trẻ:</strong> 60% dân số dưới 35 tuổi — đối tượng chính của truyện online</li>
+      <li><strong>Mobile penetration cao:</strong> 69M smartphone users, đứng top ASEAN</li>
+      <li><strong>Văn hóa đọc trẻ đang phục hồi:</strong> Hệ thống book club, BookTok VN growth</li>
+      <li><strong>Audio boom đã chứng minh:</strong> Voiz FM/Fonos growth 60-100%/năm</li>
+      <li><strong>Ngành phim/drama Việt đang lên:</strong> Tăng demand cho IP gốc</li>
+      <li><strong>Government support:</strong> Quỹ Hỗ trợ Phát triển Văn hóa số</li>
+      <li><strong>K-Pop/J-Pop văn hóa thâm nhập:</strong> Tạo expectation về quality content</li>
+    </ul>
+
+    <h3>Thách thức thị trường VN</h3>
+
+    <ul class="styled">
+      <li><strong>Willingness-to-pay thấp:</strong> Đã quen với "free + ads"</li>
+      <li><strong>Cạnh tranh từ TikTok/Facebook:</strong> Time-on-screen tranh giành</li>
+      <li><strong>Piracy widespread:</strong> Bất kỳ truyện hot nào cũng bị copy nhanh</li>
+      <li><strong>Pháp lý chưa rõ ràng:</strong> Một số content nhạy cảm về chính trị/xã hội</li>
+      <li><strong>Tác giả chuyên nghiệp ít:</strong> Cần thời gian build supply pipeline</li>
+      <li><strong>Vốn đầu tư hạn chế:</strong> VC VN ít hiểu mô hình content/IP</li>
+    </ul>
+
+    <h3>Đánh giá tiềm năng tổng thể</h3>
+
+    <div class="score-box">
+      <div class="score-item">
+        <div class="score-value">8/10</div>
+        <div class="score-label">Quy mô demand</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">9/10</div>
+        <div class="score-label">Khoảng trống supply</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">7/10</div>
+        <div class="score-label">Tiềm năng monetization</div>
+      </div>
+      <div class="score-item">
+        <div class="score-value">6/10</div>
+        <div class="score-label">Khả thi execution</div>
+      </div>
+    </div>
+
+    <p><strong>Điểm tổng: 7.5/10</strong> — Thị trường có tiềm năng cao hơn trung bình các ngành startup VN khác, đặc biệt cho player định vị "truyện gốc Việt + IP factory + audio integrated".</p>
+
+    <!-- Final verdict -->
+    <div class="verdict">
+      <h3>Verdict — Kết luận chính</h3>
+      <p>Thị trường truyện Việt Nam đang ở <em>điểm uốn</em> — demand đã được chứng minh, nhưng supply hợp pháp gần như không tồn tại. So với 5 nước phát triển nhất, VN ở giai đoạn 2010-2013 của Hàn Quốc.</p>
+      <p>Cửa sổ <strong>18-24 tháng tới</strong> là cơ hội generational để xây dựng "KakaoPage Việt Nam" — không lặp lại trong 2 thập kỷ. Trong kịch bản trung bình, top platform VN có thể đạt doanh thu $30-80M/năm vào 2030.</p>
+      <p>Định vị "100% truyện gốc Việt + audio integrated + IP factory + có pháp lý bảo vệ" là <em>defensible moat</em> không player nào hiện có thể copy. Đây là điều kiện đầy đủ để một platform mới chiếm vị trí số 1 trong segment.</p>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section style="border-bottom: none;">
+    <span class="section-num">Sources</span>
+    <h2>Nguồn dữ liệu</h2>
+
+    <ul class="styled">
+      <li><strong>Traffic data:</strong> Similarweb, Semrush, Ahrefs (tháng 1-4/2026)</li>
+      <li><strong>Vietnam market:</strong> Vietnam Times, Hanoi Times, Vietnam Investment Review, Spiderum</li>
+      <li><strong>Audiobook VN:</strong> Publishing Research Quarterly (PMC), Startup Wheel, Vietnam.vn</li>
+      <li><strong>China market:</strong> ChinaDaily, MCLC Resource Center, Science Survey, Wuxiaworld blog</li>
+      <li><strong>Korea market:</strong> Wikipedia (Web novels in South Korea), KED Global, NamuWiki, KLitReads</li>
+      <li><strong>Global market:</strong> WiseGuyReports, DataIntelo, Gitnux Statistics, GrowthMarketReports</li>
+      <li><strong>Wattpad:</strong> Wikipedia, ExpandedRamblings, official Wattpad press materials</li>
+      <li><strong>Genres VN:</strong> Top truyện trending từ Truyenfull, Metruyencv, POPS, FPT Shop blogs</li>
+    </ul>
+
+    <p style="font-size: 13px; color: var(--ink-muted); font-style: italic; margin-top: 20px;">Lưu ý: Một số số liệu là ước tính dựa trên triangulation từ nhiều nguồn. Doanh thu thị trường VN chưa có báo cáo official từ government, các con số là ước tính dựa trên top platforms và similar market patterns.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><em>Báo cáo thị trường truyện Việt Nam 2026</em></p>
+    <p>Phiên bản 1.0 · Tháng 5, 2026</p>
+    <p>📊 Tài liệu nội bộ · Vui lòng không chia sẻ rộng rãi</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
