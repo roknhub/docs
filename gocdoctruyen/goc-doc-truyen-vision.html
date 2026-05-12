@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Về Góc Đọc Truyện — Vision Document (Private)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --ink-soft: #3d3530;
+    --ink-muted: #6b5f55;
+    --paper: #faf6ef;
+    --paper-warm: #f3ebdc;
+    --paper-deep: #ebe0cb;
+    --accent: #8b3a1d;
+    --accent-soft: #c25e3a;
+    --gold: #b8893f;
+    --line: #d4c7b0;
+    --line-soft: #e8dcc4;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(184, 137, 63, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(139, 58, 29, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.008) 3px, transparent 4px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Private banner */
+  .private-banner {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 0;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 100;
+  }
+
+  .private-banner span {
+    color: var(--gold);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .hero-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .hero-meta {
+    margin-top: 48px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-meta span::before {
+    content: '◆';
+    color: var(--gold);
+    font-size: 8px;
+  }
+
+  /* Section base */
+  section {
+    padding: 72px 0;
+    position: relative;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(32px, 4.5vw, 44px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.015em;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--ink);
+    margin: 40px 0 16px;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 28px 0 12px;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ink-soft);
+  }
+
+  p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Section dividers */
+  .divider {
+    text-align: center;
+    margin: 80px 0;
+    color: var(--gold);
+    font-size: 24px;
+    letter-spacing: 1em;
+  }
+
+  /* Principles grid */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin: 40px 0;
+  }
+
+  .principle {
+    padding: 28px 24px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .principle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(26, 22, 18, 0.08);
+  }
+
+  .principle-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .principle h4 {
+    margin: 0 0 8px;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .principle p {
+    font-size: 14px;
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    margin: 56px -24px;
+    padding: 40px 32px;
+    background: var(--paper-deep);
+    border-left: 4px solid var(--accent);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--ink);
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 24px;
+    font-size: 80px;
+    color: var(--accent);
+    font-family: var(--serif);
+    line-height: 1;
+    opacity: 0.3;
+  }
+
+  /* Mission box */
+  .mission {
+    text-align: center;
+    padding: 56px 32px;
+    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-deep) 100%);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    margin: 32px 0;
+    position: relative;
+  }
+
+  .mission::before, .mission::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 16px;
+  }
+
+  .mission::before { top: 16px; left: 50%; transform: translateX(-50%); }
+  .mission::after { bottom: 16px; left: 50%; transform: translateX(-50%); }
+
+  .mission p {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Vision numbers */
+  .vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .vision-item {
+    text-align: center;
+    padding: 24px 16px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    transition: background 0.3s ease;
+  }
+
+  .vision-item:hover {
+    background: var(--paper-warm);
+  }
+
+  .vision-emoji {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .vision-number {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .vision-label {
+    font-size: 13px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Co-creation highlight */
+  .cocreation-intro {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 32px;
+    border-radius: 4px;
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cocreation-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(184, 137, 63, 0.15) 0%, transparent 60%);
+  }
+
+  .cocreation-intro * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cocreation-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .cocreation-intro h3 {
+    color: var(--paper);
+    font-size: 32px;
+    margin: 0 0 16px;
+  }
+
+  .cocreation-intro p {
+    color: rgba(250, 246, 239, 0.85);
+    font-size: 18px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* Flow diagram */
+  .flow {
+    background: var(--paper-warm);
+    padding: 32px;
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    margin: 32px 0;
+    font-family: var(--mono);
+    font-size: 14px;
+    overflow-x: auto;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .flow-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .flow-emoji {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .flow-label {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .flow-detail {
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+  .flow-arrow {
+    font-size: 24px;
+    color: var(--accent);
+  }
+
+  .flow-bottom {
+    text-align: center;
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .flow-bottom-label {
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  /* Steps */
+  .step {
+    margin: 40px 0;
+    padding-left: 80px;
+    position: relative;
+  }
+
+  .step-num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    color: var(--paper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  .step h4 {
+    margin-top: 4px;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  /* Choice cards */
+  .choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .choice {
+    padding: 24px;
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .choice-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    background: var(--paper);
+    padding: 4px 10px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  .choice h5 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .choice ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .choice li {
+    padding-left: 18px;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .choice li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* Commitment box */
+  .commitment {
+    background: var(--paper-deep);
+    padding: 20px 24px;
+    border-left: 3px solid var(--gold);
+    margin: 24px 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  /* Revenue table */
+  .revenue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+
+  .revenue-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px 20px;
+    text-align: left;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .revenue-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 15px;
+    vertical-align: top;
+  }
+
+  .revenue-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .revenue-table td:first-child strong {
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 17px;
+  }
+
+  .revenue-table td:last-child {
+    text-align: right;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Benefits */
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .benefit {
+    padding: 28px;
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-top: 3px solid var(--accent);
+    border-radius: 0 0 4px 4px;
+  }
+
+  .benefit h5 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .benefit ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .benefit li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .benefit li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--gold);
+    font-size: 8px;
+  }
+
+  /* References list */
+  .refs {
+    padding-left: 0;
+    list-style: none;
+    margin: 20px 0;
+  }
+
+  .refs li {
+    padding: 12px 0 12px 32px;
+    position: relative;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 15px;
+  }
+
+  .refs li::before {
+    content: '↳';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  .refs li:last-child {
+    border-bottom: none;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    bottom: 30px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--accent), var(--ink));
+  }
+
+  .phase {
+    padding-left: 80px;
+    position: relative;
+    margin-bottom: 48px;
+  }
+
+  .phase-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    z-index: 2;
+  }
+
+  .phase-year {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+  }
+
+  .phase h4 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  .phase-sub {
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+    font-family: var(--serif);
+    font-size: 17px;
+  }
+
+  .phase ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .phase li {
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .phase li::before {
+    content: '○';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  .phase li.done::before {
+    content: '●';
+    color: var(--accent);
+  }
+
+  /* Values */
+  .values {
+    counter-reset: value;
+    margin: 32px 0;
+  }
+
+  .value-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    padding-left: 64px;
+  }
+
+  .value-item:last-child {
+    border-bottom: none;
+  }
+
+  .value-item::before {
+    counter-increment: value;
+    content: counter(value, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 28px;
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .value-item h4 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .value-item p {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  /* Feedback section */
+  .feedback {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 32px;
+    border-radius: 4px;
+    margin: 56px 0 32px;
+    text-align: center;
+  }
+
+  .feedback h3 {
+    color: var(--paper);
+    font-family: var(--serif);
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .feedback p {
+    color: rgba(250, 246, 239, 0.85);
+    max-width: 520px;
+    margin: 0 auto 24px;
+  }
+
+  .feedback-email {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    transition: background 0.3s ease;
+    font-weight: 600;
+  }
+
+  .feedback-email:hover {
+    background: var(--paper);
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+
+  footer p {
+    margin-bottom: 8px;
+    color: var(--ink-muted);
+  }
+
+  footer em {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--accent);
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .container { padding: 0 20px; }
+    section { padding: 56px 0; }
+    .pull-quote {
+      margin: 40px -8px;
+      padding: 28px 24px;
+      font-size: 20px;
+    }
+    .pull-quote::before {
+      font-size: 60px;
+      top: -10px;
+    }
+    .step { padding-left: 0; padding-top: 70px; }
+    .step-num { width: 50px; height: 50px; font-size: 22px; }
+    .phase { padding-left: 0; padding-top: 80px; }
+    .timeline::before { display: none; }
+    .phase-marker { left: 50%; transform: translateX(-50%); }
+    .vision-number { font-size: 28px; }
+    .mission p { font-size: 18px; }
+    .flow-arrow { transform: rotate(90deg); }
+    .revenue-table th, .revenue-table td { padding: 12px 14px; font-size: 13px; }
+    .hero-meta { gap: 16px; font-size: 11px; }
+  }
+
+  /* Print friendly */
+  @media print {
+    .private-banner, .feedback { display: none; }
+    body { background: white; }
+    .container { max-width: 100%; }
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.8s ease-out backwards;
+  }
+
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-tagline { animation-delay: 0.4s; }
+  .hero-meta { animation-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<div class="private-banner">
+  🔒 <span>Tài liệu riêng tư</span> · Vui lòng không chia sẻ rộng rãi · <span>Vision Document v1.0</span>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-eyebrow">Vision Document</span>
+    <h1>Về Góc Đọc <em>Truyện</em></h1>
+    <p class="hero-tagline">Nơi truyện gốc Việt được đọc thật — và được tạo ra cùng nhau.</p>
+    <div class="hero-meta">
+      <span>Tháng 5, 2026</span>
+      <span>Phiên bản 1.0</span>
+      <span>gocdoctruyen.vn</span>
+    </div>
+  </header>
+
+  <!-- CHÚNG TÔI LÀ AI -->
+  <section>
+    <span class="section-num">01 — Identity</span>
+    <h2>Chúng tôi <em>là ai?</em></h2>
+    <p>Góc Đọc Truyện là <strong>platform xuất bản truyện gốc tiếng Việt</strong> đầu tiên xây dựng dựa trên 3 nguyên tắc:</p>
+
+    <div class="principles">
+      <div class="principle">
+        <span class="principle-icon">🌱</span>
+        <h4>Truyện gốc Việt</h4>
+        <p>Không convert, không dịch lậu, không "remix" tác phẩm Trung Quốc.</p>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">🛡️</span>
+        <h4>Tôn trọng tác giả</h4>
+        <p>Bạn giữ trọn bản quyền, có pháp lý bảo vệ thật, doanh thu minh bạch.</p>
+      </div>
+      <div class="principle">
+        <span class="principle-icon">📖</span>
+        <h4>Tôn trọng độc giả</h4>
+        <p>Không quảng cáo phá đọc, không paywall chặn giữa chương, không thuật toán đẩy nội dung rẻ tiền.</p>
+      </div>
+    </div>
+
+    <p>Chúng tôi tin rằng người Việt biết viết truyện hay. Và truyện hay xứng đáng có một chỗ tử tế để đặt.</p>
+  </section>
+
+  <!-- VÌ SAO TỒN TẠI -->
+  <section>
+    <span class="section-num">02 — Why</span>
+    <h2>Vì sao chúng tôi <em>tồn tại?</em></h2>
+
+    <h3>Một thị trường đang bị nhiễu</h3>
+    <p>95% truyện online tại Việt Nam hiện nay là <strong>truyện convert từ Trung Quốc</strong> — không bản quyền, không được tác giả gốc cho phép, đầy quảng cáo cờ bạc và game lậu.</p>
+    <p>Tác giả Việt viết truyện gốc bị chìm trong biển content rẻ tiền đó. Độc giả Việt phải lội qua banner ads và pop-up chỉ để đọc một chương.</p>
+    <p>Và quan trọng nhất: <strong>không ai sở hữu gì cả</strong>. Không platform nào sở hữu IP. Không tác giả nào được trả công xứng đáng. Không độc giả nào có tiếng nói thật.</p>
+
+    <div class="pull-quote">
+      Tại sao Hàn Quốc có Webtoon. Trung Quốc có Qidian. Nhật Bản có Shōsetsuka ni Narō. Việt Nam thì sao?
+    </div>
+
+    <p>Chúng tôi tin Việt Nam xứng đáng có platform truyện của riêng mình — không phải bản sao của ai cả, mà là một thứ rất Việt Nam.</p>
+    <p>Đó là lý do Góc Đọc Truyện tồn tại.</p>
+  </section>
+
+  <!-- SỨ MỆNH -->
+  <section>
+    <span class="section-num">03 — Mission</span>
+    <h2>Sứ <em>mệnh</em></h2>
+    <div class="mission">
+      <p>Xây dựng nền tảng để mỗi câu chuyện Việt — dù bắt đầu từ một tác giả chuyên nghiệp hay từ một độc giả có ý tưởng — đều có cơ hội được kể, được đọc, và được trân trọng.</p>
+    </div>
+  </section>
+
+  <!-- TẦM NHÌN 2028 -->
+  <section>
+    <span class="section-num">04 — Vision 2028</span>
+    <h2>Tầm nhìn <em>2028</em></h2>
+    <p>Đến đầu năm 2028, chúng tôi hướng tới:</p>
+
+    <div class="vision-grid">
+      <div class="vision-item">
+        <span class="vision-emoji">📚</span>
+        <div class="vision-number">300+</div>
+        <div class="vision-label">Truyện gốc Việt</div>
+      </div>
+      <div class="vision-item">
+        <span class="vision-emoji">✍️</span>
+        <div class="vision-number">200+</div>
+        <div class="vision-label">Tác giả Việt</div>
+      </div>
+      <div class="vision-item">
+        <span class="vision-emoji">👥</span>
+        <div class="vision-number">500K</div>
+        <div class="vision-label">Độc giả/tháng</div>
+      </div>
+      <div class="vision-item">
+        <span class="vision-emoji">🌏</span>
+        <div class="vision-number">ASEAN</div>
+        <div class="vision-label">Bắt đầu xuất khẩu IP</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- CO-CREATION MODEL -->
+  <section>
+    <span class="section-num">05 — The Big Idea</span>
+    <h2>Ai cũng có thể <em>sở hữu truyện</em></h2>
+
+    <div class="cocreation-intro">
+      <div class="cocreation-eyebrow">Mô hình đầu tiên tại Việt Nam</div>
+      <h3>Co-Creation Model</h3>
+      <p>Truyện thuộc về tất cả những người tạo ra nó — người có ý tưởng, người chấp bút, và platform.</p>
+    </div>
+
+    <h3>Vấn đề chúng tôi đang giải quyết</h3>
+    <p>Có rất nhiều người Việt <strong>có ý tưởng truyện hay</strong> — nhưng không biết viết, không có thời gian viết, hoặc không tự tin với khả năng văn chương của mình.</p>
+    <p>Trong khi đó, có rất nhiều <strong>tác giả tài năng</strong> — có khả năng viết, nhưng đôi khi cạn ý tưởng, hoặc muốn thử thách bản thân với những concept mới.</p>
+    <p>Hai nhóm này chưa bao giờ gặp nhau một cách có hệ thống.</p>
+
+    <h3>Quy trình hoạt động</h3>
+
+    <!-- Flow diagram -->
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-box">
+          <span class="flow-emoji">💡</span>
+          <div class="flow-label">ĐỘC GIẢ</div>
+          <div class="flow-detail">có ý tưởng, gửi platform</div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">
+          <span class="flow-emoji">✍️</span>
+          <div class="flow-label">TÁC GIẢ ĐỒNG HÀNH</div>
+          <div class="flow-detail">của Góc Đọc Truyện chấp bút</div>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">
+          <span class="flow-emoji">📖</span>
+          <div class="flow-label">TRUYỆN</div>
+          <div class="flow-detail">xuất bản + ghi co-credit</div>
+        </div>
+      </div>
+      <div class="flow-bottom">
+        <div class="flow-bottom-label">💰 DOANH THU CHIA SẺ</div>
+        <div>giữa người có ý tưởng, tác giả chấp bút, và platform</div>
+      </div>
+    </div>
+
+    <!-- Bước 1 -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Độc giả gửi ý tưởng</h4>
+      <p>Bạn không cần biết viết. Bạn chỉ cần có một ý tưởng truyện hay trong đầu. Có thể là:</p>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Một concept tổng quát: <em>"Một thám tử ở Sài Gòn thập niên 1930 điều tra vụ mất tích bí ẩn trong giới nghệ sĩ cải lương"</em>
+        </li>
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Một premise chi tiết với nhân vật, bối cảnh, plot points
+        </li>
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Một thế giới hoàn chỉnh với hệ thống tu luyện, magic system, hoặc lịch sử
+        </li>
+      </ul>
+      <p>Submit ý tưởng qua form trên platform. Đội editor sẽ đánh giá tính khả thi, độ độc đáo, và tiềm năng phát triển thành truyện hoàn chỉnh.</p>
+    </div>
+
+    <!-- Bước 2 -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Đội ngũ tác giả đồng hành chấp bút</h4>
+      <p>Khi ý tưởng của bạn được duyệt, <strong>đội ngũ tác giả đồng hành cùng Góc Đọc Truyện sẽ là người chấp bút viết truyện</strong> dựa trên ý tưởng đó.</p>
+      <p>Bạn có 2 lựa chọn:</p>
+
+      <div class="choices">
+        <div class="choice">
+          <span class="choice-tag">Lựa chọn A</span>
+          <h5>Để Góc Đọc Truyện ghép tác giả phù hợp</h5>
+          <ul>
+            <li>Dựa vào thể loại, tone, và đặc điểm ý tưởng, chúng tôi giới thiệu tác giả phù hợp nhất</li>
+            <li>Tiết kiệm thời gian, có matching dựa trên expertise</li>
+          </ul>
+        </div>
+        <div class="choice">
+          <span class="choice-tag">Lựa chọn B</span>
+          <h5>Bạn yêu cầu tác giả cụ thể</h5>
+          <ul>
+            <li>Nếu đã yêu thích phong cách của một tác giả trên Góc Đọc Truyện, bạn có thể đề xuất tên</li>
+            <li>Chúng tôi liên hệ và phối hợp xem tác giả đó có nhận lời không</li>
+            <li>Tác giả có quyền từ chối nếu không phù hợp style hoặc lịch viết</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="commitment">
+        Trong cả 2 trường hợp, tác giả viết truyện <strong>luôn là tác giả đang có trên Góc Đọc Truyện</strong> — không phải người ngoài, không phải AI hoàn toàn. Đây là cam kết về chất lượng và trách nhiệm.
+      </div>
+
+      <p>Khi tác giả nhận lời, một hợp đồng co-creation 3 bên (độc giả - tác giả - platform) sẽ được tạo, công ty luật của chúng tôi review.</p>
+    </div>
+
+    <!-- Bước 3 -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Truyện được viết và xuất bản</h4>
+      <p>Tác giả đồng hành viết truyện dựa trên ý tưởng. Bạn — với tư cách người gửi ý tưởng — có quyền:</p>
+      <ul style="list-style: none; padding-left: 0;">
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Đọc trước các chương sắp publish (early-access độc quyền)
+        </li>
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Đưa feedback và gợi ý (nhưng không có quyền veto sáng tạo)
+        </li>
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Co-credit: <em>"Ý tưởng gốc bởi [Tên độc giả] · Chấp bút bởi [Tác giả]"</em>
+        </li>
+        <li style="padding-left: 20px; position: relative; margin: 8px 0;">
+          <span style="position: absolute; left: 0; color: var(--accent);">◆</span>
+          Tham gia quá trình quảng bá truyện nếu muốn
+        </li>
+      </ul>
+      <p>Truyện sau khi hoàn thành 5 chương đầu sẽ được publish public và xuất hiện trong hệ thống đề cử.</p>
+    </div>
+
+    <!-- Bước 4 -->
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Chia sẻ doanh thu (Affiliate Co-Creation)</h4>
+      <p>Đây là phần thay đổi cuộc chơi. Khi truyện monetize (audio, POD, membership, license), doanh thu được chia 3 bên theo công thức minh bạch:</p>
+
+      <table class="revenue-table">
+        <thead>
+          <tr>
+            <th>Bên</th>
+            <th>Đóng góp</th>
+            <th>Tỷ lệ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tác giả chấp bút</strong></td>
+            <td>Công sức sáng tạo nội dung, văn phong, phát triển nhân vật</td>
+            <td>50-60%</td>
+          </tr>
+          <tr>
+            <td><strong>Độc giả có ý tưởng gốc</strong></td>
+            <td>Concept gốc, world-building ban đầu, quyền co-credit</td>
+            <td>10-20%</td>
+          </tr>
+          <tr>
+            <td><strong>Platform</strong></td>
+            <td>Hạ tầng, marketing, pháp lý, ghép tác giả phù hợp</td>
+            <td>30%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-style: italic; font-family: var(--serif); color: var(--ink-muted); font-size: 15px;">Tỷ lệ cụ thể sẽ được hoàn thiện và công bố trước khi triển khai monetization (Phase 2 — Q2/2027).</p>
+    </div>
+
+    <h3>Tại sao mô hình này quan trọng?</h3>
+
+    <div class="benefits">
+      <div class="benefit">
+        <h5>Cho độc giả có ý tưởng</h5>
+        <ul>
+          <li>Không cần là tác giả để sở hữu một phần truyện hay</li>
+          <li>Ý tưởng được hiện thực hóa bởi người có chuyên môn</li>
+          <li>Thu nhập thụ động khi truyện thành công</li>
+          <li>Co-credit trên trang truyện</li>
+          <li>Có thể chỉ định tác giả yêu thích</li>
+        </ul>
+      </div>
+      <div class="benefit">
+        <h5>Cho tác giả đồng hành</h5>
+        <ul>
+          <li>Không bao giờ "cạn ý tưởng"</li>
+          <li>Quyền chọn nhận hoặc từ chối ý tưởng</li>
+          <li>Fan base sẵn có từ độc giả gửi ý tưởng</li>
+          <li>Giữ quyền sáng tạo về cách kể chuyện</li>
+          <li>Tăng thu nhập từ nhiều dòng truyện song song</li>
+        </ul>
+      </div>
+      <div class="benefit">
+        <h5>Cho platform</h5>
+        <ul>
+          <li>Tăng supply nội dung chất lượng</li>
+          <li>Tăng engagement độc giả ("skin in the game")</li>
+          <li>Lợi thế cạnh tranh không ai copy được</li>
+          <li>Build chiều sâu mối quan hệ 3 bên</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Đây không phải ý tưởng viển vông</h3>
+    <p>Mô hình co-creation đã thành công ở nhiều thị trường:</p>
+    <ul class="refs">
+      <li><strong>Wattpad → Wattpad Studios:</strong> Ý tưởng từ user được chuyển thành phim, series TV</li>
+      <li><strong>Kakao Page:</strong> Mô hình co-creation giữa fan và tác giả webtoon</li>
+      <li><strong>Royal Road:</strong> "Sponsored prompts" — độc giả trả tiền để tác giả viết theo prompt</li>
+      <li><strong>AO3:</strong> Cộng đồng fanfic với "gift fic" và collaborative writing</li>
+    </ul>
+    <p><strong>Chúng tôi là platform Việt Nam đầu tiên đưa mô hình này vào sản phẩm core</strong>, không phải feature phụ.</p>
+  </section>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- LỘ TRÌNH -->
+  <section>
+    <span class="section-num">06 — Roadmap</span>
+    <h2>Lộ trình <em>phát triển</em></h2>
+    <p>Chúng tôi xây dựng platform theo từng giai đoạn — không vội, nhưng dứt khoát.</p>
+
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-marker">🌱</div>
+        <div class="phase-year">2026 – Q1/2027 — Phase 1</div>
+        <h4>Foundation</h4>
+        <p class="phase-sub">"Xây nền móng — Chứng minh chất lượng"</p>
+        <ul>
+          <li class="done">Ra mắt website gocdoctruyen.vn</li>
+          <li class="done">10 truyện gốc đầu tiên từ đội tác giả nội bộ</li>
+          <li>Đạt 50 truyện gốc</li>
+          <li>Mobile app iOS + Android</li>
+          <li>30,000 độc giả thường xuyên (MAU)</li>
+          <li>Audio partnership đầu tiên (Voiz FM / Fonos)</li>
+          <li>Lập công ty + đăng ký nhãn hiệu + bản quyền</li>
+          <li>Hoàn thiện framework pháp lý cho tác giả ngoài</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">🌿</div>
+        <div class="phase-year">Q2/2027 — Phase 2</div>
+        <h4>Open Platform</h4>
+        <p class="phase-sub">"Mở cửa cho tác giả ngoài — Bắt đầu doanh thu"</p>
+        <ul>
+          <li>Mở đăng ký tác giả ngoài (sau pilot)</li>
+          <li>80+ truyện gốc trên platform</li>
+          <li>60,000 độc giả thường xuyên (MAU)</li>
+          <li>Triển khai Membership Early-Access</li>
+          <li>Bản in POD cho top truyện hoàn thành</li>
+          <li>Audio licensing mở rộng</li>
+          <li>Tổ chức Writing Contest đầu tiên</li>
+          <li>Khởi động beta khép kín cho Co-Creation Model</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">🌳</div>
+        <div class="phase-year">Q3/2027 — Phase 3</div>
+        <h4>Co-Creation Era</h4>
+        <p class="phase-sub">"Ai cũng có thể sở hữu truyện"</p>
+        <ul>
+          <li><strong>Ra mắt Co-Creation Model chính thức</strong></li>
+          <li>120+ truyện, 50+ tác giả ngoài</li>
+          <li>Webtoon adaptation cho top truyện</li>
+          <li>150,000 độc giả thường xuyên (MAU)</li>
+          <li>YouTube channel chính thức</li>
+          <li>Cộng đồng tác giả offline tại HN + HCM</li>
+          <li>100+ ý tưởng đầu tiên từ độc giả được hiện thực hóa</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">🌲</div>
+        <div class="phase-year">Q1/2028 — Phase 4</div>
+        <h4>Ecosystem</h4>
+        <p class="phase-sub">"Hệ sinh thái sáng tạo Việt"</p>
+        <ul>
+          <li>300+ truyện gốc, 200+ tác giả</li>
+          <li>500,000 MAU</li>
+          <li>IP licensing cho phim/drama Việt</li>
+          <li>Bắt đầu export sang Đông Nam Á</li>
+          <li>Quỹ hỗ trợ tác giả mới — học bổng viết lách</li>
+          <li>Định vị đơn vị tham chiếu của thị trường truyện gốc Việt</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- GIÁ TRỊ CỐT LÕI -->
+  <section>
+    <span class="section-num">07 — Core Values</span>
+    <h2>Giá trị <em>cốt lõi</em></h2>
+
+    <div class="values">
+      <div class="value-item">
+        <h4>Tử tế là chuẩn mực, không phải lựa chọn</h4>
+        <p>Tử tế với tác giả: trả công xứng đáng, bảo vệ bản quyền, không quỵt tiền. Tử tế với độc giả: không quảng cáo bẩn, không paywall lừa đảo. Tử tế với chính chúng tôi: không tăng trưởng bằng mọi giá.</p>
+      </div>
+      <div class="value-item">
+        <h4>Minh bạch tới từng đồng</h4>
+        <p>Mỗi đồng doanh thu được track. Mỗi đợt payout có statement. Mỗi điều khoản hợp đồng đều public và đọc được. Co-creation revenue split công bố công khai — không có "blackbox".</p>
+      </div>
+      <div class="value-item">
+        <h4>Pháp lý là nền tảng, không phải phụ kiện</h4>
+        <p>Chúng tôi sở hữu một công ty luật. Mọi hợp đồng, mọi điều khoản, mọi tranh chấp đều được xử lý bởi luật sư thật có giấy phép hành nghề tại Việt Nam.</p>
+      </div>
+      <div class="value-item">
+        <h4>Người Việt làm, cho người Việt — và xa hơn</h4>
+        <p>Không phải Wattpad Việt Nam. Không phải bản sao Qidian. Không phải clone Webnovel. Chúng tôi là Góc Đọc Truyện — sinh ra từ Việt Nam, hiểu Việt Nam, và đủ tham vọng mang truyện Việt ra thế giới.</p>
+      </div>
+      <div class="value-item">
+        <h4>Sáng tạo là tài sản chung</h4>
+        <p>Truyện không thuộc về riêng một ai. Một câu chuyện hay là sản phẩm của ý tưởng, công sức viết, sự ủng hộ của độc giả, và hạ tầng platform. Tất cả những người tạo ra giá trị đều xứng đáng được chia sẻ.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÂU CHUYỆN -->
+  <section>
+    <span class="section-num">08 — Behind the scenes</span>
+    <h2>Câu chuyện <em>đằng sau</em></h2>
+    <p>Chúng tôi không phải một startup gọi vốn triệu đô. Chúng tôi không có roadmap PR ồn ào. Chúng tôi không tham vọng "disrupt" gì cả.</p>
+    <p>Chúng tôi chỉ tin một điều: <strong>người Việt biết viết truyện hay, người Việt có những ý tưởng tuyệt vời, và tất cả họ xứng đáng có một chỗ tử tế để gặp nhau.</strong></p>
+    <p>Founder của platform đã tự viết và xuất bản 10 truyện đầu tiên dưới nhiều bút danh — không phải để nổi tiếng, mà để chứng minh rằng có thể xây một platform truyện gốc Việt với chất lượng đủ tốt.</p>
+    <p>Bây giờ, chúng tôi mở cửa cho mọi người.</p>
+    <p>Nếu bạn là tác giả, nếu bạn có ý tưởng truyện, nếu bạn là độc giả muốn thấy thêm truyện gốc Việt chất lượng, nếu bạn tin văn học mạng Việt Nam xứng đáng có một tương lai khác — chúng tôi mời bạn cùng đi.</p>
+  </section>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <h3>Bạn nghĩ sao về vision này?</h3>
+    <p>Đây là tài liệu private đang trong giai đoạn refinement. Mình rất muốn nghe feedback của bạn — đặc biệt về Co-Creation Model. Cái gì hay? Cái gì lo? Cái gì chưa rõ?</p>
+    <a href="mailto:doctruyengoc@gmail.com?subject=Feedback%20v%E1%BB%81%20Vision%20G%C3%B3c%20%C4%90%E1%BB%8Dc%20Truy%E1%BB%87n" class="feedback-email">
+      doctruyengoc@gmail.com
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><em>Góc Đọc Truyện — Chỗ để truyện được tìm thấy.</em></p>
+    <p>Vision Document v1.0 · Tháng 5, 2026</p>
+    <p>🔒 Tài liệu riêng tư · Vui lòng không chia sẻ rộng rãi</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
