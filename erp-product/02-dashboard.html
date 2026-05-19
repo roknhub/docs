@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>02 · Dashboard + Entity / Branch switcher — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">02 / 49</span>Dashboard + Entity / Branch switcher</div>
+    <div class="product-nav__pager">
+      <a href="01-login.html">‹ 01 Login + 2FA + Forgot...</a>
+      <a href="03-org-tree.html">03 Org tree — Cơ cấu tổ... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 02 · Dashboard AI · Entity / Branch switcher</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/dashboard?entity=tmabc-q1</div></div>
+
+    <div style="position: absolute; top: 200px; right: 40px;"><div class="sphere sphere--md" style="position: relative;"></div></div>
+    <div style="position: absolute; top: 500px; left: 300px;"><div class="sphere sphere--sm" style="position: relative;"></div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><div style="font-weight: 600;">DQM ERP</div><div style="font-size: 11px; color: var(--text-subtle);">v2.0.0</div></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Tổng quan</div>
+          <a class="shell__nav-item is-active"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</a>
+        </div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Module</div>
+          <a class="shell__nav-item" href="06-customer-360.html">CRM / Khách hàng</a>
+          <a class="shell__nav-item" href="14-calendar.html">Lịch hẹn</a>
+          <a class="shell__nav-item" href="17-pos-order.html">POS bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+          <a class="shell__nav-item">Nhân sự</a>
+          <a class="shell__nav-item" href="38-posting-console.html">Kế toán</a>
+          <a class="shell__nav-item" href="09-warehouse.html">Kho</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher" style="box-shadow: 0 0 0 3px rgba(15, 25, 114, 0.10);">
+            <span class="entity-switcher__chip">Công ty</span>
+            <span>Thẩm mỹ ABC · <strong>Chi nhánh Q1</strong></span>
+            <svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+            <span class="pill">⌘K · Tìm nhanh</span>
+            <span class="pill pill--gold">✦ 3 VIP có lịch hôm nay</span>
+            <div class="avatar avatar--vip">NA</div>
+          </div>
+        </div>
+
+        <!-- Entity dropdown opened -->
+        <div style="position: relative;">
+          <div class="glass-strong" style="position: absolute; top: 4px; left: 16px; width: 400px; border-radius: 16px; padding: 8px; z-index: 10;">
+            <div style="padding: 8px;">
+              <div class="input-group">
+                <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="input" placeholder="Tìm công ty / chi nhánh..." style="width: 100%;">
+              </div>
+            </div>
+
+            <div style="padding: 4px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-subtlest); font-weight: 600; margin-top: 4px;">Tập đoàn</div>
+            <div style="padding: 8px; display: flex; align-items: center; gap: 8px; border-radius: 8px; cursor: pointer; font-size: 13px;">
+              <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--color-brand-primary-500);"></div>
+              <strong style="flex: 1;">DQM Holdings</strong>
+              <span class="badge badge--neutral">Hợp nhất</span>
+            </div>
+
+            <div style="padding: 4px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-subtlest); font-weight: 600; margin-top: 6px;">Công ty con (3)</div>
+            <div style="padding: 8px; display: flex; align-items: center; gap: 8px; border-radius: 8px; cursor: pointer; background: rgba(15, 25, 114, 0.06); font-size: 13px;">
+              <div style="width: 12px; height: 12px; border-radius: 3px; background: var(--color-brand-secondary-600);"></div>
+              <div style="flex: 1;"><strong>Thẩm mỹ ABC</strong><div style="font-size: 11px; color: var(--text-subtle);">5 CN · 48 NV</div></div>
+            </div>
+            <div style="padding-left: 24px;">
+              <div style="padding: 6px 12px; display: flex; align-items: center; gap: 8px; border-radius: 6px; background: linear-gradient(135deg, rgba(167, 190, 240, 0.25), rgba(199, 178, 240, 0.18)); font-size: 12px;">
+                <svg class="i" viewBox="0 0 16 16" fill="var(--color-brand-primary-500)"><polyline points="13 4 6 11 3 8" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                <span><strong>Chi nhánh Q1</strong></span>
+                <span class="badge badge--brand" style="margin-left: auto;">Đang xem</span>
+              </div>
+              <div style="padding: 6px 12px; font-size: 12px;">Chi nhánh Q3</div>
+              <div style="padding: 6px 12px; font-size: 12px;">Chi nhánh Q7</div>
+              <div style="padding: 6px 12px; font-size: 12px;">Chi nhánh Thủ Đức</div>
+              <div style="padding: 6px 12px; font-size: 12px; color: var(--text-disabled);">Chi nhánh Tân Bình <span style="font-size: 10px; margin-left: 8px;">⊘ Không có quyền</span></div>
+            </div>
+
+            <div style="padding: 8px; display: flex; align-items: center; gap: 8px; border-radius: 8px; cursor: pointer; font-size: 13px;">
+              <div style="width: 12px; height: 12px; border-radius: 3px; background: var(--color-brand-tertiary-600);"></div>
+              <div style="flex: 1;"><strong>Bệnh viện thẩm mỹ XYZ</strong><div style="font-size: 11px; color: var(--text-subtle);">1 CN · 32 NV</div></div>
+            </div>
+            <div style="padding: 8px; display: flex; align-items: center; gap: 8px; border-radius: 8px; cursor: pointer; font-size: 13px;">
+              <div style="width: 12px; height: 12px; border-radius: 3px; background: var(--color-purple-400);"></div>
+              <div style="flex: 1;"><strong>Phòng khám DEF</strong><div style="font-size: 11px; color: var(--text-subtle);">2 CN · 18 NV</div></div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(15, 25, 114, 0.06); margin-top: 6px; padding: 8px; display: flex; gap: 6px;">
+              <button class="pill" style="flex: 1; justify-content: center;">+ Tạo công ty</button>
+              <button class="pill" style="flex: 1; justify-content: center;">Quản lý quyền</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shell__content" style="padding: 32px 32px 24px;">
+
+          <!-- Hero AI command bar dimmed because dropdown open -->
+          <div style="opacity: 0.4; pointer-events: none;">
+            <div class="hero-soft">
+              <div class="hero-soft__greet">
+                <div class="hero-soft__greet-avatar">✦</div>
+                <span>Hi, chiều thứ Hai. Hôm nay m có <strong style="color: var(--color-brand-primary-500);">38 lịch hẹn</strong> · <strong style="color: var(--color-yellow-500);">14 aftercare</strong>.</span>
+              </div>
+              <h2 class="hero-soft__title">Bắt đầu mọi việc <span class="txt-accent-cyan">từ một câu hỏi</span>.</h2>
+
+              <div class="cmd-bar" style="margin: 16px auto 0; max-width: 720px;">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--color-purple-100), var(--color-brand-primary-100)); display: flex; align-items: center; justify-content: center; font-size: 16px;">✦</div>
+                <input type="text" placeholder="Hỏi t bất cứ điều gì...">
+                <span class="cmd-bar__counter">0 / 500</span>
+                <button class="cmd-bar__send">→</button>
+              </div>
+
+              <div class="suggest-row">
+                <button class="suggest-chip">📅 Tạo lịch hẹn hôm nay</button>
+                <button class="suggest-chip">💰 Doanh thu Q1 tuần này</button>
+                <button class="suggest-chip">⚠ Khách aftercare cần gọi</button>
+                <button class="suggest-chip">📊 Báo cáo BS. Vy tháng này</button>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 24px;">
+              <div class="pastel-card pastel-card--sky"><div class="pastel-card__icon">📅</div><div class="pastel-card__title">Lịch hẹn</div><div class="pastel-card__desc">38 hôm nay</div></div>
+              <div class="pastel-card pastel-card--lavender"><div class="pastel-card__icon">💆‍♀️</div><div class="pastel-card__title">POS Order</div><div class="pastel-card__desc">Tạo đơn mới</div><span class="pastel-card__badge">HOT</span></div>
+              <div class="pastel-card pastel-card--mint"><div class="pastel-card__icon">📦</div><div class="pastel-card__title">Liệu trình</div><div class="pastel-card__desc">87 gói chạy</div></div>
+              <div class="pastel-card pastel-card--peach"><div class="pastel-card__icon">💬</div><div class="pastel-card__title">Aftercare</div><div class="pastel-card__desc">14 task · 2 quá hạn</div></div>
+              <div class="pastel-card pastel-card--cream"><div class="pastel-card__icon">⭐</div><div class="pastel-card__title">VIP</div><div class="pastel-card__desc">6 tại quầy</div></div>
+              <div class="pastel-card pastel-card--rose"><div class="pastel-card__icon">⊞</div><div class="pastel-card__title">Khác</div><div class="pastel-card__desc">Báo cáo · Cấu hình</div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="03-org-tree.html"><span class="related-strip__item-num">03</span>Org tree — Cơ cấu tổ chức</a><a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="14-calendar.html"><span class="related-strip__item-num">14</span>Calendar — Branch view</a><a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="37-hr-dashboard.html"><span class="related-strip__item-num">37</span>HR Dashboard · Tổng quan nhân sự</a><a class="related-strip__item" href="47-financials.html"><span class="related-strip__item-num">47</span>P&L · Balance Sheet · Cash Flow</a>
+  </div>
+</div>
+
+
+</body>
+</html>

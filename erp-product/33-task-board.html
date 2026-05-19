@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>33 · Task board (kanban 4 columns) — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W3 · HRM Core</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">33 / 49</span>Task board (kanban 4 columns)</div>
+    <div class="product-nav__pager">
+      <a href="32-commission.html">‹ 32 Commission — Hoa hồn...</a>
+      <a href="34-onboarding.html">34 Onboarding checklist... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 09 · Task board (cá nhân / nhóm / phòng ban)</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/tasks/board</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Workspace</div><a class="shell__nav-item is-active">Task board</a><a class="shell__nav-item">My tasks</a><a class="shell__nav-item">Checklist vận hành</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Q1</span></div><div style="margin-left: auto; display: flex; gap: 6px;"><span class="pill">⛛ Phòng ban: Vận hành Q1</span><button class="btn btn--primary">+ Tạo task</button></div></div>
+        <div class="shell__content" style="padding: 20px 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h2 style="font-size: 22px; font-weight: 700;">Task board · Vận hành Q1</h2>
+            <div style="display: flex; gap: 6px;"><button class="pill" style="background: rgba(15,25,114,0.10);">Kanban</button><button class="pill">List</button><button class="pill">Calendar</button></div>
+          </div>
+
+          <!-- 4 column kanban -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+
+            <!-- TODO -->
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">
+                <strong style="font-size: 13px;">⊙ TODO</strong>
+                <span class="badge badge--neutral">8</span>
+              </div>
+              <div style="padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+                <div class="pastel-card pastel-card--peach" style="padding: 10px;">
+                  <div style="display: flex; gap: 4px; margin-bottom: 4px;"><span class="badge badge--danger" style="font-size: 9px;">Khẩn</span><span class="badge badge--warning" style="font-size: 9px;">CSKH</span></div>
+                  <strong style="font-size: 13px;">Gọi Đỗ Hoa về biến chứng Botox</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Khiếu nại từ 17/05 · BS Hùng escalate</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px;"><div class="avatar avatar--sm">TM</div><span class="t-caption" style="color: rgba(0,0,0,0.65);">Trần Mai · hết hạn 19/05</span></div>
+                </div>
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <strong style="font-size: 13px;">Kiểm kê kho dược mỹ phẩm Q1</strong>
+                  <div class="t-caption t-subtle" style="margin-top: 4px;">Cuối tháng · Phạm Hoà</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px;"><div class="avatar avatar--sm">PH</div><span class="t-caption t-subtle">Phạm Hoà · 30/05</span></div>
+                </div>
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <strong style="font-size: 13px;">Báo cáo doanh thu tuần 20</strong>
+                  <div class="t-caption t-subtle" style="margin-top: 4px;">Branch Manager review</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px;"><div class="avatar avatar--sm">NA</div><span class="t-caption t-subtle">Nguyễn Anh · 24/05</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- IN PROGRESS -->
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.10), transparent);">
+                <strong style="font-size: 13px;"><span class="live-dot-inline"></span>ĐANG LÀM</strong>
+                <span class="badge badge--info">5</span>
+              </div>
+              <div style="padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+                <div class="pastel-card pastel-card--lavender" style="padding: 10px;">
+                  <span class="badge badge--info" style="font-size: 9px;">Aftercare</span>
+                  <strong style="font-size: 13px; display: block; margin-top: 4px;">Gọi sau 24h Hifu — Lê Hồng Nhung</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">VIP · Còn 22h</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px;"><div class="avatar avatar--sm">TM</div><span class="t-caption" style="color: rgba(0,0,0,0.65);">Trần Mai</span></div>
+                </div>
+                <div class="pastel-card pastel-card--sky" style="padding: 10px;">
+                  <span class="badge badge--info" style="font-size: 9px;">Vận hành</span>
+                  <strong style="font-size: 13px; display: block; margin-top: 4px;">Đào tạo NV mới Trần Trang</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">3/5 buổi đã xong</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px;"><div class="avatar avatar--sm">NL</div><span class="t-caption" style="color: rgba(0,0,0,0.65);">Nguyễn Linh</span></div>
+                </div>
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <strong style="font-size: 13px;">Update price list dịch vụ Q2</strong>
+                  <div class="t-caption t-subtle" style="margin-top: 4px;">Marketing đề xuất tăng 5%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- REVIEW -->
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.08), transparent);">
+                <strong style="font-size: 13px;">⌖ ĐANG REVIEW</strong>
+                <span class="badge badge--warning">3</span>
+              </div>
+              <div style="padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <span class="badge badge--brand" style="font-size: 9px;">POS</span>
+                  <strong style="font-size: 13px; display: block; margin-top: 4px;">Refund POS-Q1-04812 (1.2M)</strong>
+                  <div class="t-caption t-subtle" style="margin-top: 4px;">Branch Mgr duyệt</div>
+                </div>
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <span class="badge badge--brand" style="font-size: 9px;">HR</span>
+                  <strong style="font-size: 13px; display: block; margin-top: 4px;">Đơn nghỉ phép BS Hùng (2 ngày)</strong>
+                </div>
+                <div style="padding: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <span class="badge badge--brand" style="font-size: 9px;">Cash</span>
+                  <strong style="font-size: 13px; display: block; margin-top: 4px;">Chốt ca chiều 18/05 (lệch 50K)</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- DONE -->
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(0, 135, 90, 0.08), transparent);">
+                <strong style="font-size: 13px;">✓ XONG (tuần 20)</strong>
+                <span class="badge badge--success">24</span>
+              </div>
+              <div style="padding: 8px; display: flex; flex-direction: column; gap: 8px;">
+                <div class="pastel-card pastel-card--mint" style="padding: 10px;">
+                  <strong style="font-size: 13px;">Aftercare 7 KH Hifu xong tuần này</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.65); margin-top: 4px;">100% gọi · CSAT 4.86</div>
+                </div>
+                <div class="pastel-card pastel-card--mint" style="padding: 10px;">
+                  <strong style="font-size: 13px;">Mở ca sáng 18/05 đúng 8:00</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.65); margin-top: 4px;">Phạm Hoàng Minh</div>
+                </div>
+                <a href="#" class="t-caption t-subtle" style="text-align: center; padding: 6px;">+22 task khác →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="24-aftercare.html"><span class="related-strip__item-num">24</span>Aftercare task inbox (CSKH)</a><a class="related-strip__item" href="28-leave.html"><span class="related-strip__item-num">28</span>Leave request + Approval inbox</a><a class="related-strip__item" href="34-onboarding.html"><span class="related-strip__item-num">34</span>Onboarding checklist NV mới</a><a class="related-strip__item" href="36-kpi.html"><span class="related-strip__item-num">36</span>KPI / Performance review</a>
+  </div>
+</div>
+
+
+</body>
+</html>

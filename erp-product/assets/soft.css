@@ -1,0 +1,700 @@
+/* ============================================================
+   SOFT GLASS — Lavender · Glassmorphism · Pastel
+   Extends tokens.css · vẫn dùng tokens DS hiện có
+   Mood: nhẹ nhàng như sương sớm, tinh tế, đỡ "ERP"
+   Keep density compact của bản traditional
+   ============================================================ */
+
+/* ============================================================
+   1. PAGE BACKGROUND — gradient sky → lavender
+   ============================================================ */
+body.soft {
+  background:
+    radial-gradient(ellipse 1200px 800px at 10% 0%, rgba(167, 190, 240, 0.45), transparent 60%),
+    radial-gradient(ellipse 1000px 700px at 90% 20%, rgba(199, 178, 240, 0.40), transparent 55%),
+    radial-gradient(ellipse 900px 600px at 50% 100%, rgba(178, 220, 240, 0.35), transparent 60%),
+    linear-gradient(180deg, #EEF2FB 0%, #EBE8F5 50%, #E8EFF7 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Floating decorative glass spheres */
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.5px);
+}
+.sphere--lg {
+  width: 320px; height: 320px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.65), rgba(255,255,255,0.05) 50%),
+    linear-gradient(135deg, rgba(167, 190, 240, 0.7), rgba(199, 178, 240, 0.4));
+  box-shadow:
+    inset -8px -16px 32px rgba(167, 190, 240, 0.3),
+    0 24px 64px rgba(15, 25, 114, 0.10);
+}
+.sphere--md {
+  width: 200px; height: 200px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0.05) 50%),
+    linear-gradient(135deg, rgba(178, 220, 240, 0.6), rgba(167, 190, 240, 0.5));
+  box-shadow:
+    inset -6px -12px 24px rgba(178, 220, 240, 0.3),
+    0 16px 48px rgba(15, 25, 114, 0.08);
+}
+.sphere--sm {
+  width: 120px; height: 120px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(255,255,255,0.1) 50%),
+    linear-gradient(135deg, rgba(254, 204, 6, 0.4), rgba(199, 178, 240, 0.5));
+  box-shadow:
+    inset -4px -8px 16px rgba(199, 178, 240, 0.3),
+    0 12px 32px rgba(15, 25, 114, 0.08);
+}
+
+/* Soft blur blobs (background bokeh) */
+.bokeh {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+.bokeh--lavender { background: var(--color-purple-100); width: 400px; height: 400px; }
+.bokeh--sky { background: var(--color-brand-secondary-100); width: 500px; height: 500px; }
+.bokeh--cream { background: var(--color-brand-tertiary-100); width: 300px; height: 300px; }
+.bokeh--mint { background: var(--color-green-100); width: 360px; height: 360px; }
+
+/* ============================================================
+   2. GLASS SURFACES
+   ============================================================ */
+
+/* Heavy glass — main cards */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 32px rgba(15, 25, 114, 0.06),
+    0 2px 8px rgba(15, 25, 114, 0.03);
+}
+
+/* Light glass — subtle elements */
+.glass-light {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 4px 16px rgba(15, 25, 114, 0.04);
+}
+
+/* Strong glass — overlays */
+.glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 16px 48px rgba(15, 25, 114, 0.10);
+}
+
+/* Tinted glass (lavender) */
+.glass-tint {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(240, 235, 255, 0.6));
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(101, 84, 192, 0.06);
+}
+
+/* ============================================================
+   3. SHELL OVERRIDE — soft mode
+   ============================================================ */
+
+.soft .shell {
+  background: transparent !important;
+}
+.soft .shell__sidebar {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--text-default);
+}
+.soft .shell__sidebar-brand {
+  border-bottom-color: rgba(15, 25, 114, 0.06);
+  color: var(--text-default);
+}
+.soft .shell__sidebar-brand-logo {
+  background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500));
+  color: white;
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.25);
+}
+.soft .shell__sidebar-section-title { color: var(--text-subtle); }
+.soft .shell__nav-item {
+  color: var(--text-subtle);
+  border-left: 3px solid transparent;
+}
+.soft .shell__nav-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-default);
+}
+.soft .shell__nav-item.is-active {
+  background: linear-gradient(90deg, rgba(15, 25, 114, 0.08), transparent);
+  color: var(--color-brand-primary-500);
+  font-weight: 600;
+  border-left-color: var(--color-brand-primary-500);
+  position: relative;
+}
+.soft .shell__nav-item.is-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(254, 204, 6, 0.08) 100%);
+  pointer-events: none;
+}
+
+.soft .shell__topbar {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.soft .shell__content {
+  background: transparent !important;
+  position: relative;
+}
+
+/* ============================================================
+   4. ENTITY SWITCHER GLASS
+   ============================================================ */
+.soft .entity-switcher {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.06);
+}
+.soft .entity-switcher__chip {
+  background: linear-gradient(135deg, var(--color-brand-primary-100), var(--color-brand-primary-50));
+  color: var(--color-brand-primary-500);
+}
+
+/* ============================================================
+   5. CARD OVERRIDE — glass
+   ============================================================ */
+.soft .card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 24px rgba(15, 25, 114, 0.05);
+}
+
+.soft .card__header {
+  background: rgba(255, 255, 255, 0.3);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================================
+   6. PASTEL CATEGORY CARDS (như AI tools cards trong ảnh)
+   ============================================================ */
+
+.pastel-card {
+  position: relative;
+  border-radius: 16px;
+  padding: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 24px rgba(15, 25, 114, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.pastel-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 12px 32px rgba(15, 25, 114, 0.10);
+}
+.pastel-card__icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.08);
+}
+.pastel-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-default);
+  margin-bottom: 4px;
+}
+.pastel-card__desc {
+  font-size: 12px;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+.pastel-card__badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: linear-gradient(135deg, var(--color-red-400), var(--color-red-300));
+  color: white;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* 6 pastel variants */
+.pastel-card--sky {
+  background: linear-gradient(135deg, #DAEAFD 0%, #C5DCFA 100%);
+}
+.pastel-card--lavender {
+  background: linear-gradient(135deg, #E6DEF8 0%, #D4C5F0 100%);
+}
+.pastel-card--mint {
+  background: linear-gradient(135deg, #D6F0E4 0%, #BCE8D2 100%);
+}
+.pastel-card--peach {
+  background: linear-gradient(135deg, #FCE3D6 0%, #F8CDB2 100%);
+}
+.pastel-card--cream {
+  background: linear-gradient(135deg, #FBF1D2 0%, #F6E5A8 100%);
+}
+.pastel-card--rose {
+  background: linear-gradient(135deg, #F8D9E4 0%, #F2C0D2 100%);
+}
+
+/* ============================================================
+   7. AI COMMAND BAR (input lớn ở giữa hero)
+   ============================================================ */
+.cmd-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 12px 40px rgba(15, 25, 114, 0.10),
+    0 4px 12px rgba(15, 25, 114, 0.05);
+}
+.cmd-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text-default);
+  outline: none;
+}
+.cmd-bar input::placeholder { color: var(--text-subtlest); }
+.cmd-bar__counter {
+  font-size: 11px;
+  color: var(--text-subtlest);
+  font-family: var(--font-mono);
+}
+.cmd-bar__send {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500));
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.30);
+}
+.cmd-bar__send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 25, 114, 0.40);
+}
+
+/* Suggestion chips bên dưới command bar */
+.suggest-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.suggest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+  font-size: 12px;
+  color: var(--text-default);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.suggest-chip:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.08);
+}
+.suggest-chip__icon { opacity: 0.7; }
+
+/* ============================================================
+   8. HERO TITLE — colored accent words
+   ============================================================ */
+.hero-soft {
+  text-align: center;
+  padding: 24px 0;
+  position: relative;
+}
+.hero-soft__title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--text-default);
+}
+.hero-soft__title .accent-cyan { color: var(--color-teal-500); }
+.hero-soft__title .accent-purple { color: var(--color-purple-500); }
+.hero-soft__title .accent-gold { color: var(--color-brand-tertiary-700); }
+.hero-soft__title .accent-rose { color: var(--color-red-400); }
+.hero-soft__lede {
+  font-size: 13px;
+  color: var(--text-subtle);
+  max-width: 540px;
+  margin: 0 auto;
+}
+.hero-soft__greet {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 10px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  font-size: 13px;
+  color: var(--text-default);
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.05);
+}
+.hero-soft__greet-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C5DCFA, #D4C5F0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+
+/* ============================================================
+   9. TABLE OVERRIDE
+   ============================================================ */
+.soft .table thead th {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-subtle);
+  border-bottom-color: rgba(15, 25, 114, 0.06);
+}
+.soft .table tbody td {
+  border-bottom-color: rgba(15, 25, 114, 0.04);
+}
+.soft .table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+.soft .table tbody tr.is-selected {
+  background: linear-gradient(90deg, rgba(167, 190, 240, 0.20), transparent 70%) !important;
+}
+
+/* ============================================================
+   10. BUTTON SOFT VARIANT
+   ============================================================ */
+.btn--soft {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: var(--text-default);
+  box-shadow: 0 4px 12px rgba(15, 25, 114, 0.05);
+}
+.btn--soft:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+.soft .btn--primary {
+  background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500)) !important;
+  box-shadow: 0 4px 16px rgba(15, 25, 114, 0.30);
+  border: none;
+}
+.soft .btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(15, 25, 114, 0.40);
+}
+
+.soft .btn--secondary {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ============================================================
+   11. BADGE / LOZENGE SOFT
+   ============================================================ */
+.soft .badge {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.soft .badge--info {
+  background: rgba(0, 184, 217, 0.15);
+  color: var(--color-teal-500);
+  border: 1px solid rgba(0, 184, 217, 0.25);
+}
+.soft .badge--success {
+  background: rgba(0, 135, 90, 0.12);
+  color: var(--color-green-500);
+  border: 1px solid rgba(0, 135, 90, 0.20);
+}
+.soft .badge--warning {
+  background: rgba(255, 153, 31, 0.14);
+  color: var(--color-yellow-500);
+  border: 1px solid rgba(255, 153, 31, 0.22);
+}
+.soft .badge--danger {
+  background: rgba(222, 53, 11, 0.12);
+  color: var(--color-red-500);
+  border: 1px solid rgba(222, 53, 11, 0.20);
+}
+.soft .badge--brand {
+  background: rgba(15, 25, 114, 0.10);
+  color: var(--color-brand-primary-500);
+  border: 1px solid rgba(15, 25, 114, 0.18);
+}
+.soft .badge--gold {
+  background: rgba(254, 204, 6, 0.20);
+  color: var(--color-brand-tertiary-700);
+  border: 1px solid rgba(254, 204, 6, 0.40);
+}
+
+/* ============================================================
+   12. STAT SOFT
+   ============================================================ */
+.soft .stat {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 16px rgba(15, 25, 114, 0.04);
+}
+
+/* ============================================================
+   13. INPUT SOFT
+   ============================================================ */
+.soft .input {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.soft .input:focus {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--color-brand-primary-400);
+  box-shadow:
+    0 0 0 3px rgba(15, 25, 114, 0.08),
+    0 4px 16px rgba(15, 25, 114, 0.10);
+}
+
+/* ============================================================
+   14. TAB SOFT
+   ============================================================ */
+.soft .tab.is-active {
+  color: var(--color-brand-primary-500);
+  border-bottom-color: transparent;
+  position: relative;
+}
+.soft .tab.is-active::after {
+  content: '';
+  position: absolute;
+  left: 4px; right: 4px; bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-brand-primary-400), var(--color-purple-400));
+  border-radius: 2px;
+}
+
+/* ============================================================
+   15. BANNER SOFT (glass)
+   ============================================================ */
+.soft .banner {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-left-width: 3px;
+}
+.soft .banner--info { border-left-color: var(--color-teal-400); }
+.soft .banner--warning { border-left-color: var(--color-yellow-400); }
+.soft .banner--success { border-left-color: var(--color-green-400); }
+.soft .banner--danger { border-left-color: var(--color-red-400); }
+
+/* ============================================================
+   16. PROGRESS BAR GLASS
+   ============================================================ */
+.soft .progress-bar { background: rgba(15, 25, 114, 0.08); }
+
+/* ============================================================
+   17. SCROLLBAR SOFT
+   ============================================================ */
+.soft ::-webkit-scrollbar { width: 8px; height: 8px; }
+.soft ::-webkit-scrollbar-track { background: transparent; }
+.soft ::-webkit-scrollbar-thumb {
+  background: rgba(15, 25, 114, 0.15);
+  border-radius: 4px;
+}
+.soft ::-webkit-scrollbar-thumb:hover { background: rgba(15, 25, 114, 0.25); }
+
+/* ============================================================
+   18. AVATAR GLASS RING
+   ============================================================ */
+.soft .avatar {
+  background: linear-gradient(135deg, rgba(167, 190, 240, 0.3), rgba(199, 178, 240, 0.3));
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(15, 25, 114, 0.10);
+  color: var(--color-brand-primary-500);
+}
+
+/* VIP override: keep gold ring */
+.soft .avatar--vip {
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px var(--color-brand-tertiary-500),
+    0 4px 12px rgba(254, 204, 6, 0.30);
+}
+
+/* ============================================================
+   19. PAGE-WRAPPER UTILITIES
+   ============================================================ */
+.soft-canvas {
+  position: relative;
+  min-height: 100vh;
+}
+.soft-canvas-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   20. TIMELINE SOFT
+   ============================================================ */
+.soft .timeline-line {
+  background: linear-gradient(180deg,
+    var(--color-brand-tertiary-500),
+    var(--color-purple-400),
+    var(--color-brand-secondary-500),
+    var(--color-teal-400)) !important;
+  opacity: 0.5;
+  width: 2px;
+}
+
+/* ============================================================
+   21. PILL BUTTONS (sub action)
+   ============================================================ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+  font-size: 12px;
+  color: var(--text-default);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pill:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+.pill--gold {
+  background: linear-gradient(135deg, rgba(254, 204, 6, 0.25), rgba(254, 204, 6, 0.10));
+  border-color: rgba(254, 204, 6, 0.5);
+  color: var(--color-brand-tertiary-700);
+}
+
+/* ============================================================
+   22. SOFT KBD KEY
+   ============================================================ */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 25, 114, 0.10);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-subtle);
+  box-shadow: 0 1px 0 rgba(15, 25, 114, 0.05);
+}
+
+/* ============================================================
+   23. ACCENT TEXT (highlighted phrase)
+   ============================================================ */
+.txt-accent-cyan {
+  background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.txt-accent-purple {
+  background: linear-gradient(135deg, var(--color-purple-500), var(--color-purple-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.txt-accent-gold {
+  background: linear-gradient(135deg, var(--color-brand-tertiary-700), var(--color-brand-tertiary-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.txt-accent-brand {
+  background: linear-gradient(135deg, var(--color-brand-primary-500), var(--color-brand-primary-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}

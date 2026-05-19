@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>07 · Service / Product / Package catalog — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">07 / 49</span>Service / Product / Package catalog</div>
+    <div class="product-nav__pager">
+      <a href="06-customer-360.html">‹ 06 Customer 360°...</a>
+      <a href="08-employee.html">08 Employee directory... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 07 · Service / Product / Package catalog</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/master/catalog?type=service</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Master data</div>
+          <a class="shell__nav-item" href="06-customer-360.html">Khách hàng</a>
+          <a class="shell__nav-item is-active">Sản phẩm / Dịch vụ</a>
+          <a class="shell__nav-item" href="08-employee.html">Nhân viên</a>
+          <a class="shell__nav-item" href="09-warehouse.html">Kho</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>Thẩm mỹ ABC · Catalog dùng chung</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Master</a><span class="breadcrumb__sep">/</span><a href="#">Catalog</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Sản phẩm / Dịch vụ / Gói</h2>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">⬆ Import</button>
+              <button class="btn btn--primary">+ Thêm mới</button>
+            </div>
+          </div>
+
+          <div class="tabs" style="margin-bottom: 14px;">
+            <button class="tab is-active">Dịch vụ <span class="tab__count">86</span></button>
+            <button class="tab">Sản phẩm <span class="tab__count">142</span></button>
+            <button class="tab">Gói liệu trình <span class="tab__count">24</span></button>
+            <button class="tab">Bảng giá &amp; KM</button>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 14px; align-items: center;">
+            <div class="input-group" style="width: 280px;">
+              <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="input" placeholder="Tìm tên dịch vụ, mã..." style="width: 100%;">
+            </div>
+            <button class="pill">⛛ Nhóm: Tất cả</button>
+            <button class="pill">⛛ Áp dụng: Tất cả CN</button>
+            <button class="pill">⛛ Status: Đang bán</button>
+            <div style="margin-left: auto; display: flex; gap: 4px;">
+              <button class="pill" style="background: rgba(15,25,114,0.10);">▦ Card</button>
+              <button class="pill">≡ Table</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+
+            <div class="pastel-card pastel-card--sky" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(167, 190, 240, 0.5), rgba(120, 199, 238, 0.4)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                💆‍♀️
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">ĐANG BÁN</span>
+                <span class="badge badge--gold" style="position: absolute; top: 10px; right: 10px; font-size: 10px;">★ Best</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Hifu nâng cơ V-line</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-001</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Trẻ hoá da bằng sóng siêu âm hội tụ</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">90 phút</span>
+                  <span class="badge badge--neutral" style="font-size: 10px;">5 CN</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div>
+                    <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                    <div style="font-size: 16px; font-weight: 700;">8.500.000</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="t-caption" style="color: rgba(0,0,0,0.5);">HH BS</div>
+                    <div style="color: var(--color-green-500); font-weight: 600; font-size: 12px;">8% · 680K</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--cream" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(254, 204, 6, 0.4), rgba(247, 240, 211, 0.6)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                ✨
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">ĐANG BÁN</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Tẩy da chết hoá học</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-002</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Peel AHA/BHA tẩy tế bào chết</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">45 phút</span>
+                  <span class="badge badge--neutral" style="font-size: 10px;">5 CN</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div><div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div><div style="font-size: 16px; font-weight: 700;">1.200.000</div></div>
+                  <div style="text-align: right;"><div class="t-caption" style="color: rgba(0,0,0,0.5);">HH KTV</div><div style="color: var(--color-green-500); font-weight: 600; font-size: 12px;">5% · 60K</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--lavender" style="padding: 0; overflow: hidden; border: 2px solid var(--color-brand-tertiary-500);">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(199, 178, 240, 0.5), rgba(101, 84, 192, 0.3)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                📦
+                <span class="badge badge--brand" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">GÓI 6 BUỔI</span>
+                <span class="badge badge--gold" style="position: absolute; top: 10px; right: 10px; font-size: 10px;">★ VIP</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Combo Hifu + Peel</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">PKG-001</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">3 Hifu + 3 Peel · giãn cách 2 tuần</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">3 tháng</span>
+                  <span class="badge badge--success" style="font-size: 10px;">−22%</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá gói</div>
+                  <div><strong style="font-size: 16px;">22.500.000</strong> <span style="font-size: 11px; text-decoration: line-through; color: rgba(0,0,0,0.4);">28.8M</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--mint" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(171, 245, 209, 0.6), rgba(54, 179, 126, 0.3)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                💉
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">ĐANG BÁN</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Tiêm filler cằm</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-008</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Tạo dáng cằm V-line · 6-12 tháng</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">60 phút</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                  <div style="font-size: 16px; font-weight: 700;">12.000.000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--rose" style="padding: 0; overflow: hidden; opacity: 0.7;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(248, 217, 228, 0.6), rgba(242, 192, 210, 0.6)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                🦷
+                <span class="badge badge--warning" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">TẠM NGỪNG</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Cấy ghép implant</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-IMP-001</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Đang cập nhật giấy phép</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">120 phút</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                  <div style="font-size: 16px; font-weight: 700;">25.000.000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--peach" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(252, 227, 214, 0.6), rgba(248, 205, 178, 0.6)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                💋
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">ĐANG BÁN</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Phun môi collagen</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-MORI-003</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Phun tự nhiên · giữ 2 năm</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">90 phút</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                  <div style="font-size: 16px; font-weight: 700;">3.500.000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--sky" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(178, 220, 240, 0.5), rgba(0, 199, 230, 0.3)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                💧
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">ĐANG BÁN</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Mesotherapy</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-MESO-001</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Tiêm dưỡng chất nông da</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">75 phút</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                  <div style="font-size: 16px; font-weight: 700;">4.800.000</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pastel-card pastel-card--lavender" style="padding: 0; overflow: hidden;">
+              <div style="height: 100px; background: linear-gradient(135deg, rgba(230, 222, 248, 0.6), rgba(101, 84, 192, 0.25)); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative;">
+                🌿
+                <span class="badge badge--success" style="position: absolute; top: 10px; left: 10px; font-size: 10px;">MỚI</span>
+              </div>
+              <div style="padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                  <strong style="font-size: 13px;">Liệu pháp đá nóng</strong>
+                  <span class="t-caption t-mono" style="color: rgba(0,0,0,0.5);">DV-STONE-002</span>
+                </div>
+                <p class="t-caption" style="color: rgba(0,0,0,0.55); margin: 6px 0; min-height: 28px;">Massage thư giãn · giảm stress</p>
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <span class="badge badge--info" style="font-size: 10px;">90 phút</span>
+                </div>
+                <div style="padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08);">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.5);">Giá</div>
+                  <div style="font-size: 16px; font-weight: 700;">2.500.000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="22-treatment.html"><span class="related-strip__item-num">22</span>Treatment plan — Gói liệu trình</a><a class="related-strip__item" href="09-warehouse.html"><span class="related-strip__item-num">09</span>Warehouse / Location</a>
+  </div>
+</div>
+
+
+</body>
+</html>

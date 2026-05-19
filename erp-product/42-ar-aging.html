@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>42 · AR aging — Công nợ phải thu — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">42 / 49</span>AR aging — Công nợ phải thu</div>
+    <div class="product-nav__pager">
+      <a href="41-cash-bank.html">‹ 41 Cash / Bank book...</a>
+      <a href="43-ap-aging.html">43 AP aging — Công nợ p... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 05 · AR aging — Công nợ khách hàng</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/ar/aging</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item is-active">AR aging</a><a class="shell__nav-item" href="43-ap-aging.html">AP aging</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">AR Aging · Công nợ phải thu</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Tổng 348.2M · 87% trong hạn · 13% quá hạn cần xử lý</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Export</button><button class="btn btn--secondary">📨 Gửi reminder hàng loạt</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Hiện hành (0-30d)</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">302.4M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">86.8%</div></div>
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">31-60 ngày</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px;">28.6M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">8.2%</div></div>
+            <div class="pastel-card pastel-card--cream" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">61-90 ngày</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">12.4M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">3.6%</div></div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">91-180 ngày</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">3.2M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">0.9%</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">&gt; 180 ngày</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">1.6M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Có thể nợ xấu</div></div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header"><strong>Khách hàng có công nợ</strong><div class="row gap-sm"><button class="pill">⛛ Aging: Tất cả</button><button class="pill">⛛ Sắp xếp: Già nhất</button></div></div>
+            <table class="table table--compact">
+              <thead><tr><th>Khách hàng</th><th>Hạng</th><th style="text-align: right;">0-30d</th><th style="text-align: right;">31-60d</th><th style="text-align: right;">61-90d</th><th style="text-align: right;">&gt;90d</th><th style="text-align: right;">Tổng nợ</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--vip avatar--sm">HN</div><strong>Lê Hồng Nhung</strong></div></td><td><span class="badge badge--gold">VIP Gold</span></td><td style="text-align: right; font-family: var(--font-mono);">12,000,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">12,000,000</td><td><button class="pill">Xem chi tiết</button></td></tr>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">LK</div><strong>Lý Thanh Kim</strong></div></td><td><span class="badge badge--gold">VIP Gold</span></td><td style="text-align: right; font-family: var(--font-mono);">28,000,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">28,000,000</td><td><button class="pill">Xem</button></td></tr>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">PD</div><strong>Phạm Đan</strong></div></td><td><span class="badge badge--info">Silver</span></td><td style="text-align: right; font-family: var(--font-mono);">8,400,000</td><td style="text-align: right; font-family: var(--font-mono);">5,600,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">14,000,000</td><td><button class="pill">📞 Gọi nhắc</button></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);"><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">VK</div><strong>Võ Khánh Linh</strong></div></td><td><span class="badge badge--info">Silver</span></td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-yellow-500);">8,400,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--color-yellow-500);">8,400,000</td><td><button class="pill" style="background: rgba(255, 153, 31, 0.14);">📨 Gửi reminder</button></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.06), transparent 70%);"><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">DH</div><strong>Đỗ Hoa</strong></div></td><td><span class="badge badge--neutral">Mới</span></td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">1,600,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--text-danger);">1,600,000</td><td><button class="pill" style="background: rgba(222, 53, 11, 0.10);">⚠ Escalate</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="41-cash-bank.html"><span class="related-strip__item-num">41</span>Cash / Bank book</a><a class="related-strip__item" href="46-trial-balance.html"><span class="related-strip__item-num">46</span>Trial balance + Sổ cái</a>
+  </div>
+</div>
+
+
+</body>
+</html>

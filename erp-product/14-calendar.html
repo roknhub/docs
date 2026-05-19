@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>14 · Calendar — Branch view — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">14 / 49</span>Calendar — Branch view</div>
+    <div class="product-nav__pager">
+      <a href="13-lead.html">‹ 13 Lead inbox + Lead de...</a>
+      <a href="15-booking.html">15 Booking modal — Tạo ... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 02 · Calendar — Branch view (theo phòng, BS/KTV)</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/calendar?branch=Q1&amp;date=2026-05-18</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item is-active">Lịch hẹn</a>
+          <a class="shell__nav-item" href="17-pos-order.html">Bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+          <a class="shell__nav-item" href="24-aftercare.html">Aftercare</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Thẩm mỹ ABC · Q1</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div style="margin-left: auto; display: flex; gap: 8px; align-items: center;">
+            <button class="pill">‹ Hôm qua</button>
+            <span class="pill pill--gold" style="padding: 6px 14px;"><strong>Thứ Hai · 18 / 05 / 2026</strong></span>
+            <button class="pill">Ngày mai ›</button>
+          </div>
+        </div>
+
+        <div class="shell__content" style="padding: 16px 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div style="display: flex; gap: 6px;">
+              <button class="pill" style="background: rgba(15,25,114,0.10);">Theo BS/KTV</button>
+              <button class="pill">Theo phòng</button>
+              <button class="pill">Theo dịch vụ</button>
+              <button class="pill">Week view</button>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⛛ Filter</button>
+              <button class="btn btn--primary">+ Đặt lịch hẹn</button>
+            </div>
+          </div>
+
+          <!-- Calendar grid -->
+          <div class="card card--p-0" style="overflow: hidden;">
+            <!-- Header row: resources -->
+            <div style="display: grid; grid-template-columns: 80px repeat(5, 1fr); border-bottom: 1px solid rgba(15, 25, 114, 0.06); background: rgba(255, 255, 255, 0.35);">
+              <div style="padding: 12px 8px; font-size: 11px; color: var(--text-subtlest); text-transform: uppercase; letter-spacing: 0.06em;">Giờ</div>
+              <div style="padding: 10px; border-left: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center; gap: 8px;">
+                <div class="avatar avatar--vip avatar--sm">BV</div>
+                <div><strong style="font-size: 13px;">BS. Vy</strong><div class="t-caption t-subtle">Da liễu · P. 3</div></div>
+              </div>
+              <div style="padding: 10px; border-left: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center; gap: 8px;">
+                <div class="avatar avatar--sm">HG</div>
+                <div><strong style="font-size: 13px;">BS. Hùng</strong><div class="t-caption t-subtle">Da liễu · P. 1</div></div>
+              </div>
+              <div style="padding: 10px; border-left: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center; gap: 8px;">
+                <div class="avatar avatar--sm">KT</div>
+                <div><strong style="font-size: 13px;">KTV Tuyết</strong><div class="t-caption t-subtle">Peel · P. 2</div></div>
+              </div>
+              <div style="padding: 10px; border-left: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center; gap: 8px;">
+                <div class="avatar avatar--sm">KH</div>
+                <div><strong style="font-size: 13px;">KTV Hằng</strong><div class="t-caption t-subtle">Hifu · P. 4</div></div>
+              </div>
+              <div style="padding: 10px; border-left: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center; gap: 8px;">
+                <div class="avatar avatar--sm">TV</div>
+                <div><strong style="font-size: 13px;">Tư vấn</strong><div class="t-caption t-subtle">Linh / Mai · P. tư vấn</div></div>
+              </div>
+            </div>
+
+            <!-- Time slots -->
+            <div style="display: grid; grid-template-columns: 80px repeat(5, 1fr);">
+              <!-- 09:00 -->
+              <div style="padding: 8px; font-size: 11px; color: var(--text-subtlest); border-bottom: 1px solid rgba(15, 25, 114, 0.04);">09:00</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px; position: relative;">
+                <div class="pastel-card pastel-card--lavender" style="padding: 6px 8px; font-size: 11px; line-height: 1.4;">
+                  <strong>09:00 - 10:30 Hifu</strong>
+                  <div>Lê Hồng Nhung <span class="badge badge--gold" style="font-size: 9px; padding: 1px 4px;">VIP</span></div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--mint" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>09:00 - 09:45 Peel</strong>
+                  <div>Phạm Thị Yến</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--sky" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>09:30 Tư vấn</strong>
+                  <div>Trần Thanh Trang (lead)</div>
+                </div>
+              </div>
+
+              <!-- 10:00 -->
+              <div style="padding: 8px; font-size: 11px; color: var(--text-subtlest); border-bottom: 1px solid rgba(15, 25, 114, 0.04);">10:00</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--peach" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>10:00 - 11:00 Filler cằm</strong>
+                  <div>Nguyễn Mai</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--lavender" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>10:30 - 12:00 Hifu</strong>
+                  <div>Lý Thanh Kim <span class="badge badge--gold" style="font-size: 9px; padding: 1px 4px;">VIP</span></div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+
+              <!-- 11:00 -->
+              <div style="padding: 8px; font-size: 11px; color: var(--text-subtlest); border-bottom: 1px solid rgba(15, 25, 114, 0.04);">11:00</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--rose" style="padding: 6px 8px; font-size: 11px; opacity: 0.7;">
+                  <strong>11:00 Đã hủy</strong>
+                  <div>Võ Linh — no-show</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--mint" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>11:00 - 11:45 Peel</strong>
+                  <div>Đoàn Hà</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+
+              <!-- 14:00 (after lunch) - row "current time" -->
+              <div style="padding: 8px; font-size: 11px; color: var(--color-brand-primary-500); font-weight: 700; border-bottom: 1px solid rgba(15, 25, 114, 0.04); background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">14:00 ⌖</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px; background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">
+                <div class="pastel-card pastel-card--lavender" style="padding: 6px 8px; font-size: 11px; border: 2px solid var(--color-brand-tertiary-500);">
+                  <strong>14:00 Tái khám 30 ngày</strong>
+                  <div>Hồ Thị Loan <span class="live-dot-inline"></span></div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px; background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">
+                <div class="pastel-card pastel-card--mint" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>14:00 - 14:45 Peel</strong>
+                  <div>Phan Thị Hà</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);"></div>
+
+              <!-- 15:00 -->
+              <div style="padding: 8px; font-size: 11px; color: var(--text-subtlest); border-bottom: 1px solid rgba(15, 25, 114, 0.04);">15:00</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--lavender" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>15:00 - 16:30 Hifu</strong>
+                  <div>Đặng Thị Mai</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); border-bottom: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--sky" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>15:30 Tư vấn</strong>
+                  <div>Phan Thị Tuyết (lead)</div>
+                </div>
+              </div>
+
+              <!-- 16:00 -->
+              <div style="padding: 8px; font-size: 11px; color: var(--text-subtlest);">16:00</div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px; padding: 4px;">
+                <div class="pastel-card pastel-card--peach" style="padding: 6px 8px; font-size: 11px;">
+                  <strong>16:00 - 17:00 Botox</strong>
+                  <div>Trương Thúy An</div>
+                </div>
+              </div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+              <div style="border-left: 1px solid rgba(15, 25, 114, 0.04); min-height: 60px;"></div>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 11px; color: var(--text-subtle);">
+            <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 12px; height: 12px; background: linear-gradient(135deg, #E6DEF8, #D4C5F0); border-radius: 3px;"></div>Hifu / dịch vụ chính</div>
+            <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 12px; height: 12px; background: linear-gradient(135deg, #D6F0E4, #BCE8D2); border-radius: 3px;"></div>Peel / mini</div>
+            <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 12px; height: 12px; background: linear-gradient(135deg, #FCE3D6, #F8CDB2); border-radius: 3px;"></div>Tiêm filler / Botox</div>
+            <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 12px; height: 12px; background: linear-gradient(135deg, #DAEAFD, #C5DCFA); border-radius: 3px;"></div>Tư vấn</div>
+            <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 12px; height: 12px; background: linear-gradient(135deg, #F8D9E4, #F2C0D2); border-radius: 3px;"></div>Đã hủy / no-show</div>
+            <div style="margin-left: auto;"><span class="live-dot-inline"></span>Đang phục vụ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="15-booking.html"><span class="related-strip__item-num">15</span>Booking modal — Tạo lịch hẹn</a><a class="related-strip__item" href="16-checkin.html"><span class="related-strip__item-num">16</span>Check-in / Check-out lễ tân</a><a class="related-strip__item" href="23-session.html"><span class="related-strip__item-num">23</span>Session detail — BS đang thực hiện</a><a class="related-strip__item" href="22-treatment.html"><span class="related-strip__item-num">22</span>Treatment plan — Gói liệu trình</a><a class="related-strip__item" href="26-shift.html"><span class="related-strip__item-num">26</span>Shift & Work calendar — Phân ca</a>
+  </div>
+</div>
+
+
+</body>
+</html>

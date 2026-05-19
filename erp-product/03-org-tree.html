@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>03 · Org tree — Cơ cấu tổ chức — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">03 / 49</span>Org tree — Cơ cấu tổ chức</div>
+    <div class="product-nav__pager">
+      <a href="02-dashboard.html">‹ 02 Dashboard + Entity /...</a>
+      <a href="04-user-list.html">04 User list + Detail d... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 03 · Org tree · Cơ cấu tổ chức</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/admin/organization</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Quản trị</div>
+          <a class="shell__nav-item is-active">Cơ cấu tổ chức</a>
+          <a class="shell__nav-item" href="04-user-list.html">Người dùng</a>
+          <a class="shell__nav-item" href="05-permission.html">Vai trò &amp; Quyền</a>
+          <a class="shell__nav-item" href="12-audit.html">Audit log</a>
+        </div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Master data</div>
+          <a class="shell__nav-item" href="06-customer-360.html">Khách hàng</a>
+          <a class="shell__nav-item" href="07-catalog.html">Sản phẩm / Dịch vụ</a>
+          <a class="shell__nav-item" href="08-employee.html">Nhân viên</a>
+          <a class="shell__nav-item" href="09-warehouse.html">Kho</a>
+          <a class="shell__nav-item" href="10-coa.html">Kế toán (CoA · Tax · Bank)</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Xem hợp nhất</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div style="margin-left: auto;"><div class="avatar avatar--vip">NA</div></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Quản trị</a><span class="breadcrumb__sep">/</span><a href="#">Tổ chức</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Cơ cấu tổ chức tập đoàn</h2>
+              <p style="font-size: 13px; color: var(--text-subtle); margin-top: 4px;">3 công ty · 8 chi nhánh · 24 phòng ban · 98 nhân sự</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">⬆ Import</button>
+              <button class="btn btn--primary">+ Thêm đơn vị</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 360px; gap: 14px;">
+
+            <div class="card card--p-0">
+              <div class="card__header">
+                <div style="display: flex; align-items: center; gap: 8px;"><strong>Cây tổ chức</strong><span class="badge badge--neutral">3 cấp</span></div>
+                <div class="row gap-sm">
+                  <div class="input-group" style="width: 240px;">
+                    <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input class="input" placeholder="Tìm đơn vị..." style="width: 100%;">
+                  </div>
+                  <button class="pill">Mở rộng tất cả</button>
+                </div>
+              </div>
+              <div style="padding: 16px;">
+
+                <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 10px; background: rgba(15, 25, 114, 0.04);">
+                  <svg class="i" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-600));"></div>
+                  <strong style="flex: 1; font-size: 13px;">DQM Holdings</strong>
+                  <span class="badge badge--brand">Tập đoàn</span>
+                  <span class="t-caption t-subtle">Mã: DQM</span>
+                </div>
+
+                <div style="padding-left: 32px; margin-top: 4px;">
+                  <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 10px; background: linear-gradient(135deg, rgba(167, 190, 240, 0.25), transparent 70%); border: 1px solid rgba(15, 25, 114, 0.10);">
+                    <svg class="i" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    <div style="width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg, var(--color-brand-secondary-500), var(--color-brand-secondary-600));"></div>
+                    <strong style="flex: 1; font-size: 13px;">Thẩm mỹ ABC</strong>
+                    <span class="badge badge--info">Công ty</span>
+                    <span class="t-caption t-subtle">5 CN · 48 NV</span>
+                  </div>
+
+                  <div style="padding-left: 32px; margin-top: 4px;">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                      <span style="width: 16px;"></span>
+                      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-green-400);"></span>
+                      <span style="flex: 1;">Chi nhánh Q1</span>
+                      <span class="badge badge--success">12 NV</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                      <span style="width: 16px;"></span>
+                      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-green-400);"></span>
+                      <span style="flex: 1;">Chi nhánh Q3</span>
+                      <span class="badge badge--success">10 NV</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                      <span style="width: 16px;"></span>
+                      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-green-400);"></span>
+                      <span style="flex: 1;">Chi nhánh Q7</span>
+                      <span class="badge badge--success">11 NV</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px;">
+                      <span style="width: 16px;"></span>
+                      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-green-400);"></span>
+                      <span style="flex: 1;">Chi nhánh Thủ Đức</span>
+                      <span class="badge badge--success">8 NV</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; font-size: 12px; opacity: 0.6;">
+                      <span style="width: 16px;"></span>
+                      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-neutral-500);"></span>
+                      <span style="flex: 1;">Chi nhánh Tân Bình</span>
+                      <span class="badge badge--neutral">Tạm ngừng</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding-left: 32px; margin-top: 4px;">
+                  <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 10px;">
+                    <svg class="i" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    <div style="width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg, var(--color-brand-tertiary-500), var(--color-brand-tertiary-600));"></div>
+                    <strong style="flex: 1; font-size: 13px;">Bệnh viện thẩm mỹ XYZ</strong>
+                    <span class="badge badge--info">Công ty</span>
+                    <span class="t-caption t-subtle">1 CN · 32 NV</span>
+                  </div>
+                </div>
+
+                <div style="padding-left: 32px; margin-top: 4px;">
+                  <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 10px;">
+                    <svg class="i" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    <div style="width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg, var(--color-purple-400), var(--color-purple-500));"></div>
+                    <strong style="flex: 1; font-size: 13px;">Phòng khám DEF</strong>
+                    <span class="badge badge--info">Công ty</span>
+                    <span class="t-caption t-subtle">2 CN · 18 NV</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detail panel -->
+            <div class="card card--p-0">
+              <div class="card__header"><strong>Chi tiết: Thẩm mỹ ABC</strong><button class="pill">⋯</button></div>
+              <div style="padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.06);">
+                  <div class="avatar avatar--lg" style="background: linear-gradient(135deg, var(--color-brand-secondary-100), var(--color-brand-secondary-500));">A</div>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 600;">Thẩm mỹ ABC</div>
+                    <div class="t-caption t-subtle">Mã: TMABC · MST: 0312345678</div>
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; font-size: 13px;">
+                  <div><div class="t-caption t-subtle">Loại</div><div>Công ty con</div></div>
+                  <div><div class="t-caption t-subtle">Đơn vị cha</div><div>DQM Holdings</div></div>
+                  <div><div class="t-caption t-subtle">Người đứng đầu</div><div>Nguyễn Thị Lan</div></div>
+                  <div><div class="t-caption t-subtle">Trạng thái</div><div><span class="badge badge--success">● Active</span></div></div>
+                  <div><div class="t-caption t-subtle">Thành lập</div><div>12/03/2020</div></div>
+                  <div><div class="t-caption t-subtle">Cost center</div><div>CC-TMABC</div></div>
+                </div>
+                <div class="section-rule"></div>
+                <div class="t-caption t-subtle" style="margin-bottom: 8px;">Đơn vị con (5)</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="badge badge--info">Q1</span>
+                  <span class="badge badge--info">Q3</span>
+                  <span class="badge badge--info">Q7</span>
+                  <span class="badge badge--info">Thủ Đức</span>
+                  <span class="badge badge--neutral">Tân Bình</span>
+                </div>
+                <div class="section-rule"></div>
+                <div class="row gap-sm">
+                  <button class="btn btn--secondary btn--sm" style="flex: 1;">✎ Sửa</button>
+                  <button class="btn btn--secondary btn--sm" style="flex: 1;">+ Chi nhánh</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="04-user-list.html"><span class="related-strip__item-num">04</span>User list + Detail drawer</a><a class="related-strip__item" href="05-permission.html"><span class="related-strip__item-num">05</span>Role & Permission matrix</a><a class="related-strip__item" href="08-employee.html"><span class="related-strip__item-num">08</span>Employee directory</a><a class="related-strip__item" href="25-org-assign.html"><span class="related-strip__item-num">25</span>Org assignment · Phân công nhân sự</a>
+  </div>
+</div>
+
+
+</body>
+</html>

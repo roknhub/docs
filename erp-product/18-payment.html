@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>18 · Payment screen — Split + QR — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">18 / 49</span>Payment screen — Split + QR</div>
+    <div class="product-nav__pager">
+      <a href="17-pos-order.html">‹ 17 POS Order — Tạo đơn ...</a>
+      <a href="19-receipt.html">19 Receipt / Invoice pr... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 06 · Payment screen · Split payment</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/order/POS-Q1-2026-04827/pay</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item" href="14-calendar.html">Lịch hẹn</a>
+          <a class="shell__nav-item is-active">Bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Q1</span></div>
+          <div style="margin-left: auto;"><span class="pill">Order #POS-Q1-2026-04827</span></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+
+          <div style="display: grid; grid-template-columns: 1fr 380px; gap: 14px;">
+
+            <div class="col gap-md">
+
+              <!-- Total banner -->
+              <div class="pastel-card pastel-card--cream" style="padding: 20px; text-align: center;">
+                <div class="t-caption" style="color: rgba(0,0,0,0.65); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Số tiền phải thanh toán</div>
+                <div style="font-size: 40px; font-weight: 700; color: var(--color-brand-primary-500); margin-top: 6px; letter-spacing: -0.02em;">22,372,875<span style="font-size: 18px; color: var(--text-subtle);"> VND</span></div>
+                <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Đặt cọc 30% · Còn lại 52.2M sẽ thanh toán khi hoàn thành gói</div>
+              </div>
+
+              <!-- Payment methods -->
+              <div class="card card--p-0">
+                <div class="card__header"><strong>Phương thức thanh toán</strong></div>
+                <div style="padding: 16px;">
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
+                    <button class="pastel-card pastel-card--mint" style="padding: 14px; text-align: center; border: 2px solid var(--color-green-400); cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">💵</div>
+                      <strong style="font-size: 13px;">Tiền mặt</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">Tại quầy</div>
+                    </button>
+                    <button class="pastel-card pastel-card--sky" style="padding: 14px; text-align: center; cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">🏦</div>
+                      <strong style="font-size: 13px;">Chuyển khoản</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">QR ngân hàng</div>
+                    </button>
+                    <button class="pastel-card pastel-card--lavender" style="padding: 14px; text-align: center; cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">💳</div>
+                      <strong style="font-size: 13px;">Thẻ</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">POS terminal</div>
+                    </button>
+                    <button class="pastel-card pastel-card--peach" style="padding: 14px; text-align: center; cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">📱</div>
+                      <strong style="font-size: 13px;">Ví điện tử</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">Momo/ZaloPay</div>
+                    </button>
+                    <button class="pastel-card pastel-card--cream" style="padding: 14px; text-align: center; cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">💼</div>
+                      <strong style="font-size: 13px;">Ví khách hàng</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">3.5M có sẵn</div>
+                    </button>
+                    <button class="pastel-card pastel-card--rose" style="padding: 14px; text-align: center; cursor: pointer;">
+                      <div style="font-size: 28px; margin-bottom: 4px;">📊</div>
+                      <strong style="font-size: 13px;">Trả góp</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55);">3 / 6 tháng</div>
+                    </button>
+                  </div>
+
+                  <!-- Split payment lines -->
+                  <div class="t-caption t-subtle" style="margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Phân bổ thanh toán</div>
+
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="padding: 12px; background: rgba(255, 255, 255, 0.5); border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                      <div style="font-size: 22px;">🏦</div>
+                      <div style="flex: 1;">
+                        <strong>Chuyển khoản QR</strong>
+                        <div class="t-caption t-subtle">VCB 0721000xxx · Mã QR đã sinh</div>
+                      </div>
+                      <input class="input" value="18,872,875" style="width: 160px; text-align: right; font-weight: 600;">
+                      <button class="pill" style="color: var(--text-danger);">✕</button>
+                    </div>
+
+                    <div style="padding: 12px; background: linear-gradient(135deg, rgba(254, 204, 6, 0.10), rgba(254, 204, 6, 0.02)); border-radius: 10px; display: flex; align-items: center; gap: 12px;">
+                      <div style="font-size: 22px;">💼</div>
+                      <div style="flex: 1;">
+                        <strong>Ví khách hàng</strong>
+                        <div class="t-caption t-subtle">Còn lại: 3.5M → 0 sau giao dịch</div>
+                      </div>
+                      <input class="input" value="3,500,000" style="width: 160px; text-align: right; font-weight: 600;">
+                      <button class="pill" style="color: var(--text-danger);">✕</button>
+                    </div>
+
+                    <button class="pill" style="align-self: center;">+ Thêm phương thức</button>
+                  </div>
+
+                  <!-- Validation -->
+                  <div class="banner banner--success" style="margin-top: 14px; font-size: 13px;">
+                    <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    <div><strong>Khớp tổng:</strong> 18.87M CK + 3.5M ví = <strong>22,372,875</strong> · Đủ thanh toán đặt cọc</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: QR -->
+            <div class="glass-strong" style="border-radius: 14px; padding: 20px; position: sticky; top: 80px;">
+              <strong style="font-size: 14px; display: block; margin-bottom: 12px;"><span class="live-dot-inline"></span>QR thanh toán</strong>
+
+              <div style="padding: 16px; background: white; border-radius: 12px; text-align: center; margin-bottom: 12px;">
+                <div style="width: 200px; height: 200px; margin: 0 auto; background: repeating-linear-gradient(0deg, var(--color-neutral-1000) 0 4px, transparent 4px 8px), repeating-linear-gradient(90deg, var(--color-neutral-1000) 0 4px, transparent 4px 8px); border: 2px solid var(--color-neutral-1000); border-radius: 8px; position: relative;">
+                  <div style="position: absolute; inset: 30%; background: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 0 0 8px white;">
+                    <div style="font-size: 24px; font-weight: 700;">D</div>
+                  </div>
+                </div>
+                <div style="margin-top: 12px; font-size: 13px;"><strong>VCB · 0721 000 xxxx</strong></div>
+                <div class="t-caption t-subtle">Nội dung: <strong style="font-family: var(--font-mono);">POSQ12604827</strong></div>
+              </div>
+
+              <div class="banner banner--info" style="font-size: 12px; margin-bottom: 12px;">
+                <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                <div>Quét bằng app ngân hàng. Hệ thống tự ghi nhận khi nhận webhook (~10s).</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Số tiền</span><strong>18,872,875</strong></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Hết hạn</span><strong style="color: var(--color-yellow-500);">4:48</strong></div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px;">
+                <button class="pill">⤓ Tải QR</button>
+                <button class="pill">↻ Sinh lại</button>
+              </div>
+              <button class="btn btn--primary btn--lg" style="width: 100%; margin-top: 12px;">✓ Xác nhận đã thanh toán</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="19-receipt.html"><span class="related-strip__item-num">19</span>Receipt / Invoice preview</a><a class="related-strip__item" href="20-cash-session.html"><span class="related-strip__item-num">20</span>Cash session — Mở/Đóng + Đối soát</a><a class="related-strip__item" href="44-bank-recon.html"><span class="related-strip__item-num">44</span>Bank reconciliation · Đối soát</a>
+  </div>
+</div>
+
+
+</body>
+</html>

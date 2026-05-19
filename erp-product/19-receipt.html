@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>19 · Receipt / Invoice preview — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">19 / 49</span>Receipt / Invoice preview</div>
+    <div class="product-nav__pager">
+      <a href="18-payment.html">‹ 18 Payment screen — Spl...</a>
+      <a href="20-cash-session.html">20 Cash session — Mở/Đó... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 07 · Receipt / Invoice preview + In</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/order/POS-Q1-2026-04827/receipt</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item is-active">Bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Q1</span></div>
+          <div style="margin-left: auto; display: flex; gap: 6px;">
+            <button class="pill">⤓ Tải PDF</button>
+            <button class="pill">✉ Gửi email</button>
+            <button class="pill">💬 Gửi Zalo</button>
+            <button class="btn btn--primary">🖨 In ngay</button>
+          </div>
+        </div>
+
+        <div class="shell__content" style="padding: 24px 28px;">
+
+          <div class="banner banner--success" style="margin-bottom: 16px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <div><strong>Thanh toán thành công!</strong> Đơn POS-Q1-2026-04827 đã ghi nhận · Doanh thu vào sổ kế toán · +3,180 điểm cho khách · Hoa hồng BS. Vy tạm tính 8.5M</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 320px; gap: 14px;">
+
+            <!-- Invoice preview -->
+            <div style="background: white; border-radius: 16px; padding: 40px 48px; box-shadow: 0 24px 64px rgba(15, 25, 114, 0.08); position: relative;">
+
+              <!-- Header -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 24px; border-bottom: 2px solid var(--color-brand-primary-500);">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 44px; height: 44px; background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px;">D</div>
+                    <div>
+                      <div style="font-size: 18px; font-weight: 700;">DQM ERP</div>
+                      <div class="t-caption t-subtle">Thẩm mỹ ABC · Chi nhánh Q1</div>
+                    </div>
+                  </div>
+                  <div style="margin-top: 14px; font-size: 12px; color: var(--text-subtle); line-height: 1.6;">
+                    12 Nguyễn Huệ, Phường Bến Nghé, Q1, TP.HCM<br>
+                    MST: 0312345678 · ☎ 1900-0000 · contact@dqm.vn
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="badge badge--gold" style="margin-bottom: 8px;">HÓA ĐƠN GTGT</span>
+                  <div style="font-size: 22px; font-weight: 700; color: var(--color-brand-primary-500); font-family: var(--font-mono); letter-spacing: -0.02em;">04827</div>
+                  <div class="t-caption t-subtle" style="margin-top: 4px;">Mẫu: 1/001 · Ký hiệu: AA/26E</div>
+                  <div class="t-caption t-subtle">Số hóa đơn điện tử: <strong>00004827</strong></div>
+                  <div style="margin-top: 8px; font-size: 12px;">Ngày: <strong>18 / 05 / 2026 · 14:58</strong></div>
+                </div>
+              </div>
+
+              <!-- Customer info -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--color-neutral-200);">
+                <div>
+                  <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 4px;">Khách hàng</div>
+                  <strong>Lê Thị Hồng Nhung</strong>
+                  <div class="t-caption t-subtle" style="margin-top: 2px;">KH-2024-0842 · VIP Gold</div>
+                  <div class="t-caption t-subtle">📱 0909 555 888 · ✉ honghnung@email.com</div>
+                </div>
+                <div>
+                  <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 4px;">Tư vấn / Phụ trách</div>
+                  <strong>Nguyễn Thuỳ Linh</strong> <span class="t-caption t-subtle">(tư vấn)</span><br>
+                  <strong>BS. Lê Bảo Vy</strong> <span class="t-caption t-subtle">(BS phụ trách gói Hifu)</span>
+                </div>
+              </div>
+
+              <!-- Items table -->
+              <table style="width: 100%; margin: 16px 0; font-size: 13px; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-300);">
+                    <th style="text-align: left; padding: 10px 4px; font-weight: 600; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">#</th>
+                    <th style="text-align: left; padding: 10px 4px; font-weight: 600; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Hàng hoá / Dịch vụ</th>
+                    <th style="text-align: center; padding: 10px 4px; font-weight: 600; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">SL</th>
+                    <th style="text-align: right; padding: 10px 4px; font-weight: 600; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Đơn giá</th>
+                    <th style="text-align: right; padding: 10px 4px; font-weight: 600; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Thành tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);">
+                    <td style="padding: 10px 4px;">1</td>
+                    <td style="padding: 10px 4px;"><strong>Gói Hifu nâng cơ V-line 10 buổi</strong><div class="t-caption t-subtle">PKG-HIFU-010 · Giảm 15% gói liệu trình</div></td>
+                    <td style="text-align: center; padding: 10px 4px;">1</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono);">85,000,000</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); font-weight: 600;">72,250,000</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);">
+                    <td style="padding: 10px 4px;">2</td>
+                    <td style="padding: 10px 4px;"><strong>Serum HA 30ml</strong><div class="t-caption t-subtle">SP-SERUM-HA · Lot 2026-Q2</div></td>
+                    <td style="text-align: center; padding: 10px 4px;">2</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono);">1,200,000</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); font-weight: 600;">2,400,000</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);">
+                    <td style="padding: 10px 4px;">3</td>
+                    <td style="padding: 10px 4px;"><strong>Peel AHA lẻ</strong><div class="t-caption t-subtle">DV-PEEL-002 · KTV Tuyết</div></td>
+                    <td style="text-align: center; padding: 10px 4px;">1</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono);">1,200,000</td>
+                    <td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); font-weight: 600;">1,200,000</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Totals -->
+              <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-top: 1px solid var(--color-neutral-300); font-size: 13px; max-width: 360px; margin-left: auto;">
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Cộng tiền hàng</span><span style="font-family: var(--font-mono);">75,850,000</span></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Chiết khấu VIP Gold −5%</span><span style="font-family: var(--font-mono); color: var(--color-green-500);">−4,825,000</span></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Cộng tiền hàng sau giảm</span><span style="font-family: var(--font-mono);">71,025,000</span></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Thuế GTGT 5%</span><span style="font-family: var(--font-mono);">3,551,250</span></div>
+                <div style="display: flex; justify-content: space-between; padding-top: 8px; border-top: 2px solid var(--color-brand-primary-500); font-size: 16px; font-weight: 700;"><span>Tổng cộng thanh toán</span><span style="font-family: var(--font-mono); color: var(--color-brand-primary-500);">74,576,250</span></div>
+                <div style="font-size: 11px; font-style: italic; color: var(--text-subtle); margin-top: 4px;">(Bảy mươi tư triệu năm trăm bảy mươi sáu nghìn hai trăm năm mươi đồng)</div>
+              </div>
+
+              <!-- Payment breakdown -->
+              <div style="margin-top: 20px; padding: 14px; background: linear-gradient(135deg, rgba(0, 135, 90, 0.06), transparent); border-left: 3px solid var(--color-green-400); border-radius: 8px;">
+                <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 4px;">Đã thanh toán đặt cọc 30%</div>
+                <strong style="font-family: var(--font-mono); font-size: 16px;">22,372,875 VND</strong>
+                <div class="t-caption t-subtle">CK VCB 18.87M + Ví khách 3.5M · Còn lại 52,203,375 sẽ thanh toán theo lịch trình</div>
+              </div>
+
+              <!-- Footer signature -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-neutral-200); text-align: center;">
+                <div>
+                  <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 40px;">Khách hàng</div>
+                  <div style="font-size: 12px;"><em>(Ký, ghi rõ họ tên)</em></div>
+                </div>
+                <div>
+                  <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 40px;">Thu ngân</div>
+                  <strong>Phạm Hoàng Minh</strong>
+                  <div class="t-caption t-subtle">NV-0036 · 14:58</div>
+                </div>
+                <div>
+                  <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 40px;">Người phụ trách</div>
+                  <strong>Nguyễn Thuỳ Linh</strong>
+                  <div class="t-caption t-subtle">Tư vấn</div>
+                </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 24px; padding: 12px; border-top: 1px dashed var(--color-neutral-300); font-size: 11px; color: var(--text-subtle);">
+                Cảm ơn quý khách đã tin tưởng DQM · Hotline 1900-0000 · www.dqm.vn<br>
+                <em>Hóa đơn này được phát hành dưới dạng điện tử theo Thông tư 78/2021/TT-BTC</em>
+              </div>
+            </div>
+
+            <!-- Quick actions -->
+            <div class="glass-strong" style="border-radius: 14px; padding: 18px; position: sticky; top: 80px;">
+              <strong style="font-size: 14px; display: block; margin-bottom: 12px;">Hành động tiếp theo</strong>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn btn--primary"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> In hóa đơn</button>
+                <button class="btn btn--secondary">📧 Gửi email cho khách</button>
+                <button class="btn btn--secondary">💬 Gửi Zalo OA</button>
+                <button class="btn btn--secondary">⤓ Tải PDF</button>
+
+                <div class="section-rule"></div>
+
+                <button class="pill pill--gold" style="justify-content: center; padding: 10px;">+ Đặt lịch buổi liệu trình đầu tiên</button>
+                <button class="pill" style="justify-content: center;">↗ Tạo aftercare task</button>
+                <button class="pill" style="justify-content: center;">+ Bán thêm</button>
+              </div>
+
+              <div class="banner banner--info" style="margin-top: 14px; font-size: 12px;">
+                <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                <div>E-invoice 00004827 đã được phát hành lên hệ thống Tổng cục Thuế. Mã tra cứu: <code style="background: rgba(255,255,255,0.5); padding: 1px 4px; border-radius: 3px;">TM2025E04827</code></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="18-payment.html"><span class="related-strip__item-num">18</span>Payment screen — Split + QR</a><a class="related-strip__item" href="48-einvoice.html"><span class="related-strip__item-num">48</span>E-invoice (Tổng cục Thuế)</a><a class="related-strip__item" href="22-treatment.html"><span class="related-strip__item-num">22</span>Treatment plan — Gói liệu trình</a><a class="related-strip__item" href="24-aftercare.html"><span class="related-strip__item-num">24</span>Aftercare task inbox (CSKH)</a>
+  </div>
+</div>
+
+
+</body>
+</html>

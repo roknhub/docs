@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>46 · Trial balance + Sổ cái — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">46 / 49</span>Trial balance + Sổ cái</div>
+    <div class="product-nav__pager">
+      <a href="45-closing.html">‹ 45 Period closing check...</a>
+      <a href="47-financials.html">47 P&L · Balance Sheet ... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 09 · Trial balance + Sổ cái</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/trial-balance?period=202604</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Báo cáo</div><a class="shell__nav-item is-active">Trial balance</a><a class="shell__nav-item">Sổ cái</a><a class="shell__nav-item" href="47-financials.html">P&amp;L · BS · CF</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC · Kỳ 04/2026</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Trial Balance · 04/2026</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Bảng cân đối phát sinh kỳ · DR = CR · Cân bằng 100% · Snapshot 18/05 22:42</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Export Excel</button><button class="btn btn--secondary">📊 Drill-down</button></div>
+          </div>
+
+          <div class="pastel-card pastel-card--mint" style="padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 28px;">✓</div>
+            <div style="flex: 1;">
+              <strong>Cân bằng kế toán: PASS</strong>
+              <div class="t-caption" style="color: rgba(0,0,0,0.65); margin-top: 2px;">Tổng DR = Tổng CR = <strong>2,842,500,000 VND</strong> · 128 tài khoản có phát sinh / 168 tổng</div>
+            </div>
+          </div>
+
+          <div class="card card--p-0">
+            <table class="table table--compact">
+              <thead><tr><th>Số TK</th><th>Tên tài khoản</th><th style="text-align: right;">SD đầu kỳ</th><th style="text-align: right;">PS Nợ</th><th style="text-align: right;">PS Có</th><th style="text-align: right;">SD cuối kỳ</th></tr></thead>
+              <tbody>
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 1 — TÀI SẢN NGẮN HẠN</td></tr>
+                <tr><td class="t-mono"><strong>111</strong></td><td>Tiền mặt</td><td style="text-align: right; font-family: var(--font-mono);">68,200,000</td><td style="text-align: right; font-family: var(--font-mono);">142,800,000</td><td style="text-align: right; font-family: var(--font-mono);">128,550,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">82,450,000</td></tr>
+                <tr><td class="t-mono"><strong>112</strong></td><td>Tiền gửi ngân hàng</td><td style="text-align: right; font-family: var(--font-mono);">1,085,400,000</td><td style="text-align: right; font-family: var(--font-mono);">582,650,000</td><td style="text-align: right; font-family: var(--font-mono);">419,550,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">1,248,500,000</td></tr>
+                <tr><td class="t-mono"><strong>131</strong></td><td>Phải thu khách hàng</td><td style="text-align: right; font-family: var(--font-mono);">285,400,000</td><td style="text-align: right; font-family: var(--font-mono);">428,500,000</td><td style="text-align: right; font-family: var(--font-mono);">365,700,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">348,200,000</td></tr>
+                <tr><td class="t-mono"><strong>156</strong></td><td>Hàng hóa tồn kho</td><td style="text-align: right; font-family: var(--font-mono);">2,920,000,000</td><td style="text-align: right; font-family: var(--font-mono);">182,400,000</td><td style="text-align: right; font-family: var(--font-mono);">262,700,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">2,839,700,000</td></tr>
+
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 3 — NỢ PHẢI TRẢ</td></tr>
+                <tr><td class="t-mono"><strong>331</strong></td><td>Phải trả NCC</td><td style="text-align: right; font-family: var(--font-mono);">62,400,000</td><td style="text-align: right; font-family: var(--font-mono);">285,600,000</td><td style="text-align: right; font-family: var(--font-mono);">307,400,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">84,200,000</td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.05), transparent 70%);"><td class="t-mono"><strong>3387</strong></td><td>Doanh thu chưa thực hiện <span class="badge badge--warning">DEFERRED</span></td><td style="text-align: right; font-family: var(--font-mono);">385,200,000</td><td style="text-align: right; font-family: var(--font-mono);">324,500,000</td><td style="text-align: right; font-family: var(--font-mono);">367,800,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">428,500,000</td></tr>
+                <tr><td class="t-mono"><strong>334</strong></td><td>Phải trả người lao động</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">1,182,400,000</td><td style="text-align: right; font-family: var(--font-mono);">1,277,400,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">95,000,000</td></tr>
+                <tr><td class="t-mono"><strong>33311</strong></td><td>Thuế GTGT đầu ra</td><td style="text-align: right; font-family: var(--font-mono);">42,800,000</td><td style="text-align: right; font-family: var(--font-mono);">6,100,000</td><td style="text-align: right; font-family: var(--font-mono);">31,720,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">68,420,000</td></tr>
+
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 5 — DOANH THU</td></tr>
+                <tr><td class="t-mono"><strong>511</strong></td><td>Doanh thu BH &amp; DV</td><td style="text-align: right; font-family: var(--font-mono);">—</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono);">634,400,000</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--color-green-500);">−634,400,000</td></tr>
+
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 6 — CHI PHÍ</td></tr>
+                <tr><td class="t-mono"><strong>632</strong></td><td>Giá vốn hàng bán</td><td style="text-align: right; font-family: var(--font-mono);">—</td><td style="text-align: right; font-family: var(--font-mono);">142,500,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--text-danger);">142,500,000</td></tr>
+                <tr><td class="t-mono"><strong>622</strong></td><td>Chi phí lương trực tiếp</td><td style="text-align: right; font-family: var(--font-mono);">—</td><td style="text-align: right; font-family: var(--font-mono);">995,200,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--text-danger);">995,200,000</td></tr>
+                <tr><td class="t-mono"><strong>641</strong></td><td>Chi phí bán hàng (HH)</td><td style="text-align: right; font-family: var(--font-mono);">—</td><td style="text-align: right; font-family: var(--font-mono);">186,400,000</td><td style="text-align: right; font-family: var(--font-mono);">0</td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--text-danger);">186,400,000</td></tr>
+
+                <tr style="background: linear-gradient(90deg, rgba(0, 135, 90, 0.06), transparent 70%); font-weight: 700;"><td colspan="2"><strong>TỔNG CỘNG</strong></td><td style="text-align: right; font-family: var(--font-mono);">—</td><td style="text-align: right; font-family: var(--font-mono);">2,842,500,000</td><td style="text-align: right; font-family: var(--font-mono);">2,842,500,000</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-green-500);">✓ Cân bằng</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="47-financials.html"><span class="related-strip__item-num">47</span>P&L · Balance Sheet · Cash Flow</a><a class="related-strip__item" href="45-closing.html"><span class="related-strip__item-num">45</span>Period closing checklist</a>
+  </div>
+</div>
+
+
+</body>
+</html>

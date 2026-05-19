@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>16 · Check-in / Check-out lễ tân — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">16 / 49</span>Check-in / Check-out lễ tân</div>
+    <div class="product-nav__pager">
+      <a href="15-booking.html">‹ 15 Booking modal — Tạo ...</a>
+      <a href="17-pos-order.html">17 POS Order — Tạo đơn ... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 04 · Check-in / Check-out (lễ tân)</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/checkin</div></div>
+
+    <div style="position: absolute; top: 80px; right: 60px;"><div class="sphere sphere--md" style="position: relative;"></div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item" href="14-calendar.html">Lịch hẹn</a>
+          <a class="shell__nav-item is-active">Check-in</a>
+          <a class="shell__nav-item" href="17-pos-order.html">Bán hàng</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Thẩm mỹ ABC · Q1</span></div>
+          <div style="margin-left: auto;"><span class="pill pill--gold">✦ 6 VIP đang tại quầy</span></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h2 style="font-size: 22px; font-weight: 700;">Check-in lễ tân <span style="font-size: 14px; color: var(--text-subtle); font-weight: 400;">· 18 / 05 / 2026 · 14:42</span></h2>
+            <div style="display: flex; gap: 6px;">
+              <button class="pill" style="background: rgba(15,25,114,0.10);">Đang chờ (5)</button>
+              <button class="pill">Đang phục vụ (8)</button>
+              <button class="pill">Hoàn tất (24)</button>
+              <button class="pill">No-show (2)</button>
+            </div>
+          </div>
+
+          <!-- Quick search KH -->
+          <div class="card" style="padding: 16px; margin-bottom: 14px; display: flex; gap: 12px; align-items: center;">
+            <div class="input-group" style="flex: 1; max-width: 480px;">
+              <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="input input--lg" placeholder="Tìm theo SĐT / mã KH / tên... (Ctrl+K)" style="width: 100%;">
+            </div>
+            <button class="btn btn--primary btn--lg">+ Check-in khách walk-in</button>
+          </div>
+
+          <!-- Waiting list -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.10), transparent 70%);">
+                <strong>⏳ Đang chờ check-in (5)</strong>
+                <span class="badge badge--warning">2 trễ giờ</span>
+              </div>
+              <div style="padding: 8px;">
+
+                <div class="pastel-card pastel-card--cream" style="padding: 12px; margin-bottom: 8px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--vip avatar--lg">HN</div>
+                    <div style="flex: 1;">
+                      <strong>Lê Thị Hồng Nhung</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.65);">14:00 · Hifu #8/10 · BS. Vy · P. 3</div>
+                      <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--gold">VIP Gold</span><span class="badge badge--warning">Đến muộn 42'</span></div>
+                    </div>
+                    <button class="btn btn--primary">✓ Check-in</button>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; margin-bottom: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--lg">PY</div>
+                    <div style="flex: 1;">
+                      <strong>Phạm Thị Yến</strong>
+                      <div class="t-caption t-subtle">14:30 · Peel · KTV Tuyết · P. 2</div>
+                      <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--info">Silver</span><span class="badge badge--neutral">Đúng giờ</span></div>
+                    </div>
+                    <button class="btn btn--secondary">✓ Check-in</button>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; margin-bottom: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--lg">TM</div>
+                    <div style="flex: 1;">
+                      <strong>Trần Thị Mai</strong>
+                      <div class="t-caption t-subtle">15:00 · Tư vấn · Linh · P. tư vấn</div>
+                      <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--neutral">Mới</span><span class="badge badge--info">15' nữa</span></div>
+                    </div>
+                    <button class="btn btn--secondary">✓ Check-in</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.10), transparent 70%);">
+                <strong><span class="live-dot-inline"></span>Đang phục vụ (8)</strong>
+                <span class="badge badge--info">Realtime</span>
+              </div>
+              <div style="padding: 8px;">
+
+                <div class="pastel-card pastel-card--lavender" style="padding: 12px; margin-bottom: 8px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--vip avatar--lg">LK</div>
+                    <div style="flex: 1;">
+                      <strong>Lý Thanh Kim</strong>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.65);">Hifu · BS. Vy · P. 3 · bắt đầu 14:18</div>
+                      <div style="height: 4px; background: rgba(255, 255, 255, 0.6); border-radius: 2px; margin-top: 6px; overflow: hidden;">
+                        <div style="width: 55%; height: 100%; background: linear-gradient(90deg, var(--color-brand-primary-500), var(--color-purple-400)); border-radius: 2px;"></div>
+                      </div>
+                      <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">55% · còn ~40 phút</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; margin-bottom: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--lg">DM</div>
+                    <div style="flex: 1;">
+                      <strong>Đặng Thị Mai</strong>
+                      <div class="t-caption t-subtle">Peel · KTV Tuyết · P. 2 · bắt đầu 14:00</div>
+                      <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--success">Sắp xong</span></div>
+                    </div>
+                    <button class="btn btn--gold">✓ Check-out</button>
+                  </div>
+                </div>
+
+                <div style="padding: 12px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar avatar--lg">PH</div>
+                    <div style="flex: 1;">
+                      <strong>Phan Thị Hà</strong>
+                      <div class="t-caption t-subtle">Filler cằm · BS. Hùng · P. 1 · bắt đầu 13:45</div>
+                      <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--success">Sắp xong</span></div>
+                    </div>
+                    <button class="btn btn--gold">✓ Check-out</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="14-calendar.html"><span class="related-strip__item-num">14</span>Calendar — Branch view</a><a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="23-session.html"><span class="related-strip__item-num">23</span>Session detail — BS đang thực hiện</a><a class="related-strip__item" href="24-aftercare.html"><span class="related-strip__item-num">24</span>Aftercare task inbox (CSKH)</a>
+  </div>
+</div>
+
+
+</body>
+</html>

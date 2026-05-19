@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>04 · User list + Detail drawer — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">04 / 49</span>User list + Detail drawer</div>
+    <div class="product-nav__pager">
+      <a href="03-org-tree.html">‹ 03 Org tree — Cơ cấu tổ...</a>
+      <a href="05-permission.html">05 Role & Permission ma... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 04 · User list + Detail drawer</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/admin/users?entity=tmabc</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Quản trị</div>
+          <a class="shell__nav-item" href="03-org-tree.html">Cơ cấu tổ chức</a>
+          <a class="shell__nav-item is-active">Người dùng</a>
+          <a class="shell__nav-item" href="05-permission.html">Vai trò &amp; Quyền</a>
+          <a class="shell__nav-item" href="12-audit.html">Audit log</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>Thẩm mỹ ABC · Tất cả CN</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div style="margin-left: auto;"><div class="avatar avatar--vip">NA</div></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Quản trị</a><span class="breadcrumb__sep">/</span><a href="#">Người dùng</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Người dùng <span style="font-size: 14px; color: var(--text-subtle); font-weight: 400;">· 48 user</span></h2>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">⬆ Import CSV</button>
+              <button class="btn btn--primary">+ Mời user mới</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 12px; margin-bottom: 12px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+              <div class="input-group" style="flex: 1; min-width: 260px; max-width: 320px;">
+                <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="input" placeholder="Tìm theo tên, email, mã NV..." style="width: 100%;">
+              </div>
+              <button class="pill">⛛ Vai trò: Tất cả</button>
+              <button class="pill">⛛ Chi nhánh: Tất cả</button>
+              <button class="pill">⛛ Status: Active</button>
+              <span class="t-caption t-subtle" style="margin-left: auto;">1-10 / 48</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 380px; gap: 12px;">
+
+            <div class="card card--p-0">
+              <table class="table table--compact">
+                <thead>
+                  <tr>
+                    <th style="width: 32px;"><input type="checkbox"></th>
+                    <th>User</th>
+                    <th>Vai trò</th>
+                    <th>Scope</th>
+                    <th>Chi nhánh</th>
+                    <th>Trạng thái</th>
+                    <th>Login</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="is-selected">
+                    <td><input type="checkbox" checked></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar">NA</div><div><strong>Nguyễn Ngọc Anh</strong><div class="t-caption t-subtle">ngocanh@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--brand">Branch Manager</span></td>
+                    <td><span class="scope-chip">📍 Branch</span></td>
+                    <td>Q1</td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td class="t-caption t-subtle">10 phút</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar">TL</div><div><strong>Trần Thị Lan</strong><div class="t-caption t-subtle">lantt@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--info">Group Admin</span></td>
+                    <td><span class="scope-chip">🌐 Group</span></td>
+                    <td>Tất cả</td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td class="t-caption t-subtle">1 giờ</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--vip">BV</div><div><strong>BS. Lê Bảo Vy</strong><div class="t-caption t-subtle">vylb@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--gold">Doctor</span></td>
+                    <td><span class="scope-chip">📍 Branch</span></td>
+                    <td>Q1, Q3</td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td class="t-caption t-subtle">Hôm nay</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar">HM</div><div><strong>Phạm Hoàng Minh</strong><div class="t-caption t-subtle">minhph@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--neutral">Cashier</span></td>
+                    <td><span class="scope-chip">👤 Self</span></td>
+                    <td>Q7</td>
+                    <td><span class="badge badge--success">Active</span></td>
+                    <td class="t-caption t-subtle">30 phút</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox"></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar">TK</div><div><strong>Vũ Thị Kim</strong><div class="t-caption t-subtle">kimvt@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--info">Accountant</span></td>
+                    <td><span class="scope-chip">🏢 Company</span></td>
+                    <td>Tất cả</td>
+                    <td><span class="badge badge--warning">Đổi MK</span></td>
+                    <td class="t-caption t-subtle">2 giờ</td>
+                  </tr>
+                  <tr style="opacity: 0.55;">
+                    <td><input type="checkbox"></td>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar">DA</div><div><strong>Đỗ Anh</strong><div class="t-caption t-subtle">anhdo@thammyabc.vn</div></div></div></td>
+                    <td><span class="badge badge--neutral">Receptionist</span></td>
+                    <td><span class="scope-chip">📍 Branch</span></td>
+                    <td>Q3</td>
+                    <td><span class="badge badge--danger">⊘ Khóa</span></td>
+                    <td class="t-caption t-subtle">3 ngày</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(15, 25, 114, 0.06);">
+                <div class="t-caption t-subtle">1 user đã chọn</div>
+                <div class="row gap-sm">
+                  <button class="pill">‹</button>
+                  <button class="pill" style="background: rgba(15,25,114,0.10); color: var(--color-brand-primary-500);">1</button>
+                  <button class="pill">2</button>
+                  <button class="pill">3</button>
+                  <button class="pill">›</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drawer detail -->
+            <div class="glass-strong" style="border-radius: 16px; padding: 0; overflow: hidden;">
+              <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center;">
+                <strong>Chi tiết user</strong>
+                <button class="pill" style="margin-left: auto;">✕</button>
+              </div>
+              <div style="padding: 20px;">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                  <div class="avatar avatar--vip" style="width: 56px; height: 56px; font-size: 18px;">NA</div>
+                  <div>
+                    <div style="font-size: 16px; font-weight: 700;">Nguyễn Ngọc Anh</div>
+                    <div class="t-caption t-subtle">ngocanh@thammyabc.vn</div>
+                    <div style="display: flex; gap: 4px; margin-top: 6px;"><span class="badge badge--brand">Branch Manager</span><span class="badge badge--success">Active</span></div>
+                  </div>
+                </div>
+
+                <div class="tabs" style="margin-bottom: 12px;">
+                  <button class="tab is-active">Tổng quan</button>
+                  <button class="tab">Vai trò <span class="tab__count">2</span></button>
+                  <button class="tab">Phiên</button>
+                  <button class="tab">Audit</button>
+                </div>
+
+                <div class="t-caption t-subtle" style="margin-bottom: 4px;">Thông tin</div>
+                <div class="card" style="padding: 10px; margin-bottom: 10px;">
+                  <div style="display: grid; grid-template-columns: 100px 1fr; gap: 6px 12px; font-size: 12px;">
+                    <div class="t-subtle">Mã NV</div><div>NV-0042</div>
+                    <div class="t-subtle">Chức danh</div><div>Branch Manager Q1</div>
+                    <div class="t-subtle">Phòng ban</div><div>Vận hành Q1</div>
+                    <div class="t-subtle">Quản lý</div><div>Trần Thị Lan</div>
+                  </div>
+                </div>
+
+                <div class="t-caption t-subtle" style="margin-bottom: 4px;">Vai trò &amp; Scope</div>
+                <div class="card" style="padding: 10px; margin-bottom: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><strong style="font-size: 13px;">Branch Manager</strong><div class="t-caption t-subtle">Quản lý chi nhánh</div></div>
+                    <span class="scope-chip">📍 Q1</span>
+                  </div>
+                  <div class="section-rule" style="margin: 8px 0;"></div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div><strong style="font-size: 13px;">Aftercare Reviewer</strong><div class="t-caption t-subtle">Duyệt khiếu nại</div></div>
+                    <span class="scope-chip">📍 Q1, Q3</span>
+                  </div>
+                </div>
+
+                <div class="pastel-card pastel-card--mint" style="padding: 12px; margin-bottom: 12px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+                    <div><div class="t-subtle" style="color: rgba(0,0,0,0.55);">2FA</div><div><strong>Đã bật</strong></div></div>
+                    <div><div class="t-subtle" style="color: rgba(0,0,0,0.55);">Trusted devices</div><div><strong>2</strong></div></div>
+                    <div><div class="t-subtle" style="color: rgba(0,0,0,0.55);">Đổi MK gần nhất</div><div><strong>42 ngày</strong></div></div>
+                    <div><div class="t-subtle" style="color: rgba(0,0,0,0.55);">Failed login</div><div><strong>0</strong></div></div>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn btn--secondary" style="flex: 1;">✎ Sửa</button>
+                  <button class="btn btn--primary" style="flex: 1;">Reset MK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="05-permission.html"><span class="related-strip__item-num">05</span>Role & Permission matrix</a><a class="related-strip__item" href="08-employee.html"><span class="related-strip__item-num">08</span>Employee directory</a><a class="related-strip__item" href="12-audit.html"><span class="related-strip__item-num">12</span>Audit log viewer</a><a class="related-strip__item" href="03-org-tree.html"><span class="related-strip__item-num">03</span>Org tree — Cơ cấu tổ chức</a>
+  </div>
+</div>
+
+
+</body>
+</html>

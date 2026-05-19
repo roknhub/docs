@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>15 · Booking modal — Tạo lịch hẹn — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">15 / 49</span>Booking modal — Tạo lịch hẹn</div>
+    <div class="product-nav__pager">
+      <a href="14-calendar.html">‹ 14 Calendar — Branch vi...</a>
+      <a href="16-checkin.html">16 Check-in / Check-out... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 03 · Booking modal — tạo / sửa lịch hẹn</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/calendar?modal=booking-new</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item is-active">Lịch hẹn</a>
+          <a class="shell__nav-item" href="17-pos-order.html">Bán hàng</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Thẩm mỹ ABC · Q1</span></div>
+        </div>
+
+        <!-- Backdrop -->
+        <div style="position: relative; background: rgba(15, 25, 114, 0.15); flex: 1; padding: 32px;">
+          <div class="glass-strong" style="max-width: 720px; margin: 0 auto; border-radius: 20px; padding: 0; overflow: hidden;">
+
+            <div style="padding: 18px 24px; border-bottom: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center;">
+              <div>
+                <strong style="font-size: 16px;">Đặt lịch hẹn mới</strong>
+                <div class="t-caption t-subtle">Lưu sẽ gửi notification SMS + Zalo cho khách</div>
+              </div>
+              <button class="pill" style="margin-left: auto;">✕ Đóng</button>
+            </div>
+
+            <div style="padding: 20px 24px;">
+              <!-- Step indicator -->
+              <div style="display: flex; gap: 8px; margin-bottom: 20px; align-items: center;">
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; box-shadow: 0 4px 12px rgba(15, 25, 114, 0.30);">1</div>
+                  <div class="t-caption" style="color: var(--color-brand-primary-500); font-weight: 600;">Khách + DV</div>
+                </div>
+                <div style="flex: 1; height: 2px; background: rgba(15, 25, 114, 0.10); margin-top: -16px;"></div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(15, 25, 114, 0.08); color: var(--text-disabled); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px;">2</div>
+                  <div class="t-caption t-subtle">Thời gian + NV</div>
+                </div>
+                <div style="flex: 1; height: 2px; background: rgba(15, 25, 114, 0.10); margin-top: -16px;"></div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                  <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(15, 25, 114, 0.08); color: var(--text-disabled); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px;">3</div>
+                  <div class="t-caption t-subtle">Xác nhận</div>
+                </div>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Khách hàng<span class="req">*</span></label>
+                <div class="input-group">
+                  <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input class="input input--lg" value="Lê Thị Hồng Nhung · KH-2024-0842" style="font-weight: 500;">
+                </div>
+                <div style="display: flex; gap: 6px; margin-top: 6px; align-items: center; padding: 8px 12px; background: rgba(254, 204, 6, 0.10); border-radius: 8px; border: 1px solid rgba(254, 204, 6, 0.30);">
+                  <span class="badge badge--gold">✦ VIP Gold</span>
+                  <span style="font-size: 12px;">Còn 2 buổi gói Hifu · 3.5M trong ví · ⚠ dị ứng paraben</span>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                <div class="field">
+                  <label class="field__label">Loại lịch hẹn<span class="req">*</span></label>
+                  <select class="input">
+                    <option>Buổi liệu trình (Hifu #9/10)</option>
+                    <option>Dịch vụ lẻ</option>
+                    <option>Tư vấn</option>
+                    <option>Tái khám</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field__label">Thời lượng dự kiến</label>
+                  <select class="input">
+                    <option>90 phút (mặc định Hifu)</option>
+                    <option>60 phút</option>
+                    <option>120 phút</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Dịch vụ / Gói</label>
+                <div class="pastel-card pastel-card--lavender" style="padding: 12px; display: flex; align-items: center; gap: 12px;">
+                  <div style="font-size: 24px;">💆‍♀️</div>
+                  <div style="flex: 1;">
+                    <strong>Hifu nâng cơ V-line — Buổi 9/10</strong>
+                    <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 2px;">Gói: Trẻ hóa da Hifu · Còn 2 buổi · HSD 31/08/2026</div>
+                  </div>
+                  <span class="badge badge--brand">Gói liệu trình</span>
+                </div>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Ghi chú đặc biệt</label>
+                <textarea class="input" rows="2" style="resize: none; padding: 10px 12px;">Khách dặn nhắc tránh sản phẩm chứa paraben/methylparaben (dị ứng).</textarea>
+              </div>
+
+              <div class="banner banner--warning" style="font-size: 12px;">
+                <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+                <div>Khách có cảnh báo dị ứng — sẽ hiển thị cảnh báo cho BS thực hiện và tự động loại sản phẩm chứa paraben khỏi danh mục vật tư đề xuất.</div>
+              </div>
+            </div>
+
+            <div style="padding: 14px 24px; border-top: 1px solid rgba(15, 25, 114, 0.06); display: flex; gap: 8px; background: rgba(255, 255, 255, 0.3);">
+              <button class="btn btn--ghost">Hủy</button>
+              <button class="btn btn--secondary">Lưu nháp</button>
+              <div style="margin-left: auto; display: flex; gap: 8px;">
+                <button class="btn btn--secondary">‹ Quay lại</button>
+                <button class="btn btn--primary">Tiếp tục → Chọn thời gian &amp; NV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="14-calendar.html"><span class="related-strip__item-num">14</span>Calendar — Branch view</a><a class="related-strip__item" href="16-checkin.html"><span class="related-strip__item-num">16</span>Check-in / Check-out lễ tân</a><a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="22-treatment.html"><span class="related-strip__item-num">22</span>Treatment plan — Gói liệu trình</a>
+  </div>
+</div>
+
+
+</body>
+</html>

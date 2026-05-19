@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>11 · Import / Export wizard — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">11 / 49</span>Import / Export wizard</div>
+    <div class="product-nav__pager">
+      <a href="10-coa.html">‹ 10 CoA · Tax · Bank · C...</a>
+      <a href="12-audit.html">12 Audit log viewer... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 11 · Import / Export wizard · Validation step</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/import/customers?step=3</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Master data</div>
+          <a class="shell__nav-item is-active">Khách hàng</a>
+          <a class="shell__nav-item" href="07-catalog.html">Sản phẩm / Dịch vụ</a>
+          <a class="shell__nav-item" href="08-employee.html">Nhân viên</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>Thẩm mỹ ABC</span></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div class="breadcrumb"><a href="#">Master</a><span class="breadcrumb__sep">/</span><a href="#">Khách hàng</a><span class="breadcrumb__sep">/</span><span>Import</span></div>
+          <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px; margin-bottom: 24px;">Import khách hàng từ Excel</h2>
+
+          <!-- Stepper -->
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 24px; max-width: 760px;">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-green-300), var(--color-green-400)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: 0 4px 12px rgba(0, 135, 90, 0.25);">✓</div>
+              <div class="t-caption" style="color: var(--color-green-500); font-weight: 600;">1. Chọn file</div>
+            </div>
+            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, var(--color-green-400), var(--color-green-300)); margin-top: -20px;"></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-green-300), var(--color-green-400)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: 0 4px 12px rgba(0, 135, 90, 0.25);">✓</div>
+              <div class="t-caption" style="color: var(--color-green-500); font-weight: 600;">2. Map cột</div>
+            </div>
+            <div style="flex: 1; height: 2px; background: linear-gradient(90deg, var(--color-green-300), var(--color-brand-primary-400)); margin-top: -20px;"></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: 0 4px 16px rgba(15, 25, 114, 0.30);">3</div>
+              <div class="t-caption" style="color: var(--color-brand-primary-500); font-weight: 600;">3. Validate (dry-run)</div>
+            </div>
+            <div style="flex: 1; height: 2px; background: rgba(15, 25, 114, 0.10); margin-top: -20px;"></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(15, 25, 114, 0.08); color: var(--text-disabled); display: flex; align-items: center; justify-content: center; font-weight: 700;">4</div>
+              <div class="t-caption t-subtle">4. Xác nhận import</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng dòng</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px;">1,248</div>
+            </div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Hợp lệ</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">1,142</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">91.5%</div>
+            </div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Cảnh báo</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">82</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Vẫn import được</div>
+            </div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Lỗi (bị bỏ qua)</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">24</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Cần sửa file</div>
+            </div>
+          </div>
+
+          <div class="banner banner--info" style="margin-bottom: 14px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div><strong>Đây là dry-run.</strong> Hệ thống chưa lưu gì. Bạn có thể sửa file và upload lại, hoặc xác nhận import 1,224 dòng (1,142 hợp lệ + 82 cảnh báo) ở bước 4.</div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header">
+              <strong>Báo cáo validation</strong>
+              <div class="row gap-sm">
+                <button class="pill" style="background: rgba(222, 53, 11, 0.12); color: var(--text-danger); border-color: rgba(222, 53, 11, 0.30);">⛛ Lỗi (24)</button>
+                <button class="pill">⛛ Cảnh báo (82)</button>
+                <button class="pill">⛛ Hợp lệ (1142)</button>
+              </div>
+            </div>
+            <table class="table table--compact">
+              <thead><tr><th style="width: 60px;">Dòng</th><th>Mã KH</th><th>Họ tên</th><th>SĐT</th><th>Email</th><th>Hạng</th><th>Trạng thái</th><th>Chi tiết</th></tr></thead>
+              <tbody>
+                <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.10), transparent 70%);">
+                  <td class="t-mono">12</td>
+                  <td class="t-mono">KH-001</td>
+                  <td>Nguyễn Văn A</td>
+                  <td><span style="color: var(--text-danger); text-decoration: underline wavy;">090abc</span></td>
+                  <td>vana@email</td>
+                  <td>Silver</td>
+                  <td><span class="badge badge--danger">⊘ Lỗi</span></td>
+                  <td class="t-caption">SĐT không hợp lệ · Email thiếu domain</td>
+                </tr>
+                <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.10), transparent 70%);">
+                  <td class="t-mono">28</td>
+                  <td class="t-mono">—</td>
+                  <td>Lê Thị B</td>
+                  <td>0908xxx</td>
+                  <td>—</td>
+                  <td>Gold</td>
+                  <td><span class="badge badge--danger">⊘ Lỗi</span></td>
+                  <td class="t-caption">Thiếu mã KH · Trùng SĐT với KH-2024-0042</td>
+                </tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.10), transparent 70%);">
+                  <td class="t-mono">45</td>
+                  <td class="t-mono">KH-045</td>
+                  <td>Trần Thị C</td>
+                  <td>0909xxxx</td>
+                  <td>tranc@gmail.com</td>
+                  <td>—</td>
+                  <td><span class="badge badge--warning">⚠ Cảnh báo</span></td>
+                  <td class="t-caption">Hạng trống → mặc định "Mới"</td>
+                </tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.10), transparent 70%);">
+                  <td class="t-mono">67</td>
+                  <td class="t-mono">KH-067</td>
+                  <td>Phạm Văn D</td>
+                  <td>0908xxxx</td>
+                  <td>phamvand@email.com</td>
+                  <td>Gold</td>
+                  <td><span class="badge badge--warning">⚠ Cảnh báo</span></td>
+                  <td class="t-caption">Trùng email → đổi thành phamvand+2@</td>
+                </tr>
+                <tr>
+                  <td class="t-mono">89</td>
+                  <td class="t-mono">KH-089</td>
+                  <td>Võ Thị E</td>
+                  <td>0901xxxx</td>
+                  <td>voe@gmail.com</td>
+                  <td>VIP</td>
+                  <td><span class="badge badge--success">✓ Hợp lệ</span></td>
+                  <td class="t-caption t-subtle">Sẽ tạo mới</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="padding: 10px; text-align: center;">
+              <button class="pill">Xem tất cả 24 lỗi →</button>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(15, 25, 114, 0.06);">
+            <button class="btn btn--secondary">‹ Quay lại bước 2</button>
+            <button class="btn btn--ghost">⬇ Tải báo cáo lỗi (.xlsx)</button>
+            <div style="margin-left: auto; display: flex; gap: 8px;">
+              <button class="btn btn--ghost">Hủy</button>
+              <button class="btn btn--primary">Tiếp tục → 4. Xác nhận import (1,224)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="07-catalog.html"><span class="related-strip__item-num">07</span>Service / Product / Package catalog</a><a class="related-strip__item" href="08-employee.html"><span class="related-strip__item-num">08</span>Employee directory</a><a class="related-strip__item" href="12-audit.html"><span class="related-strip__item-num">12</span>Audit log viewer</a>
+  </div>
+</div>
+
+
+</body>
+</html>

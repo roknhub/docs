@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>13 · Lead inbox + Lead detail — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">13 / 49</span>Lead inbox + Lead detail</div>
+    <div class="product-nav__pager">
+      <a href="12-audit.html">‹ 12 Audit log viewer...</a>
+      <a href="14-calendar.html">14 Calendar — Branch vi... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 01 · Lead inbox + Lead detail</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/crm/leads</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">CRM</div>
+          <a class="shell__nav-item is-active">Lead inbox</a>
+          <a class="shell__nav-item" href="06-customer-360.html">Khách hàng</a>
+          <a class="shell__nav-item">Tư vấn lịch sử</a>
+          <a class="shell__nav-item">Campaign</a>
+        </div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item" href="14-calendar.html">Lịch hẹn</a>
+          <a class="shell__nav-item" href="17-pos-order.html">Bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+          <a class="shell__nav-item" href="24-aftercare.html">Aftercare</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Thẩm mỹ ABC · Q1</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div style="margin-left: auto;"><div class="avatar avatar--vip">NL</div></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">CRM</a><span class="breadcrumb__sep">/</span><a href="#">Lead inbox</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Lead inbox <span style="font-size: 14px; color: var(--text-subtle); font-weight: 400;">· 47 lead mở · 18 hôm nay</span></h2>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">⬆ Import CSV</button>
+              <button class="btn btn--primary">+ Tạo lead mới</button>
+            </div>
+          </div>
+
+          <!-- 4 funnel stats -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Mới</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px;">18</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Hôm nay · ↗ +5</div>
+            </div>
+            <div class="pastel-card pastel-card--lavender" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Đang tư vấn</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px;">22</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">5 NV phụ trách</div>
+            </div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Đặt lịch hẹn</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">7</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Tuần này</div>
+            </div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Không phản hồi</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">12</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Cần follow-up</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 380px; gap: 12px;">
+
+            <!-- Lead list -->
+            <div class="card card--p-0">
+              <div class="card__header">
+                <strong>Lead list</strong>
+                <div class="row gap-sm">
+                  <div class="input-group" style="width: 240px;">
+                    <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input class="input" placeholder="Tìm lead..." style="width: 100%;">
+                  </div>
+                  <button class="pill">⛛ Nguồn: Tất cả</button>
+                  <button class="pill">⛛ Status: Mới + Tư vấn</button>
+                </div>
+              </div>
+              <table class="table table--compact">
+                <thead><tr><th>Khách</th><th>Nguồn</th><th>Nhu cầu</th><th>Tư vấn</th><th>Status</th><th>Cập nhật</th></tr></thead>
+                <tbody>
+                  <tr class="is-selected">
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">TT</div><div><strong>Trần Thanh Trang</strong><div class="t-caption t-subtle">0908 xxx 234</div></div></div></td>
+                    <td><span class="badge badge--info">Facebook</span></td>
+                    <td><span style="font-size: 13px;">Hifu V-line</span></td>
+                    <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">NL</div>Nguyễn Linh</div></td>
+                    <td><span class="badge badge--warning">Đang tư vấn</span></td>
+                    <td class="t-caption t-subtle">10 phút</td>
+                  </tr>
+                  <tr>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">PT</div><div><strong>Phan Thị Tuyết</strong><div class="t-caption t-subtle">0909 xxx 567</div></div></div></td>
+                    <td><span class="badge badge--brand">Zalo OA</span></td>
+                    <td><span style="font-size: 13px;">Tiêm filler cằm</span></td>
+                    <td>—</td>
+                    <td><span class="badge badge--info"><span class="live-dot-inline"></span>Mới</span></td>
+                    <td class="t-caption t-subtle">25 phút</td>
+                  </tr>
+                  <tr>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">LH</div><div><strong>Lê Hà Linh</strong><div class="t-caption t-subtle">0901 xxx 890</div></div></div></td>
+                    <td><span class="badge badge--gold">Giới thiệu VIP</span></td>
+                    <td><span style="font-size: 13px;">Combo Peel + Hifu</span></td>
+                    <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">NL</div>Nguyễn Linh</div></td>
+                    <td><span class="badge badge--success">Đặt lịch</span></td>
+                    <td class="t-caption t-subtle">1 giờ</td>
+                  </tr>
+                  <tr>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">VK</div><div><strong>Võ Khánh Linh</strong><div class="t-caption t-subtle">0908 xxx 321</div></div></div></td>
+                    <td><span class="badge badge--info">Google Ads</span></td>
+                    <td><span style="font-size: 13px;">Phun môi</span></td>
+                    <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">TM</div>Trần Mai</div></td>
+                    <td><span class="badge badge--warning">Đang tư vấn</span></td>
+                    <td class="t-caption t-subtle">2 giờ</td>
+                  </tr>
+                  <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.06), transparent 70%);">
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">DH</div><div><strong>Đỗ Hoa</strong><div class="t-caption t-subtle">0908 xxx 999</div></div></div></td>
+                    <td><span class="badge badge--info">Facebook</span></td>
+                    <td><span style="font-size: 13px;">Botox trán</span></td>
+                    <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">TM</div>Trần Mai</div></td>
+                    <td><span class="badge badge--danger">Không phản hồi 5 ngày</span></td>
+                    <td class="t-caption t-subtle">5 ngày</td>
+                  </tr>
+                  <tr>
+                    <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">NM</div><div><strong>Nguyễn Mai</strong><div class="t-caption t-subtle">0901 xxx 444</div></div></div></td>
+                    <td><span class="badge badge--neutral">Walk-in</span></td>
+                    <td><span style="font-size: 13px;">Tư vấn da</span></td>
+                    <td>—</td>
+                    <td><span class="badge badge--info">Mới</span></td>
+                    <td class="t-caption t-subtle">3 giờ</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Lead detail (drawer) -->
+            <div class="glass-strong" style="border-radius: 16px; padding: 0;">
+              <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.06); display: flex; align-items: center;">
+                <strong>Lead detail</strong>
+                <button class="pill" style="margin-left: auto;">✕</button>
+              </div>
+              <div style="padding: 18px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                  <div class="avatar avatar--lg">TT</div>
+                  <div>
+                    <strong style="font-size: 15px;">Trần Thanh Trang</strong>
+                    <div class="t-caption t-subtle">0908 xxx 234 · 32 tuổi</div>
+                    <div style="display: flex; gap: 4px; margin-top: 4px;"><span class="badge badge--info">Facebook</span><span class="badge badge--warning">Đang tư vấn</span></div>
+                  </div>
+                </div>
+
+                <div class="pastel-card pastel-card--lavender" style="padding: 12px; margin-bottom: 12px;">
+                  <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-bottom: 4px;">Nhu cầu</div>
+                  <div><strong>Hifu nâng cơ V-line</strong></div>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.65); margin-top: 6px;">"Em xem video trên FB, muốn thử Hifu nhưng sợ đau và lo lắng về tác dụng phụ."</div>
+                </div>
+
+                <div class="t-caption t-subtle" style="margin-bottom: 4px;">Lịch sử tương tác</div>
+                <div style="position: relative; padding-left: 22px; margin-bottom: 14px;">
+                  <div class="timeline-line" style="position: absolute; left: 6px; top: 6px; bottom: 6px;"></div>
+                  <div style="position: relative; padding-bottom: 12px;">
+                    <div style="position: absolute; left: -22px; width: 12px; height: 12px; background: var(--color-brand-primary-500); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-size: 13px;"><strong>Click FB Ads "Hifu giảm 30%"</strong><span class="t-subtle" style="margin-left: 8px;">10 phút trước</span></div>
+                  </div>
+                  <div style="position: relative; padding-bottom: 12px;">
+                    <div style="position: absolute; left: -22px; width: 12px; height: 12px; background: var(--color-teal-400); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-size: 13px;"><strong>Nhắn tin Messenger</strong><span class="t-subtle" style="margin-left: 8px;">8 phút</span></div>
+                  </div>
+                  <div style="position: relative;">
+                    <div style="position: absolute; left: -22px; width: 12px; height: 12px; background: var(--color-yellow-400); border-radius: 50%; border: 3px solid white;"></div>
+                    <div style="font-size: 13px;"><strong>Giao Nguyễn Linh</strong> (tư vấn)<span class="t-subtle" style="margin-left: 8px;">5 phút</span></div>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+                  <button class="btn btn--primary" style="flex: 1;">📞 Gọi ngay</button>
+                  <button class="btn btn--secondary" style="flex: 1;">+ Lịch hẹn</button>
+                </div>
+                <button class="pill" style="width: 100%; justify-content: center;">⌶ Chuyển tư vấn viên khác</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="15-booking.html"><span class="related-strip__item-num">15</span>Booking modal — Tạo lịch hẹn</a><a class="related-strip__item" href="24-aftercare.html"><span class="related-strip__item-num">24</span>Aftercare task inbox (CSKH)</a>
+  </div>
+</div>
+
+
+</body>
+</html>

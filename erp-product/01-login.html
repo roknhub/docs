@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>01 · Login + 2FA + Forgot password — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">01 / 49</span>Login + 2FA + Forgot password</div>
+    <div class="product-nav__pager">
+      <a aria-disabled="true">‹ Đầu</a>
+      <a href="02-dashboard.html">02 Dashboard + Entity /... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 01 · Login + 2FA + Forgot password</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/login</div></div>
+
+    <div style="position: absolute; top: 80px; left: 26%;"><div class="sphere sphere--lg" style="position: relative;"></div></div>
+    <div style="position: absolute; bottom: 60px; right: 18%;"><div class="sphere sphere--md" style="position: relative;"></div></div>
+    <div style="position: absolute; top: 240px; right: 12%;"><div class="sphere sphere--sm" style="position: relative;"></div></div>
+
+    <div style="display: grid; grid-template-columns: 1fr 460px; min-height: 640px; position: relative; z-index: 1;">
+      <div style="padding: 48px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; background: linear-gradient(135deg, var(--color-brand-primary-400), var(--color-brand-primary-500)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; box-shadow: 0 8px 24px rgba(15, 25, 114, 0.30);">D</div>
+          <div style="font-size: 18px; font-weight: 700;">DQM ERP</div>
+        </div>
+
+        <div>
+          <span class="pill pill--gold" style="margin-bottom: 24px;">✦ Phase 1 · Vertical Thẩm mỹ</span>
+          <h1 style="font-size: 44px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-top: 16px;">
+            Quản trị <span class="txt-accent-cyan">thẩm mỹ</span><br>
+            <span class="txt-accent-purple">nhẹ nhàng</span> như sương sớm.
+          </h1>
+          <p style="font-size: 15px; color: var(--text-subtle); line-height: 1.6; margin-top: 20px; max-width: 460px;">
+            Vận hành đa công ty · đa chi nhánh trên 1 nền tảng duy nhất. Bán hàng — Lịch hẹn — Liệu trình — Kế toán — Nhân sự.
+          </p>
+          <div style="display: flex; gap: 32px; margin-top: 32px;">
+            <div><div style="font-size: 28px; font-weight: 700;" class="txt-accent-brand">12</div><div style="font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">Chi nhánh</div></div>
+            <div><div style="font-size: 28px; font-weight: 700;" class="txt-accent-purple">3</div><div style="font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">Công ty</div></div>
+            <div><div style="font-size: 28px; font-weight: 700;" class="txt-accent-gold">120+</div><div style="font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">Người dùng</div></div>
+          </div>
+        </div>
+
+        <div style="font-size: 11px; color: var(--text-subtlest); letter-spacing: 0.06em;">© 2026 DQM Group · v2.0.0 · ISO 27001</div>
+      </div>
+
+      <div style="padding: 32px; display: flex; flex-direction: column; justify-content: center;">
+        <div class="glass-strong" style="border-radius: 20px; padding: 36px;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <div class="hero-soft__greet" style="margin-bottom: 0;"><div class="hero-soft__greet-avatar">✦</div><span>Chào buổi chiều</span></div>
+            <h3 style="font-size: 22px; font-weight: 700; margin-top: 16px; margin-bottom: 4px;">Đăng nhập</h3>
+            <p style="font-size: 13px; color: var(--text-subtle);">Truy cập hệ thống bằng tài khoản công ty</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="field">
+              <label class="field__label">Email công ty<span class="req">*</span></label>
+              <div class="input-group">
+                <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input class="input input--lg" type="email" value="ngocanh@thammyabc.vn">
+              </div>
+            </div>
+            <div class="field">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <label class="field__label">Mật khẩu<span class="req">*</span></label>
+                <a href="#" style="font-size:12px;">Quên mật khẩu?</a>
+              </div>
+              <div class="input-group">
+                <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input class="input input--lg" type="password" value="••••••••••">
+              </div>
+            </div>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-subtle); margin-top: 4px;"><input type="checkbox" checked> Ghi nhớ thiết bị này 7 ngày</label>
+            <button class="btn btn--primary btn--lg" style="width: 100%; margin-top: 4px;">Đăng nhập</button>
+            <div style="text-align: center; margin: 4px 0;"><span style="font-size: 11px; color: var(--text-subtlest); text-transform: uppercase; letter-spacing: 0.1em;">— hoặc —</span></div>
+            <button class="btn btn--secondary btn--lg" style="width: 100%;">
+              <svg class="i-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z"/></svg>
+              Đăng nhập bằng SSO
+            </button>
+          </div>
+          <p style="margin-top: 24px; font-size: 11px; color: var(--text-subtlest); text-align: center;">Cần hỗ trợ? <a href="#">it@dqm.vn</a> · 1900-0000</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="02-dashboard.html"><span class="related-strip__item-num">02</span>Dashboard + Entity / Branch switcher</a>
+  </div>
+</div>
+
+
+</body>
+</html>

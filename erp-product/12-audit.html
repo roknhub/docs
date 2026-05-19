@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>12 · Audit log viewer — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">12 / 49</span>Audit log viewer</div>
+    <div class="product-nav__pager">
+      <a href="11-import.html">‹ 11 Import / Export wiza...</a>
+      <a href="13-lead.html">13 Lead inbox + Lead de... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 12 · Audit log viewer</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/admin/audit?range=7d&amp;module=pos</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Quản trị</div>
+          <a class="shell__nav-item" href="03-org-tree.html">Cơ cấu tổ chức</a>
+          <a class="shell__nav-item" href="04-user-list.html">Người dùng</a>
+          <a class="shell__nav-item" href="05-permission.html">Vai trò &amp; Quyền</a>
+          <a class="shell__nav-item is-active">Audit log</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Audit toàn tập đoàn</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Quản trị</a><span class="breadcrumb__sep">/</span><a href="#">Audit log</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Nhật ký audit <span style="font-size: 14px; color: var(--text-subtle); font-weight: 400;">· 7 ngày qua</span></h2>
+              <p class="t-caption t-subtle" style="margin-top: 4px;">Theo dõi mọi thao tác nhạy cảm · Lưu trữ 7 năm</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">📨 Subscribe cảnh báo</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 12px; margin-bottom: 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <div class="input-group" style="flex: 1; min-width: 240px; max-width: 300px;">
+              <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="input" placeholder="Tìm theo user, object..." style="width: 100%;">
+            </div>
+            <button class="pill">📅 7 ngày qua</button>
+            <button class="pill">👤 User: Tất cả</button>
+            <button class="pill">📦 Module: POS</button>
+            <button class="pill" style="background: rgba(222, 53, 11, 0.12); color: var(--text-danger); border-color: rgba(222, 53, 11, 0.30);">⚠ Severity: High</button>
+            <span class="t-caption t-subtle" style="margin-left: auto;">12 / 1,842 events</span>
+          </div>
+
+          <div class="card card--p-0">
+            <div style="padding: 12px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.06); background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">
+              <strong style="font-size: 13px;">HÔM NAY · 18 / 05 / 2026</strong>
+            </div>
+
+            <!-- High -->
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05); background: linear-gradient(90deg, rgba(222, 53, 11, 0.08), transparent 70%);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--danger" style="flex-shrink: 0;">HIGH</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>Trần Thị Lan</strong>
+                    <span class="t-subtle t-caption">(Group Admin)</span>
+                    <span class="t-caption">đã</span>
+                    <strong style="color: var(--text-danger);">REFUND order</strong>
+                    <span class="t-caption">POS-Q1-2026-04812</span>
+                    <span class="t-caption t-subtle">· 1.2M VND</span>
+                  </div>
+                  <div class="t-caption t-subtle">Lý do: "Khách yêu cầu hoàn vì dị ứng sản phẩm" · IP: 14.224.xx.xx · MacBook Pro</div>
+                  <div style="margin-top: 6px; display: flex; gap: 8px;">
+                    <code style="background: rgba(255, 255, 255, 0.7); padding: 2px 8px; border-radius: 4px; font-size: 11px;">Customer: KH-2024-0842</code>
+                    <code style="background: rgba(255, 255, 255, 0.7); padding: 2px 8px; border-radius: 4px; font-size: 11px;">Branch: Q1</code>
+                    <a href="#" style="font-size: 12px;">Xem chi tiết diff →</a>
+                  </div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>14:42:18</div><div>2 giờ trước</div></div>
+              </div>
+            </div>
+
+            <!-- Medium -->
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--warning" style="flex-shrink: 0;">MEDIUM</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>Nguyễn Ngọc Anh</strong>
+                    <span class="t-subtle t-caption">(Branch Manager)</span>
+                    <span class="t-caption">đã</span>
+                    <strong>UPDATE permission</strong>
+                    <span class="t-caption">role "Receptionist Q1"</span>
+                  </div>
+                  <div class="t-caption t-subtle">Thay đổi: thêm action "view_customer_pii" · ảnh hưởng 4 user</div>
+                  <div style="margin-top: 6px;"><a href="#" style="font-size: 12px;">Xem diff before/after →</a></div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>11:18:42</div><div>5 giờ trước</div></div>
+              </div>
+            </div>
+
+            <!-- Low -->
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--neutral" style="flex-shrink: 0;">LOW</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>Phạm Hoàng Minh</strong>
+                    <span class="t-subtle t-caption">(Cashier)</span>
+                    <span class="t-caption">đã</span>
+                    <strong>OPEN cash session</strong>
+                    <span class="t-caption">CS-Q7-20260518-08</span>
+                  </div>
+                  <div class="t-caption t-subtle">Số tiền mở ca: 5,000,000 VND · Theo lịch ca sáng</div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>08:02:11</div><div>8 giờ trước</div></div>
+              </div>
+            </div>
+
+            <div style="padding: 12px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05); background: linear-gradient(90deg, rgba(15, 25, 114, 0.04), transparent);">
+              <strong style="font-size: 13px;">HÔM QUA · 17 / 05 / 2026</strong>
+            </div>
+
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05); background: linear-gradient(90deg, rgba(222, 53, 11, 0.08), transparent 70%);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--danger" style="flex-shrink: 0;">HIGH</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>Vũ Thị Kim</strong>
+                    <span class="t-subtle t-caption">(Accountant)</span>
+                    <span class="t-caption">đã</span>
+                    <strong style="color: var(--text-danger);">REVERSE journal entry</strong>
+                    <span class="t-caption">JE-202605-00428</span>
+                  </div>
+                  <div class="t-caption t-subtle">Lý do: "Sai cost center" · Số tiền: 42,500,000 VND</div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>16:32:08</div></div>
+              </div>
+            </div>
+
+            <div style="padding: 14px 16px; border-bottom: 1px solid rgba(15, 25, 114, 0.05);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--warning" style="flex-shrink: 0;">MEDIUM</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>System</strong>
+                    <span class="t-caption">đã</span>
+                    <strong>LOCK user account</strong>
+                    <span class="t-caption">anhdo@thammyabc.vn</span>
+                  </div>
+                  <div class="t-caption t-subtle">Lý do tự động: 5 lần đăng nhập sai trong 15 phút · IP 27.71.xx.xx</div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>14:28:55</div></div>
+              </div>
+            </div>
+
+            <div style="padding: 14px 16px; background: linear-gradient(90deg, rgba(222, 53, 11, 0.08), transparent 70%);">
+              <div style="display: flex; gap: 12px; align-items: start;">
+                <span class="badge badge--danger" style="flex-shrink: 0;">HIGH</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px;">
+                    <strong>Trần Thị Lan</strong>
+                    <span class="t-subtle t-caption">(Group Admin)</span>
+                    <span class="t-caption">đã</span>
+                    <strong style="color: var(--text-danger);">EXPORT customer data</strong>
+                    <span class="t-caption">— 1,248 records</span>
+                  </div>
+                  <div class="t-caption t-subtle">Bao gồm SĐT, email · Lý do: "Báo cáo VIP cho hội đồng" · File: customer_export_20260517.xlsx</div>
+                </div>
+                <div class="t-caption t-subtle" style="text-align: right; white-space: nowrap;"><div>10:14:22</div></div>
+              </div>
+            </div>
+
+            <div style="padding: 14px 16px; text-align: center;">
+              <button class="pill">Load thêm 30 events →</button>
+            </div>
+          </div>
+
+          <div class="banner banner--info" style="margin-top: 14px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div>Click vào dòng audit để mở drawer xem <strong>diff before/after</strong> chi tiết theo từng trường dữ liệu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="05-permission.html"><span class="related-strip__item-num">05</span>Role & Permission matrix</a><a class="related-strip__item" href="04-user-list.html"><span class="related-strip__item-num">04</span>User list + Detail drawer</a><a class="related-strip__item" href="21-refund.html"><span class="related-strip__item-num">21</span>Refund / Cancel / Void</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a>
+  </div>
+</div>
+
+
+</body>
+</html>

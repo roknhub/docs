@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>38 · Posting console · Inbox pending — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">38 / 49</span>Posting console · Inbox pending</div>
+    <div class="product-nav__pager">
+      <a href="37-hr-dashboard.html">‹ 37 HR Dashboard · Tổng ...</a>
+      <a href="39-posting-rule.html">39 Posting rule editor... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 01 · Posting console · Inbox bút toán pending</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/posting/inbox</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item is-active">Posting inbox</a><a class="shell__nav-item" href="39-posting-rule.html">Posting rule</a><a class="shell__nav-item" href="40-journal.html">Journal entry</a><a class="shell__nav-item" href="41-cash-bank.html">Cash/Bank</a><a class="shell__nav-item" href="42-ar-aging.html">AR/AP</a><a class="shell__nav-item" href="47-financials.html">Báo cáo</a><a class="shell__nav-item" href="49-consolidation.html">Hợp nhất</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>Thẩm mỹ ABC</span></div><div style="margin-left: auto;"><span class="pill pill--gold"><span class="live-dot-inline"></span>42 posting pending</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Posting console</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Bút toán pending từ POS / HRM / Kho · Auto-rule + manual review</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⛛ Filter</button><button class="btn btn--primary">→ Auto-post tất cả khớp rule</button></div>
+          </div>
+
+          <!-- 4 stat by source -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--lavender" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">POS · doanh thu</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">28</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">42.5M · Khớp rule</div></div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">HRM · payroll</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">8</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Lương kỳ trước</div></div>
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Inventory · COGS</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">4</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Tự động từ session</div></div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Cần review thủ công</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">2</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Refund &amp; reverse</div></div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header"><strong>Posting inbox · 42 items</strong><div class="row gap-sm"><button class="pill" style="background: rgba(15,25,114,0.10);">Tất cả</button><button class="pill">POS only</button><button class="pill">HRM only</button><button class="pill">Cần review</button></div></div>
+
+            <!-- POS Auto group -->
+            <div style="padding: 10px 16px; background: linear-gradient(90deg, rgba(101, 84, 192, 0.06), transparent 70%); border-bottom: 1px solid rgba(15, 25, 114, 0.06);">
+              <strong style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-purple-500);">⊹ POS — DOANH THU (28 · auto rule khớp)</strong>
+            </div>
+
+            <table class="table table--compact">
+              <thead><tr><th>Source</th><th>Mô tả</th><th>Posting rule</th><th>Bút toán</th><th style="text-align: right;">Số tiền</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="t-mono">POS-Q1-04827</td><td>Bán gói Hifu — Lê Hồng Nhung</td><td><span class="badge badge--success">pos.package.paid</span></td><td class="t-mono">131 / 3387 (deferred)</td><td style="text-align: right; font-family: var(--font-mono);">22,372,875</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+                <tr><td class="t-mono">POS-Q1-04825</td><td>Bán Serum HA — Nguyễn Mai</td><td><span class="badge badge--success">pos.product.paid</span></td><td class="t-mono">112 / 511 + 632 / 156</td><td style="text-align: right; font-family: var(--font-mono);">1,200,000</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+                <tr><td class="t-mono">POS-Q1-04823</td><td>Session Hifu #8 — recognize revenue</td><td><span class="badge badge--success">treatment.session.done</span></td><td class="t-mono">3387 / 5113</td><td style="text-align: right; font-family: var(--font-mono);">7,225,000</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+                <tr><td class="t-mono">POS-Q1-04826</td><td>Bán Peel lẻ — Phạm Yến</td><td><span class="badge badge--success">pos.service.paid</span></td><td class="t-mono">111 / 5113 + 33311 (VAT)</td><td style="text-align: right; font-family: var(--font-mono);">1,260,000</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+
+                <!-- Need review -->
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);"><td class="t-mono">POS-Q1-04812</td><td><strong>REFUND</strong> — Phạm Mai (dị ứng)</td><td><span class="badge badge--warning">pos.refund · cần duyệt</span></td><td class="t-mono">5212 / 131 (đảo doanh thu)</td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−1,200,000</td><td><span class="badge badge--warning">⌖ Đang review</span></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);"><td class="t-mono">JE-2026-00428</td><td><strong>REVERSE</strong> — Sai cost center kỳ trước</td><td><span class="badge badge--warning">manual.reverse</span></td><td class="t-mono">5113 / 642 (đảo)</td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−42,500,000</td><td><span class="badge badge--warning">⌖ Đang review</span></td></tr>
+
+                <!-- HRM group -->
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(0, 135, 90, 0.06), transparent 70%); padding: 8px 12px; font-size: 11px; font-weight: 700; color: var(--color-green-500); text-transform: uppercase; letter-spacing: 0.05em;">⊹ HRM — PAYROLL (8 · chờ chốt kỳ)</td></tr>
+                <tr><td class="t-mono">PR-2026-04</td><td>Lương kỳ 04 — Phải trả NV</td><td><span class="badge badge--success">payroll.posting</span></td><td class="t-mono">622 / 334</td><td style="text-align: right; font-family: var(--font-mono);">1,182,400,000</td><td><span class="badge badge--info">⌚ Chờ duyệt kỳ</span></td></tr>
+                <tr><td class="t-mono">PR-2026-04</td><td>BHXH + TNCN trừ</td><td><span class="badge badge--success">payroll.tax</span></td><td class="t-mono">334 / 3383, 3384, 3385, 3335</td><td style="text-align: right; font-family: var(--font-mono);">142,800,000</td><td><span class="badge badge--info">⌚ Chờ duyệt kỳ</span></td></tr>
+                <tr><td class="t-mono">PR-2026-04</td><td>Hoa hồng BS/KTV/TV — kỳ trước</td><td><span class="badge badge--success">commission.accrual</span></td><td class="t-mono">641 / 334</td><td style="text-align: right; font-family: var(--font-mono);">186,400,000</td><td><span class="badge badge--info">⌚ Chờ duyệt kỳ</span></td></tr>
+
+                <!-- Inventory -->
+                <tr><td colspan="6" style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.06), transparent 70%); padding: 8px 12px; font-size: 11px; font-weight: 700; color: var(--color-teal-500); text-transform: uppercase; letter-spacing: 0.05em;">⊹ INVENTORY — COGS (4 · auto từ session)</td></tr>
+                <tr><td class="t-mono">TX-2026-05-180</td><td>Session #8 vật tư tiêu hao — Hifu</td><td><span class="badge badge--success">inventory.consume</span></td><td class="t-mono">632 / 156</td><td style="text-align: right; font-family: var(--font-mono);">680,000</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+                <tr><td class="t-mono">TX-2026-05-181</td><td>Bán SP Serum HA — xuất kho</td><td><span class="badge badge--success">inventory.sale</span></td><td class="t-mono">632 / 156</td><td style="text-align: right; font-family: var(--font-mono);">320,000</td><td><span class="badge badge--success">✓ Auto-post</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="banner banner--info" style="margin-top: 12px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+            <div><strong>Auto-post engine</strong> đang xử lý 38/42 items khớp rule. 2 refund + 2 reverse cần review thủ công. <strong>Trace 100%</strong> về source document — click row để xem full lineage.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="39-posting-rule.html"><span class="related-strip__item-num">39</span>Posting rule editor</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="30-payroll-run.html"><span class="related-strip__item-num">30</span>Payroll run · Bảng lương chờ duyệt</a><a class="related-strip__item" href="23-session.html"><span class="related-strip__item-num">23</span>Session detail — BS đang thực hiện</a>
+  </div>
+</div>
+
+
+</body>
+</html>

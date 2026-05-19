@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>10 · CoA · Tax · Bank · Cost center — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">10 / 49</span>CoA · Tax · Bank · Cost center</div>
+    <div class="product-nav__pager">
+      <a href="09-warehouse.html">‹ 09 Warehouse / Location...</a>
+      <a href="11-import.html">11 Import / Export wiza... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 10 · CoA · Tax · Bank · Cost center</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/master/accounting?tab=coa</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Master data</div>
+          <a class="shell__nav-item" href="06-customer-360.html">Khách hàng</a>
+          <a class="shell__nav-item" href="07-catalog.html">Sản phẩm / Dịch vụ</a>
+          <a class="shell__nav-item" href="08-employee.html">Nhân viên</a>
+          <a class="shell__nav-item" href="09-warehouse.html">Kho</a>
+          <a class="shell__nav-item is-active">CoA · Tax · Bank</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · CoA TT200</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Master</a><span class="breadcrumb__sep">/</span><a href="#">Kế toán</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Master kế toán</h2>
+            </div>
+          </div>
+
+          <div class="tabs" style="margin-bottom: 14px;">
+            <button class="tab is-active">CoA <span class="tab__count">128</span></button>
+            <button class="tab">Thuế &amp; VAT</button>
+            <button class="tab">Bank account</button>
+            <button class="tab">Cost center</button>
+            <button class="tab">Phương thức thanh toán</button>
+            <button class="tab">Chuẩn kế toán</button>
+          </div>
+
+          <div class="pastel-card pastel-card--cream" style="padding: 12px; margin-bottom: 14px; display: flex; gap: 12px; align-items: center;">
+            <strong style="font-size: 13px;">Chuẩn áp dụng:</strong>
+            <span class="badge badge--brand">📕 TT200 — Kế toán doanh nghiệp</span>
+            <span class="t-caption" style="color: rgba(0,0,0,0.55);">· Áp dụng cho 3 công ty con</span>
+            <div style="margin-left: auto;" class="row gap-sm">
+              <button class="pill">↪ Map sang IFRS</button>
+              <button class="pill">📋 Copy chuẩn</button>
+              <button class="pill pill--gold" style="padding: 6px 14px;">+ Thêm tài khoản</button>
+            </div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header">
+              <strong>Hệ thống tài khoản — TT200</strong>
+              <div class="row gap-sm">
+                <div class="input-group" style="width: 260px;">
+                  <svg class="i input-group__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input class="input" placeholder="Tìm tài khoản... vd 511" style="width: 100%;">
+                </div>
+                <button class="pill">⊞ Mở rộng tất cả</button>
+              </div>
+            </div>
+            <table class="table table--compact">
+              <thead><tr><th style="width: 100px;">Số TK</th><th>Tên tài khoản</th><th>Loại</th><th>TK cha</th><th>Posting rule</th><th style="text-align: right;">Số dư (VND)</th><th style="width: 80px;">Status</th></tr></thead>
+              <tbody>
+                <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 1 — TÀI SẢN NGẮN HẠN</td></tr>
+                <tr><td class="t-mono"><strong>111</strong></td><td>Tiền mặt</td><td><span class="badge badge--info">Tài sản</span></td><td>—</td><td><span class="badge badge--success">POS cash</span></td><td style="text-align: right;">82,450,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono" style="padding-left: 32px;">1111</td><td>Tiền VND</td><td><span class="badge badge--info">Tài sản</span></td><td>111</td><td>—</td><td style="text-align: right;">82,450,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono"><strong>112</strong></td><td>Tiền gửi ngân hàng</td><td><span class="badge badge--info">Tài sản</span></td><td>—</td><td><span class="badge badge--success">Bank · POS</span></td><td style="text-align: right;">1,248,500,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono" style="padding-left: 32px;">11211</td><td>VCB - 0721000xxxxxx</td><td><span class="badge badge--info">Tài sản</span></td><td>112</td><td>—</td><td style="text-align: right;">842,300,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono"><strong>131</strong></td><td>Phải thu khách hàng</td><td><span class="badge badge--info">Tài sản</span></td><td>—</td><td><span class="badge badge--success">POS AR</span></td><td style="text-align: right;">348,200,000</td><td><span class="badge badge--success">Active</span></td></tr>
+
+                <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 3 — NỢ PHẢI TRẢ</td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.10), transparent 70%);"><td class="t-mono"><strong>3387</strong></td><td>Doanh thu chưa thực hiện <span class="badge badge--warning">DEFERRED</span></td><td><span class="badge badge--warning">Nợ</span></td><td>—</td><td><span class="badge badge--success">POS package</span></td><td style="text-align: right;">428,500,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono"><strong>334</strong></td><td>Phải trả người lao động</td><td><span class="badge badge--warning">Nợ</span></td><td>—</td><td><span class="badge badge--success">Payroll</span></td><td style="text-align: right;">95,000,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono"><strong>33311</strong></td><td>Thuế GTGT đầu ra</td><td><span class="badge badge--warning">Nợ</span></td><td>—</td><td><span class="badge badge--success">VAT</span></td><td style="text-align: right;">68,420,000</td><td><span class="badge badge--success">Active</span></td></tr>
+
+                <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 5 — DOANH THU</td></tr>
+                <tr><td class="t-mono"><strong>511</strong></td><td>Doanh thu bán hàng &amp; dịch vụ</td><td><span class="badge badge--success">Doanh thu</span></td><td>—</td><td><span class="badge badge--success">POS · Session</span></td><td style="text-align: right;">1,842,500,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono" style="padding-left: 32px;">5113</td><td>Doanh thu dịch vụ</td><td><span class="badge badge--success">Doanh thu</span></td><td>511</td><td>—</td><td style="text-align: right;">1,425,800,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono" style="padding-left: 32px;">5111</td><td>Doanh thu bán sản phẩm</td><td><span class="badge badge--success">Doanh thu</span></td><td>511</td><td>—</td><td style="text-align: right;">416,700,000</td><td><span class="badge badge--success">Active</span></td></tr>
+
+                <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ LOẠI 6 — CHI PHÍ</td></tr>
+                <tr><td class="t-mono"><strong>632</strong></td><td>Giá vốn hàng bán</td><td><span class="badge badge--danger">Chi phí</span></td><td>—</td><td><span class="badge badge--success">COGS auto</span></td><td style="text-align: right;">428,300,000</td><td><span class="badge badge--success">Active</span></td></tr>
+                <tr><td class="t-mono"><strong>641</strong></td><td>Chi phí bán hàng</td><td><span class="badge badge--danger">Chi phí</span></td><td>—</td><td><span class="badge badge--success">Commission</span></td><td style="text-align: right;">124,800,000</td><td><span class="badge badge--success">Active</span></td></tr>
+              </tbody>
+            </table>
+            <div style="padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div class="t-caption t-subtle">Hiển thị 12/128 tài khoản · <strong>3 cấp đang mở</strong></div>
+              <span class="badge badge--brand">7 tài khoản có posting rule auto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="39-posting-rule.html"><span class="related-strip__item-num">39</span>Posting rule editor</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="46-trial-balance.html"><span class="related-strip__item-num">46</span>Trial balance + Sổ cái</a><a class="related-strip__item" href="47-financials.html"><span class="related-strip__item-num">47</span>P&L · Balance Sheet · Cash Flow</a>
+  </div>
+</div>
+
+
+</body>
+</html>

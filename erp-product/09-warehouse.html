@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>09 · Warehouse / Location — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">09 / 49</span>Warehouse / Location</div>
+    <div class="product-nav__pager">
+      <a href="08-employee.html">‹ 08 Employee directory...</a>
+      <a href="10-coa.html">10 CoA · Tax · Bank · C... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 09 · Warehouse / Location</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/master/warehouses</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Master data</div>
+          <a class="shell__nav-item" href="06-customer-360.html">Khách hàng</a>
+          <a class="shell__nav-item" href="07-catalog.html">Sản phẩm / Dịch vụ</a>
+          <a class="shell__nav-item" href="08-employee.html">Nhân viên</a>
+          <a class="shell__nav-item is-active">Kho</a>
+          <a class="shell__nav-item" href="10-coa.html">CoA · Tax · Bank</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Tất cả kho</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div>
+              <div class="breadcrumb"><a href="#">Master</a><span class="breadcrumb__sep">/</span><a href="#">Kho</a></div>
+              <h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Kho hàng <span style="font-size: 14px; color: var(--text-subtle); font-weight: 400;">· 12 kho</span></h2>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn--secondary">⬇ Export</button>
+              <button class="btn btn--secondary">↹ Chuyển kho</button>
+              <button class="btn btn--primary">+ Tạo kho mới</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng giá trị tồn</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px;">2.84 tỷ</div>
+              <div class="t-caption" style="color: var(--color-green-500); margin-top: 4px;">↗ +4% tháng này</div>
+            </div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">SKU đang tồn</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px;">186</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">142 sản phẩm</div>
+            </div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Sắp hết hạn 60 ngày</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">23</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">12 dược mỹ phẩm</div>
+            </div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;">
+              <div class="t-caption" style="color: rgba(0,0,0,0.55);">Dưới mức tối thiểu</div>
+              <div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">8</div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Cần đặt thêm</div>
+            </div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header">
+              <strong>Danh sách kho</strong>
+              <div class="row gap-sm">
+                <button class="pill">⛛ Loại: Tất cả</button>
+                <button class="pill">⛛ Chi nhánh: Tất cả</button>
+                <button class="pill">⛛ Status: Active</button>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr><th>Mã kho</th><th>Tên kho</th><th>Loại</th><th>Chi nhánh</th><th>Thủ kho</th><th style="text-align: right;">SKU</th><th style="text-align: right;">Giá trị</th><th>Cảnh báo</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="t-mono">WH-Q1-01</td>
+                  <td><strong>Kho dược mỹ phẩm Q1</strong><div class="t-caption t-subtle">12 Nguyễn Huệ, Q1</div></td>
+                  <td><span class="badge badge--info">Dược mỹ phẩm</span></td>
+                  <td>Q1</td>
+                  <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">PH</div>Phạm Hoà</div></td>
+                  <td style="text-align: right;"><strong>48</strong></td>
+                  <td style="text-align: right;"><strong>485.2M</strong></td>
+                  <td><span class="badge badge--warning">5 sắp hết hạn</span></td>
+                  <td><span class="badge badge--success">Active</span></td>
+                </tr>
+                <tr>
+                  <td class="t-mono">WH-Q1-02</td>
+                  <td><strong>Kho vật tư tiêu hao Q1</strong><div class="t-caption t-subtle">12 Nguyễn Huệ, Q1</div></td>
+                  <td><span class="badge badge--neutral">Vật tư tiêu hao</span></td>
+                  <td>Q1</td>
+                  <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">PH</div>Phạm Hoà</div></td>
+                  <td style="text-align: right;"><strong>32</strong></td>
+                  <td style="text-align: right;"><strong>62.4M</strong></td>
+                  <td><span class="badge badge--danger">2 dưới min</span></td>
+                  <td><span class="badge badge--success">Active</span></td>
+                </tr>
+                <tr>
+                  <td class="t-mono">WH-Q3-01</td>
+                  <td><strong>Kho dược mỹ phẩm Q3</strong><div class="t-caption t-subtle">88 Võ Văn Tần, Q3</div></td>
+                  <td><span class="badge badge--info">Dược mỹ phẩm</span></td>
+                  <td>Q3</td>
+                  <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">VT</div>Vũ Thanh</div></td>
+                  <td style="text-align: right;"><strong>42</strong></td>
+                  <td style="text-align: right;"><strong>312.8M</strong></td>
+                  <td>—</td>
+                  <td><span class="badge badge--success">Active</span></td>
+                </tr>
+                <tr>
+                  <td class="t-mono">WH-Q3-02</td>
+                  <td><strong>Kho vật tư Q3</strong><div class="t-caption t-subtle">88 Võ Văn Tần, Q3</div></td>
+                  <td><span class="badge badge--neutral">Vật tư tiêu hao</span></td>
+                  <td>Q3</td>
+                  <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">VT</div>Vũ Thanh</div></td>
+                  <td style="text-align: right;"><strong>28</strong></td>
+                  <td style="text-align: right;"><strong>48.6M</strong></td>
+                  <td><span class="badge badge--warning">1 sắp hết hạn</span></td>
+                  <td><span class="badge badge--success">Active</span></td>
+                </tr>
+                <tr>
+                  <td class="t-mono">WH-CENTRAL-01</td>
+                  <td><strong>Kho trung tâm tập đoàn</strong><div class="t-caption t-subtle">Khu CN Tân Phú</div></td>
+                  <td><span class="badge badge--brand">Kho trung tâm</span></td>
+                  <td>HQ</td>
+                  <td><div style="display: flex; align-items: center; gap: 6px;"><div class="avatar avatar--sm">LM</div>Lê Mai</div></td>
+                  <td style="text-align: right;"><strong>186</strong></td>
+                  <td style="text-align: right;"><strong>1.92 tỷ</strong></td>
+                  <td><span class="badge badge--warning">17 cần xử lý</span></td>
+                  <td><span class="badge badge--success">Active</span></td>
+                </tr>
+                <tr style="opacity: 0.55;">
+                  <td class="t-mono">WH-TB-01</td>
+                  <td><strong>Kho Tân Bình</strong><div class="t-caption t-subtle">Tân Bình (tạm ngừng)</div></td>
+                  <td><span class="badge badge--info">Dược mỹ phẩm</span></td>
+                  <td>Tân Bình</td>
+                  <td>—</td>
+                  <td style="text-align: right;">0</td>
+                  <td style="text-align: right;">0</td>
+                  <td>—</td>
+                  <td><span class="badge badge--neutral">Tạm ngừng</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="07-catalog.html"><span class="related-strip__item-num">07</span>Service / Product / Package catalog</a><a class="related-strip__item" href="23-session.html"><span class="related-strip__item-num">23</span>Session detail — BS đang thực hiện</a><a class="related-strip__item" href="11-import.html"><span class="related-strip__item-num">11</span>Import / Export wizard</a><a class="related-strip__item" href="38-posting-console.html"><span class="related-strip__item-num">38</span>Posting console · Inbox pending</a>
+  </div>
+</div>
+
+
+</body>
+</html>

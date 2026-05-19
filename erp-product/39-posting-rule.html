@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>39 · Posting rule editor — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">39 / 49</span>Posting rule editor</div>
+    <div class="product-nav__pager">
+      <a href="38-posting-console.html">‹ 38 Posting console · In...</a>
+      <a href="40-journal.html">40 Journal entry — Sổ n... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 02 · Posting rule editor — Mapping source → CoA</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/posting-rules</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item" href="38-posting-console.html">Posting inbox</a><a class="shell__nav-item is-active">Posting rule</a><a class="shell__nav-item" href="40-journal.html">Journal entry</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Rule áp dụng 3 công ty</span></div><div style="margin-left: auto;"><span class="badge badge--brand">📕 TT200</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Posting Rule Engine</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Mapping nghiệp vụ → tài khoản kế toán · Không hardcode trong code module · Mỗi rule audit + version</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Export rules</button><button class="btn btn--primary">+ Tạo rule mới</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 280px 1fr; gap: 14px;">
+
+            <!-- Rule list left -->
+            <div class="card card--p-0">
+              <div class="card__header"><strong style="font-size: 13px;">Rules · 32</strong><button class="pill">⛛</button></div>
+              <div style="padding: 6px;">
+                <div class="t-caption t-subtle" style="padding: 6px 8px;">POS (12)</div>
+                <div style="padding: 8px; border-radius: 6px; background: linear-gradient(90deg, var(--bg-brand-subtle), transparent 80%); margin-bottom: 4px;">
+                  <strong style="font-size: 12px;">pos.package.paid</strong>
+                  <div class="t-caption t-subtle">Bán gói liệu trình</div>
+                </div>
+                <div style="padding: 8px; font-size: 12px;">pos.service.paid</div>
+                <div style="padding: 8px; font-size: 12px;">pos.product.paid</div>
+                <div style="padding: 8px; font-size: 12px;">pos.deposit.paid</div>
+                <div style="padding: 8px; font-size: 12px;">pos.refund</div>
+                <div style="padding: 8px; font-size: 12px;">pos.voucher.use</div>
+                <div style="padding: 8px; font-size: 12px;">pos.wallet.use</div>
+                <div style="padding: 8px; font-size: 12px;">pos.loyalty.accrual</div>
+                <div style="padding: 8px; font-size: 12px;">treatment.session.done</div>
+                <div style="padding: 8px; font-size: 12px;">commission.accrual</div>
+
+                <div class="t-caption t-subtle" style="padding: 8px 8px 4px;">HRM (8)</div>
+                <div style="padding: 8px; font-size: 12px;">payroll.posting</div>
+                <div style="padding: 8px; font-size: 12px;">payroll.tax</div>
+                <div style="padding: 8px; font-size: 12px;">payroll.bhxh</div>
+
+                <div class="t-caption t-subtle" style="padding: 8px 8px 4px;">Inventory (6)</div>
+                <div style="padding: 8px; font-size: 12px;">inventory.consume</div>
+                <div style="padding: 8px; font-size: 12px;">inventory.sale</div>
+                <div style="padding: 8px; font-size: 12px;">inventory.adjustment</div>
+
+                <div class="t-caption t-subtle" style="padding: 8px 8px 4px;">Bank (6)</div>
+                <div style="padding: 8px; font-size: 12px;">bank.collection</div>
+                <div style="padding: 8px; font-size: 12px;">bank.payment</div>
+              </div>
+            </div>
+
+            <!-- Rule detail -->
+            <div class="card card--p-0">
+              <div class="card__header" style="flex-direction: column; align-items: stretch;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 8px;"><strong style="font-size: 16px; font-family: var(--font-mono);">pos.package.paid</strong><span class="badge badge--brand">v3 · Active</span></div>
+                    <div class="t-caption t-subtle" style="margin-top: 2px;">Khi khách thanh toán gói liệu trình → ghi deferred revenue, recognize theo session</div>
+                  </div>
+                  <div class="row gap-sm">
+                    <button class="pill">📜 Version history (3)</button>
+                    <button class="pill">🧪 Test rule</button>
+                    <button class="pill pill--gold" style="padding: 6px 14px;">✦ Lưu thay đổi</button>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px; font-size: 12px;">
+                  <span class="t-subtle">Áp dụng:</span>
+                  <span class="badge badge--success">TMABC</span>
+                  <span class="badge badge--success">Bệnh viện XYZ</span>
+                  <span class="badge badge--success">Phòng khám DEF</span>
+                  <span class="t-subtle" style="margin-left: 8px;">·</span>
+                  <span class="t-subtle">Source nghiệp vụ POS · Áp dụng từ 01/01/2026</span>
+                </div>
+              </div>
+
+              <div style="padding: 16px;">
+                <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 8px;">Trigger condition</div>
+                <div class="pastel-card pastel-card--lavender" style="padding: 12px; font-family: var(--font-mono); font-size: 12px; margin-bottom: 16px;">
+                  <strong>WHEN</strong> POSOrder.status = "paid" <strong>AND</strong> POSOrder.line.type = "package"
+                </div>
+
+                <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 8px;">Bút toán</div>
+                <table class="table table--compact" style="margin-bottom: 16px;">
+                  <thead><tr><th>Dr · Cr</th><th>Account</th><th>Mô tả</th><th>Công thức</th><th>Dimension</th></tr></thead>
+                  <tbody>
+                    <tr><td><span class="badge badge--success">DR</span></td><td class="t-mono">112 / 131</td><td>Tiền nhận / Phải thu KH</td><td class="t-mono">payment.method === "cash" ? 111 : 112</td><td>cost_center = order.branch</td></tr>
+                    <tr><td><span class="badge badge--danger">CR</span></td><td class="t-mono"><strong>3387</strong></td><td>Doanh thu chưa thực hiện (deferred)</td><td class="t-mono">order.package.total - vat</td><td>cost_center = order.branch · customer = order.customer</td></tr>
+                    <tr><td><span class="badge badge--danger">CR</span></td><td class="t-mono">33311</td><td>Thuế GTGT đầu ra</td><td class="t-mono">order.vat (5%)</td><td>cost_center = order.branch</td></tr>
+                  </tbody>
+                </table>
+
+                <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 8px;">Auto-recognize revenue trigger</div>
+                <div class="pastel-card pastel-card--mint" style="padding: 12px; font-family: var(--font-mono); font-size: 12px;">
+                  <strong>WHEN</strong> Session.status = "done" → call rule <strong>treatment.session.done</strong><br>
+                  <strong>ALLOC</strong> 3387 → 5113 (Doanh thu dịch vụ) với amount = package_total / num_sessions
+                </div>
+
+                <div class="banner banner--info" style="margin-top: 16px; font-size: 12px;">
+                  <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  <div>Rule này tuân thủ chuẩn IFRS 15 (Revenue from contracts with customers). Khi mở rộng IFRS book, tự động dùng cùng rule với mapping CoA khác.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="38-posting-console.html"><span class="related-strip__item-num">38</span>Posting console · Inbox pending</a><a class="related-strip__item" href="10-coa.html"><span class="related-strip__item-num">10</span>CoA · Tax · Bank · Cost center</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="47-financials.html"><span class="related-strip__item-num">47</span>P&L · Balance Sheet · Cash Flow</a>
+  </div>
+</div>
+
+
+</body>
+</html>

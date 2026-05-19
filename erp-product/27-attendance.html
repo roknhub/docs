@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>27 · Attendance log + Manual correction — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W3 · HRM Core</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">27 / 49</span>Attendance log + Manual correction</div>
+    <div class="product-nav__pager">
+      <a href="26-shift.html">‹ 26 Shift & Work calenda...</a>
+      <a href="28-leave.html">28 Leave request + Appr... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 03 · Attendance log + Manual correction</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/hrm/attendance?period=202605</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">HRM</div><a class="shell__nav-item" href="08-employee.html">Nhân viên</a><a class="shell__nav-item" href="25-org-assign.html">Phân công</a><a class="shell__nav-item is-active">Chấm công</a><a class="shell__nav-item" href="30-payroll-run.html">Lương</a></div></aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC · Q1</span></div><div style="margin-left: auto;"><span class="pill">Kỳ công: 01-31 / 05 / 2026</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><div class="breadcrumb"><a href="#">HRM</a><span class="breadcrumb__sep">/</span><span>Chấm công</span></div><h2 style="font-size: 22px; font-weight: 700; margin-top: 4px;">Bảng tổng hợp công kỳ 05/2026</h2></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬆ Import máy chấm công</button><button class="btn btn--secondary">⬇ Export</button><button class="pill pill--gold" style="padding: 10px 16px;">✦ Khóa kỳ công</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Đủ công</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">38</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">79.2%</div></div>
+            <div class="pastel-card pastel-card--cream" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Đi muộn</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">5</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">12 lần / 5 NV</div></div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Tăng ca</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">8</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">42h tổng</div></div>
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Nghỉ phép</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">3</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">12 ngày</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Cần điều chỉnh</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">4</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Đang chờ duyệt</div></div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header"><strong>Chi tiết theo NV</strong><div class="row gap-sm"><button class="pill">⛛ Cần xử lý</button><button class="pill">⛛ Phòng ban: Tất cả</button></div></div>
+            <table class="table table--compact">
+              <thead><tr><th>NV</th><th style="text-align: center;">Công đủ</th><th style="text-align: center;">Đi muộn</th><th style="text-align: center;">Về sớm</th><th style="text-align: center;">Tăng ca</th><th style="text-align: center;">Phép</th><th style="text-align: center;">Tổng giờ</th><th>Trạng thái</th></tr></thead>
+              <tbody>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--vip avatar--sm">BV</div><div><strong>BS. Vy</strong></div></div></td><td style="text-align: center;">22</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">4h</td><td style="text-align: center;">0</td><td style="text-align: center; font-family: var(--font-mono);"><strong>180h</strong></td><td><span class="badge badge--success">Khớp</span></td></tr>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">HG</div><div><strong>BS. Hùng</strong></div></div></td><td style="text-align: center;">20</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">2h</td><td style="text-align: center;">2</td><td style="text-align: center; font-family: var(--font-mono);"><strong>164h</strong></td><td><span class="badge badge--success">Khớp</span></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);"><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">PM</div><div><strong>Phạm Minh</strong><div class="t-caption t-subtle">Cashier</div></div></div></td><td style="text-align: center;">18</td><td style="text-align: center; color: var(--text-warning); font-weight: 700;">5</td><td style="text-align: center;">1</td><td style="text-align: center;">0</td><td style="text-align: center;">1</td><td style="text-align: center; font-family: var(--font-mono);">148h</td><td><span class="badge badge--warning">Cần xác nhận</span></td></tr>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">NL</div><div><strong>Nguyễn Linh</strong></div></div></td><td style="text-align: center;">22</td><td style="text-align: center;">1</td><td style="text-align: center;">0</td><td style="text-align: center;">8h</td><td style="text-align: center;">0</td><td style="text-align: center; font-family: var(--font-mono);"><strong>184h</strong></td><td><span class="badge badge--success">Khớp</span></td></tr>
+                <tr><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">KT</div><div><strong>KTV Tuyết</strong></div></div></td><td style="text-align: center;">22</td><td style="text-align: center;">2</td><td style="text-align: center;">0</td><td style="text-align: center;">6h</td><td style="text-align: center;">0</td><td style="text-align: center; font-family: var(--font-mono);"><strong>182h</strong></td><td><span class="badge badge--success">Khớp</span></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.06), transparent 70%);"><td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">TT</div><div><strong>Trần Trang</strong><div class="t-caption t-subtle">Thử việc</div></div></div></td><td style="text-align: center;">14</td><td style="text-align: center;">3</td><td style="text-align: center;">2</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center; font-family: var(--font-mono);">110h</td><td><span class="badge badge--danger">Quên chấm 2 ngày</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="banner banner--warning" style="margin-top: 12px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+            <div><strong>4 NV cần điều chỉnh.</strong> Trần Trang quên chấm công 2 ngày (15, 16/05) — cần upload ảnh selfie + xác nhận của Branch Manager để bù công.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="26-shift.html"><span class="related-strip__item-num">26</span>Shift & Work calendar — Phân ca</a><a class="related-strip__item" href="28-leave.html"><span class="related-strip__item-num">28</span>Leave request + Approval inbox</a><a class="related-strip__item" href="30-payroll-run.html"><span class="related-strip__item-num">30</span>Payroll run · Bảng lương chờ duyệt</a><a class="related-strip__item" href="08-employee.html"><span class="related-strip__item-num">08</span>Employee directory</a>
+  </div>
+</div>
+
+
+</body>
+</html>

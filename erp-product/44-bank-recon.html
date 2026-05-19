@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>44 · Bank reconciliation · Đối soát — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">44 / 49</span>Bank reconciliation · Đối soát</div>
+    <div class="product-nav__pager">
+      <a href="43-ap-aging.html">‹ 43 AP aging — Công nợ p...</a>
+      <a href="45-closing.html">45 Period closing check... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 07 · Bank reconciliation · Đối soát sao kê</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/bank-recon</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item" href="41-cash-bank.html">Cash/Bank</a><a class="shell__nav-item is-active">Bank reconciliation</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC · VCB 0721 000 xxxx</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Bank reconciliation · 18/05/2026</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Import sao kê VCB · 142 giao dịch · 138 khớp · 4 cần xử lý</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬆ Import sao kê XML</button><button class="btn btn--primary">→ Auto-match</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Khớp tự động</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">138</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">97.2%</div></div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Chỉ ở sao kê</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">2</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Chưa có JE</div></div>
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Chỉ ở sổ</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">2</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Chưa về bank</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Chênh lệch số tiền</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">0</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">An toàn</div></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(101, 84, 192, 0.06), transparent);"><strong>📄 Sao kê VCB (142)</strong><span class="badge badge--info">Imported 18/05</span></div>
+              <table class="table table--compact">
+                <thead><tr><th>Ngày</th><th>Mô tả CK</th><th style="text-align: right;">Số tiền</th><th>Match</th></tr></thead>
+                <tbody>
+                  <tr><td>18/05</td><td class="t-mono">POSQ12604827</td><td style="text-align: right; font-family: var(--font-mono);">+18,872,875</td><td><span class="badge badge--success">✓</span></td></tr>
+                  <tr><td>18/05</td><td class="t-mono">POSQ12604825</td><td style="text-align: right; font-family: var(--font-mono);">+12,000,000</td><td><span class="badge badge--success">✓</span></td></tr>
+                  <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.05), transparent);"><td>17/05</td><td class="t-mono">TM IB · không rõ ND</td><td style="text-align: right; font-family: var(--font-mono);">+2,400,000</td><td><span class="badge badge--warning">? Match</span></td></tr>
+                  <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.05), transparent);"><td>15/05</td><td class="t-mono">Phí dịch vụ TK</td><td style="text-align: right; font-family: var(--font-mono);">−110,000</td><td><span class="badge badge--warning">? Match</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card card--p-0">
+              <div class="card__header" style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.06), transparent);"><strong>📒 Sổ kế toán (142)</strong><span class="badge badge--info">JE 11211</span></div>
+              <table class="table table--compact">
+                <thead><tr><th>Ngày</th><th>JE Number</th><th style="text-align: right;">Số tiền</th><th>Match</th></tr></thead>
+                <tbody>
+                  <tr><td>18/05</td><td class="t-mono">JE-2026-05-1842</td><td style="text-align: right; font-family: var(--font-mono);">+18,872,875</td><td><span class="badge badge--success">✓</span></td></tr>
+                  <tr><td>18/05</td><td class="t-mono">JE-2026-05-1841</td><td style="text-align: right; font-family: var(--font-mono);">+12,000,000</td><td><span class="badge badge--success">✓</span></td></tr>
+                  <tr style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.05), transparent);"><td>16/05</td><td class="t-mono">JE-2026-05-1805</td><td style="text-align: right; font-family: var(--font-mono);">+4,200,000</td><td><span class="badge badge--info">⌛ Chờ bank</span></td></tr>
+                  <tr style="background: linear-gradient(90deg, rgba(0, 184, 217, 0.05), transparent);"><td>14/05</td><td class="t-mono">JE-2026-05-1780</td><td style="text-align: right; font-family: var(--font-mono);">−8,400,000</td><td><span class="badge badge--info">⌛ Chờ bank</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="banner banner--warning" style="margin-top: 14px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+            <div>4 mục cần xử lý thủ công: 2 giao dịch lạ ở sao kê (cần tạo JE) + 2 JE chưa về bank (chờ T+2). Phí dịch vụ TK 110K nên auto-rule → tạo JE 6427 / 11211.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="41-cash-bank.html"><span class="related-strip__item-num">41</span>Cash / Bank book</a><a class="related-strip__item" href="20-cash-session.html"><span class="related-strip__item-num">20</span>Cash session — Mở/Đóng + Đối soát</a><a class="related-strip__item" href="45-closing.html"><span class="related-strip__item-num">45</span>Period closing checklist</a>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>37 · HR Dashboard · Tổng quan nhân sự — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W3 · HRM Core</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">37 / 49</span>HR Dashboard · Tổng quan nhân sự</div>
+    <div class="product-nav__pager">
+      <a href="36-kpi.html">‹ 36 KPI / Performance re...</a>
+      <a href="38-posting-console.html">38 Posting console · In... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 13 · HR Dashboard · Tổng quan nhân sự</span>
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/hrm/dashboard</div></div>
+    <div style="position: absolute; top: 100px; right: 60px;"><div class="sphere sphere--md" style="position: relative; opacity: 0.6;"></div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">HRM</div><a class="shell__nav-item is-active">Dashboard</a><a class="shell__nav-item" href="08-employee.html">Nhân viên</a><a class="shell__nav-item" href="30-payroll-run.html">Lương</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings</span></div><div style="margin-left: auto;"><span class="pill pill--gold">✦ Báo cáo HR tháng 5/2026</span></div></div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+
+          <!-- Headline stats -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px;">
+            <div class="card card-art" style="padding: 16px;">
+              <div class="t-caption t-subtle">Headcount tổng</div>
+              <div style="font-size: 32px; font-weight: 700; color: var(--color-brand-primary-500); margin-top: 4px; letter-spacing: -0.02em;">98<span style="font-size: 14px; color: var(--text-subtle);"> NV</span></div>
+              <div class="t-caption" style="color: var(--color-green-500); margin-top: 4px;">↗ +4 mới · 1 nghỉ tháng này</div>
+            </div>
+            <div class="card card-art" style="padding: 16px;">
+              <div class="t-caption t-subtle">Turnover annualized</div>
+              <div style="font-size: 32px; font-weight: 700; margin-top: 4px;">8.4<span style="font-size: 14px; color: var(--text-subtle);"> %</span></div>
+              <div class="t-caption" style="color: var(--color-green-500); margin-top: 4px;">↘ −2.1% vs Q1 (tốt)</div>
+            </div>
+            <div class="card card-art" style="padding: 16px;">
+              <div class="t-caption t-subtle">Chi phí lương / tháng</div>
+              <div style="font-size: 32px; font-weight: 700; margin-top: 4px;">1.25<span style="font-size: 14px; color: var(--text-subtle);"> tỷ</span></div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">68% là BS+KTV+TV</div>
+            </div>
+            <div class="card card-art" style="padding: 16px;">
+              <div class="t-caption t-subtle">CSAT trung bình</div>
+              <div style="font-size: 32px; font-weight: 700; color: var(--color-green-500); margin-top: 4px;">4.86<span style="font-size: 14px; color: var(--text-subtle);"> /5</span></div>
+              <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">NPS: 64</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 14px;">
+
+            <div class="col gap-md">
+              <!-- Headcount theo chi nhánh -->
+              <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;"><strong style="font-size: 14px;">Headcount theo chi nhánh</strong><a href="#" class="t-caption">Drill-down →</a></div>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
+                  <div class="pastel-card pastel-card--sky" style="padding: 12px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Q1</div><div style="font-size: 20px; font-weight: 700; margin-top: 2px;">12</div><div style="height: 3px; background: rgba(255,255,255,0.6); margin-top: 6px; border-radius: 2px;"><div style="width: 100%; height: 100%; background: var(--color-brand-primary-500); border-radius: 2px;"></div></div></div>
+                  <div class="pastel-card pastel-card--lavender" style="padding: 12px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Q3</div><div style="font-size: 20px; font-weight: 700; margin-top: 2px;">10</div><div style="height: 3px; background: rgba(255,255,255,0.6); margin-top: 6px; border-radius: 2px;"><div style="width: 83%; height: 100%; background: var(--color-purple-400); border-radius: 2px;"></div></div></div>
+                  <div class="pastel-card pastel-card--mint" style="padding: 12px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Q7</div><div style="font-size: 20px; font-weight: 700; margin-top: 2px;">11</div><div style="height: 3px; background: rgba(255,255,255,0.6); margin-top: 6px; border-radius: 2px;"><div style="width: 92%; height: 100%; background: var(--color-green-400); border-radius: 2px;"></div></div></div>
+                  <div class="pastel-card pastel-card--peach" style="padding: 12px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Thủ Đức</div><div style="font-size: 20px; font-weight: 700; margin-top: 2px;">8</div><div style="height: 3px; background: rgba(255,255,255,0.6); margin-top: 6px; border-radius: 2px;"><div style="width: 67%; height: 100%; background: var(--color-yellow-400); border-radius: 2px;"></div></div></div>
+                  <div class="pastel-card pastel-card--cream" style="padding: 12px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">BV XYZ</div><div style="font-size: 20px; font-weight: 700; margin-top: 2px;">32</div><div style="height: 3px; background: rgba(255,255,255,0.6); margin-top: 6px; border-radius: 2px;"><div style="width: 100%; height: 100%; background: var(--color-brand-tertiary-500); border-radius: 2px;"></div></div></div>
+                </div>
+              </div>
+
+              <!-- Turnover chart placeholder -->
+              <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;"><strong style="font-size: 14px;">Biến động nhân sự 6 tháng</strong><div class="row gap-sm"><button class="pill" style="background: rgba(15,25,114,0.10); font-size: 11px;">Tuyển mới</button><button class="pill" style="font-size: 11px;">Nghỉ</button><button class="pill" style="font-size: 11px;">Net</button></div></div>
+                <!-- Sparkline -->
+                <svg width="100%" height="120" viewBox="0 0 600 120" preserveAspectRatio="none">
+                  <defs><linearGradient id="hrgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--color-brand-primary-400)" stop-opacity="0.3"/><stop offset="100%" stop-color="var(--color-brand-primary-400)" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0,90 Q50,80 100,70 T200,55 T300,60 T400,45 T500,40 T600,25 L600,120 L0,120 Z" fill="url(#hrgrad)"/>
+                  <path d="M0,90 Q50,80 100,70 T200,55 T300,60 T400,45 T500,40 T600,25" stroke="var(--color-brand-primary-500)" stroke-width="2" fill="none"/>
+                  <circle cx="0" cy="90" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="100" cy="70" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="200" cy="55" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="300" cy="60" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="400" cy="45" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="500" cy="40" r="4" fill="var(--color-brand-primary-500)"/>
+                  <circle cx="600" cy="25" r="5" fill="var(--color-brand-tertiary-500)"/>
+                </svg>
+                <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-subtle); margin-top: 6px;"><span>12/2025</span><span>01/2026</span><span>02</span><span>03</span><span>04</span><span>05/2026</span></div>
+              </div>
+            </div>
+
+            <div class="col gap-md">
+              <div class="pastel-card pastel-card--peach" style="padding: 16px;">
+                <strong style="font-size: 13px;">⚠ Cảnh báo HR</strong>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                  <div style="font-size: 12px;"><strong>5 chứng chỉ sắp hết hạn</strong><div class="t-caption" style="color: rgba(0,0,0,0.65);">BS Vy CCHN 220 ngày · 3 KTV Hifu 90 ngày</div></div>
+                  <div style="font-size: 12px;"><strong>3 NV bị PIP</strong><div class="t-caption" style="color: rgba(0,0,0,0.65);">KPI &lt; 80% Q2 · Tháng kế phải cải thiện</div></div>
+                  <div style="font-size: 12px;"><strong>1 NV thử việc trễ deadline</strong><div class="t-caption" style="color: rgba(0,0,0,0.65);">Lý lịch tư pháp Trần Trang · Quá hạn 2 ngày</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <strong style="font-size: 14px;">Top performer Q2</strong>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                  <div style="display: flex; align-items: center; gap: 10px;"><div style="font-size: 18px;">🥇</div><div class="avatar avatar--vip avatar--sm">BV</div><div style="flex: 1; font-size: 13px;"><strong>BS. Vy</strong><div class="t-caption t-subtle">CSAT 4.88 · 108% KPI</div></div><strong style="color: var(--color-green-500); font-size: 12px;">A+</strong></div>
+                  <div style="display: flex; align-items: center; gap: 10px;"><div style="font-size: 18px;">🥈</div><div class="avatar avatar--sm">NL</div><div style="flex: 1; font-size: 13px;"><strong>Nguyễn Linh</strong><div class="t-caption t-subtle">Conv 32% · 115% KPI</div></div><strong style="color: var(--color-green-500); font-size: 12px;">A+</strong></div>
+                  <div style="display: flex; align-items: center; gap: 10px;"><div style="font-size: 18px;">🥉</div><div class="avatar avatar--sm">HG</div><div style="flex: 1; font-size: 13px;"><strong>BS. Hùng</strong><div class="t-caption t-subtle">CSAT 4.65 · 95% KPI</div></div><strong style="color: var(--color-brand-primary-500); font-size: 12px;">A</strong></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <strong style="font-size: 14px;">Tuyển dụng pipeline</strong>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px; font-size: 12px;">
+                  <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Đang tuyển</span><strong>3 vị trí</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Ứng viên active</span><strong>18</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Phỏng vấn tuần này</span><strong>6</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Offer chờ</span><strong>2</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="08-employee.html"><span class="related-strip__item-num">08</span>Employee directory</a><a class="related-strip__item" href="30-payroll-run.html"><span class="related-strip__item-num">30</span>Payroll run · Bảng lương chờ duyệt</a><a class="related-strip__item" href="36-kpi.html"><span class="related-strip__item-num">36</span>KPI / Performance review</a><a class="related-strip__item" href="02-dashboard.html"><span class="related-strip__item-num">02</span>Dashboard + Entity / Branch switcher</a>
+  </div>
+</div>
+
+
+</body>
+</html>

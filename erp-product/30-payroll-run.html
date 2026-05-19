@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>30 · Payroll run · Bảng lương chờ duyệt — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W3 · HRM Core</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">30 / 49</span>Payroll run · Bảng lương chờ duyệt</div>
+    <div class="product-nav__pager">
+      <a href="29-payroll-setup.html">‹ 29 Payroll setup — Cấu ...</a>
+      <a href="31-payslip.html">31 Payslip — Phiếu lươn... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 06 · Payroll run · Bảng lương chờ duyệt</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/hrm/payroll/PR-2026-05</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">HRM</div><a class="shell__nav-item is-active">Lương</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC</span></div><div style="margin-left: auto;"><span class="pill"><span class="live-dot-inline"></span>PR-2026-05 · 48 NV · Đang tính</span></div></div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Payroll run · Kỳ 05/2026</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Chuẩn bị duyệt · So sánh kỳ trước · Posting Acc · Trả lương</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Export Excel</button><button class="btn btn--secondary">↻ Tính lại</button><button class="pill pill--gold" style="padding: 10px 16px;">✦ Duyệt bảng lương</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng chi lương</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">1,248.6M</div><div class="t-caption" style="color: var(--color-green-500); margin-top: 4px;">↗ +8.2% so 04/2026</div></div>
+            <div class="pastel-card pastel-card--cream" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Hoa hồng</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-brand-tertiary-700);">186.4M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">18 NV nhận HH</div></div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">BHXH + TNCN</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">142.8M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Khấu trừ &amp; nộp</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Lệch &gt; 20% kỳ trước</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">3</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Cần xác nhận</div></div>
+          </div>
+
+          <div class="banner banner--warning" style="margin-bottom: 14px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+            <div><strong>3 NV có biến động &gt; 20%:</strong> BS Vy +28% (hoa hồng tăng vì tháng booking nhiều), KTV Tuyết +24% (tăng ca), Phạm Minh −22% (đi muộn 5 lần trừ phạt). Cần Branch Manager xác nhận.</div>
+          </div>
+
+          <div class="card card--p-0">
+            <div class="card__header"><strong>Bảng lương chi tiết</strong><div class="row gap-sm"><button class="pill">⛛ Lệch lớn (3)</button><button class="pill">⛛ Phòng ban: Tất cả</button></div></div>
+            <table class="table table--compact">
+              <thead><tr><th>NV</th><th style="text-align: right;">Lương CB</th><th style="text-align: right;">Phụ cấp</th><th style="text-align: right;">Hoa hồng</th><th style="text-align: right;">Thưởng KPI</th><th style="text-align: right;">BHXH/TNCN</th><th style="text-align: right;">Phạt</th><th style="text-align: right;">Thực lĩnh</th><th>Diff kỳ trước</th></tr></thead>
+              <tbody>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);">
+                  <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--vip avatar--sm">BV</div><strong>BS. Vy</strong></div></td>
+                  <td style="text-align: right; font-family: var(--font-mono);">25,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">1,400,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--color-brand-tertiary-700); font-weight: 700;">12,400,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">3,200,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−3,650,000</td>
+                  <td style="text-align: right;">0</td>
+                  <td style="text-align: right; font-family: var(--font-mono); font-weight: 700; color: var(--color-brand-primary-500);">38,350,000</td>
+                  <td><span class="badge badge--warning">↗ +28%</span></td>
+                </tr>
+                <tr>
+                  <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">HG</div><strong>BS. Hùng</strong></div></td>
+                  <td style="text-align: right; font-family: var(--font-mono);">22,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">1,400,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">8,600,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">2,200,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−3,210,000</td>
+                  <td style="text-align: right;">0</td>
+                  <td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">30,990,000</td>
+                  <td><span class="badge badge--success">↗ +6%</span></td>
+                </tr>
+                <tr>
+                  <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">NL</div><strong>Nguyễn Linh</strong></div></td>
+                  <td style="text-align: right; font-family: var(--font-mono);">12,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">600,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">4,800,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">1,400,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−1,820,000</td>
+                  <td style="text-align: right;">0</td>
+                  <td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">16,980,000</td>
+                  <td><span class="badge badge--success">→ +2%</span></td>
+                </tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);">
+                  <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">KT</div><strong>KTV Tuyết</strong></div></td>
+                  <td style="text-align: right; font-family: var(--font-mono);">10,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">600,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">3,200,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">1,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−1,520,000</td>
+                  <td style="text-align: right;">0</td>
+                  <td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">13,280,000</td>
+                  <td><span class="badge badge--warning">↗ +24%</span></td>
+                </tr>
+                <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.06), transparent 70%);">
+                  <td><div style="display: flex; align-items: center; gap: 8px;"><div class="avatar avatar--sm">PM</div><strong>Phạm Minh</strong></div></td>
+                  <td style="text-align: right; font-family: var(--font-mono);">8,000,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">600,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">0</td>
+                  <td style="text-align: right; font-family: var(--font-mono);">400,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−1,210,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−250,000</td>
+                  <td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">7,540,000</td>
+                  <td><span class="badge badge--danger">↘ −22%</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="29-payroll-setup.html"><span class="related-strip__item-num">29</span>Payroll setup — Cấu hình kỳ lương</a><a class="related-strip__item" href="31-payslip.html"><span class="related-strip__item-num">31</span>Payslip — Phiếu lương cá nhân</a><a class="related-strip__item" href="32-commission.html"><span class="related-strip__item-num">32</span>Commission — Hoa hồng tạm tính</a><a class="related-strip__item" href="38-posting-console.html"><span class="related-strip__item-num">38</span>Posting console · Inbox pending</a>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>21 · Refund / Cancel / Void — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">21 / 49</span>Refund / Cancel / Void</div>
+    <div class="product-nav__pager">
+      <a href="20-cash-session.html">‹ 20 Cash session — Mở/Đó...</a>
+      <a href="22-treatment.html">22 Treatment plan — Gói... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 09 · Refund / Cancel / Void — có approval</span>
+
+  <div class="frame" style="position: relative;">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/order/POS-Q1-2026-04812/refund</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item is-active">Refund</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Q1</span></div>
+          <div style="margin-left: auto;"><span class="badge badge--danger">⚠ SENSITIVE — cần approval</span></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+
+          <!-- Warning banner top -->
+          <div class="banner banner--danger" style="margin-bottom: 14px;">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div><strong>Đây là thao tác nhạy cảm.</strong> Refund sẽ ghi audit log + thông báo Branch Manager + tự động đảo bút toán doanh thu. Yêu cầu chữ ký số của khách trước khi xác nhận.</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 360px; gap: 14px;">
+
+            <!-- Refund form -->
+            <div class="card" style="padding: 20px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <div class="avatar avatar--lg">PM</div>
+                <div>
+                  <strong style="font-size: 16px;">Đơn POS-Q1-2026-04812</strong>
+                  <div class="t-caption t-subtle">Khách: Phạm Mai · 1.2M · Đã thanh toán 12 / 05 / 2026</div>
+                </div>
+                <span class="badge badge--warning" style="margin-left: auto;">Trong hạn 14 ngày</span>
+              </div>
+
+              <div class="t-caption t-subtle" style="text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 6px;">Loại refund</div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;">
+                <button class="pastel-card pastel-card--rose" style="padding: 14px; text-align: center; border: 2px solid var(--color-red-400);">
+                  <div style="font-size: 22px;">↩</div>
+                  <strong style="font-size: 13px;">Refund toàn bộ</strong>
+                  <div class="t-caption" style="color: rgba(0,0,0,0.55);">1.2M về ví KH</div>
+                </button>
+                <button style="padding: 14px; text-align: center; background: rgba(255, 255, 255, 0.5); border-radius: 12px; cursor: pointer;">
+                  <div style="font-size: 22px;">⤴</div>
+                  <strong style="font-size: 13px;">Refund 1 phần</strong>
+                  <div class="t-caption t-subtle">Chọn dòng cụ thể</div>
+                </button>
+                <button style="padding: 14px; text-align: center; background: rgba(255, 255, 255, 0.5); border-radius: 12px; cursor: pointer;">
+                  <div style="font-size: 22px;">✕</div>
+                  <strong style="font-size: 13px;">Void đơn</strong>
+                  <div class="t-caption t-subtle">Hủy chưa thực hiện</div>
+                </button>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Lý do refund<span class="req">*</span></label>
+                <select class="input">
+                  <option>Khách yêu cầu hoàn vì dị ứng sản phẩm</option>
+                  <option>Lỗi sản phẩm (hỏng/quá hạn)</option>
+                  <option>Khách thay đổi ý định trong 24h</option>
+                  <option>Lỗi nhập liệu từ thu ngân</option>
+                  <option>Khác (mô tả chi tiết)</option>
+                </select>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Mô tả chi tiết<span class="req">*</span></label>
+                <textarea class="input" rows="3" style="resize: none;">Khách báo dị ứng paraben sau khi dùng Serum HA 30ml (Lot 2026-Q2). Triệu chứng: mẩn đỏ vùng má, ngứa nhẹ. Đã hướng dẫn khách đổi sang dòng Serum no-paraben. Yêu cầu refund 1.2M về ví khách hàng để bù trừ đơn lần sau.</textarea>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Hoàn về<span class="req">*</span></label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                  <label style="padding: 10px 12px; background: rgba(254, 204, 6, 0.10); border: 1px solid rgba(254, 204, 6, 0.40); border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" checked> <span><strong style="font-size: 13px;">Ví khách hàng</strong><div class="t-caption" style="color: rgba(0,0,0,0.55);">3.5M → 4.7M</div></span>
+                  </label>
+                  <label style="padding: 10px 12px; background: rgba(255, 255, 255, 0.5); border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio"> <span><strong style="font-size: 13px;">Chuyển khoản</strong><div class="t-caption t-subtle">VCB 0901xxx</div></span>
+                  </label>
+                  <label style="padding: 10px 12px; background: rgba(255, 255, 255, 0.5); border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio"> <span><strong style="font-size: 13px;">Tiền mặt</strong><div class="t-caption t-subtle">Tại quầy</div></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field" style="margin-bottom: 14px;">
+                <label class="field__label">Chữ ký số của khách hàng</label>
+                <div style="height: 100px; background: rgba(255, 255, 255, 0.5); border: 1px dashed rgba(15, 25, 114, 0.20); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-subtle); font-size: 13px;">
+                  Yêu cầu khách ký lên màn hình tablet trước khi gửi duyệt
+                </div>
+              </div>
+
+              <div class="banner banner--warning" style="font-size: 12px;">
+                <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+                <div>Refund &gt;500K bắt buộc Branch Manager duyệt. Refund &gt;5M cần thêm Group Admin. Tự động đảo bút toán sau khi duyệt.</div>
+              </div>
+            </div>
+
+            <!-- Approval flow -->
+            <div class="glass-strong" style="border-radius: 14px; padding: 18px; position: sticky; top: 80px;">
+              <strong style="font-size: 14px; display: block; margin-bottom: 12px;">Luồng duyệt</strong>
+
+              <div style="position: relative; padding-left: 22px;">
+                <div class="timeline-line" style="position: absolute; left: 6px; top: 6px; bottom: 6px;"></div>
+
+                <div style="position: relative; padding-bottom: 14px;">
+                  <div style="position: absolute; left: -22px; width: 14px; height: 14px; background: var(--color-green-400); border-radius: 50%; border: 3px solid white;"></div>
+                  <div style="font-size: 13px;"><strong>Khởi tạo</strong></div>
+                  <div class="t-caption t-subtle">Phạm Hoàng Minh (Cashier) · 14:42</div>
+                </div>
+
+                <div style="position: relative; padding-bottom: 14px;">
+                  <div style="position: absolute; left: -22px; width: 14px; height: 14px; background: var(--color-yellow-400); border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 4px rgba(255, 153, 31, 0.20);"></div>
+                  <div style="font-size: 13px;"><strong>Chờ duyệt</strong> <span class="badge badge--warning" style="margin-left: 4px;">Đang chờ</span></div>
+                  <div class="t-caption t-subtle">Nguyễn Ngọc Anh (Branch Mgr Q1)</div>
+                </div>
+
+                <div style="position: relative; padding-bottom: 14px;">
+                  <div style="position: absolute; left: -22px; width: 14px; height: 14px; background: rgba(15, 25, 114, 0.15); border-radius: 50%; border: 3px solid white;"></div>
+                  <div style="font-size: 13px; color: var(--text-subtle);">Ghi sổ kế toán</div>
+                  <div class="t-caption t-subtle">Tự động post sau duyệt</div>
+                </div>
+
+                <div style="position: relative;">
+                  <div style="position: absolute; left: -22px; width: 14px; height: 14px; background: rgba(15, 25, 114, 0.15); border-radius: 50%; border: 3px solid white;"></div>
+                  <div style="font-size: 13px; color: var(--text-subtle);">Hoàn tiền</div>
+                  <div class="t-caption t-subtle">Khách nhận tiền vào ví</div>
+                </div>
+              </div>
+
+              <div class="section-rule"></div>
+
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <button class="btn btn--danger">→ Gửi duyệt refund</button>
+                <button class="btn btn--secondary">Lưu nháp</button>
+                <button class="pill" style="justify-content: center;">✕ Hủy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="17-pos-order.html"><span class="related-strip__item-num">17</span>POS Order — Tạo đơn bán hàng</a><a class="related-strip__item" href="18-payment.html"><span class="related-strip__item-num">18</span>Payment screen — Split + QR</a><a class="related-strip__item" href="12-audit.html"><span class="related-strip__item-num">12</span>Audit log viewer</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a>
+  </div>
+</div>
+
+
+</body>
+</html>

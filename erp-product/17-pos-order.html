@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>17 · POS Order — Tạo đơn bán hàng — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W2 · POS Customer Journey</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">17 / 49</span>POS Order — Tạo đơn bán hàng</div>
+    <div class="product-nav__pager">
+      <a href="16-checkin.html">‹ 16 Check-in / Check-out...</a>
+      <a href="18-payment.html">18 Payment screen — Spl... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 05 · POS Order — Tạo đơn bán hàng</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/pos/order/new</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">POS</div>
+          <a class="shell__nav-item" href="14-calendar.html">Lịch hẹn</a>
+          <a class="shell__nav-item" href="16-checkin.html">Check-in</a>
+          <a class="shell__nav-item is-active">Bán hàng</a>
+          <a class="shell__nav-item" href="22-treatment.html">Liệu trình</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Chi nhánh</span><span>Q1</span></div>
+          <div style="margin-left: auto; display: flex; gap: 8px;">
+            <span class="pill">Order #POS-Q1-2026-04827</span>
+            <span class="pill"><span class="live-dot-inline"></span>Auto-save</span>
+          </div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+
+          <div style="display: grid; grid-template-columns: 1fr 380px; gap: 14px; align-items: start;">
+
+            <!-- LEFT: Customer + Cart -->
+            <div class="col gap-md">
+
+              <!-- Customer card -->
+              <div class="card card-art" style="padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                  <div class="avatar avatar--vip avatar--xl" style="width: 56px; height: 56px; font-size: 18px; background: linear-gradient(135deg, var(--color-brand-tertiary-400), var(--color-brand-tertiary-600)); color: var(--color-brand-primary-700);">HN</div>
+                  <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <strong style="font-size: 16px;">Lê Thị Hồng Nhung</strong>
+                      <span class="badge badge--gold">✦ VIP Gold</span>
+                    </div>
+                    <div class="t-caption t-subtle">KH-2024-0842 · 0909 555 888 · 142.8M tổng chi tiêu</div>
+                    <div style="display: flex; gap: 6px; margin-top: 4px;"><span class="badge badge--warning">⚠ Dị ứng paraben</span></div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="t-caption t-subtle">Có thể dùng</div>
+                    <div style="font-size: 14px;"><strong style="color: var(--color-brand-tertiary-700);">2,840 điểm</strong> · <strong>3.5M ví</strong></div>
+                  </div>
+                  <button class="pill">⌶ Đổi khách</button>
+                </div>
+              </div>
+
+              <!-- Cart -->
+              <div class="card card--p-0">
+                <div class="card__header">
+                  <strong>Giỏ hàng (3 mục)</strong>
+                  <div class="row gap-sm">
+                    <button class="pill">+ Thêm dịch vụ</button>
+                    <button class="pill">+ Thêm sản phẩm</button>
+                    <button class="pill pill--gold" style="padding: 6px 14px;">✦ Thêm gói liệu trình</button>
+                  </div>
+                </div>
+
+                <div style="padding: 8px;">
+                  <!-- Line 1: package -->
+                  <div class="pastel-card pastel-card--lavender" style="padding: 12px; margin-bottom: 8px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="font-size: 24px;">📦</div>
+                      <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <strong>Gói Hifu 10 buổi</strong>
+                          <span class="badge badge--brand">Gói liệu trình</span>
+                        </div>
+                        <div class="t-caption" style="color: rgba(0,0,0,0.65); margin-top: 2px;">PKG-HIFU-010 · giảm 15% so giá lẻ · BS Vy phụ trách</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 14px;">
+                        <div class="t-caption" style="color: rgba(0,0,0,0.55);">SL: <strong>1</strong></div>
+                        <div style="font-size: 16px; font-weight: 700;">72.250.000</div>
+                        <button class="pill">⋯</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Line 2: product -->
+                  <div style="padding: 12px; margin-bottom: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="font-size: 22px;">💧</div>
+                      <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <strong>Serum HA 30ml</strong>
+                          <span class="badge badge--info">Sản phẩm</span>
+                          <span class="badge badge--warning">⚠ Check paraben</span>
+                        </div>
+                        <div class="t-caption t-subtle">SP-SERUM-HA · Lot 2026-Q2</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 14px;">
+                        <button class="pill" style="padding: 2px 6px;">−</button>
+                        <div class="t-caption">SL: <strong>2</strong></div>
+                        <button class="pill" style="padding: 2px 6px;">+</button>
+                        <div style="font-size: 16px; font-weight: 700;">2.400.000</div>
+                        <button class="pill">⋯</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Line 3: service single -->
+                  <div style="padding: 12px; background: rgba(255, 255, 255, 0.5); border-radius: 10px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="font-size: 22px;">✨</div>
+                      <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <strong>Peel AHA lẻ</strong>
+                          <span class="badge badge--info">Dịch vụ</span>
+                        </div>
+                        <div class="t-caption t-subtle">DV-PEEL-002 · KTV Tuyết</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 14px;">
+                        <div class="t-caption">SL: <strong>1</strong></div>
+                        <div style="font-size: 16px; font-weight: 700;">1.200.000</div>
+                        <button class="pill">⋯</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Promotion + voucher row -->
+                <div style="padding: 12px 16px; border-top: 1px solid rgba(15, 25, 114, 0.06); display: flex; gap: 10px; align-items: center; background: rgba(255, 255, 255, 0.3);">
+                  <span class="t-caption t-subtle">Áp dụng:</span>
+                  <span class="badge badge--success">−15% gói liệu trình</span>
+                  <span class="badge badge--gold">−5% VIP Gold</span>
+                  <button class="pill">+ Voucher</button>
+                  <button class="pill">+ Mã KM</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: Summary -->
+            <div class="glass-strong" style="border-radius: 14px; padding: 18px; position: sticky; top: 80px;">
+              <strong style="font-size: 14px; display: block; margin-bottom: 12px;">Tóm tắt đơn hàng</strong>
+
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Tạm tính</span><span>85,000,000</span></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">Giảm gói −15%</span><span style="color: var(--color-green-500);">−12,750,000</span></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">VIP Gold −5%</span><span style="color: var(--color-green-500);">−1,225,000</span></div>
+                <div style="display: flex; justify-content: space-between; padding-top: 6px; border-top: 1px dashed rgba(15,25,114,0.10);"><span class="t-subtle">Tổng sau giảm</span><strong>71,025,000</strong></div>
+                <div style="display: flex; justify-content: space-between;"><span class="t-subtle">VAT 5%</span><span>3,551,250</span></div>
+              </div>
+
+              <div class="pastel-card pastel-card--cream" style="padding: 12px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.65); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Tổng cộng</span>
+                  <strong style="font-size: 22px; color: var(--color-brand-primary-500);">74,576,250</strong>
+                </div>
+                <div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 2px;">Bao gồm VAT · ~3,180 điểm sẽ cộng</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; font-size: 12px;">
+                <label style="display: flex; align-items: center; gap: 8px;"><input type="checkbox"> Dùng <strong style="color: var(--color-brand-tertiary-700);">2,840 điểm</strong> (=568K)</label>
+                <label style="display: flex; align-items: center; gap: 8px;"><input type="checkbox"> Dùng <strong>3.5M ví</strong></label>
+                <label style="display: flex; align-items: center; gap: 8px;"><input type="checkbox" checked> Đặt cọc 30% (22,372,875)</label>
+              </div>
+
+              <button class="btn btn--primary btn--lg" style="width: 100%; margin-bottom: 6px;">→ Thanh toán</button>
+              <button class="btn btn--secondary" style="width: 100%;">Lưu nháp</button>
+              <button class="pill" style="width: 100%; justify-content: center; margin-top: 8px; color: var(--text-danger);">✕ Hủy đơn</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="06-customer-360.html"><span class="related-strip__item-num">06</span>Customer 360°</a><a class="related-strip__item" href="07-catalog.html"><span class="related-strip__item-num">07</span>Service / Product / Package catalog</a><a class="related-strip__item" href="18-payment.html"><span class="related-strip__item-num">18</span>Payment screen — Split + QR</a><a class="related-strip__item" href="21-refund.html"><span class="related-strip__item-num">21</span>Refund / Cancel / Void</a><a class="related-strip__item" href="20-cash-session.html"><span class="related-strip__item-num">20</span>Cash session — Mở/Đóng + Đối soát</a>
+  </div>
+</div>
+
+
+</body>
+</html>

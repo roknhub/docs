@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>47 · P&L · Balance Sheet · Cash Flow — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">47 / 49</span>P&L · Balance Sheet · Cash Flow</div>
+    <div class="product-nav__pager">
+      <a href="46-trial-balance.html">‹ 46 Trial balance + Sổ c...</a>
+      <a href="48-einvoice.html">48 E-invoice (Tổng cục ... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 10 · P&amp;L · Balance Sheet · Cash Flow</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/financials?period=2026Q1</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Báo cáo</div><a class="shell__nav-item" href="46-trial-balance.html">Trial balance</a><a class="shell__nav-item is-active">P&amp;L · BS · CF</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Q1/2026 hợp nhất</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Báo cáo tài chính Q1 / 2026</h2><p class="t-caption t-subtle" style="margin-top: 4px;">P&amp;L · Bảng cân đối · Lưu chuyển tiền tệ · Drill-down theo công ty/chi nhánh/cost center</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Export PDF</button><button class="btn btn--secondary">📊 So sánh kỳ</button><button class="btn btn--primary">Snapshot lưu trữ</button></div>
+          </div>
+
+          <div class="tabs" style="margin-bottom: 14px;">
+            <button class="tab is-active">P&amp;L (Kết quả KD)</button>
+            <button class="tab">Bảng cân đối kế toán</button>
+            <button class="tab">Lưu chuyển tiền tệ</button>
+            <button class="tab">P&amp;L theo chi nhánh</button>
+            <button class="tab">P&amp;L theo dịch vụ</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 360px; gap: 14px;">
+
+            <!-- P&L -->
+            <div class="card" style="padding: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <strong style="font-size: 16px;">Kết quả kinh doanh Q1/2026</strong>
+                <div style="display: flex; gap: 6px;"><button class="pill" style="background: rgba(15,25,114,0.10); font-size: 11px;">Tập đoàn</button><button class="pill" style="font-size: 11px;">TMABC</button><button class="pill" style="font-size: 11px;">BV XYZ</button><button class="pill" style="font-size: 11px;">PK DEF</button></div>
+              </div>
+
+              <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+                <thead><tr style="border-bottom: 2px solid var(--color-brand-primary-500);"><th style="text-align: left; padding: 10px 4px; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Chỉ tiêu</th><th style="text-align: right; padding: 10px 4px; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Q1/2026</th><th style="text-align: right; padding: 10px 4px; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">Q4/2025</th><th style="text-align: right; padding: 10px 4px; font-size: 11px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">YoY</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 10px 4px;"><strong>1. Doanh thu thuần</strong></td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); font-weight: 700; color: var(--color-green-500);">5,842,500,000</td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono);">5,128,400,000</td><td style="text-align: right; padding: 10px 4px; color: var(--color-green-500);">↗ +13.9%</td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Doanh thu dịch vụ</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">4,825,800,000</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">4,142,500,000</td><td style="text-align: right; padding: 8px 4px; color: var(--text-subtle);">+16.5%</td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Doanh thu bán SP</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">1,016,700,000</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">985,900,000</td><td style="text-align: right; padding: 8px 4px; color: var(--text-subtle);">+3.1%</td></tr>
+
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 10px 4px;"><strong>2. Giá vốn hàng bán</strong></td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−1,428,300,000</td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−1,285,400,000</td><td style="text-align: right; padding: 10px 4px;">−11.1%</td></tr>
+
+                  <tr style="border-bottom: 2px solid var(--color-brand-primary-500); background: linear-gradient(90deg, rgba(0, 135, 90, 0.04), transparent);"><td style="padding: 10px 4px;"><strong>3. Lợi nhuận gộp</strong></td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); font-weight: 700;">4,414,200,000</td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono);">3,843,000,000</td><td style="text-align: right; padding: 10px 4px;"><strong style="color: var(--color-green-500);">75.5% margin</strong></td></tr>
+
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 10px 4px;"><strong>4. Chi phí bán hàng</strong></td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−548,300,000</td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−485,200,000</td><td></td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Hoa hồng BS/KTV/TV</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">−486,400,000</td><td></td><td></td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Marketing / FB Ads</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">−61,900,000</td><td></td><td></td></tr>
+
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 10px 4px;"><strong>5. Chi phí quản lý</strong></td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−2,985,600,000</td><td style="text-align: right; padding: 10px 4px; font-family: var(--font-mono); color: var(--text-danger);">−2,742,800,000</td><td></td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Lương quản lý + BS</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">−2,488,400,000</td><td></td><td></td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— BHXH · BHYT · TNCN</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">−285,600,000</td><td></td><td></td></tr>
+                  <tr style="border-bottom: 1px solid var(--color-neutral-100);"><td style="padding: 8px 4px 8px 20px; color: var(--text-subtle);">— Mặt bằng · Điện nước · Khấu hao</td><td style="text-align: right; padding: 8px 4px; font-family: var(--font-mono);">−211,600,000</td><td></td><td></td></tr>
+
+                  <tr style="border-bottom: 2px solid var(--color-brand-primary-500); background: linear-gradient(90deg, rgba(0, 135, 90, 0.08), transparent);"><td style="padding: 12px 4px;"><strong style="font-size: 14px;">6. Lợi nhuận thuần</strong></td><td style="text-align: right; padding: 12px 4px; font-family: var(--font-mono); font-weight: 700; font-size: 16px; color: var(--color-green-500);">880,300,000</td><td style="text-align: right; padding: 12px 4px; font-family: var(--font-mono);">615,000,000</td><td style="text-align: right; padding: 12px 4px; font-weight: 700; color: var(--color-green-500);">↗ +43%</td></tr>
+                  <tr><td style="padding: 8px 4px; color: var(--text-subtle); font-style: italic; font-size: 12px;">Tỷ suất LNT / DT</td><td style="text-align: right; padding: 8px 4px; color: var(--color-green-500);"><strong>15.1%</strong></td><td style="text-align: right; padding: 8px 4px; color: var(--text-subtle);">12.0%</td><td></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Side: chart + drill -->
+            <div class="col gap-md">
+              <div class="card">
+                <strong style="font-size: 13px;">📊 Doanh thu 6 quý</strong>
+                <svg width="100%" height="120" viewBox="0 0 320 120" style="margin-top: 8px;" preserveAspectRatio="none">
+                  <defs><linearGradient id="dtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--color-brand-primary-400)" stop-opacity="0.3"/><stop offset="100%" stop-color="var(--color-brand-primary-400)" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0,90 L50,80 L100,70 L150,75 L200,60 L260,50 L320,30 L320,120 L0,120 Z" fill="url(#dtg)"/>
+                  <path d="M0,90 L50,80 L100,70 L150,75 L200,60 L260,50 L320,30" stroke="var(--color-brand-primary-500)" stroke-width="2" fill="none"/>
+                  <circle cx="320" cy="30" r="5" fill="var(--color-brand-tertiary-500)"/>
+                </svg>
+                <div class="t-caption t-subtle" style="margin-top: 6px;">Q4/24 · Q1/25 · Q2/25 · Q3/25 · Q4/25 · <strong>Q1/26</strong></div>
+              </div>
+
+              <div class="pastel-card pastel-card--cream" style="padding: 14px;">
+                <strong>✦ Best segment Q1</strong>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font-size: 12px;">
+                  <div style="display: flex; justify-content: space-between;"><span style="color: rgba(0,0,0,0.65);">Hifu V-line</span><strong>1.84M / +24%</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span style="color: rgba(0,0,0,0.65);">Filler cằm</span><strong>1.24M / +18%</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span style="color: rgba(0,0,0,0.65);">Peel hoá học</span><strong>820K / +12%</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span style="color: rgba(0,0,0,0.65);">Mesotherapy</span><strong>485K / +8%</strong></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <strong style="font-size: 13px;">📈 KPI tài chính Q1</strong>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; font-size: 12px;">
+                  <div><div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span class="t-subtle">Gross margin</span><strong style="color: var(--color-green-500);">75.5%</strong></div><div style="height: 4px; background: rgba(15,25,114,0.08); border-radius: 2px;"><div style="width: 75%; height: 100%; background: var(--color-green-400); border-radius: 2px;"></div></div></div>
+                  <div><div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span class="t-subtle">Net margin</span><strong>15.1%</strong></div><div style="height: 4px; background: rgba(15,25,114,0.08); border-radius: 2px;"><div style="width: 60%; height: 100%; background: var(--color-brand-primary-500); border-radius: 2px;"></div></div></div>
+                  <div><div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span class="t-subtle">CAC payback</span><strong>2.4 tháng</strong></div></div>
+                  <div><div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span class="t-subtle">LTV/CAC</span><strong style="color: var(--color-green-500);">8.6×</strong></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="46-trial-balance.html"><span class="related-strip__item-num">46</span>Trial balance + Sổ cái</a><a class="related-strip__item" href="49-consolidation.html"><span class="related-strip__item-num">49</span>Consolidation package · Hợp nhất</a><a class="related-strip__item" href="37-hr-dashboard.html"><span class="related-strip__item-num">37</span>HR Dashboard · Tổng quan nhân sự</a><a class="related-strip__item" href="02-dashboard.html"><span class="related-strip__item-num">02</span>Dashboard + Entity / Branch switcher</a>
+  </div>
+</div>
+
+
+</body>
+</html>

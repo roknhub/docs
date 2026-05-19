@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>41 · Cash / Bank book — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">41 / 49</span>Cash / Bank book</div>
+    <div class="product-nav__pager">
+      <a href="40-journal.html">‹ 40 Journal entry — Sổ n...</a>
+      <a href="42-ar-aging.html">42 AR aging — Công nợ p... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 04 · Cash / Bank book</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/cashbank?account=11211</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item" href="40-journal.html">Journal entry</a><a class="shell__nav-item is-active">Cash / Bank</a><a class="shell__nav-item" href="42-ar-aging.html">AR / AP</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Sổ tiền · Tài khoản 11211 (VCB)</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Tài khoản VCB · 0721 000 xxxx · Số dư hiện tại 842.3M</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Sổ chi tiết PDF</button><button class="btn btn--secondary">↹ Bank reconciliation</button><button class="btn btn--primary">+ Phiếu chi</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Số dư đầu kỳ</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px;">685.4M</div></div>
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng thu (5/2026)</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">+342.8M</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng chi (5/2026)</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">−185.9M</div></div>
+            <div class="pastel-card pastel-card--cream" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Số dư hiện tại</div><div style="font-size: 20px; font-weight: 700; margin-top: 4px; color: var(--color-brand-primary-500);">842.3M</div></div>
+          </div>
+
+          <div class="card card--p-0">
+            <table class="table table--compact">
+              <thead><tr><th>Ngày</th><th>Số chứng từ</th><th>Diễn giải</th><th>Đối ứng</th><th style="text-align: right;">Thu (DR)</th><th style="text-align: right;">Chi (CR)</th><th style="text-align: right;">Số dư</th></tr></thead>
+              <tbody>
+                <tr><td>18/05</td><td class="t-mono">PT-2026-05-0182</td><td>Thu CK POS-Q1-04827 (Hifu HN)</td><td class="t-mono">131</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-green-500);">18,872,875</td><td></td><td style="text-align: right; font-family: var(--font-mono); font-weight: 700;">842,300,000</td></tr>
+                <tr><td>18/05</td><td class="t-mono">PT-2026-05-0181</td><td>Thu CK POS-Q3-08821</td><td class="t-mono">5113</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-green-500);">12,000,000</td><td></td><td style="text-align: right; font-family: var(--font-mono);">823,427,125</td></tr>
+                <tr><td>18/05</td><td class="t-mono">PC-2026-05-0042</td><td>Chi mua vật tư nhập kho</td><td class="t-mono">156</td><td></td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">8,400,000</td><td style="text-align: right; font-family: var(--font-mono);">811,427,125</td></tr>
+                <tr><td>17/05</td><td class="t-mono">PT-2026-05-0180</td><td>Thu CK tổng cuối ngày</td><td class="t-mono">131, 5113</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-green-500);">28,632,000</td><td></td><td style="text-align: right; font-family: var(--font-mono);">819,827,125</td></tr>
+                <tr><td>15/05</td><td class="t-mono">PC-2026-05-0040</td><td>Chi lương kỳ 04/2026 — net</td><td class="t-mono">334</td><td></td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">142,800,000</td><td style="text-align: right; font-family: var(--font-mono);">791,195,125</td></tr>
+                <tr><td>15/05</td><td class="t-mono">PC-2026-05-0039</td><td>Nộp BHXH + TNCN kỳ 04</td><td class="t-mono">3383, 3385, 3335</td><td></td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">28,600,000</td><td style="text-align: right; font-family: var(--font-mono);">933,995,125</td></tr>
+                <tr><td>10/05</td><td class="t-mono">PT-2026-05-0142</td><td>Thu CK lô đơn cuối tuần</td><td class="t-mono">5113</td><td style="text-align: right; font-family: var(--font-mono); color: var(--color-green-500);">68,400,000</td><td></td><td style="text-align: right; font-family: var(--font-mono);">962,595,125</td></tr>
+                <tr><td>05/05</td><td class="t-mono">PC-2026-05-0038</td><td>Chi VAT đầu ra kỳ 04 nộp NSNN</td><td class="t-mono">33311</td><td></td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">6,100,000</td><td style="text-align: right; font-family: var(--font-mono);">894,195,125</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="44-bank-recon.html"><span class="related-strip__item-num">44</span>Bank reconciliation · Đối soát</a><a class="related-strip__item" href="20-cash-session.html"><span class="related-strip__item-num">20</span>Cash session — Mở/Đóng + Đối soát</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="42-ar-aging.html"><span class="related-strip__item-num">42</span>AR aging — Công nợ phải thu</a>
+  </div>
+</div>
+
+
+</body>
+</html>

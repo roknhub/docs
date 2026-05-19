@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>48 · E-invoice (Tổng cục Thuế) — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W4 · Accounting</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">48 / 49</span>E-invoice (Tổng cục Thuế)</div>
+    <div class="product-nav__pager">
+      <a href="47-financials.html">‹ 47 P&L · Balance Sheet ...</a>
+      <a href="49-consolidation.html">49 Consolidation packag... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 11 · E-invoice list (Tổng cục Thuế)</span>
+  <div class="frame"><div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/accounting/e-invoice</div></div>
+    <div class="shell">
+      <aside class="shell__sidebar"><div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div><div class="shell__sidebar-section"><div class="shell__sidebar-section-title">Accounting</div><a class="shell__nav-item" href="47-financials.html">Báo cáo</a><a class="shell__nav-item is-active">E-invoice</a></div></aside>
+      <div class="shell__main">
+        <div class="shell__topbar"><div class="entity-switcher"><span class="entity-switcher__chip">Công ty</span><span>TMABC</span></div><div style="margin-left: auto;"><span class="pill"><span class="live-dot-inline"></span>Kết nối TCT · API live</span></div></div>
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
+            <div><h2 style="font-size: 22px; font-weight: 700;">Hóa đơn điện tử · Tháng 05/2026</h2><p class="t-caption t-subtle" style="margin-top: 4px;">Mẫu 1/001 · Ký hiệu AA/26E · 1,842 HĐ phát hành · 12 hủy/thay thế · Tổng GTGT 68.42M</p></div>
+            <div style="display: flex; gap: 8px;"><button class="btn btn--secondary">⬇ Bảng kê XML</button><button class="btn btn--secondary">🔄 Sync với TCT</button><button class="btn btn--primary">+ Phát hành HĐ</button></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px;">
+            <div class="pastel-card pastel-card--mint" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Đã phát hành</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-green-500);">1,842</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Khớp TCT 100%</div></div>
+            <div class="pastel-card pastel-card--sky" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Tổng GTGT</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px;">68.42M</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">5% trên DT</div></div>
+            <div class="pastel-card pastel-card--peach" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Hủy / Thay thế</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--color-yellow-500);">12</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Refund đơn</div></div>
+            <div class="pastel-card pastel-card--rose" style="padding: 14px;"><div class="t-caption" style="color: rgba(0,0,0,0.55);">Pending sync</div><div style="font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text-danger);">0</div><div class="t-caption" style="color: rgba(0,0,0,0.55); margin-top: 4px;">Realtime OK</div></div>
+          </div>
+
+          <div class="card card--p-0">
+            <table class="table table--compact">
+              <thead><tr><th>Số HĐ</th><th>Ngày</th><th>Khách</th><th>Mẫu/Ký hiệu</th><th style="text-align: right;">Tổng tiền</th><th style="text-align: right;">VAT 5%</th><th>Mã TCT</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td class="t-mono"><strong>00004827</strong></td><td>18/05</td><td>Lê Hồng Nhung</td><td class="t-mono">1/001 · AA/26E</td><td style="text-align: right; font-family: var(--font-mono);">74,576,250</td><td style="text-align: right; font-family: var(--font-mono);">3,551,250</td><td class="t-mono">TM2025E04827</td><td><span class="badge badge--success">✓ Đã ký TCT</span></td></tr>
+                <tr><td class="t-mono"><strong>00004826</strong></td><td>18/05</td><td>Nguyễn Mai</td><td class="t-mono">1/001 · AA/26E</td><td style="text-align: right; font-family: var(--font-mono);">1,260,000</td><td style="text-align: right; font-family: var(--font-mono);">60,000</td><td class="t-mono">TM2025E04826</td><td><span class="badge badge--success">✓ Đã ký TCT</span></td></tr>
+                <tr><td class="t-mono"><strong>00004825</strong></td><td>17/05</td><td>Phan Tuyết</td><td class="t-mono">1/001 · AA/26E</td><td style="text-align: right; font-family: var(--font-mono);">12,600,000</td><td style="text-align: right; font-family: var(--font-mono);">600,000</td><td class="t-mono">TM2025E04825</td><td><span class="badge badge--success">✓ Đã ký TCT</span></td></tr>
+                <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.06), transparent 70%);"><td class="t-mono"><strong>00004812 (HỦY)</strong></td><td>12/05</td><td>Phạm Mai</td><td class="t-mono">1/001 · AA/26E</td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−1,200,000</td><td style="text-align: right; font-family: var(--font-mono); color: var(--text-danger);">−60,000</td><td class="t-mono">TM2025E04812-C</td><td><span class="badge badge--warning">⚠ Đã hủy · Refund</span></td></tr>
+                <tr><td class="t-mono"><strong>00004824</strong></td><td>17/05</td><td>Trương An</td><td class="t-mono">1/001 · AA/26E</td><td style="text-align: right; font-family: var(--font-mono);">12,000,000</td><td style="text-align: right; font-family: var(--font-mono);">571,429</td><td class="t-mono">TM2025E04824</td><td><span class="badge badge--success">✓ Đã ký TCT</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="19-receipt.html"><span class="related-strip__item-num">19</span>Receipt / Invoice preview</a><a class="related-strip__item" href="40-journal.html"><span class="related-strip__item-num">40</span>Journal entry — Sổ nhật ký</a><a class="related-strip__item" href="45-closing.html"><span class="related-strip__item-num">45</span>Period closing checklist</a>
+  </div>
+</div>
+
+
+</body>
+</html>

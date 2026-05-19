@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>05 · Role & Permission matrix — ERP V2</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/soft.css">
+<link rel="stylesheet" href="assets/frame.css">
+<link rel="stylesheet" href="assets/product.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="soft">
+
+<div class="bokeh bokeh--lavender" style="top: 60px; left: -100px;"></div>
+<div class="bokeh bokeh--sky" style="top: 600px; right: -150px;"></div>
+<div class="bokeh bokeh--cream" style="top: 1200px; left: 40%;"></div>
+<div class="bokeh bokeh--mint" style="top: 1800px; right: 10%;"></div>
+
+<div class="product-nav">
+  <div class="product-nav__inner">
+    <a class="product-nav__back" href="index.html">⌂ Trang chủ</a>
+    <span class="product-nav__chip">W1 · Foundation</span>
+    <div class="product-nav__title"><span class="product-nav__title-num">05 / 49</span>Role & Permission matrix</div>
+    <div class="product-nav__pager">
+      <a href="04-user-list.html">‹ 04 User list + Detail d...</a>
+      <a href="06-customer-360.html">06 Customer 360°... ›</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="page" style="padding-top: 16px;">
+
+<section class="screen-section" id="screen">
+  
+  <span class="screen-label">★ 05 · Role &amp; Permission matrix</span>
+
+  <div class="frame">
+    <div class="frame__chrome"><span></span><span></span><span></span><div class="url">erp.dqm.vn/admin/roles/branch-manager</div></div>
+
+    <div class="shell">
+      <aside class="shell__sidebar">
+        <div class="shell__sidebar-brand"><div class="shell__sidebar-brand-logo">D</div><div><strong>DQM ERP</strong></div></div>
+        <div class="shell__sidebar-section">
+          <div class="shell__sidebar-section-title">Quản trị</div>
+          <a class="shell__nav-item" href="03-org-tree.html">Cơ cấu tổ chức</a>
+          <a class="shell__nav-item" href="04-user-list.html">Người dùng</a>
+          <a class="shell__nav-item is-active">Vai trò &amp; Quyền</a>
+          <a class="shell__nav-item" href="12-audit.html">Audit log</a>
+        </div>
+      </aside>
+
+      <div class="shell__main">
+        <div class="shell__topbar">
+          <div class="entity-switcher"><span class="entity-switcher__chip">Tập đoàn</span><span>DQM Holdings · Roles toàn tập đoàn</span><svg class="i entity-switcher__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+
+        <div class="shell__content" style="padding: 20px 28px;">
+          <div style="display: grid; grid-template-columns: 240px 1fr; gap: 12px;">
+
+            <div class="card card--p-0">
+              <div class="card__header"><strong>Vai trò</strong><button class="pill">+</button></div>
+              <div style="padding: 8px;">
+                <div class="t-caption t-subtle" style="padding: 4px 8px;">Hệ thống</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Super Admin</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Group Admin</div>
+                <div class="t-caption t-subtle" style="padding: 8px 8px 4px;">Nghiệp vụ</div>
+                <div style="padding: 8px; border-radius: 8px; background: linear-gradient(90deg, rgba(167, 190, 240, 0.30), rgba(199, 178, 240, 0.15) 70%); display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+                  <strong>Branch Manager</strong>
+                  <span class="badge badge--brand">12</span>
+                </div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Receptionist</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Cashier</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Consultant</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Doctor</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Technician</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Accountant</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">HR Manager</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Aftercare Reviewer</div>
+                <div style="padding: 6px 8px; border-radius: 6px; font-size: 13px;">Warehouse Keeper</div>
+              </div>
+            </div>
+
+            <div class="card card--p-0">
+              <div class="card__header" style="flex-direction: column; align-items: stretch;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="font-size: 16px;">Branch Manager</strong>
+                    <div class="t-caption t-subtle">Quản lý chi nhánh — quyền vận hành cấp chi nhánh</div>
+                  </div>
+                  <div class="row gap-sm">
+                    <button class="btn btn--secondary btn--sm">👁 Preview "User sẽ thấy gì"</button>
+                    <button class="pill pill--gold" style="padding: 8px 14px;">✦ Lưu thay đổi</button>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+                  <span class="t-caption t-subtle">Data scope:</span>
+                  <select class="input" style="height: 28px; width: 200px; font-size: 12px;">
+                    <option>📍 Branch (chỉ chi nhánh được gán)</option>
+                  </select>
+                  <span class="pill pill--gold" style="padding: 4px 10px;">★ 12 user</span>
+                  <span class="t-caption t-subtle" style="margin-left: auto;"><span class="live-dot-inline"></span>1 user online</span>
+                </div>
+              </div>
+
+              <div style="padding: 12px;">
+                <div class="banner banner--warning" style="margin-bottom: 12px; font-size: 12px;">
+                  <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>
+                  <div><strong>Role nghiệp vụ chính</strong> — đổi quyền sẽ ảnh hưởng 12 user · audit log + email tự động.</div>
+                </div>
+
+                <table class="table table--compact">
+                  <thead>
+                    <tr>
+                      <th>Module · Resource</th>
+                      <th style="text-align: center; width: 55px;">View</th>
+                      <th style="text-align: center; width: 55px;">Create</th>
+                      <th style="text-align: center; width: 55px;">Edit</th>
+                      <th style="text-align: center; width: 55px;">Delete</th>
+                      <th style="text-align: center; width: 70px;">Approve</th>
+                      <th style="text-align: center; width: 70px;">Export</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ BASE — Cơ cấu &amp; Người dùng</td></tr>
+                    <tr><td>Organization tree</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td></tr>
+                    <tr><td>User</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td></tr>
+
+                    <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ CRM</td></tr>
+                    <tr><td>Customer</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+                    <tr><td>Lead</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+
+                    <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ POS</td></tr>
+                    <tr><td>POS Order</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+                    <tr style="background: linear-gradient(90deg, rgba(255, 153, 31, 0.10), transparent 70%);">
+                      <td><strong>Refund / Void</strong> <span class="badge badge--warning">⚠ SENSITIVE</span></td>
+                      <td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-warning); font-weight: 700;">✓</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                    </tr>
+                    <tr><td>Cash Session</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+
+                    <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ HRM</td></tr>
+                    <tr><td>Employee (branch scope)</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+                    <tr><td>Attendance</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+                    <tr style="background: linear-gradient(90deg, rgba(222, 53, 11, 0.10), transparent 70%);">
+                      <td><strong>Payroll</strong> <span class="badge badge--danger">⊘ RESTRICTED</span></td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                      <td style="text-align: center; color: var(--text-disabled);">—</td>
+                    </tr>
+
+                    <tr><td colspan="7" style="background: linear-gradient(90deg, rgba(15, 25, 114, 0.05), transparent 80%); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">⊹ ACCOUNTING</td></tr>
+                    <tr><td>Journal entry</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td></tr>
+                    <tr><td>AR — Customer balance</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--text-disabled);">—</td><td style="text-align: center; color: var(--color-green-500); font-weight: 600;">✓</td></tr>
+                  </tbody>
+                </table>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(15, 25, 114, 0.06);">
+                  <div class="t-caption"><strong style="color: var(--color-green-500);">12</strong> <span class="t-subtle">/ 48 permission selected · 0 unsaved</span></div>
+                  <div class="row gap-sm">
+                    <button class="pill">↺ Reset</button>
+                    <button class="pill">📋 Copy từ role khác</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<div class="related-strip">
+  <div class="related-strip__label">✦ Trang liên quan · Click để chuyển</div>
+  <div class="related-strip__items">
+    <a class="related-strip__item" href="04-user-list.html"><span class="related-strip__item-num">04</span>User list + Detail drawer</a><a class="related-strip__item" href="12-audit.html"><span class="related-strip__item-num">12</span>Audit log viewer</a><a class="related-strip__item" href="03-org-tree.html"><span class="related-strip__item-num">03</span>Org tree — Cơ cấu tổ chức</a>
+  </div>
+</div>
+
+
+</body>
+</html>
